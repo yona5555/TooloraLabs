@@ -6,6 +6,7 @@ import { KitControls, SvgChem, SvgHandle, useMeasuredSize, useSvgDrag, type Step
 import { clamp, fmtSmart, niceCeil, snap } from "@/components/tool-ui/indicator-kit/format";
 import type { HandleDirection } from "@/components/tool-ui/glass/GlassPrimitives";
 import { sceneBase } from "./units";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 /**
  * The measuring-instrument card under the unit-converter input card (§41: it keeps the input
@@ -36,7 +37,7 @@ const LINE = { stroke: "var(--ph-line)" };
 
 const lbl = (v: number) => fmtSmart(v, 3);
 /** Rough label width in px at 11px Inter (for spacing and edge clamping). */
-const textW = (s: string, size = 11) => s.length * size * 0.58;
+const textW = (s: string, size = 12) => s.length * size * 0.58;
 
 /**
  * Tick values on [lo, hi] spaced so their labels never collide (§39): at least `minGap` px apart
@@ -53,9 +54,9 @@ function ticks(lo: number, hi: number, px: number, minGap: number, along = true)
   }
   return [lo, hi];
 }
-function Label({ x, y, text, anchor = "middle", size = 11, bold, style = MUTED }: { x: number; y: number; text: string; anchor?: "start" | "middle" | "end"; size?: number; bold?: boolean; style?: { fill: string } }) {
+function Label({ x, y, text, anchor = "middle", size = 12, bold, style = MUTED }: { x: number; y: number; text: string; anchor?: "start" | "middle" | "end"; size?: number; bold?: boolean; style?: { fill: string } }) {
   return (
-    <text x={x} y={y} fontSize={size} fontWeight={bold ? 800 : 600} textAnchor={anchor} style={style} className="tabular-nums">
+    <text x={x} y={y} fontWeight={bold ? 800 : 600} textAnchor={anchor} style={{ ...style, fontSize: svgPx(size) }} className="tabular-nums">
       <SvgChem text={text} />
     </text>
   );
@@ -239,7 +240,7 @@ function disc(c: Ctx): Variant {
           return (
             <g key={fr}>
               <circle cx={cx} cy={cy} r={rr} fill="none" style={LINE} strokeWidth={1.25} strokeDasharray="4 5" />
-              <Label x={cx} y={cy - rr - 5} text={`${lbl(c.lo + fr * (c.hi - c.lo))} ${c.fromSym} · ${lbl(conv(fr))} ${c.toSym}`} size={10.5} />
+              <Label x={cx} y={cy - rr - 5} text={`${lbl(c.lo + fr * (c.hi - c.lo))} ${c.fromSym} · ${lbl(conv(fr))} ${c.toSym}`} size={12} />
             </g>
           );
         })}

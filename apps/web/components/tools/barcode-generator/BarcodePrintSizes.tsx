@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import BarcodeIndicatorCard, { BarcodeIndicatorUnavailable } from "./BarcodeIndicatorCard";
 import { useBarcodeModel } from "./BarcodeLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 200;
@@ -37,10 +38,10 @@ export default function BarcodePrintSizes() {
         <g key={s.key}>
           <rect x={x} y={base - h - 4} width={w} height={h + 8} rx={3} className="fill-white stroke-zinc-300 dark:fill-zinc-50 dark:stroke-zinc-600" />
           {draw(x, base, w, h)}
-          <text x={x + w / 2} y={base + 18} textAnchor="middle" fontSize={12} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
+          <text style={{ fontSize: svgPx(12) }} x={x + w / 2} y={base + 18} textAnchor="middle" fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
             {t(s.key)}
           </text>
-          <text x={x + w / 2} y={base + 32} textAnchor="middle" fontSize={12} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+          <text style={{ fontSize: svgPx(12) }} x={x + w / 2} y={base + 32} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
             {f(s.widthMm, 1)} mm
           </text>
         </g>

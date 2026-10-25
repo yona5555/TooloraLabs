@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import WcIndicatorCard from "./WcIndicatorCard";
 import { useWcLive } from "./WcLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 300;
 const H = 176;
@@ -44,14 +45,14 @@ export default function WcReadabilityGauge() {
       ))}
       {[0, 30, 40, 50, 60, 70].map((v) => {
         const [x, y] = pt(v, R + 18);
-        return <text key={v} x={x} y={y + 3} textAnchor="middle" fontSize={9} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">{f(v)}</text>;
+        return <text style={{ fontSize: svgPx(12) }} key={v} x={x} y={y + 3} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">{f(v)}</text>;
       })}
       <g style={{ transform: `rotate(${deg}deg)`, transformOrigin: `${CX}px ${CY}px`, transition: "transform 400ms cubic-bezier(.3,1.4,.5,1)" }}>
         <line x1={CX} y1={CY} x2={CX - R + 14} y2={CY} strokeWidth={4} strokeLinecap="round" className="stroke-zinc-800 dark:stroke-zinc-100" />
       </g>
       <circle cx={CX} cy={CY} r={7} className="fill-zinc-800 dark:fill-zinc-100" />
-      <text x={CX} y={CY - 34} textAnchor="middle" fontSize={26} fontWeight={800} fontFamily="ui-monospace, monospace" className="fill-zinc-900 dark:fill-zinc-50">{f(lix)}</text>
-      <text x={CX} y={CY + 26} textAnchor="middle" fontSize={13} fontWeight={700} fill={band.color}>{t(`bands.${band.key}`)}</text>
+      <text style={{ fontSize: svgPx(26) }} x={CX} y={CY - 34} textAnchor="middle" fontWeight={800} fontFamily="ui-monospace, monospace" className="fill-zinc-900 dark:fill-zinc-50">{f(lix)}</text>
+      <text style={{ fontSize: svgPx(13) }} x={CX} y={CY + 26} textAnchor="middle" fontWeight={700} fill={band.color}>{t(`bands.${band.key}`)}</text>
     </svg>
   );
 

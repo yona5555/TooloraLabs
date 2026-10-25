@@ -4,6 +4,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { ltr } from "@/components/tool-ui/MixedText";
 import { useStepper, type KitRow } from "@/components/tool-ui/indicator-kit/CardKit";
 import { Drawing, INK, LINE, lit, MUTED, px2, SvgLabel as T, useDrawing } from "@/components/tool-ui/indicator-kit/SvgBits";
+import { labelW, laneRows, thinLabels, wrapLabel } from "@/components/tool-ui/labelLayout";
 import { clamp, f1 } from "@/components/tool-ui/indicator-kit/format";
 import { Card, SvgTrack, useSharedStepper } from "../macro-calculator/MacroCards";
 import { usePregnancyLive } from "./PregnancyLiveContext";
@@ -72,7 +73,20 @@ export function PregnancyTimelineCard({ side }: { side: Side }) {
   const xd = (day: number) => X0 + (clamp(day, 0, MAX_DAY) / MAX_DAY) * (W - 2 * X0);
   const extra = Math.max(0, (H - HMIN) / 3);
   const LEVEL = 32;
-  const lineY = 34 + 4 * LEVEL + extra;
+  // station labels: each on the first row where it clears the label before it, by the real 12px widths
+  // (four rows on desktop as before; close stations on a phone no longer share a row) (§39)
+  const stationBox = STATIONS.map((st) => {
+    const x = xd(st.at);
+    const w = Math.max(labelW(tc(`stations.${st.key}`)), labelW(`${Math.floor(st.at / 7)}w${st.at % 7 ? ` ${st.at % 7}d` : ""}`));
+    const anchor: "start" | "middle" | "end" = x < X0 + 50 ? "start" : x > W - X0 - 50 ? "end" : "middle";
+    const tx = anchor === "start" ? x - 4 : anchor === "end" ? x + 4 : x;
+    return { anchor, tx, w, x: anchor === "start" ? tx + w / 2 : anchor === "end" ? tx - w / 2 : tx };
+  });
+  const lanes = STATIONS.map((_, i) => i % 4);
+  const fits = (rows: number[]) =>
+    rows.every((r, i) => rows.every((q, j) => j >= i || q !== r || Math.abs(stationBox[i].x - stationBox[j].x) >= (stationBox[i].w + stationBox[j].w) / 2 + 6));
+  const level = fits(lanes) ? lanes : laneRows(stationBox, 6);
+  const lineY = 34 + Math.max(4, ...level.map((l) => l + 1)) * LEVEL + extra;
   const bandY = lineY + 14;
   const trackY = H - 52;
   const passed = STATIONS.filter((st) => st.at <= ga);
@@ -102,21 +116,19 @@ export function PregnancyTimelineCard({ side }: { side: Side }) {
       caption={t("caption", { ga: ltr(wd(ga)), due: ltr(fmtDate(due, locale)) })}
       visual={
         <Drawing {...d} hMin={HMIN} label={t("handle")} valueText={valueText} handle={{ x: xd(ga), y: trackY, dir: "horizontal" }} s={s} testId="pregnancy-c1">
-          {/* Stations: four label rows above the line, neighbours on a row are four stations apart */}
+          {/* Stations: label rows above the line (see `level`) */}
           {STATIONS.map((st, i) => {
             const x = xd(st.at);
-            const level = i % 4;
-            const ly = 30 + level * LEVEL + extra * 0.5;
+            const ly = 30 + level[i] * LEVEL + extra * 0.5;
             const done = st.at <= ga;
             const on = hover === "next" && next?.key === st.key;
-            const anchor = x < X0 + 50 ? "start" : x > W - X0 - 50 ? "end" : "middle";
-            const tx = anchor === "start" ? x - 4 : anchor === "end" ? x + 4 : x;
+            const { anchor, tx } = stationBox[i];
             return (
               <g key={st.key}>
                 <line x1={x} y1={ly + 16} x2={x} y2={lineY} style={{ stroke: "var(--ph-line)" }} strokeDasharray="2 3" />
                 <circle cx={x} cy={lineY} r={on ? 8 : 6} style={{ fill: done ? "var(--ph-accent-strong)" : "var(--ph-surface)", stroke: "var(--ph-ink)" }} strokeWidth={1.5} />
-                <T x={tx} y={ly} text={tc(`stations.${st.key}`)} anchor={anchor} size={10} bold={done || on} style={done || on ? INK : MUTED} />
-                <T x={tx} y={ly + 13} text={`${Math.floor(st.at / 7)}w${st.at % 7 ? ` ${st.at % 7}d` : ""}`} anchor={anchor} size={9.5} />
+                <T x={tx} y={ly} text={tc(`stations.${st.key}`)} anchor={anchor} size={12} bold={done || on} style={done || on ? INK : MUTED} />
+                <T x={tx} y={ly + 13} text={`${Math.floor(st.at / 7)}w${st.at % 7 ? ` ${st.at % 7}d` : ""}`} anchor={anchor} size={12} />
               </g>
             );
           })}
@@ -126,14 +138,14 @@ export function PregnancyTimelineCard({ side }: { side: Side }) {
           {ACOG_TRI.map((z) => (
             <g key={z.n}>
               <rect x={xd(z.from)} y={bandY} width={xd(z.to) - xd(z.from) - 1} height={18} rx={3} fill={TRI_COLORS[z.n]} opacity={hover === "tri" && z.n === tri ? 1 : 0.75} />
-              <T x={(xd(z.from) + xd(z.to)) / 2} y={bandY + 13} text={`T${z.n}`} size={10.5} bold style={{ fill: "#fff" }} />
+              <T x={(xd(z.from) + xd(z.to)) / 2} y={bandY + 13} text={`T${z.n}`} size={12} bold style={{ fill: "#fff" }} />
             </g>
           ))}
           <rect x={xd(FULL_TERM)} y={bandY} width={xd(MAX_DAY) - xd(FULL_TERM)} height={18} rx={3} fill={TERMS[4].color} opacity={0.35} />
           {/* Today */}
           <line x1={xd(ga)} y1={lineY - 6} x2={xd(ga)} y2={bandY + 30} style={{ stroke: "var(--ph-ink)" }} strokeWidth={2.5} />
           <T x={clamp(xd(ga), X0 + 60, W - X0 - 60)} y={bandY + 48} text={`${t("you")}: ${wd(ga)} · ${f1((ga / FULL_TERM) * 100)}%`} size={12.5} bold style={INK} />
-          {next && <T x={clamp(xd(ga), X0 + 70, W - X0 - 70)} y={bandY + 66} text={`→ ${tc(`stations.${next.key}`)} +${next.at - ga} d`} size={10.5} bold />}
+          {next && <T x={clamp(xd(ga), X0 + 70, W - X0 - 70)} y={bandY + 66} text={`→ ${tc(`stations.${next.key}`)} +${next.at - ga} d`} size={12} bold />}
           <SvgTrack stopAnchor="middle" W={W} y={trackY} frac={ga / MAX_DAY} lo="0w" hi="42w" stops={[98, 196, FULL_TERM].map((v) => ({ frac: v / MAX_DAY, text: `${v / 7}w` }))} />
         </Drawing>
       }
@@ -214,10 +226,10 @@ export function PregnancyRingsCard({ side }: { side: Side }) {
           {legend.map((l, i) => (
             <g key={l.key}>
               <rect x={X0} y={legendY + i * 18 - 10} width={11} height={11} rx={2} style={{ fill: l.color }} />
-              <T x={X0 + 16} y={legendY + i * 18} text={l.text} anchor="start" size={10.5} bold style={INK} />
+              <T x={X0 + 16} y={legendY + i * 18} text={l.text} anchor="start" size={12} bold style={INK} />
             </g>
           ))}
-          <T x={W - X0} y={legendY} text={fmtDate(date, locale)} anchor="end" size={11} bold style={INK} />
+          <T x={W - X0} y={legendY} text={fmtDate(date, locale)} anchor="end" size={12} bold style={INK} />
           <SvgTrack stopAnchor="middle" W={W} y={trackY} frac={N / 30} lo={t("now")} hi="+30 w" />
         </Drawing>
       }
@@ -278,7 +290,7 @@ function Growth({ side }: { side: Side }) {
           {[0, 1000, 2000, 3000].map((g) => (
             <g key={g}>
               <line x1={PL} y1={yg(g)} x2={W - PR} y2={yg(g)} style={{ stroke: "var(--ph-grid)" }} />
-              <T x={PL - 6} y={yg(g) + 4} text={g ? `${g / 1000} kg` : "0"} anchor="end" size={10} />
+              <T x={PL - 6} y={yg(g) + 4} text={g ? `${g / 1000} kg` : "0"} anchor="end" size={12} />
             </g>
           ))}
           {/* Trimester shading (ACOG) */}
@@ -291,15 +303,18 @@ function Growth({ side }: { side: Side }) {
           ))}
           {/* Reference: this week (calculator) */}
           <circle cx={xw(you.week)} cy={yg(you.weightG)} r={8} fill="none" stroke="#ec4899" strokeWidth={2.5} />
-          <T x={xw(you.week)} y={yg(you.weightG) + (you.weightG > 2500 ? 22 : -14)} text={`${t("you")} ${you.week}w`} size={10} bold style={{ fill: "#ec4899" }} />
+          <T x={xw(you.week)} y={yg(you.weightG) + (you.weightG > 2500 ? 22 : -14)} text={`${t("you")} ${you.week}w`} size={12} bold style={{ fill: "#ec4899" }} />
           {/* Selected week */}
           <line x1={xw(w)} y1={top - 8} x2={xw(w)} y2={base} style={{ stroke: "var(--ph-ink)" }} strokeWidth={hover === "week" ? 3 : 1.5} strokeDasharray="4 3" />
           <circle cx={xw(w)} cy={yg(m.weightG)} r={6} style={{ fill: "var(--ph-ink)" }} />
-          <T x={tagRight ? xw(w) + 8 : xw(w) - 8} y={top - 14} text={`${tSize(m.sizeComparison)} · ${wt(m.weightG)} · ${m.lengthCm} cm`} anchor={tagRight ? "start" : "end"} size={11.5} bold style={INK} />
+          <T x={tagRight ? xw(w) + 8 : xw(w) - 8} y={top - 14} text={`${tSize(m.sizeComparison)} · ${wt(m.weightG)} · ${m.lengthCm} cm`} anchor={tagRight ? "start" : "end"} size={12} bold style={INK} />
           {[4, 12, 20, 28, 36, 40].map((wk) => (
-            <T key={wk} x={xw(wk)} y={base + 26} text={`${wk}w`} size={10} />
+            <T key={wk} x={xw(wk)} y={base + 26} text={`${wk}w`} size={12} />
           ))}
-          <T x={xw(20)} y={base + 44} text={t("lengthNote")} size={9.5} />
+          {/* the note wraps across the drawing's width instead of running off both edges (§39) */}
+          {wrapLabel(t("lengthNote"), W - 2 * X0).map((line, i) => (
+            <T key={i} x={W / 2} y={base + 44 + i * 14} text={line} size={12} />
+          ))}
           <SvgTrack stopAnchor="middle" W={W} y={trackY} frac={(w - 4) / 36} lo="4w" hi="40w" />
         </Drawing>
       }
@@ -356,31 +371,34 @@ export function PregnancyTermCard({ side }: { side: Side }) {
             const on = z.key === zone.key;
             return <rect key={z.key} x={xz(a)} y={sy} width={Math.max(0, xz(e) - xz(a) - 1)} height={sh} fill={z.color} opacity={on ? 0.95 : 0.45} />;
           })}
-          {[259, 273, 287, 294].map((v) => (
-            <T key={v} x={xz(v)} y={sy + sh + 16} text={`${v / 7}`} size={10.5} bold style={INK} />
-          ))}
+          {/* zone boundary weeks; "41" gives way to "42" when a phone puts them closer than a label (§39) */}
+          {[259, 273, 287, 294].map((v, i, all) =>
+            thinLabels(all.map((u) => ({ x: xz(u), w: labelW(`${u / 7}`) })), 4, [0, 1, 3, 2])[i] ? (
+              <T key={v} x={xz(v)} y={sy + sh + 16} text={`${v / 7}`} size={12} bold style={INK} />
+            ) : null,
+          )}
           {/* Due date and today */}
           <line x1={xz(FULL_TERM)} y1={sy - 8} x2={xz(FULL_TERM)} y2={sy + sh + 4} style={{ stroke: "var(--ph-ink)" }} strokeWidth={hover === "due" ? 3 : 1.5} strokeDasharray="3 3" />
-          <T x={xz(FULL_TERM)} y={sy - 12} text={`${tc("edd")} 40w`} size={10} bold />
+          <T x={xz(FULL_TERM)} y={sy - 12} text={`${tc("edd")} 40w`} size={12} bold />
           {snap.ga >= Z0 && <line x1={xz(snap.ga)} y1={sy} x2={xz(snap.ga)} y2={sy + sh} stroke="#ec4899" strokeWidth={3} />}
           {/* The what-if birth */}
           <path d={`M ${xz(b) - 7} ${sy - 10} L ${xz(b) + 7} ${sy - 10} L ${xz(b)} ${sy - 1} Z`} style={{ fill: "var(--ph-ink)" }} />
           <line x1={xz(b)} y1={sy} x2={xz(b)} y2={sy + sh} style={{ stroke: "var(--ph-ink)" }} strokeWidth={3} />
-          <T x={X0} y={sy + sh + 16} text={`${Z0 / 7}w`} anchor="start" size={10} />
+          <T x={X0} y={sy + sh + 16} text={`${Z0 / 7}w`} anchor="start" size={12} />
           {/* Legend, one row per zone, then today */}
           {TERMS.map((z, i) => {
             const ly = sy + sh + 44 + extra + i * 18;
             return (
               <g key={`lg${z.key}`}>
                 <rect x={X0} y={ly - 10} width={11} height={11} rx={2} fill={z.color} />
-                <T x={X0 + 16} y={ly} text={`${tc(`terms.${z.key}`)}: ${termRange(z)}`} anchor="start" size={10.5} bold={z.key === zone.key} style={INK} />
+                <T x={X0 + 16} y={ly} text={`${tc(`terms.${z.key}`)}: ${termRange(z)}`} anchor="start" size={12} bold={z.key === zone.key} style={INK} />
               </g>
             );
           })}
           {snap.ga >= Z0 && (
             <g>
               <rect x={X0} y={sy + sh + 44 + extra + 5 * 18 - 6} width={11} height={3} fill="#ec4899" />
-              <T x={X0 + 16} y={sy + sh + 44 + extra + 5 * 18} text={`${t("you")} ${wd(snap.ga)}`} anchor="start" size={10.5} bold style={{ fill: "#ec4899" }} />
+              <T x={X0 + 16} y={sy + sh + 44 + extra + 5 * 18} text={`${t("you")} ${wd(snap.ga)}`} anchor="start" size={12} bold style={{ fill: "#ec4899" }} />
             </g>
           )}
           <SvgTrack stopAnchor="middle" W={W} y={trackY} frac={frac(b, Z0, Z1)} lo="24w" hi="43w" />
@@ -410,7 +428,7 @@ export function PregnancyNaegeleCard({ side }: { side: Side }) {
   const box = (x: number, w: number, y: number, text: string, fill: string, ink: { fill: string }, on: boolean) => (
     <g>
       <rect x={x} y={y} width={w} height={bh} rx={8} style={{ fill, ...lit(on) }} />
-      <T x={x + w / 2} y={y + bh / 2 + 4.5} text={text} size={w < 70 ? 9.5 : 11.5} bold style={ink} />
+      <T x={x + w / 2} y={y + bh / 2 + 4.5} text={text} size={w < 70 ? 12 : 12} bold style={ink} />
     </g>
   );
   const row = (i: number, parts: { text: string; fill: string; ink: { fill: string } }[], on: boolean, label: string) => {
@@ -418,7 +436,7 @@ export function PregnancyNaegeleCard({ side }: { side: Side }) {
     const bw = (W - 2 * X0 + 20 - (n - 1) * gap) / n;
     return (
       <g key={i}>
-        <T x={X0 - 10} y={lane(i) - 6} text={label} anchor="start" size={10} bold />
+        <T x={X0 - 10} y={lane(i) - 6} text={label} anchor="start" size={12} bold />
         {parts.map((p, j) => (
           <g key={j}>{box(X0 - 10 + j * (bw + gap), bw, lane(i), p.text, p.fill, p.ink, on)}</g>
         ))}
@@ -510,7 +528,7 @@ export function PregnancyBirthWindowCard({ side }: { side: Side }) {
         <Drawing {...d} hMin={HMIN} label={t("handle")} valueText={valueText} handle={{ x: X0 + ((off + 21) / 35) * (W - 2 * X0), y: trackY, dir: "horizontal" }} s={s} testId="pregnancy-c6">
           {/* ±7 days band */}
           <rect x={xo(-7)} y={top - 6} width={xo(7) - xo(-7)} height={base - top + 6} fill="#10b981" opacity={hover === "week" ? 0.22 : 0.1} />
-          <T x={xo(0)} y={top - 12} text={`± 7 d: ${f1(pWeek)}%`} size={10} bold style={{ fill: "#059669" }} />
+          <T x={xo(0)} y={top - 12} text={`± 7 d: ${f1(pWeek)}%`} size={12} bold style={{ fill: "#059669" }} />
           <polygon points={shade.join(" ")} style={{ fill: "var(--ph-accent-strong)" }} opacity={hover === "by" ? 0.45 : 0.28} />
           <polyline points={pts.join(" ")} fill="none" style={{ stroke: "var(--ph-accent-strong)" }} strokeWidth={2.5} />
           <line x1={X0} y1={base} x2={W - X0} y2={base} style={LINE} />
@@ -521,9 +539,9 @@ export function PregnancyBirthWindowCard({ side }: { side: Side }) {
           <circle cx={xo(off)} cy={yo(off)} r={6} style={{ fill: "var(--ph-ink)" }} />
           <T x={tagRight ? xo(off) + 8 : xo(off) - 8} y={18} text={`${fmtDate(date, locale, true)} · ${f1(pBy)}%`} anchor={tagRight ? "start" : "end"} size={12} bold style={INK} />
           {[-28, -21, -14, -7, 0, 7, 14, 21].map((o) => (
-            <T key={o} x={xo(o)} y={base + 18} text={o === 0 ? tc("edd") : `${sgn(o)}`} size={10} bold={o === 0} style={o === 0 ? { fill: "#ec4899" } : MUTED} />
+            <T key={o} x={xo(o)} y={base + 18} text={o === 0 ? tc("edd") : `${sgn(o)}`} size={12} bold={o === 0} style={o === 0 ? { fill: "#ec4899" } : MUTED} />
           ))}
-          <T x={xo((B0 + B1) / 2)} y={base + 38} text={t("axis")} size={9.5} />
+          <T x={xo((B0 + B1) / 2)} y={base + 38} text={t("axis")} size={12} />
           <SvgTrack stopAnchor="middle" W={W} y={trackY} frac={(off + 21) / 35} lo="−21 d" hi="+14 d" stops={[{ frac: 21 / 35, text: "0", on: off === 0 }]} />
         </Drawing>
       }
@@ -573,11 +591,11 @@ export function PregnancyWeightGainCard({ side }: { side: Side }) {
       caption={t("caption", { week: ltr(wd(ga)), range: ltr(`${f1(lo)}–${f1(hi)} kg`), cat: tc(`gain.${key}`) })}
       visual={
         <Drawing {...d} hMin={HMIN} label={t("handle")} valueText={valueText} handle={{ x: X0 + ((bmi - 16) / 24) * (W - 2 * X0), y: trackY, dir: "horizontal" }} s={s} testId="pregnancy-c7">
-          <T x={X0} y={18} text={`${t("soFar")} ${wd(ga)}`} anchor="start" size={11} bold />
+          <T x={X0} y={18} text={`${t("soFar")} ${wd(ga)}`} anchor="start" size={12} bold />
           {[0, 5, 10, 15, 20].map((kg) => (
             <g key={kg}>
               <line x1={PL} y1={yk(kg)} x2={W - 10} y2={yk(kg)} style={{ stroke: "var(--ph-grid)" }} />
-              <T x={PL - 6} y={yk(kg) + 4} text={`${kg} kg`} anchor="end" size={9.5} />
+              <T x={PL - 6} y={yk(kg) + 4} text={`${kg} kg`} anchor="end" size={12} />
             </g>
           ))}
           {GAIN.map((c, i) => {
@@ -590,9 +608,9 @@ export function PregnancyWeightGainCard({ side }: { side: Side }) {
                 {/* Total by term (faded), then the range so far */}
                 <rect x={x} y={yk(c.total[1])} width={w} height={yk(c.total[0]) - yk(c.total[1])} rx={4} fill={c.color} opacity={0.18} />
                 <rect x={x} y={yk(b)} width={w} height={Math.max(3, yk(a) - yk(b))} rx={4} style={{ fill: c.color, ...lit(on && (hover === "now" || hover === "cat")) }} opacity={on ? 1 : 0.55} />
-                <T x={x + w / 2} y={yk(Math.max(b, c.total[1])) - 6} text={`${f1(a)}–${f1(b)}`} size={on ? 12 : 10.5} bold style={on ? INK : MUTED} />
-                <T x={x + w / 2} y={base + 18} text={tc(`gain.${c.key}`)} size={10} bold={on} style={on ? INK : MUTED} />
-                <T x={x + w / 2} y={base + 33} text={c.key === "obese" ? "≥ 30" : c.key === "under" ? "< 18.5" : `${c.bmi[0]}–${c.bmi[1]}`} size={9.5} />
+                <T x={x + w / 2} y={yk(Math.max(b, c.total[1])) - 6} text={`${f1(a)}–${f1(b)}`} size={on ? 12 : 12} bold style={on ? INK : MUTED} />
+                <T x={x + w / 2} y={base + 18} text={tc(`gain.${c.key}`)} size={12} bold={on} style={on ? INK : MUTED} />
+                <T x={x + w / 2} y={base + 33} text={c.key === "obese" ? "≥ 30" : c.key === "under" ? "< 18.5" : `${c.bmi[0]}–${c.bmi[1]}`} size={12} />
               </g>
             );
           })}
@@ -666,7 +684,7 @@ function Visits({ side }: { side: Side }) {
           {[0, 5, 10, 14].map((n) => (
             <g key={n}>
               <line x1={PL} y1={yv(n)} x2={W - PR} y2={yv(n)} style={{ stroke: "var(--ph-grid)" }} />
-              <T x={PL - 6} y={yv(n) + 4} text={String(n)} anchor="end" size={10} />
+              <T x={PL - 6} y={yv(n) + 4} text={String(n)} anchor="end" size={12} />
             </g>
           ))}
           <path d={steps.join(" ")} fill="none" style={{ stroke: "var(--ph-accent-strong)" }} strokeWidth={2.5} />
@@ -679,12 +697,12 @@ function Visits({ side }: { side: Side }) {
             return (
               <g key={b.from}>
                 <rect x={xw(b.from)} y={base + 6} width={xw(b.to) - xw(b.from) - 1} height={16} rx={3} fill={b.color} opacity={on ? 0.95 : 0.4} style={lit(on && hover === "int")} />
-                <T x={(xw(b.from) + xw(b.to)) / 2} y={base + 18} text={`/${b.n}w`} size={10} bold style={{ fill: "#fff" }} />
+                <T x={(xw(b.from) + xw(b.to)) / 2} y={base + 18} text={`/${b.n}w`} size={12} bold style={{ fill: "#fff" }} />
               </g>
             );
           })}
           {[4, 12, 20, 28, 36, 40].map((wk) => (
-            <T key={wk} x={xw(wk)} y={base + 40} text={`${wk}w`} size={10} />
+            <T key={wk} x={xw(wk)} y={base + 40} text={`${wk}w`} size={12} />
           ))}
           {/* Selected week */}
           <line x1={xw(w)} y1={top - 6} x2={xw(w)} y2={base} style={{ stroke: "var(--ph-ink)" }} strokeWidth={2} strokeDasharray="4 3" />

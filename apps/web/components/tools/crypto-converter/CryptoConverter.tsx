@@ -7,7 +7,6 @@ import { findCoinById, type CryptoCoin, type CryptoGlobalStats } from "@tooloral
 import { resolveDigitStyle } from "@/lib/digit-style";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
-import AdSpace from "@/components/tool-ui/AdSpace";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import CryptoInputPanel from "./CryptoInputPanel";
@@ -122,20 +121,20 @@ export default function CryptoConverter({ initialCoins, globalStats, fiatRates, 
     { id: "notices", label: tNav("notices") },
   ];
 
-  // Below the fold, in page order; `adAfter` = the desktop leaderboard that follows it (unchanged).
-  const belowCards: { key: string; node: ReactNode; adAfter?: boolean }[] = [
+  // Below the fold, in page order.
+  const belowCards: { key: string; node: ReactNode }[] = [
     { key: "chart", node: <CryptoHistoricalChart coin={chartCoin} coins={initialCoins} onSelectCoin={setChartCoinId} digitStyle={digitStyle} /> },
     { key: "volatility", node: <CryptoVolatilityGauge coin={fromCoin} digitStyle={digitStyle} /> },
-    { key: "sensitivity", node: <CryptoSensitivityTrio fromCoin={fromCoin} toCoin={toCoin} amount={amountValue} digitStyle={digitStyle} />, adAfter: true },
+    { key: "sensitivity", node: <CryptoSensitivityTrio fromCoin={fromCoin} toCoin={toCoin} amount={amountValue} digitStyle={digitStyle} /> },
     { key: "compare", node: <CryptoComparisonCards fromCoin={fromCoin} toCoin={toCoin} digitStyle={digitStyle} /> },
     { key: "supply", node: <CryptoSupplyBar coin={fromCoin} digitStyle={digitStyle} /> },
     { key: "timeline", node: <CryptoCoinTimeline coin={fromCoin} digitStyle={digitStyle} /> },
-    { key: "mcap", node: <CryptoMarketCapLog coins={initialCoins} coin={fromCoin} digitStyle={digitStyle} />, adAfter: true },
+    { key: "mcap", node: <CryptoMarketCapLog coins={initialCoins} coin={fromCoin} digitStyle={digitStyle} /> },
     { key: "movers", node: <CryptoTopMovers coins={initialCoins} digitStyle={digitStyle} onPick={handlePick} /> },
-    { key: "toplist", node: <CryptoTopList coins={initialCoins} digitStyle={digitStyle} fromCoinId={fromCoinId} toCoinId={toCoinId} onPick={handlePick} />, adAfter: true },
+    { key: "toplist", node: <CryptoTopList coins={initialCoins} digitStyle={digitStyle} fromCoinId={fromCoinId} toCoinId={toCoinId} onPick={handlePick} /> },
     { key: "fear-greed", node: <CryptoFearGreed /> },
     { key: "fees", node: <CryptoNetworkFees btcPriceUsd={findCoinById(coins, "bitcoin")?.currentPrice ?? null} digitStyle={digitStyle} /> },
-    { key: "halving", node: <CryptoHalvingSteps />, adAfter: true },
+    { key: "halving", node: <CryptoHalvingSteps /> },
     { key: "what-if", node: <CryptoWhatIfCalculator coins={coins} onCoinDiscovered={handleCoinDiscovered} digitStyle={digitStyle} /> },
     { key: "news", node: <CryptoNews /> },
     { key: "learning", node: <CryptoLearningResources /> },
@@ -198,16 +197,13 @@ export default function CryptoConverter({ initialCoins, globalStats, fiatRates, 
         />
       </div>
 
-      {/* Below the fold every card spans the full content width; leaderboards sit between groups only. */}
+      {/* Below the fold every card spans the full content width. */}
       <div className="mt-6 flex flex-col gap-6">
         <SectionNav items={navItems} />
         <ViewDocsLink slug="crypto-converter" />
 
         {belowCards.map((card) => (
-          <Fragment key={card.key}>
-            {card.node}
-            {card.adAfter && <AdSpace variant="leaderboard" />}
-          </Fragment>
+          <Fragment key={card.key}>{card.node}</Fragment>
         ))}
       </div>
 

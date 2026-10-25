@@ -7,6 +7,8 @@ import { IndicatorCard, KitControls, KitTable, KitTrack, useMeasuredSize, useSte
 import { ViewportScene } from "@/components/tool-ui/three/ViewportScene";
 import { TYPE_COLOR } from "./sgMath";
 import { PER_ROW, RIBBON_WORDS } from "./sgWords";
+import { svgPx } from "@/components/tool-ui/svgPx";
+import { labelW } from "@/components/tool-ui/labelLayout";
 
 /** 6. (3D) The stored paragraph's real words in reading order; the words the tool flags stand tall. */
 const RibbonScene3D = dynamic(() => import("./SGScene3D"), { ssr: false, loading: () => null });
@@ -18,6 +20,13 @@ function Ribbon2D({ n }: { n: number }) {
   const cw = (W - 24) / PER_ROW;
   const rh = (H - 16) / rows;
   const wide = cw >= 44;
+  // words cut to what their column holds at 12px (13.5px estimate for the extra-bold flagged words),
+  // so neighbours never touch (§39); narrow boxes label only the flagged words, up to 8 characters
+  const maxChars = wide ? Math.max(3, Math.min(8, Math.floor((cw - 4) / labelW("m", 13.5)))) : 8;
+  const short = (word: string) => (word.length > maxChars ? `${word.slice(0, maxChars - 1)}…` : word);
+  // a word in the first or last column stays whole inside the drawing
+  // (measured as 13.5px text: the flagged words are drawn extra bold, wider than the 12px estimate)
+  const inside = (cx: number, word: string) => Math.max(labelW(short(word), 13.5) / 2 + 2, Math.min(W - labelW(short(word), 13.5) / 2 - 2, cx));
   return (
     <div ref={box} className="relative min-h-[260px] w-full flex-1">
       <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={String(n)}>
@@ -29,8 +38,8 @@ function Ribbon2D({ n }: { n: number }) {
               <circle cx={cx} cy={cy - 8} r={w.type ? 9 : 4} style={{ fill: w.type ? TYPE_COLOR[w.type] : "var(--ph-ink-muted)" }} />
               {/* Narrow boxes label only the flagged words, alternating above/below so neighbours never touch (§39). */}
               {(wide || w.type) && (
-                <text x={cx} y={wide ? cy + 14 : i % 2 ? cy + 24 : cy - 22} fontSize={9.5} fontWeight={w.type ? 800 : 500} textAnchor="middle" style={{ fill: w.type ? "var(--ph-ink)" : "var(--ph-ink-muted)" }}>
-                  {w.w.length > 8 ? `${w.w.slice(0, 7)}…` : w.w}
+                <text x={inside(cx, w.w)} y={wide ? cy + 14 : i % 2 ? cy + 24 : cy - 22} fontWeight={w.type ? 800 : 500} textAnchor="middle" style={{ fontSize: svgPx(12), fill: w.type ? "var(--ph-ink)" : "var(--ph-ink-muted)" }}>
+                  {short(w.w)}
                 </text>
               )}
             </g>

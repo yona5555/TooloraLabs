@@ -5,6 +5,7 @@ import { projectileRange, rangeAngleCurve } from "@tooloralabs/tools";
 import PmIndicatorCard from "./PmIndicatorCard";
 import { r2, usePmModel } from "./PmLiveContext";
 import { niceCeil } from "./PmLaunchLab";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 400;
 const H = 240;
@@ -40,14 +41,14 @@ export default function PmRangeAngleCurve() {
       {[0, 15, 30, 45, 60, 75, 90].map((deg) => (
         <g key={deg}>
           <line x1={px(deg)} y1={T} x2={px(deg)} y2={B} className="stroke-zinc-200 dark:stroke-zinc-700" />
-          <text x={px(deg)} y={B + 14} textAnchor="middle" fontSize={10} className="fill-zinc-500 dark:fill-zinc-400">{`${deg}°`}</text>
+          <text style={{ fontSize: svgPx(12) }} x={px(deg)} y={B + 14} textAnchor={deg === 0 ? "start" : "middle"} className="fill-zinc-500 dark:fill-zinc-400">{`${deg}°`}</text>
         </g>
       ))}
       {[0, 0.5, 1].map((s) => (
-        <text key={s} x={L - 5} y={py(s * yMax) + 3} textAnchor="end" fontSize={10} className="fill-zinc-500 dark:fill-zinc-400">{f(s * yMax, 1)}</text>
+        <text style={{ fontSize: svgPx(12) }} key={s} x={L - 5} y={py(s * yMax) + 3} textAnchor="end" className="fill-zinc-500 dark:fill-zinc-400">{f(s * yMax, 1)}</text>
       ))}
-      <text x={R} y={B + 28} textAnchor="end" fontSize={10} className="fill-zinc-500 dark:fill-zinc-400">θ</text>
-      <text x={L + 4} y={T - 6} fontSize={10} className="fill-zinc-500 dark:fill-zinc-400">R (m)</text>
+      <text style={{ fontSize: svgPx(12) }} x={R} y={B + 28} textAnchor="end" className="fill-zinc-500 dark:fill-zinc-400">θ</text>
+      <text style={{ fontSize: svgPx(12) }} x={L + 4} y={T - 6} className="fill-zinc-500 dark:fill-zinc-400">R (m)</text>
       <path d={area} className="fill-blue-500/10 dark:fill-blue-400/10" />
       <path d={d} fill="none" strokeWidth={2.5} className="stroke-blue-600 dark:stroke-blue-400" />
       {/* optimal angle, complementary angle and the current angle on the curve */}
@@ -57,11 +58,11 @@ export default function PmRangeAngleCurve() {
       <circle cx={cur.x} cy={cur.y} r={6.5} strokeWidth={2} className="fill-blue-600 stroke-white dark:fill-blue-400 dark:stroke-zinc-900" />
       {/* legend band above the plot, so the annotations never overlap whatever the angle */}
       <circle cx={10} cy={12} r={4.5} className="fill-blue-600 dark:fill-blue-400" />
-      <text x={18} y={15.5} fontSize={10} fontWeight={700} className="fill-blue-700 dark:fill-blue-300">{`θ ${f(a.angle, 1)}° → ${f(a.range, 1)} m`}</text>
+      <text style={{ fontSize: svgPx(12) }} x={18} y={15.5} fontWeight={700} className="fill-blue-700 dark:fill-blue-300">{`θ ${f(a.angle, 1)}° → ${f(a.range, 1)} m`}</text>
       <circle cx={146} cy={12} r={4.5} className="fill-emerald-600 dark:fill-emerald-400" />
-      <text x={154} y={15.5} fontSize={10} fontWeight={700} className="fill-emerald-700 dark:fill-emerald-300">{`θ* ${f(a.optimalAngle, 1)}° → ${f(a.maxRange, 1)} m`}</text>
+      <text style={{ fontSize: svgPx(12) }} x={154} y={15.5} fontWeight={700} className="fill-emerald-700 dark:fill-emerald-300">{`θ* ${f(a.optimalAngle, 1)}° → ${f(a.maxRange, 1)} m`}</text>
       <circle cx={284} cy={12} r={4} strokeWidth={2} className="fill-white stroke-violet-600 dark:fill-zinc-900 dark:stroke-violet-400" />
-      <text x={292} y={15.5} fontSize={10} fontWeight={700} className="fill-violet-700 dark:fill-violet-300">{`${f(comp, 1)}° → ${f(compR, 1)} m`}</text>
+      <text style={{ fontSize: svgPx(12) }} x={292} y={15.5} fontWeight={700} className="fill-violet-700 dark:fill-violet-300">{`${f(comp, 1)}° → ${f(compR, 1)} m`}</text>
     </svg>
   );
 

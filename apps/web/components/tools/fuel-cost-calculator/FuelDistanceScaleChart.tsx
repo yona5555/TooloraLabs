@@ -7,6 +7,9 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import FuelWorkedExampleNote from "./FuelWorkedExampleNote";
 import { ltrIsolate } from "@/lib/bidi";
 import GapFreeRow from "@/components/tool-ui/GapFreeRow";
+import { svgPx } from "@/components/tool-ui/svgPx";
+import { useSvgUnitsPerPx } from "@/components/tool-ui/useFitWidth";
+import { labelW, staggerRows } from "@/components/tool-ui/labelLayout";
 
 /**
  * Same efficiency & price, four real trip distances spanning three orders of magnitude
@@ -24,8 +27,6 @@ const DISTANCES = [
 ];
 
 const WIDTH = 360;
-const HEIGHT = 130;
-const AXIS_Y = 70;
 const PAD_LEFT = 20;
 const PAD_RIGHT = 20;
 
@@ -56,25 +57,51 @@ export default function FuelDistanceScaleChart() {
   const priciest = marks[3]; // "yearly" (12,000 mi) — the longest trip already plotted, for the cost comparison
   const perMile = money(example.cost / example.miles);
 
+  // Labels at their rendered size (a phone shows the chart scaled down and svgPx grows the 12px text in
+  // chart units): marks alternate above / below the axis, and a label that would touch its side's
+  // neighbour moves out one lane (§39). Each lane holds the trip name and its cost.
+  const [svgRef, k] = useSvgUnitsPerPx(WIDTH);
+  const fs = 12 * k;
+  const lane = 2 * fs * 1.15 + 6;
+  const boxes = marks.map((m, i) => {
+    const x = xFor(m.miles);
+    const w = Math.max(labelW(m.label, fs), labelW(m.formatted, fs));
+    const anchor: "start" | "middle" | "end" = i === 0 ? "start" : i === marks.length - 1 ? "end" : "middle";
+    const cx = anchor === "start" ? x + w / 2 : anchor === "end" ? x - w / 2 : Math.max(w / 2, Math.min(WIDTH - w / 2, x));
+    return { x, w, cx, anchor, above: i % 2 === 0 };
+  });
+  const laneOf = new Map<number, number>();
+  for (const side of [true, false]) {
+    const idx = boxes.map((b, i) => (b.above === side ? i : -1)).filter((i) => i >= 0);
+    staggerRows(idx.map((i) => ({ x: boxes[i].cx, w: boxes[i].w })), 8).forEach((r, j) => laneOf.set(idx[j], r));
+  }
+  const lanesUp = 1 + Math.max(0, ...boxes.map((b, i) => (b.above ? (laneOf.get(i) ?? 0) : 0)));
+  const lanesDown = 1 + Math.max(0, ...boxes.map((b, i) => (!b.above ? (laneOf.get(i) ?? 0) : 0)));
+  const AXIS_Y = 14 + lanesUp * lane;
+  const HEIGHT = AXIS_Y + 14 + lanesDown * lane;
+
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("caption", { efficiency: EFFICIENCY, price: money(PRICE) })}</p>
       <GapFreeRow className="mt-4">
         <div dir="ltr" className="shrink-0 overflow-x-auto">
-          <svg width={WIDTH} height={HEIGHT} viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={t("title")} className="block min-w-[320px] text-current">
+          <svg ref={svgRef} width={WIDTH} height={HEIGHT} viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={t("title")} className="block min-w-[320px] text-current">
             <line x1={PAD_LEFT} y1={AXIS_Y} x2={WIDTH - PAD_RIGHT} y2={AXIS_Y} className="stroke-teal-400 dark:stroke-teal-500" strokeWidth={3} strokeLinecap="round" />
             {marks.map((m, i) => {
-              const x = xFor(m.miles);
-              const above = i % 2 === 0;
-              const anchor = i === 0 ? "start" : i === marks.length - 1 ? "end" : "middle";
+              const { x, cx, anchor, above } = boxes[i];
+              const tx = anchor === "middle" ? cx : x;
+              const out = (laneOf.get(i) ?? 0) * lane;
+              // above: name on the outer line, cost next to the axis; below: cost first, then the name
+              const near = above ? AXIS_Y - 12 - out : AXIS_Y + 12 + fs * 0.8 + out;
+              const far = above ? near - fs * 1.15 : near + fs * 1.15;
               return (
                 <g key={m.key}>
                   <circle cx={x} cy={AXIS_Y} r={6} className="fill-teal-500 dark:fill-teal-400" />
-                  <line x1={x} y1={AXIS_Y} x2={x} y2={above ? AXIS_Y - 20 : AXIS_Y + 20} className="stroke-teal-400/60 dark:stroke-teal-500/60" strokeWidth={1.5} />
-                  <text x={x} y={above ? AXIS_Y - 26 : AXIS_Y + 36} textAnchor={anchor} fontSize={10} fill="currentColor" opacity={0.75}>
+                  <line x1={x} y1={AXIS_Y} x2={x} y2={above ? near + 3 : near - fs * 0.8 - 3} className="stroke-teal-400/60 dark:stroke-teal-500/60" strokeWidth={1.5} />
+                  <text style={{ fontSize: svgPx(12) }} x={tx} y={far} textAnchor={anchor} fill="currentColor" opacity={0.75}>
                     {m.label}
                   </text>
-                  <text x={x} y={above ? AXIS_Y - 14 : AXIS_Y + 24} textAnchor={anchor} fontSize={11} fontWeight={700} className="fill-teal-600 dark:fill-teal-300">
+                  <text style={{ fontSize: svgPx(12) }} x={tx} y={near} textAnchor={anchor} fontWeight={700} className="fill-teal-600 dark:fill-teal-300">
                     {m.formatted}
                   </text>
                 </g>

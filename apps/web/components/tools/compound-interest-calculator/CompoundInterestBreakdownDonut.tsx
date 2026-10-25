@@ -1,3 +1,4 @@
+import { svgPx } from "@/components/tool-ui/svgPx";
 type Segment = {
   key: string;
   value: number;
@@ -58,10 +59,10 @@ export default function CompoundInterestBreakdownDonut({ segments, centerValue, 
             className={`transition-all duration-700 ease-out ${arc.colorClass}`}
           />
         ))}
-        <text x={center} y={center - 6} textAnchor="middle" fontSize={20} fontWeight={700} className="fill-zinc-900 dark:fill-zinc-50">
+        <text style={{ fontSize: svgPx(20) }} x={center} y={center - 6} textAnchor="middle" fontWeight={700} className="fill-zinc-900 dark:fill-zinc-50">
           {centerValue}
         </text>
-        <text x={center} y={center + 16} textAnchor="middle" fontSize={11} className="fill-zinc-500 dark:fill-zinc-400">
+        <text style={{ fontSize: svgPx(12) }} x={center} y={center + 16} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
           {centerLabel}
         </text>
       </svg>

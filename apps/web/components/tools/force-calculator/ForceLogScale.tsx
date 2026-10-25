@@ -4,11 +4,14 @@ import { useTranslations } from "next-intl";
 import { FORCE_REFERENCES } from "@tooloralabs/tools";
 import ForceIndicatorCard from "./ForceIndicatorCard";
 import { pow10, useForceModel } from "./ForceLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
+import { useFitWidth } from "@/components/tool-ui/useFitWidth";
+import { labelW } from "@/components/tool-ui/labelLayout";
 
-const W = 400;
-const H = 230;
+const MAX_W = 400;
+/** One reference: name and force lines (13px apart) plus the gap to the next row. */
+const ROW_H = 34;
 const X0 = 46;
-const X1 = W - 46;
 const AXIS = 96;
 
 const lg = (v: number) => Math.log10(Math.max(Math.abs(v), 1e-300));
@@ -23,6 +26,9 @@ export default function ForceLogScale() {
   const svgId = useId();
   const t = useTranslations("tools.force-calculator.education.lab.scale");
   const { secondLaw, gravitation, sl, gr, f } = useForceModel();
+  // laid out at its on-screen width so the 12px labels keep their true size on a phone
+  const [fitRef, W] = useFitWidth(MAX_W);
+  const X1 = W - 46;
 
   const live = [
     sl ? { key: "secondLaw", label: `F = ma · ${f(secondLaw.force)} N`, v: secondLaw.force, cls: "fill-blue-600 dark:fill-blue-400", stroke: "stroke-blue-600 dark:stroke-blue-400" } : null,
@@ -39,9 +45,13 @@ export default function ForceLogScale() {
 
   const refs = [...FORCE_REFERENCES].sort((a, b) => a.force - b.force);
   const slotW = (X1 - X0) / refs.length;
+  // labels take turns over as many rows as the widest needs, so neighbours in a row never touch (§39)
+  const widest = Math.max(...refs.flatMap((r) => [labelW(t(`refs.${r.key}`)), labelW(`${f(r.force, 1)} N`)]));
+  const rows = Math.min(3, Math.max(2, Math.ceil((widest + 8) / slotW)));
+  const H = AXIS + 44 + (rows - 1) * ROW_H + 24;
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <svg ref={fitRef} direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <defs>
         <linearGradient id={`${svgId}force-log-grad`} x1="0" x2="1" y1="0" y2="0">
           <stop offset="0%" stopColor="#38bdf8" />
@@ -53,25 +63,25 @@ export default function ForceLogScale() {
       {ticks.map((e) => (
         <line key={e} x1={sx(e)} y1={AXIS + 5} x2={sx(e)} y2={AXIS + 9} className="stroke-zinc-400 dark:stroke-zinc-500" />
       ))}
-      <text x={X0 - 6} y={AXIS + 4} textAnchor="end" fontSize={10} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={X0 - 6} y={AXIS + 4} textAnchor="end" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
         {pow10(lo)}
       </text>
-      <text x={X1 + 6} y={AXIS + 4} fontSize={10} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={X1 + 6} y={AXIS + 4} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
         {pow10(hi)}
       </text>
       {/* reference forces: slot labels on two alternating rows, with leader lines */}
       {refs.map((r, i) => {
         const x = sx(lg(r.force));
         const lx = X0 + slotW * (i + 0.5);
-        const ny = AXIS + (i % 2 === 0 ? 44 : 76);
+        const ny = AXIS + 44 + (i % rows) * ROW_H;
         return (
           <g key={r.key}>
             <line x1={x} y1={AXIS + 5} x2={lx} y2={ny - 11} strokeWidth={1} className="stroke-zinc-400 dark:stroke-zinc-500" />
             <circle cx={x} cy={AXIS} r={3} className="fill-zinc-700 dark:fill-zinc-200" />
-            <text x={lx} y={ny} textAnchor="middle" fontSize={10} fontWeight={600} className="fill-zinc-600 dark:fill-zinc-300">
+            <text style={{ fontSize: svgPx(12) }} x={lx} y={ny} textAnchor="middle" fontWeight={600} className="fill-zinc-600 dark:fill-zinc-300">
               {t(`refs.${r.key}`)}
             </text>
-            <text x={lx} y={ny + 12} textAnchor="middle" fontSize={9} fontFamily="ui-monospace, monospace" className="fill-zinc-400 dark:fill-zinc-500">
+            <text style={{ fontSize: svgPx(12) }} x={lx} y={ny + 13} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-400 dark:fill-zinc-500">
               {`${f(r.force, 1)} N`}
             </text>
           </g>
@@ -81,12 +91,13 @@ export default function ForceLogScale() {
       {live.map((l, i) => {
         const x = sx(lg(l.v));
         const y = i === 0 ? 50 : 22;
-        const lx = Math.max(70, Math.min(W - 70, x));
+        const half = labelW(l.label) / 2 + 2;
+        const lx = Math.max(half, Math.min(W - half, x));
         return (
           <g key={l.key}>
             <line x1={x} y1={AXIS - 6} x2={lx} y2={y + 6} strokeWidth={1.5} className={l.stroke} />
             <path d={`M ${x - 5} ${AXIS - 13} L ${x + 5} ${AXIS - 13} L ${x} ${AXIS - 5} z`} className={l.cls} />
-            <text x={lx} y={y} textAnchor="middle" fontSize={11} fontWeight={700} fontFamily="ui-monospace, monospace" className={l.cls}>
+            <text style={{ fontSize: svgPx(12) }} x={lx} y={y} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className={l.cls}>
               {l.label}
             </text>
           </g>

@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import FnIndicatorCard, { FnIndicatorUnavailable } from "./FnIndicatorCard";
 import { useFnModel } from "./FnLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const ROW = 50;
@@ -25,19 +26,19 @@ export default function FnPlatformRows() {
         const after = a.sanitized[i];
         return (
           <g key={p.platform}>
-            <text x={0} y={y - 4} fontSize={13} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
+            <text style={{ fontSize: svgPx(13) }} x={0} y={y - 4} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
               {tp(p.platform)}
             </text>
-            <text x={0} y={y + 13} fontSize={11} className={p.ok ? "fill-zinc-400 dark:fill-zinc-500" : "fill-rose-600 dark:fill-rose-300"}>
+            <text style={{ fontSize: svgPx(12) }} x={0} y={y + 13} className={p.ok ? "fill-zinc-400 dark:fill-zinc-500" : "fill-rose-600 dark:fill-rose-300"}>
               {p.ok ? t("fine") : p.reasons.map((r) => tr(r)).join(" · ")}
             </text>
             <circle cx={W - 62} cy={y} r={13} className={p.ok ? "fill-emerald-500" : "fill-rose-500"} />
-            <text x={W - 62} y={y + 5} textAnchor="middle" fontSize={14} fontWeight={700} className="fill-white">
+            <text style={{ fontSize: svgPx(14) }} x={W - 62} y={y + 5} textAnchor="middle" fontWeight={700} className="fill-white">
               {p.ok ? "✓" : "✕"}
             </text>
             <path d={`M ${W - 44} ${y} H ${W - 34} m -4 -4 l 4 4 l -4 4`} fill="none" strokeWidth={1.5} className="stroke-zinc-400" />
             <circle cx={W - 14} cy={y} r={13} className={after.ok ? "fill-emerald-500" : "fill-amber-500"} />
-            <text x={W - 14} y={y + 5} textAnchor="middle" fontSize={14} fontWeight={700} className="fill-white">
+            <text style={{ fontSize: svgPx(14) }} x={W - 14} y={y + 5} textAnchor="middle" fontWeight={700} className="fill-white">
               {after.ok ? "✓" : "%"}
             </text>
           </g>

@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import PasswordIndicatorCard, { PasswordIndicatorUnavailable } from "./PasswordIndicatorCard";
 import { CLASS_FILL, usePasswordModel } from "./PasswordLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 190;
@@ -48,7 +49,7 @@ export default function PasswordClassDonut() {
         KEYS.map((k, i) =>
           expected[i] > 0 ? <path key={k} d={ring(38, 56, e[i][0], e[i][1])} className={`${CLASS_FILL[k]} stroke-white opacity-45 dark:stroke-zinc-900`} strokeWidth={1.5} /> : null,
         )}
-      <text x={CX} y={CY + 6} textAnchor="middle" fontSize={20} fontWeight={700} className="fill-zinc-800 dark:fill-zinc-100">
+      <text style={{ fontSize: svgPx(20) }} x={CX} y={CY + 6} textAnchor="middle" fontWeight={700} className="fill-zinc-800 dark:fill-zinc-100">
         {f(total)}
       </text>
       {shown.map((k, i) => {
@@ -56,10 +57,10 @@ export default function PasswordClassDonut() {
         return (
           <g key={k}>
             <circle cx={208} cy={y} r={6} className={CLASS_FILL[k]} />
-            <text x={220} y={y + 4} fontSize={12} className="fill-zinc-600 dark:fill-zinc-300">
+            <text style={{ fontSize: svgPx(12) }} x={220} y={y + 4} className="fill-zinc-600 dark:fill-zinc-300">
               {tc(k)}
             </text>
-            <text x={W - 4} y={y + 4} textAnchor="end" fontSize={12} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={W - 4} y={y + 4} textAnchor="end" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
               {f(classes[k])}
             </text>
           </g>

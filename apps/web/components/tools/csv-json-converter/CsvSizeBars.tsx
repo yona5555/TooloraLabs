@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import CsvIndicatorCard, { CsvIndicatorUnavailable } from "./CsvIndicatorCard";
 import { useCsvModel } from "./CsvLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const LABEL = 104;
@@ -33,11 +34,11 @@ export default function CsvSizeBars() {
         const w = Math.max(3, (r.v / peak) * BAR_W);
         return (
           <g key={r.key}>
-            <text x={LABEL} y={y + 22} textAnchor="end" fontSize={12} fontWeight={600} className="fill-zinc-700 dark:fill-zinc-200">
+            <text style={{ fontSize: svgPx(12) }} x={LABEL} y={y + 22} textAnchor="end" fontWeight={600} className="fill-zinc-700 dark:fill-zinc-200">
               {t(r.key)}
             </text>
             <rect x={BAR_X} y={y + 8} width={w} height={ROW - 16} rx={4} className={r.cls} />
-            <text x={BAR_X + w + 5} y={y + 22} fontSize={12} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
+            <text style={{ fontSize: svgPx(12) }} x={BAR_X + w + 5} y={y + 22} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
               {f(r.v)} B
             </text>
           </g>

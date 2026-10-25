@@ -1,6 +1,8 @@
 "use client";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
+import { svgPx } from "@/components/tool-ui/svgPx";
+import { labelW, staggerRows } from "@/components/tool-ui/labelLayout";
 
 /**
  * Static illustrative chart for the education intro — not tied to the user's live inputs (unlike
@@ -20,7 +22,6 @@ const SCENARIOS = [
 const MARGIN = { top: 28, left: 8, right: 8 };
 const BAR_AREA_HEIGHT = 200;
 const XAXIS_HEIGHT = 24;
-const CHART_HEIGHT = MARGIN.top + BAR_AREA_HEIGHT + XAXIS_HEIGHT;
 const BAR_WIDTH = 56;
 const GAP = 30;
 const CHART_WIDTH = MARGIN.left + SCENARIOS.length * BAR_WIDTH + (SCENARIOS.length - 1) * GAP + MARGIN.right;
@@ -36,6 +37,14 @@ export default function HouseAffordabilityIncomeChart() {
   const groupX = (i: number) => MARGIN.left + i * (BAR_WIDTH + GAP);
 
   const money = (value: number) => `$${Math.round(value).toLocaleString("en-US")}`;
+  // income labels kept whole inside the chart, and one that would touch its neighbour drops a line (§39)
+  const incomes = SCENARIOS.map((s, i) => {
+    const text = t("incomeLabel", { income: s.income.toLocaleString("en-US") });
+    const w = labelW(text);
+    return { text, w, x: Math.max(w / 2 + 2, Math.min(CHART_WIDTH - w / 2 - 2, groupX(i) + BAR_WIDTH / 2)) };
+  });
+  const incomeRow = staggerRows(incomes, 6);
+  const CHART_HEIGHT = MARGIN.top + BAR_AREA_HEIGHT + XAXIS_HEIGHT + (incomeRow.some((r) => r) ? 14 : 0);
 
   return (
     <figure className="my-2">
@@ -54,11 +63,11 @@ export default function HouseAffordabilityIncomeChart() {
                 onPointerLeave={() => setHoverKey(null)}
               >
                 <rect x={x} y={top} width={BAR_WIDTH} height={Math.max(barBottom - top, 0)} className="fill-blue-600 dark:fill-blue-400" />
-                <text x={x + BAR_WIDTH / 2} y={top - 8} textAnchor="middle" fontSize={12} fontWeight={700} className="fill-zinc-900 dark:fill-zinc-50">
+                <text style={{ fontSize: svgPx(12) }} x={x + BAR_WIDTH / 2} y={top - 8} textAnchor="middle" fontWeight={700} className="fill-zinc-900 dark:fill-zinc-50">
                   {money(s.maxPrice)}
                 </text>
-                <text x={x + BAR_WIDTH / 2} y={barBottom + XAXIS_HEIGHT - 8} textAnchor="middle" fontSize={10} fill="currentColor" opacity={0.7}>
-                  {t("incomeLabel", { income: s.income.toLocaleString("en-US") })}
+                <text style={{ fontSize: svgPx(12) }} x={incomes[i].x} y={barBottom + XAXIS_HEIGHT - 8 + incomeRow[i] * 14} textAnchor="middle" fill="currentColor" opacity={0.7}>
+                  {incomes[i].text}
                 </text>
               </g>
             );

@@ -5,6 +5,7 @@ import { KitControls, SvgHandle, useMeasuredSize, useSvgDrag, type Stepper } fro
 import { snap } from "@/components/tool-ui/indicator-kit/format";
 import { axisTicks } from "@/components/tool-ui/indicator-kit/SvgBits";
 import { clean } from "./sttMath";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 /**
  * §44 (2D): the main visual at the top of the Transcript card — the final segments the recognizer
@@ -56,16 +57,16 @@ export default function STTScene({ segments, k, onK }: { segments: string[]; k: 
     <div data-ph-scene-block className="flex flex-1 flex-col gap-3">
       <div ref={box} dir="ltr" data-preview="visual" className="relative min-h-[280px] w-full flex-1" data-testid="stt-hero-drawing">
         <svg ref={ref} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>
-          <text x={X0} y={16} fontSize={11} fontWeight={700} style={{ fill: "var(--ph-ink-muted)" }}>
+          <text x={X0} y={16} fontWeight={700} style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
             {t("segment", { k })}
           </text>
-          <text x={X0} y={33} fontSize={11.5} fontWeight={600} style={{ fill: "var(--ph-ink)" }}>
+          <text x={X0} y={33} fontWeight={600} style={{ fontSize: svgPx(12), fill: "var(--ph-ink)" }}>
             {shown.length > room ? `“${shown.slice(0, room - 2)}…”` : `“${shown}”`}
           </text>
           {axisTicks(0, yMax, bot - top, 30).map((v) => (
             <g key={v}>
               <line x1={X0} y1={yw(v)} x2={X1} y2={yw(v)} style={{ stroke: "var(--ph-grid)" }} />
-              <text x={X0 - 6} y={yw(v) + 4} fontSize={10} fontWeight={600} textAnchor="end" className="tabular-nums" style={{ fill: "var(--ph-ink-muted)" }}>
+              <text x={X0 - 6} y={yw(v) + 4} fontWeight={600} textAnchor="end" className="tabular-nums" style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
                 {v}
               </text>
             </g>
@@ -75,7 +76,7 @@ export default function STTScene({ segments, k, onK }: { segments: string[]; k: 
             return (
               <g key={i} opacity={on ? 1 : 0.35}>
                 <rect x={xc(i) - bw / 2} y={yw(w)} width={bw} height={Math.max(3, bot - yw(w))} rx={Math.min(8, bw / 2)} style={{ fill: i === k - 1 ? "var(--ai-a)" : "var(--ai-soft)", stroke: "var(--ai-a)" }} strokeWidth={1.25} />
-                <text x={xc(i)} y={bot + 15} fontSize={10.5} fontWeight={700} textAnchor="middle" style={{ fill: "var(--ph-ink-muted)" }}>
+                <text x={xc(i)} y={bot + 15} fontWeight={700} textAnchor="middle" style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
                   {`S${i + 1} · ${w}`}
                 </text>
               </g>
@@ -85,7 +86,7 @@ export default function STTScene({ segments, k, onK }: { segments: string[]; k: 
           {cum.map((c, i) => (
             <g key={i} opacity={i < k ? 1 : 0.35}>
               <circle cx={xc(i)} cy={yw(c)} r={i === k - 1 ? 6 : 4} style={{ fill: "var(--ai-b)" }} />
-              <text x={xc(i)} y={yw(c) - 10} fontSize={11} fontWeight={800} textAnchor="middle" className="tabular-nums" style={{ fill: "var(--ph-ink)" }}>
+              <text x={xc(i)} y={yw(c) - 10} fontWeight={800} textAnchor="middle" className="tabular-nums" style={{ fontSize: svgPx(12), fill: "var(--ph-ink)" }}>
                 {c}
               </text>
             </g>

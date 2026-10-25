@@ -7,6 +7,7 @@ import "@/components/tool-ui/mafsTheme.css";
 import { GlassHeroCard } from "@/components/tool-ui/glass/GlassPrimitives";
 import { useFractionLive } from "./FractionLiveContext";
 import { formatMathValue, formatPercent, toMathValueFraction, gcd } from "@tooloralabs/tools";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const COLOR_A = "var(--glass-accent-1-strong)";
 const COLOR_B = "var(--glass-accent-2-strong)";
@@ -144,10 +145,10 @@ export default function FractionHero() {
               <path d={pieSlicePath(remainder, 46)} fill={COLOR_SUM} opacity={0.9} />
             )}
             <circle cx="50" cy="50" r={whole >= 1 ? 22 : 27} fill="var(--glass-surface)" />
-            <text x="50" y="47" textAnchor="middle" fontSize="12" fontWeight="700" fill="var(--glass-title)">
+            <text style={{ fontSize: svgPx(12) }} x="50" y="47" textAnchor="middle" fontWeight="700" fill="var(--glass-title)">
               {formatMathValue(result)}
             </text>
-            <text x="50" y="60" textAnchor="middle" fontSize="6" fill="var(--glass-muted)">
+            <text style={{ fontSize: svgPx(12) }} x="50" y="60" textAnchor="middle" fill="var(--glass-muted)">
               {`${formatPercent(result * 100)}%`}
             </text>
           </svg>
@@ -177,10 +178,10 @@ export default function FractionHero() {
               />
               <Line.Segment point1={[dataMin, 0.15]} point2={[dataMax, 0.15]} color={COLOR_A} weight={1.5} opacity={0.4} />
               <Line.Segment point1={[dataMin, -0.15]} point2={[dataMax, -0.15]} color={COLOR_B} weight={1.5} opacity={0.4} />
-              <Text x={valueA} y={0.34} size={11} color={COLOR_A}>
+              <Text x={valueA} y={0.34} size={12} color={COLOR_A}>
                 {`A = ${formatMathValue(numeratorA)}/${formatMathValue(denominatorA)}`}
               </Text>
-              <Text x={valueB} y={-0.34} size={11} color={COLOR_B}>
+              <Text x={valueB} y={-0.34} size={12} color={COLOR_B}>
                 {`B = ${formatMathValue(numeratorB)}/${formatMathValue(denominatorB)}`}
               </Text>
               <g data-point-role="pointA">{pointA.element}</g>

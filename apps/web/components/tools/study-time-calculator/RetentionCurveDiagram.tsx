@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import { useMeasuredWidth } from "@/components/tool-ui/useMeasuredWidth";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 /**
  * The Ebbinghaus forgetting curve, with review points marking how spaced
@@ -42,10 +43,10 @@ export default function RetentionCurveDiagram() {
         <svg viewBox={`0 0 ${width} ${height}`} width={width} height={height} role="img" aria-label={d("ariaLabel")} className="block h-auto w-full text-current">
           <line x1={padLeft} y1={10} x2={padLeft} y2={height - padBottom} stroke="currentColor" strokeOpacity={0.3} strokeWidth={1} />
           <line x1={padLeft} y1={height - padBottom} x2={width - 10} y2={height - padBottom} stroke="currentColor" strokeOpacity={0.3} strokeWidth={1} />
-          <text x={padLeft - 6} y={16} textAnchor="end" fontSize={12} fill="currentColor" opacity={0.6}>
+          <text style={{ fontSize: svgPx(12) }} x={padLeft - 6} y={16} textAnchor="end" fill="currentColor" opacity={0.6}>
             100%
           </text>
-          <text x={padLeft - 6} y={height - padBottom} textAnchor="end" fontSize={12} fill="currentColor" opacity={0.6}>
+          <text style={{ fontSize: svgPx(12) }} x={padLeft - 6} y={height - padBottom} textAnchor="end" fill="currentColor" opacity={0.6}>
             0%
           </text>
           <polyline points={points} fill="none" stroke="currentColor" className="stroke-blue-500 dark:stroke-blue-400" strokeWidth={2.5} />
@@ -66,7 +67,7 @@ export default function RetentionCurveDiagram() {
               strokeWidth={1.5}
             />
           ))}
-          <text x={width - 10} y={22} textAnchor="end" fontSize={12} fontWeight={700} className="fill-green-600 dark:fill-green-400">
+          <text style={{ fontSize: svgPx(12) }} x={width - 10} y={22} textAnchor="end" fontWeight={700} className="fill-green-600 dark:fill-green-400">
             {d("reviewLabel")}
           </text>
         </svg>

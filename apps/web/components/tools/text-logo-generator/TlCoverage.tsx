@@ -2,9 +2,10 @@
 import { useTranslations } from "next-intl";
 import TlIndicatorCard from "./TlIndicatorCard";
 import { useTlLive } from "./TlLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
+import { useFitWidth } from "@/components/tool-ui/useFitWidth";
+import { labelW } from "@/components/tool-ui/labelLayout";
 
-const W = 330;
-const LEFT = 78;
 const ROW = 20;
 const SEGMENTS = [
   { key: "offset", fill: "fill-blue-600 dark:fill-blue-400" },
@@ -17,12 +18,16 @@ const SEGMENTS = [
 export default function TlCoverage() {
   const t = useTranslations("tools.text-logo-generator.live.coverage");
   const { styles, active, activeStyle, setActiveStyle, styleName, f, pct } = useTlLive();
+  // laid out at its on-screen width, the name column as wide as the longest style name at 12px, so
+  // names never run off the left edge on a phone (§39)
+  const [fitRef, W] = useFitWidth(330);
+  const LEFT = Math.max(78, Math.ceil(Math.max(...styles.map((s) => labelW(styleName(s.style)))) + 10));
   const H = styles.length * ROW + 4;
   const parts = (s: (typeof styles)[number]) => ({ offset: s.mapped - s.exceptions, exception: s.exceptions, unchanged: s.unchanged, other: s.other });
 
   const indicator = (
     <div className="space-y-2">
-      <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
+      <svg ref={fitRef} direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
         {styles.map((s, i) => {
           const y = 2 + i * ROW;
           const p = parts(s);
@@ -30,7 +35,7 @@ export default function TlCoverage() {
           let x = LEFT;
           return (
             <g key={s.style} className="cursor-pointer" onClick={() => setActiveStyle(s.style)} opacity={on ? 1 : 0.6} style={{ transition: "opacity 200ms ease" }}>
-              <text x={LEFT - 6} y={y + 11} textAnchor="end" fontSize={9} fontWeight={on ? 700 : 500} className="fill-zinc-700 dark:fill-zinc-200">
+              <text style={{ fontSize: svgPx(12) }} x={LEFT - 6} y={y + 11} textAnchor="end" fontWeight={on ? 700 : 500} className="fill-zinc-700 dark:fill-zinc-200">
                 {styleName(s.style)}
               </text>
               {SEGMENTS.map((seg) => {

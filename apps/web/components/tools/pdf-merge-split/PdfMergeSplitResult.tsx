@@ -5,6 +5,7 @@ import { Download, Loader2 } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import PdfMergeSplitShareExportModal from "./PdfMergeSplitShareExportModal";
 import { formatBytes, SOURCE_FILL, usePdfModel } from "./PdfLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const THUMB_H = 64;
 /** Largest drawn page: the grid grows to the card width but a page never exceeds this. */
@@ -85,7 +86,7 @@ export default function PdfMergeSplitResult({ isProcessing, resultCount, onDownl
                 <svg key={i} viewBox={`0 0 ${w} ${THUMB_H}`} className="h-auto w-full" style={{ maxWidth: (w / THUMB_H) * THUMB_MAX_H }} role="img" aria-label={`${sources[p.source]} p.${p.page}`}>
                   <path d={`M 1 1 H ${w - 9} L ${w - 1} 9 V ${THUMB_H - 1} H 1 Z`} className={`${SOURCE_FILL[p.source % SOURCE_FILL.length]} opacity-90`} />
                   <path d={`M ${w - 9} 1 V 9 H ${w - 1}`} className="fill-white/40" />
-                  <text x={w / 2} y={THUMB_H / 2 + 5} textAnchor="middle" fontSize={13} fontWeight={700} className="fill-white">
+                  <text style={{ fontSize: svgPx(13) }} x={w / 2} y={THUMB_H / 2 + 5} textAnchor="middle" fontWeight={700} className="fill-white">
                     {p.page}
                   </text>
                 </svg>

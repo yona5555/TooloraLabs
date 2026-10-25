@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import FsIndicatorCard, { FsIndicatorUnavailable } from "./FsIndicatorCard";
 import { durationParts, useFsModel } from "./FsLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 220;
@@ -45,13 +46,13 @@ export default function FsTransferBars() {
               rx={5}
               className={["fill-rose-500 dark:fill-rose-400", "fill-amber-500 dark:fill-amber-400", "fill-blue-600 dark:fill-blue-400", "fill-emerald-500 dark:fill-emerald-400"][i]}
             />
-            <text x={cx} y={top - 6} textAnchor="middle" fontSize={11} fontWeight={700} className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={cx} y={top - 6} textAnchor="middle" fontWeight={700} className="fill-zinc-800 dark:fill-zinc-100">
               {label(x.seconds)}
             </text>
-            <text x={cx} y={BASE + 16} textAnchor="middle" fontSize={11} className="fill-zinc-600 dark:fill-zinc-300">
+            <text style={{ fontSize: svgPx(12) }} x={cx} y={BASE + 16} textAnchor="middle" className="fill-zinc-600 dark:fill-zinc-300">
               {tp(x.key).split(" (")[0]}
             </text>
-            <text x={cx} y={BASE + 30} textAnchor="middle" fontSize={10} fontFamily="ui-monospace, monospace" className="fill-zinc-400 dark:fill-zinc-500">
+            <text style={{ fontSize: svgPx(12) }} x={cx} y={BASE + 30} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-400 dark:fill-zinc-500">
               {f(x.mbps, 3)} Mb/s
             </text>
           </g>

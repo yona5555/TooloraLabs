@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import B64IndicatorCard, { B64IndicatorUnavailable } from "./B64IndicatorCard";
 import { useB64Model } from "./B64LiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const ROW_H = 30;
@@ -46,10 +47,10 @@ export default function B64SizeBar() {
         const total = r.parts.reduce((s, p) => s + p.v, 0);
         return (
           <g key={r.key}>
-            <text x={0} y={y + 12} fontSize={12} className="fill-zinc-600 dark:fill-zinc-300">
+            <text style={{ fontSize: svgPx(12) }} x={0} y={y + 12} className="fill-zinc-600 dark:fill-zinc-300">
               {t(r.key)}
             </text>
-            <text x={W} y={y + 12} textAnchor="end" fontSize={12} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={W} y={y + 12} textAnchor="end" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
               {f(total)}
             </text>
             {r.parts.map((p, k) => {
@@ -67,7 +68,7 @@ export default function B64SizeBar() {
       ].map((k, i) => (
         <g key={k.key}>
           <circle cx={6} cy={rows.length * (ROW_H + 26) + i * 22 + 2} r={6} className={k.cls} />
-          <text x={20} y={rows.length * (ROW_H + 26) + i * 22 + 6} fontSize={12} className="fill-zinc-600 dark:fill-zinc-300">
+          <text style={{ fontSize: svgPx(12) }} x={20} y={rows.length * (ROW_H + 26) + i * 22 + 6} className="fill-zinc-600 dark:fill-zinc-300">
             {t(k.key)}
           </text>
         </g>

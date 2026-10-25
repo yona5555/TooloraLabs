@@ -9,6 +9,7 @@ import { ViewportScene } from "@/components/tool-ui/three/ViewportScene";
 import { ballPoints, snap } from "@/components/tool-ui/indicator-kit/format";
 import { g3, liquidCss, V_MAX, V_MIN, V_STEP } from "./molMath";
 import type { MolProjection } from "./MolarityResultScene3D";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const Scene3D = dynamic(() => import("./MolarityResultScene3D"), { ssr: false, loading: () => null });
 const PTS = ballPoints(64, 17);
@@ -46,7 +47,7 @@ function Scene2D({ s, valueText, label, p }: { s: Stepper; valueText: string; la
         <rect x={BAR_X - 6} y={TOP - 6} width={12} height={BOTTOM - TOP + 12} rx={6} style={{ fill: "var(--glass-track)", stroke: "var(--ph-line)" }} strokeWidth={1} />
         <rect x={BAR_X - 6} y={yFor(p.volume)} width={12} height={BOTTOM - yFor(p.volume) + 6} rx={6} style={{ fill: liquidCss(p.molarity) }} />
         {[0, 1, 2, 3, 4, 5].map((tk) => (
-          <text key={tk} x={BAR_X + 22} y={yFor(tk) + 4} fontSize={11} style={{ fill: "var(--ph-ink-muted)" }}>
+          <text key={tk} x={BAR_X + 22} y={yFor(tk) + 4} style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
             {`${tk} L`}
           </text>
         ))}

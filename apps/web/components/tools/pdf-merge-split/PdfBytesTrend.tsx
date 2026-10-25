@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import PdfIndicatorCard, { PdfIndicatorUnavailable } from "./PdfIndicatorCard";
 import { formatBytes, usePdfModel } from "./PdfLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 220;
@@ -36,17 +37,17 @@ export default function PdfBytesTrend() {
       {[0, total / 2, total].map((v, k) => (
         <g key={k}>
           <line x1={L} y1={y(v)} x2={W - R} y2={y(v)} className="stroke-zinc-200 dark:stroke-zinc-700" />
-          <text x={L - 6} y={y(v) + 4} textAnchor="end" fontSize={10} className="fill-zinc-500 dark:fill-zinc-400">
+          <text style={{ fontSize: svgPx(12) }} x={L - 6} y={y(v) + 4} textAnchor="end" className="fill-zinc-500 dark:fill-zinc-400">
             {formatBytes(v)}
           </text>
         </g>
       ))}
       {[0, n].map((v) => (
-        <text key={v} x={x(v)} y={H - B + 16} textAnchor="middle" fontSize={12} className="fill-zinc-500 dark:fill-zinc-400">
+        <text style={{ fontSize: svgPx(12) }} key={v} x={x(v)} y={H - B + 16} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
           {v}
         </text>
       ))}
-      <text x={(L + W - R) / 2} y={H - 4} textAnchor="middle" fontSize={12} className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={(L + W - R) / 2} y={H - 4} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
         {t("axis")}
       </text>
       <path d={line} fill="none" strokeWidth={2.5} className="stroke-blue-600 dark:stroke-blue-400" />

@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { PAPER_SIZES, PT_TO_MM } from "@tooloralabs/tools";
 import PdfIndicatorCard, { PdfIndicatorUnavailable } from "./PdfIndicatorCard";
 import { usePdfModel } from "./PdfLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const LABEL = 110;
@@ -38,15 +39,15 @@ export default function PdfPaperRanking() {
         const w = Math.max(4, (r.count / peak) * BAR_W);
         return (
           <g key={i}>
-            <text x={LABEL} y={y + 13} textAnchor="end" fontSize={12} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
+            <text style={{ fontSize: svgPx(12) }} x={LABEL} y={y + 13} textAnchor="end" fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
               {r.name === "other" ? tp("other") : r.name}
               {r.landscape ? " ⟷" : ""}
             </text>
-            <text x={LABEL} y={y + 26} textAnchor="end" fontSize={10} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+            <text style={{ fontSize: svgPx(12) }} x={LABEL} y={y + 26} textAnchor="end" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
               {f(r.w * PT_TO_MM, 0)}×{f(r.h * PT_TO_MM, 0)} mm
             </text>
             <rect x={BAR_X} y={y + 4} width={w} height={ROW - 12} rx={3} className={i === 0 ? "fill-blue-600 dark:fill-blue-400" : "fill-blue-300 dark:fill-blue-800"} />
-            <text x={BAR_X + w + 5} y={y + 18} fontSize={12} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
+            <text style={{ fontSize: svgPx(12) }} x={BAR_X + w + 5} y={y + 18} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
               {f(r.count)}
             </text>
           </g>

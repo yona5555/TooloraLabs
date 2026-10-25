@@ -222,6 +222,7 @@ export function KitControls({ s, valueText, testId }: { s: Stepper; valueText: s
 }
 
 // ── Worked-example table ──────────────────────────────────────────────────────────────
+/** `key` links the row to its part of the drawing (hover); several rows may share one. */
 export type KitRow = { key: string; label: string; value: string; isKey?: boolean };
 
 export function KitTable({ rows, flash, activeKey, onHover, caption }: { rows: KitRow[]; flash: number; activeKey: string | null; onHover: (k: string | null) => void; caption: string }) {
@@ -247,7 +248,9 @@ export function KitTable({ rows, flash, activeKey, onHover, caption }: { rows: K
           const active = r.key === activeKey;
           return (
             <tr
-              key={r.key}
+              // r.key is the hover link to the drawing, and two rows may share one part (e.g. the given
+              // value and the bar it feeds); the position keeps React's key unique.
+              key={`${i}:${r.key}`}
               data-key={r.key}
               data-key-row={r.isKey ? "" : undefined}
               data-active={active ? "" : undefined}
@@ -480,7 +483,7 @@ export function KitTrack({ s, label, valueText, testId, ticks }: { s: Stepper; l
         <span className="sr-only">{valueText}</span>
       </div>
       {ticks && (
-        <div data-ph-ticks className="relative mt-0.5 h-4 text-[11px] tabular-nums" style={{ color: "var(--ph-ink-muted)" }}>
+        <div data-ph-ticks className="relative mt-0.5 h-4 text-xs tabular-nums" style={{ color: "var(--ph-ink-muted)" }}>
           {ticks.map((tk, i) => (
             <span
               key={tk.at}

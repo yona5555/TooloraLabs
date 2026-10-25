@@ -8,6 +8,7 @@ import { clamp, f1, f2, snap } from "@/components/tool-ui/indicator-kit/format";
 import { Card } from "../macro-calculator/MacroCards";
 import { useBMILive } from "./BMILiveContext";
 import { BMI_MID, WHO_CLASSES, WHO_CUTS, bmiOf, weightAt, whoIndex, whoOf } from "./who";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 /**
  * The eight BMI indicator cards (§31 library). All read the calculator's live result
@@ -35,8 +36,8 @@ function SvgTrack({ W, y, frac, lo, hi }: { W: number; y: number; frac: number; 
     <g>
       <line x1={X0} y1={y} x2={W - X0} y2={y} style={LINE} strokeWidth={3} strokeLinecap="round" opacity={0.45} />
       <line x1={X0} y1={y} x2={x} y2={y} style={{ stroke: "var(--ph-accent-strong)" }} strokeWidth={4} strokeLinecap="round" />
-      <T x={X0} y={y + 22} text={lo} anchor="start" size={10.5} />
-      <T x={W - X0} y={y + 22} text={hi} anchor="end" size={10.5} />
+      <T x={X0} y={y + 22} text={lo} anchor="start" size={12} />
+      <T x={W - X0} y={y + 22} text={hi} anchor="end" size={12} />
     </g>
   );
 }
@@ -118,11 +119,11 @@ export function BMIZoneStripCard({ side }: { side: Side }) {
             return (
               <g key={kg}>
                 <line x1={x} y1={sy - SH / 2 - 30} x2={x} y2={sy - SH / 2 - 22} style={LINE} />
-                <T x={x} y={sy - SH / 2 - 36} text={`${kg}`} size={10.5} />
+                <T x={x} y={sy - SH / 2 - 36} text={`${kg}`} size={12} />
               </g>
             );
           })}
-          <T x={X0} y={sy - SH / 2 - 52} text="kg" anchor="start" size={10.5} bold />
+          <T x={X0} y={sy - SH / 2 - 52} text="kg" anchor="start" size={12} bold />
           {WHO_CLASSES.map((c, ci) => {
             const a = xb(Math.max(c.min, B0));
             const b = xb(Math.min(c.max, B1));
@@ -132,7 +133,7 @@ export function BMIZoneStripCard({ side }: { side: Side }) {
               <g key={c.key}>
                 <rect x={a} y={sy - SH / 2} width={Math.max(0, b - a)} height={SH} style={{ fill: c.color, opacity: on ? 1 : 0.55, ...lit(on && hover === "cls") }} />
                 {b - a > name.length * 6.6 + 8 && (
-                  <text x={(a + b) / 2} y={sy + 4} fontSize={10.5} fontWeight={800} textAnchor="middle" fill="#fff">
+                  <text style={{ fontSize: svgPx(12) }} x={(a + b) / 2} y={sy + 4} fontWeight={800} textAnchor="middle" fill="#fff">
                     {name}
                   </text>
                 )}
@@ -141,9 +142,9 @@ export function BMIZoneStripCard({ side }: { side: Side }) {
           })}
           <rect x={X0} y={sy - SH / 2} width={W - 2 * X0} height={SH} fill="none" style={LINE} rx={3} />
           {WHO_CUTS.map((c, ci) => (
-            <T key={c} x={xb(c)} y={sy + SH / 2 + (ci === 1 ? 32 : 18)} text={String(c)} size={10.5} bold={c === 18.5 || c === 25} style={c === 18.5 || c === 25 ? INK : MUTED} />
+            <T key={c} x={xb(c)} y={sy + SH / 2 + (ci === 1 ? 32 : 18)} text={String(c)} size={12} bold={c === 18.5 || c === 25} style={c === 18.5 || c === 25 ? INK : MUTED} />
           ))}
-          <T x={X0} y={sy + SH / 2 + 50} text="BMI" anchor="start" size={10.5} bold />
+          <T x={X0} y={sy + SH / 2 + 50} text="BMI" anchor="start" size={12} bold />
           <line x1={xb(bmi)} y1={sy - SH / 2 - 6} x2={xb(bmi)} y2={sy + SH / 2 + 6} style={{ stroke: "var(--ph-ink)" }} strokeWidth={2.5} />
           <T x={clamp(xb(bmi), X0 + 60, W - X0 - 60)} y={H - 10} text={`${f1(w)} kg · BMI ${f1(bmi)}`} size={13} bold style={INK} />
         </Drawing>
@@ -219,13 +220,13 @@ export function BMIPrimeGaugeCard({ side }: { side: Side }) {
           })}
           {[0.64, 0.74, 1, 1.2, 1.4, 1.6].map((p) => {
             const [x, y] = pt(p, R + 24);
-            return <T key={p} x={x} y={y + 4} text={f2(p)} size={10.5} bold={p === 1} style={p === 1 ? INK : MUTED} />;
+            return <T key={p} x={x} y={y + 4} text={f2(p)} size={12} bold={p === 1} style={p === 1 ? INK : MUTED} />;
           })}
           <line x1={cx} y1={cy} x2={gx} y2={gy} style={{ stroke: "var(--ph-ink-muted)" }} strokeWidth={2} strokeDasharray="4 4" opacity={hover === "p0" ? 1 : 0.7} />
           <line x1={cx} y1={cy} x2={nx} y2={ny} style={{ stroke: "var(--ph-ink)" }} strokeWidth={hover === "p2" ? 4.5 : 3.5} strokeLinecap="round" />
           <circle cx={cx} cy={cy} r={7} style={{ fill: "var(--ph-ink)" }} />
           <T x={cx} y={cy + 26} text={`BMI Prime ${f2(prime2)}`} size={15} bold style={INK} />
-          <T x={cx} y={cy + 42} text={`BMI ${f1(bmi2)} · ${f1(w2)} kg`} size={11} />
+          <T x={cx} y={cy + 42} text={`BMI ${f1(bmi2)} · ${f1(w2)} kg`} size={12} />
         </Drawing>
       }
     />
@@ -286,13 +287,13 @@ export function BMICutoffBarsCard({ side }: { side: Side }) {
             return (
               <g key={b.key}>
                 <rect x={x} y={yk(b.kg)} width={bw} height={base - yk(b.kg)} rx={4} style={{ fill: b.color, opacity: b.you || on ? 1 : 0.55, ...lit(on || (b.you && hover === "you")) }} />
-                <T x={x + bw / 2} y={yk(b.kg) - 6} text={f1(b.kg)} size={10.5} bold={on || b.you} style={on || b.you ? INK : MUTED} />
-                <T x={x + bw / 2} y={base + 16} text={b.label} size={10.5} bold={b.you} style={b.you ? INK : MUTED} />
+                <T x={x + bw / 2} y={yk(b.kg) - 6} text={f1(b.kg)} size={12} bold={on || b.you} style={on || b.you ? INK : MUTED} />
+                <T x={x + bw / 2} y={base + 16} text={b.label} size={12} bold={b.you} style={b.you ? INK : MUTED} />
               </g>
             );
           })}
-          <T x={X0} y={14} text="kg" anchor="start" size={10.5} bold />
-          <T x={W - X0} y={base + 32} text="BMI" anchor="end" size={10.5} bold />
+          <T x={X0} y={14} text="kg" anchor="start" size={12} bold />
+          <T x={W - X0} y={base + 32} text="BMI" anchor="end" size={12} bold />
         </Drawing>
       }
     />
@@ -360,18 +361,18 @@ function HeightCurve({ side }: { side: Side }) {
           {axisTicks(yMin, yMax, base - top, 26).map((v) => (
             <g key={v}>
               <line x1={PL} y1={yb(v)} x2={W - 18} y2={yb(v)} style={{ stroke: "var(--ph-grid)" }} />
-              <T x={PL - 6} y={yb(v) + 4} text={String(v)} anchor="end" size={10.5} />
+              <T x={PL - 6} y={yb(v) + 4} text={String(v)} anchor="end" size={12} />
             </g>
           ))}
           {[140, 150, 160, 170, 180, 190, 200, 210].map((v) => (
-            <T key={v} x={xh(v)} y={base + 16} text={String(v)} size={10.5} />
+            <T key={v} x={xh(v)} y={base + 16} text={String(v)} size={12} />
           ))}
-          <T x={W - 18} y={base + 32} text="cm" anchor="end" size={10.5} bold />
-          <T x={6} y={top - 4} text="BMI" anchor="start" size={10.5} bold />
+          <T x={W - 18} y={base + 32} text="cm" anchor="end" size={12} bold />
+          <T x={6} y={top - 4} text="BMI" anchor="start" size={12} bold />
           <polyline points={pts} fill="none" style={{ stroke: "var(--ph-accent-strong)" }} strokeWidth={3} />
           {hNorm >= HC0 && hNorm <= HC1 && <line x1={xh(hNorm)} y1={top} x2={xh(hNorm)} y2={base} style={{ stroke: "var(--ph-neutral)" }} strokeDasharray="4 4" strokeWidth={hover === "hn" ? 2.5 : 1.5} />}
           <circle cx={xh(clamp(result.heightCm, HC0, HC1))} cy={yb(result.bmi)} r={hover === "you" ? 8 : 6} style={{ fill: "var(--ph-ink)" }} />
-          <T x={xh(clamp(result.heightCm, HC0, HC1))} y={yb(result.bmi) - 12} text={`${f1(result.bmi)}`} size={11} bold style={INK} />
+          <T x={xh(clamp(result.heightCm, HC0, HC1))} y={yb(result.bmi) - 12} text={`${f1(result.bmi)}`} size={12} bold style={INK} />
         </Drawing>
       }
     />
@@ -432,7 +433,7 @@ export function BMISensitivityCard({ side }: { side: Side }) {
               <g key={c.key}>
                 <rect x={x} y={yb(c.b)} width={bw} height={base - yb(c.b)} rx={5} style={{ fill: whoOf(c.b).color, opacity: ci === 1 ? 1 : 0.7, ...lit(on) }} />
                 <T x={x + bw / 2} y={yb(c.b) - 8} text={`BMI ${f1(c.b)}`} size={12} bold style={INK} />
-                <T x={x + bw / 2} y={base + 16} text={c.label} size={10.5} bold={ci === 1} style={ci === 1 ? INK : MUTED} />
+                <T x={x + bw / 2} y={base + 16} text={c.label} size={12} bold={ci === 1} style={ci === 1 ? INK : MUTED} />
               </g>
             );
           })}
@@ -496,8 +497,8 @@ export function BMIFormulaCard({ side }: { side: Side }) {
             return (
               <g key={g.key} opacity={shown ? 1 : 0.28}>
                 <rect x={x} y={by} width={boxW} height={bh} rx={10} style={{ fill: on ? "var(--ph-accent-soft)" : "var(--ph-surface)", ...lit(on) }} />
-                <T x={x + boxW / 2} y={by + 22} text={String(gi + 1)} size={11} bold />
-                <T x={x + boxW / 2} y={by + bh / 2} text={g.top} size={11} />
+                <T x={x + boxW / 2} y={by + 22} text={String(gi + 1)} size={12} bold />
+                <T x={x + boxW / 2} y={by + bh / 2} text={g.top} size={12} />
                 <T x={x + boxW / 2} y={by + bh / 2 + 22} text={g.bottom} size={12.5} bold style={INK} />
                 {gi < 3 && <path d={`M ${x + boxW + 3} ${by + bh / 2} l ${gap - 8} 0 m -6 -5 l 6 5 l -6 5`} fill="none" style={LINE} strokeWidth={2} opacity={gi + 1 < st ? 1 : 0.35} />}
               </g>
@@ -540,7 +541,7 @@ export function BMIBalanceCard({ side }: { side: Side }) {
       <line x1={x} y1={y} x2={x + 34} y2={y + 46} style={LINE} />
       <path d={`M ${x - 46} ${y + 46} Q ${x} ${y + 72} ${x + 46} ${y + 46} Z`} style={{ fill: color, ...lit(on) }} opacity={0.9} />
       <T x={x} y={y + 92} text={`${f1(kg)} kg`} size={13} bold style={INK} />
-      <T x={x} y={y + 108} text={label} size={10.5} />
+      <T x={x} y={y + 108} text={label} size={12} />
     </g>
   );
   const valueText = `BMI ${f1(tb)}`;
@@ -635,8 +636,8 @@ export function BMITimelineCard({ side }: { side: Side }) {
             return (
               <g key={st.key}>
                 <circle cx={x} cy={lineY} r={st.key === "goal" || st.key === "start" ? 10 : 7} style={{ fill: whoOf(st.b).color, ...lit(on) }} />
-                <T x={x} y={up ? lineY - 22 : lineY + 30} text={st.label} size={10.5} bold style={INK} />
-                <T x={x} y={up ? lineY - 38 : lineY + 46} text={`${f1(st.kg)} kg · ${t("wk", { n: Math.round(wk) })}`} size={10.5} />
+                <T x={x} y={up ? lineY - 22 : lineY + 30} text={st.label} size={12} bold style={INK} />
+                <T x={x} y={up ? lineY - 38 : lineY + 46} text={`${f1(st.kg)} kg · ${t("wk", { n: Math.round(wk) })}`} size={12} />
               </g>
             );
           })}

@@ -6,6 +6,7 @@ import RsIndicatorCard from "./RsIndicatorCard";
 import { useRsLive } from "./RsLiveContext";
 import { PASSAGE_EXAMPLES } from "./passageExamples";
 import { EASE_BANDS, EASE_MAX, EASE_MIN, clampEase, easeBand } from "./rsScales";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 150;
@@ -38,7 +39,7 @@ export default function RsEaseScale() {
         <rect key={b.key} x={x(b.from)} y={STRIP_Y} width={x(b.to) - x(b.from)} height={STRIP_H} fill={b.color} opacity={b === band ? 1 : 0.4} style={{ transition: "opacity 300ms" }} />
       ))}
       {TICKS.map((v) => (
-        <text key={v} x={x(v)} y={STRIP_Y + STRIP_H + 12} textAnchor="middle" fontSize={8.5} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+        <text style={{ fontSize: svgPx(12) }} key={v} x={x(v)} y={STRIP_Y + STRIP_H + 12} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
           {f(v)}
         </text>
       ))}
@@ -50,7 +51,7 @@ export default function RsEaseScale() {
           <g key={r.key}>
             <line x1={cx} y1={ly + 8} x2={cx} y2={STRIP_Y} strokeDasharray="2 2" className="stroke-zinc-400 dark:stroke-zinc-500" />
             <circle cx={cx} cy={ly} r={8} className="fill-zinc-700 dark:fill-zinc-200" />
-            <text x={cx} y={ly + 3.5} textAnchor="middle" fontSize={10} fontWeight={700} className="fill-white dark:fill-zinc-900">
+            <text style={{ fontSize: svgPx(12) }} x={cx} y={ly + 3.5} textAnchor="middle" fontWeight={700} className="fill-white dark:fill-zinc-900">
               {f(n)}
             </text>
           </g>
@@ -60,11 +61,10 @@ export default function RsEaseScale() {
         <path d={`M-7 ${STRIP_Y - 14} h14 l-7 10 z`} className="fill-blue-700 dark:fill-blue-300" />
         <line x1={0} y1={STRIP_Y - 4} x2={0} y2={STRIP_Y + STRIP_H + 2} strokeWidth={3} className="stroke-blue-700 dark:stroke-blue-300" />
       </g>
-      <text
+      <text style={{ fontSize: svgPx(12) }}
         x={Math.min(W - PAD, Math.max(PAD, x(score)))}
         y={H - 8}
         textAnchor={x(score) < 60 ? "start" : x(score) > W - 60 ? "end" : "middle"}
-        fontSize={11}
         fontWeight={800}
         className="fill-blue-700 dark:fill-blue-300"
       >

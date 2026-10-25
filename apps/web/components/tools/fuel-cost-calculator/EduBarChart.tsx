@@ -1,3 +1,4 @@
+import { svgPx } from "@/components/tool-ui/svgPx";
 /**
  * Lightweight, non-interactive SVG horizontal bar chart shared by this tool's
  * education-page diagrams. Pure presentational (no "use client", no hooks) so it
@@ -18,7 +19,8 @@ const ROW_GAP = 10;
 const VALUE_WIDTH = 78;
 const MARGIN = { top: 8, bottom: 8 };
 /** Rough monospace-ish average glyph width at fontSize 11, generous enough for this tool's longest real labels (e.g. "Annual driving (12,000 mi)"). */
-const CHAR_WIDTH = 6.3;
+// 12px labels (≈7.4px a glyph), with room for the up-to-1.1× label boost of a slightly narrowed chart
+const CHAR_WIDTH = 8.2;
 const MIN_LABEL_WIDTH = 90;
 const MIN_PLOT_WIDTH = 150;
 
@@ -38,12 +40,12 @@ export default function EduBarChart({ bars, ariaLabel, barColorClass = "fill-blu
           const barW = Math.max((bar.value / maxValue) * plotWidth, 2);
           return (
             <g key={bar.label}>
-              <text x={labelWidth - 8} y={y + ROW_HEIGHT / 2 + 4} textAnchor="end" fontSize={11} fill="currentColor" opacity={0.75}>
+              <text style={{ fontSize: svgPx(12) }} x={labelWidth - 8} y={y + ROW_HEIGHT / 2 + 4} textAnchor="end" fill="currentColor" opacity={0.75}>
                 {bar.label}
               </text>
               <rect x={labelWidth} y={y} width={plotWidth} height={ROW_HEIGHT} rx={4} className="fill-current opacity-[0.06]" />
               <rect x={labelWidth} y={y} width={barW} height={ROW_HEIGHT} rx={4} className={bar.highlight ? highlightColorClass : barColorClass} />
-              <text x={labelWidth + plotWidth + 10} y={y + ROW_HEIGHT / 2 + 4} textAnchor="start" fontSize={11} fontWeight={700} fill="currentColor">
+              <text style={{ fontSize: svgPx(12) }} x={labelWidth + plotWidth + 10} y={y + ROW_HEIGHT / 2 + 4} textAnchor="start" fontWeight={700} fill="currentColor">
                 {bar.formatted}
               </text>
             </g>

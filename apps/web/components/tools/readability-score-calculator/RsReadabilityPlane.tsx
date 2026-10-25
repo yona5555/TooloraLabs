@@ -4,10 +4,13 @@ import { fleschReadingEaseOf } from "@tooloralabs/tools";
 import RsIndicatorCard from "./RsIndicatorCard";
 import { useRsLive } from "./RsLiveContext";
 import { EASE_BANDS, easeBand } from "./rsScales";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 230;
-const L = 34;
+// room for the turned axis title beside the tick numbers, also when a phone shows them larger in
+// chart units (svgPx, up to ~1.15×) (§39)
+const L = 46;
 const R = 10;
 const T = 10;
 const B = 34;
@@ -64,24 +67,24 @@ export default function RsReadabilityPlane() {
           <polygon key={r.key} points={r.points} fill={r.color} opacity={r.key === band.key ? 0.42 : 0.18} style={{ transition: "opacity 300ms" }} />
         ))}
         {[0, 10, 20, 30, 40].map((v) => (
-          <text key={v} x={px(v)} y={H - B + 13} textAnchor="middle" fontSize={8.5} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+          <text style={{ fontSize: svgPx(12) }} key={v} x={px(v)} y={H - B + 13} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
             {f(v)}
           </text>
         ))}
         {[1, 1.4, 1.8, 2.2, 2.6].map((v) => (
-          <text key={v} x={L - 4} y={py(v) + 3} textAnchor="end" fontSize={8.5} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+          <text style={{ fontSize: svgPx(12) }} key={v} x={L - 4} y={py(v) + 3} textAnchor="end" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
             {f(v)}
           </text>
         ))}
         <rect x={L} y={T} width={W - L - R} height={H - T - B} fill="none" className="stroke-zinc-300 dark:stroke-zinc-600" />
-        <text x={(L + W - R) / 2} y={H - 6} textAnchor="middle" fontSize={9} fontWeight={600} className="fill-zinc-600 dark:fill-zinc-300">
+        <text style={{ fontSize: svgPx(12) }} x={(L + W - R) / 2} y={H - 6} textAnchor="middle" fontWeight={600} className="fill-zinc-600 dark:fill-zinc-300">
           {t("xAxis")}
         </text>
-        <text x={10} y={(T + H - B) / 2} textAnchor="middle" fontSize={9} fontWeight={600} transform={`rotate(-90 10 ${(T + H - B) / 2})`} className="fill-zinc-600 dark:fill-zinc-300">
+        <text style={{ fontSize: svgPx(12) }} x={12} y={(T + H - B) / 2} textAnchor="middle" fontWeight={600} transform={`rotate(-90 12 ${(T + H - B) / 2})`} className="fill-zinc-600 dark:fill-zinc-300">
           {t("yAxis")}
         </text>
-        <text x={L + 6} y={H - B - 6} fontSize={9} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">{tr("bands.very-easy")}</text>
-        <text x={W - R - 6} y={T + 12} textAnchor="end" fontSize={9} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">{tr("bands.very-confusing")}</text>
+        <text style={{ fontSize: svgPx(12) }} x={L + 6} y={H - B - 6} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">{tr("bands.very-easy")}</text>
+        <text style={{ fontSize: svgPx(12) }} x={W - R - 6} y={T + 12} textAnchor="end" fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">{tr("bands.very-confusing")}</text>
         {dots.map((s) => {
           const on = s.index === activeSentence;
           return (

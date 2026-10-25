@@ -6,7 +6,6 @@ import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
-import AdSpace from "@/components/tool-ui/AdSpace";
 import GpaPlannerInput from "./GpaPlannerInput";
 import GpaPlannerResult from "./GpaPlannerResult";
 import GpaTranscriptPrint from "./GpaTranscriptPrint";
@@ -58,7 +57,6 @@ export default function GpaCalculator({ education }: { education: ReactNode }) {
         <GpaWhatIfCard {...props} />
         <GpaTrendCard {...props} />
         <GpaHonorsStripCard {...props} />
-        <AdSpace variant="leaderboard" />
         <GpaRetakeCard {...props} />
         <GpaContributionCard {...props} />
         <GpaDistributionCard {...props} />

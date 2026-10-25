@@ -3,7 +3,6 @@ import EncyclopediaPaper from "@/components/tool-ui/EncyclopediaPaper";
 import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
-import AdSpace from "@/components/tool-ui/AdSpace";
 import FnCharExplorer from "./FnCharExplorer";
 import FnPipelineSteps from "./FnPipelineSteps";
 import FnPlatformRows from "./FnPlatformRows";
@@ -59,8 +58,6 @@ export default async function FileNameEducation() {
         </div>
       </InfoSection>
 
-      <AdSpace variant="leaderboard" />
-
       <InfoSection id="faq" title={t("faq.title")}>
         <FAQAccordion items={faqItems} />
         <FnVariants />
@@ -82,8 +79,6 @@ export default async function FileNameEducation() {
         </div>
         <AcademicPathSection title={t("behindTheTool.academicPath.title")} intro={t("behindTheTool.academicPath.intro")} universities={universities} />
       </InfoSection>
-
-      <AdSpace variant="leaderboard" />
 
       <InfoSection title={t("references.title")}>
         <p>{t("references.citation")}</p>

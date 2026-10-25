@@ -1,3 +1,4 @@
+import { svgPx } from "@/components/tool-ui/svgPx";
 type ScenarioBar = { key: string; label: string; units: number };
 
 type BreakEvenTwoScenarioCompareBarProps = {
@@ -31,12 +32,12 @@ export default function BreakEvenTwoScenarioCompareBar({ scenarios, caption, tit
             const w = (s.units / max) * trackW;
             return (
               <g key={s.key}>
-                <text x={0} y={y + ROW_H / 2 + 5} fontSize={13} className="fill-zinc-600 dark:fill-zinc-300">
+                <text style={{ fontSize: svgPx(13) }} x={0} y={y + ROW_H / 2 + 5} className="fill-zinc-600 dark:fill-zinc-300">
                   {s.label}
                 </text>
                 <rect x={LABEL_W} y={y + 8} width={trackW} height={ROW_H - 16} rx={6} className="fill-zinc-100 dark:fill-zinc-800" />
                 <rect x={LABEL_W} y={y + 8} width={w} height={ROW_H - 16} rx={6} className="fill-emerald-500 dark:fill-emerald-400" />
-                <text x={LABEL_W + w + 8} y={y + ROW_H / 2 + 5} fontSize={15} fontWeight={700} className="fill-emerald-700 dark:fill-emerald-300">
+                <text style={{ fontSize: svgPx(15) }} x={LABEL_W + w + 8} y={y + ROW_H / 2 + 5} fontWeight={700} className="fill-emerald-700 dark:fill-emerald-300">
                   {s.units}
                 </text>
               </g>

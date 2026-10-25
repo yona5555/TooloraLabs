@@ -3,6 +3,8 @@ import { useTranslations } from "next-intl";
 import { prefixGap } from "@tooloralabs/tools";
 import FsIndicatorCard, { FsIndicatorUnavailable } from "./FsIndicatorCard";
 import { useFsModel } from "./FsLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
+import { labelW } from "@/components/tool-ui/labelLayout";
 
 const W = 340;
 const H = 210;
@@ -32,7 +34,7 @@ export default function FsGapTrend() {
       {[0, 5, 10].map((v) => (
         <g key={v}>
           <line x1={L} y1={y(v)} x2={W - R} y2={y(v)} className="stroke-zinc-200 dark:stroke-zinc-700" />
-          <text x={L - 6} y={y(v) + 4} textAnchor="end" fontSize={11} className="fill-zinc-500 dark:fill-zinc-400">
+          <text style={{ fontSize: svgPx(12) }} x={L - 6} y={y(v) + 4} textAnchor="end" className="fill-zinc-500 dark:fill-zinc-400">
             {v}%
           </text>
         </g>
@@ -47,10 +49,10 @@ export default function FsGapTrend() {
             strokeWidth={p.k === k ? 2.5 : 0}
             className={p.k === k ? "fill-blue-600 stroke-white dark:fill-blue-400 dark:stroke-zinc-900" : "fill-amber-500"}
           />
-          <text x={x(p.k)} y={y(p.g) - 12} textAnchor="middle" fontSize={11} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
+          <text style={{ fontSize: svgPx(12) }} x={Math.min(x(p.k), W - (labelW(`${f(p.g, 1)}%`) / 2) * 1.15 - 2)} y={y(p.g) - 12} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
             {f(p.g, 1)}%
           </text>
-          <text x={x(p.k)} y={H - B + 16} textAnchor="middle" fontSize={12} className="fill-zinc-500 dark:fill-zinc-400">
+          <text style={{ fontSize: svgPx(12) }} x={x(p.k)} y={H - B + 16} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
             {PREFIX[p.k]}
           </text>
         </g>

@@ -84,8 +84,8 @@ export function ImageRawMemoryCard({ side }: { side: Side }) {
             return (
               <g key={b.key} onPointerEnter={() => setHover(b.key)} onPointerLeave={() => setHover(null)}>
                 <rect x={px2(cx - bw / 2)} y={px2(base - bh)} width={px2(bw)} height={px2(bh)} rx={Math.min(8, bh / 2)} style={{ fill: b.color, ...lit(hover === b.key) }} />
-                <T x={cx} y={base - bh - 7} text={formatBytes(b.bytes)} size={11.5} bold style={INK} />
-                <T x={cx} y={base + 16} text={b.label} size={10.5} />
+                <T x={cx} y={base - bh - 7} text={formatBytes(b.bytes)} size={12} bold style={INK} />
+                <T x={cx} y={base + 16} text={b.label} size={12} />
               </g>
             );
           })}
@@ -145,13 +145,13 @@ export function ImageBitDepthCard({ side }: { side: Side }) {
           {Array.from({ length: E_MAX + 1 }, (_, e) => (
             <g key={e}>
               <line x1={xe(e)} y1={barY + 16} x2={xe(e)} y2={barY + 24} style={LINE} strokeWidth={1.25} />
-              <T x={xe(e)} y={barY + 38} text={`10${sup(e)}`} size={10.5} anchor={e === 0 ? "start" : e === E_MAX ? "end" : "middle"} />
+              <T x={xe(e)} y={barY + 38} text={`10${sup(e)}`} size={12} anchor={e === 0 ? "start" : e === E_MAX ? "end" : "middle"} />
             </g>
           ))}
           {marks.map((m) => (
             <g key={m.b}>
               <line x1={xb(m.b)} y1={barY - 30} x2={xb(m.b)} y2={barY - 14} style={{ stroke: "var(--cv-to)" }} strokeWidth={2} />
-              <T x={xb(m.b)} y={barY - 36} text={m.label} size={10.5} bold anchor={m.b === 1 ? "start" : "middle"} style={{ fill: "var(--cv-to)" }} />
+              <T x={xb(m.b)} y={barY - 36} text={m.label} size={12} bold anchor={m.b === 1 ? "start" : "middle"} style={{ fill: "var(--cv-to)" }} />
             </g>
           ))}
           <T x={W / 2} y={H - 14} text={`${n0(colors)} ${t("colorsUnit")}`} size={14} bold style={INK} />
@@ -211,7 +211,7 @@ export function ImageDctCard({ side }: { side: Side }) {
               <g key={x}>
                 <line x1={xs(x)} y1={mid} x2={xs(x)} y2={px2(mid - v * amp)} style={{ stroke: "var(--cv-from)" }} strokeWidth={on ? 4 : 2.5} />
                 <circle cx={xs(x)} cy={px2(mid - v * amp)} r={on ? 6.5 : 5} style={{ fill: v >= 0 ? "var(--cv-from)" : "var(--cv-to)" }} />
-                <T x={xs(x)} y={trackY - 18} text={`x${x}`} size={10} />
+                <T x={xs(x)} y={trackY - 18} text={`x${x}`} size={12} />
               </g>
             );
           })}
@@ -265,11 +265,11 @@ export function ImageQualityCurveCard({ side }: { side: Side }) {
           {[1, 10, 100, 255].map((v) => (
             <g key={v}>
               <line x1={X0} y1={yq(v)} x2={W - 18} y2={yq(v)} style={{ stroke: "var(--ph-grid)" }} strokeWidth={1} />
-              <T x={X0 - 6} y={yq(v) + 4} text={String(v)} anchor="end" size={10.5} />
+              <T x={X0 - 6} y={yq(v) + 4} text={String(v)} anchor="end" size={12} />
             </g>
           ))}
           {axisTicks(0, 100, W - X0 - 18, 52).map((v) => (
-            <T key={v} x={xq(Math.max(1, v))} y={Y0 + 18} text={String(v)} size={10.5} anchor={v === 0 ? "start" : v === 100 ? "end" : "middle"} />
+            <T key={v} x={xq(Math.max(1, v))} y={Y0 + 18} text={String(v)} size={12} anchor={v === 0 ? "start" : v === 100 ? "end" : "middle"} />
           ))}
           <g onPointerEnter={() => setHover("hi")} onPointerLeave={() => setHover(null)}>
             <path d={path(121)} fill="none" style={{ stroke: "var(--cv-to)" }} strokeWidth={hover === "hi" ? 4 : 2.5} />
@@ -465,10 +465,10 @@ export function ImageTransferCard({ side }: { side: Side }) {
             const on = hover === `l${i}`;
             return (
               <g key={mbps} onPointerEnter={() => setHover(`l${i}`)} onPointerLeave={() => setHover(null)}>
-                <T x={X0 - 8} y={y + 4} text={`${mbps} Mbit/s`} anchor="end" size={10.5} bold={on} style={on ? INK : MUTED} />
+                <T x={X0 - 8} y={y + 4} text={`${mbps} Mbit/s`} anchor="end" size={12} bold={on} style={on ? INK : MUTED} />
                 <rect x={X0} y={y - 9} width={W - X0 - 70} height={18} rx={9} style={{ fill: "var(--glass-track)" }} />
                 <rect x={X0} y={y - 9} width={px2(Math.max(18, xt(secs[i]) - X0))} height={18} rx={9} style={{ fill: i === 0 ? "var(--cv-to)" : "var(--cv-from)", ...lit(on) }} />
-                <T x={px2(Math.max(X0 + 18, xt(secs[i])) + 6)} y={y + 4} text={fmtT(secs[i])} anchor="start" size={11} bold style={INK} />
+                <T x={px2(Math.max(X0 + 18, xt(secs[i])) + 6)} y={y + 4} text={fmtT(secs[i])} anchor="start" size={12} bold style={INK} />
               </g>
             );
           })}
@@ -536,12 +536,12 @@ export function ImageTimelineCard({ side }: { side: Side }) {
               <g key={e.k}>
                 <line x1={xy(e.y)} y1={lineY} x2={xy(e.y)} y2={ty + (tier[i] < 0 ? 6 : -14)} style={{ stroke: on ? "var(--cv-from)" : "var(--ph-line)" }} strokeWidth={1.5} />
                 <circle cx={xy(e.y)} cy={lineY} r={lit2 ? 9 : 7} style={{ fill: on ? "var(--cv-from)" : "var(--ph-surface)", stroke: "var(--ph-line)" }} strokeWidth={1.25} />
-                <T x={xy(e.y)} y={ty} text={String(e.y)} size={11} bold={on} style={on ? INK : MUTED} />
+                <T x={xy(e.y)} y={ty} text={String(e.y)} size={12} bold={on} style={on ? INK : MUTED} />
               </g>
             );
           })}
-          <T x={X0} y={H - 10} text={String(Y_MIN)} anchor="start" size={10.5} />
-          <T x={W - X0} y={H - 10} text={String(Y_MAX)} anchor="end" size={10.5} />
+          <T x={X0} y={H - 10} text={String(Y_MIN)} anchor="start" size={12} />
+          <T x={W - X0} y={H - 10} text={String(Y_MAX)} anchor="end" size={12} />
         </Drawing>
       }
     />

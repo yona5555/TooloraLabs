@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { dialMinutes, PACE_TONES } from "./swMath";
 import { SPEECH_PACE_PRESETS, type SpeechPacePreset } from "./types";
 import { useSwLive } from "./SwLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const SIZE = 184;
 const C = SIZE / 2;
@@ -74,13 +75,13 @@ export default function PaceRings() {
           <circle cx={C} cy={C - RINGS[0] - 6} r={4} className="fill-amber-500 stroke-white dark:fill-amber-400 dark:stroke-zinc-900" strokeWidth={1.5} />
         </g>
         <circle cx={C} cy={C} r={34} className="fill-white dark:fill-zinc-900" />
-        <text x={C} y={C - 4} textAnchor="middle" fontSize={19} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-900 dark:fill-zinc-100">
+        <text style={{ fontSize: svgPx(19) }} x={C} y={C - 4} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-900 dark:fill-zinc-100">
           {clock(result.totalSeconds)}
         </text>
-        <text x={C} y={C + 14} textAnchor="middle" fontSize={9} className="fill-zinc-500 dark:fill-zinc-400">
+        <text style={{ fontSize: svgPx(12) }} x={C} y={C + 14} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
           {t("wpm", { wpm: f(wpm) })}
         </text>
-        <text x={C} y={C + 25} textAnchor="middle" fontSize={8} className="fill-zinc-400 dark:fill-zinc-500">
+        <text style={{ fontSize: svgPx(12) }} x={C} y={C + 25} textAnchor="middle" className="fill-zinc-400 dark:fill-zinc-500">
           {t("scale", { n: f(span) })}
         </text>
       </svg>

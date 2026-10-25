@@ -222,8 +222,8 @@ export default function KinematicsShareExportModal({ operationLabel, inputRows, 
         <h2 className="mb-2 mt-6 text-sm font-bold text-blue-600">{t("form.inputTitle")}</h2>
         <table className="w-full border-collapse text-sm">
           <tbody>
-            {inputRows.map((row) => (
-              <tr key={row.label}>
+            {inputRows.map((row, i) => (
+              <tr key={i}>
                 <td className="border border-zinc-200 bg-blue-50 px-3 py-1.5 font-semibold text-blue-900">{row.label}</td>
                 <td className="border border-zinc-200 px-3 py-1.5">{row.value}</td>
               </tr>
@@ -238,8 +238,8 @@ export default function KinematicsShareExportModal({ operationLabel, inputRows, 
               <td className="border border-zinc-200 bg-blue-50 px-3 py-1.5 font-semibold text-blue-900">{heroLabel}</td>
               <td className="border border-zinc-200 px-3 py-1.5 font-semibold">{heroValue}</td>
             </tr>
-            {resultRows.map((row) => (
-              <tr key={row.label}>
+            {resultRows.map((row, i) => (
+              <tr key={i}>
                 <td className="border border-zinc-200 bg-blue-50 px-3 py-1.5 font-semibold text-blue-900">{row.label}</td>
                 <td className="border border-zinc-200 px-3 py-1.5">{row.value}</td>
               </tr>

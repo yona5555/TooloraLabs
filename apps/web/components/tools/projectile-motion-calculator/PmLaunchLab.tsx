@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { projectileStateAt, sampleTrajectory } from "@tooloralabs/tools";
 import PmIndicatorCard from "./PmIndicatorCard";
 import { r2, usePmLive, usePmModel } from "./PmLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 400;
 const H = 260;
@@ -109,23 +110,23 @@ export default function PmLaunchLab() {
         {xTicks.map((x) => (
           <g key={`x${x}`}>
             <line x1={px(x)} y1={T} x2={px(x)} y2={B} className="stroke-zinc-200 dark:stroke-zinc-700" />
-            <text x={px(x)} y={B + 14} textAnchor="middle" fontSize={10} className="fill-zinc-500 dark:fill-zinc-400">{f(x, 1)}</text>
+            <text style={{ fontSize: svgPx(12) }} x={px(x)} y={B + 14} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">{f(x, 1)}</text>
           </g>
         ))}
         {yTicks.map((y) => (
           <g key={`y${y}`}>
             <line x1={L} y1={py(y)} x2={R} y2={py(y)} className="stroke-zinc-200 dark:stroke-zinc-700" />
-            <text x={L - 5} y={py(y) + 3} textAnchor="end" fontSize={10} className="fill-zinc-500 dark:fill-zinc-400">{f(y, 1)}</text>
+            <text style={{ fontSize: svgPx(12) }} x={L - 5} y={py(y) + 3} textAnchor="end" className="fill-zinc-500 dark:fill-zinc-400">{f(y, 1)}</text>
           </g>
         ))}
-        <text x={R} y={B + 28} textAnchor="end" fontSize={10} className="fill-zinc-500 dark:fill-zinc-400">x (m)</text>
-        <text x={L + 4} y={T - 4} fontSize={10} className="fill-zinc-500 dark:fill-zinc-400">y (m)</text>
+        <text style={{ fontSize: svgPx(12) }} x={R} y={B + 28} textAnchor="end" className="fill-zinc-500 dark:fill-zinc-400">x (m)</text>
+        <text style={{ fontSize: svgPx(12) }} x={L + 4} y={T - 4} className="fill-zinc-500 dark:fill-zinc-400">y (m)</text>
         <path d={d} fill="none" strokeWidth={1.5} strokeDasharray="4 4" className="stroke-zinc-400 dark:stroke-zinc-500" />
         {trail && <path d={trail} fill="none" strokeWidth={3} className="stroke-blue-600 dark:stroke-blue-400" />}
         {/* apex: the highlighted reference point */}
         <line x1={px(a.apexX)} y1={py(a.maxHeight)} x2={px(a.apexX)} y2={B} strokeDasharray="3 3" className="stroke-amber-500 dark:stroke-amber-400" />
         <circle cx={px(a.apexX)} cy={py(a.maxHeight)} r={5} className="fill-amber-500 stroke-white dark:fill-amber-400 dark:stroke-zinc-900" strokeWidth={1.5} />
-        <text x={px(a.apexX)} y={py(a.maxHeight) - 9} textAnchor="middle" fontSize={11} fontWeight={700} className="fill-amber-700 dark:fill-amber-300">
+        <text style={{ fontSize: svgPx(12) }} x={px(a.apexX)} y={py(a.maxHeight) - 9} textAnchor="middle" fontWeight={700} className="fill-amber-700 dark:fill-amber-300">
           {`h_max ${f(a.maxHeight)} m`}
         </text>
         <g clipPath={`url(#${svgId}pm-lab-clip)`}>

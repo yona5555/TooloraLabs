@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import SdIndicatorCard from "./SdIndicatorCard";
 import { useSdModel } from "./SdLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 300;
 const BAR_Y = 8;
@@ -39,7 +40,7 @@ export default function SdSquaresStacked() {
             <g key={p.index}>
               <rect x={x} y={BAR_Y} width={Math.max(0, w - 1)} height={BAR_H} className={COLORS[i % COLORS.length]} />
               {w > 34 && (
-                <text x={x + w / 2} y={BAR_Y + BAR_H / 2 + 4} textAnchor="middle" fontSize={11} fontWeight={700} className="fill-white">
+                <text style={{ fontSize: svgPx(12) }} x={x + w / 2} y={BAR_Y + BAR_H / 2 + 4} textAnchor="middle" fontWeight={700} className="fill-white">
                   {pct(p.shareOfSS)}
                 </text>
               )}
@@ -53,10 +54,10 @@ export default function SdSquaresStacked() {
         return (
           <g key={p.index}>
             <rect x={0} y={y} width={12} height={12} rx={3} className={COLORS[i % COLORS.length]} />
-            <text x={18} y={y + 10} fontSize={11} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
+            <text style={{ fontSize: svgPx(12) }} x={18} y={y + 10} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
               {`x = ${f(p.value)}  (${f(p.deviation)})² = ${f(p.squaredDeviation)}`}
             </text>
-            <text x={W} y={y + 10} textAnchor="end" fontSize={11} fontWeight={700} className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={W} y={y + 10} textAnchor="end" fontWeight={700} className="fill-zinc-800 dark:fill-zinc-100">
               {pct(p.shareOfSS)}
             </text>
           </g>

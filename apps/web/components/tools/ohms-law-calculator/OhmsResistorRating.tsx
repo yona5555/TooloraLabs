@@ -3,11 +3,12 @@ import { useTranslations } from "next-intl";
 import { RESISTOR_POWER_RATINGS } from "@tooloralabs/tools";
 import OhmsIndicatorCard, { OhmsIndicatorUnavailable } from "./OhmsIndicatorCard";
 import { pow10, useOhmsModel } from "./OhmsLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
+import { useFitWidth } from "@/components/tool-ui/useFitWidth";
 
-const W = 360;
+const MAX_W = 360;
 const H = 170;
 const X0 = 20;
-const X1 = W - 20;
 const STRIP = 70;
 const LO = -2;
 const HI = 3;
@@ -29,6 +30,9 @@ const NAMES = ["⅛ W", "¼ W", "½ W", "1 W", "2 W"];
 export default function OhmsResistorRating() {
   const t = useTranslations("tools.ohms-law-calculator.education.lab.rating");
   const { a, f } = useOhmsModel();
+  // laid out at its on-screen width so the 12px labels keep their true size on a phone
+  const [fitRef, W] = useFitWidth(MAX_W);
+  const X1 = W - 20;
   if (!a) return <OhmsIndicatorUnavailable title={t("title")} />;
 
   const P = Math.abs(a.power);
@@ -40,25 +44,25 @@ export default function OhmsResistorRating() {
   ];
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <svg ref={fitRef} direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {edges.slice(0, -1).map((e, i) => (
         <rect key={i} x={sx(e)} y={STRIP} width={Math.max(1, sx(edges[i + 1]) - sx(e))} height={22} className={ZONES[i]} />
       ))}
       {RESISTOR_POWER_RATINGS.map((r, i) => (
         <g key={r}>
           <line x1={sx(r)} y1={STRIP - 2} x2={sx(r)} y2={STRIP + 26} strokeWidth={1.5} className="stroke-zinc-700 dark:stroke-zinc-200" />
-          <text x={sx(r)} y={STRIP + 38 + (i % 2) * 12} textAnchor="middle" fontSize={10} fontWeight={600} className="fill-zinc-600 dark:fill-zinc-300">
+          <text style={{ fontSize: svgPx(12) }} x={sx(r)} y={STRIP + 38 + (i % 2) * 14} textAnchor="middle" fontWeight={600} className="fill-zinc-600 dark:fill-zinc-300">
             {NAMES[i]}
           </text>
         </g>
       ))}
-      <text x={X0} y={STRIP + 38} fontSize={9.5} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={X0} y={STRIP + 38} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
         {`${pow10(LO)} W`}
       </text>
-      <text x={X1} y={STRIP + 38} textAnchor="end" fontSize={9.5} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={X1} y={STRIP + 38} textAnchor="end" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
         {`${pow10(HI)} W`}
       </text>
-      <text x={X1} y={STRIP + 66} textAnchor="end" fontSize={10} fontWeight={600} className="fill-red-600 dark:fill-red-400">
+      <text style={{ fontSize: svgPx(12) }} x={X1} y={STRIP + 70} textAnchor="end" fontWeight={600} className="fill-red-600 dark:fill-red-400">
         {t("powerResistor")}
       </text>
       {marks.map((m) => {
@@ -67,7 +71,7 @@ export default function OhmsResistorRating() {
           <g key={m.key}>
             <line x1={m.x} y1={STRIP} x2={lx} y2={m.y + 4} strokeWidth={1.5} className={m.stroke} />
             <path d={`M ${m.x - 5} ${STRIP - 6} L ${m.x + 5} ${STRIP - 6} L ${m.x} ${STRIP + 1} z`} className={m.cls} />
-            <text x={lx} y={m.y} textAnchor="middle" fontSize={11} fontWeight={700} fontFamily="ui-monospace, monospace" className={m.cls}>
+            <text style={{ fontSize: svgPx(12) }} x={lx} y={m.y} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className={m.cls}>
               {m.label}
             </text>
           </g>

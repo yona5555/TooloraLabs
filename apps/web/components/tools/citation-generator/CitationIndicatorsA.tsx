@@ -17,6 +17,9 @@ import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { EntryText, fmt } from "./CitationShared";
 import { partOrder } from "./CitationStudioResult";
 import { PART_COLORS, type StudioState } from "./studio";
+import { svgPx } from "@/components/tool-ui/svgPx";
+import { useFitWidth } from "@/components/tool-ui/useFitWidth";
+import { labelW, thinLabels } from "@/components/tool-ui/labelLayout";
 
 export type CiteIndicatorProps = { state: StudioState; onChange: (s: StudioState) => void; source: CiteSource; index: number };
 
@@ -37,7 +40,7 @@ export function CitationAnatomyCard({ state, source, index }: CiteIndicatorProps
   const lens = parts.map((p) => ({ p, n: segs.filter((s) => s.part === p).reduce((a, s) => a + s.text.length, 0) }));
   const punct = segs.filter((s) => s.part === "punct").reduce((a, s) => a + s.text.length, 0);
   const total = lens.reduce((a, l) => a + l.n, 0) + punct || 1;
-  const W = 400;
+  const [fitRef, W] = useFitWidth(400);
   const H = 96;
   const starts = lens.map((_, i) => lens.slice(0, i).reduce((a, l) => a + (l.n / total) * W, 0));
   const usedW = lens.reduce((a, l) => a + (l.n / total) * W, 0);
@@ -66,7 +69,7 @@ export function CitationAnatomyCard({ state, source, index }: CiteIndicatorProps
             <div className="mb-2 rounded-lg border border-zinc-200 p-2 dark:border-zinc-700">
               <EntryText segs={segs} rtl={sourceLang(source) === "ar"} highlight={active} className="font-serif text-sm leading-6 text-zinc-900 dark:text-zinc-50" />
             </div>
-            <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.anatomy.title")} className="max-w-full">
+            <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.anatomy.title")} className="max-w-full">
               {lens.map((l, li) => {
                 const w = (l.n / total) * W;
                 const x0 = starts[li];
@@ -75,7 +78,7 @@ export function CitationAnatomyCard({ state, source, index }: CiteIndicatorProps
                   <g key={l.p} onClick={() => setFocus(l.p)} onMouseEnter={() => setFocus(l.p)} style={{ cursor: "pointer" }}>
                     <rect x={x0} y={on ? 4 : 10} width={Math.max(2, w - 2)} height={on ? 44 : 32} rx={5} fill={PART_COLORS[l.p]} fillOpacity={on ? 1 : 0.55} style={{ transition: "all 300ms ease" }} />
                     {w > 26 && (
-                      <text x={x0 + w / 2 - 1} y={31} textAnchor="middle" fontSize={10} fontWeight={800} fill="white">
+                      <text style={{ fontSize: svgPx(12) }} x={x0 + w / 2 - 1} y={31} textAnchor="middle" fontWeight={800} fill="white">
                         {`${fmt((l.n / total) * 100)}%`}
                       </text>
                     )}
@@ -83,9 +86,9 @@ export function CitationAnatomyCard({ state, source, index }: CiteIndicatorProps
                 );
               })}
               <rect x={usedW} y={10} width={Math.max(0, W - usedW)} height={32} rx={5} fill="currentColor" fillOpacity={0.12} />
-              <text x={0} y={70} fontSize={10} className={axisText}>0</text>
-              <text x={W} y={70} textAnchor="end" fontSize={10} className={axisText}>{`${fmt(total)}`}</text>
-              <text x={W / 2} y={88} textAnchor="middle" fontSize={11} fontWeight={700} fill={active ? PART_COLORS[active] : undefined}>
+              <text style={{ fontSize: svgPx(12) }} x={0} y={70} className={axisText}>0</text>
+              <text style={{ fontSize: svgPx(12) }} x={W} y={70} textAnchor="end" className={axisText}>{`${fmt(total)}`}</text>
+              <text style={{ fontSize: svgPx(12) }} x={W / 2} y={88} textAnchor="middle" fontWeight={700} fill={active ? PART_COLORS[active] : undefined}>
                 {active ? `${t(`parts.${active}`)} · ${fmt(lens.find((l) => l.p === active)?.n ?? 0)}` : ""}
               </text>
             </svg>
@@ -140,12 +143,12 @@ export function CitationCompletenessCard({ source }: CiteIndicatorProps) {
             {[0, 50, 70, 90, 100].map((v) => {
               const [tx, ty] = pt(v / 100, R + 18);
               return (
-                <text key={v} x={tx} y={ty} textAnchor="middle" dominantBaseline="middle" fontSize={9} className={axisText}>{v}</text>
+                <text style={{ fontSize: svgPx(12) }} key={v} x={tx} y={ty} textAnchor="middle" dominantBaseline="middle" className={axisText}>{v}</text>
               );
             })}
             <circle cx={ex} cy={ey} r={7} fill={color} stroke="white" strokeWidth={2} />
-            <text x={CX} y={CY - 22} textAnchor="middle" fontSize={30} fontWeight={800} fill={color}>{`${fmt(pct)}%`}</text>
-            <text x={CX} y={CY - 4} textAnchor="middle" fontSize={10} className={axisText}>
+            <text style={{ fontSize: svgPx(30) }} x={CX} y={CY - 22} textAnchor="middle" fontWeight={800} fill={color}>{`${fmt(pct)}%`}</text>
+            <text style={{ fontSize: svgPx(12) }} x={CX} y={CY - 4} textAnchor="middle" className={axisText}>
               {`${fmt(req.filter((c) => c.filled).length)}/${fmt(req.length)} · ${fmt(rec.filter((c) => c.filled).length)}/${fmt(rec.length)}`}
             </text>
           </svg>
@@ -191,7 +194,7 @@ export function CitationMixCard({ state }: CiteIndicatorProps) {
         <g key={it.k}>
           <path d={d} stroke={it.c} strokeWidth={w} fill="none" style={{ transition: "all 400ms ease" }} />
           {sweep > 0.45 && (
-            <text x={C + r * Math.cos(mid)} y={C + r * Math.sin(mid) + 4} textAnchor="middle" fontSize={11} fontWeight={800} fill="white">{fmt(it.v)}</text>
+            <text style={{ fontSize: svgPx(12) }} x={C + r * Math.cos(mid)} y={C + r * Math.sin(mid) + 4} textAnchor="middle" fontWeight={800} fill="white">{fmt(it.v)}</text>
           )}
         </g>
       ) : null;
@@ -209,8 +212,8 @@ export function CitationMixCard({ state }: CiteIndicatorProps) {
             <svg width={S} height={S} viewBox={`0 0 ${S} ${S}`} role="img" aria-label={t("ind.mix.title")}>
               {ring(types, 78, 22)}
               {ring(langs, 50, 18)}
-              <text x={C} y={C + 2} textAnchor="middle" fontSize={22} fontWeight={800} className={valueText}>{fmt(list.length)}</text>
-              <text x={C} y={C + 16} textAnchor="middle" fontSize={9} className={axisText}>{t("ind.mix.sources")}</text>
+              <text style={{ fontSize: svgPx(22) }} x={C} y={C + 2} textAnchor="middle" fontWeight={800} className={valueText}>{fmt(list.length)}</text>
+              <text style={{ fontSize: svgPx(12) }} x={C} y={C + 16} textAnchor="middle" className={axisText}>{t("ind.mix.sources")}</text>
             </svg>
             <ul className="space-y-1 text-xs">
               {[...types, ...langs].map((it) => (
@@ -244,7 +247,7 @@ export function CitationRecencyCard({ state }: CiteIndicatorProps) {
     .sort((a, b) => a.y - b.y);
   const undated = state.list.filter((s) => s.title.trim()).length - dated.length;
   const minY = Math.min(now - 12, ...dated.map((d) => d.y));
-  const W = 400;
+  const [fitRef, W] = useFitWidth(400);
   const H = 150;
   const L = 14;
   const R = 14;
@@ -254,6 +257,16 @@ export function CitationRecencyCard({ state }: CiteIndicatorProps) {
   const within = (k: number) => dated.filter((d) => now - d.y <= k).length;
   const stacks = new Map<number, number>();
   const ticks = Array.from(new Set([minY, Math.round((minY + now) / 2), now - 10, now - 5, now])).filter((v) => v >= minY).sort((a, b) => a - b);
+  // years that would touch on a narrow card are left out, most important kept first: now, oldest, the zone edges
+  const rank = (v: number) => [now, minY, now - 10, now - 5].indexOf(v);
+  const showTick = thinLabels(
+    ticks.map((v) => {
+      const w = labelW(String(v));
+      return { x: x(v) < 20 ? x(v) + w / 2 : x(v) > W - 20 ? x(v) - w / 2 : x(v), w };
+    }),
+    6,
+    ticks.map((_, i) => i).sort((a, b) => (rank(ticks[a]) < 0 ? 9 : rank(ticks[a])) - (rank(ticks[b]) < 0 ? 9 : rank(ticks[b]))),
+  );
 
   return (
     <SectionCard title={t("ind.recency.title")}>
@@ -261,20 +274,20 @@ export function CitationRecencyCard({ state }: CiteIndicatorProps) {
       <IndicatorWithTable
         workedExampleTitle={t("ind.worked")}
         indicator={
-          <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.recency.title")} className="max-w-full">
+          <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.recency.title")} className="max-w-full">
             <rect x={x(now - 10)} y={14} width={x(now) - x(now - 10)} height={86} fill="#3b82f6" fillOpacity={0.1} />
             <rect x={x(now - 5)} y={14} width={x(now) - x(now - 5)} height={86} fill="#10b981" fillOpacity={0.16} />
-            <text x={x(now - 5) + 3} y={24} fontSize={9} fill="#059669">≤5</text>
-            <text x={x(now - 10) + 3} y={24} fontSize={9} fill="#2563eb">≤10</text>
+            <text style={{ fontSize: svgPx(12) }} x={x(now - 5) + 3} y={24} fill="#059669">≤5</text>
+            <text style={{ fontSize: svgPx(12) }} x={x(now - 10) + 3} y={24} fill="#2563eb">≤10</text>
             <line x1={L} x2={W - R} y1={100} y2={100} stroke="currentColor" strokeOpacity={0.4} />
-            {ticks.map((v) => (
+            {ticks.map((v, i) => (
               <g key={v}>
                 <line x1={x(v)} x2={x(v)} y1={100} y2={105} stroke="currentColor" strokeOpacity={0.4} />
-                <text x={x(v)} y={118} textAnchor="middle" fontSize={9} className={axisText}>{v}</text>
+                {showTick[i] && <text style={{ fontSize: svgPx(12) }} x={x(v)} y={118} textAnchor={x(v) < 20 ? "start" : x(v) > W - 20 ? "end" : "middle"} className={axisText}>{v}</text>}
               </g>
             ))}
             <line x1={x(median)} x2={x(median)} y1={30} y2={100} stroke="#f59e0b" strokeDasharray="4 3" strokeWidth={1.5} />
-            <text x={x(median)} y={140} textAnchor="middle" fontSize={10} fontWeight={700} fill="#d97706">{`${t("ind.recency.medianShort")} ${fmt(median)}`}</text>
+            <text style={{ fontSize: svgPx(12) }} x={x(median)} y={140} textAnchor="middle" fontWeight={700} fill="#d97706">{`${t("ind.recency.medianShort")} ${fmt(median)}`}</text>
             {dated.map((d) => {
               const k = stacks.get(d.y) ?? 0;
               stacks.set(d.y, k + 1);
@@ -282,7 +295,7 @@ export function CitationRecencyCard({ state }: CiteIndicatorProps) {
               return (
                 <g key={d.i} style={{ transition: "all 400ms ease" }}>
                   <circle cx={x(d.y)} cy={cy} r={8} fill={now - d.y <= 5 ? "#10b981" : now - d.y <= 10 ? "#3b82f6" : "#94a3b8"} stroke="white" strokeWidth={1.5} />
-                  <text x={x(d.y)} y={cy + 3.5} textAnchor="middle" fontSize={9} fontWeight={800} fill="white">{d.i + 1}</text>
+                  <text style={{ fontSize: svgPx(12) }} x={x(d.y)} y={cy + 3.5} textAnchor="middle" fontWeight={800} fill="white">{d.i + 1}</text>
                 </g>
               );
             })}

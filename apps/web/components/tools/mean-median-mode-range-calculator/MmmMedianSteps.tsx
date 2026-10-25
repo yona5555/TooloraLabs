@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import MmmIndicatorCard from "./MmmIndicatorCard";
 import { useMmmModel } from "./MmmLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 360;
 const H = 200;
@@ -38,21 +39,21 @@ export default function MmmMedianSteps() {
               className={mid ? "fill-emerald-500 dark:fill-emerald-400" : "fill-blue-200 dark:fill-blue-500/40"}
             />
             {bw >= 18 && (
-              <text x={x + bw / 2} y={sy(v) - 4} textAnchor="middle" fontSize={10} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
+              <text style={{ fontSize: svgPx(12) }} x={x + bw / 2} y={sy(v) - 4} textAnchor="middle" fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
                 {f(v)}
               </text>
             )}
-            <text x={x + bw / 2} y={BASE + 14} textAnchor="middle" fontSize={9} className={mid ? "fill-emerald-700 font-bold dark:fill-emerald-300" : "fill-zinc-400"}>
+            <text style={{ fontSize: svgPx(12) }} x={x + bw / 2} y={BASE + 14} textAnchor="middle" className={mid ? "fill-emerald-700 font-bold dark:fill-emerald-300" : "fill-zinc-400"}>
               {`x${i + 1}`}
             </text>
           </g>
         );
       })}
       <line x1={8} x2={W - 8} y1={my} y2={my} strokeDasharray="4 3" strokeWidth={1.5} className="stroke-emerald-600 dark:stroke-emerald-400" />
-      <text x={W - 10} y={my - 5} textAnchor="end" fontSize={11} fontWeight={700} className="fill-emerald-700 dark:fill-emerald-300">
+      <text style={{ fontSize: svgPx(12) }} x={W - 10} y={my - 5} textAnchor="end" fontWeight={700} className="fill-emerald-700 dark:fill-emerald-300">
         {`${tr("median")} ${f(a.median)}`}
       </text>
-      <text x={10} y={14} fontSize={11} className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={10} y={14} className="fill-zinc-500 dark:fill-zinc-400">
         {`${t("halfBelow")} ${Math.floor(a.n / 2)} · ${t("halfAbove")} ${Math.floor(a.n / 2)}`}
       </text>
     </svg>

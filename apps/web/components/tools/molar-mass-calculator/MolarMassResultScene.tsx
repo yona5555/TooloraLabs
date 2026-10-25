@@ -8,6 +8,7 @@ import { uniFormula } from "../chemical-equation-balancer/chemMath";
 import { SvgMolecule } from "../chemical-equation-balancer/Molecules2D";
 import { clampIndex, RAIL, RAIL_SEED, railPos } from "./mmMath";
 import { spreadLabels, type MmSceneProps } from "./mmSceneLayout";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const Scene3D = dynamic(() => import("./MolarMassResultScene3D"), { ssr: false, loading: () => null });
 
@@ -34,21 +35,21 @@ function Scene2D({ p }: { p: MmSceneProps }) {
     <div ref={box} dir="ltr" className="relative w-full flex-1">
       <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={`${p.formulaLabel} ${p.totalText}`}>
         {p.drawMolecule && <SvgMolecule formula={p.formula} x={molX} y={H / 2 - 20} size={molSize} />}
-        <text x={molX} y={H / 2 + molSize + 6} fontSize={18} fontWeight={800} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+        <text x={molX} y={H / 2 + molSize + 6} fontWeight={800} textAnchor="middle" style={{ fontSize: svgPx(18), fill: "var(--ph-ink)" }}>
           <SvgChem text={p.formulaLabel} />
         </text>
-        <text x={molX} y={H / 2 + molSize + 28} fontSize={13} fontWeight={600} textAnchor="middle" style={{ fill: "var(--ph-ink-muted)" }}>
+        <text x={molX} y={H / 2 + molSize + 28} fontWeight={600} textAnchor="middle" style={{ fontSize: svgPx(13), fill: "var(--ph-ink-muted)" }}>
           {p.atomsText}
         </text>
         {segs.map(({ pt, y, h }, i) => (
           <g key={pt.symbol}>
             <rect x={colX - cw / 2} y={y} width={cw} height={Math.max(0.5, h - 1)} rx={i === 0 || i === segs.length - 1 ? 6 : 0} style={{ fill: `var(${`--chem-el-${pt.symbol.toLowerCase()}`}, var(--chem-el-other))` }} />
-            <text x={colX + cw / 2 + 10} y={ly[i] + 5} fontSize={14} fontWeight={700} style={{ fill: "var(--ph-ink)" }}>
+            <text x={colX + cw / 2 + 10} y={ly[i] + 5} fontWeight={700} style={{ fontSize: svgPx(14), fill: "var(--ph-ink)" }}>
               {`${pt.symbol}  ${pt.pct.toFixed(1)} %`}
             </text>
           </g>
         ))}
-        <text x={colX} y={top - 14} fontSize={15} fontWeight={800} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+        <text x={colX} y={top - 14} fontWeight={800} textAnchor="middle" style={{ fontSize: svgPx(15), fill: "var(--ph-ink)" }}>
           {p.totalText}
         </text>
       </svg>

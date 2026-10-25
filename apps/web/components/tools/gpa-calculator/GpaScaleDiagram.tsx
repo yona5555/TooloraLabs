@@ -1,3 +1,4 @@
+import { svgPx } from "@/components/tool-ui/svgPx";
 type GpaScaleDiagramProps = {
   gpa: number;
   caption: string;
@@ -34,7 +35,7 @@ export default function GpaScaleDiagram({ gpa, caption }: GpaScaleDiagramProps) 
             return (
               <g key={tick}>
                 <line x1={x} y1={AXIS_Y - 5} x2={x} y2={AXIS_Y + 5} stroke="currentColor" strokeWidth={1.5} opacity={0.5} />
-                <text x={x} y={AXIS_Y + 20} fontSize={10} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
+                <text style={{ fontSize: svgPx(12) }} x={x} y={AXIS_Y + 20} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
                   {tick.toFixed(1)}
                 </text>
               </g>

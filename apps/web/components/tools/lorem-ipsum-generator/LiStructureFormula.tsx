@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { LOREM_SENTENCES_PER_PARAGRAPH as SPP, LOREM_WORDS_PER_SENTENCE as WPS } from "@tooloralabs/tools";
 import LiIndicatorCard from "./LiIndicatorCard";
 import { useLiLive } from "./LiLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 330;
 const PAD = 14;
@@ -52,12 +53,12 @@ export default function LiStructureFormula() {
         <rect x={PAD} y={BAR_Y} width={W - PAD * 2} height={10} rx={5} className="fill-zinc-200 dark:fill-zinc-700" />
         <rect x={PAD} y={BAR_Y} width={Math.max(0, x(words) - PAD)} height={10} rx={5} className="fill-blue-600 dark:fill-blue-500" style={{ transition: "width 350ms ease" }} />
         <line x1={x(range.expected)} y1={BAR_Y - 6} x2={x(range.expected)} y2={BAR_Y + 16} strokeDasharray="3 2" strokeWidth={1.5} className="stroke-zinc-500 dark:stroke-zinc-400" />
-        <text x={x(range.expected)} y={BAR_Y - 9} textAnchor="middle" fontSize={9} className="fill-zinc-500 dark:fill-zinc-400">{t("expectedTick", { n: f(range.expected, 0) })}</text>
+        <text style={{ fontSize: svgPx(12) }} x={x(range.expected)} y={BAR_Y - 9} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">{t("expectedTick", { n: f(range.expected, 0) })}</text>
         <g style={{ transform: `translateX(${x(words)}px)`, transition: "transform 350ms cubic-bezier(.3,1.4,.5,1)" }}>
           <circle cx={0} cy={BAR_Y + 5} r={7} strokeWidth={2} className="fill-amber-400 stroke-white dark:stroke-zinc-900" />
         </g>
-        <text x={PAD} y={BAR_Y + 26} fontSize={9} className="fill-zinc-500 dark:fill-zinc-400">{f(range.min)}</text>
-        <text x={W - PAD} y={BAR_Y + 26} textAnchor="end" fontSize={9} className="fill-zinc-500 dark:fill-zinc-400">{f(range.max)}</text>
+        <text style={{ fontSize: svgPx(12) }} x={PAD} y={BAR_Y + 26} className="fill-zinc-500 dark:fill-zinc-400">{f(range.min)}</text>
+        <text style={{ fontSize: svgPx(12) }} x={W - PAD} y={BAR_Y + 26} textAnchor="end" className="fill-zinc-500 dark:fill-zinc-400">{f(range.max)}</text>
       </svg>
       <p className="mt-1 text-center text-[11px] text-zinc-500 dark:text-zinc-400">{t("legend", { words: f(words) })}</p>
     </div>

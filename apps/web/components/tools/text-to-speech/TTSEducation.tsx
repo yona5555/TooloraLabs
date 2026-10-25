@@ -3,7 +3,6 @@ import EncyclopediaPaper from "@/components/tool-ui/EncyclopediaPaper";
 import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
-import AdSpace from "@/components/tool-ui/AdSpace";
 import { TTSCharMixCard, TTSPackingCard, TTSPlayheadCard, TTSRateCheckCard, TTSRateCurveCard, TTSWordSplitCard, TTSWpmGaugeCard } from "./TTSCards";
 import { TTSChunkStackCard } from "./TTSCard3D";
 
@@ -29,8 +28,6 @@ export default async function TTSEducation() {
         <TTSPackingCard side="visual-left" />
       </InfoSection>
 
-      <AdSpace variant="leaderboard" />
-
       <InfoSection title={t("useCases.title")}>
         <p>{t("useCases.intro")}</p>
         <TTSRateCurveCard side="table-left" />
@@ -44,8 +41,6 @@ export default async function TTSEducation() {
         </div>
         <TTSWpmGaugeCard side="visual-left" />
       </InfoSection>
-
-      <AdSpace variant="leaderboard" />
 
       <InfoSection id="faq" title={t("faq.title")}>
         <FAQAccordion items={faqItems} />
@@ -70,8 +65,6 @@ export default async function TTSEducation() {
           universities={universities}
         />
       </InfoSection>
-
-      <AdSpace variant="leaderboard" />
 
       <InfoSection title={t("references.title")}>
         <p>{t("references.citation")}</p>

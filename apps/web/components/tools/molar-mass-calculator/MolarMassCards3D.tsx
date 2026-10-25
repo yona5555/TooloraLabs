@@ -9,6 +9,7 @@ import { g3, sciText } from "../molarity-calculator/molMath";
 import { atomsOf, uniFormula } from "../chemical-equation-balancer/chemMath";
 import { SvgMolecule } from "../chemical-equation-balancer/Molecules2D";
 import { AVOGADRO, BEAKER_ML, CUSO4_M, GROUPS, HYDRATE_MAX, hydrateFormula, partsOf, WATER_DENSITY, WATER_M } from "./mmMath";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const BeakerScene3D = dynamic(() => import("./MolarMassScenes3D").then((m) => m.BeakerScene3D), { ssr: false, loading: () => null });
 const HydrateScene3D = dynamic(() => import("./MolarMassScenes3D").then((m) => m.HydrateScene3D), { ssr: false, loading: () => null });
@@ -37,10 +38,10 @@ function Beaker2D({ volume, label }: { volume: number; label: string }) {
         {[50, 100, 150, 200].map((ml) => (
           <g key={ml}>
             <line x1={R - 18} x2={R} y1={yv(ml)} y2={yv(ml)} style={{ stroke: "var(--ph-ink-muted)" }} />
-            <text x={R + 8} y={yv(ml) + 4} fontSize={11} style={{ fill: "var(--ph-ink-muted)" }}>{`${ml} mL`}</text>
+            <text x={R + 8} y={yv(ml) + 4} style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>{`${ml} mL`}</text>
           </g>
         ))}
-        <text x={W / 2} y={Math.max(18, yv(volume) - 10)} fontSize={13} fontWeight={800} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+        <text x={W / 2} y={Math.max(18, yv(volume) - 10)} fontWeight={800} textAnchor="middle" style={{ fontSize: svgPx(13), fill: "var(--ph-ink)" }}>
           {label}
         </text>
       </svg>
@@ -99,7 +100,7 @@ function Hydrate2D({ n, label }: { n: number; label: string }) {
           const a = (i / Math.max(1, n)) * Math.PI * 2 + 0.4;
           return <SvgMolecule key={i} formula="H2O" x={cx + Math.round(Math.cos(a) * Math.min(W * 0.32, 150))} y={cy + Math.round(Math.sin(a) * (H * 0.3))} size={size * 0.75} />;
         })}
-        <text x={cx} y={H - 12} fontSize={14} fontWeight={800} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+        <text x={cx} y={H - 12} fontWeight={800} textAnchor="middle" style={{ fontSize: svgPx(14), fill: "var(--ph-ink)" }}>
           <SvgChem text={label} />
         </text>
       </svg>
@@ -168,16 +169,16 @@ function Groups2D({ index }: { index: number }) {
               {Array.from({ length: pt.count }, (_, k) => (
                 <circle key={k} cx={x} cy={base - r - k * (2 * r + 1.5)} r={r} style={{ fill: elFill(pt.symbol), stroke: "var(--ph-line)" }} strokeWidth={0.8} />
               ))}
-              <text x={x} y={base - pt.count * (2 * r + 1.5) - 8} fontSize={14} fontWeight={800} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+              <text x={x} y={base - pt.count * (2 * r + 1.5) - 8} fontWeight={800} textAnchor="middle" style={{ fontSize: svgPx(14), fill: "var(--ph-ink)" }}>
                 {pt.count}
               </text>
-              <text x={x} y={base + 20} fontSize={13} fontWeight={700} textAnchor="middle" style={{ fill: grp ? "var(--ph-focus)" : "var(--ph-ink)" }}>
+              <text x={x} y={base + 20} fontWeight={700} textAnchor="middle" style={{ fontSize: svgPx(13), fill: grp ? "var(--ph-focus)" : "var(--ph-ink)" }}>
                 {grp ? `${pt.symbol} ×${g.mult}` : pt.symbol}
               </text>
             </g>
           );
         })}
-        <text x={W / 2} y={22} fontSize={15} fontWeight={800} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+        <text x={W / 2} y={22} fontWeight={800} textAnchor="middle" style={{ fontSize: svgPx(15), fill: "var(--ph-ink)" }}>
           <SvgChem text={fx(g.formula)} />
         </text>
       </svg>

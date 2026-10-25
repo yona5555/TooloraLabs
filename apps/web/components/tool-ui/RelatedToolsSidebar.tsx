@@ -4,8 +4,10 @@ import { useTranslations } from "next-intl";
 import { ArrowRight, ChevronDown, Search as SearchIcon } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { tools } from "@/data/tools";
+import { categoryHref } from "@/data/categories";
 import { getToolIcon } from "@/lib/tool-icons";
 import AdSpace from "./AdSpace";
+import { ADS_ENABLED } from "@/lib/ads";
 import SectionCard from "./SectionCard";
 
 type RelatedToolsSidebarProps = {
@@ -172,7 +174,7 @@ export default function RelatedToolsSidebar({
         )}
 
         <Link
-          href={`/categories/${category}`}
+          href={categoryHref(category)}
           className="flex items-center justify-center gap-1.5 rounded-xl border border-zinc-200 py-2.5 text-sm font-medium text-blue-600 transition hover:bg-blue-50/50 dark:border-zinc-800 dark:text-blue-400 dark:hover:bg-blue-500/10"
         >
           {tCommon("viewAllCta", { category: tCategories(`${category}.title`) })}
@@ -180,9 +182,11 @@ export default function RelatedToolsSidebar({
         </Link>
       </div>
 
-      <div className="-mx-4 border-t border-zinc-200 pt-6 dark:border-zinc-800 lg:-mx-6">
-        <AdSpace className="mx-auto" />
-      </div>
+      {ADS_ENABLED && (
+        <div className="-mx-4 border-t border-zinc-200 pt-6 dark:border-zinc-800 lg:-mx-6">
+          <AdSpace className="mx-auto" />
+        </div>
+      )}
     </SectionCard>
     {/* Unused sidebarMatchRow column height lands here, outside the card; ToolAboveFold subtracts it when
         measuring regardless of whether it's empty or filled with `fillContent`. */}

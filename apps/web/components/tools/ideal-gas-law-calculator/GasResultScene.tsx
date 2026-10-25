@@ -9,6 +9,7 @@ import { ViewportScene } from "@/components/tool-ui/three/ViewportScene";
 import { ballPoints, snap } from "@/components/tool-ui/indicator-kit/format";
 import { g4, pistonFrac, T_MAX, T_MIN, T_STEP, tempCss } from "./gasMath";
 import type { GasProjection } from "./GasResultScene3D";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const Scene3D = dynamic(() => import("./GasResultScene3D"), { ssr: false, loading: () => null });
 const PTS = ballPoints(64, 23);
@@ -38,7 +39,7 @@ function Scene2D({ s, valueText, label, p }: { s: Stepper; valueText: string; la
         <rect x={BAR_X - 6} y={TOP - 6} width={12} height={BOTTOM - TOP + 12} rx={6} style={{ fill: "var(--glass-track)", stroke: "var(--ph-line)" }} strokeWidth={1} />
         <rect x={BAR_X - 6} y={yT(p.temperature)} width={12} height={BOTTOM - yT(p.temperature) + 6} rx={6} style={{ fill: tempCss(p.temperature) }} />
         {[0, 100, 200, 300, 400, 500, 600].map((tk) => (
-          <text key={tk} x={BAR_X + 20} y={yT(tk) + 4} fontSize={11} style={{ fill: "var(--ph-ink-muted)" }}>
+          <text key={tk} x={BAR_X + 20} y={yT(tk) + 4} style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
             {`${tk} K`}
           </text>
         ))}

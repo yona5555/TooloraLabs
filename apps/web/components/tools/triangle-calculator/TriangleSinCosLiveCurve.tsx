@@ -30,7 +30,7 @@ export default function TriangleSinCosLiveCurve({ angles }: Props) {
               <Line.Segment point1={[m.deg, -1.2]} point2={[m.deg, 1.02]} color={Theme.foreground} weight={1} style="dashed" opacity={0.35} />
               <Point x={m.deg} y={m.sin} color={Theme.red} />
               <Point x={m.deg} y={m.cos} color={Theme.green} />
-              <Text x={m.deg} y={1.13} size={11} color={Theme.foreground}>
+              <Text x={m.deg} y={1.13} size={12} color={Theme.foreground}>
                 {m.label}
               </Text>
             </g>

@@ -4,8 +4,10 @@ import { Calculator } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber } from "@tooloralabs/core";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import { useBelowLg } from "@/components/tool-ui/useBelowLg";
 import { useLoanLiveInputs } from "./LoanLiveInputsContext";
 import { computeNiceTicks, computeNiceStep } from "./niceTicks";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const MARGIN = { top: 16, left: 56, right: 16 };
 const MAIN_HEIGHT = 200;
@@ -26,6 +28,7 @@ export default function LoanAmortizationAreaChart() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
   const [containerWidth, setContainerWidth] = useState(0);
+  const belowLg = useBelowLg();
 
   useLayoutEffect(() => {
     const el = containerRef.current;
@@ -58,7 +61,7 @@ export default function LoanAmortizationAreaChart() {
   }
 
   const pointCount = schedule.length;
-  const step = Math.max(MIN_STEP, (containerWidth - MARGIN.left - MARGIN.right) / Math.max(pointCount - 1, 1));
+  const step = Math.max(belowLg && containerWidth > 0 ? 0 : MIN_STEP, (containerWidth - MARGIN.left - MARGIN.right) / Math.max(pointCount - 1, 1));
   const plotWidth = Math.max(pointCount - 1, 1) * step;
   const chartWidth = MARGIN.left + plotWidth + MARGIN.right;
 
@@ -160,7 +163,7 @@ export default function LoanAmortizationAreaChart() {
           {valueTicks.map((tick) => (
             <g key={tick}>
               <line x1={MARGIN.left} y1={yForValue(tick)} x2={chartWidth - MARGIN.right} y2={yForValue(tick)} stroke="currentColor" strokeWidth={1} opacity={0.08} />
-              <text x={MARGIN.left - 8} y={yForValue(tick) + 3} textAnchor="end" fontSize={9} fill="currentColor" opacity={0.6}>
+              <text style={{ fontSize: svgPx(12) }} x={MARGIN.left - 8} y={yForValue(tick) + 3} textAnchor="end" fill="currentColor" opacity={0.6}>
                 {money(tick)}
               </text>
             </g>
@@ -179,11 +182,10 @@ export default function LoanAmortizationAreaChart() {
             return (
               <g key={marker.index}>
                 <circle cx={x} cy={y} r={4} className="fill-blue-800 dark:fill-blue-200" />
-                <text
+                <text style={{ fontSize: svgPx(12) }}
                   x={x + dx}
                   y={Math.max(y - 10, MARGIN.top + 10)}
                   textAnchor={marker.anchor}
-                  fontSize={10}
                   fontWeight={700}
                   className="fill-zinc-700 dark:fill-zinc-200"
                 >
@@ -195,7 +197,7 @@ export default function LoanAmortizationAreaChart() {
 
           {schedule.map((row, i) =>
             i % labelEvery === 0 ? (
-              <text key={`period-${row.period}`} x={xForIndex(i)} y={mainBottom + XAXIS_HEIGHT - 6} textAnchor="middle" fontSize={9} fill="currentColor" opacity={0.6}>
+              <text style={{ fontSize: svgPx(12) }} key={`period-${row.period}`} x={xForIndex(i)} y={mainBottom + XAXIS_HEIGHT - 6} textAnchor="middle" fill="currentColor" opacity={0.6}>
                 {formatLocalizedNumber(row.period, digitStyle, { maximumFractionDigits: 0 })}
               </text>
             ) : null
@@ -208,16 +210,16 @@ export default function LoanAmortizationAreaChart() {
 
               <g transform={`translate(${tooltipX}, ${tooltipY})`}>
                 <rect width={TOOLTIP_WIDTH} height={TOOLTIP_HEIGHT} rx={6} className="fill-white stroke-zinc-200 dark:fill-zinc-900 dark:stroke-zinc-700" strokeWidth={1} />
-                <text x={10} y={17} fontSize={10} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
+                <text style={{ fontSize: svgPx(12) }} x={10} y={17} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
                   {t("payoffChart.tooltipPeriodLabel")} {formatLocalizedNumber(active.period, digitStyle, { maximumFractionDigits: 0 })}
                 </text>
-                <text x={10} y={35} fontSize={10} className="fill-blue-700 dark:fill-blue-400">
+                <text style={{ fontSize: svgPx(12) }} x={10} y={35} className="fill-blue-700 dark:fill-blue-400">
                   {t("payoffChart.principalLabel")}: {money(active.principalPaid)}
                 </text>
-                <text x={10} y={50} fontSize={10} className="fill-amber-600 dark:fill-amber-500">
+                <text style={{ fontSize: svgPx(12) }} x={10} y={50} className="fill-amber-600 dark:fill-amber-500">
                   {t("payoffChart.interestLabel")}: {money(active.interestPaid)}
                 </text>
-                <text x={10} y={65} fontSize={10} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
+                <text style={{ fontSize: svgPx(12) }} x={10} y={65} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
                   {t("payoffChart.balanceLabel")}: {money(active.endingBalance)}
                 </text>
               </g>

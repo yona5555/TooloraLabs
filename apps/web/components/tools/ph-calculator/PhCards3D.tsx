@@ -7,6 +7,7 @@ import { IndicatorCard, KitControls, SvgChem, KitTable, KitTrack, useMeasuredSiz
 import { ViewportScene } from "@/components/tool-ui/three/ViewportScene";
 import { ballPoints, f2, ratio, sci, sup } from "@/components/tool-ui/indicator-kit/format";
 import { classify, DILUTION_MAX_STEPS, dilutionPh, ions, particleCounts, PH_SEED, SHELF, shelfSeedIndex, uiCss } from "./phMath";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const ShelfScene3D = dynamic(() => import("./PhScenes3D").then((m) => m.ShelfScene3D), { ssr: false, loading: () => null });
 const DilutionScene3D = dynamic(() => import("./PhScenes3D").then((m) => m.DilutionScene3D), { ssr: false, loading: () => null });
@@ -41,14 +42,14 @@ function Shelf2D({ index }: { index: number }) {
           return (
             <g key={s.key}>
               <rect x={x(s.pH) - 8} y={bodyTop} width={16} height={barY - 4 - bodyTop} rx={8} style={{ fill: uiCss(s.pH), stroke: sel ? "var(--ph-focus)" : "var(--ph-line)" }} strokeWidth={sel ? 3 : 1} />
-              <text x={x(s.pH)} y={bodyTop - 8} fontSize={sel ? 12.5 : 11} fontWeight={sel ? 800 : 600} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+              <text x={x(s.pH)} y={bodyTop - 8} fontWeight={sel ? 800 : 600} textAnchor="middle" style={{ fontSize: svgPx(sel ? 12.5 : 12), fill: "var(--ph-ink)" }}>
                 {String(s.pH)}
               </text>
             </g>
           );
         })}
         {[0, 7, 14].map((p) => (
-          <text key={p} x={x(p)} y={H - 20} fontSize={11} textAnchor={p === 0 ? "start" : p === 14 ? "end" : "middle"} style={{ fill: "var(--ph-ink-muted)" }}>
+          <text key={p} x={x(p)} y={H - 20} textAnchor={p === 0 ? "start" : p === 14 ? "end" : "middle"} style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
             {`pH ${p}`}
           </text>
         ))}
@@ -117,10 +118,10 @@ function Dilution2D({ steps, pH }: { steps: number; pH: number }) {
           const y = bottom - fill(k);
           return <line key={k} x1={R} y1={y} x2={R + 12} y2={y} style={{ stroke: k === steps ? "var(--ph-focus)" : "var(--ph-line)" }} strokeWidth={k === steps ? 3 : 1.5} strokeLinecap="round" />;
         })}
-        <text x={R + 18} y={level + 4} fontSize={12.5} fontWeight={800} style={{ fill: "var(--ph-ink)" }}>
+        <text x={R + 18} y={level + 4} fontWeight={800} style={{ fontSize: svgPx(12.5), fill: "var(--ph-ink)" }}>
           {`pH ${f2(pH)}`}
         </text>
-        <text x={L - 10} y={level + 4} fontSize={11.5} textAnchor="end" style={{ fill: "var(--ph-ink-muted)" }}>
+        <text x={L - 10} y={level + 4} textAnchor="end" style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
           <SvgChem text={`V × 10${sup(steps)}`} />
         </text>
       </svg>
@@ -179,7 +180,7 @@ function Particles2D({ pH }: { pH: number }) {
   const lw = Math.max(40, W - lx - 12);
   const bar = (y: number, count: number, tint: string, label: string) => (
     <g>
-      <text x={lx} y={y} fontSize={12} fontWeight={700} style={{ fill: "var(--ph-ink)" }}>
+      <text x={lx} y={y} fontWeight={700} style={{ fontSize: svgPx(12), fill: "var(--ph-ink)" }}>
         <SvgChem text={label} />
       </text>
       <rect x={lx} y={y + 8} width={lw} height={12} rx={6} style={{ fill: "var(--glass-track)", stroke: "var(--ph-line)" }} strokeWidth={1} />

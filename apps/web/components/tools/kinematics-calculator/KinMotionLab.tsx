@@ -5,6 +5,7 @@ import { Pause, Play } from "lucide-react";
 import { kinematicsStateAt } from "@tooloralabs/tools";
 import KinIndicatorCard, { KinIndicatorUnavailable } from "./KinIndicatorCard";
 import { r2, toInput, useKinLive, useKinModel, type KinDraft } from "./KinLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 400;
 const H = 330;
@@ -107,7 +108,7 @@ export default function KinMotionLab() {
   const lab = (
     <div className="w-full max-w-[400px]">
       <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
-        <text x={W / 2} y={16} textAnchor="middle" fontSize={13} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+        <text style={{ fontSize: svgPx(13) }} x={W / 2} y={16} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
           {`t = ${f(now.t, 2)} s · v = ${f(now.v, 1)} m/s · x = ${f(now.x, 1)} m`}
         </text>
         {/* track with the eight equal-time stations */}
@@ -129,16 +130,16 @@ export default function KinMotionLab() {
             <g key={pl.key}>
               <line x1={L} y1={pl.p.top} x2={L} y2={pl.p.bottom} className="stroke-zinc-300 dark:stroke-zinc-600" />
               <line x1={L} y1={zero} x2={R} y2={zero} className="stroke-zinc-300 dark:stroke-zinc-600" />
-              <text x={L - 4} y={pl.p.top + 4} textAnchor="end" fontSize={9.5} className="fill-zinc-500 dark:fill-zinc-400">{f(pl.hi, 1)}</text>
-              <text x={L - 4} y={pl.p.bottom + 3} textAnchor="end" fontSize={9.5} className="fill-zinc-500 dark:fill-zinc-400">{f(pl.lo, 1)}</text>
-              <text x={L + 4} y={pl.p.top - 5} fontSize={10} fontWeight={600} className="fill-zinc-600 dark:fill-zinc-300">{pl.label}</text>
+              <text style={{ fontSize: svgPx(12) }} x={L - 4} y={pl.p.top + 4} textAnchor="end" className="fill-zinc-500 dark:fill-zinc-400">{f(pl.hi, 1)}</text>
+              <text style={{ fontSize: svgPx(12) }} x={L - 4} y={pl.p.bottom + 3} textAnchor="end" className="fill-zinc-500 dark:fill-zinc-400">{f(pl.lo, 1)}</text>
+              <text style={{ fontSize: svgPx(12) }} x={L + 4} y={pl.p.top - 5} fontWeight={600} className="fill-zinc-600 dark:fill-zinc-300">{pl.label}</text>
               <path d={path(pl.key, span, pl.p, pl.lo, pl.hi)} fill="none" strokeWidth={1.5} strokeDasharray="4 3" className="stroke-zinc-300 dark:stroke-zinc-600" />
               <path d={path(pl.key, now.t, pl.p, pl.lo, pl.hi)} fill="none" strokeWidth={2.5} className={pl.cls} />
               <circle cx={px(now.t)} cy={py(pl.value, pl.lo, pl.hi, pl.p)} r={5} strokeWidth={2} className={`${pl.dot} stroke-white dark:stroke-zinc-900`} />
             </g>
           );
         })}
-        <text x={R} y={PLOTS[1].bottom + 14} textAnchor="end" fontSize={10} className="fill-zinc-500 dark:fill-zinc-400">{`t (s) → ${f(span, 2)}`}</text>
+        <text style={{ fontSize: svgPx(12) }} x={R} y={PLOTS[1].bottom + 14} textAnchor="end" className="fill-zinc-500 dark:fill-zinc-400">{`t (s) → ${f(span, 2)}`}</text>
       </svg>
       <div className="mt-2 space-y-2">
         {inputs.map((q) => {

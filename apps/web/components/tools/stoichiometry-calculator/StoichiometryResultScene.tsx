@@ -9,6 +9,7 @@ import { SvgMolecule } from "../chemical-equation-balancer/Molecules2D";
 import { g3 } from "../molarity-calculator/molMath";
 import { fromLog, LOG_MAX, LOG_MIN, LOG_STEP, TICKS, tickText, toLog } from "./stoichMath";
 import { gridDims, INSET, MAX_SHOWN, ROLE_TOKEN, shownCount, type StoSceneProps } from "./stoichiometryLayout";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const Scene3D = dynamic(() => import("./StoichiometryResultScene3D"), { ssr: false, loading: () => null });
 
@@ -33,7 +34,7 @@ function Scene2D({ p, label }: { p: StoSceneProps; label: string }) {
           const gap = Math.min((sw * 0.9) / cols, availH / rows, 90);
           return (
             <g key={i}>
-              <text x={x} y={cy - (rows / 2) * gap - 8} fontSize={16} fontWeight={800} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+              <text x={x} y={cy - (rows / 2) * gap - 8} fontWeight={800} textAnchor="middle" style={{ fontSize: svgPx(16), fill: "var(--ph-ink)" }}>
                 <SvgChem text={`${it.coefficient > 1 ? it.coefficient : ""}${uniFormula(it.formula)}`} />
               </text>
               {Array.from({ length: n }, (_, j) => {
@@ -42,7 +43,7 @@ function Scene2D({ p, label }: { p: StoSceneProps; label: string }) {
                 return <SvgMolecule key={j} formula={it.formula} x={x + ((j % cols) - (inRow - 1) / 2) * gap} y={cy + (row - (rows - 1) / 2) * gap} size={gap / 1.3} />;
               })}
               {it.coefficient > MAX_SHOWN && (
-                <text x={x} y={cy + (rows / 2) * gap + 4} fontSize={13} fontWeight={800} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+                <text x={x} y={cy + (rows / 2) * gap + 4} fontWeight={800} textAnchor="middle" style={{ fontSize: svgPx(13), fill: "var(--ph-ink)" }}>
                   {`×${it.coefficient}`}
                 </text>
               )}
@@ -51,7 +52,7 @@ function Scene2D({ p, label }: { p: StoSceneProps; label: string }) {
         })}
         <line x1={ax - sw * 0.3} x2={ax + sw * 0.22} y1={cy} y2={cy} style={{ stroke: "var(--ph-ink)" }} strokeWidth={3} strokeLinecap="round" />
         <path d={`M ${ax + sw * 0.3} ${cy} l -11 -7 l 0 14 z`} style={{ fill: "var(--ph-ink)" }} />
-        <text x={ax} y={cy - 12} fontSize={14} fontWeight={800} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+        <text x={ax} y={cy - 12} fontWeight={800} textAnchor="middle" style={{ fontSize: svgPx(14), fill: "var(--ph-ink)" }}>
           {p.ratio}
         </text>
       </svg>

@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import CsvIndicatorCard, { CsvIndicatorUnavailable } from "./CsvIndicatorCard";
 import { TYPE_FILL, useCsvModel } from "./CsvLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const LABEL = 90;
@@ -38,18 +39,18 @@ export default function CsvNumericRanges() {
         const pos = max > min ? (mean - min) / (max - min) : 0.5;
         return (
           <g key={c.name}>
-            <text x={LABEL} y={y + 16} textAnchor="end" fontSize={12} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
+            <text style={{ fontSize: svgPx(12) }} x={LABEL} y={y + 16} textAnchor="end" fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
               {c.name.length > 11 ? `${c.name.slice(0, 10)}…` : c.name}
             </text>
             <rect x={BAR_X} y={y + 6} width={BAR_W} height={14} rx={7} className={TYPE_FILL[c.type]} opacity={0.35} />
             <circle cx={BAR_X + pos * BAR_W} cy={y + 13} r={8} strokeWidth={2.5} className={`${TYPE_FILL[c.type]} stroke-white dark:stroke-zinc-900`} />
-            <text x={BAR_X} y={y + 36} fontSize={11} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+            <text style={{ fontSize: svgPx(12) }} x={BAR_X} y={y + 36} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
               {f(min, 2)}
             </text>
-            <text x={BAR_X + BAR_W} y={y + 36} textAnchor="end" fontSize={11} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+            <text style={{ fontSize: svgPx(12) }} x={BAR_X + BAR_W} y={y + 36} textAnchor="end" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
               {f(max, 2)}
             </text>
-            <text x={BAR_X + pos * BAR_W} y={y + 36} textAnchor="middle" fontSize={11} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={BAR_X + pos * BAR_W} y={y + 36} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
               {f(mean, 2)}
             </text>
           </g>

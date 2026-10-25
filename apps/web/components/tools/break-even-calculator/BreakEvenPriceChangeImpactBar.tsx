@@ -1,3 +1,4 @@
+import { svgPx } from "@/components/tool-ui/svgPx";
 type PriceScenario = { key: string; label: string; units: number };
 
 type BreakEvenPriceChangeImpactBarProps = {
@@ -30,10 +31,10 @@ export default function BreakEvenPriceChangeImpactBar({ scenarios, caption, titl
             return (
               <g key={s.key}>
                 <rect x={x} y={y} width={barW} height={h} rx={4} className="fill-amber-500 dark:fill-amber-400" />
-                <text x={x + barW / 2} y={y - 6} textAnchor="middle" fontSize={10} fontWeight={700} className="fill-amber-700 dark:fill-amber-300">
+                <text style={{ fontSize: svgPx(12) }} x={x + barW / 2} y={y - 6} textAnchor="middle" fontWeight={700} className="fill-amber-700 dark:fill-amber-300">
                   {s.units}
                 </text>
-                <text x={x + barW / 2} y={CHART_BOTTOM + 14} textAnchor="middle" fontSize={8.5} className="fill-zinc-500 dark:fill-zinc-400">
+                <text style={{ fontSize: svgPx(12) }} x={x + barW / 2} y={CHART_BOTTOM + 14} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
                   {s.label}
                 </text>
               </g>

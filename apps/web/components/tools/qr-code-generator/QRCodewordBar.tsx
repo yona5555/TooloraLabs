@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import QRIndicatorCard, { QRIndicatorUnavailable } from "./QRIndicatorCard";
 import { useQRModel } from "./QRLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const BAR_Y = 26;
@@ -28,7 +29,7 @@ export default function QRCodewordBar() {
 
   const svg = (
     <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
-      <text x={0} y={14} fontSize={12} className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={0} y={14} className="fill-zinc-500 dark:fill-zinc-400">
         {t("axis", { n: a.totalCodewords, v: a.version })}
       </text>
       {parts.map((p, i) => {
@@ -38,7 +39,7 @@ export default function QRCodewordBar() {
           <g key={p.key}>
             <rect x={x} y={BAR_Y} width={Math.max(0, w - 1.5)} height={BAR_H} rx={4} className={p.fill} />
             {w > 36 && (
-              <text x={x + w / 2} y={BAR_Y + BAR_H / 2 + 4} textAnchor="middle" fontSize={12} fontWeight={700} className={p.key === "padding" ? "fill-sky-900 dark:fill-sky-100" : "fill-white"}>
+              <text style={{ fontSize: svgPx(12) }} x={x + w / 2} y={BAR_Y + BAR_H / 2 + 4} textAnchor="middle" fontWeight={700} className={p.key === "padding" ? "fill-sky-900 dark:fill-sky-100" : "fill-white"}>
                 {pct(p.value, a.totalCodewords)}
               </text>
             )}
@@ -50,10 +51,10 @@ export default function QRCodewordBar() {
         return (
           <g key={p.key}>
             <circle cx={6} cy={y - 4} r={6} className={p.fill} />
-            <text x={20} y={y} fontSize={12} className="fill-zinc-600 dark:fill-zinc-300">
+            <text style={{ fontSize: svgPx(12) }} x={20} y={y} className="fill-zinc-600 dark:fill-zinc-300">
               {t(p.key)}
             </text>
-            <text x={W} y={y} textAnchor="end" fontSize={12} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={W} y={y} textAnchor="end" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
               {f(p.value)}
             </text>
           </g>

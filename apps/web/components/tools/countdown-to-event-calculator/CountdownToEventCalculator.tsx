@@ -7,7 +7,6 @@ import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
-import AdSpace from "@/components/tool-ui/AdSpace";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import HistoryTape, { type TapeEntry } from "@/components/tool-ui/HistoryTape";
 import { newEntryId, usePersistedList } from "@/lib/use-persisted-list";
@@ -151,7 +150,6 @@ export default function CountdownToEventCalculator({ education }: { education: R
           <CdTimelineCard {...props} />
           <CdBusinessSplitCard {...props} />
           <CdZoneEquivalenceCard {...props} />
-          <AdSpace variant="leaderboard" />
           <CdHijriYearCard {...props} />
           <CdWeekdayBarsCard {...props} />
           <CdLogScaleCard {...props} />

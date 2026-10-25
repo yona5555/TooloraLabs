@@ -1,3 +1,5 @@
+import { tools } from "@/data/tools";
+
 export type Category = {
   slug: string;
   title: string;
@@ -158,3 +160,21 @@ const rank = (slug: string) => {
 
 export const categories: Category[] = [...categoryList].sort((a, b) => rank(a.slug) - rank(b.slug));
 
+
+/**
+ * A category page is generated only once the section has this many live tools (AdSense low-value rule,
+ * see .claude/rules/category-order.md). Below it the page is not built, not in the sitemap, and every link
+ * goes to `categoryHref` instead; next.config.ts 301-redirects the old URL.
+ */
+export const MIN_TOOLS_FOR_CATEGORY_PAGE = 3;
+
+const liveToolCount = (slug: string) => tools.filter((tool) => tool.category === slug).length;
+
+/** Sections that get a /categories/{slug} page, in the site-wide order. */
+export const categoryPages: Category[] = categories.filter((c) => liveToolCount(c.slug) >= MIN_TOOLS_FOR_CATEGORY_PAGE);
+
+export const hasCategoryPage = (slug: string) => categoryPages.some((c) => c.slug === slug);
+
+/** Where a link to a section goes: its page, or (below the threshold) its block on the all-tools page. */
+export const categoryHref = (slug: string) =>
+  hasCategoryPage(slug) ? `/categories/${slug}` : `/tools#category-${slug}`;

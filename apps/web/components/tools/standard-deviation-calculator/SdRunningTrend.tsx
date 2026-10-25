@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import SdIndicatorCard, { scaleX } from "./SdIndicatorCard";
 import { useSdModel } from "./SdLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 310;
 const H = 190;
@@ -33,17 +34,17 @@ export default function SdRunningTrend() {
         {[0, 0.5, 1].map((q) => (
           <g key={q}>
             <line x1={L} y1={sy(q * maxY)} x2={W - R} y2={sy(q * maxY)} strokeDasharray={q ? "3 3" : undefined} className="stroke-zinc-200 dark:stroke-zinc-700" />
-            <text x={L - 5} y={sy(q * maxY) + 3} textAnchor="end" fontSize={9} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+            <text style={{ fontSize: svgPx(12) }} x={L - 5} y={sy(q * maxY) + 3} textAnchor="end" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
               {f(q * maxY, 2)}
             </text>
           </g>
         ))}
         {ticks.map((n) => (
-          <text key={n} x={sx(n)} y={BASE + 14} textAnchor="middle" fontSize={9} className="fill-zinc-500 dark:fill-zinc-400">
+          <text style={{ fontSize: svgPx(12) }} key={n} x={sx(n)} y={BASE + 14} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
             {n}
           </text>
         ))}
-        <text x={(L + W - R) / 2} y={BASE + 27} textAnchor="middle" fontSize={10} className="fill-zinc-500 dark:fill-zinc-400">
+        <text style={{ fontSize: svgPx(12) }} x={(L + W - R) / 2} y={BASE + 27} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
           n
         </text>
         {smp && <polyline points={smp} fill="none" strokeWidth={2} strokeDasharray="5 3" className="stroke-violet-500 dark:stroke-violet-400" />}
@@ -52,10 +53,10 @@ export default function SdRunningTrend() {
           <circle key={r.n} cx={sx(r.n)} cy={sy(r.populationStdDev)} r={2.5} className="fill-blue-600 dark:fill-blue-400" />
         ))}
         <circle cx={sx(last.n)} cy={sy(last.populationStdDev)} r={6} strokeWidth={2} className="fill-white stroke-rose-600 dark:fill-zinc-900 dark:stroke-rose-400" />
-        <text x={Math.min(sx(last.n), W - R - 40)} y={Math.max(12, sy(last.populationStdDev) - 10)} textAnchor="middle" fontSize={11} fontWeight={700} className="fill-rose-700 dark:fill-rose-300">
+        <text style={{ fontSize: svgPx(12) }} x={Math.min(sx(last.n), W - R - 40)} y={Math.max(12, sy(last.populationStdDev) - 10)} textAnchor="middle" fontWeight={700} className="fill-rose-700 dark:fill-rose-300">
           {`σ = ${f(last.populationStdDev)}`}
         </text>
-        <g fontSize={10}>
+        <g style={{ fontSize: svgPx(12) }}>
           <line x1={L} y1={8} x2={L + 16} y2={8} strokeWidth={2.5} className="stroke-blue-600 dark:stroke-blue-400" />
           <text x={L + 20} y={11} className="fill-zinc-600 dark:fill-zinc-300">σ</text>
           <line x1={L + 40} y1={8} x2={L + 56} y2={8} strokeWidth={2} strokeDasharray="5 3" className="stroke-violet-500 dark:stroke-violet-400" />

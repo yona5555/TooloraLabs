@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import JSONIndicatorCard, { JSONIndicatorUnavailable } from "./JSONIndicatorCard";
 import { formatBytes, useJSONModel } from "./JSONLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const LABEL = 76;
@@ -45,11 +46,11 @@ export default function JSONIndentSizes() {
   const svg = (
     <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <circle cx={BAR_X + 4} cy={10} r={5} className="fill-blue-500 dark:fill-blue-400" />
-      <text x={BAR_X + 14} y={14} fontSize={12} className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={BAR_X + 14} y={14} className="fill-zinc-500 dark:fill-zinc-400">
         {t("payloadKey")}
       </text>
       <circle cx={BAR_X + 104} cy={10} r={5} className="fill-amber-400 dark:fill-amber-500" />
-      <text x={BAR_X + 114} y={14} fontSize={12} className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={BAR_X + 114} y={14} className="fill-zinc-500 dark:fill-zinc-400">
         {t("whitespaceKey")}
       </text>
       {styles.map((st, i) => {
@@ -59,15 +60,14 @@ export default function JSONIndentSizes() {
         const weight = st.active ? 700 : 500;
         return (
           <g key={st.key}>
-            <text x={LABEL} y={y + 17} textAnchor="end" fontSize={12} fontWeight={weight} className={st.active ? "fill-blue-700 dark:fill-blue-300" : "fill-zinc-600 dark:fill-zinc-300"}>
+            <text style={{ fontSize: svgPx(12) }} x={LABEL} y={y + 17} textAnchor="end" fontWeight={weight} className={st.active ? "fill-blue-700 dark:fill-blue-300" : "fill-zinc-600 dark:fill-zinc-300"}>
               {t(st.key)}
             </text>
             <rect x={BAR_X} y={y + 5} width={Math.max(2, core)} height={18} rx={3} className="fill-blue-500 dark:fill-blue-400" />
             {total - core > 0.5 && <rect x={BAR_X + core} y={y + 5} width={total - core} height={18} rx={3} className="fill-amber-400 dark:fill-amber-500" />}
-            <text
+            <text style={{ fontSize: svgPx(12) }}
               x={BAR_X + total + 6}
               y={y + 18}
-              fontSize={12}
               fontWeight={weight}
               fontFamily="ui-monospace, monospace"
               className={st.active ? "fill-blue-700 dark:fill-blue-300" : "fill-zinc-500 dark:fill-zinc-400"}

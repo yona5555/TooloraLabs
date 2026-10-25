@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { binomialCoefficient, surprisalBits } from "@tooloralabs/tools";
 import ProbabilityIndicatorCard from "./ProbabilityIndicatorCard";
 import { useProbabilityModel } from "./ProbabilityLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 320;
 const H = 230;
@@ -41,7 +42,7 @@ export default function ProbabilityRarityLogScale() {
       {Array.from({ length: MAX_LOG + 1 }, (_, p) => (
         <g key={p}>
           <line x1={X - 10} x2={X - 6} y1={y(p)} y2={y(p)} className="stroke-zinc-400" />
-          <text x={X - 13} y={y(p) + 3} textAnchor="end" className="fill-zinc-500 font-mono text-[9px] dark:fill-zinc-400">
+          <text style={{ fontSize: svgPx(12) }} x={X - 13} y={y(p) + 3} textAnchor="end" className="fill-zinc-500 font-mono dark:fill-zinc-400">
             {p === 0 ? "1" : `10${"⁰¹²³⁴⁵⁶⁷⁸"[p]}`}
           </text>
         </g>
@@ -49,13 +50,13 @@ export default function ProbabilityRarityLogScale() {
       {REFS.map((ref) => (
         <g key={ref.key}>
           <line x1={X + 6} x2={X + 18} y1={y(Math.log10(ref.n))} y2={y(Math.log10(ref.n))} className="stroke-zinc-400 dark:stroke-zinc-500" />
-          <text x={X + 22} y={y(Math.log10(ref.n)) + 3} className="fill-zinc-600 text-[9.5px] dark:fill-zinc-300">
+          <text style={{ fontSize: svgPx(12) }} x={X + 22} y={y(Math.log10(ref.n)) + 3} className="fill-zinc-600 dark:fill-zinc-300">
             {`${t(`refs.${ref.key}`)} · 1/${f(ref.n, 0)}`}
           </text>
         </g>
       ))}
       <polygon points={`${X - 22},${y(logN)} ${X - 34},${y(logN) - 6} ${X - 34},${y(logN) + 6}`} className="fill-violet-600 dark:fill-violet-400" />
-      <text x={4} y={y(logN) - 9} className="fill-violet-700 font-mono text-[10px] font-bold dark:fill-violet-300">{Number.isFinite(n) ? `1/${f(n, n < 10 ? 2 : 0)}` : "0"}</text>
+      <text style={{ fontSize: svgPx(12) }} x={4} y={y(logN) - 9} className="fill-violet-700 font-mono font-bold dark:fill-violet-300">{Number.isFinite(n) ? `1/${f(n, n < 10 ? 2 : 0)}` : "0"}</text>
     </svg>
   );
 

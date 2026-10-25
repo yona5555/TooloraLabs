@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { hexToRgb, hslToRgb, rgbToHex, rgbToHsl } from "@tooloralabs/tools";
 import PaletteIndicatorCard, { PaletteIndicatorUnavailable } from "./PaletteIndicatorCard";
 import { usePaletteLive, usePaletteModel } from "./PaletteLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const SIZE = 260;
 const C = SIZE / 2;
@@ -90,10 +91,10 @@ export default function PaletteHueWheel() {
         const p = pt(c.hsl.h, R_DOT);
         return <circle key={i} cx={p.x} cy={p.y} r={i === a.baseIndex ? 13 : 9} fill={c.hex} strokeWidth={i === a.baseIndex ? 4 : 2.5} className="stroke-white dark:stroke-zinc-900" />;
       })}
-      <text x={C} y={C - 4} textAnchor="middle" fontSize={22} fontWeight={700} className="fill-zinc-800 dark:fill-zinc-100">
+      <text style={{ fontSize: svgPx(22) }} x={C} y={C - 4} textAnchor="middle" fontWeight={700} className="fill-zinc-800 dark:fill-zinc-100">
         {f(base.h, 0)}°
       </text>
-      <text x={C} y={C + 16} textAnchor="middle" fontSize={12} className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={C} y={C + 16} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
         {t("drag")}
       </text>
     </svg>

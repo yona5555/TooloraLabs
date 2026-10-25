@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import GapFreeRow from "@/components/tool-ui/GapFreeRow";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 /** Real Net 30 timeline: issue date to due date, tied to the invoice's own "date" field. */
 const NET_DAYS = 30;
@@ -22,14 +23,14 @@ export default async function InvoicePaymentTermsDiagram() {
           <svg width={WIDTH} height={70} viewBox={`0 0 ${WIDTH} 70`} role="img" aria-label={t("title")} className="mx-auto block min-w-[300px] text-current">
             <line x1={20} y1={35} x2={WIDTH - 20} y2={35} stroke="currentColor" strokeWidth={2} opacity={0.25} />
             <circle cx={20} cy={35} r={5} className="fill-blue-600 dark:fill-blue-400" />
-            <text x={20} y={20} textAnchor="start" fontSize={10} fontWeight={700} fill="currentColor">
+            <text style={{ fontSize: svgPx(12) }} x={20} y={20} textAnchor="start" fontWeight={700} fill="currentColor">
               {t("issueDate")}
             </text>
             <circle cx={WIDTH - 20} cy={35} r={5} className="fill-amber-500 dark:fill-amber-400" />
-            <text x={WIDTH - 20} y={20} textAnchor="end" fontSize={10} fontWeight={700} fill="currentColor">
+            <text style={{ fontSize: svgPx(12) }} x={WIDTH - 20} y={20} textAnchor="end" fontWeight={700} fill="currentColor">
               {t("dueDate")}
             </text>
-            <text x={WIDTH / 2} y={55} textAnchor="middle" fontSize={11} fill="currentColor" opacity={0.7}>
+            <text style={{ fontSize: svgPx(12) }} x={WIDTH / 2} y={55} textAnchor="middle" fill="currentColor" opacity={0.7}>
               {t("daysLabel", { days: NET_DAYS })}
             </text>
           </svg>

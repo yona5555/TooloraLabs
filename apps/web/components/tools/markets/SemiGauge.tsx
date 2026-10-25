@@ -1,3 +1,4 @@
+import { svgPx } from "@/components/tool-ui/svgPx";
 type Zone = { to: number; className: string };
 
 type SemiGaugeProps = {
@@ -41,7 +42,7 @@ export default function SemiGauge({ value, min = 0, max, zones, ticks, ariaLabel
       {ticks.map((tk) => {
         const [x, y] = polar(tk.value, R + 14);
         return (
-          <text key={tk.value} x={x} y={y} textAnchor="middle" className={`fill-zinc-400 font-mono ${wide ? "text-[10px]" : "text-[9px]"}`}>
+          <text style={{ fontSize: svgPx(12) }} key={tk.value} x={x} y={y} textAnchor="middle" className={`fill-zinc-400 font-mono ${wide ? "": "text-xs"}`}>
             {tk.label}
           </text>
         );

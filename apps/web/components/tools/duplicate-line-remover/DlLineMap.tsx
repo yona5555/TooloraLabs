@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import DlIndicatorCard, { DlIndicatorUnavailable } from "./DlIndicatorCard";
 import { useDlModel } from "./DlLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 
@@ -54,7 +55,7 @@ export default function DlLineMap() {
             stroke="currentColor"
           />
           {cw >= 14 && (
-            <text x={i * cw + cw / 2} y={cy + 30} textAnchor="middle" fontSize={10} className="fill-zinc-500 dark:fill-zinc-400">
+            <text style={{ fontSize: svgPx(12) }} x={i * cw + cw / 2} y={cy + 30} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
               {l.position}
             </text>
           )}

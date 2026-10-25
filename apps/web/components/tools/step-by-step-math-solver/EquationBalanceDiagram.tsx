@@ -92,7 +92,7 @@ export default function EquationBalanceDiagram() {
               </Text>
               <Line.Segment point1={[-10, -4]} point2={[10, -4]} color={colors.beam} weight={1} opacity={0.3} />
               {testPoint.element}
-              <Text x={x} y={-4.9} size={11} color={colors.right}>
+              <Text x={x} y={-4.9} size={12} color={colors.right}>
                 {`x = ${fmt(x)}`}
               </Text>
             </Mafs>

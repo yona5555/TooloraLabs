@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import PaletteIndicatorCard, { PaletteIndicatorUnavailable } from "./PaletteIndicatorCard";
 import { px2, usePaletteModel } from "./PaletteLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const MID = W / 2;
@@ -25,16 +26,16 @@ export default function PaletteTextBalance() {
 
   const svg = (
     <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
-      <text x={MID - 8} y={14} textAnchor="end" fontSize={12} fontWeight={600} className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={MID - 8} y={14} textAnchor="end" fontWeight={600} className="fill-zinc-500 dark:fill-zinc-400">
         ← {t("white")}
       </text>
-      <text x={MID + 8} y={14} fontSize={12} fontWeight={600} className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={MID + 8} y={14} fontWeight={600} className="fill-zinc-500 dark:fill-zinc-400">
         {t("black")} →
       </text>
       {[MID - aa, MID + aa].map((x) => (
         <line key={x} x1={x} y1={TOP - 6} x2={x} y2={H - 4} strokeDasharray="4 3" className="stroke-emerald-500 dark:stroke-emerald-400" />
       ))}
-      <text x={MID + aa + 3} y={TOP - 8} fontSize={11} className="fill-emerald-700 dark:fill-emerald-300">
+      <text style={{ fontSize: svgPx(12) }} x={MID + aa + 3} y={TOP - 8} className="fill-emerald-700 dark:fill-emerald-300">
         4.5
       </text>
       {a.colors.map((c, i) => {
@@ -45,10 +46,10 @@ export default function PaletteTextBalance() {
           <g key={i}>
             <rect x={MID - lw} y={y + 4} width={lw} height={ROW - 12} rx={4} fill={c.hex} className="stroke-zinc-300 dark:stroke-zinc-600" />
             <rect x={MID} y={y + 4} width={lb} height={ROW - 12} rx={4} fill={c.hex} className="stroke-zinc-300 dark:stroke-zinc-600" />
-            <text x={MID - lw + 6} y={y + ROW / 2 + 3} fontSize={12} fontWeight={700} fill="#fff">
+            <text style={{ fontSize: svgPx(12) }} x={MID - lw + 6} y={y + ROW / 2 + 3} fontWeight={700} fill="#fff">
               {f(c.contrastWhite, 1)}
             </text>
-            <text x={MID + lb - 6} y={y + ROW / 2 + 3} textAnchor="end" fontSize={12} fontWeight={700} fill="#000">
+            <text style={{ fontSize: svgPx(12) }} x={MID + lb - 6} y={y + ROW / 2 + 3} textAnchor="end" fontWeight={700} fill="#000">
               {f(c.contrastBlack, 1)}
             </text>
           </g>

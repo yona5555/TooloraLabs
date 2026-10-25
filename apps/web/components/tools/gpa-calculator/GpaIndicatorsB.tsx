@@ -7,6 +7,8 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import IndicatorWithTable from "@/components/tool-ui/IndicatorWithTable";
 import { courseLetter, HONOR_COLORS } from "./planner";
 import { useIndicatorT, type IndicatorProps } from "./GpaIndicatorsA";
+import { svgPx } from "@/components/tool-ui/svgPx";
+import { useFitWidth } from "@/components/tool-ui/useFitWidth";
 
 const axisText = "fill-zinc-500 dark:fill-zinc-400";
 const valueText = "fill-zinc-800 dark:fill-zinc-100";
@@ -25,27 +27,27 @@ function CompareBars({
   hi: number;
   fmt: (v: number) => string;
 }) {
-  const W = 400;
+  const [fitRef, W] = useFitWidth(400);
   const RH = 58;
   const L = 8;
   const R = 56;
   const H = rows.length * RH + 6;
   const x = (v: number) => L + ((Math.min(hi, Math.max(lo, v)) - lo) / (hi - lo)) * (W - L - R);
   return (
-    <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" className="max-w-full">
+    <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" className="max-w-full">
       {rows.map((r, i) => {
         const yy = i * RH;
         const delta = r.after - r.before;
         const up = delta >= 0;
         return (
           <g key={i}>
-            <text x={L} y={yy + 11} fontSize={10} fontWeight={700} className={valueText}>{r.label}</text>
+            <text style={{ fontSize: svgPx(12) }} x={L} y={yy + 11} fontWeight={700} className={valueText}>{r.label}</text>
             <rect x={L} y={yy + 16} width={W - L - R} height={14} rx={4} fill="currentColor" fillOpacity={0.08} />
             <rect x={L} y={yy + 16} width={x(r.before) - L} height={14} rx={4} fill="#94a3b8" style={{ transition: "width 400ms ease" }} />
-            <text x={x(r.before) + 4} y={yy + 27} fontSize={9} fontWeight={700} className={valueText}>{fmt(r.before)}</text>
+            <text style={{ fontSize: svgPx(12) }} x={x(r.before) + 4} y={yy + 27} fontWeight={700} className={valueText}>{fmt(r.before)}</text>
             <rect x={L} y={yy + 34} width={x(r.after) - L} height={14} rx={4} fill={up ? "#10b981" : "#ef4444"} style={{ transition: "width 400ms ease" }} />
-            <text x={x(r.after) + 4} y={yy + 45} fontSize={9} fontWeight={700} className={valueText}>{fmt(r.after)}</text>
-            <text x={W - 4} y={yy + 37} textAnchor="end" fontSize={12} fontWeight={800} fill={up ? "#059669" : "#dc2626"}>
+            <text style={{ fontSize: svgPx(12) }} x={x(r.after) + 4} y={yy + 45} fontWeight={700} className={valueText}>{fmt(r.after)}</text>
+            <text style={{ fontSize: svgPx(12) }} x={W - 4} y={yy + 37} textAnchor="end" fontWeight={800} fill={up ? "#059669" : "#dc2626"}>
               {`${up ? "▲" : "▼"}${fmt(Math.abs(delta))}`}
             </text>
           </g>
@@ -130,7 +132,7 @@ export function GpaHonorsStripCard({ d, f }: IndicatorProps) {
   const svgId = useId();
   const t = useIndicatorT();
   const tp = useTranslations("tools.gpa-calculator.planner");
-  const W = 400;
+  const [fitRef, W] = useFitWidth(400);
   const H = 130;
   const L = 12;
   const R = 12;
@@ -147,20 +149,20 @@ export function GpaHonorsStripCard({ d, f }: IndicatorProps) {
       <IndicatorWithTable
         workedExampleTitle={t("worked")}
         indicator={
-          <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("honors.title")} className="max-w-full">
+          <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("honors.title")} className="max-w-full">
             {zones.map((z, i) => (
               <g key={i}>
                 <rect x={x(z.from)} y={40} width={x(z.to) - x(z.from)} height={26} fill={z.honor ? z.color : "currentColor"} fillOpacity={z.honor ? 0.85 : 0.12} />
-                <text x={(x(z.from) + x(z.to)) / 2} y={57} textAnchor="middle" fontSize={10} fontWeight={700} className={z.honor ? "fill-white" : axisText}>
+                <text style={{ fontSize: svgPx(12) }} x={(x(z.from) + x(z.to)) / 2} y={57} textAnchor="middle" fontWeight={700} className={z.honor ? "fill-white" : axisText}>
                   {z.honor ? `${i + 1}` : "—"}
                 </text>
-                <text x={x(z.from)} y={82} textAnchor="middle" fontSize={9} className={axisText}>{z.from.toFixed(2)}</text>
+                <text style={{ fontSize: svgPx(12) }} x={x(z.from)} y={82} textAnchor="middle" className={axisText}>{z.from.toFixed(2)}</text>
               </g>
             ))}
-            <text x={x(hi)} y={82} textAnchor="end" fontSize={9} className={axisText}>{hi.toFixed(2)}</text>
+            <text style={{ fontSize: svgPx(12) }} x={x(hi)} y={82} textAnchor="end" className={axisText}>{hi.toFixed(2)}</text>
             <g style={{ transform: `translateX(${x(d.cumulativeGpa)}px)`, transition: "transform 500ms ease" }}>
               <path d="M 0 36 L -7 22 L 7 22 Z" fill="#1d4ed8" />
-              <text x={0} y={16} textAnchor="middle" fontSize={12} fontWeight={800} fill="#1d4ed8">{f.gpa(d.cumulativeGpa)}</text>
+              <text style={{ fontSize: svgPx(12) }} x={0} y={16} textAnchor="middle" fontWeight={800} fill="#1d4ed8">{f.gpa(d.cumulativeGpa)}</text>
               <line x1={0} x2={0} y1={36} y2={70} stroke="#1d4ed8" strokeWidth={2} />
             </g>
             {nextGap && (
@@ -171,7 +173,7 @@ export function GpaHonorsStripCard({ d, f }: IndicatorProps) {
                     <path d="M0,0 L8,4 L0,8 Z" fill="#f59e0b" />
                   </marker>
                 </defs>
-                <text x={(x(d.cumulativeGpa) + x(nextGap.min)) / 2} y={116} textAnchor="middle" fontSize={10} fontWeight={700} fill="#d97706">
+                <text style={{ fontSize: svgPx(12) }} x={(x(d.cumulativeGpa) + x(nextGap.min)) / 2} y={116} textAnchor="middle" fontWeight={700} fill="#d97706">
                   {`+${f.gpa(nextGap.gap)}`}
                 </text>
               </g>
@@ -179,7 +181,7 @@ export function GpaHonorsStripCard({ d, f }: IndicatorProps) {
             {d.scale.honors.map((h, i) => (
               <g key={h.key}>
                 <rect x={W - R - 120 + i * 40} y={H - 10} width={8} height={8} fill={HONOR_COLORS[i]} />
-                <text x={W - R - 109 + i * 40} y={H - 3} fontSize={9} className={axisText}>{i + 1}</text>
+                <text style={{ fontSize: svgPx(12) }} x={W - R - 109 + i * 40} y={H - 3} className={axisText}>{i + 1}</text>
               </g>
             ))}
           </svg>

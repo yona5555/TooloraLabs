@@ -2,6 +2,7 @@
 import { useSyncExternalStore, useId } from "react";
 import { precipitationKind } from "@tooloralabs/tools";
 import type { WxDerived, WxFmt } from "./wx";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 360;
 const H = 230;
@@ -155,15 +156,15 @@ export default function WxSkyScene({ d, f }: { d: WxDerived; f: WxFmt }) {
       <path d={`M0,${HORIZON} Q60,${HORIZON - 14} 120,${HORIZON - 4} T240,${HORIZON - 6} T${W},${HORIZON - 2} V${H} H0Z`} fill={night ? "#0f172a" : "#365314"} />
       <rect y={HORIZON + 8} width={W} height={H - HORIZON - 8} fill={night ? "#020617" : "#1a2e05"} opacity={0.6} />
 
-      <text x={30} y={H - 26} textAnchor="middle" fontSize={11} fontWeight={700} fill="#fde68a">☀↑ {sunrise !== null ? f.hhmm(sunrise) : "—"}</text>
-      <text x={W - 30} y={H - 26} textAnchor="middle" fontSize={11} fontWeight={700} fill="#fdba74">☀↓ {sunset !== null ? f.hhmm(sunset) : "—"}</text>
-      <text x={W / 2} y={H - 26} textAnchor="middle" fontSize={11} fontWeight={700} fill="#f8fafc">
+      <text style={{ fontSize: svgPx(12) }} x={30} y={H - 26} textAnchor="middle" fontWeight={700} fill="#fde68a">☀↑ {sunrise !== null ? f.hhmm(sunrise) : "—"}</text>
+      <text style={{ fontSize: svgPx(12) }} x={W - 30} y={H - 26} textAnchor="middle" fontWeight={700} fill="#fdba74">☀↓ {sunset !== null ? f.hhmm(sunset) : "—"}</text>
+      <text style={{ fontSize: svgPx(12) }} x={W / 2} y={H - 26} textAnchor="middle" fontWeight={700} fill="#f8fafc">
         {f.time(d.now, d.place.zone)} · {f.num(d.sunElevation, 1)}°
       </text>
-      <text x={W / 2} y={H - 9} textAnchor="middle" fontSize={10} fill="#e2e8f0">
+      <text style={{ fontSize: svgPx(12) }} x={W / 2} y={H - 9} textAnchor="middle" fill="#e2e8f0">
         ☁ {f.num(cur.cloud)}% · ➶ {f.wind(cur.windKmh)}
       </text>
-      <text x={W - 8} y={24} textAnchor="end" fontSize={22} fontWeight={800} fill="#fff" style={{ paintOrder: "stroke" }} stroke="#0f172a" strokeOpacity={0.35} strokeWidth={3}>
+      <text x={W - 8} y={24} textAnchor="end" fontWeight={800} fill="#fff" style={{ fontSize: svgPx(22), paintOrder: "stroke" }} stroke="#0f172a" strokeOpacity={0.35} strokeWidth={3}>
         {f.deg(cur.tempC)}
       </text>
     </svg>

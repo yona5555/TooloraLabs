@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import SdIndicatorCard from "./SdIndicatorCard";
 import { useSdModel } from "./SdLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 300;
 const H = 210;
@@ -39,16 +40,16 @@ export default function SdEmpiricalBars() {
                 return (
                   <g key={si}>
                     <rect x={x} y={y(s)} width={BAR} height={Math.max(1, BASE - y(s))} rx={3} className={SERIES[si].cls} />
-                    <text x={x + BAR / 2} y={y(s) - 4} textAnchor="middle" fontSize={9} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
+                    <text style={{ fontSize: svgPx(12) }} x={x + BAR / 2} y={y(s) - 4} textAnchor="middle" fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
                       {Math.round(s * 100)}
                     </text>
                   </g>
                 );
               })}
-              <text x={gi * groupW + groupW / 2} y={BASE + 16} textAnchor="middle" fontSize={11} fontWeight={600} className="fill-zinc-700 dark:fill-zinc-200">
+              <text style={{ fontSize: svgPx(12) }} x={gi * groupW + groupW / 2} y={BASE + 16} textAnchor="middle" fontWeight={600} className="fill-zinc-700 dark:fill-zinc-200">
                 {`±${b.k}σ`}
               </text>
-              <text x={gi * groupW + groupW / 2} y={BASE + 30} textAnchor="middle" fontSize={10} className="fill-zinc-500 dark:fill-zinc-400">
+              <text style={{ fontSize: svgPx(12) }} x={gi * groupW + groupW / 2} y={BASE + 30} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
                 {`${b.inside}/${a.n}`}
               </text>
             </g>

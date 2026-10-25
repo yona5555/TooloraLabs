@@ -4,7 +4,6 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import EquipmentSection, { type EquipmentItem } from "@/components/tool-ui/EquipmentSection";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
-import AdSpace from "@/components/tool-ui/AdSpace";
 import WeatherLiveTempGauge from "./WeatherLiveTempGauge";
 import WeatherDisasters, { type DisasterItem } from "./WeatherDisasters";
 
@@ -31,8 +30,6 @@ export default async function WeatherEducation() {
         <p>{t("models.paragraph2")}</p>
         <p>{t("models.paragraph3")}</p>
       </InfoSection>
-
-      <AdSpace variant="leaderboard" />
 
       <InfoSection id="disasters" title={t("disasters.title")}>
         <WeatherDisasters intro={t("disasters.intro")} items={disasterItems} />
@@ -62,8 +59,6 @@ export default async function WeatherEducation() {
           universities={universities}
         />
       </InfoSection>
-
-      <AdSpace variant="leaderboard" />
 
       <InfoSection title={t("references.title")}>
         <p>{t("references.citation")}</p>

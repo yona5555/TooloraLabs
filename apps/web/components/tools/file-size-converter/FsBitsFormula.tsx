@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import FsIndicatorCard, { FsIndicatorUnavailable } from "./FsIndicatorCard";
 import { useFsModel } from "./FsLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 210;
@@ -30,24 +31,24 @@ export default function FsBitsFormula() {
         return (
           <g key={i}>
             <circle cx={cx} cy={58} r={36} className={tm.cls} />
-            <text x={cx} y={64} textAnchor="middle" fontSize={tm.top.length > 6 ? 13 : 17} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-white">
+            <text style={{ fontSize: svgPx(tm.top.length > 6 ? 13 : 17) }} x={cx} y={64} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-white">
               {tm.top}
             </text>
-            <text x={cx} y={112} textAnchor="middle" fontSize={11} className="fill-zinc-500 dark:fill-zinc-400">
+            <text style={{ fontSize: svgPx(12) }} x={cx} y={112} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
               {tm.bottom}
             </text>
             {i < 2 && (
-              <text x={cx + 57} y={64} textAnchor="middle" fontSize={20} fontWeight={700} className="fill-zinc-400">
+              <text style={{ fontSize: svgPx(20) }} x={cx + 57} y={64} textAnchor="middle" fontWeight={700} className="fill-zinc-400">
                 ×
               </text>
             )}
           </g>
         );
       })}
-      <text x={W / 2} y={150} textAnchor="middle" fontSize={13} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+      <text style={{ fontSize: svgPx(13) }} x={W / 2} y={150} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
         = {f(a.bytes, 0)} B = {f(a.bits, 0)} bit
       </text>
-      <text x={W / 2} y={182} textAnchor="middle" fontSize={12} className="fill-rose-600 dark:fill-rose-300">
+      <text style={{ fontSize: svgPx(12) }} x={W / 2} y={182} textAnchor="middle" className="fill-rose-600 dark:fill-rose-300">
         {t("trap")}
       </text>
     </svg>

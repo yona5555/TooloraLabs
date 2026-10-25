@@ -1,3 +1,4 @@
+import { svgPx } from "@/components/tool-ui/svgPx";
 /**
  * Lightweight, non-interactive SVG line chart shared by this tool's education-page
  * diagrams, for continuous/trend relationships where a line reads better than bars
@@ -17,7 +18,8 @@ const WIDTH = 340;
 const HEIGHT = 170;
 const PAD_LEFT = 44;
 const PAD_RIGHT = 16;
-const PAD_TOP = 16;
+// room above the highest point for its 12px value label
+const PAD_TOP = 24;
 const PAD_BOTTOM = 32;
 
 export default function EduLineChart({ points, ariaLabel, lineColorClass = "stroke-violet-500 dark:stroke-violet-400", dotColorClass = "fill-violet-500 dark:fill-violet-400" }: Props) {
@@ -47,10 +49,10 @@ export default function EduLineChart({ points, ariaLabel, lineColorClass = "stro
           return (
             <g key={p.label}>
               <circle cx={xFor(p.x)} cy={yFor(p.value)} r={4} className={dotColorClass} />
-              <text x={xFor(p.x)} y={HEIGHT - PAD_BOTTOM + 16} textAnchor={anchor} fontSize={10} fill="currentColor" opacity={0.7}>
+              <text style={{ fontSize: svgPx(12) }} x={xFor(p.x)} y={HEIGHT - PAD_BOTTOM + 16} textAnchor={anchor} fill="currentColor" opacity={0.7}>
                 {p.label}
               </text>
-              <text x={xFor(p.x)} y={yFor(p.value) - 10} textAnchor={anchor} fontSize={10} fontWeight={700} fill="currentColor">
+              <text style={{ fontSize: svgPx(12) }} x={xFor(p.x)} y={yFor(p.value) - 10} textAnchor={anchor} fontWeight={700} fill="currentColor">
                 {p.formatted}
               </text>
             </g>

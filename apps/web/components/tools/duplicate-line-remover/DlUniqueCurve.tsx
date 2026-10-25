@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import DlIndicatorCard, { DlIndicatorUnavailable } from "./DlIndicatorCard";
 import { useDlModel } from "./DlLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 210;
@@ -29,7 +30,7 @@ export default function DlUniqueCurve() {
     <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <line x1={x(0)} y1={y(0)} x2={x(n)} y2={y(n)} strokeDasharray="5 4" className="stroke-zinc-300 dark:stroke-zinc-600" />
       {[0, n].map((v) => (
-        <text key={v} x={L - 6} y={y(v) + 4} textAnchor="end" fontSize={11} className="fill-zinc-500 dark:fill-zinc-400">
+        <text style={{ fontSize: svgPx(12) }} key={v} x={L - 6} y={y(v) + 4} textAnchor="end" className="fill-zinc-500 dark:fill-zinc-400">
           {v}
         </text>
       ))}
@@ -37,7 +38,7 @@ export default function DlUniqueCurve() {
       {a.uniqueSoFar.map((v, i) => (
         <circle key={i} cx={x(i + 1)} cy={y(v)} r={a.lines[i].kept ? 3 : 4.5} className={a.lines[i].kept ? "fill-blue-600 dark:fill-blue-400" : "fill-rose-500"} />
       ))}
-      <text x={(L + W - R) / 2} y={H - 6} textAnchor="middle" fontSize={12} className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={(L + W - R) / 2} y={H - 6} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
         {t("axis")}
       </text>
     </svg>

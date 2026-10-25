@@ -4,8 +4,11 @@ import { useTranslations } from "next-intl";
 import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import { useBelowLg } from "@/components/tool-ui/useBelowLg";
 import { computeNiceTicks } from "./niceTicks";
 import type { MortgageExtendedResult } from "./types";
+import { svgPx } from "@/components/tool-ui/svgPx";
+import { wrapLabel } from "@/components/tool-ui/labelLayout";
 
 type MortgagePayoffChartProps = {
   result: MortgageExtendedResult;
@@ -20,6 +23,8 @@ const XAXIS_HEIGHT = 20;
 const CHART_HEIGHT = MARGIN.top + MAIN_HEIGHT + VOLUME_GAP + VOLUME_HEIGHT + XAXIS_HEIGHT;
 
 const MIN_STEP = 22;
+/** Year labels sit at least this many px apart: 12px labels never touch (§39). */
+const X_LABEL_GAP = 30;
 const BAR_WIDTH_RATIO = 14 / 22;
 const TOOLTIP_WIDTH = 180;
 const TOOLTIP_HEIGHT = 92;
@@ -31,6 +36,7 @@ export default function MortgagePayoffChart({ result, digitStyle }: MortgagePayo
   const containerRef = useRef<HTMLDivElement>(null);
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
   const [containerWidth, setContainerWidth] = useState(0);
+  const belowLg = useBelowLg();
 
   const schedule = result.amortizationSchedule;
   const standardSchedule = result.standardAmortizationSchedule;
@@ -49,7 +55,7 @@ export default function MortgagePayoffChart({ result, digitStyle }: MortgagePayo
   const initialBalance = result.loanAmount || 1;
   const maxYearPayment = Math.max(...schedule.map((row) => row.principalPaid + row.interestPaid), 1);
 
-  const step = Math.max(MIN_STEP, (containerWidth - MARGIN.left - MARGIN.right) / schedule.length);
+  const step = Math.max(belowLg && containerWidth > 0 ? 0 : MIN_STEP, (containerWidth - MARGIN.left - MARGIN.right) / schedule.length);
   const barWidth = step * BAR_WIDTH_RATIO;
   const plotWidth = schedule.length * step;
   const chartWidth = MARGIN.left + plotWidth + MARGIN.right;
@@ -97,7 +103,7 @@ export default function MortgagePayoffChart({ result, digitStyle }: MortgagePayo
     : 0;
   const tooltipY = MARGIN.top + 4;
 
-  const labelEvery = Math.max(1, Math.ceil(schedule.length / MAX_DENSE_LABELS));
+  const labelEvery = Math.max(1, Math.ceil(schedule.length / MAX_DENSE_LABELS), Math.ceil(X_LABEL_GAP / step));
 
   // Three always-visible markers on the balance line — not hover-only, unlike the tooltip below —
   // spread across the term so the shape of the payoff (full balance, roughly halfway paid down,
@@ -139,7 +145,7 @@ export default function MortgagePayoffChart({ result, digitStyle }: MortgagePayo
             {balanceTicks.map((tick) => (
               <g key={tick}>
                 <line x1={MARGIN.left} y1={yForBalance(tick)} x2={chartWidth - MARGIN.right} y2={yForBalance(tick)} stroke="currentColor" strokeWidth={1} opacity={0.08} />
-                <text x={MARGIN.left - 8} y={yForBalance(tick) + 3} textAnchor="end" fontSize={9} fill="currentColor" opacity={0.6}>
+                <text style={{ fontSize: svgPx(12) }} x={MARGIN.left - 8} y={yForBalance(tick) + 3} textAnchor="end" fill="currentColor" opacity={0.6}>
                   {currency(tick)}
                 </text>
               </g>
@@ -156,11 +162,10 @@ export default function MortgagePayoffChart({ result, digitStyle }: MortgagePayo
               return (
                 <g key={marker.anchor}>
                   <circle cx={marker.x} cy={marker.y} r={4} className="fill-zinc-900 dark:fill-zinc-100" />
-                  <text
+                  <text style={{ fontSize: svgPx(12) }}
                     x={marker.x + dx}
                     y={Math.max(marker.y - 10, MARGIN.top + 10)}
                     textAnchor={marker.anchor}
-                    fontSize={10}
                     fontWeight={700}
                     className="fill-zinc-700 dark:fill-zinc-200"
                   >
@@ -170,8 +175,12 @@ export default function MortgagePayoffChart({ result, digitStyle }: MortgagePayo
               );
             })}
 
-            <text x={MARGIN.left - 8} y={volumeTop + 8} textAnchor="end" fontSize={8} fill="currentColor" opacity={0.5}>
-              {t("payoffChart.interestLabel")}
+            <text style={{ fontSize: svgPx(12) }} x={MARGIN.left - 8} y={volumeTop + 8} textAnchor="end" fill="currentColor" opacity={0.5}>
+              {wrapLabel(t("payoffChart.interestLabel"), MARGIN.left - 10).map((line, li) => (
+              <tspan key={li} x={MARGIN.left - 8} dy={li ? 14 : 0}>
+                {line}
+              </tspan>
+            ))}
             </text>
             {schedule.map((row, i) => {
               const total = row.principalPaid + row.interestPaid;
@@ -188,7 +197,7 @@ export default function MortgagePayoffChart({ result, digitStyle }: MortgagePayo
 
             {schedule.map((row, i) =>
               i % labelEvery === 0 ? (
-                <text key={`year-${row.year}`} x={barCenterX(i)} y={volumeBottom + XAXIS_HEIGHT - 6} textAnchor="middle" fontSize={9} fill="currentColor" opacity={0.6}>
+                <text style={{ fontSize: svgPx(12) }} key={`year-${row.year}`} x={barCenterX(i)} y={volumeBottom + XAXIS_HEIGHT - 6} textAnchor="middle" fill="currentColor" opacity={0.6}>
                   {formatLocalizedNumber(row.year, digitStyle, { maximumFractionDigits: 0 })}
                 </text>
               ) : null
@@ -199,20 +208,20 @@ export default function MortgagePayoffChart({ result, digitStyle }: MortgagePayo
                 <line x1={barCenterX(activeIndex)} y1={MARGIN.top} x2={barCenterX(activeIndex)} y2={volumeBottom} stroke="currentColor" strokeWidth={1} strokeDasharray="3 3" opacity={0.35} />
                 <g transform={`translate(${tooltipX}, ${tooltipY})`}>
                   <rect width={TOOLTIP_WIDTH} height={TOOLTIP_HEIGHT} rx={6} className="fill-white stroke-zinc-200 dark:fill-zinc-900 dark:stroke-zinc-700" strokeWidth={1} />
-                  <text x={10} y={17} fontSize={10} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
+                  <text style={{ fontSize: svgPx(12) }} x={10} y={17} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
                     {t("payoffChart.tooltipYearLabel")} {formatLocalizedNumber(active.year, digitStyle, { maximumFractionDigits: 0 })}
                   </text>
-                  <text x={10} y={35} fontSize={10} className="fill-blue-700 dark:fill-blue-400">
+                  <text style={{ fontSize: svgPx(12) }} x={10} y={35} className="fill-blue-700 dark:fill-blue-400">
                     {t("payoffChart.principalLabel")}: {currency(active.principalPaid)}
                   </text>
-                  <text x={10} y={50} fontSize={10} className="fill-amber-600 dark:fill-amber-500">
+                  <text style={{ fontSize: svgPx(12) }} x={10} y={50} className="fill-amber-600 dark:fill-amber-500">
                     {t("payoffChart.interestLabel")}: {currency(active.interestPaid)}
                   </text>
-                  <text x={10} y={65} fontSize={10} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
+                  <text style={{ fontSize: svgPx(12) }} x={10} y={65} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
                     {t("payoffChart.balanceLabel")}: {currency(active.endingBalance)}
                   </text>
                   {showComparison && (
-                    <text x={10} y={82} fontSize={9} className="fill-zinc-500 dark:fill-zinc-400">
+                    <text style={{ fontSize: svgPx(12) }} x={10} y={82} className="fill-zinc-500 dark:fill-zinc-400">
                       {t("payoffChart.standardBalanceLabel")}: {currency(standardSchedule[Math.min(activeIndex, standardSchedule.length - 1)]?.endingBalance ?? 0)}
                     </text>
                   )}

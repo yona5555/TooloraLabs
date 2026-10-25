@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import B64IndicatorCard, { B64IndicatorUnavailable } from "./B64IndicatorCard";
 import { useB64Model } from "./B64LiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const LABEL = 92;
@@ -37,7 +38,7 @@ export default function B64EncodingRanking() {
         const me = r.key === "base64";
         return (
           <g key={r.key}>
-            <text x={LABEL} y={y + 19} textAnchor="end" fontSize={12} fontWeight={me ? 700 : 500} className={me ? "fill-blue-700 dark:fill-blue-300" : "fill-zinc-600 dark:fill-zinc-300"}>
+            <text style={{ fontSize: svgPx(12) }} x={LABEL} y={y + 19} textAnchor="end" fontWeight={me ? 700 : 500} className={me ? "fill-blue-700 dark:fill-blue-300" : "fill-zinc-600 dark:fill-zinc-300"}>
               {t(r.key)}
             </text>
             <rect
@@ -48,7 +49,7 @@ export default function B64EncodingRanking() {
               rx={3}
               className={me ? "fill-blue-600 dark:fill-blue-400" : r.key === "raw" ? "fill-zinc-400 dark:fill-zinc-500" : "fill-zinc-300 dark:fill-zinc-600"}
             />
-            <text x={BAR_X + w + 5} y={y + 19} fontSize={12} fontWeight={me ? 700 : 500} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
+            <text style={{ fontSize: svgPx(12) }} x={BAR_X + w + 5} y={y + 19} fontWeight={me ? 700 : 500} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
               {f(r.v)}
             </text>
           </g>

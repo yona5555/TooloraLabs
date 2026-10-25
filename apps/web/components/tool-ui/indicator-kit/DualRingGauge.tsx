@@ -92,8 +92,8 @@ export function DualRingGauge({
       <g onPointerEnter={() => onHover?.(outer.hoverKey ?? null)} onPointerLeave={() => onHover?.(null)}>{tickRing(outer, R, "o")}</g>
       <g onPointerEnter={() => onHover?.(inner.hoverKey ?? null)} onPointerLeave={() => onHover?.(null)}>{tickRing(inner, r2, "i")}</g>
       <T x={cx} y={cy - 14} text={center[0]} size={15} bold style={INK} />
-      <T x={cx} y={cy + 6} text={center[1]} size={11.5} bold style={{ fill: outer.color }} />
-      <T x={cx} y={cy + 23} text={center[2]} size={11.5} bold style={{ fill: inner.color }} />
+      <T x={cx} y={cy + 6} text={center[1]} size={12} bold style={{ fill: outer.color }} />
+      <T x={cx} y={cy + 23} text={center[2]} size={12} bold style={{ fill: inner.color }} />
       {children}
     </Drawing>
     </div>

@@ -8,6 +8,8 @@ import IndicatorWithTable from "@/components/tool-ui/IndicatorWithTable";
 import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { useGraphLive } from "./GraphLiveContext";
 import { fmtNum } from "./types";
+import { svgPx } from "@/components/tool-ui/svgPx";
+import { useFitWidth } from "@/components/tool-ui/useFitWidth";
 
 type Row = { label: string; value: string; emphasize?: boolean; note?: string };
 
@@ -40,7 +42,7 @@ export function GraphSignZoneStrip() {
   const t = useTranslations("tools.graphing-calculator.viz.signZone");
   const tv = useTranslations("tools.graphing-calculator.viz");
   const { f, xMin, xMax, analysis: a } = useGraphLive();
-  const W = 440;
+  const [fitRef, W] = useFitWidth(440);
   const L = 20;
   const R = W - 20;
   const cells = 200;
@@ -51,7 +53,7 @@ export function GraphSignZoneStrip() {
       ns="signZone"
       indicator={
         <div dir="ltr">
-          <svg width={W} height={120} viewBox={`0 0 ${W} 120`} style={svgStyle} role="img" aria-label={t("title")}>
+          <svg ref={fitRef} width={W} height={120} viewBox={`0 0 ${W} 120`} style={{ ...svgStyle }} role="img" aria-label={t("title")}>
             {Array.from({ length: cells }, (_, i) => {
               const x0 = xMin + ((xMax - xMin) * i) / cells;
               const y = f(x0 + (xMax - xMin) / cells / 2);
@@ -61,13 +63,13 @@ export function GraphSignZoneStrip() {
             {a.roots.slice(0, 8).map((r, i) => (
               <g key={r}>
                 <line x1={sx(r)} x2={sx(r)} y1={26} y2={72} className="stroke-zinc-800 dark:stroke-zinc-100" strokeWidth={2} />
-                <text x={sx(r)} y={i % 2 ? 86 : 20} fontSize={11} textAnchor="middle" fontWeight={700} className="fill-zinc-800 dark:fill-zinc-100">
+                <text style={{ fontSize: svgPx(12) }} x={sx(r)} y={i % 2 ? 86 : 20} textAnchor="middle" fontWeight={700} className="fill-zinc-800 dark:fill-zinc-100">
                   {fmtNum(r, 2)}
                 </text>
               </g>
             ))}
-            <text x={L} y={104} fontSize={11} className="fill-zinc-500 dark:fill-zinc-400">{`x = ${fmtNum(xMin, 2)}`}</text>
-            <text x={R} y={104} fontSize={11} textAnchor="end" className="fill-zinc-500 dark:fill-zinc-400">{`x = ${fmtNum(xMax, 2)}`}</text>
+            <text style={{ fontSize: svgPx(12) }} x={L} y={104} className="fill-zinc-500 dark:fill-zinc-400">{`x = ${fmtNum(xMin, 2)}`}</text>
+            <text style={{ fontSize: svgPx(12) }} x={R} y={104} textAnchor="end" className="fill-zinc-500 dark:fill-zinc-400">{`x = ${fmtNum(xMax, 2)}`}</text>
           </svg>
           <div className="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-xs text-zinc-600 dark:text-zinc-300">
             <span className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-sm bg-emerald-400" />f &gt; 0</span>
@@ -92,7 +94,7 @@ export function GraphKeyPointsTimeline() {
   const tv = useTranslations("tools.graphing-calculator.viz");
   const t = useTranslations("tools.graphing-calculator.viz.timeline");
   const { xMin, xMax, analysis: a } = useGraphLive();
-  const W = 460;
+  const [fitRef, W] = useFitWidth(460);
   const L = 24;
   const R = W - 24;
   const sx = (x: number) => L + ((x - xMin) / (xMax - xMin)) * (R - L);
@@ -104,10 +106,10 @@ export function GraphKeyPointsTimeline() {
       mini={0}
       indicator={
         <div dir="ltr">
-          <svg width={W} height={170} viewBox={`0 0 ${W} 170`} style={svgStyle} role="img" aria-label={t("title")}>
+          <svg ref={fitRef} width={W} height={170} viewBox={`0 0 ${W} 170`} style={{ ...svgStyle }} role="img" aria-label={t("title")}>
             <line x1={L} x2={R} y1={85} y2={85} className="stroke-zinc-300 dark:stroke-zinc-600" strokeWidth={4} strokeLinecap="round" />
-            <text x={L} y={112} fontSize={10} className="fill-zinc-400">{fmtNum(xMin, 2)}</text>
-            <text x={R} y={112} fontSize={10} textAnchor="end" className="fill-zinc-400">{fmtNum(xMax, 2)}</text>
+            <text style={{ fontSize: svgPx(12) }} x={L} y={112} className="fill-zinc-400">{fmtNum(xMin, 2)}</text>
+            <text style={{ fontSize: svgPx(12) }} x={R} y={112} textAnchor="end" className="fill-zinc-400">{fmtNum(xMax, 2)}</text>
             {pts.map((p, i) => {
               const up = i % 2 === 0;
               const x = sx(p.x);
@@ -115,17 +117,17 @@ export function GraphKeyPointsTimeline() {
                 <g key={i}>
                   <line x1={x} x2={x} y1={85} y2={up ? 52 : 118} className="stroke-zinc-300 dark:stroke-zinc-600" strokeWidth={1} />
                   <circle cx={x} cy={85} r={7} className={KIND_FILL[p.kind]} />
-                  <text x={x} y={up ? 30 : 136} fontSize={10.5} fontWeight={700} textAnchor="middle" className="fill-zinc-700 dark:fill-zinc-200">
+                  <text style={{ fontSize: svgPx(12) }} x={x} y={up ? 30 : 136} fontWeight={700} textAnchor="middle" className="fill-zinc-700 dark:fill-zinc-200">
                     {tv(`short.${p.kind}`)}
                   </text>
-                  <text x={x} y={up ? 44 : 150} fontSize={10} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
+                  <text style={{ fontSize: svgPx(12) }} x={x} y={up ? 44 : 150} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
                     {`(${fmtNum(p.x, 2)}, ${fmtNum(p.y, 2)})`}
                   </text>
                 </g>
               );
             })}
             {pts.length === 0 && (
-              <text x={W / 2} y={70} fontSize={12} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">{tv("none")}</text>
+              <text style={{ fontSize: svgPx(12) }} x={W / 2} y={70} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">{tv("none")}</text>
             )}
           </svg>
         </div>
@@ -144,14 +146,14 @@ export function GraphMonotonicityBar() {
   const tv = useTranslations("tools.graphing-calculator.viz");
   const t = useTranslations("tools.graphing-calculator.viz.mono");
   const { xMin, xMax, analysis: a } = useGraphLive();
-  const W = 440;
+  const [fitRef, W] = useFitWidth(440);
   const sx = (x: number) => ((x - xMin) / (xMax - xMin)) * W;
   return (
     <IndicatorCard
       ns="mono"
       indicator={
         <div dir="ltr">
-          <svg width={W} height={100} viewBox={`0 0 ${W} 100`} style={svgStyle} role="img" aria-label={t("title")}>
+          <svg ref={fitRef} width={W} height={100} viewBox={`0 0 ${W} 100`} style={{ ...svgStyle }} role="img" aria-label={t("title")}>
             <rect x={0} y={20} width={W} height={36} rx={6} className="fill-zinc-200 dark:fill-zinc-700" />
             {a.intervals.map((iv, i) => {
               const x = sx(iv.from);
@@ -160,20 +162,20 @@ export function GraphMonotonicityBar() {
                 <g key={i}>
                   <rect x={x} y={20} width={w} height={36} className={iv.trend === "up" ? "fill-emerald-500 dark:fill-emerald-500/80" : "fill-rose-500 dark:fill-rose-500/80"} />
                   {w > 26 && (
-                    <text x={x + w / 2} y={43} fontSize={14} fontWeight={700} textAnchor="middle" className="fill-white">
+                    <text style={{ fontSize: svgPx(14) }} x={x + w / 2} y={43} fontWeight={700} textAnchor="middle" className="fill-white">
                       {iv.trend === "up" ? "↗" : "↘"}
                     </text>
                   )}
                   {i > 0 && w > 0 && (
-                    <text x={x} y={74} fontSize={10} textAnchor="middle" className="fill-zinc-600 dark:fill-zinc-300">
+                    <text style={{ fontSize: svgPx(12) }} x={x} y={74} textAnchor="middle" className="fill-zinc-600 dark:fill-zinc-300">
                       {fmtNum(iv.from, 2)}
                     </text>
                   )}
                 </g>
               );
             })}
-            <text x={0} y={92} fontSize={10} className="fill-zinc-400">{fmtNum(xMin, 2)}</text>
-            <text x={W} y={92} fontSize={10} textAnchor="end" className="fill-zinc-400">{fmtNum(xMax, 2)}</text>
+            <text style={{ fontSize: svgPx(12) }} x={0} y={92} className="fill-zinc-400">{fmtNum(xMin, 2)}</text>
+            <text style={{ fontSize: svgPx(12) }} x={W} y={92} textAnchor="end" className="fill-zinc-400">{fmtNum(xMax, 2)}</text>
           </svg>
           <div className="mt-1 flex gap-4 text-xs text-zinc-600 dark:text-zinc-300">
             <span className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-sm bg-emerald-500" />{tv("increasing")}</span>
@@ -221,8 +223,8 @@ export function GraphAreaBalance() {
                 <g key={pan.x} transform={`rotate(${-tilt} ${pan.x} 92)`}>
                   <line x1={pan.x} x2={pan.x} y1={92} y2={60} className="stroke-zinc-400" strokeWidth={1.5} />
                   <rect x={pan.x - 44} y={22} width={88} height={40} rx={8} className={pan.cls} />
-                  <text x={pan.x} y={38} fontSize={10.5} textAnchor="middle" className="fill-white" fontWeight={600}>{pan.label}</text>
-                  <text x={pan.x} y={54} fontSize={12} textAnchor="middle" className="fill-white" fontWeight={700}>{fmtNum(pan.v, 3)}</text>
+                  <text style={{ fontSize: svgPx(12) }} x={pan.x} y={38} textAnchor="middle" className="fill-white" fontWeight={600}>{pan.label}</text>
+                  <text style={{ fontSize: svgPx(12) }} x={pan.x} y={54} textAnchor="middle" className="fill-white" fontWeight={700}>{fmtNum(pan.v, 3)}</text>
                 </g>
               ))}
             </g>
@@ -269,11 +271,11 @@ export function GraphSensitivityTrio() {
               return (
                 <g key={i}>
                   <rect x={cx - 30} y={y !== null && y < 0 ? 110 : 110 - h} width={60} height={Math.max(2, h)} rx={5} className={cls[i]} />
-                  <text x={cx} y={y !== null && y < 0 ? 110 + h + 14 : 110 - h - 6} fontSize={12} fontWeight={700} textAnchor="middle" className="fill-zinc-800 dark:fill-zinc-100">
+                  <text style={{ fontSize: svgPx(12) }} x={cx} y={y !== null && y < 0 ? 110 + h + 14 : 110 - h - 6} fontWeight={700} textAnchor="middle" className="fill-zinc-800 dark:fill-zinc-100">
                     {y === null ? tv("undefined") : fmtNum(y, 3)}
                   </text>
-                  <text x={cx} y={14} fontSize={11} fontWeight={600} textAnchor="middle" className="fill-zinc-600 dark:fill-zinc-300">{labels[i]}</text>
-                  <text x={cx} y={196} fontSize={10.5} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">{`x = ${fmtNum(x, 3)}`}</text>
+                  <text style={{ fontSize: svgPx(12) }} x={cx} y={14} fontWeight={600} textAnchor="middle" className="fill-zinc-600 dark:fill-zinc-300">{labels[i]}</text>
+                  <text style={{ fontSize: svgPx(12) }} x={cx} y={196} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">{`x = ${fmtNum(x, 3)}`}</text>
                 </g>
               );
             })}
@@ -324,15 +326,15 @@ export function GraphSlopeGauge() {
             {[-90, -45, 0, 45, 90].map((deg) => {
               const [tx, ty] = toXY(deg, r + 18);
               return (
-                <text key={deg} x={tx} y={ty + 4} fontSize={10} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">{`${deg}°`}</text>
+                <text style={{ fontSize: svgPx(12) }} key={deg} x={tx} y={ty + 4} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">{`${deg}°`}</text>
               );
             })}
             <line x1={cx} y1={cy} x2={nx} y2={ny} className="stroke-zinc-800 dark:stroke-zinc-100" strokeWidth={3} strokeLinecap="round" />
             <circle cx={cx} cy={cy} r={6} className="fill-zinc-800 dark:fill-zinc-100" />
             {/* Readout below the pivot, so the needle never crosses it at any value. */}
-            <text x={cx} y={cy + 32} fontSize={18} fontWeight={700} textAnchor="middle" className="fill-blue-700 dark:fill-blue-300">{`${fmtNum(angle, 1)}°`}</text>
-            <text x={cx - r} y={cy + 26} fontSize={10.5} textAnchor="middle" className="fill-rose-600 dark:fill-rose-400">{t("steepDown")}</text>
-            <text x={cx + r} y={cy + 26} fontSize={10.5} textAnchor="middle" className="fill-emerald-600 dark:fill-emerald-400">{t("steepUp")}</text>
+            <text style={{ fontSize: svgPx(18) }} x={cx} y={cy + 32} fontWeight={700} textAnchor="middle" className="fill-blue-700 dark:fill-blue-300">{`${fmtNum(angle, 1)}°`}</text>
+            <text style={{ fontSize: svgPx(12) }} x={cx - r} y={cy + 26} textAnchor="middle" className="fill-rose-600 dark:fill-rose-400">{t("steepDown")}</text>
+            <text style={{ fontSize: svgPx(12) }} x={cx + r} y={cy + 26} textAnchor="middle" className="fill-emerald-600 dark:fill-emerald-400">{t("steepUp")}</text>
           </svg>
         </div>
       }
@@ -416,7 +418,7 @@ export function GraphSampleBars() {
   const ys = xs.map((x) => f(x));
   const defined = ys.map((y, i) => ({ y, x: xs[i] })).filter((p): p is { y: number; x: number } => p.y !== null);
   const maxAbs = Math.max(1e-9, ...defined.map((p) => Math.abs(p.y)));
-  const W = 460;
+  const [fitRef, W] = useFitWidth(460);
   const base = 110;
   const bw = 34;
   const largest = defined.reduce((m, p) => (p.y > m.y ? p : m), defined[0] ?? { x: 0, y: 0 });
@@ -426,7 +428,7 @@ export function GraphSampleBars() {
       ns="bars"
       indicator={
         <div dir="ltr">
-          <svg width={W} height={230} viewBox={`0 0 ${W} 230`} style={svgStyle} role="img" aria-label={t("title")}>
+          <svg ref={fitRef} width={W} height={230} viewBox={`0 0 ${W} 230`} style={{ ...svgStyle }} role="img" aria-label={t("title")}>
             <line x1={8} x2={W - 8} y1={base} y2={base} className="stroke-zinc-400 dark:stroke-zinc-500" />
             {xs.map((x, i) => {
               const y = ys[i];
@@ -436,10 +438,10 @@ export function GraphSampleBars() {
               return (
                 <g key={i}>
                   {y !== null && <rect x={cx - bw / 2} y={neg ? base : base - h} width={bw} height={Math.max(1.5, h)} rx={3} className={neg ? "fill-rose-500 dark:fill-rose-400" : "fill-blue-600 dark:fill-blue-400"} />}
-                  <text x={cx} y={neg ? base + h + 13 : base - h - 5} fontSize={10} fontWeight={700} textAnchor="middle" className="fill-zinc-800 dark:fill-zinc-100">
+                  <text style={{ fontSize: svgPx(12) }} x={cx} y={neg ? base + h + 13 : base - h - 5} fontWeight={700} textAnchor="middle" className="fill-zinc-800 dark:fill-zinc-100">
                     {y === null ? "∅" : fmtNum(y, 2)}
                   </text>
-                  <text x={cx} y={224} fontSize={10} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">{fmtNum(x, 2)}</text>
+                  <text style={{ fontSize: svgPx(12) }} x={cx} y={224} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">{fmtNum(x, 2)}</text>
                 </g>
               );
             })}

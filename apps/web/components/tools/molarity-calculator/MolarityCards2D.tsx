@@ -5,6 +5,7 @@ import { ltr } from "@/components/tool-ui/MixedText";
 import { IndicatorCard, KitControls, KitTable, SvgChem, SvgHandle, useMeasuredSize, useStepper, useSvgDrag, type KitRow, type Stepper } from "@/components/tool-ui/indicator-kit/CardKit";
 import { clamp } from "@/components/tool-ui/indicator-kit/format";
 import { AVOGADRO, g3, liquidCss, REFERENCE, referenceSeedIndex, sciText, SEED, SERIAL_MAX } from "./molMath";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 /**
  * The five 2D molarity indicator cards. Each drawing is laid out in real pixels at the measured
@@ -83,7 +84,7 @@ function MolFlowDrawing({ s, valueText, hover, setHover }: { s: Stepper; valueTe
             <g key={op}>
               <line x1={a + R * 0.5} y1={cy} x2={b - R * 0.5} y2={cy} style={{ stroke: "var(--ph-line)" }} strokeWidth={2} strokeDasharray="4 4" />
               <path d={`M ${b - R * 0.5 - 8} ${cy - 5} L ${b - R * 0.5} ${cy} L ${b - R * 0.5 - 8} ${cy + 5}`} fill="none" style={{ stroke: "var(--ph-line)" }} strokeWidth={2} strokeLinecap="round" />
-              <text x={(a + b) / 2} y={16} fontSize={11.5} fontWeight={700} textAnchor="middle" style={{ fill: "var(--ph-ink-muted)" }}>
+              <text x={(a + b) / 2} y={16} fontWeight={700} textAnchor="middle" style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
                 {op}
               </text>
             </g>
@@ -95,7 +96,7 @@ function MolFlowDrawing({ s, valueText, hover, setHover }: { s: Stepper; valueTe
           return (
             <g key={nd.key} onPointerEnter={() => setHover(nd.key)} onPointerLeave={() => setHover(null)}>
               <circle cx={nd.x} cy={cy} r={r} style={{ fill: nd.key === "m" ? liquidCss(m) : nd.key === "n" ? "var(--chem-solute)" : "var(--chem-stock)", fillOpacity: 0.85, ...lit(on || nd.key === "m") }} />
-              <text x={nd.x} y={cy + R + 22} fontSize={12.5} fontWeight={800} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+              <text x={nd.x} y={cy + R + 22} fontWeight={800} textAnchor="middle" style={{ fontSize: svgPx(12.5), fill: "var(--ph-ink)" }}>
                 {`${nd.value} ${nd.unit}`}
               </text>
             </g>
@@ -170,22 +171,22 @@ function MolCurveDrawing({ s, valueText, hover }: { s: Stepper; valueText: strin
         {[0, 0.5, 1, 1.5, 2, 2.5].map((g, gi) => (
           <g key={g}>
             <line x1={X0} y1={yc(g)} x2={X1} y2={yc(g)} style={{ stroke: "var(--ph-grid)" }} strokeWidth={1} />
-            <text x={X0 - 8} y={yc(g) + 4} fontSize={11} textAnchor="end" style={{ fill: "var(--ph-ink-muted)" }}>
+            <text x={X0 - 8} y={yc(g) + 4} textAnchor="end" style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
               {g}
             </text>
-            <text x={xv(gi)} y={Y0 + 18} fontSize={11} textAnchor={gi === 0 ? "start" : gi === 5 ? "end" : "middle"} style={{ fill: "var(--ph-ink-muted)" }}>
+            <text x={xv(gi)} y={Y0 + 18} textAnchor={gi === 0 ? "start" : gi === 5 ? "end" : "middle"} style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
               {gi}
             </text>
           </g>
         ))}
-        <text x={X1} y={Y0 + 36} fontSize={11} textAnchor="end" style={{ fill: "var(--ph-ink-muted)" }}>
+        <text x={X1} y={Y0 + 36} textAnchor="end" style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
           {t("axisV")}
         </text>
         <line x1={X0} y1={Y0} x2={X1} y2={Y0} style={{ stroke: "var(--ph-line)" }} strokeWidth={1.5} strokeLinecap="round" />
         <polyline points={pts.join(" ")} fill="none" style={{ stroke: "var(--ph-accent-strong)" }} strokeWidth={3} strokeLinejoin="round" strokeLinecap="round" />
         <line x1={xv(s.value)} y1={yc(c)} x2={xv(s.value)} y2={Y0} style={{ stroke: "var(--ph-focus)", opacity: on ? 0.9 : 0.45 }} strokeWidth={1.5} strokeDasharray="3 3" />
         <line x1={X0} y1={yc(c)} x2={xv(s.value)} y2={yc(c)} style={{ stroke: "var(--ph-focus)", opacity: on ? 0.9 : 0.45 }} strokeWidth={1.5} strokeDasharray="3 3" />
-        <text x={X0 + 6} y={14} fontSize={12} fontWeight={800} style={{ fill: "var(--ph-ink)" }}>
+        <text x={X0 + 6} y={14} fontWeight={800} style={{ fontSize: svgPx(12), fill: "var(--ph-ink)" }}>
           {`${g3(s.value)} L → ${g3(c)} mol/L`}
         </text>
       </svg>
@@ -245,13 +246,13 @@ export function MolSerialCard({ side }: { side: Side }) {
                 <g key={i}>
                   <rect x={x - tw / 2 + 2} y={level} width={tw - 4} height={bottom - level - 2} rx={(tw - 4) / 2} style={{ fill: liquidCss(c0 / 10 ** i) }} />
                   <rect x={x - tw / 2} y={top} width={tw} height={bottom - top} rx={tw / 2} fill="none" style={lit(sel)} />
-                  <text x={x} y={bottom + 18} fontSize={sel ? 12 : 10.5} fontWeight={sel ? 800 : 500} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+                  <text x={x} y={bottom + 18} fontWeight={sel ? 800 : 500} textAnchor="middle" style={{ fontSize: svgPx(sel ? 12 : 12), fill: "var(--ph-ink)" }}>
                     {i}
                   </text>
                 </g>
               );
             })}
-            <text x={X0} y={18} fontSize={12} fontWeight={800} style={{ fill: "var(--ph-ink)" }}>
+            <text x={X0} y={18} fontWeight={800} style={{ fontSize: svgPx(12), fill: "var(--ph-ink)" }}>
               <SvgChem text={`${sciText(c)} mol/L`} />
             </text>
             <line x1={X0} y1={railY} x2={X1} y2={railY} style={{ stroke: "var(--ph-line)" }} strokeWidth={3} strokeLinecap="round" />
@@ -325,7 +326,7 @@ export function MolRulerCard({ side }: { side: Side }) {
             {decades.map((d) => (
               <g key={d}>
                 <line x1={xl(10 ** d)} y1={axisY + 9} x2={xl(10 ** d)} y2={axisY + 16} style={{ stroke: "var(--ph-line)" }} strokeWidth={1.5} />
-                <text x={xl(10 ** d)} y={axisY + 30} fontSize={11} textAnchor={d === -3 ? "start" : "middle"} style={{ fill: "var(--ph-ink-muted)" }}>
+                <text x={xl(10 ** d)} y={axisY + 30} textAnchor={d === -3 ? "start" : "middle"} style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
                   {decadeText(d)}
                 </text>
               </g>
@@ -339,14 +340,14 @@ export function MolRulerCard({ side }: { side: Side }) {
                 <g key={r.key}>
                   <line x1={x} y1={axisY - 7} x2={x} y2={y + 4} style={{ stroke: on ? "var(--ph-focus)" : "var(--ph-line)" }} strokeWidth={on ? 2 : 1} />
                   <circle cx={x} cy={axisY} r={on ? 7 : 5} style={{ fill: "var(--ph-knob)", ...lit(on) }} />
-                  <text x={x} y={y} fontSize={on ? 12.5 : 10.5} fontWeight={on ? 800 : 600} textAnchor={x < X0 + 20 ? "start" : x > X1 - 20 ? "end" : "middle"} style={{ fill: "var(--ph-ink)" }}>
+                  <text x={x} y={y} fontWeight={on ? 800 : 600} textAnchor={x < X0 + 20 ? "start" : x > X1 - 20 ? "end" : "middle"} style={{ fontSize: svgPx(on ? 12.5 : 12), fill: "var(--ph-ink)" }}>
                     {g3(r.molarity)}
                   </text>
                 </g>
               );
             })}
             {/* Callout under the scale: the selected solution, kept inside the box. */}
-            <text x={clamp(xl(sel.molarity), X0 + 80, X1 - 80)} y={H - 12} fontSize={12.5} fontWeight={800} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+            <text x={clamp(xl(sel.molarity), X0 + 80, X1 - 80)} y={H - 12} fontWeight={800} textAnchor="middle" style={{ fontSize: svgPx(12.5), fill: "var(--ph-ink)" }}>
               {name}
             </text>
           </svg>
@@ -418,20 +419,20 @@ export function MolDonutCard({ side }: { side: Side }) {
             ) : (
               <path d={arc(0, frac)} fill="none" style={{ stroke: "var(--chem-stock)" }} strokeWidth={hover === "v1" ? 30 : 24} strokeLinecap="butt" />
             )}
-            <text x={cx} y={cy - 2} fontSize={18} fontWeight={800} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+            <text x={cx} y={cy - 2} fontWeight={800} textAnchor="middle" style={{ fontSize: svgPx(18), fill: "var(--ph-ink)" }}>
               {`${g3(v1 * 1000)} mL`}
             </text>
-            <text x={cx} y={cy + 16} fontSize={11} textAnchor="middle" style={{ fill: "var(--ph-ink-muted)" }}>
+            <text x={cx} y={cy + 16} textAnchor="middle" style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
               <SvgChem text="V₁" />
             </text>
             {showLegend && (
               <g>
                 <circle cx={lx} cy={cy - 20} r={7} style={{ fill: "var(--chem-stock)" }} />
-                <text x={lx + 14} y={cy - 16} fontSize={12} fontWeight={700} style={{ fill: "var(--ph-ink)" }}>
+                <text x={lx + 14} y={cy - 16} fontWeight={700} style={{ fontSize: svgPx(12), fill: "var(--ph-ink)" }}>
                   {`${t("stock")} ${g3(v1 * 1000)} mL`}
                 </text>
                 <circle cx={lx} cy={cy + 14} r={7} style={{ fill: "var(--chem-solvent)", stroke: "var(--ph-line)" }} />
-                <text x={lx + 14} y={cy + 18} fontSize={12} fontWeight={700} style={{ fill: "var(--ph-ink)" }}>
+                <text x={lx + 14} y={cy + 18} fontWeight={700} style={{ fontSize: svgPx(12), fill: "var(--ph-ink)" }}>
                   {`${t("water")} ${g3((V2 - v1) * 1000)} mL`}
                 </text>
               </g>

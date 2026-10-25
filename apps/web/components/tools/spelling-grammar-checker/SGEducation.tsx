@@ -3,7 +3,6 @@ import EncyclopediaPaper from "@/components/tool-ui/EncyclopediaPaper";
 import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
-import AdSpace from "@/components/tool-ui/AdSpace";
 import { SGArticleCard, SGDensityCard, SGLettersCard, SGRulesCard, SGScanCard, SGSlipsCard, SGTypesCard } from "./SGCards";
 import { SGRibbonCard } from "./SGCard3D";
 
@@ -31,8 +30,6 @@ export default async function SGEducation() {
         <SGDensityCard side="visual-left" />
       </InfoSection>
 
-      <AdSpace variant="leaderboard" />
-
       <InfoSection title={t("useCases.title")}>
         <p>{t("useCases.intro")}</p>
         <SGTypesCard side="table-left" />
@@ -46,8 +43,6 @@ export default async function SGEducation() {
         </div>
         <SGRibbonCard side="visual-left" />
       </InfoSection>
-
-      <AdSpace variant="leaderboard" />
 
       <InfoSection id="faq" title={t("faq.title")}>
         <FAQAccordion items={faqItems} />
@@ -72,8 +67,6 @@ export default async function SGEducation() {
           universities={universities}
         />
       </InfoSection>
-
-      <AdSpace variant="leaderboard" />
 
       <InfoSection title={t("references.title")}>
         <p>{t("references.citation")}</p>

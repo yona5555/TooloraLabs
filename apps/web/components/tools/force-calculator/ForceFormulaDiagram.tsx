@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import ForceIndicatorCard, { ForceIndicatorUnavailable } from "./ForceIndicatorCard";
 import { useForceModel } from "./ForceLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 200;
@@ -37,35 +38,35 @@ export default function ForceFormulaDiagram() {
         return (
           <g key={b.key}>
             <rect x={b.x} y={TOP} width={BOX_W} height={BOX_H} rx={10} strokeWidth={on ? 3.5 : 1.5} className={`fill-white dark:fill-zinc-900 ${b.cls}`} />
-            <text x={b.x + BOX_W / 2} y={TOP + 22} textAnchor="middle" fontSize={16} fontWeight={700} className={b.txt}>
+            <text style={{ fontSize: svgPx(16) }} x={b.x + BOX_W / 2} y={TOP + 22} textAnchor="middle" fontWeight={700} className={b.txt}>
               {b.sym}
             </text>
-            <text x={b.x + BOX_W / 2} y={TOP + 43} textAnchor="middle" fontSize={12.5} fontWeight={600} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12.5) }} x={b.x + BOX_W / 2} y={TOP + 43} textAnchor="middle" fontWeight={600} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
               {b.value}
             </text>
-            <text x={b.x + BOX_W / 2} y={TOP + BOX_H + 14} textAnchor="middle" fontSize={10} className="fill-zinc-500 dark:fill-zinc-400">
+            <text style={{ fontSize: svgPx(12) }} x={b.x + BOX_W / 2} y={TOP + BOX_H + 14} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
               {b.unit}
             </text>
             {on && (
-              <text x={b.x + BOX_W / 2} y={TOP - 8} textAnchor="middle" fontSize={10} fontWeight={700} className={b.txt}>
+              <text style={{ fontSize: svgPx(12) }} x={b.x + BOX_W / 2} y={TOP - 8} textAnchor="middle" fontWeight={700} className={b.txt}>
                 {t("solved")}
               </text>
             )}
           </g>
         );
       })}
-      <text x={113} y={TOP + 35} textAnchor="middle" fontSize={20} fontWeight={700} className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(20) }} x={113} y={TOP + 35} textAnchor="middle" fontWeight={700} className="fill-zinc-500 dark:fill-zinc-400">
         =
       </text>
-      <text x={227} y={TOP + 35} textAnchor="middle" fontSize={20} fontWeight={700} className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(20) }} x={227} y={TOP + 35} textAnchor="middle" fontWeight={700} className="fill-zinc-500 dark:fill-zinc-400">
         ×
       </text>
       <line x1={10} y1={124} x2={W - 10} y2={124} className="stroke-zinc-200 dark:stroke-zinc-700" />
-      <text x={W / 2} y={143} textAnchor="middle" fontSize={11} fontWeight={600} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
+      <text style={{ fontSize: svgPx(12) }} x={W / 2} y={143} textAnchor="middle" fontWeight={600} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
         1 N = 1 kg × 1 m/s² = 1 kg·m/s²
       </text>
       {rearr.slice(0, 2).map((r, i) => (
-        <text key={r.key} x={W / 2} y={165 + i * 18} textAnchor="middle" fontSize={10.5} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+        <text style={{ fontSize: svgPx(12) }} key={r.key} x={W / 2} y={165 + i * 18} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
           {r.text}
         </text>
       ))}

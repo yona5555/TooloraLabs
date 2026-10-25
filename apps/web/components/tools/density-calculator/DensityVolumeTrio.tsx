@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { DENSITY_WATER } from "@tooloralabs/tools";
 import DensityIndicatorCard, { DensityIndicatorUnavailable } from "./DensityIndicatorCard";
 import { useDensityModel } from "./DensityLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 320;
 const H = 210;
@@ -32,13 +33,13 @@ export default function DensityVolumeTrio() {
         return (
           <g key={it.factor}>
             <rect x={cx - BAR / 2} y={BASE - h} width={BAR} height={Math.max(1, h)} rx={6} className={CLS[i]} />
-            <text x={cx} y={BASE - h - 8} textAnchor="middle" fontSize={12} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={cx} y={BASE - h - 8} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
               {f(it.density, 3)}
             </text>
-            <text x={cx} y={BASE + 16} textAnchor="middle" fontSize={11} fontWeight={600} className="fill-zinc-600 dark:fill-zinc-300">
+            <text style={{ fontSize: svgPx(12) }} x={cx} y={BASE + 16} textAnchor="middle" fontWeight={600} className="fill-zinc-600 dark:fill-zinc-300">
               {names[i]}
             </text>
-            <text x={cx} y={BASE + 31} textAnchor="middle" fontSize={10} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+            <text style={{ fontSize: svgPx(12) }} x={cx} y={BASE + 31} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
               {`${f(it.volume)} cm³`}
             </text>
           </g>
@@ -47,12 +48,12 @@ export default function DensityVolumeTrio() {
       {showWater && (
         <g>
           <line x1={0} y1={yWater} x2={W} y2={yWater} strokeDasharray="5 4" strokeWidth={1.5} className="stroke-sky-500 dark:stroke-sky-400" />
-          <text x={W - 2} y={yWater - 4} textAnchor="end" fontSize={10} fontWeight={600} className="fill-sky-600 dark:fill-sky-400">
+          <text style={{ fontSize: svgPx(12) }} x={W - 2} y={yWater - 4} textAnchor="end" fontWeight={600} className="fill-sky-600 dark:fill-sky-400">
             {t("water")}
           </text>
         </g>
       )}
-      <text x={4} y={14} fontSize={10} className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={4} y={14} className="fill-zinc-500 dark:fill-zinc-400">
         {`ρ (g/cm³) · m = ${f(a.mass)} g`}
       </text>
     </svg>

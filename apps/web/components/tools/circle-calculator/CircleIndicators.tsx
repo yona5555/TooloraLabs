@@ -14,6 +14,8 @@ import {
 import IndicatorCard, { PillGroup } from "@/components/tools/markets/IndicatorCard";
 import { useCircleRadius } from "./CircleLiveContext";
 import type { CircleKnownField } from "./types";
+import { svgPx } from "@/components/tool-ui/svgPx";
+import { useMeasuredWidth } from "@/components/tool-ui/useMeasuredWidth";
 
 function useInd() {
   return useTranslations("tools.circle-calculator.ind");
@@ -77,7 +79,9 @@ export function CircleGrowthCurves() {
   const tf = useFields();
   const { r, fmt } = useCircleRadius();
   const { f, n } = fmt;
-  const W = 420;
+  // drawn at the box width (true px): 12px tick labels keep their spacing on a phone
+  const [boxRef, boxW] = useMeasuredWidth<HTMLDivElement>(420);
+  const W = Math.min(420, boxW);
   const H = 240;
   const L = 52;
   const B = 30;
@@ -111,16 +115,16 @@ export function CircleGrowthCurves() {
         ],
       }}
     >
-      <div dir="ltr">
+      <div ref={boxRef} dir="ltr">
         <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} className="mx-auto block h-auto max-w-full" role="img" aria-label={t("growth.heading")}>
           {[0, 0.5, 1].map((k) => (
             <g key={k}>
               <line x1={L} x2={W - Rt} y1={Y(k * ymax)} y2={Y(k * ymax)} className="stroke-zinc-200 dark:stroke-zinc-700" />
-              <text x={L - 6} y={Y(k * ymax) + 3} textAnchor="end" className="fill-zinc-400 font-mono text-[9px]">{n(k * ymax, 1)}</text>
-              <text x={X(k * xmax)} y={H - B + 14} textAnchor="middle" className="fill-zinc-400 font-mono text-[9px]">{n(k * xmax, 2)}</text>
+              <text style={{ fontSize: svgPx(12) }} x={L - 6} y={Y(k * ymax) + 3} textAnchor="end" className="fill-zinc-400 font-mono">{n(k * ymax, 1)}</text>
+              <text style={{ fontSize: svgPx(12) }} x={X(k * xmax)} y={H - B + 14} textAnchor="middle" className="fill-zinc-400 font-mono">{n(k * xmax, 2)}</text>
             </g>
           ))}
-          <text x={W - Rt} y={H - 3} textAnchor="end" className="fill-zinc-500 text-[10px]">r</text>
+          <text style={{ fontSize: svgPx(12) }} x={W - Rt} y={H - 3} textAnchor="end" className="fill-zinc-500">r</text>
           <polyline points={pts((x) => 2 * Math.PI * x)} fill="none" className="stroke-amber-500" strokeWidth={2.5} />
           <polyline points={pts((x) => Math.PI * x * x)} fill="none" className="stroke-blue-600 dark:stroke-blue-400" strokeWidth={2.5} />
           {showCross && (
@@ -129,15 +133,15 @@ export function CircleGrowthCurves() {
               {/* Above-left of the crossing: both curves lie below it there, and it is dropped when the
                   current-radius labels come close, so no label ever sits on a line or another label. */}
               {Math.abs(X(r) - X(cross)) > 80 && (
-                <text x={X(cross) - 6} y={Y(4 * Math.PI) - 8} textAnchor="end" className="fill-violet-600 font-mono text-[10px] dark:fill-violet-400">A = C</text>
+                <text style={{ fontSize: svgPx(12) }} x={X(cross) - 6} y={Y(4 * Math.PI) - 8} textAnchor="end" className="fill-violet-600 font-mono dark:fill-violet-400">A = C</text>
               )}
             </g>
           )}
           <line x1={X(r)} x2={X(r)} y1={T} y2={H - B} className="stroke-red-500" strokeDasharray="4 3" />
           <circle cx={X(r)} cy={Y(Cr)} r={5} className="fill-amber-500 stroke-white dark:stroke-zinc-900" strokeWidth={1.5} />
           <circle cx={X(r)} cy={Y(Ar)} r={5} className="fill-blue-600 stroke-white dark:fill-blue-400 dark:stroke-zinc-900" strokeWidth={1.5} />
-          <text x={X(r) - 6} y={Y(Ar) - 8} textAnchor="end" className="fill-blue-700 font-mono text-[10px] font-semibold dark:fill-blue-300">{`A = ${n(Ar)}`}</text>
-          <text x={X(r) - 6} y={Y(Cr) + 14} textAnchor="end" className="fill-amber-700 font-mono text-[10px] font-semibold dark:fill-amber-400">{`C = ${n(Cr)}`}</text>
+          <text style={{ fontSize: svgPx(12) }} x={X(r) - 6} y={Y(Ar) - 8} textAnchor="end" className="fill-blue-700 font-mono font-semibold dark:fill-blue-300">{`A = ${n(Ar)}`}</text>
+          <text style={{ fontSize: svgPx(12) }} x={X(r) - 6} y={Y(Cr) + 14} textAnchor="end" className="fill-amber-700 font-mono font-semibold dark:fill-amber-400">{`C = ${n(Cr)}`}</text>
         </svg>
       </div>
       <div className="mt-2 flex flex-wrap gap-4 text-xs text-zinc-500 dark:text-zinc-400">
@@ -379,7 +383,7 @@ export function CircleRingDonut() {
             return <circle key={i} cx={c} cy={c} r={(R * b.outer) / r} className={`${fills[i]} stroke-white dark:stroke-zinc-900`} strokeWidth={1.5} />;
           })}
           {bands.map((b, i) => (i === 0 ? null : (
-            <text key={i} x={c} y={c - (R * (b.inner + b.outer)) / 2 / r + 3} textAnchor="middle" className="fill-white font-mono text-[9px] font-bold">{`${f(b.share * 100, 1)}%`}</text>
+            <text style={{ fontSize: svgPx(12) }} key={i} x={c} y={c - (R * (b.inner + b.outer)) / 2 / r + 3} textAnchor="middle" className="fill-white font-mono font-bold">{`${f(b.share * 100, 1)}%`}</text>
           )))}
         </svg>
         <ul className="space-y-1.5 text-sm">
@@ -493,14 +497,16 @@ export function CirclePolygonGauge() {
           <path d={`M ${cx - R} ${cy} A ${R} ${R} 0 0 1 ${cx + R} ${cy}`} fill="none" stroke={`url(#${svgId}circle-gauge-grad)`} strokeWidth={16} strokeLinecap="round" />
           {[80, 85, 90, 95, 100].map((v) => {
             const a = Math.PI * (1 - (v - MIN) / (100 - MIN));
+            // the two end labels sit under the arc ends: beside them they would run past the drawing's edge
+            const end = v === MIN || v === 100;
             return (
-              <text key={v} x={cx + (R + 16) * Math.cos(a)} y={cy - (R + 16) * Math.sin(a) + 3} textAnchor="middle" className="fill-zinc-400 font-mono text-[9px]">{`${v}%`}</text>
+              <text style={{ fontSize: svgPx(12) }} key={v} x={end ? cx + R * Math.cos(a) : cx + (R + 16) * Math.cos(a)} y={end ? cy + 22 : cy - (R + 16) * Math.sin(a) + 3} textAnchor="middle" className="fill-zinc-400 font-mono">{`${v}%`}</text>
             );
           })}
           <line x1={cx} y1={cy} x2={nx} y2={ny} className="stroke-zinc-800 dark:stroke-zinc-100" strokeWidth={3} strokeLinecap="round" />
           <circle cx={cx} cy={cy} r={6} className="fill-zinc-800 dark:fill-zinc-100" />
           {/* Readout below the pivot, so the needle never crosses it at any value. */}
-          <text x={cx} y={cy + 32} textAnchor="middle" className="fill-zinc-900 font-mono text-[16px] font-bold dark:fill-zinc-100">{`${f(p.perimeterShare * 100, 3)}%`}</text>
+          <text style={{ fontSize: svgPx(16) }} x={cx} y={cy + 32} textAnchor="middle" className="fill-zinc-900 font-mono font-bold dark:fill-zinc-100">{`${f(p.perimeterShare * 100, 3)}%`}</text>
         </svg>
       </div>
     </IndicatorCard>

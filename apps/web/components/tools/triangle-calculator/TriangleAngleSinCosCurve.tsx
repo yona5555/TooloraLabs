@@ -5,6 +5,8 @@ import { Mafs, Coordinates, Plot, Line, Point, Text } from "mafs";
 import "mafs/core.css";
 import "./triangleMafsTheme.css";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
+import { useMeasuredSize } from "@/components/tool-ui/indicator-kit/CardKit";
+import { labelW, thinLabels } from "@/components/tool-ui/labelLayout";
 
 type Props = {
   angleADeg: number;
@@ -52,6 +54,7 @@ const VERTEX_LABELS = ["A", "B", "C"] as const;
  */
 export default function TriangleAngleSinCosCurve({ angleADeg, angleBDeg, angleCDeg, activeIndex, digitStyle }: Props) {
   const t = useTranslations("tools.triangle-calculator.sinCosCurve");
+  const [plotBox, { w: plotW }] = useMeasuredSize<HTMLDivElement>({ w: 600, h: 190 });
   const isDark = useSyncExternalStore(subscribeDark, getDarkSnapshot, getDarkServerSnapshot);
   const colors = isDark ? DARK : LIGHT;
   const fmt = (value: number) => formatLocalizedNumber(value, digitStyle, { maximumFractionDigits: 2 });
@@ -63,8 +66,16 @@ export default function TriangleAngleSinCosCurve({ angleADeg, angleBDeg, angleCD
   const sinActive = Math.sin(toRad(activeDeg));
   const cosActive = Math.cos(toRad(activeDeg));
 
+  // radian names that fit at 12px side by side: on a phone π/4 and 3π/4 give way first (§39)
+  const pxPerDeg = plotW / 204;
+  const showTick = thinLabels(
+    RADIAN_TICKS.map(({ deg, label }) => ({ x: deg * pxPerDeg, w: labelW(label) })),
+    6,
+    [0, 8, 4, 3, 5, 1, 7, 2, 6],
+  );
+
   return (
-    <div className="mt-4 border-t border-zinc-100 pt-4 dark:border-zinc-800">
+    <div ref={plotBox} className="mt-4 border-t border-zinc-100 pt-4 dark:border-zinc-800">
       <h3 className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("title")}</h3>
       <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">{t("caption", { vertex: activeLetter })}</p>
 
@@ -81,11 +92,13 @@ export default function TriangleAngleSinCosCurve({ angleADeg, angleBDeg, angleCD
             yAxis={{ lines: 0.5 }}
           />
 
-          {RADIAN_TICKS.map(({ deg, label }) => (
-            <Text key={deg} x={deg} y={-1.2} size={10} color={colors.faint}>
-              {label}
-            </Text>
-          ))}
+          {RADIAN_TICKS.map(({ deg, label }, i) =>
+            showTick[i] ? (
+              <Text key={deg} x={deg} y={-1.2} size={12} color={colors.faint}>
+                {label}
+              </Text>
+            ) : null,
+          )}
 
           <Plot.OfX y={(deg) => Math.sin(toRad(deg))} domain={[0, 180]} color={colors.sin} weight={2.5} />
           <Plot.OfX y={(deg) => Math.cos(toRad(deg))} domain={[0, 180]} color={colors.cos} weight={2.5} />

@@ -1,6 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { categories } from "@/data/categories";
+import { categories, categoryHref } from "@/data/categories";
 import { tools } from "@/data/tools";
 import { comingSoonPhases } from "@/data/comingSoon";
 import { getCategoryIcon } from "@/lib/category-icons";
@@ -32,12 +32,11 @@ export default function HeroCategories() {
 
   return (
     <div className="grid grid-cols-3 gap-2 sm:grid-cols-5 sm:gap-2.5 lg:flex-1 lg:grid-rows-3">
-      {categories.map((category) => {
+      {categories.filter((category) => TOOL_COUNT_BY_CATEGORY[category.slug]).map((category) => {
         const Icon = getCategoryIcon(category.icon);
         const { hex, text } = getCategoryPaletteColor(category.slug);
         const toolCount = TOOL_COUNT_BY_CATEGORY[category.slug] ?? 0;
         const comingSoonCount = COMING_SOON_COUNT_BY_CATEGORY[category.slug] ?? 0;
-        const isComingSoon = toolCount === 0;
         const textColorClass = text === "white" ? "text-white" : "text-[#1c1917]";
         const ctaClass = text === "white" ? "bg-white text-[#1c1917] hover:bg-white/90" : "bg-[#1c1917] text-white hover:bg-black/80";
         const secondaryClass = text === "white" ? "border-white/50 hover:bg-white/15" : "border-[#1c1917]/30 hover:bg-black/10";
@@ -46,7 +45,7 @@ export default function HeroCategories() {
         const toolNames = categoryTools.map((t) => tTools(`${t.slug}.title`)).join("، ");
         const overviewText = toolNames ? `${tc(`${category.slug}.description`)} — ${toolNames}.` : tc(`${category.slug}.description`);
 
-        const hoverOverlay = !isComingSoon ? (
+        const hoverOverlay = (
           <div className={`flex h-full min-h-0 flex-col items-center gap-1 p-2.5 text-center ${textColorClass}`}>
             <h3 className="shrink-0 text-[11px] leading-tight font-bold sm:text-xs">{tc(`${category.slug}.title`)}</h3>
 
@@ -54,7 +53,7 @@ export default function HeroCategories() {
 
             <div className="pointer-events-auto flex w-full min-w-0 shrink-0 flex-col gap-1">
               <Link
-                href={`/categories/${category.slug}`}
+                href={categoryHref(category.slug)}
                 className={`relative z-50 inline-flex items-center justify-center gap-1 rounded-md px-2 py-1 text-[9px] font-bold transition-colors sm:text-[10px] ${ctaClass}`}
               >
                 {tNav("browse")}
@@ -68,19 +67,18 @@ export default function HeroCategories() {
               </Link>
             </div>
           </div>
-        ) : undefined;
+        );
 
         return (
           <DecoratedCard
             key={category.slug}
-            href={`/categories/${category.slug}`}
+            href={categoryHref(category.slug)}
             colorHex={hex}
             textVariant={text}
             Icon={Icon}
             seed={category.slug}
             title={tc(`${category.slug}.title`)}
             size="compact"
-            disabled={isComingSoon}
             hoverOverlay={hoverOverlay}
           >
             <div className="flex flex-1 flex-col items-center gap-1 p-2 text-center sm:p-2.5">
@@ -88,12 +86,7 @@ export default function HeroCategories() {
               <span className="line-clamp-2 text-[9px] leading-tight text-zinc-500 dark:text-zinc-400 sm:text-[10px]">
                 {tc(`${category.slug}.description`)}
               </span>
-              {isComingSoon ? (
-                <span className="mt-auto pt-1 text-[9px] font-medium tracking-wide text-zinc-400 uppercase dark:text-zinc-500 sm:text-[10px]">
-                  {tNav("comingSoon")}
-                </span>
-              ) : (
-                <span className="mt-auto flex flex-col items-center gap-0.5 pt-1">
+              <span className="mt-auto flex flex-col items-center gap-0.5 pt-1">
                   <span className="rounded-full bg-zinc-100 px-1.5 py-0.5 text-[9px] font-medium text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400 sm:text-[10px]">
                     {tSection("toolCount", { count: toolCount })}
                   </span>
@@ -103,7 +96,6 @@ export default function HeroCategories() {
                     </span>
                   )}
                 </span>
-              )}
             </div>
           </DecoratedCard>
         );

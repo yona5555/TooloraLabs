@@ -3,12 +3,15 @@ import { useLocale, useTranslations } from "next-intl";
 import { ltr } from "@/components/tool-ui/MixedText";
 import KinIndicatorCard, { KinIndicatorUnavailable } from "./KinIndicatorCard";
 import { r2, useKinModel } from "./KinLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
+import { useFitWidth } from "@/components/tool-ui/useFitWidth";
+import { labelW } from "@/components/tool-ui/labelLayout";
 
-const W = 400;
-const H = 190;
+const MAX_W = 400;
+const H = 196;
 const L = 16;
-const R = 384;
-const ROWS = [34, 82, 130] as const;
+// row 2 sits a full label line below row 1's "½at²" caption (§39)
+const ROWS = [34, 88, 136] as const;
 const BAR = 24;
 
 /**
@@ -20,6 +23,11 @@ export default function KinDisplacementSplit() {
   const t = useTranslations("tools.kinematics-calculator.education.lab.split");
   const rtl = useLocale() === "ar";
   const { k, f } = useKinModel();
+  // laid out at its on-screen width so the 12px labels keep their true size on a phone
+  const [fitRef, W] = useFitWidth(MAX_W);
+  const R = W - 16;
+  // a label centred on its bar, kept whole inside the axis
+  const centre = (x: number, text: string) => r2(Math.min(R - labelW(text) / 2, Math.max(L + labelW(text) / 2, x)));
   if (!k || k.span <= 0) return <KinIndicatorUnavailable title={t("title")} />;
 
   const a1 = k.dxFromV0;
@@ -35,17 +43,17 @@ export default function KinDisplacementSplit() {
   const sp = seg(0, k.pathLength);
 
   const label = (x: number, w: number, y: number, text: string, cls: string, words = false) => (
-    <text x={r2(Math.min(R - 4, Math.max(L + 4, x + w / 2)))} y={y - 6} textAnchor="middle" direction={words && rtl ? "rtl" : "ltr"} fontSize={10.5} fontWeight={700} className={cls}>{text}</text>
+    <text style={{ fontSize: svgPx(12) }} x={centre(x + w / 2, text)} y={y - 6} textAnchor="middle" direction={words && rtl ? "rtl" : "ltr"} fontWeight={700} className={cls}>{text}</text>
   );
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
+    <svg ref={fitRef} direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
       <line x1={px(0)} y1={ROWS[0] - 4} x2={px(0)} y2={ROWS[2] + BAR + 4} strokeWidth={1.5} className="stroke-zinc-400 dark:stroke-zinc-500" />
       {/* row 1: v₀t then ½at² laid end to end */}
       <rect x={s1.x} y={ROWS[0]} width={s1.w} height={BAR} rx={3} className="fill-sky-500 dark:fill-sky-400" />
       <rect x={s2.x} y={ROWS[0] + (a2 < 0 ? BAR / 2 : 0)} width={s2.w} height={a2 < 0 ? BAR / 2 : BAR} rx={3} className={a2 < 0 ? "fill-amber-500 dark:fill-amber-400" : "fill-violet-500 dark:fill-violet-400"} />
       {label(s1.x, s1.w, ROWS[0], `v₀t = ${f(a1, 1)}`, "fill-sky-700 dark:fill-sky-300")}
-      <text x={r2(Math.min(R - 4, Math.max(L + 4, s2.x + s2.w / 2)))} y={ROWS[0] + BAR + 13} textAnchor="middle" fontSize={10.5} fontWeight={700} className={a2 < 0 ? "fill-amber-700 dark:fill-amber-300" : "fill-violet-700 dark:fill-violet-300"}>{`½at² = ${f(a2, 1)}`}</text>
+      <text style={{ fontSize: svgPx(12) }} x={centre(s2.x + s2.w / 2, `½at² = ${f(a2, 1)}`)} y={ROWS[0] + BAR + 13} textAnchor="middle" fontWeight={700} className={a2 < 0 ? "fill-amber-700 dark:fill-amber-300" : "fill-violet-700 dark:fill-violet-300"}>{`½at² = ${f(a2, 1)}`}</text>
       {/* row 2: the net displacement */}
       <rect x={sn.x} y={ROWS[1] + 8} width={sn.w} height={BAR} rx={3} className="fill-blue-600 dark:fill-blue-400" />
       {label(sn.x, sn.w, ROWS[1] + 8, `Δx = ${f(net, 1)} m`, "fill-blue-700 dark:fill-blue-300")}

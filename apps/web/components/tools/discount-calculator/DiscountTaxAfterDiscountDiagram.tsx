@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import { useMeasuredWidth } from "@/components/tool-ui/useMeasuredWidth";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 /** Real retail convention: discount is applied to the price first, then sales tax is computed on the discounted amount, not the original. */
 const PRICE = 120;
@@ -29,10 +30,10 @@ export default function DiscountTaxAfterDiscountDiagram() {
           {steps.map((step, i) => (
             <g key={step.label} transform={`translate(0, ${i * 40})`}>
               <rect x={0} y={0} width={W} height={32} rx={6} className={i === steps.length - 1 ? "fill-emerald-50 stroke-emerald-400 dark:fill-emerald-500/10 dark:stroke-emerald-400/50" : "fill-current opacity-[0.04]"} strokeWidth={i === steps.length - 1 ? 1.5 : 0} />
-              <text x={12} y={21} fontSize={12} fill="currentColor" opacity={0.8}>
+              <text style={{ fontSize: svgPx(12) }} x={12} y={21} fill="currentColor" opacity={0.8}>
                 {step.label}
               </text>
-              <text x={W - 12} y={21} textAnchor="end" fontSize={13} fontWeight={700} className={i === steps.length - 1 ? "fill-emerald-700 dark:fill-emerald-300" : "fill-current"}>
+              <text style={{ fontSize: svgPx(13) }} x={W - 12} y={21} textAnchor="end" fontWeight={700} className={i === steps.length - 1 ? "fill-emerald-700 dark:fill-emerald-300" : "fill-current"}>
                 {step.value}
               </text>
             </g>

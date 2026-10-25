@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { charEntropy, passphraseEntropy } from "@tooloralabs/tools";
 import PasswordIndicatorCard, { PasswordIndicatorUnavailable } from "./PasswordIndicatorCard";
 import { usePasswordModel } from "./PasswordLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const LABEL = 128;
@@ -41,7 +42,7 @@ export default function PasswordPolicyRanking() {
         const me = r.key === "yours";
         return (
           <g key={r.key}>
-            <text x={LABEL} y={y + 17} textAnchor="end" fontSize={12} fontWeight={me ? 700 : 500} className={me ? "fill-blue-700 dark:fill-blue-300" : "fill-zinc-600 dark:fill-zinc-300"}>
+            <text style={{ fontSize: svgPx(12) }} x={LABEL} y={y + 17} textAnchor="end" fontWeight={me ? 700 : 500} className={me ? "fill-blue-700 dark:fill-blue-300" : "fill-zinc-600 dark:fill-zinc-300"}>
               {t(r.key)}
             </text>
             <rect
@@ -52,7 +53,7 @@ export default function PasswordPolicyRanking() {
               rx={3}
               className={me ? "fill-blue-600 dark:fill-blue-400" : r.bits >= 60 ? "fill-emerald-400 dark:fill-emerald-600" : "fill-zinc-300 dark:fill-zinc-600"}
             />
-            <text x={BAR_X + w + 5} y={y + 17} fontSize={12} fontWeight={me ? 700 : 500} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
+            <text style={{ fontSize: svgPx(12) }} x={BAR_X + w + 5} y={y + 17} fontWeight={me ? 700 : 500} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
               {f(r.bits, 1)}
             </text>
           </g>

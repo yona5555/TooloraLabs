@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { primeExponentTable } from "@tooloralabs/tools";
 import GcfLcmIndicatorCard from "./GcfLcmIndicatorCard";
 import { sup, useGcfLcmModel } from "./GcfLcmLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 220;
@@ -34,7 +35,7 @@ export default function GcfLcmExponentBars() {
         {Array.from({ length: maxE + 1 }, (_, e) => (
           <g key={e}>
             <line x1={PAD_L} x2={W - 4} y1={y(e)} y2={y(e)} className="stroke-zinc-200 dark:stroke-zinc-700" />
-            <text x={PAD_L - 6} y={y(e) + 3} textAnchor="end" className="fill-zinc-400 font-mono text-[10px]">{f(e)}</text>
+            <text style={{ fontSize: svgPx(12) }} x={PAD_L - 6} y={y(e) + 3} textAnchor="end" className="fill-zinc-400 font-mono">{f(e)}</text>
           </g>
         ))}
         {table.map((r, gi) => {
@@ -45,12 +46,12 @@ export default function GcfLcmExponentBars() {
               {r.exponents.map((e, i) => (
                 <g key={i}>
                   <rect x={gx + i * barW} y={y(e)} width={barW - 2} height={Math.max(0, y(0) - y(e))} rx={2} className={BAR_COLORS[i % BAR_COLORS.length]} />
-                  <text x={gx + i * barW + (barW - 2) / 2} y={y(e) - 3} textAnchor="middle" className="fill-zinc-700 font-mono text-[10px] font-semibold dark:fill-zinc-200">{f(e)}</text>
+                  <text style={{ fontSize: svgPx(12) }} x={gx + i * barW + (barW - 2) / 2} y={y(e) - 3} textAnchor="middle" className="fill-zinc-700 font-mono font-semibold dark:fill-zinc-200">{f(e)}</text>
                 </g>
               ))}
               <line x1={x0} x2={x0 + groupW - 6} y1={y(r.min)} y2={y(r.min)} strokeWidth={2.5} strokeDasharray="5 3" className="stroke-emerald-600 dark:stroke-emerald-400" />
               <line x1={x0} x2={x0 + groupW - 6} y1={y(r.max)} y2={y(r.max)} strokeWidth={2.5} strokeDasharray="2 3" className="stroke-violet-600 dark:stroke-violet-400" />
-              <text x={PAD_L + gi * groupW + groupW / 2} y={H - PAD_B + 16} textAnchor="middle" className="fill-zinc-800 font-mono text-[12px] font-bold dark:fill-zinc-100">{f(r.prime)}</text>
+              <text style={{ fontSize: svgPx(12) }} x={PAD_L + gi * groupW + groupW / 2} y={H - PAD_B + 16} textAnchor="middle" className="fill-zinc-800 font-mono font-bold dark:fill-zinc-100">{f(r.prime)}</text>
             </g>
           );
         })}

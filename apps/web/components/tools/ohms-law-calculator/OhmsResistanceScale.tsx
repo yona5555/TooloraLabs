@@ -4,12 +4,15 @@ import { useTranslations } from "next-intl";
 import { RESISTANCE_REFERENCES } from "@tooloralabs/tools";
 import OhmsIndicatorCard, { OhmsIndicatorUnavailable } from "./OhmsIndicatorCard";
 import { pow10, useOhmsModel } from "./OhmsLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
+import { useFitWidth } from "@/components/tool-ui/useFitWidth";
+import { labelW } from "@/components/tool-ui/labelLayout";
 
-const W = 400;
-const H = 220;
+const MAX_W = 400;
 const X0 = 46;
-const X1 = W - 46;
 const AXIS = 86;
+/** One reference: name, resistance and current lines (13px apart) plus the gap to the next row. */
+const ROW_H = 44;
 
 const lg = (v: number) => Math.log10(Math.max(Math.abs(v), 1e-300));
 
@@ -22,6 +25,9 @@ export default function OhmsResistanceScale() {
   const svgId = useId();
   const t = useTranslations("tools.ohms-law-calculator.education.lab.scale");
   const { a, f } = useOhmsModel();
+  // laid out at its on-screen width so the 12px labels keep their true size on a phone
+  const [fitRef, W] = useFitWidth(MAX_W);
+  const X1 = W - 46;
   if (!a || a.resistance === 0) return <OhmsIndicatorUnavailable title={t("title")} />;
 
   const R = Math.abs(a.resistance);
@@ -34,13 +40,17 @@ export default function OhmsResistanceScale() {
   for (let e = Math.ceil(lo / step) * step; e <= hi; e += step) ticks.push(e);
   const refs = RESISTANCE_REFERENCES;
   const slotW = (X1 - X0) / refs.length;
+  // labels take turns over as many rows as the widest needs, so neighbours in a row never touch (§39)
+  const widest = Math.max(...refs.flatMap((r) => [labelW(t(`refs.${r.key}`)), labelW(`${f(r.resistance, 2)} Ω`), labelW(`${f(Math.abs(a.voltage) / r.resistance, 2)} A`)]));
+  const rows = Math.min(3, Math.max(2, Math.ceil((widest + 8) / slotW)));
+  const H = AXIS + 44 + (rows - 1) * ROW_H + 34;
   const x = sx(lg(R));
   const lx = Math.max(80, Math.min(W - 80, x));
   const nearest = [...refs].sort((p, q) => Math.abs(lg(p.resistance) - lg(R)) - Math.abs(lg(q.resistance) - lg(R)))[0];
   const V = Math.abs(a.voltage);
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <svg ref={fitRef} direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <defs>
         <linearGradient id={`${svgId}ohms-log-grad`} x1="0" x2="1" y1="0" y2="0">
           <stop offset="0%" stopColor="#3b82f6" />
@@ -52,33 +62,33 @@ export default function OhmsResistanceScale() {
       {ticks.map((e) => (
         <line key={e} x1={sx(e)} y1={AXIS + 5} x2={sx(e)} y2={AXIS + 9} className="stroke-zinc-400 dark:stroke-zinc-500" />
       ))}
-      <text x={X0 - 6} y={AXIS + 4} textAnchor="end" fontSize={10} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={X0 - 6} y={AXIS + 4} textAnchor="end" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
         {pow10(lo)}
       </text>
-      <text x={X1 + 6} y={AXIS + 4} fontSize={10} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={X1 + 6} y={AXIS + 4} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
         {pow10(hi)}
       </text>
-      <text x={X0} y={AXIS - 14} fontSize={10} className="fill-blue-600 dark:fill-blue-400">
+      <text style={{ fontSize: svgPx(12) }} x={X0} y={AXIS - 14} className="fill-blue-600 dark:fill-blue-400">
         {t("conductors")}
       </text>
-      <text x={X1} y={AXIS - 14} textAnchor="end" fontSize={10} className="fill-amber-600 dark:fill-amber-400">
+      <text style={{ fontSize: svgPx(12) }} x={X1} y={AXIS - 14} textAnchor="end" className="fill-amber-600 dark:fill-amber-400">
         {t("insulators")}
       </text>
       {refs.map((r, i) => {
         const rx = sx(lg(r.resistance));
         const slx = X0 + slotW * (i + 0.5);
-        const ny = AXIS + (i % 2 === 0 ? 44 : 84);
+        const ny = AXIS + 44 + (i % rows) * ROW_H;
         return (
           <g key={r.key}>
             <line x1={rx} y1={AXIS + 5} x2={slx} y2={ny - 11} strokeWidth={1} className="stroke-zinc-400 dark:stroke-zinc-500" />
             <circle cx={rx} cy={AXIS} r={3} className="fill-zinc-700 dark:fill-zinc-200" />
-            <text x={slx} y={ny} textAnchor="middle" fontSize={10} fontWeight={600} className="fill-zinc-600 dark:fill-zinc-300">
+            <text style={{ fontSize: svgPx(12) }} x={slx} y={ny} textAnchor="middle" fontWeight={600} className="fill-zinc-600 dark:fill-zinc-300">
               {t(`refs.${r.key}`)}
             </text>
-            <text x={slx} y={ny + 12} textAnchor="middle" fontSize={9} fontFamily="ui-monospace, monospace" className="fill-zinc-400 dark:fill-zinc-500">
+            <text style={{ fontSize: svgPx(12) }} x={slx} y={ny + 13} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-400 dark:fill-zinc-500">
               {`${f(r.resistance, 2)} Ω`}
             </text>
-            <text x={slx} y={ny + 23} textAnchor="middle" fontSize={9} fontFamily="ui-monospace, monospace" className="fill-emerald-600 dark:fill-emerald-400">
+            <text style={{ fontSize: svgPx(12) }} x={slx} y={ny + 26} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-emerald-600 dark:fill-emerald-400">
               {`${f(V / r.resistance, 2)} A`}
             </text>
           </g>
@@ -86,7 +96,7 @@ export default function OhmsResistanceScale() {
       })}
       <line x1={x} y1={AXIS - 6} x2={lx} y2={30} strokeWidth={1.5} className="stroke-red-600 dark:stroke-red-400" />
       <path d={`M ${x - 5} ${AXIS - 13} L ${x + 5} ${AXIS - 13} L ${x} ${AXIS - 5} z`} className="fill-red-600 dark:fill-red-400" />
-      <text x={lx} y={24} textAnchor="middle" fontSize={11} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-red-600 dark:fill-red-400">
+      <text style={{ fontSize: svgPx(12) }} x={lx} y={24} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-red-600 dark:fill-red-400">
         {`R = ${f(R)} Ω`}
       </text>
     </svg>

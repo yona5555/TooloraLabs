@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import OhmsIndicatorCard, { OhmsIndicatorUnavailable } from "./OhmsIndicatorCard";
 import { useOhmsModel } from "./OhmsLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 210;
@@ -34,24 +35,24 @@ export default function OhmsPowerRoutes() {
         const w = (Math.abs(r.v) / max) * (R - L);
         return (
           <g key={r.label}>
-            <text x={L - 8} y={y + 13} textAnchor="end" fontSize={13} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(13) }} x={L - 8} y={y + 13} textAnchor="end" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
               {r.label}
             </text>
             <rect x={L} y={y} width={Math.max(1, w)} height={20} rx={5} className={CLS[i]} />
-            <text x={L + w - 6} y={y + 14} textAnchor="end" fontSize={11} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-white">
+            <text style={{ fontSize: svgPx(12) }} x={L + w - 6} y={y + 14} textAnchor="end" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-white">
               {`${f(r.v)} W`}
             </text>
-            <text x={L} y={y + 34} fontSize={10} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+            <text style={{ fontSize: svgPx(12) }} x={L} y={y + 34} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
               {r.sub}
             </text>
           </g>
         );
       })}
       <line x1={R} y1={TOP - 8} x2={R} y2={TOP + 2 * ROW + 28} strokeDasharray="4 3" strokeWidth={1.5} className="stroke-red-500 dark:stroke-red-400" />
-      <text x={R} y={TOP - 12} textAnchor="middle" fontSize={11} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-red-600 dark:fill-red-400">
+      <text style={{ fontSize: svgPx(12) }} x={R} y={TOP - 12} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-red-600 dark:fill-red-400">
         {`P = ${f(a.power)} W`}
       </text>
-      <text x={W / 2} y={H - 8} textAnchor="middle" fontSize={10.5} className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={W / 2} y={H - 8} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
         {t("footer")}
       </text>
     </svg>

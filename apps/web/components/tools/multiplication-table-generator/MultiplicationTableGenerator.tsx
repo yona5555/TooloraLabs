@@ -18,7 +18,6 @@ import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
-import AdSpace from "@/components/tool-ui/AdSpace";
 import SidebarFillList from "@/components/tools/markets/SidebarFillList";
 import MTInputPanel from "./MTInputPanel";
 import MTResult from "./MTResult";
@@ -195,7 +194,7 @@ export default function MultiplicationTableGenerator({ education }: { education:
         />
       </div>
 
-      {/* Below the fold every card spans the full width; leaderboards sit between groups only. */}
+      {/* Below the fold every card spans the full width. */}
       <div className="mt-6 flex flex-col gap-6">
         <SectionNav items={navItems} />
         <ViewDocsLink slug="multiplication-table-generator" />
@@ -206,21 +205,18 @@ export default function MultiplicationTableGenerator({ education }: { education:
             <MTAreaModelLab {...ind} />
             <ArrayModel {...ind} />
             <DistributiveBalance {...ind} />
-            <AdSpace variant="leaderboard" />
 
             {/* Group 2 — neighbours, rows and the whole grid */}
             <NeighbourTrio {...ind} />
             <RowSumStacked {...ind} />
             <GridSumFormula {...ind} />
             <DistinctTrend {...ind} />
-            <AdSpace variant="leaderboard" />
 
             {/* Group 3 — digit patterns and memorising */}
             <UnitsDigitTimeline {...ind} />
             <DigitalRootStrip {...ind} />
             <FactorPairsEquivalence {...ind} />
             <MemoryStairs {...ind} />
-            <AdSpace variant="leaderboard" />
           </>
         ) : (
           <p className="rounded-2xl border border-dashed border-zinc-300 p-6 text-center text-sm text-zinc-500 dark:border-zinc-700 dark:text-zinc-400">{t("ind.empty")}</p>

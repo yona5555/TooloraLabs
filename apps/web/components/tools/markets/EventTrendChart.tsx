@@ -1,4 +1,6 @@
 import type { DailyRate } from "@tooloralabs/tools";
+import { svgPx } from "@/components/tool-ui/svgPx";
+import { useFitWidth } from "@/components/tool-ui/useFitWidth";
 
 type Props = {
   points: DailyRate[];
@@ -11,12 +13,16 @@ type Props = {
   bands?: { from: number; to: number; className: string }[];
 };
 
-const W = 720;
-const H = 380;
-const PAD = { l: 52, r: 8, t: 14, b: 40 };
+const MAX_W = 720;
+const MAX_H = 380;
+const PAD = { l: 60, r: 8, t: 14, b: 40 };
 
 /** Trend line with highlighted reference points (§31 type 7): a long series, its range, and numbered landmarks. */
 export default function EventTrendChart({ points, events, formatValue, ariaLabel, testId, bands = [] }: Props) {
+  // laid out at its on-screen width (true px) so the 12px labels keep their spacing on a phone; the height
+  // follows the width down to a readable floor
+  const [fitRef, W] = useFitWidth(MAX_W);
+  const H = Math.round(Math.max(220, (W * MAX_H) / MAX_W));
   if (points.length < 2) return null;
   // ~600 points keep the path light; the extremes below stay exact.
   const step = Math.max(1, Math.floor(points.length / 600));
@@ -44,19 +50,19 @@ export default function EventTrendChart({ points, events, formatValue, ariaLabel
   });
 
   return (
-    <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} className="h-auto w-full" role="img" aria-label={ariaLabel} data-testid={testId}>
+    <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} className="h-auto w-full" role="img" aria-label={ariaLabel} data-testid={testId}>
       {bands.map((b) => (
         <rect key={b.from} x={PAD.l} width={W - PAD.l - PAD.r} y={clampY(b.to)} height={Math.max(0, clampY(b.from) - clampY(b.to))} className={b.className} />
       ))}
       {years.map((yr) => (
-        <text key={yr} x={x(`${yr}-01-01`)} y={H - 22} textAnchor="middle" className="fill-zinc-400 font-mono text-[10px]">
+        <text style={{ fontSize: svgPx(12) }} key={yr} x={x(`${yr}-01-01`)} y={H - 22} textAnchor="middle" className="fill-zinc-400 font-mono">
           {yr}
         </text>
       ))}
       {[hi, lo].map((mk) => (
         <g key={`${mk.date}-${mk.rate}`}>
           <line x1={PAD.l} x2={W - PAD.r} y1={y(mk.rate)} y2={y(mk.rate)} strokeDasharray="2 4" className="stroke-zinc-300 dark:stroke-zinc-600" />
-          <text x={PAD.l - 4} y={y(mk.rate) + 3} textAnchor="end" className="fill-zinc-500 font-mono text-[10px] dark:fill-zinc-400">
+          <text style={{ fontSize: svgPx(12) }} x={PAD.l - 4} y={y(mk.rate) + 3} textAnchor="end" className="fill-zinc-500 font-mono dark:fill-zinc-400">
             {formatValue(mk.rate)}
           </text>
         </g>
@@ -66,7 +72,7 @@ export default function EventTrendChart({ points, events, formatValue, ariaLabel
         <g key={e.key}>
           <line x1={x(e.point.date)} x2={x(e.point.date)} y1={PAD.t} y2={H - PAD.b} strokeDasharray="3 3" className="stroke-zinc-300 dark:stroke-zinc-600" />
           <circle cx={x(e.point.date)} cy={y(e.point.rate)} r={4.5} className="fill-amber-500 stroke-white dark:stroke-zinc-900" strokeWidth={1.5} />
-          <text x={x(e.point.date)} y={H - 6} textAnchor="middle" className="fill-amber-600 font-mono text-[11px] font-bold dark:fill-amber-400">
+          <text style={{ fontSize: svgPx(12) }} x={x(e.point.date)} y={H - 6} textAnchor="middle" className="fill-amber-600 font-mono font-bold dark:fill-amber-400">
             {i + 1}
           </text>
         </g>

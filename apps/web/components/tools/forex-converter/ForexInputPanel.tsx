@@ -6,11 +6,12 @@ import { convertCurrencyAmount, type CurrencyRate } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import FiatPicker from "@/components/tools/markets/FiatPicker";
-import QuickConversionTable, { quickAmounts } from "@/components/tools/markets/QuickConversionTable";
+import QuickConversionTable, { quickAmountDigits, quickAmounts } from "@/components/tools/markets/QuickConversionTable";
 import { useMarketFormatters, type FiatRate } from "@/components/tools/markets/fiat";
 import ForexCurrencyPicker from "./ForexCurrencyPicker";
 
-const QUICK_AMOUNTS = quickAmounts(0, 9);
+const QUICK_MIN_EXP = 0;
+const QUICK_AMOUNTS = quickAmounts(QUICK_MIN_EXP, 9);
 
 type ForexInputPanelProps = {
   currencies: CurrencyRate[];
@@ -110,7 +111,7 @@ export default function ForexInputPanel({
           title={t("quickTitle")}
           columns={[fromCurrency.code, toCurrency.code, f.currency]}
           rows={QUICK_AMOUNTS.map((a) => [
-            f.num(a, 0),
+            f.num(a, quickAmountDigits(QUICK_MIN_EXP)),
             f.num(convertCurrencyAmount(a, fromCurrency.ratePerUsd, toCurrency.ratePerUsd), 4),
             f.compactMoney(a / fromCurrency.ratePerUsd),
           ])}

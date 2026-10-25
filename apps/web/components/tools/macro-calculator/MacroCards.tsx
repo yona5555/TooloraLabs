@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import type { PhoneRole } from "@/components/tool-ui/SectionCard";
 import { ltr } from "@/components/tool-ui/MixedText";
 import { IndicatorCard, KitControls, KitTable, useStepper, type KitRow, type Stepper } from "@/components/tool-ui/indicator-kit/CardKit";
-import { Drawing, INK, LINE, lit, MUTED, px2, SvgLabel as T, useDrawing } from "@/components/tool-ui/indicator-kit/SvgBits";
+import { Drawing, flowRows, INK, labelW, LINE, lit, MUTED, px2, SvgLabel as T, useDrawing } from "@/components/tool-ui/indicator-kit/SvgBits";
 import { clamp, f1, f2 } from "@/components/tool-ui/indicator-kit/format";
 import { useMacroLive } from "./MacroLiveContext";
 import {
@@ -64,24 +64,42 @@ function useBase() {
  */
 export function SvgTrack({ W, y, frac, lo, hi, stops, stopAnchor = "ends" }: { W: number; y: number; frac: number; lo?: string; hi?: string; stops?: { frac: number; text?: string; on?: boolean }[]; stopAnchor?: "ends" | "middle" | "frac" }) {
   const x = X0 + clamp(frac, 0, 1) * (W - 2 * X0);
+  const placed = stops?.map((st, i) => {
+    const sx = X0 + st.frac * (W - 2 * X0);
+    const anchor: "start" | "middle" | "end" =
+      stopAnchor === "middle"
+        ? "middle"
+        : stopAnchor === "frac"
+          ? st.frac <= 0 ? "start" : st.frac >= 1 ? "end" : "middle"
+          : i === 0 ? "start" : i === stops.length - 1 ? "end" : "middle";
+    const w = st.text ? labelW(st.text) : 0;
+    return { sx, anchor, w, cx: anchor === "start" ? sx + w / 2 : anchor === "end" ? sx - w / 2 : sx };
+  });
+  // stop names that would touch their neighbour (long goal names on a phone) take turns on a second
+  // line, between the track and the first (the drawing ends under the first line) (§39)
+  // (the lo / hi end labels always keep the first line, so a stop touching them moves too)
+  const loEnd = lo ? X0 + labelW(lo) : -Infinity;
+  const hiStart = hi ? W - X0 - labelW(hi) : Infinity;
+  const rowEnd = [loEnd, -Infinity];
+  const stopRow = (placed ?? []).map((p) => {
+    const a = p.cx - p.w / 2;
+    const b = p.cx + p.w / 2;
+    const row = !p.w || (a >= rowEnd[0] + 6 && b <= hiStart - 6) ? 0 : 1;
+    if (p.w) rowEnd[row] = b;
+    return row;
+  });
   return (
     <g>
       <line x1={X0} y1={y} x2={W - X0} y2={y} style={LINE} strokeWidth={3} strokeLinecap="round" opacity={0.45} />
       <line x1={X0} y1={y} x2={x} y2={y} style={{ stroke: "var(--ph-accent-strong)" }} strokeWidth={4} strokeLinecap="round" />
-      {lo && <T x={X0} y={y + TRACK_LABEL_DY} text={lo} anchor="start" size={10.5} />}
-      {hi && <T x={W - X0} y={y + TRACK_LABEL_DY} text={hi} anchor="end" size={10.5} />}
+      {lo && <T x={X0} y={y + TRACK_LABEL_DY} text={lo} anchor="start" size={12} />}
+      {hi && <T x={W - X0} y={y + TRACK_LABEL_DY} text={hi} anchor="end" size={12} />}
       {stops?.map((st, i) => {
-        const sx = X0 + st.frac * (W - 2 * X0);
-        const anchor =
-          stopAnchor === "middle"
-            ? "middle"
-            : stopAnchor === "frac"
-              ? st.frac <= 0 ? "start" : st.frac >= 1 ? "end" : "middle"
-              : i === 0 ? "start" : i === stops.length - 1 ? "end" : "middle";
+        const { sx, anchor } = placed![i];
         return (
           <g key={i}>
             <circle cx={sx} cy={y} r={3.5} style={{ fill: "var(--ph-ink-muted)" }} />
-            {st.text && <T x={sx} y={y + TRACK_LABEL_DY} text={st.text} anchor={anchor} size={9.5} bold={st.on} style={st.on ? INK : MUTED} />}
+            {st.text && <T x={sx} y={y + TRACK_LABEL_DY - stopRow[i] * 14} text={st.text} anchor={anchor} size={12} bold={st.on} style={st.on ? INK : MUTED} />}
           </g>
         );
       })}
@@ -260,16 +278,16 @@ function Mixer({ side }: { side: Side }) {
           })}
           {[20, 40].map((v) => {
             const [lx, ly] = pt(v, 100 - v, 0);
-            return <T key={v} x={lx - 6} y={ly + 4} text={`${v}%`} anchor="end" size={10} style={{ fill: COLORS.protein }} />;
+            return <T key={v} x={lx - 6} y={ly + 4} text={`${v}%`} anchor="end" size={12} style={{ fill: COLORS.protein }} />;
           })}
           {/* The what-if point: a ring (goal dots stay visible inside it), tied to the handle beside it */}
           <line x1={hx + 10} y1={hy} x2={hx + HANDLE_DX - 20} y2={hy} style={{ stroke: "var(--ph-ink)" }} strokeWidth={2} />
           <circle cx={hx} cy={hy} r={10} fill="none" style={{ stroke: "var(--ph-ink)" }} strokeWidth={2.5} />
           <circle cx={hx} cy={hy} r={2} style={{ fill: "var(--ph-ink)" }} />
           {/* Edge labels (the handle is kept ≥ 20 % from every corner) */}
-          <T x={cx} y={tC[1] - 8} text={`${tm("protein")} ${PV}%`} size={11} bold style={{ fill: COLORS.protein }} />
-          <T x={vC[0]} y={vC[1] + 18} text={`${tm("carbs")} 100%`} anchor="start" size={11} bold style={{ fill: COLORS.carbs }} />
-          <T x={vF[0]} y={vF[1] + 18} text={`${tm("fat")} 100%`} anchor="end" size={11} bold style={{ fill: COLORS.fat }} />
+          <T x={cx} y={tC[1] - 8} text={`${tm("protein")} ${PV}%`} size={12} bold style={{ fill: COLORS.protein }} />
+          <T x={vC[0]} y={vC[1] + 18} text={`${tm("carbs")} 100%`} anchor="start" size={12} bold style={{ fill: COLORS.carbs }} />
+          <T x={vF[0]} y={vF[1] + 18} text={`${tm("fat")} 100%`} anchor="end" size={12} bold style={{ fill: COLORS.fat }} />
           {/* Readout and legend under the triangle, out of the handle's range */}
           <T x={cx} y={H - 66} text={`${valueText} → ${k0(grams.protein)} / ${k0(grams.carbs)} / ${k0(grams.fat)} g`} size={12} bold style={INK} />
           {legend.map((lg, i) => {
@@ -278,7 +296,7 @@ function Mixer({ side }: { side: Side }) {
             return (
               <g key={lg.key}>
                 <circle cx={lx + 5} cy={ly - 4} r={5} fill={lg.color} />
-                <T x={lx + 15} y={ly} text={lg.text} anchor="start" size={10.5} />
+                <T x={lx + 15} y={ly} text={lg.text} anchor="start" size={12} />
               </g>
             );
           })}
@@ -303,6 +321,9 @@ export function MacroCaloriesStackCard({ side }: { side: Side }) {
   const xk = (v: number) => X0 + (v / KMAX) * (W - 2 * X0);
   const by = 58;
   const bh = 52;
+  // legend packed by the real 12px widths (three across where they fit), so "250 g · 1,000 kcal" never
+  // runs into the next one (§39)
+  const legend = flowRows(MACROS.map((m) => 14 + Math.max(labelW(tm(m)), labelW(`${gT(snap[m].grams)} · ${k0(snap[m].calories)} kcal`))), W - 2 * X0, 12);
   const segs = MACROS.map((m, i) => {
     const a = MACROS.slice(0, i).reduce((sum, q) => sum + snap[q].calories, 0);
     return { m, a, b: a + snap[m].calories };
@@ -331,7 +352,7 @@ export function MacroCaloriesStackCard({ side }: { side: Side }) {
           {[0, 1000, 2000, 3000, 4000, 5000].map((v) => (
             <g key={v}>
               <line x1={xk(v)} y1={by - 8} x2={xk(v)} y2={by + bh + 4} style={{ stroke: "var(--ph-grid)" }} />
-              <T x={xk(v)} y={by - 12} text={k0(v)} size={9.5} />
+              <T x={xk(v)} y={by - 12} text={k0(v)} size={12} />
             </g>
           ))}
           {segs.map((g) => {
@@ -340,18 +361,19 @@ export function MacroCaloriesStackCard({ side }: { side: Side }) {
               <g key={g.m}>
                 <rect x={xk(g.a)} y={by} width={w} height={bh} style={{ fill: COLORS[g.m], ...lit(hover === g.m || hover === "sum") }} />
                 {w > 36 && <T x={xk(g.a) + w / 2} y={by + bh / 2 - 2} text={SYMBOL[g.m]} size={12} bold style={{ fill: "#fff" }} />}
-                {w > 36 && <T x={xk(g.a) + w / 2} y={by + bh / 2 + 14} text={`${Math.round(snap[g.m].percent)}%`} size={10.5} style={{ fill: "#fff" }} />}
+                {w > 36 && <T x={xk(g.a) + w / 2} y={by + bh / 2 + 14} text={`${Math.round(snap[g.m].percent)}%`} size={12} style={{ fill: "#fff" }} />}
               </g>
             );
           })}
           {/* Grams per macro under the bar */}
           {MACROS.map((m, i) => {
-            const lx = X0 + i * ((W - 2 * X0) / 3);
+            const lx = X0 + legend.at[i].x;
+            const ly = by + bh + 18 + legend.at[i].row * 36;
             return (
               <g key={`lg${m}`}>
-                <rect x={lx} y={by + bh + 18} width={10} height={10} rx={2} style={{ fill: COLORS[m] }} />
-                <T x={lx + 14} y={by + bh + 27} text={`${tm(m)}`} anchor="start" size={10.5} bold style={INK} />
-                <T x={lx + 14} y={by + bh + 42} text={`${gT(snap[m].grams)} · ${k0(snap[m].calories)} kcal`} anchor="start" size={10} />
+                <rect x={lx} y={ly} width={10} height={10} rx={2} style={{ fill: COLORS[m] }} />
+                <T x={lx + 14} y={ly + 9} text={`${tm(m)}`} anchor="start" size={12} bold style={INK} />
+                <T x={lx + 14} y={ly + 24} text={`${gT(snap[m].grams)} · ${k0(snap[m].calories)} kcal`} anchor="start" size={12} />
               </g>
             );
           })}
@@ -408,13 +430,13 @@ export function MacroAmdrCard({ side }: { side: Side }) {
             const on = hover === m;
             return (
               <g key={m}>
-                <T x={X0} y={y - 26} text={tm(m)} anchor="start" size={11} bold style={{ fill: COLORS[m] }} />
+                <T x={X0} y={y - 26} text={tm(m)} anchor="start" size={12} bold style={{ fill: COLORS[m] }} />
                 <rect x={xp(0)} y={y} width={xp(PMAX) - xp(0)} height={sh} rx={4} style={{ fill: "var(--ph-grid)" }} />
                 <rect x={xp(a)} y={y} width={xp(b) - xp(a)} height={sh} rx={4} fill="#22c55e" opacity={on ? 0.75 : 0.45} />
-                <T x={xp(a)} y={y + sh + 14} text={`${a}%`} size={10} />
-                <T x={xp(b)} y={y + sh + 14} text={`${b}%`} size={10} />
+                <T x={xp(a)} y={y + sh + 14} text={`${a}%`} size={12} />
+                <T x={xp(b)} y={y + sh + 14} text={`${b}%`} size={12} />
                 <line x1={xp(v)} y1={y - 4} x2={xp(v)} y2={y + sh + 4} stroke={COLORS[m]} strokeWidth={on ? 5 : 4} strokeLinecap="round" />
-                <T x={xp(v) > W / 2 ? xp(v) - 6 : xp(v) + 6} y={y - 9} text={`${Math.round(v)}% · ${gT(snap[m].grams)}`} anchor={xp(v) > W / 2 ? "end" : "start"} size={11} bold style={INK} />
+                <T x={xp(v) > W / 2 ? xp(v) - 6 : xp(v) + 6} y={y - 9} text={`${Math.round(v)}% · ${gT(snap[m].grams)}`} anchor={xp(v) > W / 2 ? "end" : "start"} size={12} bold style={INK} />
               </g>
             );
           })}
@@ -481,13 +503,13 @@ export function MacroProteinGaugeCard({ side }: { side: Side }) {
           })}
           {[0, 0.8, 1.4, 2, 3.1, 4].map((v) => {
             const [x, y] = pt(v, R + 26);
-            return <T key={v} x={x} y={y + 4} text={String(v)} size={10.5} />;
+            return <T key={v} x={x} y={y + 4} text={String(v)} size={12} />;
           })}
           <path d={arc(1.4, 2, R - 32)} fill="none" style={{ stroke: "var(--ph-ink)" }} strokeWidth={4} opacity={hover === "issn" ? 1 : 0.35} />
           <line x1={cx} y1={cy} x2={nx} y2={ny} style={{ stroke: "var(--ph-ink)" }} strokeWidth={hover === "gkg" ? 4.5 : 3.5} strokeLinecap="round" />
           <circle cx={cx} cy={cy} r={7} style={{ fill: "var(--ph-ink)" }} />
           <T x={cx} y={cy + 26} text={`${f2(gkg)} g/kg · ${gT(snap.protein.grams)}`} size={15} bold style={INK} />
-          <T x={cx} y={cy + 44} text={t(`zones.${zone.key}`)} size={11.5} bold style={{ fill: zone.color }} />
+          <T x={cx} y={cy + 44} text={t(`zones.${zone.key}`)} size={12} bold style={{ fill: zone.color }} />
           <SvgTrack W={W} y={trackY} frac={(w - 40) / 110} lo="40 kg" hi="150 kg" />
         </Drawing>
       }
@@ -536,11 +558,11 @@ export function MacroMealsCard({ side }: { side: Side }) {
       caption={t("caption", { n: ltr(String(meals)), p: ltr(gT(pMeal)) })}
       visual={
         <Drawing {...d} hMin={HMIN} label={t("handle")} valueText={valueText} handle={{ x: X0 + ((meals - 2) / 4) * (W - 2 * X0), y: trackY, dir: "horizontal" }} s={s} testId="macro-c5">
-          <T x={6} y={16} text={t("axis")} anchor="start" size={10.5} bold />
+          <T x={6} y={16} text={t("axis")} anchor="start" size={12} bold />
           {ticks.map((v) => (
             <g key={v}>
               <line x1={PL} y1={yv(v)} x2={W - 12} y2={yv(v)} style={{ stroke: "var(--ph-grid)" }} />
-              <T x={PL - 6} y={yv(v) + 4} text={String(v)} anchor="end" size={10} />
+              <T x={PL - 6} y={yv(v) + 4} text={String(v)} anchor="end" size={12} />
             </g>
           ))}
           {/* ISSN per-meal protein band, 20–40 g */}
@@ -552,12 +574,12 @@ export function MacroMealsCard({ side }: { side: Side }) {
               <g key={p.m}>
                 <rect x={x} y={yv(p.v)} width={w} height={base - yv(p.v)} rx={5} style={{ fill: COLORS[p.m], ...lit(hover === p.m) }} />
                 <T x={x + w / 2} y={yv(p.v) - 7} text={gT(p.v)} size={12.5} bold style={INK} />
-                <T x={x + w / 2} y={base + 16} text={tm(p.m)} size={10.5} bold style={{ fill: COLORS[p.m] }} />
+                <T x={x + w / 2} y={base + 16} text={tm(p.m)} size={12} bold style={{ fill: COLORS[p.m] }} />
               </g>
             );
           })}
           <rect x={W - 118} y={7} width={10} height={10} rx={2} fill="#22c55e" opacity={0.5} />
-          <T x={W - 12} y={16} text="ISSN 20–40 g" anchor="end" size={10} bold style={{ fill: "#16a34a" }} />
+          <T x={W - 12} y={16} text="ISSN 20–40 g" anchor="end" size={12} bold style={{ fill: "#16a34a" }} />
           <SvgTrack W={W} y={trackY} frac={(meals - 2) / 4} stops={[2, 3, 4, 5, 6].map((m, i) => ({ frac: i / 4, text: String(m), on: m === meals }))} />
         </Drawing>
       }
@@ -609,7 +631,7 @@ export function MacroSensitivityCard({ side }: { side: Side }) {
       caption={t("caption", { pct: ltr(`${pct}%`), dp: ltr(gT(dP)) })}
       visual={
         <Drawing {...d} hMin={HMIN} label={t("handle")} valueText={valueText} handle={{ x: X0 + ((pct - 5) / 35) * (W - 2 * X0), y: trackY, dir: "horizontal" }} s={s} testId="macro-c6">
-          <T x={X0} y={18} text={t("axis")} anchor="start" size={10.5} bold />
+          <T x={X0} y={18} text={t("axis")} anchor="start" size={12} bold />
           {cols.map((c, ci) => {
             const x = X0 + cw * ci + cw * 0.2;
             const w = cw * 0.6;
@@ -624,12 +646,12 @@ export function MacroSensitivityCard({ side }: { side: Side }) {
                   return (
                     <g key={q.m}>
                       <rect x={x} y={yv(y1)} width={w} height={Math.max(0, hgt)} style={{ fill: COLORS[q.m], ...lit(hover === c.key) }} />
-                      {hgt > 16 && <T x={x + w / 2} y={yv(y1) + hgt / 2 + 4} text={k0(q.v)} size={10.5} bold style={{ fill: "#fff" }} />}
+                      {hgt > 16 && <T x={x + w / 2} y={yv(y1) + hgt / 2 + 4} text={k0(q.v)} size={12} bold style={{ fill: "#fff" }} />}
                     </g>
                   );
                 })}
-                <T x={x + w / 2} y={yv(acc) - 8} text={kcalT(c.kcal)} size={on ? 12.5 : 11} bold style={INK} />
-                <T x={x + w / 2} y={base + 16} text={c.key === "now" ? t("now") : c.key === "low" ? `−${pct}%` : `+${pct}%`} size={11} bold={on} style={on ? INK : MUTED} />
+                <T x={x + w / 2} y={yv(acc) - 8} text={kcalT(c.kcal)} size={on ? 12.5 : 12} bold style={INK} />
+                <T x={x + w / 2} y={base + 16} text={c.key === "now" ? t("now") : c.key === "low" ? `−${pct}%` : `+${pct}%`} size={12} bold={on} style={on ? INK : MUTED} />
               </g>
             );
           })}
@@ -675,7 +697,7 @@ function Flow({ side }: { side: Side }) {
     <g>
       <line x1={x1 + 2} y1={y} x2={x2 - 8} y2={y} style={{ stroke: "var(--ph-ink-muted)" }} strokeWidth={2} />
       <path d={`M ${x2 - 8} ${y - 5} L ${x2} ${y} L ${x2 - 8} ${y + 5} Z`} style={{ fill: "var(--ph-ink-muted)" }} />
-      <T x={(x1 + x2) / 2} y={labelY} text={text} size={10.5} bold style={INK} />
+      <T x={(x1 + x2) / 2} y={labelY} text={text} size={12} bold style={INK} />
     </g>
   );
   return (
@@ -698,7 +720,7 @@ function Flow({ side }: { side: Side }) {
             return (
               <g key={m}>
                 <rect x={col[0]} y={y} width={boxW} height={bh} rx={8} style={{ fill: "var(--ph-surface)", ...lit(on) }} />
-                <T x={col[0] + boxW / 2} y={y + 18} text={tm(m)} size={10} bold style={{ fill: COLORS[m] }} />
+                <T x={col[0] + boxW / 2} y={y + 18} text={tm(m)} size={12} bold style={{ fill: COLORS[m] }} />
                 <T x={col[0] + boxW / 2} y={y + 35} text={k0(kcal)} size={12} bold style={INK} />
                 {arrow(col[0] + boxW, col[1], y + bh / 2, y - 6, `× ${Math.round(snap[m].percent)}%`)}
                 <rect x={col[1]} y={y} width={boxW} height={bh} rx={8} style={{ fill: COLORS[m], opacity: 0.85, ...lit(on) }} />
@@ -760,9 +782,9 @@ export function MacroFoodsCard({ side }: { side: Side }) {
             const on = hover === b.key;
             return (
               <g key={b.key}>
-                <T x={LW - 8} y={y + bh / 2 + 4} text={t(`items.${b.key}`)} anchor="end" size={10.5} bold={on} style={on ? INK : MUTED} />
+                <T x={LW - 8} y={y + bh / 2 + 4} text={t(`items.${b.key}`)} anchor="end" size={12} bold={on} style={on ? INK : MUTED} />
                 <rect x={LW} y={y} width={Math.max(2, xv(b.g) - LW)} height={bh} rx={4} style={{ fill: COLORS.protein, opacity: 0.55 + 0.45 * (1 - bi / bars.length), ...lit(on) }} />
-                <T x={xv(b.g) + 6} y={y + bh / 2 + 4} text={gT(b.g)} anchor="start" size={11} bold style={INK} />
+                <T x={xv(b.g) + 6} y={y + bh / 2 + 4} text={gT(b.g)} anchor="start" size={12} bold style={INK} />
               </g>
             );
           })}

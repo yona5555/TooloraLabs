@@ -3,6 +3,7 @@ import { sanitizePomodoro } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import LiveTable3DLayout, { LiveTableFill, type LiveTableGroup } from "@/components/tool-ui/three/LiveTable3DLayout";
 import { useFmt, useStudyT, type Derived, type StudioState } from "./studio";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 type Props = { state: StudioState; d: Derived };
 
@@ -40,7 +41,7 @@ function PlanMap({ d }: { d: Derived }) {
         return (
           <g key={e.id}>
             <circle cx={LW / 2} cy={y + RH / 2} r={7} fill={color} />
-            <text x={LW / 2} y={y + RH / 2 + 3.5} textAnchor="middle" fontSize={9} fontWeight={800} fill="white">
+            <text style={{ fontSize: svgPx(12) }} x={LW / 2} y={y + RH / 2 + 3.5} textAnchor="middle" fontWeight={800} fill="white">
               {ri + 1}
             </text>
             {plan.days.map((day) => {
@@ -82,7 +83,7 @@ function PlanMap({ d }: { d: Derived }) {
       })}
       {plan.days.map((day) =>
         day.index % step === 0 ? (
-          <text key={day.index} x={LW + day.index * cw + cw / 2} y={H - 8} textAnchor="middle" fontSize={8.5} className="fill-zinc-500 dark:fill-zinc-400">
+          <text style={{ fontSize: svgPx(12) }} key={day.index} x={LW + day.index * cw + cw / 2} y={H - 8} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
             {Number(day.date.slice(8))}
           </text>
         ) : null,

@@ -2,6 +2,7 @@
 import { useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
 import { px2 } from "@/components/tool-ui/indicator-kit/SvgBits";
 import { C } from "./state";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const axisText = "fill-zinc-500 dark:fill-zinc-400";
 const valueText = "fill-zinc-800 dark:fill-zinc-100";
@@ -94,7 +95,7 @@ export function ShiftDial({ start, end, extraDays = 0, dstDelta = 0, hourLabel, 
           <g key={h}>
             <line x1={a.x} y1={a.y} x2={b.x} y2={b.y} stroke="currentColor" strokeOpacity={0.4} />
             {h % 3 === 0 && (
-              <text x={lbl.x} y={lbl.y + 3} textAnchor="middle" fontSize={9} className={axisText}>
+              <text style={{ fontSize: svgPx(12) }} x={lbl.x} y={lbl.y + 3} textAnchor="middle" className={axisText}>
                 {hourLabel(h)}
               </text>
             )}
@@ -104,16 +105,16 @@ export function ShiftDial({ start, end, extraDays = 0, dstDelta = 0, hourLabel, 
       <path d={arcPath(start, end, R)} fill="none" stroke={C.main} strokeWidth={18} strokeLinecap="butt" style={{ transition: dragging ? undefined : "all 300ms ease" }} />
       {dstDelta !== 0 && <path d={arcPath(dstFrom, dstTo, R + 14)} fill="none" stroke={C.dst} strokeWidth={6} />}
       {extraDays > 0 && <circle cx={CX} cy={CY} r={R + 24} fill="none" stroke={C.main} strokeOpacity={0.35} strokeDasharray="3 4" strokeWidth={2} />}
-      <text x={CX} y={CY - 18} textAnchor="middle" fontSize={10} className={axisText}>{center[0]}</text>
-      <text x={CX} y={CY + 6} textAnchor="middle" fontSize={22} fontWeight={800} className={valueText}>{center[1]}</text>
-      <text x={CX} y={CY + 24} textAnchor="middle" fontSize={10} fontWeight={700} fill={dstDelta ? C.dst : C.main}>{center[2]}</text>
+      <text style={{ fontSize: svgPx(12) }} x={CX} y={CY - 18} textAnchor="middle" className={axisText}>{center[0]}</text>
+      <text style={{ fontSize: svgPx(22) }} x={CX} y={CY + 6} textAnchor="middle" fontWeight={800} className={valueText}>{center[1]}</text>
+      <text style={{ fontSize: svgPx(12) }} x={CX} y={CY + 24} textAnchor="middle" fontWeight={700} fill={dstDelta ? C.dst : C.main}>{center[2]}</text>
       {[
         { p: s, which: "start" as const, color: C.add, label: startLabel },
         { p: en, which: "end" as const, color: C.main, label: endLabel },
       ].map((h) => (
         <g key={h.which} onPointerDown={down(h.which)} style={{ cursor: onDrag ? "grab" : undefined }}>
           <circle cx={h.p.x} cy={h.p.y} r={onDrag ? 13 : 10} fill={h.color} stroke="white" strokeWidth={2.5} />
-          <text x={h.p.x} y={h.p.y + 3.5} textAnchor="middle" fontSize={9} fontWeight={800} fill="white">{h.label}</text>
+          <text style={{ fontSize: svgPx(12) }} x={h.p.x} y={h.p.y + 3.5} textAnchor="middle" fontWeight={800} fill="white">{h.label}</text>
         </g>
       ))}
     </svg>
@@ -167,20 +168,20 @@ export function Waterfall({
           <g key={i}>
             <rect x={x(i) - bw / 2} y={top} width={bw} height={h} rx={3} fill={it.value < 0 ? C.sub : C.add} fillOpacity={0.85} style={{ transition: "all 350ms ease" }} />
             {i < items.length - 1 && <line x1={x(i) + bw / 2} x2={x(i + 1) - bw / 2} y1={y(to)} y2={y(to)} stroke="currentColor" strokeOpacity={0.4} strokeDasharray="3 3" />}
-            <text x={x(i)} y={top - 5} textAnchor="middle" fontSize={9} fontWeight={700} fill={it.value < 0 ? C.sub : C.add}>
+            <text style={{ fontSize: svgPx(12) }} x={x(i)} y={top - 5} textAnchor="middle" fontWeight={700} fill={it.value < 0 ? C.sub : C.add}>
               {it.value < 0 ? "−" : "+"}
               {fmt(Math.abs(it.value))}
             </text>
-            <text x={x(i)} y={H - 18} textAnchor="middle" fontSize={9} className={axisText}>
+            <text style={{ fontSize: svgPx(12) }} x={x(i)} y={H - 18} textAnchor="middle" className={axisText}>
               {it.label.length > 10 ? `${it.label.slice(0, 9)}…` : it.label}
             </text>
           </g>
         );
       })}
       <rect x={x(n - 1) - bw / 2} y={y(Math.max(0, total))} width={bw} height={Math.max(2, Math.abs(y(0) - y(total)))} rx={3} fill={C.main} style={{ transition: "all 350ms ease" }} />
-      <text x={x(n - 1)} y={y(Math.max(0, total)) - 5} textAnchor="middle" fontSize={10} fontWeight={800} fill={C.main}>{fmt(total)}</text>
-      <text x={x(n - 1)} y={H - 18} textAnchor="middle" fontSize={9} fontWeight={700} className={valueText}>{totalLabel}</text>
-      <text x={W / 2} y={H - 4} textAnchor="middle" fontSize={8.5} className={axisText}>{`Σ = ${fmt(total)}`}</text>
+      <text style={{ fontSize: svgPx(12) }} x={x(n - 1)} y={y(Math.max(0, total)) - 5} textAnchor="middle" fontWeight={800} fill={C.main}>{fmt(total)}</text>
+      <text style={{ fontSize: svgPx(12) }} x={x(n - 1)} y={H - 18} textAnchor="middle" fontWeight={700} className={valueText}>{totalLabel}</text>
+      <text style={{ fontSize: svgPx(12) }} x={W / 2} y={H - 4} textAnchor="middle" className={axisText}>{`Σ = ${fmt(total)}`}</text>
     </svg>
   );
 }
@@ -224,7 +225,7 @@ export function WeekBars({
       {[0, 4, 8, 12].filter((h) => h * 3600 <= max).map((h) => (
         <g key={h}>
           <line x1={22} x2={W - 4} y1={y(h * 3600)} y2={y(h * 3600)} stroke="currentColor" strokeOpacity={0.1} />
-          <text x={18} y={y(h * 3600) + 3} textAnchor="end" fontSize={8.5} className={axisText}>{`${h}h`}</text>
+          <text style={{ fontSize: svgPx(12) }} x={18} y={y(h * 3600) + 3} textAnchor="end" className={axisText}>{`${h}h`}</text>
         </g>
       ))}
       {dailyThreshold ? <line x1={22} x2={W - 4} y1={y(dailyThreshold)} y2={y(dailyThreshold)} stroke={C.ot} strokeDasharray="5 3" strokeWidth={1.5} /> : null}
@@ -237,13 +238,13 @@ export function WeekBars({
               <>
                 <rect x={x(i) - bw / 2} y={y(d.regular)} width={bw} height={Math.max(1, y(0) - y(d.regular))} rx={3} fill={C.main} fillOpacity={0.85} style={{ transition: "all 350ms ease" }} />
                 {d.overtime > 0 && <rect x={x(i) - bw / 2} y={y(total)} width={bw} height={y(d.regular) - y(total)} rx={3} fill={C.ot} style={{ transition: "all 350ms ease" }} />}
-                <text x={x(i)} y={y(total) - 5} textAnchor="middle" fontSize={9.5} fontWeight={700} className={valueText}>{fmt(total)}</text>
-                {d.overnight && <text x={x(i)} y={y(0) - 6} textAnchor="middle" fontSize={10} fill="white">☾</text>}
+                <text style={{ fontSize: svgPx(12) }} x={x(i)} y={y(total) - 5} textAnchor="middle" fontWeight={700} className={valueText}>{fmt(total)}</text>
+                {d.overnight && <text style={{ fontSize: svgPx(12) }} x={x(i)} y={y(0) - 6} textAnchor="middle" fill="white">☾</text>}
               </>
             ) : (
-              <text x={x(i)} y={y(0) - 8} textAnchor="middle" fontSize={8.5} className={axisText}>{offLabel}</text>
+              <text style={{ fontSize: svgPx(12) }} x={x(i)} y={y(0) - 8} textAnchor="middle" className={axisText}>{offLabel}</text>
             )}
-            <text x={x(i)} y={H - 16} textAnchor="middle" fontSize={10} fontWeight={d.on ? 700 : 400} className={d.on ? valueText : axisText}>{d.label}</text>
+            <text style={{ fontSize: svgPx(12) }} x={x(i)} y={H - 16} textAnchor="middle" fontWeight={d.on ? 700 : 400} className={d.on ? valueText : axisText}>{d.label}</text>
           </g>
         );
       })}
@@ -293,7 +294,7 @@ export function HourPie({
           <g key={m}>
             <line x1={a.x} y1={a.y} x2={b.x} y2={b.y} stroke="currentColor" strokeOpacity={m % 5 === 0 ? 0.55 : 0.25} />
             {m % 15 === 0 && (
-              <text x={l.x} y={l.y + 3} textAnchor="middle" fontSize={8.5} className={axisText}>{`${m}′ · .${String(m / 60 * 100).padStart(2, "0")}`}</text>
+              <text style={{ fontSize: svgPx(12) }} x={l.x} y={l.y + 3} textAnchor="middle" className={axisText}>{`${m}′ · .${String(m / 60 * 100).padStart(2, "0")}`}</text>
             )}
           </g>
         );
@@ -302,12 +303,12 @@ export function HourPie({
         <line x1={cx} y1={cy} x2={at(rf, r + 4).x} y2={at(rf, r + 4).y} stroke={C.ot} strokeWidth={2.5} strokeDasharray="4 2" />
       )}
       <circle cx={cx} cy={cy} r={34} className="fill-white dark:fill-zinc-900" />
-      <text x={cx} y={cy - 2} textAnchor="middle" fontSize={17} fontWeight={800} className={valueText}>{decimalLabel}</text>
-      <text x={cx} y={cy + 14} textAnchor="middle" fontSize={10} fontWeight={700} fill={C.main}>{hmsLabel}</text>
+      <text style={{ fontSize: svgPx(17) }} x={cx} y={cy - 2} textAnchor="middle" fontWeight={800} className={valueText}>{decimalLabel}</text>
+      <text style={{ fontSize: svgPx(12) }} x={cx} y={cy + 14} textAnchor="middle" fontWeight={700} fill={C.main}>{hmsLabel}</text>
       {Array.from({ length: dots }, (_, i) => (
         <circle key={i} cx={px2(130 - ((dots - 1) * 9) / 2 + i * 9)} cy={242} r={3.5} fill={C.main} />
       ))}
-      {whole > 24 && <text x={232} y={245} fontSize={9} className={axisText}>{`+${whole - 24}`}</text>}
+      {whole > 24 && <text style={{ fontSize: svgPx(12) }} x={232} y={245} className={axisText}>{`+${whole - 24}`}</text>}
     </svg>
   );
 }

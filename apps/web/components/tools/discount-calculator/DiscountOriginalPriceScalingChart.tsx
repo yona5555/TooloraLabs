@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import DiscountWorkedExampleNote from "./DiscountWorkedExampleNote";
 import GapFreeRow from "@/components/tool-ui/GapFreeRow";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 /** Fixed 25% off, four real original prices — the tool's own price*discount% formula, directly, shown as vertical columns so the four price points read as a lineup. */
 const DISCOUNT_PERCENT = 25;
@@ -38,10 +39,10 @@ export default async function DiscountOriginalPriceScalingChart() {
               return (
                 <g key={price}>
                   <rect x={x} y={y} width={COL_WIDTH} height={colHeight} rx={6} className="fill-indigo-500/80 dark:fill-indigo-400/80" />
-                  <text x={x + COL_WIDTH / 2} y={y - 8} textAnchor="middle" fontSize={11} fontWeight={700} fill="currentColor">
+                  <text style={{ fontSize: svgPx(12) }} x={x + COL_WIDTH / 2} y={y - 8} textAnchor="middle" fontWeight={700} fill="currentColor">
                     ${save.toFixed(2)}
                   </text>
-                  <text x={x + COL_WIDTH / 2} y={HEIGHT - PAD_BOTTOM + 18} textAnchor="middle" fontSize={10} fill="currentColor" opacity={0.75}>
+                  <text style={{ fontSize: svgPx(12) }} x={x + COL_WIDTH / 2} y={HEIGHT - PAD_BOTTOM + 18} textAnchor="middle" fill="currentColor" opacity={0.75}>
                     ${price}
                   </text>
                 </g>

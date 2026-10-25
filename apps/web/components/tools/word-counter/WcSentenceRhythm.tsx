@@ -2,6 +2,8 @@
 import { useTranslations } from "next-intl";
 import WcIndicatorCard from "./WcIndicatorCard";
 import { useWcLive } from "./WcLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
+import { labelW } from "@/components/tool-ui/labelLayout";
 
 const W = 340;
 const H = 180;
@@ -36,11 +38,34 @@ export default function WcSentenceRhythm() {
   const active = activeSentence != null ? all[activeSentence] : undefined;
   const longCount = all.filter((s) => s.words > LONG).length;
 
+  // the "25 · long" line label takes the first free spot (right or left end, over or under its line)
+  // where no bar's value label sits (§39); widths allow for a phone's up-to-1.15×
+  const longText = `${f(LONG)} · ${t("longLine")}`;
+  const longW = labelW(longText) * 1.15;
+  const valueBoxes =
+    shown.length <= 24
+      ? shown.map((s, i) => {
+          const cx = PAD_X + i * slot + slot / 2;
+          const half = (labelW(f(s.words)) * 1.15) / 2;
+          return { a: cx - half, b: cx + half, base: y(s.words) - 3 };
+        })
+      : [];
+  const longSpot =
+    [
+      { x: W - PAD_X, anchor: "end" as const, base: y(LONG) - 3 },
+      { x: W - PAD_X, anchor: "end" as const, base: y(LONG) + 14 },
+      { x: PAD_X, anchor: "start" as const, base: y(LONG) - 3 },
+      { x: PAD_X, anchor: "start" as const, base: y(LONG) + 14 },
+    ].find((c) => {
+      const a = c.anchor === "end" ? c.x - longW : c.x;
+      return valueBoxes.every((v) => v.b < a - 2 || v.a > a + longW + 2 || Math.abs(v.base - c.base) >= 16);
+    }) ?? { x: W - PAD_X, anchor: "end" as const, base: y(LONG) - 3 };
+
   const indicator = (
     <div>
       <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
         <line x1={PAD_X} y1={y(LONG)} x2={W - PAD_X} y2={y(LONG)} strokeDasharray="2 3" className="stroke-rose-400" />
-        <text x={W - PAD_X} y={y(LONG) - 3} textAnchor="end" fontSize={9} className="fill-rose-500 dark:fill-rose-400">{`${f(LONG)} · ${t("longLine")}`}</text>
+        <text style={{ fontSize: svgPx(12) }} x={longSpot.x} y={longSpot.base} textAnchor={longSpot.anchor} className="fill-rose-500 dark:fill-rose-400">{longText}</text>
         {shown.map((s, i) => {
           const x = PAD_X + i * slot + (slot - barW) / 2;
           const isActive = s.index === activeSentence;
@@ -51,7 +76,7 @@ export default function WcSentenceRhythm() {
                 <title>{t("barTitle", { n: f(s.index + 1), words: f(s.words) })}</title>
               </rect>
               {shown.length <= 24 && (
-                <text x={x + barW / 2} y={y(s.words) - 3} textAnchor="middle" fontSize={9} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">{f(s.words)}</text>
+                <text style={{ fontSize: svgPx(12) }} x={x + barW / 2} y={y(s.words) - 3} textAnchor="middle" fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">{f(s.words)}</text>
               )}
             </g>
           );
@@ -59,12 +84,12 @@ export default function WcSentenceRhythm() {
         {avg > 0 && (
           <>
             <line x1={PAD_X} y1={y(avg)} x2={W - PAD_X} y2={y(avg)} strokeWidth={1.5} className="stroke-emerald-600 dark:stroke-emerald-400" />
-            <text x={PAD_X} y={y(avg) - 3} fontSize={9} fontWeight={600} className="fill-emerald-700 dark:fill-emerald-300">{`${t("avgLine")} ${f(avg)}`}</text>
+            <text style={{ fontSize: svgPx(12) }} x={PAD_X} y={y(avg) - 3} fontWeight={600} className="fill-emerald-700 dark:fill-emerald-300">{`${t("avgLine")} ${f(avg)}`}</text>
           </>
         )}
         <line x1={PAD_X} y1={BASE} x2={W - PAD_X} y2={BASE} className="stroke-zinc-300 dark:stroke-zinc-600" />
-        <text x={PAD_X} y={BASE + 14} fontSize={9} className="fill-zinc-500 dark:fill-zinc-400">{`${t("first")} ${f(1)}`}</text>
-        <text x={W - PAD_X} y={BASE + 14} textAnchor="end" fontSize={9} className="fill-zinc-500 dark:fill-zinc-400">{f(shown.length)}</text>
+        <text style={{ fontSize: svgPx(12) }} x={PAD_X} y={BASE + 14} className="fill-zinc-500 dark:fill-zinc-400">{`${t("first")} ${f(1)}`}</text>
+        <text style={{ fontSize: svgPx(12) }} x={W - PAD_X} y={BASE + 14} textAnchor="end" className="fill-zinc-500 dark:fill-zinc-400">{f(shown.length)}</text>
       </svg>
       <p className="mt-1 text-[11px] text-amber-700 dark:text-amber-300">
         {t("hint")}

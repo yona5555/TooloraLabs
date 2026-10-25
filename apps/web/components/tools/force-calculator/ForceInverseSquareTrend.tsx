@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { inverseSquareCurve } from "@tooloralabs/tools";
 import ForceIndicatorCard, { ForceIndicatorUnavailable } from "./ForceIndicatorCard";
 import { useForceModel } from "./ForceLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 220;
@@ -39,19 +40,19 @@ export default function ForceInverseSquareTrend() {
       <line x1={L} y1={B} x2={R} y2={B} className="stroke-zinc-300 dark:stroke-zinc-600" />
       <line x1={L} y1={T} x2={L} y2={B} className="stroke-zinc-300 dark:stroke-zinc-600" />
       {[0.5, 1, 2, 3, 4].map((k) => (
-        <text key={k} x={sx(k)} y={B + 14} textAnchor="middle" fontSize={10} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+        <text style={{ fontSize: svgPx(12) }} key={k} x={sx(k)} y={B + 14} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
           {k === 0.5 ? "r/2" : k === 1 ? "r" : `${k}r`}
         </text>
       ))}
       {[1, 2, 3, 4].map((q) => (
-        <text key={q} x={L - 6} y={sy(q) + 3} textAnchor="end" fontSize={10} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+        <text style={{ fontSize: svgPx(12) }} key={q} x={L - 6} y={sy(q) + 3} textAnchor="end" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
           {q === 1 ? "F" : `${q}F`}
         </text>
       ))}
-      <text x={R} y={B + 30} textAnchor="end" fontSize={10} className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={R} y={B + 30} textAnchor="end" className="fill-zinc-500 dark:fill-zinc-400">
         {tr("inverseSquareXLabel")}
       </text>
-      <text x={R} y={T + 2} textAnchor="end" fontSize={10} className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={R} y={T + 2} textAnchor="end" className="fill-zinc-500 dark:fill-zinc-400">
         {tr("inverseSquareYLabel")}
       </text>
       <path d={path} fill="none" strokeWidth={2.5} className="stroke-blue-600 dark:stroke-blue-400" />
@@ -62,7 +63,7 @@ export default function ForceInverseSquareTrend() {
           <g key={m.k}>
             <line x1={x} y1={y} x2={x} y2={B} strokeDasharray="3 3" className="stroke-zinc-300 dark:stroke-zinc-600" />
             <circle cx={x} cy={y} r={m.main ? 7 : 4} className={m.main ? "fill-red-600 dark:fill-red-400" : "fill-zinc-500 dark:fill-zinc-400"} />
-            <text x={x + 9} y={y - 7} fontSize={m.main ? 12 : 10} fontWeight={700} fontFamily="ui-monospace, monospace" className={m.main ? "fill-red-600 dark:fill-red-400" : "fill-zinc-600 dark:fill-zinc-300"}>
+            <text style={{ fontSize: svgPx(m.main ? 12 : 12) }} x={x + 9} y={y - 7} fontWeight={700} fontFamily="ui-monospace, monospace" className={m.main ? "fill-red-600 dark:fill-red-400" : "fill-zinc-600 dark:fill-zinc-300"}>
               {m.label}
             </text>
           </g>

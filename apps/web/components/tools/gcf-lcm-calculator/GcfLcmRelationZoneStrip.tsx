@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { relationKind } from "@tooloralabs/tools";
 import GcfLcmIndicatorCard from "./GcfLcmIndicatorCard";
 import { useGcfLcmModel } from "./GcfLcmLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 96;
@@ -36,15 +37,15 @@ export default function GcfLcmRelationZoneStrip() {
         {ZONES.map((z) => (
           <g key={z.key}>
             <rect x={x(z.from) + 1} y={34} width={x(z.to) - x(z.from) - 2} height={22} rx={4} className={z.cls} fillOpacity={z.key === zone ? 1 : 0.45} />
-            <text x={(x(z.from) + x(z.to)) / 2} y={72} textAnchor="middle" className={`text-[10px] font-semibold ${z.key === zone ? "fill-zinc-900 dark:fill-white" : "fill-zinc-400"}`}>
+            <text style={{ fontSize: svgPx(12) }} x={(x(z.from) + x(z.to)) / 2} y={72} textAnchor="middle" className={`font-semibold ${z.key === zone ? "fill-zinc-900 dark:fill-white" : "fill-zinc-400"}`}>
               {t(`zone.${z.key}`)}
             </text>
           </g>
         ))}
-        <text x={x(0)} y={88} className="fill-zinc-400 font-mono text-[9px]">1/min</text>
-        <text x={x(1)} y={88} textAnchor="end" className="fill-zinc-400 font-mono text-[9px]">1</text>
+        <text style={{ fontSize: svgPx(12) }} x={x(0)} y={88} className="fill-zinc-400 font-mono">1/min</text>
+        <text style={{ fontSize: svgPx(12) }} x={x(1)} y={88} textAnchor="end" className="fill-zinc-400 font-mono">1</text>
         <polygon points={`${x(pos) - 7},18 ${x(pos) + 7},18 ${x(pos)},30`} className="fill-zinc-800 dark:fill-zinc-100" />
-        <text x={Math.min(W - 60, Math.max(60, x(pos)))} y={13} textAnchor="middle" className="fill-zinc-800 font-mono text-[11px] font-bold dark:fill-zinc-100">
+        <text style={{ fontSize: svgPx(12) }} x={Math.min(W - 60, Math.max(60, x(pos)))} y={13} textAnchor="middle" className="fill-zinc-800 font-mono font-bold dark:fill-zinc-100">
           {`${f(result.gcf)} / ${f(min)} = ${f(ratio, 3)}`}
         </text>
       </svg>

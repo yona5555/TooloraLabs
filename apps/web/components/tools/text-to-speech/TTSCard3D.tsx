@@ -6,6 +6,7 @@ import { ltr } from "@/components/tool-ui/MixedText";
 import { IndicatorCard, KitControls, KitTable, KitTrack, useMeasuredSize, useStepper, type KitRow } from "@/components/tool-ui/indicator-kit/CardKit";
 import { ViewportScene } from "@/components/tool-ui/three/ViewportScene";
 import { chunksOf, STORY } from "./ttsMath";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 /** 1. (3D) The stored paragraph's real chunks as a stack of slabs under an adjustable chunk limit. */
 const ChunkStackScene3D = dynamic(() => import("./TTSScene3D"), { ssr: false, loading: () => null });
@@ -26,12 +27,12 @@ function ChunkStack2D({ lengths, limit }: { lengths: number[]; limit: number }) 
           return (
             <g key={i}>
               <rect x={X0} y={y} width={Math.max(4, xs(len) - X0)} height={h} rx={h / 2} style={{ fill: SERIES[i % SERIES.length] }} />
-              <text x={X0 + 10} y={y + h / 2 + 4} fontSize={10.5} fontWeight={700} className="tabular-nums" style={{ fill: "var(--ph-surface)" }}>{`#${i + 1} · ${len}`}</text>
+              <text x={X0 + 10} y={y + h / 2 + 4} fontWeight={700} className="tabular-nums" style={{ fontSize: svgPx(12), fill: "var(--ph-surface)" }}>{`#${i + 1} · ${len}`}</text>
             </g>
           );
         })}
         <line x1={xs(limit)} y1={20} x2={xs(limit)} y2={H - 8} style={{ stroke: "var(--ai-d)" }} strokeWidth={2} strokeDasharray="6 4" />
-        <text x={xs(limit)} y={14} fontSize={11} fontWeight={800} textAnchor="middle" className="tabular-nums" style={{ fill: "var(--ai-d)" }}>{limit}</text>
+        <text x={xs(limit)} y={14} fontWeight={800} textAnchor="middle" className="tabular-nums" style={{ fontSize: svgPx(12), fill: "var(--ai-d)" }}>{limit}</text>
       </svg>
     </div>
   );

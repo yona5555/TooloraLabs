@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import WcIndicatorCard from "./WcIndicatorCard";
 import { useWcLive } from "./WcLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 330;
 const H = 170;
@@ -29,8 +30,8 @@ export default function WcLetterFrequency() {
         return (
           <g key={l.letter}>
             <rect x={x} y={y(l.count)} width={barW} height={BASE - y(l.count)} rx={3} className={i < 3 ? "fill-blue-600 dark:fill-blue-500" : "fill-blue-300 dark:fill-blue-800"} style={{ transition: "y 250ms ease, height 250ms ease" }} />
-            <text x={x + barW / 2} y={y(l.count) - 3} textAnchor="middle" fontSize={9} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">{f(l.count)}</text>
-            <text x={x + barW / 2} y={BASE + 16} textAnchor="middle" fontSize={14} fontWeight={700} className="fill-zinc-800 dark:fill-zinc-100">{l.letter}</text>
+            <text style={{ fontSize: svgPx(12) }} x={x + barW / 2} y={y(l.count) - 3} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">{f(l.count)}</text>
+            <text style={{ fontSize: svgPx(14) }} x={x + barW / 2} y={BASE + 16} textAnchor="middle" fontWeight={700} className="fill-zinc-800 dark:fill-zinc-100">{l.letter}</text>
           </g>
         );
       })}

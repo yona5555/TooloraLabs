@@ -8,6 +8,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import FuelWorkedExampleNote from "./FuelWorkedExampleNote";
 import { ltrIsolate } from "@/lib/bidi";
 import GapFreeRow from "@/components/tool-ui/GapFreeRow";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 /** Same annual distance & price, five real-world efficiency levels — the tool's own inverse relationship (cost = distance / efficiency * price). */
 const ANNUAL_DISTANCE = 12000;
@@ -76,7 +77,7 @@ export default function FuelEfficiencyComparisonChart() {
                       <AutoFitText text={p.formatted} steps={VALUE_STEPS} allowWrap={false} className="font-mono font-bold text-emerald-700 dark:text-emerald-300" />
                     </div>
                   </foreignObject>
-                  <text x={x + COL_WIDTH / 2} y={HEIGHT - PAD_BOTTOM + 18} textAnchor="middle" fontSize={11} fontWeight={700} fill="currentColor" opacity={0.8}>
+                  <text style={{ fontSize: svgPx(12) }} x={x + COL_WIDTH / 2} y={HEIGHT - PAD_BOTTOM + 18} textAnchor="middle" fontWeight={700} fill="currentColor" opacity={0.8}>
                     {p.x} mpg
                   </text>
                 </g>

@@ -1,3 +1,4 @@
+import { svgPx } from "@/components/tool-ui/svgPx";
 type Segment = { key: string; value: number; label: string; colorClass: string; dotColorClass: string };
 
 type SalesTaxRateStackDonutProps = {
@@ -46,10 +47,10 @@ export default function SalesTaxRateStackDonut({ segments, centerValue, centerLa
               className={arc.colorClass}
             />
           ))}
-          <text x={center} y={center - 4} textAnchor="middle" fontSize={17} fontWeight={700} className="fill-zinc-900 dark:fill-zinc-50">
+          <text style={{ fontSize: svgPx(17) }} x={center} y={center - 4} textAnchor="middle" fontWeight={700} className="fill-zinc-900 dark:fill-zinc-50">
             {centerValue}
           </text>
-          <text x={center} y={center + 15} textAnchor="middle" fontSize={10} className="fill-zinc-500 dark:fill-zinc-400">
+          <text style={{ fontSize: svgPx(12) }} x={center} y={center + 15} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
             {centerLabel}
           </text>
         </svg>

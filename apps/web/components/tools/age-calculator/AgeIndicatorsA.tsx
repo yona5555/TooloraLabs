@@ -15,6 +15,8 @@ import {
 import SectionCard from "@/components/tool-ui/SectionCard";
 import IndicatorWithTable from "@/components/tool-ui/IndicatorWithTable";
 import { AGE_COLORS, type AgeState, type Derived, type Formatters } from "./ageModel";
+import { svgPx } from "@/components/tool-ui/svgPx";
+import { useFitWidth } from "@/components/tool-ui/useFitWidth";
 
 export type IndicatorProps = { state: AgeState; setState: (s: AgeState) => void; d: Derived; f: Formatters };
 
@@ -94,29 +96,29 @@ export function AgeTimeTravelCard({ state, setState, d, f }: IndicatorProps) {
                   <g key={age}>
                     <line x1={sx} x2={sx} y1={up ? axisY - 26 : axisY + 6} y2={up ? axisY - 6 : axisY + 26} stroke="currentColor" strokeOpacity={0.35} />
                     <circle cx={sx} cy={axisY} r={5} fill={reached ? AGE_COLORS.accent : "white"} stroke={AGE_COLORS.accent} strokeWidth={2} />
-                    <text x={sx} y={up ? axisY - 30 : axisY + 38} textAnchor="middle" fontSize={10} fontWeight={700} className={valueText}>
+                    <text style={{ fontSize: svgPx(12) }} x={sx} y={up ? axisY - 30 : axisY + 38} textAnchor="middle" fontWeight={700} className={valueText}>
                       {f.int(age)}
                     </text>
-                    <text x={sx} y={up ? axisY - 42 : axisY + 50} textAnchor="middle" fontSize={8} className={axisText}>
+                    <text style={{ fontSize: svgPx(12) }} x={sx} y={up ? axisY - 44 : axisY + 52} textAnchor="middle" className={axisText}>
                       {r.birth.year + age}
                     </text>
                   </g>
                 );
               })}
               <line x1={x(r.totalDays)} x2={x(r.totalDays)} y1={axisY - 12} y2={axisY + 12} stroke={AGE_COLORS.gregorian} strokeWidth={2} />
-              <text x={x(r.totalDays)} y={axisY + 64} textAnchor="middle" fontSize={9} fontWeight={700} fill={AGE_COLORS.gregorian}>
+              <text style={{ fontSize: svgPx(12) }} x={x(r.totalDays)} y={axisY + 68} textAnchor="middle" fontWeight={700} fill={AGE_COLORS.gregorian}>
                 {d.isToday ? td("input.today") : td("result.reference")}
               </text>
               <g style={{ transition: pick === null ? "transform 300ms ease" : undefined }} transform={`translate(${x(offset)} 0)`}>
                 <line x1={0} x2={0} y1={18} y2={axisY + 14} stroke={AGE_COLORS.hijri} strokeWidth={2} strokeDasharray="3 2" />
                 <rect x={-46} y={2} width={92} height={18} rx={9} fill={AGE_COLORS.hijri} />
-                <text x={0} y={15} textAnchor="middle" fontSize={10} fontWeight={800} fill="white">
+                <text style={{ fontSize: svgPx(12) }} x={0} y={15} textAnchor="middle" fontWeight={800} fill="white">
                   {formatIsoDate(at)}
                 </text>
                 <circle cx={0} cy={axisY} r={9} fill="white" stroke={AGE_COLORS.hijri} strokeWidth={3} />
               </g>
-              <text x={L} y={H - 6} fontSize={9} className={axisText}>{r.birth.year}</text>
-              <text x={W - R} y={H - 6} textAnchor="end" fontSize={9} className={axisText}>{r.birth.year + 100}</text>
+              <text style={{ fontSize: svgPx(12) }} x={L} y={H - 6} className={axisText}>{r.birth.year}</text>
+              <text style={{ fontSize: svgPx(12) }} x={W - R} y={H - 6} textAnchor="end" className={axisText}>{r.birth.year + 100}</text>
             </svg>
             <input
               type="range"
@@ -167,7 +169,7 @@ export function AgeEquivalenceCard({ d, f }: IndicatorProps) {
   const { report: r } = d;
   const g = r.gregorian;
   const h = r.hijri;
-  const W = 400;
+  const [fitRef, W] = useFitWidth(400);
   const H = 170;
   const L = 8;
   const R = 8;
@@ -188,26 +190,26 @@ export function AgeEquivalenceCard({ d, f }: IndicatorProps) {
       <IndicatorWithTable
         workedExampleTitle={t("worked")}
         indicator={
-          <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("equiv.title")} className="max-w-full">
+          <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("equiv.title")} className="max-w-full">
             {rows.map((row) => {
               const blockW = row.len * unit;
               const n = Math.floor(total / row.len);
               return (
                 <g key={row.key}>
-                  <text x={L} y={row.y - 8} fontSize={11} fontWeight={800} fill={row.color}>{row.label}</text>
-                  <text x={W - R} y={row.y - 8} textAnchor="end" fontSize={11} fontWeight={700} className={valueText}>{row.text}</text>
+                  <text style={{ fontSize: svgPx(12) }} x={L} y={row.y - 8} fontWeight={800} fill={row.color}>{row.label}</text>
+                  <text style={{ fontSize: svgPx(12) }} x={W - R} y={row.y - 8} textAnchor="end" fontWeight={700} className={valueText}>{row.text}</text>
                   {Array.from({ length: n }, (_, i) => (
                     <rect key={i} x={L + i * blockW + 0.5} y={row.y} width={Math.max(0.5, blockW - 1)} height={26} fill={row.color} fillOpacity={i % 2 ? 0.55 : 0.8} style={{ transition: "all 400ms ease" }} />
                   ))}
                   <rect x={L + n * blockW} y={row.y} width={Math.max(0, W - R - (L + n * blockW))} height={26} fill={row.color} fillOpacity={0.2} />
-                  <text x={L} y={row.y + 40} fontSize={9} className={axisText}>
+                  <text style={{ fontSize: svgPx(12) }} x={L} y={row.y + 40} className={axisText}>
                     {t("equiv.blocks", { n: f.int(n), len: f.num(row.len, 2) })}
                   </text>
                 </g>
               );
             })}
             <line x1={W - R} x2={W - R} y1={22} y2={H - 30} stroke="currentColor" strokeOpacity={0.4} strokeDasharray="3 2" />
-            <text x={W / 2} y={H - 4} textAnchor="middle" fontSize={10} fontWeight={700} className={valueText}>
+            <text style={{ fontSize: svgPx(12) }} x={W / 2} y={H - 4} textAnchor="middle" fontWeight={700} className={valueText}>
               {t("equiv.sameDays", { n: f.int(r.totalDays) })}
             </text>
           </svg>
@@ -237,7 +239,7 @@ const EVENT_COLORS: Record<AgeEventKey, string> = {
 export function AgeCountdownCard({ d, f }: IndicatorProps) {
   const t = useIndicatorT();
   const { events } = d;
-  const W = 400;
+  const [fitRef, W] = useFitWidth(400);
   const RH = 34;
   const H = events.length * RH + 8;
   const L = 8;
@@ -253,17 +255,17 @@ export function AgeCountdownCard({ d, f }: IndicatorProps) {
       <IndicatorWithTable
         workedExampleTitle={t("worked")}
         indicator={
-          <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("countdown.title")} className="max-w-full">
+          <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("countdown.title")} className="max-w-full">
             {events.map((e, i) => {
               const y = i * RH + 4;
               return (
                 <g key={e.key}>
-                  <text x={L} y={y + 9} fontSize={10} fontWeight={700} className={valueText}>
+                  <text style={{ fontSize: svgPx(12) }} x={L} y={y + 9} fontWeight={700} className={valueText}>
                     {label(e.key, e.value)}
                   </text>
                   <rect x={L} y={y + 14} width={W - L - R} height={12} rx={6} fill="currentColor" fillOpacity={0.07} />
                   <rect x={L} y={y + 14} width={len(e.daysUntil)} height={12} rx={6} fill={EVENT_COLORS[e.key]} style={{ transition: "width 500ms ease" }} />
-                  <text x={W - 4} y={y + 24} textAnchor="end" fontSize={11} fontWeight={800} fill={EVENT_COLORS[e.key]}>
+                  <text style={{ fontSize: svgPx(12) }} x={W - 4} y={y + 24} textAnchor="end" fontWeight={800} fill={EVENT_COLORS[e.key]}>
                     {e.daysUntil === 0 ? t("countdown.now") : t("countdown.days", { n: f.int(e.daysUntil) })}
                   </text>
                 </g>
@@ -292,7 +294,7 @@ export function AgeWeekdayCard({ d, f }: IndicatorProps) {
   const counts = birthdayWeekdayCounts(r.birth, r.reference, r.leapRule);
   const nextWd = (r.referenceWeekday + r.gregorian.daysUntilNext) % 7;
   const max = Math.max(1, ...counts);
-  const W = 400;
+  const [fitRef, W] = useFitWidth(400);
   const H = 200;
   const B = 36;
   const bw = (W - 16) / 7;
@@ -304,7 +306,7 @@ export function AgeWeekdayCard({ d, f }: IndicatorProps) {
       <IndicatorWithTable
         workedExampleTitle={t("worked")}
         indicator={
-          <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("weekday.title")} className="max-w-full">
+          <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("weekday.title")} className="max-w-full">
             {counts.map((c, i) => {
               const h = (c / max) * (H - B - 30);
               const cx = 8 + i * bw + bw / 2;
@@ -312,15 +314,15 @@ export function AgeWeekdayCard({ d, f }: IndicatorProps) {
               return (
                 <g key={i}>
                   <rect x={cx - bw * 0.34} y={H - B - h} width={bw * 0.68} height={Math.max(1, h)} rx={3} fill={born ? AGE_COLORS.accent : AGE_COLORS.gregorian} fillOpacity={born ? 0.95 : 0.65} style={{ transition: "all 400ms ease" }} />
-                  <text x={cx} y={H - B - h - 5} textAnchor="middle" fontSize={11} fontWeight={800} className={valueText}>{f.int(c)}</text>
-                  <text x={cx} y={H - B + 14} textAnchor="middle" fontSize={10} fontWeight={born ? 800 : 600} className={valueText}>{f.weekdayShort(i)}</text>
+                  <text style={{ fontSize: svgPx(12) }} x={cx} y={H - B - h - 5} textAnchor="middle" fontWeight={800} className={valueText}>{f.int(c)}</text>
+                  <text style={{ fontSize: svgPx(12) }} x={cx} y={H - B + 14} textAnchor="middle" fontWeight={born ? 800 : 600} className={valueText}>{f.weekdayShort(i)}</text>
                   {i === nextWd && (
-                    <text x={cx} y={H - B + 28} textAnchor="middle" fontSize={9} fontWeight={700} fill={AGE_COLORS.hijri}>
+                    <text style={{ fontSize: svgPx(12) }} x={cx} y={H - B + 28} textAnchor="middle" fontWeight={700} fill={AGE_COLORS.hijri}>
                       {t("weekday.next")}
                     </text>
                   )}
                   {born && (
-                    <text x={cx} y={14} textAnchor="middle" fontSize={9} fontWeight={700} fill={AGE_COLORS.accent}>
+                    <text style={{ fontSize: svgPx(12) }} x={cx} y={14} textAnchor="middle" fontWeight={700} fill={AGE_COLORS.accent}>
                       {t("weekday.born")}
                     </text>
                   )}

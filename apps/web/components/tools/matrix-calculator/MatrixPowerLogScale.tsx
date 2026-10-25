@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { det2, detPowers2 } from "@tooloralabs/tools";
 import MatrixIndicatorCard from "./MatrixIndicatorCard";
 import { useMatrixModel } from "./MatrixLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const ROW = 28;
@@ -34,7 +35,7 @@ export default function MatrixPowerLogScale() {
       {ticks.map((p) => (
         <g key={p}>
           <line x1={sx(p)} x2={sx(p)} y1={8} y2={N * ROW + 12} strokeWidth={1} strokeDasharray="2 3" className="stroke-zinc-300 dark:stroke-zinc-700" />
-          <text x={sx(p)} y={N * ROW + 28} textAnchor="middle" className="fill-zinc-500 font-mono text-[10px] dark:fill-zinc-400">{`10${sup(p)}`}</text>
+          <text style={{ fontSize: svgPx(12) }} x={sx(p)} y={N * ROW + 28} textAnchor="middle" className="fill-zinc-500 font-mono dark:fill-zinc-400">{`10${sup(p)}`}</text>
         </g>
       ))}
       {pw.map((p, i) => {
@@ -43,13 +44,13 @@ export default function MatrixPowerLogScale() {
         const end = l === null ? sx(lo) : sx(l);
         return (
           <g key={p.k}>
-            <text x={LEFT - 8} y={y + 15} textAnchor="end" className="fill-zinc-600 font-mono text-[11px] font-semibold dark:fill-zinc-300">{`A${sup(p.k)}`}</text>
+            <text style={{ fontSize: svgPx(12) }} x={LEFT - 8} y={y + 15} textAnchor="end" className="fill-zinc-600 font-mono font-semibold dark:fill-zinc-300">{`A${sup(p.k)}`}</text>
             <rect x={sx(lo)} y={y + 3} width={Math.max(2, end - sx(lo))} height={ROW - 10} rx={4} className={tone} />
-            <text x={Math.min(end + 4, W - RIGHT - 2)} y={y + 15} textAnchor={end + 60 > W - RIGHT ? "end" : "start"} className="fill-zinc-800 font-mono text-[10px] font-bold dark:fill-zinc-100">{f(Math.abs(p.det), 4)}</text>
+            <text style={{ fontSize: svgPx(12) }} x={Math.min(end + 4, W - RIGHT - 2)} y={y + 15} textAnchor={end + 60 > W - RIGHT ? "end" : "start"} className="fill-zinc-800 font-mono font-bold dark:fill-zinc-100">{f(Math.abs(p.det), 4)}</text>
           </g>
         );
       })}
-      <text x={W / 2} y={H - 4} textAnchor="middle" className="fill-zinc-400 text-[10px] dark:fill-zinc-500">{t("axis")}</text>
+      <text style={{ fontSize: svgPx(12) }} x={W / 2} y={H - 4} textAnchor="middle" className="fill-zinc-400 dark:fill-zinc-500">{t("axis")}</text>
     </svg>
   );
 

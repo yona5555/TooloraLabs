@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import FsIndicatorCard, { FsIndicatorUnavailable } from "./FsIndicatorCard";
 import { useFsModel } from "./FsLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const ROW = 46;
@@ -33,16 +34,16 @@ export default function FsOsLabels() {
         return (
           <g key={r.key}>
             <circle cx={16} cy={y} r={12} className={r.cls} />
-            <text x={16} y={y + 4} textAnchor="middle" fontSize={11} fontWeight={700} className="fill-white">
+            <text style={{ fontSize: svgPx(12) }} x={16} y={y + 4} textAnchor="middle" fontWeight={700} className="fill-white">
               {t(`${r.key}Short`)}
             </text>
-            <text x={38} y={y - 3} fontSize={12} fontWeight={600} className="fill-zinc-700 dark:fill-zinc-200">
+            <text style={{ fontSize: svgPx(12) }} x={38} y={y - 3} fontWeight={600} className="fill-zinc-700 dark:fill-zinc-200">
               {t(r.key)}
             </text>
-            <text x={38} y={y + 13} fontSize={11} fontFamily="ui-monospace, monospace" className="fill-zinc-400 dark:fill-zinc-500">
+            <text style={{ fontSize: svgPx(12) }} x={38} y={y + 13} fontFamily="ui-monospace, monospace" className="fill-zinc-400 dark:fill-zinc-500">
               {r.base}
             </text>
-            <text x={W - 2} y={y + 5} textAnchor="end" fontSize={15} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(15) }} x={W - 2} y={y + 5} textAnchor="end" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
               {r.label}
             </text>
           </g>

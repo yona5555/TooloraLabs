@@ -3,11 +3,12 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { ltr } from "@/components/tool-ui/MixedText";
 import { useStepper, type KitRow, type Stepper } from "@/components/tool-ui/indicator-kit/CardKit";
-import { axisTicks, Drawing, INK, LINE, lit, MUTED, px2, SvgLabel as T, useDrawing } from "@/components/tool-ui/indicator-kit/SvgBits";
+import { axisTicks, Drawing, flowRows, INK, labelW, LINE, lit, MUTED, px2, SvgLabel as T, useDrawing, wrapLabel } from "@/components/tool-ui/indicator-kit/SvgBits";
 import { clamp, f1, f2, snap } from "@/components/tool-ui/indicator-kit/format";
 import { Card } from "../macro-calculator/MacroCards";
 import { useBMRLive } from "./BMRLiveContext";
 import { BANDS, CUTS, DOMAIN, ORGANS, PAL, ageForBmr, bandOf, bmrAt, coefOf, cunningham, deurenberg, k0, katchMcArdle, weightForBmr, type Which } from "./bmr";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 /**
  * The eight BMR indicator cards (§31 library). All read the calculator's last valid measurements
@@ -37,8 +38,8 @@ function SvgTrack({ W, y, frac, lo, hi }: { W: number; y: number; frac: number; 
     <g>
       <line x1={X0} y1={y} x2={W - X0} y2={y} style={LINE} strokeWidth={3} strokeLinecap="round" opacity={0.45} />
       <line x1={X0} y1={y} x2={x} y2={y} style={{ stroke: "var(--ph-accent-strong)" }} strokeWidth={4} strokeLinecap="round" />
-      <T x={X0} y={y + 22} text={lo} anchor="start" size={10.5} />
-      <T x={W - X0} y={y + 22} text={hi} anchor="end" size={10.5} />
+      <T x={X0} y={y + 22} text={lo} anchor="start" size={12} />
+      <T x={W - X0} y={y + 22} text={hi} anchor="end" size={12} />
     </g>
   );
 }
@@ -116,11 +117,11 @@ export function BMRZoneStripCard({ side }: { side: Side }) {
             return (
               <g key={kg}>
                 <line x1={x} y1={sy - SH / 2 - 30} x2={x} y2={sy - SH / 2 - 22} style={LINE} />
-                <T x={x} y={sy - SH / 2 - 36} text={`${kg}`} size={10.5} />
+                <T x={x} y={sy - SH / 2 - 36} text={`${kg}`} size={12} />
               </g>
             );
           })}
-          <T x={X0} y={sy - SH / 2 - 52} text={t("axisWeight")} anchor="start" size={10.5} bold />
+          <T x={X0} y={sy - SH / 2 - 52} text={t("axisWeight")} anchor="start" size={12} bold />
           {BANDS.map((c) => {
             const a = xb(c.min);
             const z = xb(c.max);
@@ -134,7 +135,7 @@ export function BMRZoneStripCard({ side }: { side: Side }) {
               <g key={c.key}>
                 <rect x={a} y={sy - SH / 2} width={Math.max(0, z - a)} height={SH} style={{ fill: c.color, opacity: on ? 1 : 0.55, ...lit(on && hover === "range") }} />
                 {room > name.length * 6.6 + 8 && (
-                  <text x={lx} y={sy + 4} fontSize={10.5} fontWeight={800} textAnchor="middle" fill="#fff">
+                  <text style={{ fontSize: svgPx(12) }} x={lx} y={sy + 4} fontWeight={800} textAnchor="middle" fill="#fff">
                     {name}
                   </text>
                 )}
@@ -143,9 +144,9 @@ export function BMRZoneStripCard({ side }: { side: Side }) {
           })}
           <rect x={X0} y={sy - SH / 2} width={W - 2 * X0} height={SH} fill="none" style={LINE} rx={3} />
           {[D0, ...CUTS, D1].map((c) => (
-            <T key={c} x={xb(c)} y={sy + SH / 2 + 24} text={k0(c)} size={10.5} bold={CUTS.includes(c)} style={CUTS.includes(c) ? INK : MUTED} />
+            <T key={c} x={xb(c)} y={sy + SH / 2 + 24} text={k0(c)} size={12} bold={CUTS.includes(c)} style={CUTS.includes(c) ? INK : MUTED} />
           ))}
-          <T x={X0} y={sy + SH / 2 + 44} text={t("axisKcal")} anchor="start" size={10.5} bold />
+          <T x={X0} y={sy + SH / 2 + 44} text={t("axisKcal")} anchor="start" size={12} bold />
           {/* the other formula as a hollow marker on the same strip */}
           <circle cx={xb(otherVal)} cy={sy + SH / 2 + 6} r={hover === "other" ? 6 : 4.5} fill="none" style={{ stroke: "var(--ph-ink)" }} strokeWidth={2} />
           <line x1={xb(bmr)} y1={sy - SH / 2 - 6} x2={xb(bmr)} y2={sy + SH / 2 + 6} style={{ stroke: "var(--ph-ink)" }} strokeWidth={2.5} />
@@ -218,13 +219,13 @@ export function BMRGaugeCard({ side }: { side: Side }) {
           })}
           {[D0, ...CUTS, D1].map((p) => {
             const [x, y] = pt(p, R + 24);
-            return <T key={p} x={x} y={y + 4} text={k0(p)} size={10.5} />;
+            return <T key={p} x={x} y={y + 4} text={k0(p)} size={12} />;
           })}
           <line x1={cx} y1={cy} x2={gx} y2={gy} style={{ stroke: "var(--ph-ink-muted)" }} strokeWidth={2} strokeDasharray="4 4" opacity={hover === "now" ? 1 : 0.7} />
           <line x1={cx} y1={cy} x2={nx} y2={ny} style={{ stroke: "var(--ph-ink)" }} strokeWidth={hover === "bmr2" ? 4.5 : 3.5} strokeLinecap="round" />
           <circle cx={cx} cy={cy} r={7} style={{ fill: "var(--ph-ink)" }} />
           <T x={cx} y={cy + 26} text={`${k0(bmr2)} kcal`} size={15} bold style={INK} />
-          <T x={cx} y={cy + 42} text={`${b.age} → ${age2}`} size={11} />
+          <T x={cx} y={cy + 42} text={`${b.age} → ${age2}`} size={12} />
         </Drawing>
       }
     />
@@ -268,8 +269,10 @@ export function BMROrganCard({ side }: { side: Side }) {
     organRow("kidneys"),
   ];
   const ticks = axisTicks(0, bmr, W - 2 * X0, 56);
-  const perRow = 4;
-  const colW = (W - 2 * X0) / perRow;
+  // legend packed in as many rows as the width needs (12px labels never collide); the box grows with them
+  const legend = segs.map((sg) => `${t(sg.key)} ${Math.round(sg.share * 100)}%`);
+  const flow = flowRows(legend.map((s) => 18 + labelW(s)), W - 2 * X0);
+  const extraH = Math.max(0, flow.rows - 2) * 20;
   return (
     <Card tool="bmr-calculator" idPrefix="bmr"
       n={3}
@@ -282,7 +285,7 @@ export function BMROrganCard({ side }: { side: Side }) {
       setHover={setHover}
       caption={t("caption", { h: ltr(valueText), kcal: ltr(`${k0(total)} kcal`), brain: ltr(`${k0(total * 0.2)} kcal`) })}
       visual={
-        <Drawing {...d} hMin={HMIN} label={t("handle")} valueText={valueText} handle={{ x: xk(total), y: by + bh / 2, dir: "horizontal" }} s={s} testId="bmr-c3">
+        <Drawing {...d} hMin={HMIN + extraH} label={t("handle")} valueText={valueText} handle={{ x: xk(total), y: by + bh / 2, dir: "horizontal" }} s={s} testId="bmr-c3">
           <T x={W / 2} y={28} text={`${h} h → ${k0(total)} kcal`} size={14} bold style={INK} />
           {/* the full day as a ghost outline */}
           <rect x={xk(0)} y={by - 8} width={xk(bmr) - xk(0)} height={bh + 16} rx={8} fill="none" style={{ stroke: "var(--ph-ink-muted)" }} strokeDasharray="5 4" opacity={0.6} />
@@ -293,7 +296,7 @@ export function BMROrganCard({ side }: { side: Side }) {
               <g key={sg.key}>
                 <rect x={a} y={by} width={Math.max(0, z - a)} height={bh} style={{ fill: sg.color, ...lit(hover === sg.key) }} />
                 {z - a > 34 && (
-                  <text x={(a + z) / 2} y={by + bh / 2 + 4} fontSize={11} fontWeight={800} textAnchor="middle" fill="#fff" className="tabular-nums">
+                  <text style={{ fontSize: svgPx(12) }} x={(a + z) / 2} y={by + bh / 2 + 4} fontWeight={800} textAnchor="middle" fill="#fff" className="tabular-nums">
                     {k0(sg.kcal)}
                   </text>
                 )}
@@ -304,18 +307,18 @@ export function BMROrganCard({ side }: { side: Side }) {
           {ticks.map((v) => (
             <g key={v}>
               <line x1={xk(v)} y1={gy - 18} x2={xk(v)} y2={gy - 10} style={LINE} />
-              <T x={xk(v)} y={gy + 2} text={k0(v)} size={10.5} />
+              <T x={xk(v)} y={gy + 2} text={k0(v)} size={12} />
             </g>
           ))}
-          <T x={W - X0} y={gy + 18} text="kcal" anchor="end" size={10.5} bold />
-          {/* legend, two rows */}
+          <T x={W - X0} y={gy + 18} text="kcal" anchor="end" size={12} bold />
+          {/* legend, packed rows */}
           {segs.map((sg, i) => {
-            const lx = X0 + (i % perRow) * colW;
-            const ly = H - 44 + Math.floor(i / perRow) * 20;
+            const lx = X0 + flow.at[i].x;
+            const ly = H - 24 - (flow.rows - 1 - flow.at[i].row) * 20;
             return (
               <g key={`lg${sg.key}`}>
                 <rect x={lx} y={ly} width={12} height={12} rx={3} fill={sg.color} />
-                <T x={lx + 18} y={ly + 10} text={`${t(sg.key)} ${Math.round(sg.share * 100)}%`} anchor="start" size={10.5} bold={hover === sg.key} style={hover === sg.key ? INK : MUTED} />
+                <T x={lx + 18} y={ly + 10} text={legend[i]} anchor="start" size={12} bold={hover === sg.key} style={hover === sg.key ? INK : MUTED} />
               </g>
             );
           })}
@@ -382,24 +385,24 @@ export function BMRAgeCurveCard({ side }: { side: Side }) {
           {axisTicks(yLo, yHi, base - top, 28).map((v) => (
             <g key={v}>
               <line x1={PL} y1={yk(v)} x2={W - 18} y2={yk(v)} style={{ stroke: "var(--ph-grid)" }} />
-              <T x={PL - 6} y={yk(v) + 4} text={k0(v)} anchor="end" size={10.5} />
+              <T x={PL - 6} y={yk(v) + 4} text={k0(v)} anchor="end" size={12} />
             </g>
           ))}
           {axisTicks(A0, A1, W - PL - 18, 40).map((v) => (
-            <T key={v} x={xa(v)} y={base + 16} text={String(v)} size={10.5} />
+            <T key={v} x={xa(v)} y={base + 16} text={String(v)} size={12} />
           ))}
-          <T x={W - 18} y={base + 32} text={t("axisAge")} anchor="end" size={10.5} bold />
+          <T x={W - 18} y={base + 32} text={t("axisAge")} anchor="end" size={12} bold />
           <polyline points={line(o)} fill="none" stroke={colorOf(o)} strokeWidth={hover === "other" ? 3 : 2} strokeDasharray="6 5" />
           <polyline points={line(which)} fill="none" stroke={colorOf(which)} strokeWidth={hover === "slope" ? 4.5 : 3.5} />
           <line x1={xa(age)} y1={yk(bmr)} x2={xa(age)} y2={base} style={{ stroke: "var(--ph-ink-muted)" }} strokeDasharray="3 4" />
           {b.age > 25 && <circle cx={xa(25)} cy={yk(at25)} r={hover === "since" ? 6 : 4} fill="none" stroke={colorOf(which)} strokeWidth={2} />}
           <circle cx={xa(age)} cy={yk(at(b.age, o))} r={hover === "other" ? 6 : 4.5} fill={colorOf(o)} />
-          <T x={xa(age)} y={Math.max(top + 12, yk(Math.max(bmr, at(b.age, o))) - 14)} text={`${k0(bmr)} kcal`} size={11} bold style={INK} />
+          <T x={xa(age)} y={Math.max(top + 12, yk(Math.max(bmr, at(b.age, o))) - 14)} text={`${k0(bmr)} kcal`} size={12} bold style={INK} />
           {/* legend */}
           {([which, o] as Which[]).map((w, i) => (
             <g key={w}>
               <line x1={PL + 8 + i * 150} y1={top + 6} x2={PL + 30 + i * 150} y2={top + 6} stroke={colorOf(w)} strokeWidth={3} strokeDasharray={i ? "6 5" : undefined} />
-              <T x={PL + 36 + i * 150} y={top + 10} text={tl(nameKey(w))} anchor="start" size={10.5} bold={i === 0} />
+              <T x={PL + 36 + i * 150} y={top + 10} text={tl(nameKey(w))} anchor="start" size={12} bold={i === 0} />
             </g>
           ))}
         </Drawing>
@@ -455,7 +458,7 @@ export function BMRSensitivityCard({ side }: { side: Side }) {
       visual={
         <Drawing {...d} hMin={HMIN} label={t("handle")} valueText={valueText} handle={{ x: X0 + ((e - 0.5) / 9.5) * (W - 2 * X0), y: trackY, dir: "horizontal" }} s={s} testId="bmr-c5">
           <line x1={X0} y1={base} x2={W - X0} y2={base} style={LINE} strokeWidth={1.5} />
-          <T x={X0} y={base - 6} text={k0(lo)} anchor="start" size={10} />
+          <T x={X0} y={base - 6} text={k0(lo)} anchor="start" size={12} />
           {trio.map((c, ci) => {
             const x = X0 + colW * ci + colW * 0.22;
             const bw = colW * 0.56;
@@ -464,7 +467,7 @@ export function BMRSensitivityCard({ side }: { side: Side }) {
               <g key={c.key}>
                 <rect x={x} y={yb(c.v)} width={bw} height={Math.max(0, base - yb(c.v))} rx={5} style={{ fill: bandOf(c.v).color, opacity: ci === 1 ? 1 : 0.7, ...lit(on) }} />
                 <T x={x + bw / 2} y={yb(c.v) - 8} text={`${k0(c.v)}`} size={12} bold style={INK} />
-                <T x={x + bw / 2} y={base + 16} text={c.label} size={10.5} bold={ci === 1} style={ci === 1 ? INK : MUTED} />
+                <T x={x + bw / 2} y={base + 16} text={c.label} size={12} bold={ci === 1} style={ci === 1 ? INK : MUTED} />
               </g>
             );
           })}
@@ -524,7 +527,9 @@ export function BMRFormulaCard({ side }: { side: Side }) {
       caption={t("caption", { stage: valueText, formula: tl(nameKey(which)) })}
       visual={
         <Drawing {...d} hMin={HMIN} label={t("handle")} valueText={valueText} handle={{ x: X0 + ((st - 1) / 3) * (W - 2 * X0), y: trackY, dir: "horizontal" }} s={s} testId="bmr-c6">
-          <T x={W / 2} y={30} text={eq} size={13} bold style={INK} />
+          {wrapLabel(eq, W - 2 * X0, 13).map((line, li, all) => (
+            <T key={li} x={W / 2} y={30 - (all.length - 1) * 16 + li * 16} text={line} size={13} bold style={INK} />
+          ))}
           {stages.map((sg, gi) => {
             const x = X0 + gi * (boxW + gap);
             const shown = gi < st;
@@ -532,8 +537,10 @@ export function BMRFormulaCard({ side }: { side: Side }) {
             return (
               <g key={sg.key} opacity={shown ? 1 : 0.28}>
                 <rect x={x} y={by} width={boxW} height={bh} rx={10} style={{ fill: on ? "var(--ph-accent-soft)" : "var(--ph-surface)", ...lit(on) }} />
-                <T x={x + boxW / 2} y={by + 22} text={String(gi + 1)} size={11} bold />
-                <T x={x + boxW / 2} y={by + bh / 2} text={sg.top} size={10.5} />
+                <T x={x + boxW / 2} y={by + 22} text={String(gi + 1)} size={12} bold />
+                {wrapLabel(sg.top, boxW - 6).map((line, li, all) => (
+                  <T key={li} x={x + boxW / 2} y={by + bh / 2 - (all.length - 1) * 14 + li * 14} text={line} size={12} />
+                ))}
                 <T x={x + boxW / 2} y={by + bh / 2 + 22} text={sg.bottom} size={12} bold style={INK} />
                 {gi < 3 && <path d={`M ${x + boxW + 3} ${by + bh / 2} l ${gap - 8} 0 m -6 -5 l 6 5 l -6 5`} fill="none" style={LINE} strokeWidth={2} opacity={gi + 1 < st ? 1 : 0.35} />}
               </g>
@@ -605,7 +612,7 @@ function Equations({ side }: { side: Side }) {
       visual={
         <Drawing {...d} hMin={HMIN} label={t("handle")} valueText={valueText} handle={{ x: X0 + ((bf - BF0) / (BF1 - BF0)) * (W - 2 * X0), y: trackY, dir: "horizontal" }} s={s} testId="bmr-c7">
           <line x1={X0} y1={base} x2={W - X0} y2={base} style={LINE} strokeWidth={1.5} />
-          <T x={X0} y={base - 6} text={k0(lo)} anchor="start" size={10} />
+          <T x={X0} y={base - 6} text={k0(lo)} anchor="start" size={12} />
           {bars.map((c, ci) => {
             const x = X0 + colW * ci + colW * 0.2;
             const bw = colW * 0.6;
@@ -614,7 +621,7 @@ function Equations({ side }: { side: Side }) {
               <g key={c.key}>
                 <rect x={x} y={yb(c.v)} width={bw} height={Math.max(0, base - yb(c.v))} rx={5} style={{ fill: c.color, opacity: lean ? 1 : 0.8, ...lit(hover === c.key) }} />
                 <T x={x + bw / 2} y={yb(c.v) - 8} text={k0(c.v)} size={12} bold style={INK} />
-                <T x={x + bw / 2} y={base + 16} text={c.label} size={10.5} bold={lean} style={lean ? INK : MUTED} />
+                <T x={x + bw / 2} y={base + 16} text={c.label} size={12} bold={lean} style={lean ? INK : MUTED} />
               </g>
             );
           })}
@@ -672,17 +679,17 @@ export function BMRActivityCard({ side }: { side: Side }) {
             const v = bmr * p.f;
             return (
               <g key={p.key} opacity={on ? 1 : 0.62}>
-                <T x={X0} y={y + rowH * 0.62 - bh / 2 - 5} text={`${t(p.key)} · × ${p.f}`} anchor="start" size={10.5} bold={on} style={on ? INK : MUTED} />
+                <T x={X0} y={y + rowH * 0.62 - bh / 2 - 5} text={`${t(p.key)} · × ${p.f}`} anchor="start" size={12} bold={on} style={on ? INK : MUTED} />
                 <rect x={X0} y={y + rowH * 0.62 - bh / 2} width={xk(v) - X0} height={bh} rx={5} fill="#f59e0b" style={on ? lit(hover === "tdee" || hover === "move") : undefined} />
                 <rect x={X0} y={y + rowH * 0.62 - bh / 2} width={xk(bmr) - X0} height={bh} rx={5} fill="#3b82f6" />
-                <T x={xk(v) + (on ? 18 : 6)} y={y + rowH * 0.62 + 4} text={k0(v)} anchor="start" size={11} bold={on} style={on ? INK : MUTED} />
+                <T x={xk(v) + (on ? 18 : 6)} y={y + rowH * 0.62 + 4} text={k0(v)} anchor="start" size={12} bold={on} style={on ? INK : MUTED} />
               </g>
             );
           })}
           <rect x={X0} y={H - 22} width={12} height={12} rx={3} fill="#3b82f6" />
-          <T x={X0 + 18} y={H - 12} text={t("legendBmr")} anchor="start" size={10.5} />
+          <T x={X0 + 18} y={H - 12} text={t("legendBmr")} anchor="start" size={12} />
           <rect x={W / 2} y={H - 22} width={12} height={12} rx={3} fill="#f59e0b" />
-          <T x={W / 2 + 18} y={H - 12} text={t("legendMove")} anchor="start" size={10.5} />
+          <T x={W / 2 + 18} y={H - 12} text={t("legendMove")} anchor="start" size={12} />
         </Drawing>
       }
     />

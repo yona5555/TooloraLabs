@@ -63,8 +63,8 @@ function SvgTrack({ W, y, frac, lo, hi }: { W: number; y: number; frac: number; 
     <g>
       <line x1={X0} y1={y} x2={W - X0} y2={y} style={LINE} strokeWidth={3} strokeLinecap="round" opacity={0.45} />
       <line x1={X0} y1={y} x2={x} y2={y} style={{ stroke: "var(--ph-accent-strong)" }} strokeWidth={4} strokeLinecap="round" />
-      <T x={X0} y={y + 22} text={lo} anchor="start" size={10.5} />
-      <T x={W - X0} y={y + 22} text={hi} anchor="end" size={10.5} />
+      <T x={X0} y={y + 22} text={lo} anchor="start" size={12} />
+      <T x={W - X0} y={y + 22} text={hi} anchor="end" size={12} />
     </g>
   );
 }
@@ -141,10 +141,10 @@ export function TDEEActivityStepsCard({ side }: { side: Side }) {
           {[0, 1000, 2000, 3000, 4000, 5000].filter((v) => v <= vmax).map((v) => (
             <g key={v}>
               <line x1={PL} y1={yv(v)} x2={W - 12} y2={yv(v)} style={{ stroke: "var(--ph-grid)" }} />
-              <T x={PL - 6} y={yv(v) + 4} text={k0(v)} anchor="end" size={10} />
+              <T x={PL - 6} y={yv(v) + 4} text={k0(v)} anchor="end" size={12} />
             </g>
           ))}
-          <T x={6} y={14} text="kcal/day" anchor="start" size={10.5} bold />
+          <T x={6} y={14} text="kcal/day" anchor="start" size={12} bold />
           {LEVELS.map((lv, li) => {
             const v = bmr * mult(lv);
             const x = PL + colW * li + 3;
@@ -155,14 +155,14 @@ export function TDEEActivityStepsCard({ side }: { side: Side }) {
                 {/* BMR base (same on every step) and the activity on top of it */}
                 <rect x={x} y={yv(bmr)} width={w} height={base - yv(bmr)} style={{ fill: COLORS.bmr, opacity: on ? 0.95 : 0.4 }} />
                 <rect x={x} y={yv(v)} width={w} height={yv(bmr) - yv(v)} style={{ fill: LEVEL_COLORS[lv], opacity: on ? 1 : 0.45, ...lit(on && hover === "act") }} />
-                <T x={x + w / 2} y={yv(v) - 6} text={k0(v)} size={on ? 12.5 : 10.5} bold={on} style={on ? INK : MUTED} />
-                <T x={x + w / 2} y={base + 14} text={`×${mult(lv)}`} size={10} bold={on} style={on ? INK : MUTED} />
-                <T x={x + w / 2} y={base + 28} text={tv(`level.${lv}`)} size={9.5} bold={on} style={on ? INK : MUTED} />
+                <T x={x + w / 2} y={yv(v) - 6} text={k0(v)} size={on ? 12.5 : 12} bold={on} style={on ? INK : MUTED} />
+                <T x={x + w / 2} y={base + 14} text={`×${mult(lv)}`} size={12} bold={on} style={on ? INK : MUTED} />
+                <T x={x + w / 2} y={base + 28} text={tv(`level.${lv}`)} size={12} bold={on} style={on ? INK : MUTED} />
               </g>
             );
           })}
           <line x1={PL} y1={yv(bmr)} x2={W - 12} y2={yv(bmr)} style={{ stroke: "var(--ph-ink)" }} strokeDasharray="5 4" strokeWidth={hover === "lvl" ? 2.5 : 1.2} />
-          <T x={PL + 6} y={yv(bmr) + 14} text={`BMR ${k0(bmr)}`} anchor="start" size={10.5} bold style={INK} />
+          <T x={PL + 6} y={yv(bmr) + 14} text={`BMR ${k0(bmr)}`} anchor="start" size={12} bold style={INK} />
         </Drawing>
       }
     />
@@ -224,8 +224,8 @@ export function TDEEComponentsStackCard({ side }: { side: Side }) {
             return (
               <g key={g.key}>
                 <rect x={xk(g.a)} y={by} width={w} height={bh} style={{ fill: g.color, opacity: on || hover === "sum" ? 1 : 0.75, ...lit(hover === g.key) }} />
-                {w > 34 && <T x={xk(g.a) + w / 2} y={by + bh / 2 - 2} text={g.name} size={11} bold style={{ fill: "#fff" }} />}
-                {w > 34 && <T x={xk(g.a) + w / 2} y={by + bh / 2 + 13} text={pct(g.v)} size={10.5} style={{ fill: "#fff" }} />}
+                {w > 34 && <T x={xk(g.a) + w / 2} y={by + bh / 2 - 2} text={g.name} size={12} bold style={{ fill: "#fff" }} />}
+                {w > 34 && <T x={xk(g.a) + w / 2} y={by + bh / 2 + 13} text={pct(g.v)} size={12} style={{ fill: "#fff" }} />}
               </g>
             );
           })}
@@ -236,12 +236,12 @@ export function TDEEComponentsStackCard({ side }: { side: Side }) {
             return (
               <g key={`lg${g.key}`}>
                 <rect x={lx} y={H - 58} width={10} height={10} rx={2} style={{ fill: g.color }} />
-                <T x={lx + 14} y={H - 49} text={g.name} anchor="start" size={10.5} bold style={INK} />
-                <T x={lx + 14} y={H - 34} text={k0(g.v)} anchor="start" size={10.5} />
+                <T x={lx + 14} y={H - 49} text={g.name} anchor="start" size={12} bold style={INK} />
+                <T x={lx + 14} y={H - 34} text={k0(g.v)} anchor="start" size={12} />
               </g>
             );
           })}
-          <T x={W - X0} y={H - 10} text={`${t("activityLabel")} ${kcalT(sp.neat + sp.eat)}`} anchor="end" size={10.5} bold />
+          <T x={W - X0} y={H - 10} text={`${t("activityLabel")} ${kcalT(sp.neat + sp.eat)}`} anchor="end" size={12} bold />
         </Drawing>
       }
     />
@@ -316,7 +316,7 @@ function Balance({ side }: { side: Side }) {
               <g key={p.key}>
                 <line x1={px2(p.x - 34)} y1={px2(p.y + 4)} x2={px2(p.x + 34)} y2={px2(p.y + 4)} style={{ stroke: "var(--ph-ink)" }} strokeWidth={3} />
                 <rect x={px2(p.x - 26)} y={px2(p.y - h)} width={52} height={px2(h)} rx={4} style={{ fill: p.color, ...lit(hover === p.key) }} />
-                <T x={px2(p.x)} y={px2(p.y - h - 22)} text={p.label} size={10.5} bold />
+                <T x={px2(p.x)} y={px2(p.y - h - 22)} text={p.label} size={12} bold />
                 <T x={px2(p.x)} y={px2(p.y - h - 8)} text={k0(p.v)} size={12} bold style={INK} />
               </g>
             );
@@ -401,14 +401,14 @@ function Projection({ side }: { side: Side }) {
           {yTicks.map((v) => (
             <g key={v}>
               <line x1={PL} y1={yw(v)} x2={W - PR} y2={yw(v)} style={{ stroke: "var(--ph-grid)" }} />
-              <T x={PL - 6} y={yw(v) + 4} text={String(v)} anchor="end" size={10} />
+              <T x={PL - 6} y={yw(v) + 4} text={String(v)} anchor="end" size={12} />
             </g>
           ))}
           {ticks.map((i) => (
-            <T key={i} x={xw(i)} y={base + 16} text={String(i)} size={10} />
+            <T key={i} x={xw(i)} y={base + 16} text={String(i)} size={12} />
           ))}
-          <T x={W - PR} y={base + 30} text={t("weeksLabel")} anchor="end" size={10.5} bold />
-          <T x={6} y={top - 6} text="kg" anchor="start" size={10.5} bold />
+          <T x={W - PR} y={base + 30} text={t("weeksLabel")} anchor="end" size={12} bold />
+          <T x={6} y={top - 6} text="kg" anchor="start" size={12} bold />
           <line x1={PL} y1={yw(w0)} x2={W - PR} y2={yw(w0)} style={{ stroke: "var(--ph-ink-muted)" }} strokeDasharray="3 4" />
           <polyline points={pts(simple)} fill="none" style={{ stroke: "var(--ph-neutral)" }} strokeWidth={hover === "simple" ? 4 : 2.5} strokeDasharray="7 5" />
           <polyline points={pts(adaptive)} fill="none" stroke={rate < 0 ? "#ef4444" : rate > 0 ? "#10b981" : COLORS.bmr} strokeWidth={hover === "adapt" ? 4.5 : 3.2} strokeLinejoin="round" />
@@ -417,9 +417,9 @@ function Projection({ side }: { side: Side }) {
           ))}
           {/* Reference point: week 12 on the adaptive curve */}
           <circle cx={px2(xw(ref))} cy={px2(yw(adaptive[ref]))} r={hover === "w12" ? 9 : 7} fill="none" stroke={COLORS.intake} strokeWidth={3} />
-          <T x={xw(ref)} y={yw(adaptive[ref]) + (rate < 0 ? 24 : -14)} text={kgT(adaptive[ref])} size={11.5} bold style={INK} />
-          <T x={xw(WEEKS) - 22} y={yw(simple[WEEKS]) + (rate < 0 ? 20 : -12)} text={t("simpleShort")} anchor="end" size={10.5} bold style={MUTED} />
-          <T x={xw(WEEKS) - 22} y={yw(adaptive[WEEKS]) + (rate < 0 ? -24 : 30)} text={t("adaptiveShort")} anchor="end" size={10.5} bold style={INK} />
+          <T x={xw(ref)} y={yw(adaptive[ref]) + (rate < 0 ? 24 : -14)} text={kgT(adaptive[ref])} size={12} bold style={INK} />
+          <T x={xw(WEEKS) - 22} y={yw(simple[WEEKS]) + (rate < 0 ? 20 : -12)} text={t("simpleShort")} anchor="end" size={12} bold style={MUTED} />
+          <T x={xw(WEEKS) - 22} y={yw(adaptive[WEEKS]) + (rate < 0 ? -24 : 30)} text={t("adaptiveShort")} anchor="end" size={12} bold style={INK} />
         </Drawing>
       }
     />
@@ -439,7 +439,8 @@ function AdjustmentGauge({ side }: { side: Side }) {
   const [hover, setHover] = useState<string | null>(null);
   const HMIN = 270;
   const geo = (W: number, H: number) => {
-    const R = Math.max(70, Math.min(W / 2 - 50, H - 86));
+    // H − 92: room above the arc for the "0%" tick label (§39: never clipped)
+    const R = Math.max(70, Math.min(W / 2 - 50, H - 92));
     return { cx: W / 2, cy: H - 58, R };
   };
   const d = useDrawing(HMIN, s, (x, y, W, H) => {
@@ -488,14 +489,14 @@ function AdjustmentGauge({ side }: { side: Side }) {
           })}
           {[-50, -35, -10, 0, 10, 35, 50].map((p) => {
             const [x, y] = pt(p, R + 24);
-            return <T key={p} x={x} y={y + 4} text={`${p > 0 ? "+" : p < 0 ? "−" : ""}${Math.abs(p)}%`} size={10.5} bold={p === 0} style={p === 0 ? INK : MUTED} />;
+            return <T key={p} x={x} y={y + 4} text={`${p > 0 ? "+" : p < 0 ? "−" : ""}${Math.abs(p)}%`} size={12} bold={p === 0} style={p === 0 ? INK : MUTED} />;
           })}
           <path d={arc(-50, -35, R - 34)} fill="none" style={{ stroke: "var(--ph-ink)" }} strokeWidth={4} opacity={hover === "aggr" ? 1 : 0.35} />
           <path d={arc(35, 50, R - 34)} fill="none" style={{ stroke: "var(--ph-ink)" }} strokeWidth={4} opacity={hover === "aggr" ? 1 : 0.35} />
           <line x1={cx} y1={cy} x2={nx} y2={ny} style={{ stroke: "var(--ph-ink)" }} strokeWidth={hover === "pct" ? 4.5 : 3.5} strokeLinecap="round" />
           <circle cx={cx} cy={cy} r={7} style={{ fill: "var(--ph-ink)" }} />
           <T x={cx} y={cy + 26} text={`${kcalT(tdee + adj)} · ${valueText}`} size={15} bold style={INK} />
-          <T x={cx} y={cy + 44} text={tg(`gauge.${zone.key}`)} size={11.5} bold style={{ fill: zone.color }} />
+          <T x={cx} y={cy + 44} text={tg(`gauge.${zone.key}`)} size={12} bold style={{ fill: zone.color }} />
         </Drawing>
       }
     />
@@ -557,12 +558,12 @@ export function TDEEAgeSensitivityCard({ side }: { side: Side }) {
                 <rect x={x} y={yv(v)} width={w} height={base - yv(v)} rx={5} style={{ fill: on ? COLORS.intake : COLORS.bmr, opacity: on ? 1 : 0.6, ...lit(hover === c.key) }} />
                 <rect x={x} y={yv(c.b)} width={w} height={base - yv(c.b)} rx={5} style={{ fill: "#000", opacity: 0.12 }} />
                 <T x={x + w / 2} y={yv(v) - 8} text={k0(v)} size={on ? 14 : 12} bold style={INK} />
-                <T x={x + w / 2} y={base + 16} text={`${tv("ageShort")} ${c.a}`} size={11} bold={on} style={on ? INK : MUTED} />
-                {ci !== 1 && <T x={x + w / 2} y={base + 30} text={sgn(v - bmr * m, k0(Math.abs(v - bmr * m)))} size={10.5} />}
+                <T x={x + w / 2} y={base + 16} text={`${tv("ageShort")} ${c.a}`} size={12} bold={on} style={on ? INK : MUTED} />
+                {ci !== 1 && <T x={x + w / 2} y={base + 30} text={sgn(v - bmr * m, k0(Math.abs(v - bmr * m)))} size={12} />}
               </g>
             );
           })}
-          <T x={X0} y={18} text="TDEE · kcal/day" anchor="start" size={10.5} bold />
+          <T x={X0} y={18} text="TDEE · kcal/day" anchor="start" size={12} bold />
           <SvgTrack W={W} y={trackY} frac={(dy - 1) / 19} lo="1" hi="20" />
         </Drawing>
       }
@@ -623,13 +624,13 @@ export function TDEEFormulaBarsCard({ side }: { side: Side }) {
             const on = bi === sel;
             return (
               <g key={b.key}>
-                <T x={LW - 8} y={y + bh / 2 + 4} text={t(`names.${b.key}`)} anchor="end" size={10.5} bold={on} style={on ? INK : MUTED} />
+                <T x={LW - 8} y={y + bh / 2 + 4} text={t(`names.${b.key}`)} anchor="end" size={12} bold={on} style={on ? INK : MUTED} />
                 <rect x={LW} y={y} width={Math.max(0, xv(b.v) - LW)} height={bh} rx={4} style={{ fill: on ? COLORS.intake : COLORS.bmr, opacity: on ? 1 : 0.5, ...lit(on && hover === "v") }} />
-                <T x={LW + 8} y={y + bh / 2 + 4} text={k0(b.v)} anchor="start" size={11} bold style={{ fill: "#fff" }} />
+                <T x={LW + 8} y={y + bh / 2 + 4} text={k0(b.v)} anchor="start" size={12} bold style={{ fill: "#fff" }} />
               </g>
             );
           })}
-          <T x={W - X0} y={H - 8} text={`TDEE · kcal/day · ×${m}`} anchor="end" size={10.5} bold />
+          <T x={W - X0} y={H - 8} text={`TDEE · kcal/day · ×${m}`} anchor="end" size={12} bold />
         </Drawing>
       }
     />
@@ -703,17 +704,17 @@ function FormulaDiagram({ side }: { side: Side }) {
               <g key={b.key}>
                 {bi > 0 && <line x1={xk(b.a)} y1={rowY[bi - 1] + bh} x2={xk(b.a)} y2={y} style={LINE} strokeDasharray="3 3" />}
                 <rect x={x1} y={y} width={Math.max(2, x2 - x1)} height={bh} rx={4} style={{ fill: b.color, opacity: b.v < 0 ? 0.8 : 1, ...lit(hover === b.key) }} />
-                <T x={b.v < 0 ? x1 - 6 : x2 + (bi === 0 ? 20 : 6)} y={y + bh / 2 + 4} text={b.text} anchor={b.v < 0 ? "end" : "start"} size={11} bold style={INK} />
+                <T x={b.v < 0 ? x1 - 6 : x2 + (bi === 0 ? 20 : 6)} y={y + bh / 2 + 4} text={b.text} anchor={b.v < 0 ? "end" : "start"} size={12} bold style={INK} />
               </g>
             );
           })}
           {/* BMR = the sum; TDEE = BMR × activity */}
           <rect x={X0} y={yB} width={Math.max(2, xk(bmr) - X0)} height={bh} rx={4} style={{ fill: COLORS.bmr, ...lit(hover === "bmr") }} />
-          <T x={xk(bmr) + 6} y={yB + bh / 2 + 4} text={`BMR ${k0(bmr)}`} anchor="start" size={11.5} bold style={INK} />
+          <T x={xk(bmr) + 6} y={yB + bh / 2 + 4} text={`BMR ${k0(bmr)}`} anchor="start" size={12} bold style={INK} />
           <rect x={X0} y={yT} width={Math.max(2, xk(tdee) - X0)} height={bh} rx={4} style={{ fill: COLORS.eat, ...lit(hover === "tdee") }} />
-          <T x={Math.min(xk(tdee) + 6, W - 120)} y={yT + bh / 2 + 4} text={`TDEE ${k0(tdee)}`} anchor="start" size={11.5} bold style={xk(tdee) + 6 > W - 120 ? { fill: "#fff" } : INK} />
-          <T x={X0} y={yT - 6} text={`× ${m}`} anchor="start" size={10.5} bold />
-          <T x={W - X0} y={16} text="Mifflin-St Jeor · kcal/day" anchor="end" size={10.5} bold />
+          <T x={Math.min(xk(tdee) + 6, W - 120)} y={yT + bh / 2 + 4} text={`TDEE ${k0(tdee)}`} anchor="start" size={12} bold style={xk(tdee) + 6 > W - 120 ? { fill: "#fff" } : INK} />
+          <T x={X0} y={yT - 6} text={`× ${m}`} anchor="start" size={12} bold />
+          <T x={W - X0} y={16} text="Mifflin-St Jeor · kcal/day" anchor="end" size={12} bold />
         </Drawing>
       }
     />

@@ -5,18 +5,19 @@ import { isDstActive, wtSolarElevation, wtSolarPosition, zonedParts, zoneOffsetM
 import SectionCard from "@/components/tool-ui/SectionCard";
 import WtCityPicker from "./WtCityPicker";
 import { MAX_CITIES, useNow, type CardProps } from "./state";
+import { px2 } from "@/components/tool-ui/indicator-kit/SvgBits";
 
 function AnalogClock({ h, m, sec, night }: { h: number; m: number; sec: number; night: boolean }) {
   const hand = (deg: number, len: number) => {
     const a = ((deg - 90) * Math.PI) / 180;
-    return { x2: 40 + len * Math.cos(a), y2: 40 + len * Math.sin(a) };
+    return { x2: px2(40 + len * Math.cos(a)), y2: px2(40 + len * Math.sin(a)) };
   };
   return (
     <svg width={64} height={64} viewBox="0 0 80 80" aria-hidden className="shrink-0">
       <circle cx={40} cy={40} r={37} fill={night ? "#1e293b" : "#fef9c3"} stroke={night ? "#60a5fa" : "#f59e0b"} strokeWidth={3} />
       {Array.from({ length: 12 }, (_, i) => {
         const a = (i * 30 * Math.PI) / 180;
-        return <line key={i} x1={40 + 30 * Math.sin(a)} y1={40 - 30 * Math.cos(a)} x2={40 + 34 * Math.sin(a)} y2={40 - 34 * Math.cos(a)} stroke={night ? "#cbd5e1" : "#78350f"} strokeWidth={i % 3 === 0 ? 2.5 : 1} />;
+        return <line key={i} x1={px2(40 + 30 * Math.sin(a))} y1={px2(40 - 30 * Math.cos(a))} x2={px2(40 + 34 * Math.sin(a))} y2={px2(40 - 34 * Math.cos(a))} stroke={night ? "#cbd5e1" : "#78350f"} strokeWidth={i % 3 === 0 ? 2.5 : 1} />;
       })}
       <line x1={40} y1={40} {...hand((h % 12) * 30 + m * 0.5, 18)} stroke={night ? "#f8fafc" : "#1c1917"} strokeWidth={4} strokeLinecap="round" />
       <line x1={40} y1={40} {...hand(m * 6 + sec * 0.1, 27)} stroke={night ? "#f8fafc" : "#1c1917"} strokeWidth={2.5} strokeLinecap="round" />

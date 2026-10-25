@@ -6,7 +6,6 @@ import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
-import AdSpace from "@/components/tool-ui/AdSpace";
 import { newEntryId, usePersistedList } from "@/lib/use-persisted-list";
 import DateInputCard from "./DateInputCard";
 import DateResultCard from "./DateResultCard";
@@ -131,7 +130,6 @@ export default function DateCalculator({ education }: { education: ReactNode }) 
         <DateBusinessSplitCard {...props} />
         <DateStepLadderCard {...props} />
         <DateDualCalendarCard {...props} />
-        <AdSpace variant="leaderboard" />
         <DateBusinessFormulaCard {...props} />
         <DateWeekdayBarsCard {...props} />
         <DateYearZoneCard {...props} />

@@ -2,10 +2,11 @@
 import { useTranslations } from "next-intl";
 import QRIndicatorCard, { QRIndicatorUnavailable } from "./QRIndicatorCard";
 import { useQRModel } from "./QRLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
+import { labelW } from "@/components/tool-ui/labelLayout";
 
 const W = 340;
 const STEP = 46;
-const PILL_W = 200;
 
 /**
  * Type #3 (Hierarchical Flow): how your content becomes modules — characters, UTF-8 bytes, bits with
@@ -25,6 +26,9 @@ export default function QREncodingFlow() {
     { key: "modules", value: `${a.size} × ${a.size}`, cls: "fill-emerald-600 dark:fill-emerald-400" },
   ];
   const H = steps.length * STEP;
+  // each pill as wide as its name and value need side by side (widths allow for the up-to-1.15× a
+  // phone draws them at), so "Codewords + EC" never runs into "28 + 16 = 44" (§39)
+  const PILL_W = Math.min(W - 4, Math.max(200, ...steps.map((s) => (labelW(t(s.key)) + labelW(s.value)) * 1.15 + 40)));
   const x0 = (W - PILL_W) / 2;
 
   const svg = (
@@ -35,10 +39,10 @@ export default function QREncodingFlow() {
           <g key={s.key}>
             {i < steps.length - 1 && <path d={`M ${W / 2} ${y + 30} V ${y + STEP} m -5 -7 l 5 7 l 5 -7`} fill="none" strokeWidth={1.5} className="stroke-zinc-400 dark:stroke-zinc-500" />}
             <rect x={x0} y={y} width={PILL_W} height={30} rx={15} className={s.cls} />
-            <text x={x0 + 14} y={y + 20} fontSize={12} fontWeight={600} className="fill-white">
+            <text style={{ fontSize: svgPx(12) }} x={x0 + 14} y={y + 20} fontWeight={600} className="fill-white">
               {t(s.key)}
             </text>
-            <text x={x0 + PILL_W - 14} y={y + 20} textAnchor="end" fontSize={12} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-white">
+            <text style={{ fontSize: svgPx(12) }} x={x0 + PILL_W - 14} y={y + 20} textAnchor="end" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-white">
               {s.value}
             </text>
           </g>

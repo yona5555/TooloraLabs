@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { GlassIndicatorCard, GlassTable } from "@/components/tool-ui/glass/GlassPrimitives";
 import { useFractionCardState } from "./useFractionCardState";
 import { formatMathValue, crossMultiplyCompare } from "@tooloralabs/tools";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 /** Cross-multiplication as two real diagonal arrows between A and B — drag either numerator
  * stepper and watch which cross-product wins change live, without ever computing a decimal. */
@@ -21,13 +22,13 @@ export default function FractionCrossMultiplyCard() {
       visual={
         <div className="flex w-full flex-col items-center justify-center gap-3">
           <svg width={160} height={90} viewBox="0 0 160 90" className="h-auto w-full max-w-[320px]">
-            <text x="30" y="20" textAnchor="middle" fontSize="13" fontWeight="700" fill="var(--glass-accent-1-strong)">{formatMathValue(numeratorA)}</text>
-            <text x="30" y="80" textAnchor="middle" fontSize="13" fontWeight="700" fill="var(--glass-accent-1-strong)">{formatMathValue(denominatorA)}</text>
-            <text x="130" y="20" textAnchor="middle" fontSize="13" fontWeight="700" fill="var(--glass-accent-2-strong)">{formatMathValue(numeratorB)}</text>
-            <text x="130" y="80" textAnchor="middle" fontSize="13" fontWeight="700" fill="var(--glass-accent-2-strong)">{formatMathValue(denominatorB)}</text>
+            <text style={{ fontSize: svgPx(13) }} x="30" y="20" textAnchor="middle" fontWeight="700" fill="var(--glass-accent-1-strong)">{formatMathValue(numeratorA)}</text>
+            <text style={{ fontSize: svgPx(13) }} x="30" y="80" textAnchor="middle" fontWeight="700" fill="var(--glass-accent-1-strong)">{formatMathValue(denominatorA)}</text>
+            <text style={{ fontSize: svgPx(13) }} x="130" y="20" textAnchor="middle" fontWeight="700" fill="var(--glass-accent-2-strong)">{formatMathValue(numeratorB)}</text>
+            <text style={{ fontSize: svgPx(13) }} x="130" y="80" textAnchor="middle" fontWeight="700" fill="var(--glass-accent-2-strong)">{formatMathValue(denominatorB)}</text>
             <line x1="38" y1="16" x2="122" y2="74" stroke={compare.larger === "A" ? "var(--glass-accent-3-strong)" : "var(--glass-track)"} strokeWidth={compare.larger === "A" ? 3 : 1.5} />
             <line x1="38" y1="74" x2="122" y2="16" stroke={compare.larger === "B" ? "var(--glass-accent-3-strong)" : "var(--glass-track)"} strokeWidth={compare.larger === "B" ? 3 : 1.5} />
-            <text x="80" y="50" textAnchor="middle" fontSize="11" fill="var(--glass-muted)">
+            <text style={{ fontSize: svgPx(12) }} x="80" y="50" textAnchor="middle" fill="var(--glass-muted)">
               {compare.larger === "equal" ? "=" : compare.larger === "A" ? ">" : "<"}
             </text>
           </svg>

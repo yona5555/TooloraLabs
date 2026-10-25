@@ -21,6 +21,7 @@ import {
   partsOf,
   WATER_M,
 } from "./mmMath";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 /**
  * The five 2D molar mass indicator cards. Each drawing is laid out in real pixels at the measured
@@ -85,7 +86,7 @@ export function MmIsotopesCard({ side }: { side: Side }) {
             {[35, 36, 37].map((m) => (
               <g key={m}>
                 <line x1={xm(m)} y1={axisY - 5} x2={xm(m)} y2={axisY + 5} style={{ stroke: "var(--ph-line)" }} />
-                <text x={xm(m)} y={axisY + 20} fontSize={11} textAnchor="middle" style={{ fill: "var(--ph-ink-muted)" }}>
+                <text x={xm(m)} y={axisY + 20} textAnchor="middle" style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
                   {`${m} u`}
                 </text>
               </g>
@@ -98,14 +99,14 @@ export function MmIsotopesCard({ side }: { side: Side }) {
               <g key={b.key} onPointerEnter={() => setHover(b.key)} onPointerLeave={() => setHover(null)}>
                 <line x1={xm(b.m)} y1={beamY} x2={xm(b.m)} y2={beamY - 14} style={{ stroke: "var(--ph-ink)" }} strokeWidth={2} />
                 <circle cx={xm(b.m)} cy={beamY - 14 - b.r} r={b.r} style={{ fill: b.fill, stroke: hover === b.key ? "var(--ph-focus)" : "var(--ph-line)" }} strokeWidth={hover === b.key ? 2.5 : 1} />
-                <text x={xm(b.m)} y={Math.max(16, beamY - 22 - 2 * b.r)} fontSize={12.5} fontWeight={800} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+                <text x={xm(b.m)} y={Math.max(16, beamY - 22 - 2 * b.r)} fontWeight={800} textAnchor="middle" style={{ fontSize: svgPx(12.5), fill: "var(--ph-ink)" }}>
                   <SvgChem text={`${b.label} · ${b.pct} %`} />
                 </text>
               </g>
             ))}
             <path d={`M ${xm(w)} ${beamY + 3} l -14 26 l 28 0 z`} style={{ fill: "var(--ph-accent-strong)" }} />
             <line x1={xm(w)} y1={beamY + 29} x2={xm(w)} y2={axisY} style={{ stroke: "var(--ph-focus)" }} strokeDasharray="4 4" />
-            <text x={xm(w)} y={beamY + 46} fontSize={13} fontWeight={800} textAnchor={xm(w) > W - 80 ? "end" : xm(w) < 80 ? "start" : "middle"} style={{ fill: "var(--ph-ink)" }}>
+            <text x={xm(w)} y={beamY + 46} fontWeight={800} textAnchor={xm(w) > W - 80 ? "end" : xm(w) < 80 ? "start" : "middle"} style={{ fontSize: svgPx(13), fill: "var(--ph-ink)" }}>
               {`${f3(w)} u`}
             </text>
           </svg>
@@ -167,7 +168,7 @@ function MmCompositionDrawing({ parts, heading, valueText, hover, setHover }: { 
   return (
     <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
       <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>
-        <text x={W / 2} y={28} fontSize={16} fontWeight={800} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+        <text x={W / 2} y={28} fontWeight={800} textAnchor="middle" style={{ fontSize: svgPx(16), fill: "var(--ph-ink)" }}>
           <SvgChem text={heading} />
         </text>
         {segs.map(({ pt, x, w }, i) => {
@@ -177,11 +178,11 @@ function MmCompositionDrawing({ parts, heading, valueText, hover, setHover }: { 
             <g key={pt.symbol} onPointerEnter={() => setHover(pt.symbol)} onPointerLeave={() => setHover(null)}>
               <rect x={x} y={barY} width={Math.max(1, w - 1.5)} height={barH} rx={i === 0 || i === segs.length - 1 ? 8 : 0} style={{ fill: elFill(pt.symbol), stroke: on ? "var(--ph-focus)" : "none" }} strokeWidth={on ? 3 : 0} />
               {wide && (
-                <text x={x + w / 2} y={barY + barH / 2 + 5} fontSize={14} fontWeight={800} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+                <text x={x + w / 2} y={barY + barH / 2 + 5} fontWeight={800} textAnchor="middle" style={{ fontSize: svgPx(14), fill: "var(--ph-ink)" }}>
                   {pt.symbol}
                 </text>
               )}
-              <text x={x + w / 2} y={barY + barH + 22 + (wide ? 0 : (i % 2) * 16)} fontSize={12.5} fontWeight={700} textAnchor={x + w / 2 < 40 ? "start" : x + w / 2 > W - 40 ? "end" : "middle"} style={{ fill: "var(--ph-ink)" }}>
+              <text x={x + w / 2} y={barY + barH + 22 + (wide ? 0 : (i % 2) * 16)} fontWeight={700} textAnchor={x + w / 2 < 40 ? "start" : x + w / 2 > W - 40 ? "end" : "middle"} style={{ fontSize: svgPx(12.5), fill: "var(--ph-ink)" }}>
                 {`${wide ? "" : `${pt.symbol} `}${pt.pct.toFixed(1)} %`}
               </text>
             </g>
@@ -246,11 +247,11 @@ function MmRankedDrawing({ list, valueText, hover, setHover }: { list: Array<(ty
           const on = hover === c.formula || (hover === null && i === 0);
           return (
             <g key={c.formula} onPointerEnter={() => setHover(c.formula)} onPointerLeave={() => setHover(null)}>
-              <text x={X0 - 8} y={y + rowH / 2 + 5} fontSize={13} fontWeight={700} textAnchor="end" style={{ fill: "var(--ph-ink)" }}>
+              <text x={X0 - 8} y={y + rowH / 2 + 5} fontWeight={700} textAnchor="end" style={{ fontSize: svgPx(13), fill: "var(--ph-ink)" }}>
                 <SvgChem text={uniFormula(c.formula)} />
               </text>
               <rect x={X0} y={y + rowH * 0.2} width={w} height={rowH * 0.6} rx={rowH * 0.3} style={{ fill: i === 0 ? "var(--chem-product)" : "var(--chem-gas)", opacity: on ? 1 : 0.75, stroke: on ? "var(--ph-focus)" : "none" }} strokeWidth={2} />
-              <text x={X0 + w + 8} y={y + rowH / 2 + 5} fontSize={12.5} fontWeight={800} style={{ fill: "var(--ph-ink)" }}>
+              <text x={X0 + w + 8} y={y + rowH / 2 + 5} fontWeight={800} style={{ fontSize: svgPx(12.5), fill: "var(--ph-ink)" }}>
                 {`${g3(c.n)} mol`}
               </text>
             </g>
@@ -315,7 +316,7 @@ export function MmAvogadroCard({ side }: { side: Side }) {
             {Array.from({ length: LOG_N_MAX - LOG_N_MIN + 1 }, (_, i) => LOG_N_MIN + i).map((e) => (
               <g key={e}>
                 <line x1={xl(e)} y1={barY + 11} x2={xl(e)} y2={barY + 17} style={{ stroke: "var(--ph-line)" }} />
-                <text x={xl(e)} y={barY + 32} fontSize={11} textAnchor="middle" style={{ fill: "var(--ph-ink-muted)" }}>
+                <text x={xl(e)} y={barY + 32} textAnchor="middle" style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
                   <SvgChem text={`10${String(e).replace(/\d/g, (d) => "⁰¹²³⁴⁵⁶⁷⁸⁹"[Number(d)])}`} />
                 </text>
               </g>
@@ -323,12 +324,12 @@ export function MmAvogadroCard({ side }: { side: Side }) {
             {marks.map((m, i) => (
               <g key={m.key} onPointerEnter={() => setHover(m.key)} onPointerLeave={() => setHover(null)}>
                 <line x1={xl(m.e)} y1={barY - 11} x2={xl(m.e)} y2={barY - 30 - i * 22} style={{ stroke: hover === m.key ? "var(--ph-focus)" : "var(--ph-ink)" }} strokeWidth={1.5} />
-                <text x={xl(m.e)} y={barY - 35 - i * 22} fontSize={12} fontWeight={700} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+                <text x={xl(m.e)} y={barY - 35 - i * 22} fontWeight={700} textAnchor="middle" style={{ fontSize: svgPx(12), fill: "var(--ph-ink)" }}>
                   {m.text}
                 </text>
               </g>
             ))}
-            <text x={W / 2} y={24} fontSize={15} fontWeight={800} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+            <text x={W / 2} y={24} fontWeight={800} textAnchor="middle" style={{ fontSize: svgPx(15), fill: "var(--ph-ink)" }}>
               <SvgChem text={`N = ${sciText(N)} → ${g3(n)} mol`} />
             </text>
           </svg>
@@ -396,7 +397,7 @@ export function MmParserCard({ side }: { side: Side }) {
               return (
                 <g key={i} onPointerEnter={() => setHover("tok")} onPointerLeave={() => setHover(null)}>
                   <rect x={tx(i) - tw / 2 + 3} y={pillY} width={tw - 6} height={pillH} rx={pillH / 2} style={{ fill: cur ? "var(--ph-accent-soft)" : "transparent", stroke: cur ? "var(--ph-focus)" : "var(--ph-line)" }} strokeWidth={cur ? 2.5 : 1} />
-                  <text x={tx(i)} y={pillY + pillH / 2 + 6} fontSize={17} fontWeight={800} textAnchor="middle" style={{ fill: read ? "var(--ph-ink)" : "var(--ph-ink-muted)", opacity: read ? 1 : 0.6 }}>
+                  <text x={tx(i)} y={pillY + pillH / 2 + 6} fontWeight={800} textAnchor="middle" style={{ fontSize: svgPx(17), fill: read ? "var(--ph-ink)" : "var(--ph-ink-muted)", opacity: read ? 1 : 0.6 }}>
                     <SvgChem text={uniFormula(x.token)} />
                   </text>
                 </g>
@@ -411,7 +412,7 @@ export function MmParserCard({ side }: { side: Side }) {
               return (
                 <g key={i} onPointerEnter={() => setHover("m")} onPointerLeave={() => setHover(null)}>
                   <rect x={tx(i) - tw / 2 + 5} y={ys(m)} width={tw - 10} height={Math.max(2, sy0 - ys(m))} rx={6} style={{ fill: done ? "var(--chem-product)" : "var(--glass-track)", opacity: on ? 1 : done ? 0.6 : 0.5, stroke: on ? "var(--ph-focus)" : "none" }} strokeWidth={2} />
-                  <text x={tx(i)} y={ys(m) - 8} fontSize={12} fontWeight={on ? 800 : 600} textAnchor="middle" style={{ fill: "var(--ph-ink)", opacity: done ? 1 : 0.55 }}>
+                  <text x={tx(i)} y={ys(m) - 8} fontWeight={on ? 800 : 600} textAnchor="middle" style={{ fontSize: svgPx(12), fill: "var(--ph-ink)", opacity: done ? 1 : 0.55 }}>
                     {Math.round(m)}
                   </text>
                 </g>

@@ -4,6 +4,8 @@ import type { HandleDirection } from "@/components/tool-ui/glass/GlassPrimitives
 import { SvgChem, SvgHandle, useMeasuredSize, useSvgDrag, type Stepper } from "./CardKit";
 import { niceCeil } from "./format";
 import { MiniContext } from "./miniContext";
+export { flowRows, labelW, staggerRows, thinLabels, wrapLabel } from "@/components/tool-ui/labelLayout";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 /**
  * Small SVG building blocks shared by the 2D indicator cards: a token-coloured label, collision-free
@@ -17,9 +19,10 @@ export const lit = (on: boolean) => ({ stroke: on ? "var(--ph-focus)" : "var(--p
 /** Trig results differ in the last bits between Node and browsers: round so hydration matches. */
 export const px2 = (v: number) => Math.round(v * 100) / 100;
 
-export function SvgLabel({ x, y, text, anchor = "middle", size = 11.5, bold, style = MUTED }: { x: number; y: number; text: string; anchor?: "start" | "middle" | "end"; size?: number; bold?: boolean; style?: { fill: string } }) {
+export function SvgLabel({ x, y, text, anchor = "middle", size = 12, bold, style = MUTED }: { x: number; y: number; text: string; anchor?: "start" | "middle" | "end"; size?: number; bold?: boolean; style?: { fill: string } }) {
   return (
-    <text x={x} y={y} fontSize={size} fontWeight={bold ? 800 : 600} textAnchor={anchor} style={style} className="tabular-nums">
+    // px2: positions often come from log/trig math whose last digits differ between server and browser.
+    <text x={px2(x)} y={px2(y)} fontWeight={bold ? 800 : 600} textAnchor={anchor} style={{ ...style, fontSize: svgPx(size) }} className="tabular-nums">
       <SvgChem text={text} />
     </text>
   );

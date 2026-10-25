@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { STORAGE_MEDIA } from "@tooloralabs/tools";
 import FsIndicatorCard, { FsIndicatorUnavailable } from "./FsIndicatorCard";
 import { useFsLive, useFsModel } from "./FsLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 150;
@@ -74,7 +75,7 @@ export default function FsMagnitudeSlider() {
       {UNITS.map((u, k) => (
         <g key={u}>
           <line x1={x(k * 3)} y1={AXIS_Y + 10} x2={x(k * 3)} y2={AXIS_Y + 16} className="stroke-zinc-400" />
-          <text x={x(k * 3)} y={AXIS_Y + 30} textAnchor="middle" fontSize={12} fontWeight={600} className="fill-zinc-600 dark:fill-zinc-300">
+          <text style={{ fontSize: svgPx(12) }} x={x(k * 3)} y={AXIS_Y + 30} textAnchor="middle" fontWeight={600} className="fill-zinc-600 dark:fill-zinc-300">
             {u}
           </text>
         </g>
@@ -84,14 +85,14 @@ export default function FsMagnitudeSlider() {
         return (
           <g key={m.key}>
             <line x1={mx} y1={AXIS_Y - 14} x2={mx} y2={i % 2 ? 22 : 34} strokeDasharray="2 3" className="stroke-zinc-400 dark:stroke-zinc-500" />
-            <text x={mx} y={i % 2 ? 16 : 28} textAnchor="middle" fontSize={11} className="fill-zinc-500 dark:fill-zinc-400">
+            <text style={{ fontSize: svgPx(12) }} x={mx} y={i % 2 ? 16 : 28} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
               {tm(m.key)}
             </text>
           </g>
         );
       })}
       <circle cx={x(cur)} cy={AXIS_Y} r={12} strokeWidth={3} className="fill-amber-500 stroke-white dark:fill-amber-400 dark:stroke-zinc-900" />
-      <text x={Math.min(Math.max(x(cur), 40), W - 40)} y={AXIS_Y + 50} textAnchor="middle" fontSize={13} fontWeight={700} className="fill-amber-700 dark:fill-amber-300">
+      <text style={{ fontSize: svgPx(13) }} x={Math.min(Math.max(x(cur), 40), W - 40)} y={AXIS_Y + 50} textAnchor="middle" fontWeight={700} className="fill-amber-700 dark:fill-amber-300">
         {t("you")}
       </text>
     </svg>

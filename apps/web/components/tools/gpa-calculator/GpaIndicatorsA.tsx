@@ -5,6 +5,8 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import IndicatorWithTable from "@/components/tool-ui/IndicatorWithTable";
 import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { courseLetter, HONOR_COLORS, type Derived, type Formatters, type PlannerState } from "./planner";
+import { svgPx } from "@/components/tool-ui/svgPx";
+import { useFitWidth } from "@/components/tool-ui/useFitWidth";
 
 export type IndicatorProps = { state: PlannerState; setState: (s: PlannerState) => void; d: Derived; f: Formatters };
 
@@ -19,7 +21,7 @@ export function useIndicatorT() {
 export function GpaTrendCard({ d, f }: IndicatorProps) {
   const t = useIndicatorT();
   const tp = useTranslations("tools.gpa-calculator.planner");
-  const W = 400;
+  const [fitRef, W] = useFitWidth(400);
   const H = 230;
   const L = 34;
   const R = 12;
@@ -44,11 +46,11 @@ export function GpaTrendCard({ d, f }: IndicatorProps) {
         workedExampleTitle={t("worked")}
         indicator={
           <PhoneMini slot={0} title={t("trend.title")}>
-          <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("trend.title")} className="max-w-full">
+          <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("trend.title")} className="max-w-full">
             {[lo, ...d.scale.honors.map((h) => h.min), hi].map((v) => (
               <g key={v}>
                 <line x1={L} x2={W - R} y1={y(v)} y2={y(v)} stroke="currentColor" strokeOpacity={0.12} />
-                <text x={L - 4} y={y(v) + 3} textAnchor="end" fontSize={9} className={axisText}>{v.toFixed(2)}</text>
+                <text style={{ fontSize: svgPx(12) }} x={L - 4} y={y(v) + 3} textAnchor="end" className={axisText}>{v.toFixed(2)}</text>
               </g>
             ))}
             {d.scale.honors.map((h, i) => (
@@ -67,7 +69,7 @@ export function GpaTrendCard({ d, f }: IndicatorProps) {
                     fillOpacity={i - (n - d.timeline.length) === best ? 0.95 : 0.55}
                     style={{ transition: "all 500ms ease" }}
                   />
-                  <text x={x(i)} y={y(p.sem) - 4} textAnchor="middle" fontSize={9} fontWeight={700} className={valueText}>{f.gpa(p.sem)}</text>
+                  <text style={{ fontSize: svgPx(12) }} x={x(i)} y={y(p.sem) - 4} textAnchor="middle" fontWeight={700} className={valueText}>{f.gpa(p.sem)}</text>
                 </g>
               ),
             )}
@@ -75,8 +77,8 @@ export function GpaTrendCard({ d, f }: IndicatorProps) {
             {pts.map((p, i) => (
               <g key={`c${i}`}>
                 <circle cx={x(i)} cy={y(p.cum)} r={i === n - 1 ? 6 : 4} fill="#2563eb" stroke="white" strokeWidth={1.5} />
-                <text x={x(i) + 8} y={y(p.cum) + 12} fontSize={9} fontWeight={700} fill="#2563eb">{f.gpa(p.cum)}</text>
-                <text x={x(i)} y={H - 10} textAnchor="middle" fontSize={10} className={axisText}>{p.label === "0" ? "◦" : `S${p.label}`}</text>
+                <text style={{ fontSize: svgPx(12) }} x={x(i) + 8} y={y(p.cum) + 12} fontWeight={700} fill="#2563eb">{f.gpa(p.cum)}</text>
+                <text style={{ fontSize: svgPx(12) }} x={x(i)} y={H - 10} textAnchor="middle" className={axisText}>{p.label === "0" ? "◦" : `S${p.label}`}</text>
               </g>
             ))}
           </svg>
@@ -107,7 +109,7 @@ export function GpaContributionCard({ state, d, f }: IndicatorProps) {
     .map((c, i) => ({ name: c.name || tp("input.courseN", { n: i + 1 }), letter: courseLetter(state, c), ...courses[i], ...contrib[i] }))
     .sort((a, b) => b.pull - a.pull);
   const maxAbs = Math.max(0.05, ...rows.map((r) => Math.abs(r.pull)));
-  const W = 400;
+  const [fitRef, W] = useFitWidth(400);
   const RH = 30;
   const H = rows.length * RH + 24;
   const mid = W / 2;
@@ -122,7 +124,7 @@ export function GpaContributionCard({ state, d, f }: IndicatorProps) {
         workedExampleTitle={t("worked")}
         indicator={
           <PhoneMini slot={1} title={t("contribution.title")}>
-          <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("contribution.title")} className="max-w-full">
+          <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("contribution.title")} className="max-w-full">
             <line x1={mid} x2={mid} y1={0} y2={H - 18} stroke="currentColor" strokeOpacity={0.35} />
             {rows.map((r, i) => {
               const w = Math.abs(r.pull) * scale;
@@ -131,16 +133,16 @@ export function GpaContributionCard({ state, d, f }: IndicatorProps) {
               return (
                 <g key={i}>
                   <rect x={pos ? mid : mid - w} y={yy} width={Math.max(1, w)} height={RH - 10} rx={3} fill={pos ? "#10b981" : "#ef4444"} style={{ transition: "all 400ms ease" }} />
-                  <text x={pos ? mid - 6 : mid + 6} y={yy + 14} textAnchor={pos ? "end" : "start"} fontSize={10} className={valueText}>
+                  <text style={{ fontSize: svgPx(12) }} x={pos ? mid - 6 : mid + 6} y={yy + 14} textAnchor={pos ? "end" : "start"} className={valueText}>
                     {r.name.length > 18 ? `${r.name.slice(0, 17)}…` : r.name} · {r.letter}
                   </text>
-                  <text x={pos ? mid + w + 4 : mid - w - 4} y={yy + 14} textAnchor={pos ? "start" : "end"} fontSize={10} fontWeight={700} fill={pos ? "#059669" : "#dc2626"}>
+                  <text style={{ fontSize: svgPx(12) }} x={pos ? mid + w + 4 : mid - w - 4} y={yy + 14} textAnchor={pos ? "start" : "end"} fontWeight={700} fill={pos ? "#059669" : "#dc2626"}>
                     {f.signed(r.pull)}
                   </text>
                 </g>
               );
             })}
-            <text x={mid} y={H - 4} textAnchor="middle" fontSize={9} className={axisText}>{`GPA ${f.gpa(semGpa)}`}</text>
+            <text style={{ fontSize: svgPx(12) }} x={mid} y={H - 4} textAnchor="middle" className={axisText}>{`GPA ${f.gpa(semGpa)}`}</text>
           </svg>
           </PhoneMini>
         }
@@ -176,7 +178,7 @@ export function GpaDistributionCard({ state, d, f }: IndicatorProps) {
   );
   const total = byLetter.reduce((s, b) => s + b.credits, 0) || 1;
   const maxC = Math.max(1, ...byLetter.map((b) => b.credits));
-  const W = 400;
+  const [fitRef, W] = useFitWidth(400);
   const H = 210;
   const B = 34;
   const bw = (W - 20) / grades.length;
@@ -192,16 +194,16 @@ export function GpaDistributionCard({ state, d, f }: IndicatorProps) {
       <IndicatorWithTable
         workedExampleTitle={t("worked")}
         indicator={
-          <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("distribution.title")} className="max-w-full">
+          <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("distribution.title")} className="max-w-full">
             {byLetter.map((b, i) => {
               const h = (b.credits / maxC) * (H - B - 26);
               const cx = 10 + i * bw + bw / 2;
               return (
                 <g key={b.letter}>
                   <rect x={cx - bw * 0.35} y={H - B - h} width={bw * 0.7} height={Math.max(h, 1)} rx={3} fill={color(b.points)} fillOpacity={b.credits ? 0.9 : 0.15} style={{ transition: "all 400ms ease" }} />
-                  <text x={cx} y={H - B - h - 4} textAnchor="middle" fontSize={10} fontWeight={700} className={valueText}>{b.credits ? f.num(b.credits) : "0"}</text>
-                  <text x={cx} y={H - B + 14} textAnchor="middle" fontSize={11} fontWeight={700} className={valueText}>{b.letter}</text>
-                  <text x={cx} y={H - B + 27} textAnchor="middle" fontSize={9} className={axisText}>{b.points.toFixed(2)}</text>
+                  <text style={{ fontSize: svgPx(12) }} x={cx} y={H - B - h - 4} textAnchor="middle" fontWeight={700} className={valueText}>{b.credits ? f.num(b.credits) : "0"}</text>
+                  <text style={{ fontSize: svgPx(12) }} x={cx} y={H - B + 14} textAnchor="middle" fontWeight={700} className={valueText}>{b.letter}</text>
+                  <text style={{ fontSize: svgPx(12) }} x={cx} y={H - B + 27} textAnchor="middle" className={axisText}>{b.points.toFixed(2)}</text>
                 </g>
               );
             })}
@@ -222,7 +224,7 @@ export function GpaDistributionCard({ state, d, f }: IndicatorProps) {
 export function GpaTargetSliderCard({ state, setState, d, f }: IndicatorProps) {
   const t = useIndicatorT();
   const tp = useTranslations("tools.gpa-calculator.planner");
-  const W = 400;
+  const [fitRef, W] = useFitWidth(400);
   const H = 230;
   const L = 34;
   const R = 12;
@@ -252,20 +254,20 @@ export function GpaTargetSliderCard({ state, setState, d, f }: IndicatorProps) {
         workedExampleTitle={t("worked")}
         indicator={
           <div className="w-[400px] max-w-full">
-            <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("target.title")} className="max-w-full">
+            <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("target.title")} className="max-w-full">
               <rect x={L} y={T} width={W - L - R} height={y(d.scale.max) - T} fill="#ef4444" fillOpacity={0.1} />
-              <text x={W - R - 4} y={T + 12} textAnchor="end" fontSize={9} fill="#dc2626">{t("target.impossibleZone")}</text>
+              <text style={{ fontSize: svgPx(12) }} x={W - R - 4} y={T + 12} textAnchor="end" fill="#dc2626">{t("target.impossibleZone")}</text>
               <line x1={L} x2={W - R} y1={y(d.scale.max)} y2={y(d.scale.max)} stroke="#dc2626" strokeWidth={1.5} />
               {[lo, d.scale.max].map((v) => (
-                <text key={v} x={L - 4} y={y(v) + 3} textAnchor="end" fontSize={9} className={axisText}>{v.toFixed(2)}</text>
+                <text style={{ fontSize: svgPx(12) }} key={v} x={L - 4} y={y(v) + 3} textAnchor="end" className={axisText}>{v.toFixed(2)}</text>
               ))}
               <polyline points={xs.map((c) => `${x(c)},${y(req(c))}`).join(" ")} fill="none" stroke="#2563eb" strokeWidth={2.5} />
               {[3, 6, 9, 12, 15, 18, 21, 24].map((c) => (
-                <text key={c} x={x(c)} y={H - 10} textAnchor="middle" fontSize={9} className={axisText}>{c}</text>
+                <text style={{ fontSize: svgPx(12) }} key={c} x={x(c)} y={H - 10} textAnchor="middle" className={axisText}>{c}</text>
               ))}
               <line x1={x(cur)} x2={x(cur)} y1={T} y2={H - B} stroke="currentColor" strokeOpacity={0.3} strokeDasharray="3 3" />
               <circle cx={x(cur)} cy={y(d.plan.required)} r={7} fill={d.plan.status === "impossible" ? "#dc2626" : "#10b981"} stroke="white" strokeWidth={2} style={{ transition: "all 250ms ease" }} />
-              <text x={x(cur) + (cur > 18 ? -10 : 10)} y={y(d.plan.required) - 8} textAnchor={cur > 18 ? "end" : "start"} fontSize={11} fontWeight={800} className={valueText}>
+              <text style={{ fontSize: svgPx(12) }} x={x(cur) + (cur > 18 ? -10 : 10)} y={y(d.plan.required) - 8} textAnchor={cur > 18 ? "end" : "start"} fontWeight={800} className={valueText}>
                 {f.gpa(d.plan.required)}
               </text>
             </svg>

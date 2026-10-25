@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import BarcodeIndicatorCard, { BarcodeIndicatorUnavailable } from "./BarcodeIndicatorCard";
 import { useBarcodeModel } from "./BarcodeLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 210;
@@ -26,11 +27,11 @@ export default function BarcodeWidthHistogram() {
   const svg = (
     <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <circle cx={8} cy={10} r={6} className="fill-zinc-800 dark:fill-zinc-200" />
-      <text x={20} y={14} fontSize={12} className="fill-zinc-600 dark:fill-zinc-300">
+      <text style={{ fontSize: svgPx(12) }} x={20} y={14} className="fill-zinc-600 dark:fill-zinc-300">
         {t("bars")}
       </text>
       <circle cx={98} cy={10} r={6} className="fill-sky-300 dark:fill-sky-700" />
-      <text x={110} y={14} fontSize={12} className="fill-zinc-600 dark:fill-zinc-300">
+      <text style={{ fontSize: svgPx(12) }} x={110} y={14} className="fill-zinc-600 dark:fill-zinc-300">
         {t("spaces")}
       </text>
       <line x1={0} y1={BASE} x2={W} y2={BASE} className="stroke-zinc-300 dark:stroke-zinc-600" />
@@ -42,13 +43,13 @@ export default function BarcodeWidthHistogram() {
           <g key={i}>
             {hb > 0 && <rect x={cx - bw - 2} y={BASE - hb} width={bw} height={hb} rx={4} className="fill-zinc-800 dark:fill-zinc-200" />}
             {hs > 0 && <rect x={cx + 2} y={BASE - hs} width={bw} height={hs} rx={4} className="fill-sky-300 dark:fill-sky-700" />}
-            <text x={cx - bw / 2 - 2} y={BASE - hb - 5} textAnchor="middle" fontSize={12} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={cx - bw / 2 - 2} y={BASE - hb - 5} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
               {f(a.barWidths[i])}
             </text>
-            <text x={cx + bw / 2 + 2} y={BASE - hs - 5} textAnchor="middle" fontSize={12} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-sky-700 dark:fill-sky-300">
+            <text style={{ fontSize: svgPx(12) }} x={cx + bw / 2 + 2} y={BASE - hs - 5} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-sky-700 dark:fill-sky-300">
               {f(a.spaceWidths[i])}
             </text>
-            <text x={cx} y={BASE + 18} textAnchor="middle" fontSize={12} className="fill-zinc-500 dark:fill-zinc-400">
+            <text style={{ fontSize: svgPx(12) }} x={cx} y={BASE + 18} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
               {t("width", { n: i + 1 })}
             </text>
           </g>

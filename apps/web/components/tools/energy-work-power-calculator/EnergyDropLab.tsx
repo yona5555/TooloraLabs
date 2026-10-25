@@ -5,6 +5,7 @@ import { Pause, Play } from "lucide-react";
 import { ENERGY_GRAVITY, fallAtTime } from "@tooloralabs/tools";
 import EnergyIndicatorCard from "./EnergyIndicatorCard";
 import { toInput, useEnergyLive, useEnergyModel } from "./EnergyLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 360;
 const H = 248;
@@ -74,7 +75,7 @@ export default function EnergyDropLab() {
   const lab = (
     <div className="w-full max-w-[360px]">
       <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
-        <text x={W / 2} y={18} textAnchor="middle" fontSize={13} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+        <text style={{ fontSize: svgPx(13) }} x={W / 2} y={18} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
           {`t = ${f(now.time, 2)} s · v = ${f(now.speed, 2)} m/s`}
         </text>
         <line x1={10} y1={GROUND} x2={W - 10} y2={GROUND} strokeWidth={2} className="stroke-zinc-300 dark:stroke-zinc-600" />
@@ -84,14 +85,14 @@ export default function EnergyDropLab() {
         {[1, 0.5, 0].map((k) => (
           <g key={k}>
             <line x1={TOWER_X - 40} y1={GROUND - k * span} x2={TOWER_X - 24} y2={GROUND - k * span} className="stroke-zinc-400 dark:stroke-zinc-500" />
-            <text x={TOWER_X - 44} y={GROUND - k * span + 4} textAnchor="end" fontSize={9.5} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+            <text style={{ fontSize: svgPx(12) }} x={TOWER_X - 44} y={GROUND - k * span + 4} textAnchor="end" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
               {`${f(pa.height * k, 2)}`}
             </text>
           </g>
         ))}
         <line x1={TOWER_X} y1={TOP} x2={TOWER_X} y2={GROUND} strokeDasharray="3 4" className="stroke-zinc-300 dark:stroke-zinc-600" />
         <circle cx={TOWER_X} cy={ballY} r={10} className="fill-blue-600 dark:fill-blue-400" />
-        <text x={TOWER_X} y={GROUND + 16} textAnchor="middle" fontSize={10} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+        <text style={{ fontSize: svgPx(12) }} x={TOWER_X} y={GROUND + 16} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
           {`${f(now.height, 2)} m`}
         </text>
         {/* energy bars: PE + KE = total */}
@@ -100,16 +101,16 @@ export default function EnergyDropLab() {
           return (
             <g key={b.label}>
               <rect x={BARS_X[i] - BAR_W / 2} y={GROUND - hh} width={BAR_W} height={Math.max(1, hh)} rx={4} className={b.cls} />
-              <text x={BARS_X[i]} y={GROUND - hh - 6} textAnchor="middle" fontSize={10.5} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+              <text style={{ fontSize: svgPx(12) }} x={BARS_X[i]} y={GROUND - hh - 6} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
                 {f(b.value, 1)}
               </text>
-              <text x={BARS_X[i]} y={GROUND + 16} textAnchor="middle" fontSize={10.5} fontWeight={600} className="fill-zinc-600 dark:fill-zinc-300">
+              <text style={{ fontSize: svgPx(12) }} x={BARS_X[i]} y={GROUND + 16} textAnchor="middle" fontWeight={600} className="fill-zinc-600 dark:fill-zinc-300">
                 {b.label}
               </text>
             </g>
           );
         })}
-        <text x={BARS_X[1]} y={GROUND + 30} textAnchor="middle" fontSize={9.5} className="fill-zinc-500 dark:fill-zinc-400">
+        <text style={{ fontSize: svgPx(12) }} x={BARS_X[1]} y={GROUND + 30} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
           {t("joules")}
         </text>
       </svg>

@@ -4,6 +4,7 @@ import type { JSONPathStep } from "@tooloralabs/tools";
 import JSONIndicatorCard, { JSONIndicatorUnavailable } from "./JSONIndicatorCard";
 import { KIND_FILL, useJSONModel } from "./JSONLiveContext";
 import { clip } from "./jsonSvg";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const STEP_H = 34;
@@ -43,15 +44,15 @@ export default function JSONDeepestPath() {
             {s ? (
               <>
                 <rect x={x} y={y} width={PILL_W} height={26} rx={13} className={KIND_FILL[s.kind]} />
-                <text x={x + 12} y={y + 17} fontSize={12} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-white">
+                <text style={{ fontSize: svgPx(12) }} x={x + 12} y={y + 17} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-white">
                   {clip(s.key, 11)}
                 </text>
-                <text x={x + PILL_W - 10} y={y + 17} textAnchor="end" fontSize={11} className="fill-white/90">
+                <text style={{ fontSize: svgPx(12) }} x={x + PILL_W - 10} y={y + 17} textAnchor="end" className="fill-white/90">
                   {i === 0 ? 1 : all.indexOf(s) + 1}
                 </text>
               </>
             ) : (
-              <text x={x + 10} y={y + 18} fontSize={14} fontWeight={700} className="fill-zinc-400 dark:fill-zinc-500">
+              <text style={{ fontSize: svgPx(14) }} x={x + 10} y={y + 18} fontWeight={700} className="fill-zinc-400 dark:fill-zinc-500">
                 {t("skipped", { n: all.length - 6 })}
               </text>
             )}

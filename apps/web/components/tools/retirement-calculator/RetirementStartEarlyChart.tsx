@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 /**
  * Static illustrative chart for the education intro — not tied to the user's live inputs (unlike
@@ -53,10 +54,10 @@ export default function RetirementStartEarlyChart() {
               >
                 <rect x={x} y={contributedTop} width={BAR_WIDTH} height={Math.max(barBottom - contributedTop, 0)} className="fill-blue-600 dark:fill-blue-400" />
                 <rect x={x} y={totalTop} width={BAR_WIDTH} height={Math.max(contributedTop - totalTop, 0)} className="fill-amber-400 dark:fill-amber-500" />
-                <text x={x + BAR_WIDTH / 2} y={totalTop - 8} textAnchor="middle" fontSize={13} fontWeight={700} className="fill-zinc-900 dark:fill-zinc-50">
+                <text style={{ fontSize: svgPx(13) }} x={x + BAR_WIDTH / 2} y={totalTop - 8} textAnchor="middle" fontWeight={700} className="fill-zinc-900 dark:fill-zinc-50">
                   {money(s.total)}
                 </text>
-                <text x={x + BAR_WIDTH / 2} y={barBottom + XAXIS_HEIGHT - 8} textAnchor="middle" fontSize={11} fill="currentColor" opacity={0.7}>
+                <text style={{ fontSize: svgPx(12) }} x={x + BAR_WIDTH / 2} y={barBottom + XAXIS_HEIGHT - 8} textAnchor="middle" fill="currentColor" opacity={0.7}>
                   {t("ageLabel", { age: s.startAge })}
                 </text>
               </g>

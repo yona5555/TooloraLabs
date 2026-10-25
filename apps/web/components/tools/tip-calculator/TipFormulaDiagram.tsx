@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import TipWorkedExampleNote from "./TipWorkedExampleNote";
 import GapFreeRow from "@/components/tool-ui/GapFreeRow";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 /** Worked example of the tool's own formula: bill * tip% = tip amount, then + bill = total. Real numbers. */
 const BILL = 85;
@@ -54,19 +55,19 @@ export default async function TipFormulaDiagram() {
 
             {stops.map((stop) => (
               <g key={stop.label}>
-                <text x={stop.zoneStart + STOP_ZONE_W / 2} y={RIBBON_TOP + 22} textAnchor="middle" fontSize={9} fontWeight={600} fill="white" opacity={0.85}>
+                <text style={{ fontSize: svgPx(12) }} x={stop.zoneStart + STOP_ZONE_W / 2} y={RIBBON_TOP + 22} textAnchor="middle" fontWeight={600} fill="white" opacity={0.85}>
                   {stop.label}
                 </text>
-                <text x={stop.zoneStart + STOP_ZONE_W / 2} y={RIBBON_TOP + 40} textAnchor="middle" fontSize={13} fontWeight={700} fill="white" fontFamily="monospace">
+                <text style={{ fontSize: svgPx(13) }} x={stop.zoneStart + STOP_ZONE_W / 2} y={RIBBON_TOP + 40} textAnchor="middle" fontWeight={700} fill="white" fontFamily="monospace">
                   {stop.value}
                 </text>
               </g>
             ))}
 
-            <text x={resultZoneStart + RESULT_ZONE_W / 2} y={RIBBON_TOP + 22} textAnchor="middle" fontSize={9} fontWeight={600} fill="white" opacity={0.85}>
+            <text style={{ fontSize: svgPx(12) }} x={resultZoneStart + RESULT_ZONE_W / 2} y={RIBBON_TOP + 22} textAnchor="middle" fontWeight={600} fill="white" opacity={0.85}>
               {tRoot("workedExampleTitle")}
             </text>
-            <text x={resultZoneStart + RESULT_ZONE_W / 2} y={RIBBON_TOP + 44} textAnchor="middle" fontSize={17} fontWeight={700} fill="white" fontFamily="monospace">
+            <text style={{ fontSize: svgPx(17) }} x={resultZoneStart + RESULT_ZONE_W / 2} y={RIBBON_TOP + 44} textAnchor="middle" fontWeight={700} fill="white" fontFamily="monospace">
               ${TOTAL.toFixed(2)}
             </text>
           </svg>

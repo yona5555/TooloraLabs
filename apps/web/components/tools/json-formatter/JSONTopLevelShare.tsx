@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import JSONIndicatorCard, { JSONIndicatorUnavailable } from "./JSONIndicatorCard";
 import { formatBytes, KIND_FILL, useJSONModel } from "./JSONLiveContext";
 import { clip, ringPath, turns } from "./jsonSvg";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 190;
@@ -56,10 +57,10 @@ export default function JSONTopLevelShare() {
       {segs.map((s, i) => (
         <path key={i} d={ringPath(CX, CY, 50, 88, arcs[i][0], arcs[i][1])} className={`${s.fill} stroke-white dark:stroke-zinc-900`} strokeWidth={1.5} />
       ))}
-      <text x={CX} y={CY - 1} textAnchor="middle" fontSize={16} fontWeight={700} className="fill-zinc-800 dark:fill-zinc-100">
+      <text style={{ fontSize: svgPx(16) }} x={CX} y={CY - 1} textAnchor="middle" fontWeight={700} className="fill-zinc-800 dark:fill-zinc-100">
         {formatBytes(total)}
       </text>
-      <text x={CX} y={CY + 15} textAnchor="middle" fontSize={12} className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={CX} y={CY + 15} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
         {t("center", { n: a.topLevel.length })}
       </text>
       {segs.map((s, i) => {
@@ -67,10 +68,10 @@ export default function JSONTopLevelShare() {
         return (
           <g key={i}>
             <circle cx={208} cy={y} r={6} className={s.fill} />
-            <text x={220} y={y + 4} fontSize={12} fontFamily="ui-monospace, monospace" className="fill-zinc-600 dark:fill-zinc-300">
+            <text style={{ fontSize: svgPx(12) }} x={220} y={y + 4} fontFamily="ui-monospace, monospace" className="fill-zinc-600 dark:fill-zinc-300">
               {clip(s.label, 9)}
             </text>
-            <text x={W - 4} y={y + 4} textAnchor="end" fontSize={12} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={W - 4} y={y + 4} textAnchor="end" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
               {pct(s.bytes, total)}
             </text>
           </g>

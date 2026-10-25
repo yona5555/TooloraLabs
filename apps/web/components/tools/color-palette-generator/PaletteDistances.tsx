@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import PaletteIndicatorCard, { PaletteIndicatorUnavailable } from "./PaletteIndicatorCard";
 import { px2, usePaletteModel } from "./PaletteLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const LABEL = 62;
@@ -29,7 +30,7 @@ export default function PaletteDistances() {
       {xTen < BAR_X + BAR_W && (
         <g>
           <line x1={xTen} y1={TOP - 6} x2={xTen} y2={H} strokeDasharray="4 3" className="stroke-rose-500 dark:stroke-rose-400" />
-          <text x={xTen + 4} y={TOP - 8} fontSize={11} className="fill-rose-600 dark:fill-rose-300">
+          <text style={{ fontSize: svgPx(12) }} x={xTen + 4} y={TOP - 8} className="fill-rose-600 dark:fill-rose-300">
             ΔE 10
           </text>
         </g>
@@ -42,7 +43,7 @@ export default function PaletteDistances() {
             <circle cx={14} cy={y + ROW / 2 - 2} r={9} fill={a.colors[p.i].hex} strokeWidth={1.5} className="stroke-zinc-300 dark:stroke-zinc-600" />
             <circle cx={36} cy={y + ROW / 2 - 2} r={9} fill={a.colors[p.j].hex} strokeWidth={1.5} className="stroke-zinc-300 dark:stroke-zinc-600" />
             <rect x={BAR_X} y={y + 5} width={w} height={ROW - 14} rx={3} className={p.deltaE < 10 ? "fill-rose-500 dark:fill-rose-400" : "fill-blue-500 dark:fill-blue-400"} />
-            <text x={BAR_X + w + 5} y={y + ROW / 2 + 2} fontSize={12} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
+            <text style={{ fontSize: svgPx(12) }} x={BAR_X + w + 5} y={y + ROW / 2 + 2} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
               {f(p.deltaE, 1)}
             </text>
           </g>

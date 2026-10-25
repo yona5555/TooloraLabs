@@ -5,6 +5,7 @@ import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { binaryEntropyBits, oddsFromProbability, surprisalBits } from "@tooloralabs/tools";
 import ProbabilityIndicatorCard from "./ProbabilityIndicatorCard";
 import { useProbabilityModel } from "./ProbabilityLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 300;
 const H = 222;
@@ -48,7 +49,7 @@ export default function ProbabilityChanceGauge() {
       {[0, 0.25, 0.5, 0.75, 1].map((p) => {
         const [tx, ty] = polar(p, R + 18);
         return (
-          <text key={p} x={tx} y={ty} textAnchor="middle" className="fill-zinc-500 font-mono text-[10px] dark:fill-zinc-400">
+          <text style={{ fontSize: svgPx(12) }} key={p} x={tx} y={ty} textAnchor="middle" className="fill-zinc-500 font-mono dark:fill-zinc-400">
             {pct(p, 0)}
           </text>
         );
@@ -56,8 +57,8 @@ export default function ProbabilityChanceGauge() {
       <line x1={CX} y1={CY} x2={nx} y2={ny} strokeWidth={4} strokeLinecap="round" className="stroke-zinc-800 dark:stroke-zinc-100" />
       <circle cx={CX} cy={CY} r={7} className="fill-zinc-800 dark:fill-zinc-100" />
       {/* Readout below the pivot, so the needle never crosses it. */}
-      <text x={CX} y={CY + 32} textAnchor="middle" className="fill-zinc-800 font-mono text-[17px] font-bold dark:fill-zinc-100">{`${symbol} = ${pct(r)}`}</text>
-      <text x={CX} y={CY + 52} textAnchor="middle" className="fill-zinc-500 text-[11px] font-semibold dark:fill-zinc-400">{t(`zones.${zone}`)}</text>
+      <text style={{ fontSize: svgPx(17) }} x={CX} y={CY + 32} textAnchor="middle" className="fill-zinc-800 font-mono font-bold dark:fill-zinc-100">{`${symbol} = ${pct(r)}`}</text>
+      <text style={{ fontSize: svgPx(12) }} x={CX} y={CY + 52} textAnchor="middle" className="fill-zinc-500 font-semibold dark:fill-zinc-400">{t(`zones.${zone}`)}</text>
     </svg>
   );
 

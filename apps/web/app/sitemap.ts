@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { routing } from "@/i18n/routing";
 import { tools } from "@/data/tools";
-import { categories } from "@/data/categories";
+import { categoryPages } from "@/data/categories";
 import { SITE_URL } from "@/lib/site";
 import { DOCUMENTED_TOOL_SLUGS } from "@/lib/docs-tools";
 
@@ -31,7 +31,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/terms",
     "/affiliate-disclosure",
   ];
-  const categoryPaths = categories.map((category) => `/categories/${category.slug}`);
+  const categoryPaths = categoryPages.map((category) => `/categories/${category.slug}`);
   const toolPaths = tools.map((tool) => `/tools/${tool.slug}`);
   const docsPaths = DOCUMENTED_TOOL_SLUGS.map((slug) => `/docs/${slug}`);
 

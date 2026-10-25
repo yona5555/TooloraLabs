@@ -109,7 +109,7 @@ export function OvCycleDayCard({ side }: { side: Side }) {
               <g key={l.key}>
                 <line x1={X0} y1={y + 4} x2={W - X0} y2={y + 4} style={{ stroke: "var(--ph-grid)" }} />
                 <rect x={a} y={y - 1} width={Math.max(3, b - a)} height={10} rx={4} fill={PHASE_COLORS[l.key]} opacity={on ? 1 : 0.5} style={on ? { stroke: "var(--ph-focus)", strokeWidth: 2 } : undefined} />
-                <T x={lx} y={y - 5} text={name} anchor="start" size={10} bold={on} style={on ? INK : MUTED} />
+                <T x={lx} y={y - 5} text={name} anchor="start" size={12} bold={on} style={on ? INK : MUTED} />
               </g>
             );
           })}
@@ -120,7 +120,7 @@ export function OvCycleDayCard({ side }: { side: Side }) {
           <line x1={sx} y1={24} x2={sx} y2={base} style={{ stroke: "var(--ph-ink)" }} strokeWidth={2} />
           {/* Day axis */}
           {[0, ov, c - 1].map((i, k) => (
-            <T key={k} x={xs(i + 0.5)} y={base + 18} text={String(i + 1)} size={10} bold={i === ov} anchor={k === 0 ? "start" : k === 2 ? "end" : "middle"} />
+            <T key={k} x={xs(i + 0.5)} y={base + 18} text={String(i + 1)} size={12} bold={i === ov} anchor={k === 0 ? "start" : k === 2 ? "end" : "middle"} />
           ))}
           <SvgTrack W={W} y={trackY} frac={(day - 1) / Math.max(1, c - 1)} lo={tc("dayN", { n: "1" })} hi={tc("dayN", { n: String(c) })} />
         </Drawing>
@@ -177,7 +177,7 @@ export function OvChanceCard({ side }: { side: Side }) {
       caption={t("caption", { date: ltr(f.long(ov + r)), p: ltr(PCT(p)), from: ltr(PCT(fromHere)) })}
       visual={
         <Drawing {...d} hMin={HMIN} label={t("handle")} valueText={valueText} handle={{ x: X0 + ((r + 5) / 6) * (W - 2 * X0), y: trackY, dir: "horizontal" }} s={s} testId="ov-c2">
-          <T x={X0} y={18} text={t("axis")} anchor="start" size={10.5} bold />
+          <T x={X0} y={18} text={t("axis")} anchor="start" size={12} bold />
           {RELS.map((k, i) => {
             const x = X0 + i * cw + cw * 0.15;
             const bw = cw * 0.7;
@@ -188,9 +188,9 @@ export function OvChanceCard({ side }: { side: Side }) {
             return (
               <g key={k}>
                 <rect x={x} y={Math.min(y, base - 2)} width={bw} height={Math.max(2, base - y)} rx={3} fill={color} opacity={on ? 1 : 0.55} style={lit(on && hover === "p")} />
-                <T x={x + bw / 2} y={Math.min(y, base - 2) - 6} text={PCT(v)} size={on ? 11.5 : 10} bold={on} style={on ? INK : MUTED} />
-                <T x={x + bw / 2} y={base + 16} text={signed(k)} size={10.5} bold={on} style={on ? INK : MUTED} />
-                <T x={x + bw / 2} y={base + 31} text={String(new Date((ov + k) * DAY_MS).getUTCDate())} size={9.5} bold={on} style={on ? INK : MUTED} />
+                <T x={x + bw / 2} y={Math.min(y, base - 2) - 6} text={PCT(v)} size={on ? 12 : 12} bold={on} style={on ? INK : MUTED} />
+                <T x={x + bw / 2} y={base + 16} text={signed(k)} size={12} bold={on} style={on ? INK : MUTED} />
+                <T x={x + bw / 2} y={base + 31} text={String(new Date((ov + k) * DAY_MS).getUTCDate())} size={12} bold={on} style={on ? INK : MUTED} />
               </g>
             );
           })}
@@ -256,26 +256,26 @@ export function OvCycleLengthCard({ side }: { side: Side }) {
       caption={t("caption", { c: ltr(`${c} ${dd}`), day: ltr(String(ovDay)), date: ltr(f.long(snap.lmp + c - L)) })}
       visual={
         <Drawing {...d} hMin={HMIN} label={t("handle")} valueText={valueText} handle={{ x: X0 + ((c - 20) / 25) * (W - 2 * X0), y: trackY, dir: "horizontal" }} s={s} testId="ov-c3">
-          <T x={PL - 8} y={18} text={t("axisY")} anchor="start" size={10.5} bold />
+          <T x={PL - 8} y={18} text={t("axisY")} anchor="start" size={12} bold />
           {/* FIGO normal-frequency band 24–38 days */}
           <rect x={xc(FIGO_LO)} y={top} width={xc(FIGO_HI) - xc(FIGO_LO)} height={base - top} fill="#22c55e" opacity={0.1} style={lit(hover === "figo")} />
-          <T x={(xc(FIGO_LO) + xc(FIGO_HI)) / 2} y={top + 14} text={`${FIGO_LO}–${FIGO_HI} ${dd} · FIGO`} size={10} style={{ fill: "#16a34a" }} bold />
+          <T x={(xc(FIGO_LO) + xc(FIGO_HI)) / 2} y={top + 14} text={`${FIGO_LO}–${FIGO_HI} ${dd} · FIGO`} size={12} style={{ fill: "#16a34a" }} bold />
           {[5, 10, 15, 20, 25, 30, 35].map((v) => (
             <g key={v}>
               <line x1={PL} y1={ys(v)} x2={W - PR} y2={ys(v)} style={{ stroke: "var(--ph-grid)" }} />
-              <T x={PL - 6} y={ys(v) + 4} text={String(v)} anchor="end" size={10} />
+              <T x={PL - 6} y={ys(v) + 4} text={String(v)} anchor="end" size={12} />
             </g>
           ))}
           {/* The luteal-range fan (10–17 days) and the line for your luteal phase */}
           <path d={`M ${xc(20)} ${ys(20 - 10 + 1)} L ${xc(45)} ${ys(45 - 10 + 1)} L ${xc(45)} ${ys(45 - 17 + 1)} L ${xc(20)} ${ys(20 - 17 + 1)} Z`} fill={PHASE_COLORS.luteal} opacity={0.12} />
           <line x1={xc(20)} y1={ys(20 - L + 1)} x2={xc(45)} y2={ys(45 - L + 1)} style={{ stroke: "var(--ph-accent-strong)" }} strokeWidth={3} />
-          <T x={W - PR} y={ys(45 - L + 1) + 16} text={`L = ${L} ${dd}`} anchor="end" size={10} bold style={INK} />
+          <T x={W - PR} y={ys(45 - L + 1) + 16} text={`L = ${L} ${dd}`} anchor="end" size={12} bold style={INK} />
           {/* Reference point */}
           <line x1={px} y1={py} x2={px} y2={base} style={{ stroke: "var(--ph-ink-muted)" }} strokeDasharray="3 3" />
           <circle cx={px} cy={py} r={hover === "ovday" ? 9 : 7} fill={PHASE_COLORS.ovulation} style={{ stroke: "var(--ph-surface)" }} strokeWidth={2} />
           <T x={tagRight ? px + 12 : px - 12} y={py - 10} text={tag} anchor={tagRight ? "start" : "end"} size={12} bold style={INK} />
           {[20, 25, 30, 35, 40, 45].map((v) => (
-            <T key={v} x={xc(v)} y={base + 16} text={String(v)} size={10} bold={v === c} />
+            <T key={v} x={xc(v)} y={base + 16} text={String(v)} size={12} bold={v === c} />
           ))}
           <SvgTrack W={W} y={trackY} frac={(c - 20) / 25} lo={`20 ${dd}`} hi={`45 ${dd}`} />
         </Drawing>
@@ -337,7 +337,7 @@ export function OvPhaseSplitCard({ side }: { side: Side }) {
       <g key={sg.key}>
         <rect x={a} y={y} width={b - a} height={bh} fill={sg.color} style={lit(on)} />
         {b - a > 22 && <T x={(a + b) / 2} y={y + bh / 2 + 4} text={label} size={12} bold style={{ fill: "#fff" }} />}
-        {sg.name && b - a > textW(sg.name, 10) + 4 && <T x={(a + b) / 2} y={y - 6} text={sg.name} size={10} bold style={MUTED} />}
+        {sg.name && b - a > textW(sg.name, 10) + 4 && <T x={(a + b) / 2} y={y - 6} text={sg.name} size={12} bold style={MUTED} />}
       </g>
     );
   };
@@ -356,17 +356,17 @@ export function OvPhaseSplitCard({ side }: { side: Side }) {
       caption={t("caption", { l: ltr(`${L} ${dd}`), f: ltr(`${ov} ${dd}`), day: ltr(String(ov + 1)) })}
       visual={
         <Drawing {...d} hMin={HMIN} label={t("handle")} valueText={valueText} handle={{ x: X0 + ((L - 10) / 7) * (W - 2 * X0), y: trackY, dir: "horizontal" }} s={s} testId="ov-c4">
-          <T x={X0} y={18} text={t("bar1")} anchor="start" size={10.5} bold />
+          <T x={X0} y={18} text={t("bar1")} anchor="start" size={12} bold />
           {segs1.map((sg) => seg(sg, bar1))}
-          <T x={X0} y={bar2 - 26} text={t("bar2")} anchor="start" size={10.5} bold />
+          <T x={X0} y={bar2 - 26} text={t("bar2")} anchor="start" size={12} bold />
           {segs2.map((sg) => seg(sg, bar2))}
           {/* Ovulation marker across both bars */}
           <line x1={xs(ov + 0.5)} y1={bar1 - 4} x2={xs(ov + 0.5)} y2={bar2 + bh + 4} style={{ stroke: PHASE_COLORS.ovulation }} strokeWidth={3} />
           <circle cx={xs(ov + 0.5)} cy={bar2 + bh + 12} r={6} fill={PHASE_COLORS.ovulation} />
-          <T x={clamp(xs(ov + 0.5), X0 + 40, W - X0 - 40)} y={bar2 + bh + 34} text={`${tc("phases.ovulation")} · ${f.short(snap.lmp + ov)}`} size={11} bold style={INK} />
+          <T x={clamp(xs(ov + 0.5), X0 + 40, W - X0 - 40)} y={bar2 + bh + 34} text={`${tc("phases.ovulation")} · ${f.short(snap.lmp + ov)}`} size={12} bold style={INK} />
           {/* Day scale */}
           {[0, 7, 14, 21, 28, 35, 42].filter((v) => v <= c).map((v) => (
-            <T key={v} x={xs(v)} y={bar1 + bh + 14} text={String(v)} size={9.5} />
+            <T key={v} x={xs(v)} y={bar1 + bh + 14} text={String(v)} size={12} />
           ))}
           <SvgTrack W={W} y={trackY} frac={(L - 10) / 7} lo={`L = 10 ${dd}`} hi={`L = 17 ${dd}`} stops={[{ frac: 2 / 7 }, { frac: 4 / 7 }]} />
         </Drawing>
@@ -437,7 +437,7 @@ export function OvCalendarCard({ side }: { side: Side }) {
         <Drawing {...d} hMin={HMIN} label={t("handle")} valueText={valueText} handle={{ x: X0 + (M ? k / M : 0) * (W - 2 * X0), y: trackY, dir: "horizontal" }} s={s} testId="ov-c5">
           <T x={W / 2} y={20} text={f.month(m0)} size={14} bold style={INK} />
           {Array.from({ length: 7 }, (_, i) => (
-            <T key={i} x={gx0 + cw * i + cw / 2} y={gy0 - 10} text={f.weekday(i)} size={10.5} bold />
+            <T key={i} x={gx0 + cw * i + cw / 2} y={gy0 - 10} text={f.weekday(i)} size={12} bold />
           ))}
           {days.map((day, i) => {
             const pos = lead + i;
@@ -461,7 +461,7 @@ export function OvCalendarCard({ side }: { side: Side }) {
                   style={ph ? (hl ? { stroke: "var(--ph-focus)", strokeWidth: 2.5 } : undefined) : { stroke: "var(--ph-grid)" }}
                 />
                 {isToday && <rect x={x + 1.5} y={y + 1.5} width={cw - 3} height={ch - 3} rx={5} fill="none" style={{ stroke: "var(--ph-accent-strong)" }} strokeWidth={2.5} />}
-                <T x={x + cw / 2} y={y + ch / 2 + 4} text={String(i + 1)} size={11} bold={isOv || isToday} style={isOv ? { fill: "#fff" } : on ? INK : MUTED} />
+                <T x={x + cw / 2} y={y + ch / 2 + 4} text={String(i + 1)} size={12} bold={isOv || isToday} style={isOv ? { fill: "#fff" } : on ? INK : MUTED} />
               </g>
             );
           })}
@@ -472,7 +472,7 @@ export function OvCalendarCard({ side }: { side: Side }) {
             return (
               <g key={key}>
                 <rect x={lx} y={ly - 9} width={10} height={10} rx={2} fill={PHASE_COLORS[key]} />
-                <T x={lx + 15} y={ly} text={tc(`phases.${key}`)} anchor="start" size={10} />
+                <T x={lx + 15} y={ly} text={tc(`phases.${key}`)} anchor="start" size={12} />
               </g>
             );
           })}
@@ -558,7 +558,7 @@ export function OvDonutCard({ side }: { side: Side }) {
             return <path key={k} d={arc(r, a0, a1)} fill="none" stroke={lit7 ? (k === 5 ? PHASE_COLORS.ovulation : PHASE_COLORS.fertile) : "var(--ph-grid)"} strokeWidth={sw} style={lit7 ? undefined : { stroke: "var(--ph-grid)" }} />;
           })}
           <T x={cx} y={cy + 2} text={String(idx + 1)} size={Math.min(30, R * 0.36)} bold style={INK} />
-          <T x={cx} y={cy + Math.min(30, R * 0.36) * 0.75} text={`/ ${c} ${dd}`} size={11} bold />
+          <T x={cx} y={cy + Math.min(30, R * 0.36) * 0.75} text={`/ ${c} ${dd}`} size={12} bold />
           {[
             { col: PHASE_COLORS[ph], text: `${t("ringCycle")} · ${tc(`phases.${ph}`)}` },
             { col: PHASE_COLORS.ovulation, text: `${t("ringOv")} · ${toOv} ${dd}` },
@@ -566,7 +566,7 @@ export function OvDonutCard({ side }: { side: Side }) {
           ].map((l, i) => (
             <g key={i}>
               <rect x={X0} y={legendY + 8 + i * 18 - 9} width={10} height={10} rx={2} fill={l.col} />
-              <T x={X0 + 15} y={legendY + 8 + i * 18} text={l.text} anchor="start" size={10.5} bold style={INK} />
+              <T x={X0 + 15} y={legendY + 8 + i * 18} text={l.text} anchor="start" size={12} bold style={INK} />
             </g>
           ))}
           <SvgTrack W={W} y={trackY} frac={(off + 14) / 70} lo={`−14 ${dd}`} hi={`+56 ${dd}`} stops={[{ frac: 0.2, text: tc("abbr.today"), on: off === 0 }]} />
@@ -634,7 +634,7 @@ export function OvTrioCard({ side }: { side: Side }) {
                 <rect x={x} y={14} width={cw - 8} height={boxH} rx={10} style={{ fill: col.key === "cur" ? "var(--ph-accent-soft)" : "var(--ph-surface)", ...lit(on) }} />
                 <T x={x + (cw - 8) / 2} y={34} text={col.name} size={Math.min(10.5, (cw - 14) / (col.name.length * 0.56))} bold style={MUTED} />
                 <T x={x + (cw - 8) / 2} y={14 + boxH / 2 + 4} text={f.short(col.ov)} size={col.key === "cur" ? 15 : 13} bold style={INK} />
-                <T x={x + (cw - 8) / 2} y={14 + boxH - 12} text={`${col.c} ${dd}`} size={11} bold />
+                <T x={x + (cw - 8) / 2} y={14 + boxH - 12} text={`${col.c} ${dd}`} size={12} bold />
               </g>
             );
           })}
@@ -647,8 +647,8 @@ export function OvTrioCard({ side }: { side: Side }) {
           {cols.map((col) => (
             <circle key={col.key} cx={xs(col.ov + 0.5)} cy={axisY} r={col.key === "cur" ? 7 : 5.5} fill={PHASE_COLORS.ovulation} stroke="#fff" strokeWidth={1.5} />
           ))}
-          <T x={xs(first)} y={axisY + 24} text={f.short(first)} anchor="start" size={10} bold />
-          <T x={xs(lastDay + 1)} y={axisY + 24} text={f.short(lastDay)} anchor="end" size={10} bold />
+          <T x={xs(first)} y={axisY + 24} text={f.short(first)} anchor="start" size={12} bold />
+          <T x={xs(lastDay + 1)} y={axisY + 24} text={f.short(lastDay)} anchor="end" size={12} bold />
           <SvgTrack W={W} y={trackY} frac={N / 7} lo={`±0 ${dd}`} hi={`±7 ${dd}`} />
         </Drawing>
       }
@@ -714,14 +714,14 @@ export function OvFlowCard({ side }: { side: Side }) {
               <g key={b.key}>
                 <rect x={bx} y={y} width={bw} height={bh} rx={10} style={{ fill: "var(--ph-surface)", ...lit(on || b.key === "ov") }} />
                 <rect x={bx} y={y} width={8} height={bh} rx={4} fill={b.color} />
-                <T x={bx + 18} y={y + 16} text={b.name} anchor="start" size={10} bold style={MUTED} />
+                <T x={bx + 18} y={y + 16} text={b.name} anchor="start" size={12} bold style={MUTED} />
                 <T x={bx + 18} y={y + bh - 8} text={b.value} anchor="start" size={13} bold style={INK} />
                 {i < pills.length && (
                   <g>
                     <line x1={W / 2} y1={y + bh} x2={W / 2} y2={y + gap - 2} style={{ stroke: "var(--ph-accent-strong)" }} strokeWidth={2.5} />
                     <path d={`M ${W / 2 - 6} ${y + gap - 8} L ${W / 2} ${y + gap - 1} L ${W / 2 + 6} ${y + gap - 8} Z`} style={{ fill: "var(--ph-accent-strong)" }} />
                     <rect x={W / 2 + 10} y={y + bh + (gap - bh) / 2 - 10} width={textW(pills[i], 11) + 16} height={20} rx={10} style={{ fill: "var(--ph-surface)", stroke: "var(--ph-line)" }} />
-                    <T x={W / 2 + 18} y={y + bh + (gap - bh) / 2 + 4} text={pills[i]} anchor="start" size={11} bold style={INK} />
+                    <T x={W / 2 + 18} y={y + bh + (gap - bh) / 2 + 4} text={pills[i]} anchor="start" size={12} bold style={INK} />
                   </g>
                 )}
               </g>

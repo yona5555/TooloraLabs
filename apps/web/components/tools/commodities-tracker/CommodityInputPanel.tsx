@@ -6,7 +6,7 @@ import { METAL_UNIT_GRAMS, OIL_UNIT_BARRELS, metalValueUsd, oilValueUsd, toBarre
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import FiatPicker from "@/components/tools/markets/FiatPicker";
-import QuickConversionTable, { quickAmounts } from "@/components/tools/markets/QuickConversionTable";
+import QuickConversionTable, { quickAmountDigits, quickAmounts } from "@/components/tools/markets/QuickConversionTable";
 import { useMarketFormatters, type FiatRate } from "@/components/tools/markets/fiat";
 import { COMMODITIES, isMetal, type CommodityId, type MetalUnit, type OilUnit } from "./types";
 
@@ -30,7 +30,8 @@ type Props = {
 
 const METAL_UNITS = Object.keys(METAL_UNIT_GRAMS) as MetalUnit[];
 const OIL_UNITS = Object.keys(OIL_UNIT_BARRELS) as OilUnit[];
-const QUICK = quickAmounts(-2, 9);
+const QUICK_MIN_EXP = -2;
+const QUICK = quickAmounts(QUICK_MIN_EXP, 9);
 
 export default function CommodityInputPanel(p: Props) {
   const t = useTranslations("tools.commodities-tracker.aboveFold");
@@ -125,7 +126,7 @@ export default function CommodityInputPanel(p: Props) {
           title={t("quickTitle")}
           columns={[t(`unitsShort.${unit}`), baseUnit, f.currency]}
           rows={QUICK.map((a) => [
-            f.num(a, 1),
+            f.num(a, quickAmountDigits(QUICK_MIN_EXP)),
             f.num(metal ? toTroyOunces(a, p.metalUnit) : toBarrels(a, p.oilUnit), 4),
             f.compactMoney(metal ? metalValueUsd(a, p.metalUnit, p.spot!) : oilValueUsd(a, p.oilUnit, p.spot!)),
           ])}

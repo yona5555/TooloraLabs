@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import LiIndicatorCard from "./LiIndicatorCard";
 import { useLiLive } from "./LiLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 330;
 const H = 140;
@@ -41,11 +42,11 @@ export default function LiWordLengths() {
                 <title>{t("barTitle", { n: f(n), len: f(i + 1) })}</title>
               </rect>
               {n > 0 && (
-                <text x={PAD + i * slot + slot / 2} y={H - BOTTOM - h - 3} textAnchor="middle" fontSize={8} className="fill-zinc-500 dark:fill-zinc-400">
+                <text style={{ fontSize: svgPx(12) }} x={PAD + i * slot + slot / 2} y={H - BOTTOM - h - 3} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
                   {f(n)}
                 </text>
               )}
-              <text x={PAD + i * slot + slot / 2} y={H - 5} textAnchor="middle" fontSize={9} className="fill-zinc-500 dark:fill-zinc-400">
+              <text style={{ fontSize: svgPx(12) }} x={PAD + i * slot + slot / 2} y={H - 5} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
                 {i === buckets.length - 1 ? `${f(i + 1)}+` : f(i + 1)}
               </text>
             </g>
@@ -53,7 +54,7 @@ export default function LiWordLengths() {
         })}
         <g style={{ transform: `translateX(${PAD + (avg - 0.5) * slot}px)`, transition: "transform 300ms ease" }}>
           <line x1={0} y1={6} x2={0} y2={H - BOTTOM} strokeDasharray="3 2" strokeWidth={1.5} className="stroke-emerald-600 dark:stroke-emerald-400" />
-          <text x={3} y={10} fontSize={9} fontWeight={600} className="fill-emerald-700 dark:fill-emerald-300">{t("mean", { n: f(avg, 2) })}</text>
+          <text style={{ fontSize: svgPx(12) }} x={3} y={10} fontWeight={600} className="fill-emerald-700 dark:fill-emerald-300">{t("mean", { n: f(avg, 2) })}</text>
         </g>
       </svg>
       <p className="mt-1 text-[11px] text-zinc-500 dark:text-zinc-400">{t("legend")}</p>

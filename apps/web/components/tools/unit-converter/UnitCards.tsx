@@ -77,7 +77,7 @@ export function UnitPrefixCard({ side }: { side: Side }) {
             return (
               <g key={k}>
                 <path d={`M ${a} ${lineY} Q ${(a + b) / 2} ${lineY - rise * 2} ${b} ${lineY}`} fill="none" style={{ stroke: e > 0 ? "var(--cv-from)" : "var(--cv-to)" }} strokeWidth={on ? 3.5 : 2.5} strokeLinecap="round" />
-                <T x={(a + b) / 2} y={lineY - rise - 8} text={e > 0 ? "×10" : "÷10"} size={11} bold style={INK} />
+                <T x={(a + b) / 2} y={lineY - rise - 8} text={e > 0 ? "×10" : "÷10"} size={12} bold style={INK} />
               </g>
             );
           })}
@@ -89,7 +89,7 @@ export function UnitPrefixCard({ side }: { side: Side }) {
               <g key={p.e}>
                 <circle cx={x} cy={lineY} r={p.e === 0 ? 8 : 6} style={{ fill: p.e === 0 ? "var(--ph-ink)" : on ? "var(--cv-from)" : "var(--glass-track)", ...lit(on) }} />
                 <T x={x} y={lineY + 26} text={`${p.sym}m`} size={12.5} bold style={on ? INK : MUTED} />
-                <T x={x} y={lineY + 44} text={p.e === 0 ? "1" : `10${sup(p.e)}`} size={11} />
+                <T x={x} y={lineY + 44} text={p.e === 0 ? "1" : `10${sup(p.e)}`} size={12} />
               </g>
             );
           })}
@@ -201,14 +201,14 @@ export function UnitTempLineCard({ side }: { side: Side }) {
           {ticks(-80, 220, Y0 - Y1, 30).map((v) => (
             <g key={v}>
               <line x1={X0} y1={yf(v)} x2={W - 14} y2={yf(v)} style={{ stroke: "var(--ph-grid)" }} />
-              <T x={X0 - 6} y={yf(v) + 4} text={String(v)} anchor="end" size={10.5} />
+              <T x={X0 - 6} y={yf(v) + 4} text={String(v)} anchor="end" size={12} />
             </g>
           ))}
           {ticks(-40, 100, W - 14 - X0, 52).map((v) => (
-            <T key={v} x={xc(v)} y={Y0 + 18} text={String(v)} size={10.5} />
+            <T key={v} x={xc(v)} y={Y0 + 18} text={String(v)} size={12} />
           ))}
-          <T x={X0 - 6} y={Y1 - 4} text="°F" anchor="end" size={11} bold style={{ fill: "var(--cv-to)" }} />
-          <T x={W - 14} y={Y0 + 32} text="°C" anchor="end" size={11} bold style={{ fill: "var(--cv-from)" }} />
+          <T x={X0 - 6} y={Y1 - 4} text="°F" anchor="end" size={12} bold style={{ fill: "var(--cv-to)" }} />
+          <T x={W - 14} y={Y0 + 32} text="°C" anchor="end" size={12} bold style={{ fill: "var(--cv-from)" }} />
           <line x1={xc(-40)} y1={yf(-72)} x2={xc(100)} y2={yf(180)} style={{ stroke: "var(--ph-ink-muted)" }} strokeWidth={on ? 3 : 1.5} strokeDasharray="6 5" />
           <line x1={xc(-40)} y1={yf(-40)} x2={xc(100)} y2={yf(212)} style={{ stroke: "var(--cv-to)" }} strokeWidth={3} strokeLinecap="round" />
           <line x1={xc(c)} y1={Y0} x2={xc(c)} y2={yf(f)} style={{ stroke: "var(--cv-from)" }} strokeWidth={1.5} strokeDasharray="4 4" />
@@ -269,7 +269,7 @@ export function UnitScalesCard({ side }: { side: Side }) {
           {marks.map((m) => (
             <g key={m.key}>
               <line x1={14} y1={yk(m.k)} x2={W - 14} y2={yk(m.k)} style={{ stroke: "var(--ph-grid)" }} strokeDasharray="3 5" />
-              <T x={14} y={yk(m.k) - 5} text={t(`mark.${m.key}`)} anchor="start" size={10} />
+              <T x={14} y={yk(m.k) - 5} text={t(`mark.${m.key}`)} anchor="start" size={12} />
             </g>
           ))}
           {cols.map((col) => {
@@ -283,7 +283,7 @@ export function UnitScalesCard({ side }: { side: Side }) {
                 {ticks(lo, hi, BOT - TOP, 34).map((v) => (
                   <g key={v}>
                     <line x1={col.x + 6} y1={yk(col.inv(v))} x2={col.x + 12} y2={yk(col.inv(v))} style={LINE} />
-                    <T x={col.x + 15} y={yk(col.inv(v)) + 3.5} text={String(Math.round(v))} anchor="start" size={10} />
+                    <T x={col.x + 15} y={yk(col.inv(v)) + 3.5} text={String(Math.round(v))} anchor="start" size={12} />
                   </g>
                 ))}
                 <T x={col.x} y={TOP - 14} text={col.sym} size={13} bold style={{ fill: col.color }} />
@@ -344,13 +344,13 @@ export function UnitAreaCirclesCard({ side }: { side: Side }) {
           {refs.map((r) => (
             <g key={r.key} onPointerEnter={() => setHover(r.key === "acre" ? "ac" : "pitch")} onPointerLeave={() => setHover(null)}>
               <circle cx={r.x} cy={cy} r={rOf(r.a)} style={{ fill: r.key === "acre" ? "var(--cv-to-soft)" : "var(--glass-track)", ...lit(hover === (r.key === "acre" ? "ac" : "pitch")) }} />
-              <T x={r.x} y={cy + rOf(r.a) + 18} text={r.label} size={11} bold style={INK} />
+              <T x={r.x} y={cy + rOf(r.a) + 18} text={r.label} size={12} bold style={INK} />
             </g>
           ))}
           <circle cx={W * 0.62} cy={cy} r={rOf(10)} fill="none" style={LINE} strokeDasharray="4 5" />
           <circle cx={W * 0.62} cy={cy} r={rOf(ha)} style={{ fill: "var(--cv-from-soft)", stroke: "var(--cv-from)" }} strokeWidth={hover === "ha" || hover === "ac" ? 3.5 : 2.5} />
           <T x={W * 0.62} y={cy + rOf(10) + 18} text={valueText} size={12.5} bold style={INK} />
-          <T x={W * 0.62} y={cy - rOf(10) - 6} text="10 ha" size={10} />
+          <T x={W * 0.62} y={cy - rOf(10) - 6} text="10 ha" size={12} />
         </Drawing>
       }
     />
@@ -398,18 +398,18 @@ export function UnitRoadCard({ side }: { side: Side }) {
           {ticks(0, 200, W - 2 * X0, 50).map((v) => (
             <g key={`k${v}`} onPointerEnter={() => setHover("kmh")} onPointerLeave={() => setHover(null)}>
               <line x1={xk(v)} y1={roadY - 18} x2={xk(v)} y2={roadY - 26} style={{ stroke: "var(--cv-from)" }} strokeWidth={1.5} />
-              <T x={xk(v)} y={roadY - 32} text={String(v)} size={10.5} style={{ fill: "var(--cv-from)" }} />
+              <T x={xk(v)} y={roadY - 32} text={String(v)} size={12} style={{ fill: "var(--cv-from)" }} />
             </g>
           ))}
           {ticks(0, 200 / KM_MI, W - 2 * X0, 50).map((v) => (
             <g key={`m${v}`} onPointerEnter={() => setHover("mph")} onPointerLeave={() => setHover(null)}>
               <line x1={xk(v * KM_MI)} y1={roadY + 18} x2={xk(v * KM_MI)} y2={roadY + 26} style={{ stroke: "var(--cv-to)" }} strokeWidth={1.5} />
-              <T x={xk(v * KM_MI)} y={roadY + 40} text={String(v)} size={10.5} style={{ fill: "var(--cv-to)" }} />
+              <T x={xk(v * KM_MI)} y={roadY + 40} text={String(v)} size={12} style={{ fill: "var(--cv-to)" }} />
             </g>
           ))}
-          <T x={X0 - 10} y={roadY - 52} text="km" anchor="start" size={11} bold style={{ fill: "var(--cv-from)" }} />
-          <T x={X0 - 10} y={roadY + 60} text="mi" anchor="start" size={11} bold style={{ fill: "var(--cv-to)" }} />
-          <T x={W - X0 + 10} y={roadY - 52} text={t("afterHour")} anchor="end" size={11} />
+          <T x={X0 - 10} y={roadY - 52} text="km" anchor="start" size={12} bold style={{ fill: "var(--cv-from)" }} />
+          <T x={X0 - 10} y={roadY + 60} text="mi" anchor="start" size={12} bold style={{ fill: "var(--cv-to)" }} />
+          <T x={W - X0 + 10} y={roadY - 52} text={t("afterHour")} anchor="end" size={12} />
         </Drawing>
       }
     />
@@ -489,7 +489,7 @@ export function UnitGallonJugsCard({ side }: { side: Side }) {
           <line x1={X0} y1={axisY} x2={W - X0} y2={axisY} style={{ stroke: "var(--glass-track)" }} strokeWidth={8} strokeLinecap="round" />
           <line x1={X0} y1={axisY} x2={xl(L)} y2={axisY} style={{ stroke: "var(--ph-accent-strong)" }} strokeWidth={8} strokeLinecap="round" />
           {ticks(0, L_MAX, W - 2 * X0, 56).map((v) => (
-            <T key={v} x={xl(v)} y={axisY + 26} text={`${v} L`} size={10.5} anchor={v === 0 ? "start" : v === L_MAX ? "end" : "middle"} />
+            <T key={v} x={xl(v)} y={axisY + 26} text={`${v} L`} size={12} anchor={v === 0 ? "start" : v === L_MAX ? "end" : "middle"} />
           ))}
         </Drawing>
       }
@@ -546,12 +546,12 @@ export function UnitMeridianCard({ side }: { side: Side }) {
           <line x1={ox} y1={oy} x2={px} y2={py} style={{ stroke: "var(--ph-ink-muted)" }} strokeWidth={1.5} strokeDasharray="4 4" />
           {[30, 60].map((a) => {
             const [x, y] = pt(a, R + 18);
-            return <T key={a} x={x} y={y + 4} text={`${a}°`} size={10.5} />;
+            return <T key={a} x={x} y={y + 4} text={`${a}°`} size={12} />;
           })}
-          <T x={ox + R} y={oy + 22} text={t("equator")} anchor="middle" size={11} bold style={INK} />
-          <T x={ox + 8} y={oy - R - 2} text={t("pole")} anchor="start" size={11} bold style={INK} />
+          <T x={ox + R} y={oy + 22} text={t("equator")} anchor="middle" size={12} bold style={INK} />
+          <T x={ox + 8} y={oy - R - 2} text={t("pole")} anchor="start" size={12} bold style={INK} />
           <T x={W - 12} y={22} text={valueText} anchor="end" size={13} bold style={INK} />
-          <T x={W - 12} y={42} text="10,000 km = 10⁷ m" anchor="end" size={10.5} />
+          <T x={W - 12} y={42} text="10,000 km = 10⁷ m" anchor="end" size={12} />
           <circle cx={ox} cy={oy} r={4} style={{ fill: "var(--ph-ink)" }} />
         </Drawing>
       }

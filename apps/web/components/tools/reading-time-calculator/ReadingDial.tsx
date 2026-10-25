@@ -2,6 +2,8 @@
 import { useTranslations } from "next-intl";
 import { dialMinutes, SEGMENT_DOTS, SEGMENT_STROKES } from "./rtMath";
 import { useRtLive } from "./RtLiveContext";
+import { px2 } from "@/components/tool-ui/indicator-kit/SvgBits";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const SIZE = 184;
 const C = SIZE / 2;
@@ -34,10 +36,10 @@ export default function ReadingDial() {
           return (
             <line
               key={i}
-              x1={C + Math.cos(a) * (R + 8)}
-              y1={C + Math.sin(a) * (R + 8)}
-              x2={C + Math.cos(a) * (R + (major ? 13 : 11))}
-              y2={C + Math.sin(a) * (R + (major ? 13 : 11))}
+              x1={px2(C + Math.cos(a) * (R + 8))}
+              y1={px2(C + Math.sin(a) * (R + 8))}
+              x2={px2(C + Math.cos(a) * (R + (major ? 13 : 11)))}
+              y2={px2(C + Math.sin(a) * (R + (major ? 13 : 11)))}
               strokeWidth={major ? 2 : 1}
               className="stroke-zinc-400 dark:stroke-zinc-500"
             />
@@ -69,10 +71,10 @@ export default function ReadingDial() {
         </g>
         <circle cx={C} cy={C} r={30} className="fill-white dark:fill-zinc-900" />
         <circle cx={C} cy={C} r={3} className="fill-amber-500 dark:fill-amber-400" />
-        <text x={C} y={C - 8} textAnchor="middle" fontSize={20} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-900 dark:fill-zinc-100">
+        <text style={{ fontSize: svgPx(20) }} x={C} y={C - 8} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-900 dark:fill-zinc-100">
           {clock(result.totalSeconds)}
         </text>
-        <text x={C} y={C + 18} textAnchor="middle" fontSize={9} className="fill-zinc-500 dark:fill-zinc-400">
+        <text style={{ fontSize: svgPx(12) }} x={C} y={C + 18} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
           {t("scale", { n: f(span) })}
         </text>
       </svg>

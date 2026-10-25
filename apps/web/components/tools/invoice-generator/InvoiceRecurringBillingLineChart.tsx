@@ -1,3 +1,4 @@
+import { svgPx } from "@/components/tool-ui/svgPx";
 type MonthPoint = { key: string; label: string; total: number };
 
 type InvoiceRecurringBillingLineChartProps = {
@@ -37,10 +38,10 @@ export default function InvoiceRecurringBillingLineChart({ points, title }: Invo
           return (
             <g key={c.key}>
               <circle cx={c.x} cy={c.y} r={4} className="fill-indigo-600 dark:fill-indigo-400" />
-              <text x={c.x} y={c.y - 10} textAnchor={anchor} fontSize={9} fontWeight={700} className="fill-indigo-700 dark:fill-indigo-300">
+              <text style={{ fontSize: svgPx(12) }} x={c.x} y={c.y - 10} textAnchor={anchor} fontWeight={700} className="fill-indigo-700 dark:fill-indigo-300">
                 ${c.total.toFixed(0)}
               </text>
-              <text x={c.x} y={CHART_BOTTOM + 14} textAnchor={anchor} fontSize={9} className="fill-zinc-500 dark:fill-zinc-400">
+              <text style={{ fontSize: svgPx(12) }} x={c.x} y={CHART_BOTTOM + 14} textAnchor={anchor} className="fill-zinc-500 dark:fill-zinc-400">
                 {c.label}
               </text>
             </g>

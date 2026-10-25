@@ -78,7 +78,7 @@ export default function ComplexPlaneDiagram() {
               {r && (im2 !== im1 || re2 !== re1) && <Point x={re2} y={im2} color={colors.root} svgCircleProps={{ r: 6 }} />}
               <Line.Segment point1={[0, 0]} point2={explorer.point} color={colors.circle} weight={1.5} opacity={0.6} />
               {explorer.element}
-              <Text x={0} y={-yMax + 0.6} size={11} color={colors.root}>
+              <Text x={0} y={-yMax + 0.6} size={12} color={colors.root}>
                 {t("realAxisLabel")}
               </Text>
             </Mafs>

@@ -7,6 +7,7 @@ import { g3, sciText } from "../molarity-calculator/molMath";
 import { uniFormula } from "../chemical-equation-balancer/chemMath";
 import { ACIDS, AVOGADRO, M, rd } from "./stoichMath";
 import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 /**
  * The five 2D stoichiometry indicator cards. Each drawing is laid out in real pixels at the measured
@@ -72,16 +73,16 @@ export function StoLinesCard({ side }: { side: Side }) {
                   {a.ticks.map((tk) => (
                     <g key={tk}>
                       <line x1={xA(tk, a.max)} y1={y - 4} x2={xA(tk, a.max)} y2={y + 4} style={{ stroke: "var(--ph-line)" }} />
-                      <text x={xA(tk, a.max)} y={y + 17} fontSize={10} textAnchor="middle" style={{ fill: "var(--ph-ink-muted)" }}>
+                      <text x={xA(tk, a.max)} y={y + 17} textAnchor="middle" style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
                         {tk}
                       </text>
                     </g>
                   ))}
-                  <text x={X0} y={y - 9} fontSize={11.5} fontWeight={800} style={{ fill: "var(--ph-ink)" }}>
+                  <text x={X0} y={y - 9} fontWeight={800} style={{ fontSize: svgPx(12), fill: "var(--ph-ink)" }}>
                     <SvgChem text={a.label} />
                   </text>
                   {a.op && (
-                    <text x={X1} y={y + 34} fontSize={10.5} fontWeight={700} textAnchor="end" style={{ fill: "var(--ph-ink-muted)" }}>
+                    <text x={X1} y={y + 34} fontWeight={700} textAnchor="end" style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
                       {`↓ ${a.op}`}
                     </text>
                   )}
@@ -146,13 +147,13 @@ export function StoProgressCard({ side }: { side: Side }) {
             {[0, 1, 2, 3, 4].map((n) => (
               <g key={n}>
                 <line x1={X0} y1={yn(n)} x2={X1} y2={yn(n)} style={{ stroke: "var(--ph-grid)" }} />
-                <text x={X0 - 8} y={yn(n) + 4} fontSize={10.5} textAnchor="end" style={{ fill: "var(--ph-ink-muted)" }}>
+                <text x={X0 - 8} y={yn(n) + 4} textAnchor="end" style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
                   {n}
                 </text>
               </g>
             ))}
             {[0, 25, 50, 75, 100].map((q) => (
-              <text key={q} x={xp(q)} y={H - 12} fontSize={10.5} textAnchor="middle" style={{ fill: "var(--ph-ink-muted)" }}>
+              <text key={q} x={xp(q)} y={H - 12} textAnchor={q === 100 ? "end" : "middle"} style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
                 {`${q} %`}
               </text>
             ))}
@@ -160,7 +161,7 @@ export function StoProgressCard({ side }: { side: Side }) {
               <g key={sr.key} onPointerEnter={() => setHover(sr.key)} onPointerLeave={() => setHover(null)}>
                 <line x1={xp(0)} y1={yn(sr.n(0))} x2={xp(100)} y2={yn(sr.n(1))} style={{ stroke: sr.color }} strokeWidth={hover === sr.key ? 5 : 3.5} strokeLinecap="round" />
                 <circle cx={xp(s.value)} cy={yn(sr.n(p))} r={6.5} style={{ fill: sr.color, stroke: "var(--ph-ink)" }} strokeWidth={1.25} />
-                <text x={i === 2 ? xp(100) - 6 : xp(0) + 8} y={yn(sr.n(i === 2 ? 1 : 0)) + (i === 2 ? 18 : i === 0 ? 18 : -8)} fontSize={11.5} fontWeight={800} textAnchor={i === 2 ? "end" : "start"} style={{ fill: "var(--ph-ink)" }}>
+                <text x={i === 2 ? xp(100) - 6 : xp(0) + 8} y={yn(sr.n(i === 2 ? 1 : 0)) + (i === 2 ? 18 : i === 0 ? 18 : -8)} fontWeight={800} textAnchor={i === 2 ? "end" : "start"} style={{ fontSize: svgPx(12), fill: "var(--ph-ink)" }}>
                   <SvgChem text={sr.f} />
                 </text>
               </g>
@@ -221,13 +222,13 @@ export function StoSlopesCard({ side }: { side: Side }) {
             {[0, 5, 10, 15].map((v) => (
               <g key={v}>
                 <line x1={X0} y1={yv(v)} x2={X1} y2={yv(v)} style={{ stroke: "var(--ph-grid)" }} />
-                <text x={X0 - 8} y={yv(v) + 4} fontSize={10.5} textAnchor="end" style={{ fill: "var(--ph-ink-muted)" }}>
+                <text x={X0 - 8} y={yv(v) + 4} textAnchor="end" style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
                   {v}
                 </text>
               </g>
             ))}
             {[0, 1, 2, 3, 4, 5].map((v) => (
-              <text key={v} x={xv(v)} y={H - 12} fontSize={10.5} textAnchor="middle" style={{ fill: "var(--ph-ink-muted)" }}>
+              <text key={v} x={xv(v)} y={H - 12} textAnchor="middle" style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
                 {v}
               </text>
             ))}
@@ -235,7 +236,7 @@ export function StoSlopesCard({ side }: { side: Side }) {
               <g key={ln.key} onPointerEnter={() => setHover(ln.key)} onPointerLeave={() => setHover(null)}>
                 <line x1={xv(0)} y1={yv(0)} x2={xv(5)} y2={yv(5 * ln.k)} style={{ stroke: ln.color }} strokeWidth={hover === ln.key ? 5 : 3} strokeLinecap="round" />
                 <circle cx={xv(x)} cy={yv(x * ln.k)} r={6.5} style={{ fill: ln.color, stroke: "var(--ph-ink)" }} strokeWidth={1.25} />
-                <text x={X0 + 8} y={Y1 + 12 + i * 16} fontSize={11} fontWeight={700} style={{ fill: ln.color }}>
+                <text x={X0 + 8} y={Y1 + 12 + i * 16} fontWeight={700} style={{ fontSize: svgPx(12), fill: ln.color }}>
                   <SvgChem text={ln.label} />
                 </text>
               </g>
@@ -307,13 +308,13 @@ function StoNeutralVisual({ value, hover, setHover }: { value: number; hover: st
           const on = hover === it.formula;
           return (
             <g key={it.formula} onPointerEnter={() => setHover(it.formula)} onPointerLeave={() => setHover(null)}>
-              <text x={LX - 12} y={y + 4} fontSize={12} fontWeight={800} textAnchor="end" style={{ fill: "var(--ph-ink)" }}>
+              <text x={LX - 12} y={y + 4} fontWeight={800} textAnchor="end" style={{ fontSize: svgPx(12), fill: "var(--ph-ink)" }}>
                 <SvgChem text={uniFormula(it.formula)} />
               </text>
               <line x1={LX} y1={y} x2={X1} y2={y} style={{ stroke: "var(--ph-grid)" }} strokeWidth={2} strokeLinecap="round" />
               <line x1={LX} y1={y} x2={xg(it.g)} y2={y} style={{ stroke: "var(--chem-reactant)" }} strokeWidth={on ? 5 : 3.5} strokeLinecap="round" />
               <circle cx={xg(it.g)} cy={y} r={on ? 10 : 8} style={{ fill: "var(--chem-reactant)", ...lit(on) }} />
-              <text x={xg(it.g) + 14} y={y + 4} fontSize={12} fontWeight={800} style={{ fill: "var(--ph-ink)" }}>
+              <text x={xg(it.g) + 14} y={y + 4} fontWeight={800} style={{ fontSize: svgPx(12), fill: "var(--ph-ink)" }}>
                 {`${g3(it.g)} g`}
               </text>
             </g>
@@ -398,10 +399,10 @@ function StoDialVisual({ s, setHover }: { s: Stepper; setHover: (k: string | nul
           const [gx, gy] = pt(v, R + 22);
           return (
             <g key={v}>
-              <text x={tx} y={ty + 4} fontSize={11} fontWeight={700} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+              <text x={tx} y={ty + 4} fontWeight={700} textAnchor="middle" style={{ fontSize: svgPx(12), fill: "var(--ph-ink)" }}>
                 {`${v}`}
               </text>
-              <text x={gx} y={gy + 4} fontSize={10} textAnchor="middle" style={{ fill: "var(--ph-ink-muted)" }}>
+              <text x={gx} y={gy + 4} textAnchor="middle" style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
                 {`${Math.round(v * M.H2O)} g`}
               </text>
             </g>
@@ -409,7 +410,7 @@ function StoDialVisual({ s, setHover }: { s: Stepper; setHover: (k: string | nul
         })}
         <line x1={cx} y1={cy} x2={nx} y2={ny} style={{ stroke: "var(--ph-ink)" }} strokeWidth={3} strokeLinecap="round" onPointerEnter={() => setHover("n")} onPointerLeave={() => setHover(null)} />
         <circle cx={cx} cy={cy} r={7} style={{ fill: "var(--ph-ink)" }} />
-        <text x={cx} y={cy + 26} fontSize={15} fontWeight={800} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+        <text x={cx} y={cy + 26} fontWeight={800} textAnchor="middle" style={{ fontSize: svgPx(15), fill: "var(--ph-ink)" }}>
           {`${g3(n)} mol`}
         </text>
       </svg>

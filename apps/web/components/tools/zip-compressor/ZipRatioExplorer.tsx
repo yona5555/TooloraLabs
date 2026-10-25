@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import ZipIndicatorCard, { ZipIndicatorUnavailable } from "./ZipIndicatorCard";
 import { FILE_FILL, formatBytes, useZipModel } from "./ZipLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 210;
@@ -38,10 +39,10 @@ export default function ZipRatioExplorer() {
             <g key={x.name} onClick={() => setPick(i)} className="cursor-pointer">
               <rect x={cx - bw - 2} y={y(x.size)} width={bw} height={BASE - y(x.size)} rx={4} className="fill-zinc-300 dark:fill-zinc-600" />
               <rect x={cx + 2} y={y(x.compressed)} width={bw} height={Math.max(2, BASE - y(x.compressed))} rx={4} className={FILE_FILL[i % FILE_FILL.length]} opacity={on ? 1 : 0.55} />
-              <text x={cx} y={BASE + 16} textAnchor="middle" fontSize={11} fontWeight={on ? 700 : 500} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
+              <text style={{ fontSize: svgPx(12) }} x={cx} y={BASE + 16} textAnchor="middle" fontWeight={on ? 700 : 500} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
                 {x.name.length > 10 ? `${x.name.slice(0, 9)}…` : x.name}
               </text>
-              <text x={cx} y={BASE + 31} textAnchor="middle" fontSize={11} fontWeight={700} className={on ? "fill-blue-700 dark:fill-blue-300" : "fill-zinc-500 dark:fill-zinc-400"}>
+              <text style={{ fontSize: svgPx(12) }} x={cx} y={BASE + 31} textAnchor="middle" fontWeight={700} className={on ? "fill-blue-700 dark:fill-blue-300" : "fill-zinc-500 dark:fill-zinc-400"}>
                 −{f((1 - x.ratio) * 100, 0)}%
               </text>
             </g>

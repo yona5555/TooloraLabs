@@ -3,10 +3,12 @@ import { useLayoutEffect, useRef, useState, type PointerEvent as ReactPointerEve
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import { useBelowLg } from "@/components/tool-ui/useBelowLg";
 import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { computeNiceTicks } from "./niceTicks";
 import type { CurrencyCode } from "@/lib/currency";
 import type { ComparisonRow } from "./types";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 type BorrowingComparisonChartProps = {
   rows: ComparisonRow[];
@@ -38,6 +40,7 @@ function ComparisonPlot({ rows, digitStyle, currency }: BorrowingComparisonChart
   const containerRef = useRef<HTMLDivElement>(null);
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
   const [containerWidth, setContainerWidth] = useState(0);
+  const belowLg = useBelowLg();
 
   useLayoutEffect(() => {
     const el = containerRef.current;
@@ -47,7 +50,7 @@ function ComparisonPlot({ rows, digitStyle, currency }: BorrowingComparisonChart
     return () => observer.disconnect();
   }, []);
 
-  const step = Math.max(MIN_STEP, (containerWidth - MARGIN.left - MARGIN.right) / rows.length);
+  const step = Math.max(belowLg && containerWidth > 0 ? 0 : MIN_STEP, (containerWidth - MARGIN.left - MARGIN.right) / rows.length);
   const barWidth = step * BAR_WIDTH_RATIO;
   const plotWidth = rows.length * step;
   const chartWidth = MARGIN.left + plotWidth + MARGIN.right;
@@ -106,7 +109,7 @@ function ComparisonPlot({ rows, digitStyle, currency }: BorrowingComparisonChart
         {valueTicks.map((tick) => (
           <g key={tick}>
             <line x1={MARGIN.left} y1={yForValue(tick)} x2={chartWidth - MARGIN.right} y2={yForValue(tick)} stroke="currentColor" strokeWidth={1} opacity={0.08} />
-            <text x={MARGIN.left - 8} y={yForValue(tick) + 3} textAnchor="end" fontSize={9} fill="currentColor" opacity={0.6}>
+            <text style={{ fontSize: svgPx(12) }} x={MARGIN.left - 8} y={yForValue(tick) + 3} textAnchor="end" fill="currentColor" opacity={0.6}>
               {money(tick)}
             </text>
           </g>
@@ -116,10 +119,10 @@ function ComparisonPlot({ rows, digitStyle, currency }: BorrowingComparisonChart
         {rows.map((row, i) => (
           <g key={row.purpose} opacity={hoverIndex === null || i === hoverIndex ? 1 : 0.5}>
             <rect x={barX(i)} y={yForValue(row.maxAmount)} width={barWidth} height={Math.max(mainBottom - yForValue(row.maxAmount), 0)} rx={3} className={PURPOSE_FILL[row.purpose]} />
-            <text x={groupCenterX(i)} y={yForValue(row.maxAmount) - 8} textAnchor="middle" fontSize={11} fontWeight={700} className="fill-zinc-900 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={groupCenterX(i)} y={yForValue(row.maxAmount) - 8} textAnchor="middle" fontWeight={700} className="fill-zinc-900 dark:fill-zinc-100">
               {money(row.maxAmount)}
             </text>
-            <text x={groupCenterX(i)} y={mainBottom + XAXIS_HEIGHT - 6} textAnchor="middle" fontSize={10} fill="currentColor" opacity={0.7}>
+            <text style={{ fontSize: svgPx(12) }} x={groupCenterX(i)} y={mainBottom + XAXIS_HEIGHT - 6} textAnchor="middle" fill="currentColor" opacity={0.7}>
               {t(`comparisonChart.purposeLabels.${row.purpose}`)}
             </text>
           </g>
@@ -130,10 +133,10 @@ function ComparisonPlot({ rows, digitStyle, currency }: BorrowingComparisonChart
             <line x1={groupCenterX(activeIndex)} y1={MARGIN.top} x2={groupCenterX(activeIndex)} y2={mainBottom} stroke="currentColor" strokeWidth={1} strokeDasharray="3 3" opacity={0.35} />
             <g transform={`translate(${tooltipX}, ${tooltipY})`}>
               <rect width={TOOLTIP_WIDTH} height={TOOLTIP_HEIGHT} rx={6} className="fill-white stroke-zinc-200 dark:fill-zinc-900 dark:stroke-zinc-700" strokeWidth={1} />
-              <text x={10} y={17} fontSize={10} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
+              <text style={{ fontSize: svgPx(12) }} x={10} y={17} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
                 {t(`comparisonChart.purposeLabels.${active.purpose}`)}
               </text>
-              <text x={10} y={35} fontSize={10} className="fill-zinc-600 dark:fill-zinc-300">
+              <text style={{ fontSize: svgPx(12) }} x={10} y={35} className="fill-zinc-600 dark:fill-zinc-300">
                 {t("comparisonChart.maxAmountLabel")}: {money(active.maxAmount)}
               </text>
             </g>

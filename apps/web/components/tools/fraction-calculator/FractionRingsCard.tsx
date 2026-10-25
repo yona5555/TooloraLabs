@@ -4,6 +4,7 @@ import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { GlassIndicatorCard, GlassTable } from "@/components/tool-ui/glass/GlassPrimitives";
 import { useFractionCardState } from "./useFractionCardState";
 import { formatMathValue } from "@tooloralabs/tools";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 function Ring({ num, den, color, onDrag, label }: { num: number; den: number; color: string; onDrag: (newNum: number) => void; label: string }) {
   const r = 38;
@@ -37,7 +38,7 @@ function Ring({ num, den, color, onDrag, label }: { num: number; den: number; co
         <circle cx="50" cy="50" r={r} fill="none" stroke="var(--glass-track)" strokeWidth="10" />
         <circle cx="50" cy="50" r={r} fill="none" stroke={color} strokeWidth="10" strokeDasharray={circ} strokeDashoffset={circ * (1 - frac)} strokeLinecap="round" transform="rotate(-90 50 50)" />
         <circle cx={50 + r * Math.sin(frac * Math.PI * 2)} cy={50 - r * Math.cos(frac * Math.PI * 2)} r="6" fill={color} stroke="white" strokeWidth="2" />
-        <text x="50" y="54" textAnchor="middle" fontSize="13" fontWeight="700" fill="var(--glass-title)">
+        <text style={{ fontSize: svgPx(13) }} x="50" y="54" textAnchor="middle" fontWeight="700" fill="var(--glass-title)">
           {formatMathValue(num)}/{formatMathValue(den)}
         </text>
       </svg>

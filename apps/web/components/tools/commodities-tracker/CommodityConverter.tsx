@@ -9,7 +9,6 @@ import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
-import AdSpace from "@/components/tool-ui/AdSpace";
 import SidebarFillList from "@/components/tools/markets/SidebarFillList";
 import { FiatContext, marketFormatters, useFiatPreference, type FiatRate } from "@/components/tools/markets/fiat";
 import CommodityInputPanel from "./CommodityInputPanel";
@@ -166,7 +165,7 @@ export default function CommodityConverter({ spot, fiatRates, lastUpdatedUnix, g
         />
       </div>
 
-      {/* Below the fold every card spans the full content width; leaderboards sit between groups only. */}
+      {/* Below the fold every card spans the full content width. */}
       <div className="mt-6 flex flex-col gap-6">
         <SectionNav items={navItems} />
         <ViewDocsLink slug="commodities-tracker" />
@@ -176,19 +175,16 @@ export default function CommodityConverter({ spot, fiatRates, lastUpdatedUnix, g
         <CommodityVolatilityGauge commodity={commodity} history={history} digitStyle={digitStyle} />
         <CommoditySensitivityTrio {...sel} />
         <CommodityReturns commodity={commodity} history={returnsHistory} digitStyle={digitStyle} />
-        <AdSpace variant="leaderboard" />
 
         {/* Group 2 — precious metals */}
         <CommodityRatioGauge {...sel} />
         <CommodityRatioHistory spot={spot} digitStyle={digitStyle} />
         <CommodityPurityTable {...sel} />
         <CommoditySilverHistory {...sel} />
-        <AdSpace variant="leaderboard" />
 
         {/* Group 3 — oil and the whole basket */}
         <CommoditySpreadBalance {...sel} />
         <CommodityComparisonCards spot={spot} commodity={commodity} onPick={handlePick} digitStyle={digitStyle} />
-        <AdSpace variant="leaderboard" />
 
         <CommodityNews />
         <CommodityLearningResources />

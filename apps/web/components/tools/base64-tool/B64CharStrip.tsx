@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import B64IndicatorCard, { B64IndicatorUnavailable } from "./B64IndicatorCard";
 import { GROUP_FILL, useB64Model } from "./B64LiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const COLS = 16;
@@ -30,13 +31,13 @@ export default function B64CharStrip() {
         return (
           <g key={i}>
             <rect x={x + 1} y={y + 1} width={CELL - 2} height={CELL - 2} rx={4} className={pad ? "fill-rose-500 dark:fill-rose-400" : GROUP_FILL[gi % 2]} opacity={pad ? 1 : 0.9} />
-            <text x={x + CELL / 2} y={y + CELL / 2 + 5} textAnchor="middle" fontSize={14} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-white">
+            <text style={{ fontSize: svgPx(14) }} x={x + CELL / 2} y={y + CELL / 2 + 5} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-white">
               {c}
             </text>
           </g>
         );
       })}
-      <text x={0} y={H - 4} fontSize={12} className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={0} y={H - 4} className="fill-zinc-500 dark:fill-zinc-400">
         {t("shown", { n: chars.length, total: a.textLength })}
       </text>
     </svg>

@@ -1,3 +1,4 @@
+import { svgPx } from "@/components/tool-ui/svgPx";
 export type BarcodeSegment = { width: number; filled: boolean; tall?: boolean };
 
 type BarcodeSVGProps = {
@@ -54,11 +55,10 @@ export default function BarcodeSVG({
         y={BAR_HEIGHT + TALL_EXTRA + TEXT_HEIGHT - 4}
         textAnchor="middle"
         fontFamily="monospace"
-        fontSize={16}
         letterSpacing={2}
         fill="black"
         direction="ltr"
-        style={{ unicodeBidi: "bidi-override" }}
+        style={{ fontSize: svgPx(16), unicodeBidi: "bidi-override" }}
       >
         {displayText}
       </text>

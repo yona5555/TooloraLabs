@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import { EASE_BANDS, EASE_MAX, EASE_MIN, SYLLABLE_BUCKETS, clampEase, easeBand } from "./rsScales";
 import { useRsLive } from "./RsLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const SIZE = 176;
 const C = SIZE / 2;
@@ -70,13 +71,13 @@ export default function ScoreDial() {
           <circle cx={C + OUTER_R} cy={C} r={8} stroke={band.color} strokeWidth={3} className="fill-white dark:fill-zinc-900" />
         </g>
         <MixRing counts={counts} />
-        <text x={C} y={C + 2} textAnchor="middle" fontSize={26} fontWeight={800} fontFamily="ui-monospace, monospace" className="fill-zinc-900 dark:fill-zinc-50">
+        <text style={{ fontSize: svgPx(26) }} x={C} y={C + 2} textAnchor="middle" fontWeight={800} fontFamily="ui-monospace, monospace" className="fill-zinc-900 dark:fill-zinc-50">
           {f(score)}
         </text>
-        <text x={C} y={C + 18} textAnchor="middle" fontSize={10} fontWeight={700} fill={band.color}>
+        <text style={{ fontSize: svgPx(12) }} x={C} y={C + 18} textAnchor="middle" fontWeight={700} fill={band.color}>
           {tBands(band.key)}
         </text>
-        <text x={C} y={SIZE - 8} textAnchor="middle" fontSize={9} className="fill-zinc-500 dark:fill-zinc-400">
+        <text style={{ fontSize: svgPx(12) }} x={C} y={SIZE - 8} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
           {`${f(EASE_MIN)} … ${f(EASE_MAX)}`}
         </text>
       </svg>

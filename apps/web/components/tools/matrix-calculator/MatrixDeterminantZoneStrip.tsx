@@ -3,6 +3,8 @@ import { useTranslations } from "next-intl";
 import { det2, detZone, mul2 } from "@tooloralabs/tools";
 import MatrixIndicatorCard from "./MatrixIndicatorCard";
 import { useMatrixModel } from "./MatrixLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
+import { labelW } from "@/components/tool-ui/labelLayout";
 
 const W = 340;
 const X0 = 20;
@@ -25,6 +27,11 @@ export default function MatrixDeterminantZoneStrip() {
   const mid = x(0);
   const one = x(1);
 
+  // a marker label near either end stays whole inside the strip (widths allow for a phone's up-to-1.15×)
+  const inside = (cx: number, text: string) => {
+    const half = (labelW(text) / 2) * 1.15 + 2;
+    return Math.max(half, Math.min(W - half, cx));
+  };
   const markers = [
     { key: "A", v: dA, cls: "fill-blue-600 dark:fill-blue-400", y: 34 },
     { key: "B", v: dB, cls: "fill-orange-500 dark:fill-orange-400", y: 20 },
@@ -38,20 +45,20 @@ export default function MatrixDeterminantZoneStrip() {
       <rect x={mid + 2} y={70} width={one - mid - 3} height={30} className="fill-amber-300/80 dark:fill-amber-500/50" />
       <rect x={one - 1} y={70} width={2} height={30} className="fill-zinc-700 dark:fill-zinc-200" />
       <rect x={one + 1} y={70} width={X1 - one - 1} height={30} className="fill-emerald-400/70 dark:fill-emerald-500/50" rx={4} />
-      <text x={(X0 + mid) / 2} y={90} textAnchor="middle" className="fill-rose-900 text-[11px] font-semibold dark:fill-rose-100">{t("zones.flip")}</text>
-      <text x={(one + X1) / 2} y={90} textAnchor="middle" className="fill-emerald-900 text-[11px] font-semibold dark:fill-emerald-100">{t("zones.expand")}</text>
+      <text style={{ fontSize: svgPx(12) }} x={(X0 + mid) / 2} y={90} textAnchor="middle" className="fill-rose-900 font-semibold dark:fill-rose-100">{t("zones.flip")}</text>
+      <text style={{ fontSize: svgPx(12) }} x={(one + X1) / 2} y={90} textAnchor="middle" className="fill-emerald-900 font-semibold dark:fill-emerald-100">{t("zones.expand")}</text>
       {[-M, -1, 0, 1, M].map((v) => (
-        <text key={v} x={x(v)} y={116} textAnchor="middle" className="fill-zinc-500 font-mono text-[10px] dark:fill-zinc-400">{f(v, 1)}</text>
+        <text style={{ fontSize: svgPx(12) }} key={v} x={x(v)} y={116} textAnchor="middle" className="fill-zinc-500 font-mono dark:fill-zinc-400">{f(v, 1)}</text>
       ))}
-      <text x={(mid + one) / 2} y={132} textAnchor="middle" className="fill-amber-700 text-[10px] font-semibold dark:fill-amber-300">{t("zones.shrink")}</text>
+      <text style={{ fontSize: svgPx(12) }} x={(mid + one) / 2} y={132} textAnchor="middle" className="fill-amber-700 font-semibold dark:fill-amber-300">{t("zones.shrink")}</text>
       {markers.map((m) => (
         <g key={m.key} transform={`translate(${x(m.v)}, 0)`}>
           <line x1={0} y1={m.y + 10} x2={0} y2={70} strokeWidth={1.5} className="stroke-zinc-400 dark:stroke-zinc-500" />
           <circle cx={0} cy={70} r={4} className={m.cls} />
-          <text x={0} y={m.y + 6} textAnchor="middle" className={`${m.cls} font-mono text-[11px] font-bold`}>{`${m.key}: ${f(m.v)}`}</text>
+          <text style={{ fontSize: svgPx(12) }} x={inside(x(m.v), `${m.key}: ${f(m.v)}`) - x(m.v)} y={m.y + 6} textAnchor="middle" className={`${m.cls} font-mono font-bold`}>{`${m.key}: ${f(m.v)}`}</text>
         </g>
       ))}
-      <text x={W / 2} y={158} textAnchor="middle" className="fill-zinc-400 text-[10px] dark:fill-zinc-500">{t("axis")}</text>
+      <text style={{ fontSize: svgPx(12) }} x={W / 2} y={158} textAnchor="middle" className="fill-zinc-400 dark:fill-zinc-500">{t("axis")}</text>
     </svg>
   );
 

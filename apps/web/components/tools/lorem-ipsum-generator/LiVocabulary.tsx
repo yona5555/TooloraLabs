@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import LiIndicatorCard from "./LiIndicatorCard";
 import { useLiLive } from "./LiLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const TOP = 8;
 const R = 30;
@@ -36,7 +37,7 @@ export default function LiVocabulary() {
               style={{ transition: "stroke-dasharray 400ms ease" }}
             />
           </g>
-          <text x={SIZE / 2} y={SIZE / 2 + 4} textAnchor="middle" fontSize={13} fontWeight={700} className="fill-zinc-900 dark:fill-zinc-100">{pct(coverage)}</text>
+          <text style={{ fontSize: svgPx(13) }} x={SIZE / 2} y={SIZE / 2 + 4} textAnchor="middle" fontWeight={700} className="fill-zinc-900 dark:fill-zinc-100">{pct(coverage)}</text>
         </svg>
         <p className="text-xs text-zinc-500 dark:text-zinc-400">
           {t("ring", { unique: f(unique), bank: f(bankSize), style: tf(`styles.${style}`) })}

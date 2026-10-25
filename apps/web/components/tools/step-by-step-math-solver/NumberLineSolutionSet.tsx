@@ -58,12 +58,12 @@ export default function NumberLineSolutionSet() {
                   <Point key={i} x={r} y={0} color={colors.root} svgCircleProps={{ r: 6 }} />
                 ))}
                 {roots.map((r, i) => (
-                  <Text key={`t${i}`} x={r} y={0.8} size={11} color={colors.root}>
+                  <Text key={`t${i}`} x={r} y={1.05} size={12} color={colors.root}>
                     {fmt(r)}
                   </Text>
                 ))}
                 {explorer.element}
-                <Text x={ex} y={-0.9} size={11} color={colors.explorer}>
+                <Text x={ex} y={-1.3} size={12} color={colors.explorer}>
                   {fmt(ex)}
                 </Text>
               </Mafs>

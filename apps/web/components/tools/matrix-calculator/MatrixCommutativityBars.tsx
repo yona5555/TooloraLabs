@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { mul2 } from "@tooloralabs/tools";
 import MatrixIndicatorCard from "./MatrixIndicatorCard";
 import { useMatrixModel } from "./MatrixLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 230;
@@ -42,18 +43,18 @@ export default function MatrixCommutativityBars() {
               return (
                 <g key={k}>
                   <rect x={gx + b.dx} y={top} width={24} height={h} rx={3} className={b.cls} />
-                  <text x={gx + b.dx + 12} y={b.v >= 0 ? top - 4 : top + h + 11} textAnchor="middle" className="fill-zinc-700 font-mono text-[10px] font-semibold dark:fill-zinc-200">{f(b.v, 2)}</text>
+                  <text style={{ fontSize: svgPx(12) }} x={gx + b.dx + 12} y={b.v >= 0 ? top - 4 : top + h + 11} textAnchor="middle" className="fill-zinc-700 font-mono font-semibold dark:fill-zinc-200">{f(b.v, 2)}</text>
                 </g>
               );
             })}
-            <text x={gx} y={H - 16} textAnchor="middle" className="fill-zinc-500 font-mono text-[11px] dark:fill-zinc-400">{`[ ]${lab}`}</text>
+            <text style={{ fontSize: svgPx(12) }} x={gx} y={H - 16} textAnchor="middle" className="fill-zinc-500 font-mono dark:fill-zinc-400">{`[ ]${lab}`}</text>
           </g>
         );
       })}
       <rect x={14} y={H - 10} width={10} height={8} className="fill-violet-500 dark:fill-violet-400" />
-      <text x={28} y={H - 3} className="fill-zinc-600 text-[10px] dark:fill-zinc-300">A×B</text>
+      <text style={{ fontSize: svgPx(12) }} x={28} y={H - 3} className="fill-zinc-600 dark:fill-zinc-300">A×B</text>
       <rect x={70} y={H - 10} width={10} height={8} className="fill-teal-500 dark:fill-teal-400" />
-      <text x={84} y={H - 3} className="fill-zinc-600 text-[10px] dark:fill-zinc-300">B×A</text>
+      <text style={{ fontSize: svgPx(12) }} x={84} y={H - 3} className="fill-zinc-600 dark:fill-zinc-300">B×A</text>
     </svg>
   );
 

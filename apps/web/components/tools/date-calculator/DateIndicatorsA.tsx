@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState, type PointerEvent } from "react";
+import { useState, type PointerEvent } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import {
   addCivilDays,
@@ -19,6 +19,9 @@ import IndicatorWithTable from "@/components/tool-ui/IndicatorWithTable";
 import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { useYmd } from "./DateResultCard";
 import { DATE_COLORS, isWeekendDay, withSpanEnd, type DateState, type Derived, type Formatters } from "./dateModel";
+import { svgPx } from "@/components/tool-ui/svgPx";
+import { useFitWidth } from "@/components/tool-ui/useFitWidth";
+import { labelW } from "@/components/tool-ui/labelLayout";
 
 export type IndicatorProps = { state: DateState; setState: (s: DateState) => void; d: Derived; f: Formatters };
 
@@ -61,12 +64,14 @@ export function monthTicks(a: CivilDate, b: CivilDate, cal: "gregorian" | "hijri
 export function DateTimelineDragCard({ state, setState, d, f }: IndicatorProps) {
   const t = useIndT();
   const rtl = useLocale().startsWith("ar");
-  const W = 420;
+  // laid out at its on-screen width (true px); the svg ref also serves the drag
+  const [svgRef, W] = useFitWidth(420);
   const H = 200;
   const L = 22;
   const R = 22;
   const AXIS = 112;
-  const svgRef = useRef<SVGSVGElement>(null);
+  // a date label kept inside the drawing, centred on its marker where there is room
+  const inX = (x: number, text: string) => Math.min(W - 2 - labelW(text) / 2, Math.max(2 + labelW(text) / 2, x));
   const [frozen, setFrozen] = useState<{ lo: number; hi: number } | null>(null);
   const span = Math.abs(diffCivilDays(d.start, d.target));
   const pad = Math.max(10, Math.round(span * 0.3));
@@ -129,7 +134,7 @@ export function DateTimelineDragCard({ state, setState, d, f }: IndicatorProps) 
                 return (
                   <g key={f.iso(c)}>
                     <line x1={x} x2={x} y1={AXIS - 6} y2={AXIS + 6} stroke="currentColor" strokeOpacity={0.4} />
-                    <text x={x} y={AXIS + 20} textAnchor="middle" fontSize={9} className={axisText}>
+                    <text style={{ fontSize: svgPx(12) }} x={x} y={AXIS + 20} textAnchor="middle" className={axisText}>
                       {showYear ? f.int(c.year) : f.monthShort(c.month)}
                     </text>
                   </g>
@@ -144,15 +149,15 @@ export function DateTimelineDragCard({ state, setState, d, f }: IndicatorProps) 
                 return (
                   <g key={c.year}>
                     <line x1={x} x2={x} y1={AXIS - 30} y2={AXIS + 30} stroke={DATE_COLORS.leap} strokeDasharray="3 2" strokeWidth={1.5} />
-                    <text x={x} y={AXIS + 42} textAnchor="middle" fontSize={9} fontWeight={700} fill={DATE_COLORS.leap}>29/2</text>
+                    <text style={{ fontSize: svgPx(12) }} x={x} y={AXIS + 42} textAnchor="middle" fontWeight={700} fill={DATE_COLORS.leap}>29/2</text>
                   </g>
                 );
               })}
               <g>
                 <line x1={x0} x2={x0} y1={AXIS - 40} y2={AXIS} stroke={DATE_COLORS.hijri} strokeWidth={2} />
                 <circle cx={x0} cy={AXIS} r={6} fill={DATE_COLORS.hijri} />
-                <text x={x0} y={AXIS - 60} textAnchor="middle" fontSize={10} fontWeight={700} className={valueText}>{f.greg(d.start)}</text>
-                <text x={x0} y={AXIS - 47} textAnchor="middle" fontSize={9} fill={DATE_COLORS.hijri}>{f.hijri(d.start)}</text>
+                <text style={{ fontSize: svgPx(12) }} x={inX(x0, f.greg(d.start))} y={AXIS - 60} textAnchor="middle" fontWeight={700} className={valueText}>{f.greg(d.start)}</text>
+                <text style={{ fontSize: svgPx(12) }} x={inX(x0, f.hijri(d.start))} y={AXIS - 47} textAnchor="middle" fill={DATE_COLORS.hijri}>{f.hijri(d.start)}</text>
               </g>
               <g
                 style={{ cursor: "ew-resize" }}
@@ -163,11 +168,11 @@ export function DateTimelineDragCard({ state, setState, d, f }: IndicatorProps) 
               >
                 <line x1={x1} x2={x1} y1={AXIS} y2={AXIS + 52} stroke={DATE_COLORS.danger} strokeWidth={2} />
                 <circle cx={x1} cy={AXIS} r={11} fill={DATE_COLORS.danger} stroke="white" strokeWidth={2.5} />
-                <text x={x1} y={AXIS + 4} textAnchor="middle" fontSize={11} fontWeight={800} fill="white">⇔</text>
-                <text x={x1} y={AXIS + 66} textAnchor="middle" fontSize={10} fontWeight={700} className={valueText}>{f.greg(d.target)}</text>
-                <text x={x1} y={AXIS + 79} textAnchor="middle" fontSize={9} fill={DATE_COLORS.hijri}>{f.hijri(d.target)}</text>
+                <text style={{ fontSize: svgPx(12) }} x={x1} y={AXIS + 4} textAnchor="middle" fontWeight={800} fill="white">⇔</text>
+                <text style={{ fontSize: svgPx(12) }} x={inX(x1, f.greg(d.target))} y={AXIS + 66} textAnchor="middle" fontWeight={700} className={valueText}>{f.greg(d.target)}</text>
+                <text style={{ fontSize: svgPx(12) }} x={inX(x1, f.hijri(d.target))} y={AXIS + 79} textAnchor="middle" fill={DATE_COLORS.hijri}>{f.hijri(d.target)}</text>
               </g>
-              <text x={(x0 + x1) / 2} y={AXIS - 22 - 8} textAnchor="middle" fontSize={12} fontWeight={800} fill={DATE_COLORS.business}>
+              <text style={{ fontSize: svgPx(12) }} x={(x0 + x1) / 2} y={AXIS - 22 - 8} textAnchor="middle" fontWeight={800} fill={DATE_COLORS.business}>
                 {f.int(s.totalDays)}
               </text>
             </svg>
@@ -191,7 +196,7 @@ export function DateTimelineDragCard({ state, setState, d, f }: IndicatorProps) 
 export function DateBusinessSplitCard({ state, setState, d, f }: IndicatorProps) {
   const t = useIndT();
   const tp = useTranslations("tools.date-calculator.pro");
-  const W = 420;
+  const [fitRef, W] = useFitWidth(420);
   const L = 8;
   const R = 8;
   const presets: WeekendPreset[] = ["fri-sat", "sat-sun"];
@@ -212,7 +217,7 @@ export function DateBusinessSplitCard({ state, setState, d, f }: IndicatorProps)
         workedExampleTitle={t("worked")}
         indicator={
           <PhoneMini slot={0} title={t("split.title")}>
-          <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("split.title")} className="max-w-full">
+          <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("split.title")} className="max-w-full">
             {rows.map((r, i) => {
               const y = 22 + i * 78;
               const segs = [
@@ -224,7 +229,7 @@ export function DateBusinessSplitCard({ state, setState, d, f }: IndicatorProps)
               const active = r.p === d.weekend;
               return (
                 <g key={r.p} style={{ cursor: "pointer" }} onClick={() => setState({ ...state, weekend: r.p })}>
-                  <text x={L} y={y - 6} fontSize={11} fontWeight={active ? 800 : 600} className={active ? valueText : axisText}>
+                  <text style={{ fontSize: svgPx(12) }} x={L} y={y - 6} fontWeight={active ? 800 : 600} className={active ? valueText : axisText}>
                     {tp(`weekend.${r.p}`)} {active ? "●" : "○"}
                   </text>
                   {segs.map((sg, j) => {
@@ -235,7 +240,7 @@ export function DateBusinessSplitCard({ state, setState, d, f }: IndicatorProps)
                       <g key={j}>
                         <rect x={rx} y={y} width={Math.max(0, w)} height={34} fill={sg.color} fillOpacity={active ? 0.9 : 0.45} style={{ transition: "all 400ms ease" }} />
                         {w > 26 && (
-                          <text x={rx + w / 2} y={y + 22} textAnchor="middle" fontSize={12} fontWeight={800} fill="white">
+                          <text style={{ fontSize: svgPx(12) }} x={rx + w / 2} y={y + 22} textAnchor="middle" fontWeight={800} fill="white">
                             {f.int(sg.n)}
                           </text>
                         )}
@@ -268,7 +273,7 @@ export function DateWeekdayBarsCard({ d, f }: IndicatorProps) {
   const rtl = useLocale().startsWith("ar");
   const counts = d.span.weekdayCounts;
   const max = Math.max(1, ...counts);
-  const W = 420;
+  const [fitRef, W] = useFitWidth(420);
   const H = 210;
   const B = 30;
   const bw = (W - 20) / 7;
@@ -281,7 +286,7 @@ export function DateWeekdayBarsCard({ d, f }: IndicatorProps) {
         workedExampleTitle={t("worked")}
         indicator={
           <PhoneMini slot={1} title={t("weekday.title")}>
-          <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("weekday.title")} className="max-w-full">
+          <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("weekday.title")} className="max-w-full">
             {counts.map((n, i) => {
               const col = rtl ? 6 - i : i;
               const h = (n / max) * (H - B - 26);
@@ -290,8 +295,8 @@ export function DateWeekdayBarsCard({ d, f }: IndicatorProps) {
               return (
                 <g key={i}>
                   <rect x={cx - bw * 0.34} y={H - B - h} width={bw * 0.68} height={Math.max(h, 1)} rx={4} fill={we ? DATE_COLORS.weekend : DATE_COLORS.business} fillOpacity={0.88} style={{ transition: "all 400ms ease" }} />
-                  <text x={cx} y={H - B - h - 5} textAnchor="middle" fontSize={11} fontWeight={800} className={valueText}>{f.int(n)}</text>
-                  <text x={cx} y={H - B + 16} textAnchor="middle" fontSize={10.5} fontWeight={700} fill={we ? DATE_COLORS.danger : undefined} className={we ? "" : valueText}>
+                  <text style={{ fontSize: svgPx(12) }} x={cx} y={H - B - h - 5} textAnchor="middle" fontWeight={800} className={valueText}>{f.int(n)}</text>
+                  <text style={{ fontSize: svgPx(12) }} x={cx} y={H - B + 16} textAnchor="middle" fontWeight={700} fill={we ? DATE_COLORS.danger : undefined} className={we ? "" : valueText}>
                     {f.weekdayShort(i)}
                   </text>
                 </g>
@@ -318,7 +323,7 @@ export function DateDualCalendarCard({ d, f }: IndicatorProps) {
   const ymd = useYmd(f);
   const rtl = useLocale().startsWith("ar");
   const s = d.span;
-  const W = 420;
+  const [fitRef, W] = useFitWidth(420);
   const H = 200;
   const L = 16;
   const R = 16;
@@ -335,13 +340,13 @@ export function DateDualCalendarCard({ d, f }: IndicatorProps) {
   const hTicks = dense && !hm.dense ? hm.ticks.filter((c) => gregorianToHijri(c).month === 1) : hm.ticks;
   const ruler = (y: number, color: string, ticks: CivilDate[], name: string, value: string) => (
     <g>
-      <text x={rtl ? W - L : L} y={y - 30} textAnchor={rtl ? "end" : "start"} fontSize={11} fontWeight={800} fill={color}>{name}</text>
-      <text x={rtl ? L : W - R} y={y - 30} textAnchor={rtl ? "start" : "end"} fontSize={11} fontWeight={800} className={valueText}>{value}</text>
+      <text style={{ fontSize: svgPx(12) }} x={rtl ? W - L : L} y={y - 30} textAnchor={rtl ? "end" : "start"} fontWeight={800} fill={color}>{name}</text>
+      <text style={{ fontSize: svgPx(12) }} x={rtl ? L : W - R} y={y - 30} textAnchor={rtl ? "start" : "end"} fontWeight={800} className={valueText}>{value}</text>
       <rect x={L} y={y - 14} width={W - L - R} height={22} rx={6} fill={color} fillOpacity={0.15} />
       {ticks.map((c) => (
         <line key={f.iso(c)} x1={px(c)} x2={px(c)} y1={y - 14} y2={y + 8} stroke={color} strokeWidth={1.5} />
       ))}
-      <text x={W / 2} y={y + 24} textAnchor="middle" fontSize={9} className={axisText}>{f.int(ticks.length)}</text>
+      <text style={{ fontSize: svgPx(12) }} x={W / 2} y={y + 24} textAnchor="middle" className={axisText}>{f.int(ticks.length)}</text>
     </g>
   );
 
@@ -351,10 +356,10 @@ export function DateDualCalendarCard({ d, f }: IndicatorProps) {
       <IndicatorWithTable
         workedExampleTitle={t("worked")}
         indicator={
-          <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("dual.title")} className="max-w-full">
+          <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("dual.title")} className="max-w-full">
             {ruler(60, DATE_COLORS.business, gTicks, tp("cal.gregorian"), ymd(s.ymd))}
             {ruler(150, DATE_COLORS.hijri, hTicks, tp("cal.hijri"), ymd(s.hijri))}
-            <text x={W / 2} y={106} textAnchor="middle" fontSize={13} fontWeight={800} className={valueText}>
+            <text style={{ fontSize: svgPx(13) }} x={W / 2} y={106} textAnchor="middle" fontWeight={800} className={valueText}>
               = {f.int(s.totalDays)}
             </text>
           </svg>

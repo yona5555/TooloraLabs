@@ -8,6 +8,8 @@ import { clamp, f2 } from "@/components/tool-ui/indicator-kit/format";
 import { Card } from "../macro-calculator/MacroCards";
 import { useHRLive } from "./HRLiveContext";
 import { ACSM, BELOW_COLOR, MAX_FORMULAS, REST_DEFAULT, ZONES, ahaOf, fox, maxBy, pctAt, r0, tanaka, targetAt, zoneColor, zoneIndex } from "./hr";
+import { labelW } from "@/components/tool-ui/labelLayout";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 /**
  * The eight target-heart-rate indicator cards (§31 library). All read the calculator's live
@@ -45,8 +47,8 @@ function SvgTrack({ W, y, frac, lo, hi }: { W: number; y: number; frac: number; 
     <g>
       <line x1={X0} y1={y} x2={W - X0} y2={y} style={LINE} strokeWidth={3} strokeLinecap="round" opacity={0.45} />
       <line x1={X0} y1={y} x2={x} y2={y} style={{ stroke: "var(--ph-accent-strong)" }} strokeWidth={4} strokeLinecap="round" />
-      <T x={X0} y={y + 22} text={lo} anchor="start" size={10.5} />
-      <T x={W - X0} y={y + 22} text={hi} anchor="end" size={10.5} />
+      <T x={X0} y={y + 22} text={lo} anchor="start" size={12} />
+      <T x={W - X0} y={y + 22} text={hi} anchor="end" size={12} />
     </g>
   );
 }
@@ -133,11 +135,11 @@ export function HRZoneStripCard({ side }: { side: Side }) {
         <Drawing {...d} hMin={HMIN} label={t("handle")} valueText={valueText} handle={{ x: xp(pct), y: sy, dir: "horizontal" }} s={s} testId="thr-c1">
           <style>{KEYFRAMES}</style>
           {/* bpm axis on top: the same strip read in this person's beats per minute */}
-          <T x={X0} y={22} text="bpm" anchor="start" size={10.5} bold />
+          <T x={X0} y={22} text="bpm" anchor="start" size={12} bold />
           {[50, 60, 70, 80, 90, 100].map((p) => (
             <g key={p}>
               <line x1={xp(p)} y1={sy - SH / 2 - 14} x2={xp(p)} y2={sy - SH / 2 - 4} style={LINE} />
-              <T x={xp(p)} y={sy - SH / 2 - 20} text={n0(targetAt(p, max, rest))} size={10.5} bold={hover === "bpm"} />
+              <T x={xp(p)} y={sy - SH / 2 - 20} text={n0(targetAt(p, max, rest))} size={12} bold={hover === "bpm"} />
             </g>
           ))}
           {ZONES.map((z, i) => {
@@ -149,7 +151,7 @@ export function HRZoneStripCard({ side }: { side: Side }) {
               <g key={z.key}>
                 <rect x={a} y={sy - SH / 2} width={Math.max(0, b - a)} height={SH} style={{ fill: z.color, opacity: on ? 1 : 0.5, ...lit(on && hover === "zone") }} />
                 {b - a > name.length * 6.6 + 8 && (
-                  <text x={(a + b) / 2} y={sy + 4} fontSize={10.5} fontWeight={800} textAnchor="middle" fill="#fff">
+                  <text style={{ fontSize: svgPx(12) }} x={(a + b) / 2} y={sy + 4} fontWeight={800} textAnchor="middle" fill="#fff">
                     {name}
                   </text>
                 )}
@@ -158,7 +160,7 @@ export function HRZoneStripCard({ side }: { side: Side }) {
           })}
           <rect x={X0} y={sy - SH / 2} width={W - 2 * X0} height={SH} fill="none" style={LINE} rx={3} />
           {[50, 60, 70, 80, 90, 100].map((p) => (
-            <T key={p} x={xp(p)} y={sy + SH / 2 + 16} text={`${p}%`} size={10.5} />
+            <T key={p} x={xp(p)} y={sy + SH / 2 + 16} text={`${p}%`} size={12} />
           ))}
           <line x1={xp(pct)} y1={sy - SH / 2 - 6} x2={xp(pct)} y2={sy + SH / 2 + 6} style={{ stroke: "var(--ph-ink)" }} strokeWidth={2.5} />
           <T x={clamp(xp(pct), X0 + 70, W - X0 - 70)} y={sy + SH / 2 + 42} text={`${pct}% → ${bpmT(bpm)}`} size={14} bold style={INK} />
@@ -176,7 +178,7 @@ export function HRZoneStripCard({ side }: { side: Side }) {
           <g transform={`translate(${X0 + 14} ${ecgY - 8})`}>
             <path d={HEART_PATH} fill={zoneColor(pct)} className="thr-anim" style={{ transformBox: "fill-box", transformOrigin: "center", animation: `thr-beat ${f2(period)}s ease-out infinite` }} />
           </g>
-          <T x={W - X0} y={H - 8} text={`${f2(period)} s / ${tv("beatShort")}`} anchor="end" size={10.5} bold={hover === "beat"} />
+          <T x={W - X0} y={H - 8} text={`${f2(period)} s / ${tv("beatShort")}`} anchor="end" size={12} bold={hover === "beat"} />
         </Drawing>
       }
     />
@@ -257,12 +259,12 @@ function ReadingGauge({ side }: { side: Side }) {
           <path d={arc(70, 85, R - 34)} fill="none" style={{ stroke: "var(--ph-ink)" }} strokeWidth={5} opacity={hover === "aha" ? 1 : 0.55} />
           {[40, 50, 60, 70, 80, 90, 100].map((p) => {
             const [x, y] = pt(p, R + 24);
-            return <T key={p} x={x} y={y + 4} text={`${p}%`} size={10.5} bold={p === 70} style={p === 70 ? INK : MUTED} />;
+            return <T key={p} x={x} y={y + 4} text={`${p}%`} size={12} bold={p === 70} style={p === 70 ? INK : MUTED} />;
           })}
           <line x1={cx} y1={cy} x2={nx} y2={ny} style={{ stroke: "var(--ph-ink)" }} strokeWidth={hover === "pmax" ? 4.5 : 3.5} strokeLinecap="round" />
           <circle cx={cx} cy={cy} r={7} style={{ fill: "var(--ph-ink)" }} />
           <T x={cx} y={cy + 26} text={`${valueText} · ${Math.round(pMax)}% HRmax`} size={15} bold style={INK} />
-          <T x={cx} y={cy + 42} text={`HRmax ${max} · ${Math.round(pHrr)}% HRR`} size={11} />
+          <T x={cx} y={cy + 42} text={`HRmax ${max} · ${Math.round(pHrr)}% HRR`} size={12} />
         </Drawing>
       }
     />
@@ -277,10 +279,12 @@ export function HRFormulaBarsCard({ side }: { side: Side }) {
   const [hover, setHover] = useState<string | null>(null);
   const HMIN = 260;
   const bars = MAX_FORMULAS.map((f, fi) => ({ ...f, fi, v: maxBy(f.key, age) })).sort((a, b) => b.v - a.v);
-  const LW = 112;
   const top = 18;
   const d = useDrawing(HMIN, s, (_x, y, _W, H) => bars[clamp(Math.floor(((y - top) / (H - top - 30)) * bars.length), 0, bars.length - 1)].fi);
   const { W, H } = d;
+  // the name column as wide as the longest formula name at 12px, so "Gulati 2010 (women)" never runs
+  // off the left edge (§39); at most half the drawing
+  const LW = Math.min(W / 2, Math.max(112, Math.ceil(Math.max(...bars.map((b) => labelW(t(`names.${b.key}`))))) + 12));
   const rowH = (H - top - 30) / bars.length;
   const vmax = Math.max(...bars.map((b) => b.v)) * 1.12;
   const xv = (v: number) => LW + (v / vmax) * (W - LW - X0);
@@ -315,13 +319,13 @@ export function HRFormulaBarsCard({ side }: { side: Side }) {
             const on = bi === sel;
             return (
               <g key={b.key}>
-                <T x={LW - 8} y={y + bh / 2 + 4} text={t(`names.${b.key}`)} anchor="end" size={10.5} bold={on} style={on ? INK : MUTED} />
+                <T x={LW - 8} y={y + bh / 2 + 4} text={t(`names.${b.key}`)} anchor="end" size={12} bold={on} style={on ? INK : MUTED} />
                 <rect x={LW} y={y} width={Math.max(0, xv(b.v) - LW)} height={bh} rx={4} style={{ fill: on ? "#ef4444" : "#f97316", opacity: on ? 1 : 0.5, ...lit(on && hover === "v") }} />
-                <T x={xv(b.v) - 6} y={y + bh / 2 + 4} text={f2(b.v)} anchor="end" size={11} bold style={{ fill: "#fff" }} />
+                <T x={xv(b.v) - 6} y={y + bh / 2 + 4} text={f2(b.v)} anchor="end" size={12} bold style={{ fill: "#fff" }} />
               </g>
             );
           })}
-          <T x={W - X0} y={H - 8} text={`${t("ageLabel")} ${age} · bpm`} anchor="end" size={10.5} bold />
+          <T x={W - X0} y={H - 8} text={`${t("ageLabel")} ${age} · bpm`} anchor="end" size={12} bold />
         </Drawing>
       }
     />
@@ -379,22 +383,23 @@ function AgeCurve({ side }: { side: Side }) {
           {[130, 150, 170, 190, 210].map((v) => (
             <g key={v}>
               <line x1={PL} y1={yb(v)} x2={W - 18} y2={yb(v)} style={{ stroke: "var(--ph-grid)" }} />
-              <T x={PL - 6} y={yb(v) + 4} text={String(v)} anchor="end" size={10.5} />
+              <T x={PL - 6} y={yb(v) + 4} text={String(v)} anchor="end" size={12} />
             </g>
           ))}
           {[20, 30, 40, 50, 60, 70, 80].map((v) => (
-            <T key={v} x={xa(v)} y={base + 16} text={String(v)} size={10.5} />
+            <T key={v} x={xa(v)} y={base + 16} text={String(v)} size={12} />
           ))}
-          <T x={W - 18} y={base + 32} text={t("ageLabel")} anchor="end" size={10.5} bold />
-          <T x={6} y={top - 6} text="HRmax" anchor="start" size={10.5} bold />
+          <T x={W - 18} y={base + 32} text={t("ageLabel")} anchor="end" size={12} bold />
+          {/* beside the axis, not above its tick numbers: over the "210" tick it touched it (§39) */}
+          <T x={PL + 4} y={top - 6} text="HRmax" anchor="start" size={12} bold />
           <polyline points={line(tanaka)} fill="none" style={{ stroke: "var(--ph-neutral)" }} strokeWidth={hover === "tan" ? 4 : 2.5} strokeDasharray="6 5" />
           <polyline points={line(fox)} fill="none" style={{ stroke: "var(--ph-accent-strong)" }} strokeWidth={hover === "fox" ? 4.5 : 3} />
-          <T x={xa(A1) - 4} y={yb(fox(A1)) + 16} text="Fox" anchor="end" size={10.5} bold style={INK} />
-          <T x={xa(A1) - 4} y={yb(tanaka(A1)) - 8} text="Tanaka" anchor="end" size={10.5} bold />
+          <T x={xa(A1) - 4} y={yb(fox(A1)) + 16} text="Fox" anchor="end" size={12} bold style={INK} />
+          <T x={xa(A1) - 4} y={yb(tanaka(A1)) - 8} text="Tanaka" anchor="end" size={12} bold />
           <circle cx={xa(40)} cy={yb(180)} r={hover === "cross" ? 6 : 4} style={{ fill: "var(--ph-neutral)" }} />
           <line x1={xa(a)} y1={yb(fa)} x2={xa(a)} y2={yb(ta)} style={{ stroke: "var(--ph-ink)" }} strokeWidth={hover === "diff" ? 3 : 1.5} />
           <circle cx={xa(clamp(age, A0, A1))} cy={yb(max)} r={hover === "you" ? 8 : 6} fill="#ef4444" />
-          <T x={xa(clamp(age, A0, A1))} y={yb(max) - 12} text={String(max)} size={11} bold style={INK} />
+          <T x={xa(clamp(age, A0, A1))} y={yb(max) - 12} text={String(max)} size={12} bold style={INK} />
         </Drawing>
       }
     />
@@ -451,7 +456,7 @@ export function HRRestSensitivityCard({ side }: { side: Side }) {
               <g key={c.key}>
                 <rect x={x} y={yb(c.v)} width={bw} height={base - yb(c.v)} rx={5} style={{ fill: zoneColor(intensity), opacity: ci === 1 ? 1 : 0.65, ...lit(on) }} />
                 <T x={x + bw / 2} y={yb(c.v) - 8} text={bpmT(c.v)} size={12} bold style={INK} />
-                <T x={x + bw / 2} y={base + 16} text={`${t("restShort")} ${c.r}`} size={10.5} bold={ci === 1} style={ci === 1 ? INK : MUTED} />
+                <T x={x + bw / 2} y={base + 16} text={`${t("restShort")} ${c.r}`} size={12} bold={ci === 1} style={ci === 1 ? INK : MUTED} />
               </g>
             );
           })}
@@ -516,8 +521,8 @@ export function HRKarvonenFormulaCard({ side }: { side: Side }) {
             return (
               <g key={g.key} opacity={shown ? 1 : 0.28}>
                 <rect x={x} y={by} width={boxW} height={bh} rx={10} style={{ fill: on ? "var(--ph-accent-soft)" : "var(--ph-surface)", ...lit(on) }} />
-                <T x={x + boxW / 2} y={by + 22} text={String(gi + 1)} size={11} bold />
-                <T x={x + boxW / 2} y={by + bh / 2} text={g.top} size={11} />
+                <T x={x + boxW / 2} y={by + 22} text={String(gi + 1)} size={12} bold />
+                <T x={x + boxW / 2} y={by + bh / 2} text={g.top} size={12} />
                 <T x={x + boxW / 2} y={by + bh / 2 + 22} text={g.bottom} size={12.5} bold style={INK} />
                 {gi < 3 && <path d={`M ${x + boxW + 3} ${by + bh / 2} l ${gap - 8} 0 m -6 -5 l 6 5 l -6 5`} fill="none" style={LINE} strokeWidth={2} opacity={gi + 1 < st ? 1 : 0.35} />}
               </g>
@@ -559,7 +564,7 @@ export function HRMethodBalanceCard({ side }: { side: Side }) {
       <line x1={x} y1={y} x2={x + 34} y2={y + 46} style={LINE} />
       <path d={`M ${x - 46} ${y + 46} Q ${x} ${y + 72} ${x + 46} ${y + 46} Z`} style={{ fill: color, ...lit(on) }} opacity={0.9} />
       <T x={x} y={y + 92} text={bpmT(v)} size={13} bold style={INK} />
-      <T x={x} y={y + 108} text={label} size={10.5} />
+      <T x={x} y={y + 108} text={label} size={12} />
     </g>
   );
   const valueText = `${pct}%`;
@@ -607,7 +612,9 @@ export function HRAcsmStepsCard({ side }: { side: Side }) {
   const d = useDrawing(HMIN, s, (x, _y, W) => clamp(Math.floor(((x - X0) / (W - 2 * X0)) * n), 0, n - 1));
   const { W, H } = d;
   const slot = (W - 2 * X0) / n;
-  const base = H - 40;
+  // a range wider than its step (a phone) is set on two lines, "146–" over "182", so neighbours never touch (§39)
+  const wrap = labelW("000–000") > slot - 4;
+  const base = H - (wrap ? 53 : 40);
   const top = 34;
   const yp = (p: number) => base - (p / 100) * (base - top);
   const c = ACSM[s.value];
@@ -643,13 +650,24 @@ export function HRAcsmStepsCard({ side }: { side: Side }) {
             return (
               <g key={a.key}>
                 <rect x={x} y={yp(a.max[1])} width={slot - 6} height={base - yp(a.max[1])} rx={4} style={{ fill: a.color, opacity: on ? 1 : 0.45, ...lit(on && hover === "pmax") }} />
-                <T x={x + (slot - 6) / 2} y={yp(a.max[1]) - 8} text={`${r0((max * a.max[0]) / 100)}–${r0((max * a.max[1]) / 100)}`} size={10.5} bold={on} style={on ? INK : MUTED} />
-                <T x={x + (slot - 6) / 2} y={base + 16} text={`${a.max[0]}–${a.max[1]}%`} size={10.5} bold={on} style={on ? INK : MUTED} />
+                {wrap ? (
+                  <>
+                    <T x={x + (slot - 6) / 2} y={yp(a.max[1]) - 21} text={`${r0((max * a.max[0]) / 100)}–`} size={12} bold={on} style={on ? INK : MUTED} />
+                    <T x={x + (slot - 6) / 2} y={yp(a.max[1]) - 8} text={String(r0((max * a.max[1]) / 100))} size={12} bold={on} style={on ? INK : MUTED} />
+                    <T x={x + (slot - 6) / 2} y={base + 16} text={`${a.max[0]}–`} size={12} bold={on} style={on ? INK : MUTED} />
+                    <T x={x + (slot - 6) / 2} y={base + 29} text={`${a.max[1]}%`} size={12} bold={on} style={on ? INK : MUTED} />
+                  </>
+                ) : (
+                  <>
+                    <T x={x + (slot - 6) / 2} y={yp(a.max[1]) - 8} text={`${r0((max * a.max[0]) / 100)}–${r0((max * a.max[1]) / 100)}`} size={12} bold={on} style={on ? INK : MUTED} />
+                    <T x={x + (slot - 6) / 2} y={base + 16} text={`${a.max[0]}–${a.max[1]}%`} size={12} bold={on} style={on ? INK : MUTED} />
+                  </>
+                )}
               </g>
             );
           })}
-          <T x={X0} y={16} text="bpm" anchor="start" size={10.5} bold />
-          <T x={W - X0} y={base + 32} text="% HRmax" anchor="end" size={10.5} bold />
+          <T x={X0} y={16} text="bpm" anchor="start" size={12} bold />
+          <T x={W - X0} y={base + (wrap ? 45 : 32)} text="% HRmax" anchor="end" size={12} bold />
         </Drawing>
       }
     />

@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import SdIndicatorCard, { scaleX } from "./SdIndicatorCard";
 import { BAND_FILL, bandOf, useSdModel } from "./SdLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 320;
 const H = 150;
@@ -46,11 +47,11 @@ export default function SdZoneStrip() {
           return (
             <g key={k}>
               <line x1={x} y1={STRIP_Y - 2} x2={x} y2={STRIP_Y + STRIP_H + 3} className={k === 0 ? "stroke-blue-600 dark:stroke-blue-400" : "stroke-zinc-400 dark:stroke-zinc-500"} strokeWidth={k === 0 ? 2 : 1} />
-              <text x={x} y={STRIP_Y + STRIP_H + 15} textAnchor="middle" fontSize={9} className="fill-zinc-500 dark:fill-zinc-400">
+              <text style={{ fontSize: svgPx(12) }} x={x} y={STRIP_Y + STRIP_H + 15} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
                 {k === 0 ? "μ" : `${k > 0 ? "+" : "−"}${Math.abs(k)}σ`}
               </text>
               {Math.abs(k) !== 2 && (
-                <text x={x} y={STRIP_Y + STRIP_H + 27} textAnchor="middle" fontSize={9} fontFamily="ui-monospace, monospace" className="fill-zinc-600 dark:fill-zinc-300">
+                <text style={{ fontSize: svgPx(12) }} x={x} y={STRIP_Y + STRIP_H + 27} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-600 dark:fill-zinc-300">
                   {f(a.mean + k * s, 2)}
                 </text>
               )}
@@ -62,7 +63,7 @@ export default function SdZoneStrip() {
         seen.set(p.value, level + 1);
         return <circle key={p.index} cx={sx(p.value)} cy={STRIP_Y - 8 - Math.min(level, 5) * 11} r={5} className={`${BAND_FILL[bandOf(p.z)]} stroke-white dark:stroke-zinc-900`} strokeWidth={1} />;
       })}
-      <text x={W / 2} y={14} textAnchor="middle" fontFamily="ui-monospace, monospace" fontSize={11} fontWeight={600} className="fill-zinc-700 dark:fill-zinc-200">
+      <text style={{ fontSize: svgPx(12) }} x={W / 2} y={14} textAnchor="middle" fontFamily="ui-monospace, monospace" fontWeight={600} className="fill-zinc-700 dark:fill-zinc-200">
         {`μ = ${f(a.mean)} · σ = ${f(a.populationStdDev)}`}
       </text>
     </svg>

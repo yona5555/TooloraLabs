@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import PaletteIndicatorCard, { PaletteIndicatorUnavailable } from "./PaletteIndicatorCard";
 import { usePaletteModel } from "./PaletteLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 210;
@@ -29,7 +30,7 @@ export default function PaletteRgbChannels() {
     <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <line x1={0} y1={BASE} x2={W} y2={BASE} className="stroke-zinc-300 dark:stroke-zinc-600" />
       <line x1={0} y1={TOP} x2={W} y2={TOP} strokeDasharray="3 4" className="stroke-zinc-200 dark:stroke-zinc-700" />
-      <text x={W} y={TOP - 6} textAnchor="end" fontSize={11} className="fill-zinc-400 dark:fill-zinc-500">
+      <text style={{ fontSize: svgPx(12) }} x={W} y={TOP - 6} textAnchor="end" className="fill-zinc-400 dark:fill-zinc-500">
         255
       </text>
       {a.colors.map((c, i) => {
@@ -43,7 +44,7 @@ export default function PaletteRgbChannels() {
                 <g key={ch.key}>
                   <rect x={gx + k * (bw + 2)} y={BASE - h} width={bw} height={h} rx={3} className={ch.fill} />
                   {bw >= 14 && (
-                    <text x={gx + k * (bw + 2) + bw / 2} y={BASE - h - 4} textAnchor="middle" fontSize={10} fontFamily="ui-monospace, monospace" className="fill-zinc-600 dark:fill-zinc-300">
+                    <text style={{ fontSize: svgPx(12) }} x={gx + k * (bw + 2) + bw / 2} y={BASE - h - 4} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-600 dark:fill-zinc-300">
                       {v}
                     </text>
                   )}

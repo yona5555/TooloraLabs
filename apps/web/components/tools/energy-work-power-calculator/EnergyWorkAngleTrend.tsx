@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { workAngleCurve } from "@tooloralabs/tools";
 import EnergyIndicatorCard, { EnergyIndicatorUnavailable } from "./EnergyIndicatorCard";
 import { useEnergyModel } from "./EnergyLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 220;
@@ -46,25 +47,25 @@ export default function EnergyWorkAngleTrend() {
       <line x1={L} y1={MID} x2={R} y2={MID} className="stroke-zinc-300 dark:stroke-zinc-600" />
       <line x1={L} y1={T} x2={L} y2={B} className="stroke-zinc-300 dark:stroke-zinc-600" />
       {[0, 45, 90, 135, 180].map((d) => (
-        <text key={d} x={sx(d)} y={B + 14} textAnchor="middle" fontSize={10} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+        <text style={{ fontSize: svgPx(12) }} key={d} x={sx(d)} y={B + 14} textAnchor={d === 180 ? "end" : "middle"} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
           {`${d}°`}
         </text>
       ))}
       {[1, 0, -1].map((k) => (
-        <text key={k} x={L - 5} y={sy(k * Wmax) + 3} textAnchor="end" fontSize={9.5} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+        <text style={{ fontSize: svgPx(12) }} key={k} x={L - 5} y={sy(k * Wmax) + 3} textAnchor="end" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
           {f(k * w.alignedWork, 2)}
         </text>
       ))}
-      <text x={R} y={B + 30} textAnchor="end" fontSize={10} className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={R} y={B + 30} textAnchor="end" className="fill-zinc-500 dark:fill-zinc-400">
         {t("xLabel")}
       </text>
-      <text x={L + 4} y={T - 8} fontSize={10} className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={L + 4} y={T - 8} className="fill-zinc-500 dark:fill-zinc-400">
         {t("yLabel")}
       </text>
       <path d={path} fill="none" strokeWidth={2.5} className="stroke-blue-600 dark:stroke-blue-400" />
       <line x1={sx(90)} y1={T} x2={sx(90)} y2={B} strokeDasharray="3 3" className="stroke-zinc-400 dark:stroke-zinc-500" />
       <circle cx={cx} cy={cy} r={7} className="fill-red-600 dark:fill-red-400" />
-      <text x={cx > W / 2 ? cx - 10 : cx + 10} y={cy < MID ? cy + 18 : cy - 10} textAnchor={cx > W / 2 ? "end" : "start"} fontSize={11.5} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-red-600 dark:fill-red-400">
+      <text style={{ fontSize: svgPx(12) }} x={cx > W / 2 ? cx - 10 : cx + 10} y={cy < MID ? cy + 18 : cy - 10} textAnchor={cx > W / 2 ? "end" : "start"} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-red-600 dark:fill-red-400">
         {`${f(a, 1)}° → ${f(w.work, 2)} J`}
       </text>
     </svg>

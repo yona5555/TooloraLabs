@@ -7,6 +7,8 @@ import { Drawing, INK, lit, MUTED, px2, SvgLabel as T, useDrawing } from "@/comp
 import { DualRingGauge } from "@/components/tool-ui/indicator-kit/DualRingGauge";
 import type { IssueType } from "./types";
 import { A_EXCEPTIONS, align, AN_EXCEPTIONS, ARTICLE_PHRASES, check, CLEAN, INJECT, ISSUE_TYPES, MESSY, MESSY_B, RULES, ruleOf, sentencesOf, SPELL_LIST, suggestionFor, TYPE_COLOR, type Op } from "./sgMath";
+import { svgPx } from "@/components/tool-ui/svgPx";
+import { labelW, wrapLabel } from "@/components/tool-ui/labelLayout";
 
 /**
  * The seven 2D spelling & grammar indicator cards (the 3D word ribbon lives in SGCard3D). Each card
@@ -66,8 +68,8 @@ export function SGLettersCard({ side }: { side: Side }) {
       table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
       visual={
         <Drawing {...d} hMin={HMIN} label={t("handle")} valueText={valueText} handle={{ x: X0 + (s.value / (SPELL_LIST.length - 1)) * (W - 2 * X0), y: trackY, dir: "horizontal" }} s={s} testId="sg-c1">
-          <T x={X0} y={20} text={t("typed")} anchor="start" size={10.5} bold style={{ fill: "var(--ai-d)" }} />
-          <T x={X0} y={yBot + 40} text={t("suggested")} anchor="start" size={10.5} bold style={{ fill: "var(--ai-c)" }} />
+          <T x={X0} y={20} text={t("typed")} anchor="start" size={12} bold style={{ fill: "var(--ai-d)" }} />
+          <T x={X0} y={yBot + 40} text={t("suggested")} anchor="start" size={12} bold style={{ fill: "var(--ai-c)" }} />
           {cur.ops.map((o, i) => {
             const n = o.op === "swap" ? 2 : 1;
             const cx0 = x0 + cw * (col + 0.5);
@@ -157,7 +159,7 @@ export function SGSlipsCard({ side }: { side: Side }) {
             const bh = Math.min(30, rowH * 0.55);
             return (
               <g key={k.k} onPointerEnter={() => setHover("n")} onPointerLeave={() => setHover(null)}>
-                <T x={X0 - 10} y={y + 4} text={t(`op.${k.k}`)} anchor="end" size={11.5} bold style={on ? INK : MUTED} />
+                <T x={X0 - 10} y={y + 4} text={t(`op.${k.k}`)} anchor="end" size={12} bold style={on ? INK : MUTED} />
                 <rect x={X0} y={y - bh / 2} width={Math.max(bh, xl(k.n) - X0)} height={bh} rx={bh / 2} style={{ fill: OP_COLOR[k.k], opacity: on ? 1 : 0.5, ...lit(on && hover === "n") }} />
                 <T x={xl(k.n) - 10} y={y + 4} text={String(k.n)} anchor="end" size={12} bold style={{ fill: "var(--ph-surface)" }} />
               </g>
@@ -229,7 +231,7 @@ export function SGArticleCard({ side }: { side: Side }) {
                 {i > 0 && narrow && <path d={`M ${x + w / 2} ${y - 17} L ${x + w / 2} ${y - 3} M ${x + w / 2 - 5} ${y - 8} L ${x + w / 2} ${y - 3} L ${x + w / 2 + 5} ${y - 8}`} fill="none" style={{ stroke: "var(--ph-ink-muted)" }} strokeWidth={2} />}
                 <rect x={x} y={y} width={w} height={h} rx={h / 2} style={{ fill, ...lit(hover === n.key) }} />
                 <T x={x + w / 2} y={y + h / 2 + 5} text={n.label} size={13} bold style={{ fill: dim ? "var(--ph-ink-muted)" : "var(--ph-surface)" }} />
-                {narrow ? <T x={X0} y={y + h / 2 + 4} text={n.sub} anchor="start" size={10.5} /> : <T x={x + nw / 2} y={ny + 74} text={n.sub} size={10.5} />}
+                {narrow ? <T x={X0} y={y + h / 2 + 4} text={n.sub} anchor="start" size={12} /> : <T x={x + nw / 2} y={ny + 74} text={n.sub} size={12} />}
               </g>
             );
           })}
@@ -304,9 +306,16 @@ export function SGTypesCard({ side }: { side: Side }) {
   const out = check(text);
   const parts = ISSUE_TYPES.map((ty) => ({ key: ty, v: out.issues.filter((i) => i.type === ty).length, color: TYPE_COLOR[ty] }));
   const total = out.issues.length || 1;
-  const cx = Math.min(W * 0.3, H / 2 + 20);
   const cy = H / 2;
-  const R = Math.min(H / 2 - 12, W * 0.25);
+  // the legend keeps the room its 12px names need: on a narrow card the donut shrinks first, then a
+  // name too long for what is left wraps onto a second line (§39: never clipped at the right edge)
+  const legendW = Math.max(...parts.map((p) => Math.max(labelW(tl(p.key)), labelW("00 · 100 %")))) + 14;
+  let cx = Math.min(W * 0.3, H / 2 + 20);
+  let R = Math.min(H / 2 - 12, W * 0.25);
+  if (cx + R + 28 + legendW > W) {
+    R = Math.max(40, (W - legendW - 4 - 28 - 12) / 2);
+    cx = R + 12;
+  }
   const r0 = R * 0.58;
   const arcs = parts.map((p, i) => {
     const before = parts.slice(0, i).reduce((a, q) => a + q.v, 0);
@@ -318,6 +327,8 @@ export function SGTypesCard({ side }: { side: Side }) {
     return { ...p, full, d: p.v === 0 || full ? "" : `M ${P(a0, R)} A ${R} ${R} 0 ${big} 1 ${P(a1, R)} L ${P(a1, r0)} A ${r0} ${r0} 0 ${big} 0 ${P(a0, r0)} Z` };
   });
   const lx = cx + R + 28;
+  const names = parts.map((p) => wrapLabel(tl(p.key), W - lx - 18));
+  const rowGap = 36 + (names.some((n) => n.length > 1) ? 14 : 0);
   const top = parts.reduce((a, p) => (p.v > a.v ? p : a), parts[0]);
   const valueText = t("valueText", { k: s.value, n: out.issues.length });
   const rows: KitRow[] = [
@@ -352,14 +363,16 @@ export function SGTypesCard({ side }: { side: Side }) {
               ) : null,
             )}
             <T x={cx} y={cy - 2} text={String(out.issues.length)} size={20} bold style={INK} />
-            <T x={cx} y={cy + 16} text={t("centre")} size={10.5} />
+            <T x={cx} y={cy + 16} text={t("centre")} size={12} />
             {parts.map((p, i) => {
-              const y = cy - 54 + i * 36;
+              const y = cy - ((parts.length - 1) * rowGap) / 2 + i * rowGap;
               return (
                 <g key={p.key} onPointerEnter={() => setHover(p.key)} onPointerLeave={() => setHover(null)}>
                   <circle cx={lx} cy={y} r={7} style={{ fill: p.color }} />
-                  <T x={lx + 14} y={y - 2} text={tl(p.key)} anchor="start" size={11.5} bold style={INK} />
-                  <T x={lx + 14} y={y + 13} text={`${p.v} · ${((p.v / total) * 100).toFixed(0)} %`} anchor="start" size={10.5} />
+                  {names[i].map((line, j) => (
+                    <T key={j} x={lx + 14} y={y - 2 + j * 14} text={line} anchor="start" size={12} bold style={INK} />
+                  ))}
+                  <T x={lx + 14} y={y + 13 + (names[i].length - 1) * 14} text={`${p.v} · ${((p.v / total) * 100).toFixed(0)} %`} anchor="start" size={12} />
                 </g>
               );
             })}
@@ -388,9 +401,13 @@ export function SGRulesCard({ side }: { side: Side }) {
   const maxC = Math.max(1, ...RULES.map((r) => full.issues.filter((i) => ruleOf(i) === r).length));
   const cw = (W - 2 * X0) / RULES.length;
   const xc = (i: number) => X0 + cw * (i + 0.5);
-  const base = H - 92;
-  const yc = (v: number) => base - (v / maxC) * (base - 30);
   const trackY = H - 22;
+  // rule names: turned 35° when the columns are wide; on a narrow card upright (90°), each as tall as
+  // its name, with the plot above them, so names neither touch their neighbours nor reach the track (§39)
+  const steep = cw < 60;
+  const nameLen = Math.max(...RULES.map((r) => labelW(t(`rule.${r}`))));
+  const base = steep ? Math.min(H - 92, trackY - 18 - nameLen - 14) : H - 92;
+  const yc = (v: number) => base - (v / maxC) * (base - 30);
   const busiest = RULES[counts.indexOf(Math.max(...counts))];
   const valueText = t("valueText", { k, n: out.issues.length });
   const rows: KitRow[] = [
@@ -421,9 +438,9 @@ export function SGRulesCard({ side }: { side: Side }) {
               <g key={r} onPointerEnter={() => setHover(on ? "fired" : null)} onPointerLeave={() => setHover(null)}>
                 <line x1={xc(i)} y1={base} x2={xc(i)} y2={yc(c)} style={{ stroke: on ? TYPE_COLOR[ty] : "var(--ph-grid)" }} strokeWidth={3} />
                 <circle cx={xc(i)} cy={yc(c)} r={on ? 12 : 6} style={{ fill: on ? TYPE_COLOR[ty] : "var(--ph-surface)", ...lit(on && hover === "fired") }} />
-                {on && <T x={xc(i)} y={yc(c) + 4} text={String(c)} size={11} bold style={{ fill: "var(--ph-surface)" }} />}
-                <g transform={`translate(${px2(xc(i) + 4)} ${base + 14}) rotate(${cw < 60 ? -70 : -35})`}>
-                  <text x={0} y={0} fontSize={cw < 60 ? 9 : 10.5} fontWeight={600} textAnchor="end" style={{ fill: on ? "var(--ph-ink)" : "var(--ph-ink-muted)" }}>
+                {on && <T x={xc(i)} y={yc(c) + 4} text={String(c)} size={12} bold style={{ fill: "var(--ph-surface)" }} />}
+                <g transform={steep ? `translate(${px2(xc(i) + 4)} ${base + 14}) rotate(-90)` : `translate(${px2(xc(i) + 4)} ${base + 14}) rotate(-35)`}>
+                  <text x={0} y={0} fontWeight={600} textAnchor="end" style={{ fontSize: svgPx(12), fill: on ? "var(--ph-ink)" : "var(--ph-ink-muted)" }}>
                     {t(`rule.${r}`)}
                   </text>
                 </g>
@@ -493,7 +510,7 @@ export function SGScanCard({ side }: { side: Side }) {
           {[0, Math.round(total / 2), total].map((v) => (
             <g key={v}>
               <line x1={X0} y1={yc(v)} x2={W - 16} y2={yc(v)} style={{ stroke: "var(--ph-grid)" }} />
-              <T x={X0 - 6} y={yc(v) + 4} text={String(v)} anchor="end" size={10} />
+              <T x={X0 - 6} y={yc(v) + 4} text={String(v)} anchor="end" size={12} />
             </g>
           ))}
           <path d={`${steps} L ${px2(xc(MESSY.length))} ${bot} Z`} style={{ fill: "var(--glass-track)" }} />

@@ -4,6 +4,10 @@ import { wtSolarElevation, wtSolarPosition, type WtCity } from "@tooloralabs/too
 import SectionCard from "@/components/tool-ui/SectionCard";
 import LiveTable3DLayout, { LiveTableFill, type LiveTableGroup } from "@/components/tool-ui/three/LiveTable3DLayout";
 import { STATUS_COLORS, type Derived, type Fmt, type WtState } from "./state";
+import { px2 } from "@/components/tool-ui/indicator-kit/SvgBits";
+import { svgPx } from "@/components/tool-ui/svgPx";
+import { useSvgUnitsPerPx } from "@/components/tool-ui/useFitWidth";
+import { labelW, placeLabels } from "@/components/tool-ui/labelLayout";
 
 type Props = { s: WtState; d: Derived; f: Fmt };
 
@@ -20,7 +24,8 @@ function Dial({ s, d, f }: Props) {
   const sun = wtSolarPosition(d.conv.utcMs);
   const sub = { lat: sun.subsolarLatDeg, lon: sun.subsolarLonDeg };
   const ang = (min: number) => (min / 1440) * 2 * Math.PI - Math.PI / 2;
-  const pt = (min: number, r: number) => [c + r * Math.cos(ang(min)), c + r * Math.sin(ang(min))] as const;
+  // Rounded: server and browser trig differ in the last digits, which broke hydration.
+  const pt = (min: number, r: number) => [px2(c + r * Math.cos(ang(min))), px2(c + r * Math.sin(ang(min)))] as const;
   const arc = (a: number, b: number, r0: number, r1: number) => {
     const large = (b - a + 1440) % 1440 > 720 ? 1 : 0;
     const [x0, y0] = pt(a, r1);
@@ -30,9 +35,26 @@ function Dial({ s, d, f }: Props) {
     return `M${x0},${y0} A${r1},${r1} 0 ${large} 1 ${x1},${y1} L${x2},${y2} A${r0},${r0} 0 ${large} 0 ${x3},${y3} Z`;
   };
   const r = (i: number) => outer - i * gap;
+  // city labels at their rendered size (the dial is scaled to its box): two cities an hour or so apart
+  // take different lines instead of printing over each other (§39)
+  const [dialRef, k] = useSvgUnitsPerPx(S);
+  const fs = 12 * k;
+  const label = (city: WtCity) => `${f.city(city).split(" / ")[0].slice(0, 12)} ${f.time(d.conv.utcMs, city.zone)}`;
+  const spots = placeLabels(
+    d.all.map((city, i) => {
+      const m = d.conv.rows[i].parts.hour * 60 + d.conv.rows[i].parts.minute;
+      const [x, y] = pt(m, r(i));
+      return { x, y, lw: labelW(label(city), fs), lh: fs * 1.25, side: Math.cos(ang(m)) >= 0 ? ("start" as const) : ("end" as const) };
+    }),
+    S,
+    S,
+    7,
+    // the UTC clock in the centre
+    [{ a: c - (inner - 14), b: c + (inner - 14), t: c - (inner - 14), u: c + (inner - 14) }],
+  );
 
   return (
-    <svg viewBox={`0 0 ${S} ${S}`} width="100%" height="100%" overflow="visible" style={{ direction: "ltr" }} role="img" aria-label="24h dial">
+    <svg ref={dialRef} viewBox={`0 0 ${S} ${S}`} width="100%" height="100%" overflow="visible" style={{ direction: "ltr" }} role="img" aria-label="24h dial">
       <circle cx={c} cy={c} r={outer + 18} className="fill-zinc-50 dark:fill-zinc-800/60" />
       <path d={arc(22 * 60, 7 * 60, inner - 10, outer + 8)} fill={STATUS_COLORS.night} fillOpacity={0.18} />
       <path d={arc(s.ws, s.we % 1440 === s.ws ? s.ws + 1439 : s.we, inner - 10, outer + 8)} fill={STATUS_COLORS.work} fillOpacity={0.2} />
@@ -44,7 +66,7 @@ function Dial({ s, d, f }: Props) {
           <g key={h}>
             <line x1={x0} y1={y0} x2={x1} y2={y1} stroke="currentColor" strokeOpacity={0.45} />
             {h % 3 === 0 && (
-              <text x={tx} y={ty + 3} textAnchor="middle" fontSize={9} className="fill-zinc-500 dark:fill-zinc-400">
+              <text style={{ fontSize: svgPx(12) }} x={tx} y={ty + 3} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
                 {String(h).padStart(2, "0")}
               </text>
             )}
@@ -57,23 +79,22 @@ function Dial({ s, d, f }: Props) {
         const [x, y] = pt(m, r(i));
         const el = wtSolarElevation({ lat: city.lat, lon: city.lon }, sub);
         const col = RING_COLORS[i % RING_COLORS.length];
-        const lx = x + (Math.cos(ang(m)) >= 0 ? 7 : -7);
         return (
           <g key={city.id} style={{ transition: "all 400ms ease" }}>
             <circle cx={c} cy={c} r={r(i)} fill="none" stroke={col} strokeOpacity={0.25} strokeWidth={1} />
             <line x1={c} y1={c} x2={x} y2={y} stroke={col} strokeOpacity={i === 0 ? 0.9 : 0.35} strokeWidth={i === 0 ? 2.5 : 1} />
             <circle cx={x} cy={y} r={i === 0 ? 6 : 4.5} fill={el > -0.833 ? "#fbbf24" : "#1e3a8a"} stroke={col} strokeWidth={2} />
-            <text x={lx} y={y + 3} textAnchor={Math.cos(ang(m)) >= 0 ? "start" : "end"} fontSize={9} fontWeight={i === 0 ? 800 : 600} fill={col}>
-              {f.city(city).split(" / ")[0].slice(0, 12)} {f.time(d.conv.utcMs, city.zone)}
+            <text style={{ fontSize: svgPx(12) }} x={spots[i].x} y={spots[i].y} textAnchor={spots[i].anchor} fontWeight={i === 0 ? 800 : 600} fill={col}>
+              {label(city)}
             </text>
           </g>
         );
       })}
       <circle cx={c} cy={c} r={inner - 14} className="fill-white dark:fill-zinc-900" stroke="currentColor" strokeOpacity={0.2} />
-      <text x={c} y={c - 2} textAnchor="middle" fontSize={13} fontWeight={800} className="fill-zinc-800 dark:fill-zinc-100">
+      <text style={{ fontSize: svgPx(13) }} x={c} y={c - 2} textAnchor="middle" fontWeight={800} className="fill-zinc-800 dark:fill-zinc-100">
         {f.time(d.conv.utcMs, "UTC")}
       </text>
-      <text x={c} y={c + 11} textAnchor="middle" fontSize={8} className="fill-zinc-500 dark:fill-zinc-400">UTC</text>
+      <text style={{ fontSize: svgPx(12) }} x={c} y={c + 11} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">UTC</text>
     </svg>
   );
 }

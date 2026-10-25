@@ -3,7 +3,6 @@ import EncyclopediaPaper from "@/components/tool-ui/EncyclopediaPaper";
 import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
-import AdSpace from "@/components/tool-ui/AdSpace";
 import { MolCurveCard, MolDonutCard, MolFlowCard, MolRulerCard, MolSerialCard } from "./MolarityCards2D";
 import { MolCylindersCard, MolDropletCard, MolHeapsCard } from "./MolarityCards3D";
 
@@ -30,8 +29,6 @@ export default async function MolarityEducation() {
         <MolCurveCard side="visual-left" />
       </InfoSection>
 
-      <AdSpace variant="leaderboard" />
-
       <InfoSection title={t("examples.title")}>
         <p>{t("examples.intro")}</p>
         <MolDropletCard side="table-left" />
@@ -56,8 +53,6 @@ export default async function MolarityEducation() {
         <MolSerialCard side="visual-left" />
       </InfoSection>
 
-      <AdSpace variant="leaderboard" />
-
       <InfoSection id="faq" title={t("faq.title")}>
         <FAQAccordion items={faqItems} />
       </InfoSection>
@@ -81,8 +76,6 @@ export default async function MolarityEducation() {
           universities={universities}
         />
       </InfoSection>
-
-      <AdSpace variant="leaderboard" />
 
       <InfoSection title={t("references.title")}>
         <p>{t("references.citation")}</p>

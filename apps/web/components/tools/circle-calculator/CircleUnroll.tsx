@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { Pause, Play } from "lucide-react";
 import IndicatorCard from "@/components/tools/markets/IndicatorCard";
 import { useCircleRadius } from "./CircleLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 380;
 const H = 192;
@@ -111,15 +112,15 @@ export default function CircleUnroll() {
           {[1, 2, 3].map((k) => (
             <g key={k}>
               <line x1={X0 + k * 2 * R} y1={BASE - 6} x2={X0 + k * 2 * R} y2={BASE + 8} className="stroke-zinc-400 dark:stroke-zinc-500" strokeWidth={1.5} />
-              <text x={X0 + k * 2 * R} y={BASE + 22} textAnchor="middle" className="fill-zinc-500 font-mono text-[10px] dark:fill-zinc-400">{`${k}d`}</text>
-              <text x={X0 + k * 2 * R} y={BASE + 35} textAnchor="middle" className="fill-zinc-400 font-mono text-[9px] dark:fill-zinc-500">{n(k * d)}</text>
+              <text style={{ fontSize: svgPx(12) }} x={X0 + k * 2 * R} y={BASE + 22} textAnchor="middle" className="fill-zinc-500 font-mono dark:fill-zinc-400">{`${k}d`}</text>
+              <text style={{ fontSize: svgPx(12) }} x={X0 + k * 2 * R} y={BASE + 35} textAnchor="middle" className="fill-zinc-400 font-mono dark:fill-zinc-500">{n(k * d)}</text>
             </g>
           ))}
           <line x1={endX} y1={BASE - 10} x2={endX} y2={BASE + 10} className="stroke-amber-500" strokeWidth={2} />
-          <text x={endX} y={BASE + 52} textAnchor="middle" className="fill-amber-600 font-mono text-[10px] font-bold dark:fill-amber-400">πd = C</text>
-          <text x={endX} y={BASE + 65} textAnchor="middle" className="fill-amber-600 font-mono text-[9px] dark:fill-amber-400">{n(C)}</text>
+          <text style={{ fontSize: svgPx(12) }} x={endX} y={BASE + 52} textAnchor="middle" className="fill-amber-600 font-mono font-bold dark:fill-amber-400">πd = C</text>
+          <text style={{ fontSize: svgPx(12) }} x={endX} y={BASE + 65} textAnchor="middle" className="fill-amber-600 font-mono dark:fill-amber-400">{n(C)}</text>
           <line x1={X0} y1={BASE - 6} x2={X0} y2={BASE + 8} className="stroke-zinc-400 dark:stroke-zinc-500" strokeWidth={1.5} />
-          <text x={X0} y={BASE + 22} textAnchor="middle" className="fill-zinc-500 font-mono text-[10px] dark:fill-zinc-400">0</text>
+          <text style={{ fontSize: svgPx(12) }} x={X0} y={BASE + 22} textAnchor="middle" className="fill-zinc-500 font-mono dark:fill-zinc-400">0</text>
           {/* The laid-down rim. */}
           <line x1={X0} y1={BASE} x2={cx} y2={BASE} className="stroke-amber-500" strokeWidth={4} strokeLinecap="round" />
           {/* The rolling circle: filled disk, remaining rim, spoke to the starting point. */}
@@ -133,7 +134,7 @@ export default function CircleUnroll() {
           <line x1={cx - R} y1={cy} x2={cx + R} y2={cy} className="stroke-emerald-600 dark:stroke-emerald-400" strokeWidth={1.5} />
           <line x1={cx} y1={cy} x2={sx} y2={sy} className="stroke-red-600 dark:stroke-red-400" strokeWidth={2} />
           <circle cx={cx} cy={cy} r={2.5} className="fill-zinc-700 dark:fill-zinc-200" />
-          <text x={cx} y={cy - R - 8} textAnchor="middle" className="fill-zinc-700 font-mono text-[11px] font-semibold dark:fill-zinc-200">{`${n(p * C)} / ${n(C)}`}</text>
+          <text style={{ fontSize: svgPx(12) }} x={cx} y={cy - R - 8} textAnchor="middle" className="fill-zinc-700 font-mono font-semibold dark:fill-zinc-200">{`${n(p * C)} / ${n(C)}`}</text>
         </svg>
       </div>
     </IndicatorCard>

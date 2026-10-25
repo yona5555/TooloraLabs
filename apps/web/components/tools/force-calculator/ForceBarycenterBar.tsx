@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import ForceIndicatorCard, { ForceIndicatorUnavailable } from "./ForceIndicatorCard";
 import { useForceModel } from "./ForceLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 170;
@@ -28,23 +29,23 @@ export default function ForceBarycenterBar() {
 
   const svg = (
     <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
-      <text x={X0} y={Y - 30} fontSize={11} fontWeight={700} className="fill-blue-700 dark:fill-blue-300">
+      <text style={{ fontSize: svgPx(12) }} x={X0} y={Y - 30} fontWeight={700} className="fill-blue-700 dark:fill-blue-300">
         {`m₁ → ⊙ ${pct(share1)}`}
       </text>
-      <text x={X1} y={Y - 30} textAnchor="end" fontSize={11} fontWeight={700} className="fill-amber-600 dark:fill-amber-400">
+      <text style={{ fontSize: svgPx(12) }} x={X1} y={Y - 30} textAnchor="end" fontWeight={700} className="fill-amber-600 dark:fill-amber-400">
         {`${pct(1 - share1)} ⊙ → m₂`}
       </text>
       <rect x={X0} y={Y - BAR_H / 2} width={w1} height={BAR_H} rx={4} className="fill-blue-600 dark:fill-blue-400" />
       <rect x={bx} y={Y - BAR_H / 2} width={X1 - bx} height={BAR_H} rx={4} className="fill-amber-500 dark:fill-amber-400" />
       <path d={`M ${bx} ${Y - BAR_H / 2 - 4} L ${bx - 6} ${Y - BAR_H / 2 - 14} L ${bx + 6} ${Y - BAR_H / 2 - 14} z`} className="fill-violet-600 dark:fill-violet-400" />
       <line x1={bx} y1={Y - BAR_H / 2 - 4} x2={bx} y2={Y + BAR_H / 2 + 4} strokeWidth={2} className="stroke-violet-600 dark:stroke-violet-400" />
-      <text x={X0} y={Y + 32} fontSize={10.5} fontFamily="ui-monospace, monospace" className="fill-zinc-600 dark:fill-zinc-300">
+      <text style={{ fontSize: svgPx(12) }} x={X0} y={Y + 32} fontFamily="ui-monospace, monospace" className="fill-zinc-600 dark:fill-zinc-300">
         {`${f(gr.barycenterFrom1)} m`}
       </text>
-      <text x={X1} y={Y + 32} textAnchor="end" fontSize={10.5} fontFamily="ui-monospace, monospace" className="fill-zinc-600 dark:fill-zinc-300">
+      <text style={{ fontSize: svgPx(12) }} x={X1} y={Y + 32} textAnchor="end" fontFamily="ui-monospace, monospace" className="fill-zinc-600 dark:fill-zinc-300">
         {`${f(gr.barycenterFrom2)} m`}
       </text>
-      <text x={W / 2} y={Y + 60} textAnchor="middle" fontSize={10.5} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={W / 2} y={Y + 60} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
         {`r = ${f(gr.distance)} m`}
       </text>
     </svg>

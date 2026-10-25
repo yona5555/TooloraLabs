@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import FnIndicatorCard, { FnIndicatorUnavailable } from "./FnIndicatorCard";
 import { useFnModel } from "./FnLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 210;
@@ -43,10 +44,10 @@ export default function FnChangeBars() {
         return (
           <g key={b.key}>
             <rect x={x} y={BASE - h} width={w} height={h} rx={4} className={b.cls} />
-            <text x={x + w / 2} y={BASE - h - 6} textAnchor="middle" fontSize={12} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={x + w / 2} y={BASE - h - 6} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
               {f(b.v, 0)}
             </text>
-            <text x={x + w / 2} y={BASE + 16} textAnchor="middle" fontSize={11} className="fill-zinc-600 dark:fill-zinc-300">
+            <text style={{ fontSize: svgPx(12) }} x={x + w / 2} y={BASE + 16} textAnchor="middle" className="fill-zinc-600 dark:fill-zinc-300">
               {t(b.key)}
             </text>
           </g>

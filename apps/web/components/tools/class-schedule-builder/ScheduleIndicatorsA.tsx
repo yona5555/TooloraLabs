@@ -6,6 +6,9 @@ import IndicatorWithTable from "@/components/tool-ui/IndicatorWithTable";
 import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { classColor, fmt, hm, toMinutes, type Derived, type StudioState } from "./studio";
 import { axisText, gridLine, hourWindow, useDayOrder, useSchedT, useUnits, valueText } from "./ScheduleShared";
+import { svgPx } from "@/components/tool-ui/svgPx";
+import { useFitWidth } from "@/components/tool-ui/useFitWidth";
+import { flowRows, labelW } from "@/components/tool-ui/labelLayout";
 
 export type SchedIndicatorProps = { state: StudioState; onChange: (s: StudioState) => void; d: Derived };
 
@@ -17,10 +20,11 @@ export function ScheduleConflictCard({ state, onChange, d }: SchedIndicatorProps
   const t = useSchedT();
   const [h0, h1] = hourWindow(d);
   const days = d.shownDays;
-  const W = 420;
+  const [fitRef, W] = useFitWidth(420);
   const LW = 34;
   const RH = 26;
-  const TOP = 6;
+  // room above the first row for its gap label
+  const TOP = 16;
   const H = TOP + days.length * RH + 24;
   const x = (min: number) => LW + ((min - h0 * 60) / ((h1 - h0) * 60)) * (W - LW - 6);
   const sens = BUFFER_STEPS.map((b) => ({ b, n: findClassConflicts(d.classes, { bufferMinutes: b }).filter((c) => c.kind === "buffer").length }));
@@ -36,7 +40,7 @@ export function ScheduleConflictCard({ state, onChange, d }: SchedIndicatorProps
         workedExampleTitle={t("ind.worked")}
         indicator={
           <div className="w-[420px] max-w-full">
-            <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.conflict.title")} className="max-w-full">
+            <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.conflict.title")} className="max-w-full">
               <defs>
                 <pattern id={`${svgId}csb-hatch-a`} width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
                   <rect width="5" height="5" fill="#ef4444" fillOpacity="0.25" />
@@ -47,7 +51,7 @@ export function ScheduleConflictCard({ state, onChange, d }: SchedIndicatorProps
                 <g key={h}>
                   <line x1={x(h * 60)} x2={x(h * 60)} y1={TOP} y2={TOP + days.length * RH} className={gridLine} />
                   {(h - h0) % 2 === 0 && (
-                    <text x={x(h * 60)} y={TOP + days.length * RH + 12} textAnchor="middle" fontSize={9} className={axisText}>
+                    <text style={{ fontSize: svgPx(12) }} x={x(h * 60)} y={TOP + days.length * RH + 12} textAnchor={x(h * 60) > W - 20 ? "end" : "middle"} className={axisText}>
                       {hm(h * 60)}
                     </text>
                   )}
@@ -58,7 +62,7 @@ export function ScheduleConflictCard({ state, onChange, d }: SchedIndicatorProps
                 const s = d.stats.days[DAY_CODES.indexOf(day)];
                 return (
                   <g key={day}>
-                    <text x={0} y={y0 + RH / 2 + 3} fontSize={10} fontWeight={700} className={s.classCount ? valueText : axisText}>
+                    <text style={{ fontSize: svgPx(12) }} x={0} y={y0 + RH / 2 + 3} fontWeight={700} className={s.classCount ? valueText : axisText}>
                       {t(`days.${day}`)}
                     </text>
                     {s.meetings.map((m) => {
@@ -79,7 +83,7 @@ export function ScheduleConflictCard({ state, onChange, d }: SchedIndicatorProps
                         return (
                           <g key={`b${i}`} style={{ transition: "opacity 300ms ease" }}>
                             <rect x={cx - 3} y={y0 + 1} width={6} height={RH - 2} rx={2} fill="#f59e0b" />
-                            <text x={cx} y={y0 + 1} dy={-1} textAnchor="middle" fontSize={8} fontWeight={800} fill="#d97706">
+                            <text style={{ fontSize: svgPx(12) }} x={cx} y={y0 + 1} dy={-1} textAnchor="middle" fontWeight={800} fill="#d97706">
                               {`${fmt(o.gapMinutes)}′`}
                             </text>
                           </g>
@@ -111,7 +115,7 @@ export function ScheduleDailyLoadCard({ d }: SchedIndicatorProps) {
   const t = useSchedT();
   const u = useUnits();
   const days = useDayOrder(d.shownDays);
-  const W = 400;
+  const [fitRef, W] = useFitWidth(400);
   const H = 190;
   const B = 150;
   const max = Math.max(60, ...d.stats.days.map((s) => s.scheduledMinutes));
@@ -126,7 +130,7 @@ export function ScheduleDailyLoadCard({ d }: SchedIndicatorProps) {
         workedExampleTitle={t("ind.worked")}
         indicator={
           <PhoneMini slot={1} title={t("ind.load.title")}>
-          <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.load.title")} className="max-w-full">
+          <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.load.title")} className="max-w-full">
             <line x1={10} x2={W - 10} y1={B} y2={B} stroke="currentColor" strokeOpacity={0.35} />
             {days.map((day, i) => {
               const s = d.stats.days[DAY_CODES.indexOf(day)];
@@ -136,13 +140,13 @@ export function ScheduleDailyLoadCard({ d }: SchedIndicatorProps) {
               return (
                 <g key={day}>
                   <rect x={x0} y={B - h} width={bw * 0.64} height={h} rx={5} fill={busiest ? "#2563eb" : "#60a5fa"} style={{ transition: "all 400ms ease" }} />
-                  <text x={x0 + bw * 0.32} y={B - h - 5} textAnchor="middle" fontSize={11} fontWeight={800} className={valueText}>
+                  <text style={{ fontSize: svgPx(12) }} x={x0 + bw * 0.32} y={B - h - 5} textAnchor="middle" fontWeight={800} className={valueText}>
                     {fmt(s.scheduledMinutes / 60, 1)}
                   </text>
-                  <text x={x0 + bw * 0.32} y={B + 14} textAnchor="middle" fontSize={10} fontWeight={700} className={axisText}>
+                  <text style={{ fontSize: svgPx(12) }} x={x0 + bw * 0.32} y={B + 14} textAnchor="middle" fontWeight={700} className={axisText}>
                     {t(`days.${day}`)}
                   </text>
-                  <text x={x0 + bw * 0.32} y={B + 27} textAnchor="middle" fontSize={9} className={axisText}>
+                  <text style={{ fontSize: svgPx(12) }} x={x0 + bw * 0.32} y={B + 27} textAnchor="middle" className={axisText}>
                     {s.classCount ? `×${fmt(s.classCount)}` : ""}
                   </text>
                 </g>
@@ -151,7 +155,7 @@ export function ScheduleDailyLoadCard({ d }: SchedIndicatorProps) {
             {avg > 0 && (
               <g>
                 <line x1={10} x2={W - 10} y1={B - avg * scale} y2={B - avg * scale} stroke="#f59e0b" strokeDasharray="5 4" strokeWidth={1.5} />
-                <text x={W - 10} y={B - avg * scale - 4} textAnchor="end" fontSize={9} fontWeight={700} fill="#d97706">
+                <text style={{ fontSize: svgPx(12) }} x={W - 10} y={B - avg * scale - 4} textAnchor="end" fontWeight={700} fill="#d97706">
                   {`${t("ind.load.avgShort")} ${fmt(avg / 60, 1)}`}
                 </text>
               </g>
@@ -177,10 +181,17 @@ export function ScheduleGapsCard({ d }: SchedIndicatorProps) {
   const t = useSchedT();
   const u = useUnits();
   const campus = d.stats.days.filter((s) => s.classCount > 0);
-  const W = 400;
+  const [fitRef, W] = useFitWidth(400);
   const LW = 34;
   const RH = 28;
-  const H = campus.length * RH + 30;
+  const gapLegend = [
+    { c: "#3b82f6", k: t("ind.gaps.inClass") },
+    { c: "#f59e0b", k: t("ind.gaps.short") },
+    { c: "#10b981", k: t("ind.gaps.study") },
+  ];
+  // legend packed in rows that fit the drawing (12px labels never run into each other)
+  const gapFlow = flowRows(gapLegend.map((l) => Math.max(104, 14 + labelW(l.k))), W - LW, 16);
+  const H = campus.length * RH + 30 + (gapFlow.rows - 1) * 16;
   const maxSpan = Math.max(60, ...campus.map((s) => s.spanMinutes));
   const sx = (W - LW - 10) / maxSpan;
   const allGaps = campus.flatMap((s) => s.gaps);
@@ -192,7 +203,7 @@ export function ScheduleGapsCard({ d }: SchedIndicatorProps) {
       <IndicatorWithTable
         workedExampleTitle={t("ind.worked")}
         indicator={
-          <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.gaps.title")} className="max-w-full">
+          <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.gaps.title")} className="max-w-full">
             {campus.map((s, ri) => {
               const y0 = ri * RH + 4;
               const first = s.firstStart ?? 0;
@@ -206,7 +217,7 @@ export function ScheduleGapsCard({ d }: SchedIndicatorProps) {
               segs.push({ a: cur, b: s.lastEnd ?? cur, gap: false });
               return (
                 <g key={s.day}>
-                  <text x={0} y={y0 + RH / 2 + 2} fontSize={10} fontWeight={700} className={valueText}>
+                  <text style={{ fontSize: svgPx(12) }} x={0} y={y0 + RH / 2 + 2} fontWeight={700} className={valueText}>
                     {t(`days.${s.day}`)}
                   </text>
                   {segs.map((g, i) => {
@@ -217,7 +228,7 @@ export function ScheduleGapsCard({ d }: SchedIndicatorProps) {
                       <g key={i}>
                         <rect x={x0} y={y0} width={Math.max(1, w - 1)} height={RH - 8} rx={4} fill={fill} fillOpacity={g.gap ? 0.85 : 1} style={{ transition: "all 400ms ease" }} />
                         {w > 26 && (
-                          <text x={x0 + w / 2} y={y0 + (RH - 8) / 2 + 3.5} textAnchor="middle" fontSize={9} fontWeight={800} fill="white">
+                          <text style={{ fontSize: svgPx(12) }} x={x0 + w / 2} y={y0 + (RH - 8) / 2 + 3.5} textAnchor="middle" fontWeight={800} fill="white">
                             {fmt((g.b - g.a) / 60, 1)}
                           </text>
                         )}
@@ -227,14 +238,10 @@ export function ScheduleGapsCard({ d }: SchedIndicatorProps) {
                 </g>
               );
             })}
-            {[
-              { c: "#3b82f6", k: t("ind.gaps.inClass") },
-              { c: "#f59e0b", k: t("ind.gaps.short") },
-              { c: "#10b981", k: t("ind.gaps.study") },
-            ].map((l, i) => (
-              <g key={l.k} transform={`translate(${LW + i * 120}, ${H - 14})`}>
+            {gapLegend.map((l, i) => (
+              <g key={l.k} transform={`translate(${LW + gapFlow.at[i].x}, ${H - 14 - (gapFlow.rows - 1 - gapFlow.at[i].row) * 16})`}>
                 <rect width={10} height={10} rx={2} fill={l.c} />
-                <text x={14} y={9} fontSize={9} className={axisText}>
+                <text style={{ fontSize: svgPx(12) }} x={14} y={9} className={axisText}>
                   {l.k}
                 </text>
               </g>
@@ -261,10 +268,15 @@ export function ScheduleCreditsCard({ state }: SchedIndicatorProps) {
   const t = useSchedT();
   const u = useUnits();
   const rows = state.classes.map((c) => ({ c, credits: c.credits, contact: (Math.max(0, toMinutes(c.end) - toMinutes(c.start)) * c.days.length) / 60 }));
-  const W = 400;
+  const [fitRef, W] = useFitWidth(400);
   const LW = 70;
   const RH = 26;
-  const H = rows.length * RH + 26;
+  const creditLegend = [
+    { c: "#8b5cf6", k: t("ind.credits.credits") },
+    { c: "#0ea5e9", k: t("ind.credits.contact") },
+  ];
+  const creditFlow = flowRows(creditLegend.map((l) => Math.max(120, 14 + labelW(l.k))), W - LW, 30);
+  const H = rows.length * RH + 26 + (creditFlow.rows - 1) * 16;
   const max = Math.max(1, ...rows.map((r) => Math.max(r.credits, r.contact)));
   const sx = (W - LW - 36) / max;
   const totC = rows.reduce((a, r) => a + r.credits, 0);
@@ -276,33 +288,30 @@ export function ScheduleCreditsCard({ state }: SchedIndicatorProps) {
       <IndicatorWithTable
         workedExampleTitle={t("ind.worked")}
         indicator={
-          <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.credits.title")} className="max-w-full">
+          <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.credits.title")} className="max-w-full">
             {rows.map((r, i) => {
               const y0 = i * RH + 2;
               return (
                 <g key={r.c.id}>
                   <rect x={0} y={y0 + 4} width={8} height={RH - 10} rx={2} fill={classColor(r.c)} />
-                  <text x={12} y={y0 + RH / 2 + 2} fontSize={9.5} fontWeight={700} className={valueText}>
+                  <text style={{ fontSize: svgPx(12) }} x={12} y={y0 + RH / 2 + 2} fontWeight={700} className={valueText}>
                     {(r.c.code || r.c.name).slice(0, 10)}
                   </text>
                   <rect x={LW} y={y0 + 2} width={Math.max(1, r.credits * sx)} height={9} rx={3} fill="#8b5cf6" style={{ transition: "all 400ms ease" }} />
-                  <text x={LW + r.credits * sx + 4} y={y0 + 10} fontSize={8.5} fontWeight={700} fill="#7c3aed">
+                  <text style={{ fontSize: svgPx(12) }} x={LW + r.credits * sx + 4} y={y0 + 10} fontWeight={700} fill="#7c3aed">
                     {fmt(r.credits)}
                   </text>
                   <rect x={LW} y={y0 + 13} width={Math.max(1, r.contact * sx)} height={9} rx={3} fill="#0ea5e9" style={{ transition: "all 400ms ease" }} />
-                  <text x={LW + r.contact * sx + 4} y={y0 + 21} fontSize={8.5} fontWeight={700} fill="#0284c7">
+                  <text style={{ fontSize: svgPx(12) }} x={LW + r.contact * sx + 4} y={y0 + 21} fontWeight={700} fill="#0284c7">
                     {fmt(r.contact, 1)}
                   </text>
                 </g>
               );
             })}
-            {[
-              { c: "#8b5cf6", k: t("ind.credits.credits") },
-              { c: "#0ea5e9", k: t("ind.credits.contact") },
-            ].map((l, i) => (
-              <g key={l.k} transform={`translate(${LW + i * 150}, ${H - 13})`}>
+            {creditLegend.map((l, i) => (
+              <g key={l.k} transform={`translate(${LW + creditFlow.at[i].x}, ${H - 13 - (creditFlow.rows - 1 - creditFlow.at[i].row) * 16})`}>
                 <rect width={10} height={10} rx={2} fill={l.c} />
-                <text x={14} y={9} fontSize={9} className={axisText}>
+                <text style={{ fontSize: svgPx(12) }} x={14} y={9} className={axisText}>
                   {l.k}
                 </text>
               </g>

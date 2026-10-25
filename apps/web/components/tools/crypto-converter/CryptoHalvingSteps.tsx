@@ -8,6 +8,9 @@ import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import type { ChainTip } from "@/lib/crypto/network";
 import { useNetworkData } from "./useCryptoLive";
 import LiveFallback from "@/components/tools/markets/LiveFallback";
+import { svgPx } from "@/components/tool-ui/svgPx";
+import { useFitWidth } from "@/components/tool-ui/useFitWidth";
+import { labelW } from "@/components/tool-ui/labelLayout";
 
 /** Genesis plus the four halvings so far, with the UTC date each era's first block was mined. */
 const ERA_STARTS = [
@@ -18,8 +21,8 @@ const ERA_STARTS = [
   { height: 840_000, date: "2024-04-20" },
 ];
 
-const W = 560;
-const H = 230;
+const MAX_W = 560;
+const H0 = 230;
 const PAD = { top: 26, right: 12, bottom: 34, left: 12 };
 
 function splitDuration(seconds: number) {
@@ -31,6 +34,8 @@ export default function CryptoHalvingSteps() {
   const t = useTranslations("tools.crypto-converter.halving");
   const locale = useLocale();
   const state = useNetworkData<ChainTip>("tip", 60_000);
+  // laid out at its on-screen width (true px): the 12px labels keep their size and spacing on a phone
+  const [fitRef, W] = useFitWidth(MAX_W);
   const [now, setNow] = useState(() => Date.now());
 
   useEffect(() => {
@@ -61,8 +66,12 @@ export default function CryptoHalvingSteps() {
 
   // Each era is one equal-width step; step height is the reward (linear, 50 BTC at the top).
   const stepW = (W - PAD.left - PAD.right) / eras.length;
-  const y = (reward: number) => PAD.top + (1 - reward / 50) * (H - PAD.top - PAD.bottom);
-  const base = H - PAD.bottom;
+  // block heights alternate between two rows when a step is too narrow for them side by side (§39)
+  const stagger = eras.some((e) => labelW(`#${num(e.height)}`) > stepW - 4);
+  const H = H0 + (stagger ? 14 : 0);
+  const padBottom = PAD.bottom + (stagger ? 14 : 0);
+  const y = (reward: number) => PAD.top + (1 - reward / 50) * (H - PAD.top - padBottom);
+  const base = H - padBottom;
 
   return (
     <SectionCard id="halving" title={t("title")}>
@@ -80,7 +89,7 @@ export default function CryptoHalvingSteps() {
             ))}
           </div>
 
-          <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} className="mt-3 h-auto max-w-full" role="img" aria-label={t("heading")}>
+          <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} className="mt-3 h-auto max-w-full" role="img" aria-label={t("heading")}>
             {eras.map((e, i) => {
               const reward = blockRewardAtHeight(e.height);
               const x = PAD.left + i * stepW;
@@ -112,13 +121,13 @@ export default function CryptoHalvingSteps() {
                       className="fill-blue-600 dark:fill-blue-400"
                     />
                   )}
-                  <text x={x + stepW / 2} y={y(reward) - 7} textAnchor="middle" className="fill-zinc-800 font-mono text-[11px] font-semibold dark:fill-zinc-100">
+                  <text style={{ fontSize: svgPx(12) }} x={x + stepW / 2} y={y(reward) - 7} textAnchor="middle" className="fill-zinc-800 font-mono font-semibold dark:fill-zinc-100">
                     {num(reward, 4)}
                   </text>
-                  <text x={x + stepW / 2} y={base + 13} textAnchor="middle" className="fill-zinc-500 font-mono text-[10px] dark:fill-zinc-400">
+                  <text style={{ fontSize: svgPx(12) }} x={x + stepW / 2} y={base + 13} textAnchor="middle" className="fill-zinc-500 font-mono dark:fill-zinc-400">
                     {e.estimated ? `~${new Date(e.time).getUTCFullYear()}` : e.date.slice(0, 4)}
                   </text>
-                  <text x={x + stepW / 2} y={base + 26} textAnchor="middle" className="fill-zinc-400 font-mono text-[9px] dark:fill-zinc-500">
+                  <text style={{ fontSize: svgPx(12) }} x={x + stepW / 2} y={base + 26 + (stagger ? (i % 2) * 14 : 0)} textAnchor="middle" className="fill-zinc-400 font-mono dark:fill-zinc-500">
                     #{num(e.height)}
                   </text>
                 </g>

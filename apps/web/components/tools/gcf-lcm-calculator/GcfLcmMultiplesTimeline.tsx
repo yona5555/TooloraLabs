@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import GcfLcmIndicatorCard from "./GcfLcmIndicatorCard";
 import { useGcfLcmModel } from "./GcfLcmLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const PAD_X = 16;
@@ -31,7 +32,7 @@ export default function GcfLcmMultiplesTimeline() {
           const dense = count > MAX_DOTS;
           return (
             <g key={i}>
-              <text x={PAD_X - 2} y={y - 6} className="fill-zinc-600 font-mono text-[10px] font-semibold dark:fill-zinc-300">{`×${f(n)} · ${f(count)}`}</text>
+              <text style={{ fontSize: svgPx(12) }} x={PAD_X - 2} y={y - 6} className="fill-zinc-600 font-mono font-semibold dark:fill-zinc-300">{`×${f(n)} · ${f(count)}`}</text>
               <line x1={PAD_X} x2={W - PAD_X} y1={y} y2={y} className="stroke-zinc-300 dark:stroke-zinc-600" strokeWidth={dense ? 4 : 1.5} />
               {!dense &&
                 Array.from({ length: count }, (_, k) => (
@@ -41,8 +42,8 @@ export default function GcfLcmMultiplesTimeline() {
             </g>
           );
         })}
-        <text x={PAD_X} y={H - 8} className="fill-zinc-400 font-mono text-[10px]">0</text>
-        <text x={xL} y={H - 8} textAnchor="end" className="fill-violet-700 font-mono text-[11px] font-bold dark:fill-violet-300">{`LCM = ${f(lcm)}`}</text>
+        <text style={{ fontSize: svgPx(12) }} x={PAD_X} y={H - 8} className="fill-zinc-400 font-mono">0</text>
+        <text style={{ fontSize: svgPx(12) }} x={xL} y={H - 8} textAnchor="end" className="fill-violet-700 font-mono font-bold dark:fill-violet-300">{`LCM = ${f(lcm)}`}</text>
       </svg>
     </div>
   );

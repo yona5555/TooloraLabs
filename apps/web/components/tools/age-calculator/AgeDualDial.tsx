@@ -1,5 +1,7 @@
 "use client";
 import type { CalendarAge } from "@tooloralabs/tools";
+import { px2 } from "@/components/tool-ui/indicator-kit/SvgBits";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 type Ring = { age: CalendarAge; color: string; label: string; next: string };
 
@@ -42,29 +44,29 @@ export default function AgeDualDial({ outer, inner, centerTop, centerBottom }: {
             {ticks.map((a, i) => (
               <line
                 key={i}
-                x1={c + Math.cos(a - Math.PI / 2) * (ring.r - sw / 2)}
-                y1={c + Math.sin(a - Math.PI / 2) * (ring.r - sw / 2)}
-                x2={c + Math.cos(a - Math.PI / 2) * (ring.r - sw / 2 + 4)}
-                y2={c + Math.sin(a - Math.PI / 2) * (ring.r - sw / 2 + 4)}
+                x1={px2(c + Math.cos(a - Math.PI / 2) * (ring.r - sw / 2))}
+                y1={px2(c + Math.sin(a - Math.PI / 2) * (ring.r - sw / 2))}
+                x2={px2(c + Math.cos(a - Math.PI / 2) * (ring.r - sw / 2 + 4))}
+                y2={px2(c + Math.sin(a - Math.PI / 2) * (ring.r - sw / 2 + 4))}
                 stroke="currentColor"
                 strokeOpacity={0.35}
               />
             ))}
-            <circle cx={c + Math.cos(endA) * ring.r} cy={c + Math.sin(endA) * ring.r} r={7} fill="white" stroke={ring.color} strokeWidth={3} style={{ transition: "all 700ms ease" }} />
-            <text x={c + 4} y={c - ring.r + 4} fontSize={10} fontWeight={800} fill="white">
+            <circle cx={px2(c + Math.cos(endA) * ring.r)} cy={px2(c + Math.sin(endA) * ring.r)} r={7} fill="white" stroke={ring.color} strokeWidth={3} style={{ transition: "all 700ms ease" }} />
+            <text style={{ fontSize: svgPx(12) }} x={c + 4} y={c - ring.r + 4} fontWeight={800} fill="white">
               {ring.label}
             </text>
           </g>
         );
       })}
-      <text x={c} y={c - 4} textAnchor="middle" fontSize={22} fontWeight={800} className="fill-zinc-900 dark:fill-zinc-50">
+      <text style={{ fontSize: svgPx(22) }} x={c} y={c - 4} textAnchor="middle" fontWeight={800} className="fill-zinc-900 dark:fill-zinc-50">
         {centerTop}
       </text>
-      <text x={c} y={c + 16} textAnchor="middle" fontSize={11} fontWeight={600} className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={c} y={c + 16} textAnchor="middle" fontWeight={600} className="fill-zinc-500 dark:fill-zinc-400">
         {centerBottom}
       </text>
       {rings.map((ring, i) => (
-        <text key={ring.label} x={c} y={c + 34 + i * 14} textAnchor="middle" fontSize={10} fontWeight={700} fill={ring.color}>
+        <text style={{ fontSize: svgPx(12) }} key={ring.label} x={c} y={c + 34 + i * 14} textAnchor="middle" fontWeight={700} fill={ring.color}>
           {ring.next}
         </text>
       ))}

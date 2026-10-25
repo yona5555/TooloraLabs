@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import type { Vec3 } from "@tooloralabs/tools";
 import VectorIndicatorCard from "./VectorIndicatorCard";
 import { useVectorAnalysis } from "./VectorLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const SIZE = 180;
 const C = SIZE / 2;
@@ -26,7 +27,7 @@ function Ring({ shares, radius, width, pct }: { shares: Vec3 | null; radius: num
         const x = C + radius * Math.cos(mid);
         const y = C + radius * Math.sin(mid);
         return (
-          <text key={`t${i}`} x={x} y={y + 3.5} textAnchor="middle" transform={`rotate(90 ${x} ${y})`} className="fill-white text-[9px] font-bold">
+          <text style={{ fontSize: svgPx(12) }} key={`t${i}`} x={x} y={y + 3.5} textAnchor="middle" transform={`rotate(90 ${x} ${y})`} className="fill-white font-bold">
             {pct(s)}
           </text>
         );
@@ -54,8 +55,8 @@ export default function VectorDirectionDonut() {
             <svg width={SIZE} height={SIZE} viewBox={`0 0 ${SIZE} ${SIZE}`} role="img" aria-label={t("title")} className="block">
               <Ring shares={r.dirCos2A} radius={76} width={20} pct={pct} />
               <Ring shares={r.dirCos2B} radius={50} width={18} pct={pct} />
-              <text x={C} y={C - 4} textAnchor="middle" className="fill-zinc-500 text-[9px] dark:fill-zinc-400">Σ cos²</text>
-              <text x={C} y={C + 12} textAnchor="middle" className="fill-zinc-900 text-[15px] font-bold dark:fill-zinc-50">= 1</text>
+              <text style={{ fontSize: svgPx(12) }} x={C} y={C - 4} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">Σ cos²</text>
+              <text style={{ fontSize: svgPx(15) }} x={C} y={C + 12} textAnchor="middle" className="fill-zinc-900 font-bold dark:fill-zinc-50">= 1</text>
             </svg>
           </div>
           <div className="flex flex-wrap justify-center gap-x-3 gap-y-1 text-xs text-zinc-600 dark:text-zinc-300">

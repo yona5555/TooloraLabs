@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import DensityIndicatorCard, { DensityIndicatorUnavailable } from "./DensityIndicatorCard";
 import { useDensityModel } from "./DensityLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const ROW = 30;
@@ -27,11 +28,11 @@ export default function DensityFluidDepthBars() {
   const svg = (
     <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <rect x={BAR_X} y={6} width={10} height={10} rx={2} className="fill-sky-500 dark:fill-sky-400" />
-      <text x={BAR_X + 14} y={15} fontSize={10} className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={BAR_X + 14} y={15} className="fill-zinc-500 dark:fill-zinc-400">
         {t("under")}
       </text>
       <rect x={BAR_X + 90} y={6} width={10} height={10} rx={2} className="fill-amber-400 dark:fill-amber-500" />
-      <text x={BAR_X + 104} y={15} fontSize={10} className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={BAR_X + 104} y={15} className="fill-zinc-500 dark:fill-zinc-400">
         {t("above")}
       </text>
       {a.fluids.map((fl, i) => {
@@ -39,10 +40,10 @@ export default function DensityFluidDepthBars() {
         const under = fl.submergedFraction * BAR_W;
         return (
           <g key={fl.key}>
-            <text x={LABEL} y={y + 11} textAnchor="end" fontSize={11} fontWeight={600} className="fill-zinc-700 dark:fill-zinc-200">
+            <text style={{ fontSize: svgPx(12) }} x={LABEL} y={y + 11} textAnchor="end" fontWeight={600} className="fill-zinc-700 dark:fill-zinc-200">
               {tFluids(fl.key)}
             </text>
-            <text x={LABEL} y={y + 23} textAnchor="end" fontSize={9.5} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+            <text style={{ fontSize: svgPx(12) }} x={LABEL} y={y + 23} textAnchor="end" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
               {`${f(fl.density)} g/cm³`}
             </text>
             {fl.floats ? (
@@ -53,7 +54,7 @@ export default function DensityFluidDepthBars() {
             ) : (
               <rect x={BAR_X} y={y + 4} width={BAR_W} height={ROW - 10} className="fill-red-500/80 dark:fill-red-400/80" />
             )}
-            <text x={BAR_X + BAR_W + 6} y={y + 18} fontSize={10.5} fontWeight={700} fontFamily={fl.floats ? "ui-monospace, monospace" : undefined} className={fl.floats ? "fill-sky-700 dark:fill-sky-300" : "fill-red-600 dark:fill-red-400"}>
+            <text style={{ fontSize: svgPx(12) }} x={BAR_X + BAR_W + 6} y={y + 18} fontWeight={700} fontFamily={fl.floats ? "ui-monospace, monospace" : undefined} className={fl.floats ? "fill-sky-700 dark:fill-sky-300" : "fill-red-600 dark:fill-red-400"}>
               {fl.floats ? `${f(fl.submergedFraction * 100, 1)} %` : t("sinks")}
             </text>
           </g>

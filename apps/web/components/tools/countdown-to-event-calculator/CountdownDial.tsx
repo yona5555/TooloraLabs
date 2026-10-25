@@ -1,6 +1,8 @@
 "use client";
 import type { Derived } from "./model";
 import { num, pct, two } from "./model";
+import { px2 } from "@/components/tool-ui/indicator-kit/SvgBits";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const S = 260;
 const C = S / 2;
@@ -9,7 +11,8 @@ const R_SEC = 78;
 
 function polar(r: number, frac: number) {
   const a = -Math.PI / 2 + frac * 2 * Math.PI;
-  return [C + r * Math.cos(a), C + r * Math.sin(a)] as const;
+  // Rounded: server and browser trig differ in the last digits, which broke hydration.
+  return [px2(C + r * Math.cos(a)), px2(C + r * Math.sin(a))] as const;
 }
 
 function arcPath(r: number, frac: number) {
@@ -43,7 +46,7 @@ export default function CountdownDial({ d }: { d: Derived }) {
         return (
           <g key={m.key}>
             <line x1={x0} y1={y0} x2={x1} y2={y1} stroke={m.passed ? "#f59e0b" : "currentColor"} strokeOpacity={m.passed ? 1 : 0.45} strokeWidth={2.5} />
-            <text x={tx} y={ty + 3} textAnchor="middle" fontSize={8.5} fontWeight={700} className="fill-zinc-500 dark:fill-zinc-400">
+            <text style={{ fontSize: svgPx(12) }} x={tx} y={ty + 3} textAnchor="middle" fontWeight={700} className="fill-zinc-500 dark:fill-zinc-400">
               {m.key.replace("d", "−").replace("h", "−")}
               {m.key.startsWith("d") ? "d" : "h"}
             </text>
@@ -61,13 +64,13 @@ export default function CountdownDial({ d }: { d: Derived }) {
         const [x, y] = polar(R_SEC - 14, frac % 1);
         return <circle cx={x} cy={y} r={4.5} fill="#f59e0b" />;
       })()}
-      <text x={C} y={C - 12} textAnchor="middle" fontSize={44} fontWeight={800} className="fill-zinc-900 dark:fill-zinc-50" style={{ fontVariantNumeric: "tabular-nums" }}>
+      <text x={C} y={C - 12} textAnchor="middle" fontWeight={800} className="fill-zinc-900 dark:fill-zinc-50" style={{ fontSize: svgPx(44), fontVariantNumeric: "tabular-nums" }}>
         {num(d.b.days)}
       </text>
-      <text x={C} y={C + 16} textAnchor="middle" fontSize={20} fontWeight={700} fill={elapsedColor} style={{ fontVariantNumeric: "tabular-nums", fontFamily: "ui-monospace, monospace" }}>
+      <text x={C} y={C + 16} textAnchor="middle" fontWeight={700} fill={elapsedColor} style={{ fontSize: svgPx(20), fontVariantNumeric: "tabular-nums", fontFamily: "ui-monospace, monospace" }}>
         {`${two(d.b.hours)}:${two(d.b.minutes)}:${two(d.b.seconds)}`}
       </text>
-      <text x={C} y={C + 38} textAnchor="middle" fontSize={12} fontWeight={700} className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={C} y={C + 38} textAnchor="middle" fontWeight={700} className="fill-zinc-500 dark:fill-zinc-400">
         {pct(d.progress)}
       </text>
     </svg>

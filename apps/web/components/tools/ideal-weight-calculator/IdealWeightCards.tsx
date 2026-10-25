@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { ltr } from "@/components/tool-ui/MixedText";
 import { useStepper, type KitRow, type Stepper } from "@/components/tool-ui/indicator-kit/CardKit";
-import { axisTicks, Drawing, INK, LINE, lit, MUTED, px2, SvgLabel as T, useDrawing } from "@/components/tool-ui/indicator-kit/SvgBits";
+import { axisTicks, Drawing, flowRows, INK, labelW, LINE, lit, MUTED, px2, SvgLabel as T, useDrawing } from "@/components/tool-ui/indicator-kit/SvgBits";
 import { clamp, f1, f2, snap } from "@/components/tool-ui/indicator-kit/format";
 import { Card } from "../macro-calculator/MacroCards";
 import { useIdealWeightLive } from "./IdealWeightLiveContext";
@@ -38,8 +38,8 @@ function SvgTrack({ W, y, frac, lo, hi }: { W: number; y: number; frac: number; 
     <g>
       <line x1={X0} y1={y} x2={W - X0} y2={y} style={LINE} strokeWidth={3} strokeLinecap="round" opacity={0.45} />
       <line x1={X0} y1={y} x2={x} y2={y} style={{ stroke: "var(--ph-accent-strong)" }} strokeWidth={4} strokeLinecap="round" />
-      <T x={X0} y={y + TRACK_LABEL} text={lo} anchor="start" size={10.5} />
-      <T x={W - X0} y={y + TRACK_LABEL} text={hi} anchor="end" size={10.5} />
+      <T x={X0} y={y + TRACK_LABEL} text={lo} anchor="start" size={12} />
+      <T x={W - X0} y={y + TRACK_LABEL} text={hi} anchor="end" size={12} />
     </g>
   );
 }
@@ -86,7 +86,15 @@ export function IdealWeightHeightSweepCard({ side }: { side: Side }) {
   const A1 = HS1 + 5;
   const d = useDrawing(HMIN, s, (x, _y, W) => A0 + ((x - PL) / (W - PL - PR)) * (A1 - A0));
   const { W, H } = d;
-  const top = 56;
+  const legend: { key: string; label: string; color: string; dash?: string; band?: boolean }[] = [
+    ...FORMULAS.map((f) => ({ key: f.key, label: tf(f.label), color: f.color })),
+    { key: "avg", label: tf("averageLabel"), color: "var(--ph-ink)", dash: "7 4" },
+    { key: "who", label: tc("whoRange"), color: IDEAL_COLOR, band: true },
+  ];
+  // legend items packed by their real 12px widths (two rows of three on desktop, more rows on a
+  // phone), so long names never run into their neighbour or off the edge (§39)
+  const pack = flowRows(legend.map((l) => 24 + labelW(l.label)), W - 2 * X0, 14);
+  const top = 20 + pack.rows * 18;
   const base = H - 44;
   const yLo = Math.floor((Math.min(weightAt(WHO_LO, A0), ...FORMULAS.map((f) => ideal(g, A0)[f.key])) - 2) / 10) * 10;
   const yHi = Math.ceil((Math.max(weightAt(WHO_HI, A1), ...FORMULAS.map((f) => ideal(g, A1)[f.key])) + 2) / 10) * 10;
@@ -109,12 +117,6 @@ export function IdealWeightHeightSweepCard({ side }: { side: Side }) {
     { key: "who", label: tc("whoRange"), value: `${f1(weightAt(WHO_LO, h))}–${kg1(weightAt(WHO_HI, h))}` },
     { key: "slope", label: t("rowSlope"), value: `+${f2(slope)} kg` },
   ];
-  const legend: { key: string; label: string; color: string; dash?: string; band?: boolean }[] = [
-    ...FORMULAS.map((f) => ({ key: f.key, label: tf(f.label), color: f.color })),
-    { key: "avg", label: tf("averageLabel"), color: "var(--ph-ink)", dash: "7 4" },
-    { key: "who", label: tc("whoRange"), color: IDEAL_COLOR, band: true },
-  ];
-  const colW = (W - 2 * X0) / 3;
   return (
     <Card phoneRole="visual" tool="ideal-weight-calculator" idPrefix="iw"
       n={1}
@@ -128,10 +130,9 @@ export function IdealWeightHeightSweepCard({ side }: { side: Side }) {
       caption={t("caption", { h: ltr(valueText), kg: ltr(kg1(r.average)), slope: ltr(`${f2(slope)} kg`) })}
       visual={
         <Drawing {...d} hMin={HMIN} label={t("handle")} valueText={`${valueText} · ${kg1(r.average)}`} handle={{ x: xa(hc), y: yk(r.average), dir: "horizontal" }} s={s} testId="iw-c1">
-          {/* legend, two rows of three */}
           {legend.map((l, i) => {
-            const lx = X0 + (i % 3) * colW;
-            const ly = 12 + Math.floor(i / 3) * 18;
+            const lx = X0 + pack.at[i].x;
+            const ly = 12 + pack.at[i].row * 18;
             return (
               <g key={l.key}>
                 {l.band ? (
@@ -139,7 +140,7 @@ export function IdealWeightHeightSweepCard({ side }: { side: Side }) {
                 ) : (
                   <line x1={lx} y1={ly + 4} x2={lx + 18} y2={ly + 4} style={l.key === "avg" ? { stroke: l.color } : undefined} stroke={l.key === "avg" ? undefined : l.color} strokeWidth={3} strokeDasharray={l.dash} />
                 )}
-                <T x={lx + 24} y={ly + 8} text={l.label} anchor="start" size={10} bold={hover === l.key} style={hover === l.key ? INK : MUTED} />
+                <T x={lx + 24} y={ly + 8} text={l.label} anchor="start" size={12} bold={hover === l.key} style={hover === l.key ? INK : MUTED} />
               </g>
             );
           })}
@@ -147,14 +148,14 @@ export function IdealWeightHeightSweepCard({ side }: { side: Side }) {
           {axisTicks(yLo, yHi, base - top, 26).map((v) => (
             <g key={v}>
               <line x1={PL} y1={yk(v)} x2={W - PR} y2={yk(v)} style={{ stroke: "var(--ph-grid)" }} />
-              <T x={PL - 6} y={yk(v) + 4} text={String(v)} anchor="end" size={10.5} />
+              <T x={PL - 6} y={yk(v) + 4} text={String(v)} anchor="end" size={12} />
             </g>
           ))}
           {axisTicks(A0, A1, W - PL - PR, 44).map((v) => (
-            <T key={v} x={xa(v)} y={base + 16} text={String(v)} size={10.5} />
+            <T key={v} x={xa(v)} y={base + 16} text={String(v)} size={12} />
           ))}
-          <T x={W - PR} y={base + 34} text={t("axisHeight")} anchor="end" size={10.5} bold />
-          <T x={PL} y={base + 34} text={`${valueText} → ${kg1(r.average)}`} anchor="start" size={11.5} bold style={INK} />
+          <T x={W - PR} y={base + 34} text={t("axisHeight")} anchor="end" size={12} bold />
+          <T x={PL} y={base + 34} text={`${valueText} → ${kg1(r.average)}`} anchor="start" size={12} bold style={INK} />
           {FORMULAS.map((f) => (
             <polyline key={f.key} points={curve((cm) => ideal(g, cm)[f.key])} fill="none" stroke={f.color} strokeWidth={hover === f.key ? 3.5 : 2} opacity={hover && hover !== f.key && hover !== "h" ? 0.45 : 1} />
           ))}
@@ -219,18 +220,18 @@ export function IdealWeightRankCard({ side }: { side: Side }) {
           {/* WHO healthy band behind the bars */}
           <rect x={xk(whoLo)} y={top - 8} width={Math.max(0, xk(whoHi) - xk(whoLo))} height={rowH * 4 + 4} fill={IDEAL_COLOR} opacity={hover === "who" ? 0.25 : 0.12} />
           <line x1={X0} y1={16} x2={X0 + 16} y2={16} style={{ stroke: "var(--ph-ink)" }} strokeWidth={2} strokeDasharray="5 4" />
-          <T x={X0 + 22} y={20} text={`${tf("averageLabel")}: ${kg1(r.average)}`} anchor="start" size={11.5} bold style={INK} />
+          <T x={X0 + 22} y={20} text={`${tf("averageLabel")}: ${kg1(r.average)}`} anchor="start" size={12} bold style={INK} />
           <line x1={railX(W)} y1={top} x2={railX(W)} y2={top + rowH * 4} style={LINE} strokeWidth={3} strokeLinecap="round" opacity={0.45} />
           {ranked.map((f, i) => {
             const y = top + rowH * i + rowH * 0.62;
             const on = i === s.value;
             return (
               <g key={f.key} opacity={on ? 1 : 0.6}>
-                <T x={X0} y={y - bh / 2 - 5} text={`${i + 1}. ${tf(f.label)}`} anchor="start" size={10.5} bold={on} style={on ? INK : MUTED} />
+                <T x={X0} y={y - bh / 2 - 5} text={`${i + 1}. ${tf(f.label)}`} anchor="start" size={12} bold={on} style={on ? INK : MUTED} />
                 <rect x={X0} y={y - bh / 2} width={Math.max(0, xk(r[f.key]) - X0)} height={bh} rx={5} style={{ fill: f.color, ...(on ? lit(hover === "eq") : {}) }} />
                 {/* value in a fixed column past the plot: no line or band ever crosses it */}
                 <rect x={xEnd + 6} y={y - 10} width={44} height={20} rx={10} style={{ fill: "var(--ph-surface)", stroke: f.color }} strokeWidth={on ? 2 : 1.25} />
-                <T x={xEnd + 28} y={y + 4} text={f1(r[f.key])} size={11} bold={on} style={INK} />
+                <T x={xEnd + 28} y={y + 4} text={f1(r[f.key])} size={12} bold={on} style={INK} />
                 <circle cx={railX(W)} cy={y} r={3} style={{ fill: on ? "var(--ph-accent-strong)" : "var(--ph-ink-muted)" }} />
               </g>
             );
@@ -238,11 +239,11 @@ export function IdealWeightRankCard({ side }: { side: Side }) {
           <line x1={xk(r.average)} y1={top - 8} x2={xk(r.average)} y2={top + rowH * 4 - 4} style={{ stroke: "var(--ph-ink)" }} strokeDasharray="5 4" strokeWidth={hover === "avg" ? 2.5 : 1.5} />
           <line x1={xk(current)} y1={top - 8} x2={xk(current)} y2={top + rowH * 4 - 4} stroke={groupOf(bmiOf(current, h)).color} strokeWidth={hover === "cur" || hover === "diff" ? 3.5 : 2.5} />
           {axisTicks(lo, hi, xEnd - X0, 48).map((v, i, all) => (
-            <T key={v} x={xk(v)} y={H - 24} text={i === all.length - 1 ? `${v} kg` : String(v)} size={10.5} />
+            <T key={v} x={xk(v)} y={H - 24} text={i === all.length - 1 ? `${v} kg` : String(v)} size={12} />
           ))}
           {/* legend for the current-weight line (the dashed average is keyed in the title) */}
           <line x1={X0} y1={H - 10} x2={X0 + 16} y2={H - 10} stroke={groupOf(bmiOf(current, h)).color} strokeWidth={3} />
-          <T x={X0 + 22} y={H - 6} text={`${tc("current")} ${kg1(current)}`} anchor="start" size={10.5} bold />
+          <T x={X0 + 22} y={H - 6} text={`${tc("current")} ${kg1(current)}`} anchor="start" size={12} bold />
         </Drawing>
       }
     />
@@ -313,10 +314,10 @@ export function IdealWeightZoneCard({ side }: { side: Side }) {
           {[15, 18.5, 25, 30, 35, 40].map((b) => (
             <g key={b}>
               <line x1={xb(weightAt(b, h))} y1={sy - SH / 2 - 42} x2={xb(weightAt(b, h))} y2={sy - SH / 2 - 34} style={LINE} />
-              <T x={xb(weightAt(b, h))} y={sy - SH / 2 - 48} text={String(b)} size={10.5} bold={b === 18.5 || b === 25} />
+              <T x={xb(weightAt(b, h))} y={sy - SH / 2 - 48} text={String(b)} size={12} bold={b === 18.5 || b === 25} />
             </g>
           ))}
-          <T x={X0} y={sy - SH / 2 - 64} text="BMI" anchor="start" size={10.5} bold />
+          <T x={X0} y={sy - SH / 2 - 64} text="BMI" anchor="start" size={12} bold />
           {GROUPS.map((c) => {
             const a = xb(weightAt(Math.max(15, c.min), h));
             const z = xb(weightAt(Math.min(40, c.max), h));
@@ -325,7 +326,7 @@ export function IdealWeightZoneCard({ side }: { side: Side }) {
           })}
           {/* band names in a row just above the strip (the average line and the handle start below it) */}
           {zoneLabels.map((l) => (
-            <T key={l.key} x={l.x} y={sy - SH / 2 - 12} text={l.name} anchor={l.anchor} size={10.5} bold={l.on} style={l.on ? INK : MUTED} />
+            <T key={l.key} x={l.x} y={sy - SH / 2 - 12} text={l.name} anchor={l.anchor} size={12} bold={l.on} style={l.on ? INK : MUTED} />
           ))}
           <rect x={X0} y={sy - SH / 2} width={W - 2 * X0} height={SH} fill="none" style={LINE} rx={3} />
           {/* the four formula estimates and their average as markers under the strip */}
@@ -333,7 +334,7 @@ export function IdealWeightZoneCard({ side }: { side: Side }) {
             <path key={f.key} d={`M ${px2(xb(r[f.key]))} ${sy + SH / 2 + 26} l -5 9 l 10 0 z`} fill={f.color} />
           ))}
           <line x1={xb(r.average)} y1={sy - SH / 2} x2={xb(r.average)} y2={sy + SH / 2 + 38} style={{ stroke: "var(--ph-ink)" }} strokeWidth={hover === "avg" ? 3 : 2} strokeDasharray="4 3" />
-          <T x={clamp(xb(r.average), X0 + 60, W - X0 - 60)} y={sy + SH / 2 + 52} text={`${tf("averageLabel")} ${kg1(r.average)}`} size={10.5} bold style={INK} />
+          <T x={clamp(xb(r.average), X0 + 60, W - X0 - 60)} y={sy + SH / 2 + 52} text={`${tf("averageLabel")} ${kg1(r.average)}`} size={12} bold style={INK} />
           <line x1={hx} y1={sy - SH / 2 - 6} x2={hx} y2={sy + SH / 2 + 6} style={{ stroke: "var(--ph-ink)" }} strokeWidth={2.5} />
           <T x={clamp(hx, X0 + 80, W - X0 - 80)} y={H - 8} text={`${valueText} · BMI ${f1(bmi)}`} size={13} bold style={INK} />
         </Drawing>
@@ -396,8 +397,8 @@ export function IdealWeightFormulaCard({ side }: { side: Side }) {
             return (
               <g key={sg.key} opacity={shown ? 1 : 0.28}>
                 <rect x={x} y={by} width={boxW} height={bh} rx={10} style={{ fill: on ? "var(--ph-accent-soft)" : "var(--ph-surface)", ...lit(on) }} />
-                <T x={x + boxW / 2} y={by + 20} text={String(gi + 1)} size={11} bold />
-                <T x={x + boxW / 2} y={by + bh / 2 + 2} text={sg.top} size={10.5} />
+                <T x={x + boxW / 2} y={by + 20} text={String(gi + 1)} size={12} bold />
+                <T x={x + boxW / 2} y={by + bh / 2 + 2} text={sg.top} size={12} />
                 <T x={x + boxW / 2} y={by + bh / 2 + 24} text={sg.bottom} size={12} bold style={INK} />
                 {gi < 3 && <path d={`M ${x + boxW + 3} ${by + bh / 2} l ${gap - 8} 0 m -6 -5 l 6 5 l -6 5`} fill="none" style={LINE} strokeWidth={2} opacity={gi + 1 < st ? 1 : 0.35} />}
               </g>
@@ -481,7 +482,7 @@ function Gauge({ side }: { side: Side }) {
           })}
           {[B0, WHO_LO, 25, 30, B1].map((b) => {
             const [x, y] = pt(b, R + 26);
-            return <T key={b} x={x} y={y + 4} text={String(b)} size={10.5} />;
+            return <T key={b} x={x} y={y + 4} text={String(b)} size={12} />;
           })}
           {/* the average ideal weight as a dark tick across the arc */}
           <line x1={ax0} y1={ay0} x2={ax1} y2={ay1} style={{ stroke: "var(--ph-ink)" }} strokeWidth={hover === "avg" ? 4.5 : 3} />
@@ -490,7 +491,7 @@ function Gauge({ side }: { side: Side }) {
           <circle cx={cx} cy={cy} r={7} style={{ fill: "var(--ph-ink)" }} />
           {/* centre readout sits below the 44 px handle band, even with the needle flat */}
           <T x={cx} y={cy + 36} text={`BMI ${f1(bmi2)}`} size={15} bold style={INK} />
-          <T x={cx} y={cy + 52} text={`${f1(current)} → ${kg1(w2)}`} size={11} />
+          <T x={cx} y={cy + 52} text={`${f1(current)} → ${kg1(w2)}`} size={12} />
         </Drawing>
       }
     />
@@ -530,7 +531,8 @@ export function IdealWeightTimelineCard({ side }: { side: Side }) {
     { key: "last", label: t("rowLast"), value: `${f1(Math.max(...FORMULAS.map((f) => weeksOf(r[f.key]))))} ${tc("weeks")}` },
     { key: "months", label: t("rowMonths"), value: f1(avgWeeks / 4.345) },
   ];
-  const colW = (W - 2 * X0) / 2;
+  // legend packed by the real 12px widths (two per row where they fit), so long names never collide (§39)
+  const pack = flowRows(stations.map((x) => 22 + labelW(`${x.label} · ${f1(weeksOf(x.kg))}`)), W - 2 * X0, 14);
   return (
     <Card tool="ideal-weight-calculator" idPrefix="iw"
       n={6}
@@ -545,27 +547,27 @@ export function IdealWeightTimelineCard({ side }: { side: Side }) {
       visual={
         <Drawing {...d} hMin={HMIN} label={t("handle")} valueText={valueText} handle={{ x: X0 + ((rate - 0.25) / 0.75) * (W - 2 * X0), y: trackY, dir: "horizontal" }} s={s} testId="iw-c6">
           <T x={X0} y={24} text={`${kg1(current)} → ${kg1(r.average)} · ${f1(avgWeeks)} ${tc("weeks")}`} anchor="start" size={13} bold style={INK} />
-          <T x={X0} y={44} text={gain ? t("gain") : t("loss")} anchor="start" size={10.5} />
+          <T x={X0} y={44} text={gain ? t("gain") : t("loss")} anchor="start" size={12} />
           <line x1={X0} y1={ly} x2={W - X0} y2={ly} style={LINE} strokeWidth={3} strokeLinecap="round" />
           {axisTicks(0, maxWeeks, W - 2 * X0, 48).map((v) => (
             <g key={v}>
               <line x1={xw(v)} y1={ly + 6} x2={xw(v)} y2={ly + 12} style={LINE} />
-              <T x={xw(v)} y={ly + 26} text={String(v)} size={10.5} />
+              <T x={xw(v)} y={ly + 26} text={String(v)} size={12} />
             </g>
           ))}
-          <T x={W - X0} y={ly + 42} text={tc("weeks")} anchor="end" size={10.5} bold />
+          <T x={W - X0} y={ly + 42} text={tc("weeks")} anchor="end" size={12} bold />
           <circle cx={xw(0)} cy={ly} r={6} style={{ fill: "var(--ph-surface)", stroke: "var(--ph-ink)" }} strokeWidth={2} />
           {stations.map((x) => (
             <circle key={x.key} cx={xw(weeksOf(x.kg))} cy={ly} r={hover === x.key || (x.key === "avg" && hover === null) ? 7 : 5} style={{ fill: x.color }} stroke="var(--ph-surface)" strokeWidth={1.5} />
           ))}
           {/* legend instead of labels on the line, so close stations never collide */}
           {stations.map((x, i) => {
-            const lx = X0 + (i % 2) * colW;
-            const lyy = ly + 62 + Math.floor(i / 2) * 18;
+            const lx = X0 + pack.at[i].x;
+            const lyy = ly + 62 + pack.at[i].row * 18;
             return (
               <g key={`lg${x.key}`}>
                 <circle cx={lx + 6} cy={lyy - 4} r={5} style={{ fill: x.color }} />
-                <T x={lx + 16} y={lyy} text={`${x.label} · ${f1(weeksOf(x.kg))}`} anchor="start" size={10.5} bold={hover === x.key} style={hover === x.key ? INK : MUTED} />
+                <T x={lx + 16} y={lyy} text={`${x.label} · ${f1(weeksOf(x.kg))}`} anchor="start" size={12} bold={hover === x.key} style={hover === x.key ? INK : MUTED} />
               </g>
             );
           })}
@@ -621,8 +623,8 @@ export function IdealWeightSensitivityCard({ side }: { side: Side }) {
       visual={
         <Drawing {...d} hMin={HMIN} label={t("handle")} valueText={valueText} handle={{ x: X0 + ((e - 0.5) / 4.5) * (W - 2 * X0), y: trackY, dir: "horizontal" }} s={s} testId="iw-c7">
           <line x1={X0} y1={base} x2={W - X0} y2={base} style={LINE} strokeWidth={1.5} />
-          <T x={X0} y={base - 6} text={String(lo)} anchor="start" size={10} />
-          <T x={W - X0} y={22} text={tf("averageLabel")} anchor="end" size={10.5} bold />
+          <T x={X0} y={base - 6} text={String(lo)} anchor="start" size={12} />
+          <T x={W - X0} y={22} text={tf("averageLabel")} anchor="end" size={12} bold />
           {trio.map((c, ci) => {
             const x = X0 + colW * ci + colW * 0.22;
             const bw = colW * 0.56;
@@ -631,7 +633,7 @@ export function IdealWeightSensitivityCard({ side }: { side: Side }) {
               <g key={c.key}>
                 <rect x={x} y={yb(c.v)} width={bw} height={Math.max(0, base - yb(c.v))} rx={5} style={{ fill: ci === 1 ? IDEAL_COLOR : "#3b82f6", opacity: ci === 1 ? 1 : 0.7, ...lit(on) }} />
                 <T x={x + bw / 2} y={yb(c.v) - 8} text={f1(c.v)} size={12} bold style={INK} />
-                <T x={x + bw / 2} y={base + 16} text={c.label} size={10.5} bold={ci === 1} style={ci === 1 ? INK : MUTED} />
+                <T x={x + bw / 2} y={base + 16} text={c.label} size={12} bold={ci === 1} style={ci === 1 ? INK : MUTED} />
               </g>
             );
           })}
@@ -695,7 +697,7 @@ export function IdealWeightTargetBmiCard({ side }: { side: Side }) {
           {axisTicks(lo, hi, base - top, 26).map((v) => (
             <g key={v}>
               <line x1={PL} y1={yb(v)} x2={plotR} y2={yb(v)} style={{ stroke: "var(--ph-grid)" }} />
-              <T x={PL - 6} y={yb(v) + 4} text={String(v)} anchor="end" size={10.5} />
+              <T x={PL - 6} y={yb(v) + 4} text={String(v)} anchor="end" size={12} />
             </g>
           ))}
           <line x1={PL} y1={base} x2={plotR} y2={base} style={LINE} strokeWidth={1.5} />
@@ -706,8 +708,8 @@ export function IdealWeightTargetBmiCard({ side }: { side: Side }) {
             return (
               <g key={f.key}>
                 <rect x={x} y={yb(f.bmi)} width={bw} height={Math.max(0, base - yb(f.bmi))} rx={5} style={{ fill: f.color, opacity: on ? 1 : 0.75, ...lit(hover === f.key) }} />
-                <T x={x + bw / 2} y={yb(f.bmi) - 7} text={f1(f.bmi)} size={11.5} bold style={INK} />
-                <T x={x + bw / 2} y={base + 16} text={tf(f.label).replace(/\s*\(\d{4}\)$/, "")} size={10.5} bold={on} style={on ? INK : MUTED} />
+                <T x={x + bw / 2} y={yb(f.bmi) - 7} text={f1(f.bmi)} size={12} bold style={INK} />
+                <T x={x + bw / 2} y={base + 16} text={tf(f.label).replace(/\s*\(\d{4}\)$/, "")} size={12} bold={on} style={on ? INK : MUTED} />
               </g>
             );
           })}
@@ -716,7 +718,7 @@ export function IdealWeightTargetBmiCard({ side }: { side: Side }) {
           <line x1={railX(W)} y1={yb(WHO_HI)} x2={railX(W)} y2={yb(WHO_LO)} style={LINE} strokeWidth={3} strokeLinecap="round" opacity={0.45} />
           {/* legend for the green band, in its own row under the bar names */}
           <rect x={PL} y={H - 16} width={18} height={10} rx={2} fill={IDEAL_COLOR} opacity={0.3} />
-          <T x={PL + 24} y={H - 7} text={`${tg("normal")} · BMI ${WHO_LO}–${WHO_HI}`} anchor="start" size={10.5} />
+          <T x={PL + 24} y={H - 7} text={`${tg("normal")} · BMI ${WHO_LO}–${WHO_HI}`} anchor="start" size={12} />
         </Drawing>
       }
     />

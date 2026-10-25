@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import PmIndicatorCard from "./PmIndicatorCard";
 import { r2, usePmModel } from "./PmLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 400;
 const H = 250;
@@ -53,18 +54,18 @@ export default function PmEnergyBalance() {
       <rect x={rx - PAN_W / 2} y={ry + 10} width={PAN_W} height={4} rx={2} className="fill-zinc-500 dark:fill-zinc-400" />
       <rect x={rx - PAN_W / 2 + 8} y={r2(ry + 10 - hImp)} width={PAN_W - 16} height={hImp} className="fill-red-500 dark:fill-red-400" />
       {/* pan captions under each pan */}
-      <text x={lx} y={ly + 30} textAnchor="middle" fontSize={11} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">{`${f(left, 1)} J/kg`}</text>
-      <text x={lx} y={ly + 44} textAnchor="middle" fontSize={10} className="fill-zinc-500 dark:fill-zinc-400">{t("launchPan")}</text>
-      <text x={rx} y={ry + 30} textAnchor="middle" fontSize={11} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">{`${f(right, 1)} J/kg`}</text>
-      <text x={rx} y={ry + 44} textAnchor="middle" fontSize={10} className="fill-zinc-500 dark:fill-zinc-400">{t("impactPan")}</text>
+      <text style={{ fontSize: svgPx(12) }} x={lx} y={ly + 30} textAnchor="middle" fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">{`${f(left, 1)} J/kg`}</text>
+      <text style={{ fontSize: svgPx(12) }} x={lx} y={ly + 44} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">{t("launchPan")}</text>
+      <text style={{ fontSize: svgPx(12) }} x={rx} y={ry + 30} textAnchor="middle" fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">{`${f(right, 1)} J/kg`}</text>
+      <text style={{ fontSize: svgPx(12) }} x={rx} y={ry + 44} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">{t("impactPan")}</text>
       {/* legend + verdict along the top */}
       <rect x={8} y={6} width={10} height={10} rx={2} className="fill-blue-500 dark:fill-blue-400" />
-      <text x={22} y={15} fontSize={10} className="fill-zinc-600 dark:fill-zinc-300">{`½v₀² ${f(a.kineticLaunch, 1)}`}</text>
+      <text style={{ fontSize: svgPx(12) }} x={22} y={15} className="fill-zinc-600 dark:fill-zinc-300">{`½v₀² ${f(a.kineticLaunch, 1)}`}</text>
       <rect x={140} y={6} width={10} height={10} rx={2} className="fill-amber-500 dark:fill-amber-400" />
-      <text x={154} y={15} fontSize={10} className="fill-zinc-600 dark:fill-zinc-300">{`g·h₀ ${f(a.potentialLaunch, 1)}`}</text>
+      <text style={{ fontSize: svgPx(12) }} x={154} y={15} className="fill-zinc-600 dark:fill-zinc-300">{`g·h₀ ${f(a.potentialLaunch, 1)}`}</text>
       <rect x={272} y={6} width={10} height={10} rx={2} className="fill-red-500 dark:fill-red-400" />
-      <text x={286} y={15} fontSize={10} className="fill-zinc-600 dark:fill-zinc-300">{`½v² ${f(right, 1)}`}</text>
-      <text x={CX} y={H - 12} textAnchor="middle" fontSize={11} fontWeight={700} className="fill-emerald-700 dark:fill-emerald-300">
+      <text style={{ fontSize: svgPx(12) }} x={286} y={15} className="fill-zinc-600 dark:fill-zinc-300">{`½v² ${f(right, 1)}`}</text>
+      <text style={{ fontSize: svgPx(12) }} x={CX} y={H - 12} textAnchor="middle" fontWeight={700} className="fill-emerald-700 dark:fill-emerald-300">
         {`Δ = ${f(left - right, 3)} J/kg`}
       </text>
     </svg>

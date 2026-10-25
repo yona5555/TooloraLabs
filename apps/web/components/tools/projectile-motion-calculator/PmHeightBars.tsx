@@ -4,6 +4,7 @@ import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { sampleTrajectory } from "@tooloralabs/tools";
 import PmIndicatorCard from "./PmIndicatorCard";
 import { r2, usePmModel } from "./PmLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 400;
 const H = 230;
@@ -41,13 +42,13 @@ export default function PmHeightBars() {
         return (
           <g key={i}>
             <rect x={x} y={y} width={r2(bw)} height={r2(Math.max(0, B - y))} rx={3} className={peak ? "fill-amber-500 dark:fill-amber-400" : i === 0 ? "fill-sky-500 dark:fill-sky-400" : "fill-blue-600 dark:fill-blue-400"} />
-            <text x={r2(x + bw / 2)} y={r2(y - 5)} textAnchor="middle" fontSize={10} fontWeight={700} className="fill-zinc-800 dark:fill-zinc-100">{f(q.y, 1)}</text>
-            <text x={r2(x + bw / 2)} y={B + 14} textAnchor="middle" fontSize={9.5} className="fill-zinc-500 dark:fill-zinc-400">{f(q.t, 2)}</text>
+            <text style={{ fontSize: svgPx(12) }} x={r2(x + bw / 2)} y={r2(y - 5)} textAnchor="middle" fontWeight={700} className="fill-zinc-800 dark:fill-zinc-100">{f(q.y, 1)}</text>
+            <text style={{ fontSize: svgPx(12) }} x={r2(x + bw / 2)} y={B + 14} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">{f(q.t, 2)}</text>
           </g>
         );
       })}
-      <text x={R} y={B + 32} textAnchor="end" fontSize={10} className="fill-zinc-500 dark:fill-zinc-400">t (s)</text>
-      <text x={L} y={B + 32} fontSize={10} className="fill-zinc-500 dark:fill-zinc-400">y (m)</text>
+      <text style={{ fontSize: svgPx(12) }} x={R} y={B + 32} textAnchor="end" className="fill-zinc-500 dark:fill-zinc-400">t (s)</text>
+      <text style={{ fontSize: svgPx(12) }} x={L} y={B + 32} className="fill-zinc-500 dark:fill-zinc-400">y (m)</text>
     </svg>
   );
 

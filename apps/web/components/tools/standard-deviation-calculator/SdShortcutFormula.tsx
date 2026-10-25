@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import SdIndicatorCard from "./SdIndicatorCard";
 import { useSdModel } from "./SdLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 300;
 const H = 220;
@@ -21,10 +22,10 @@ export default function SdShortcutFormula() {
   const box = (x: number, y: number, w: number, top: string, value: string, cls: string) => (
     <g>
       <rect x={x} y={y} width={w} height={52} rx={10} strokeWidth={1.5} className={cls} />
-      <text x={x + w / 2} y={y + 20} textAnchor="middle" fontSize={11} className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={x + w / 2} y={y + 20} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
         {top}
       </text>
-      <text x={x + w / 2} y={y + 40} textAnchor="middle" fontSize={14} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+      <text style={{ fontSize: svgPx(14) }} x={x + w / 2} y={y + 40} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
         {value}
       </text>
     </g>
@@ -33,18 +34,18 @@ export default function SdShortcutFormula() {
   const svg = (
     <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {box(4, 6, 126, "Σx²", f(a.sumOfSquaresRaw), "fill-sky-100 stroke-sky-500 dark:fill-sky-500/15 dark:stroke-sky-400")}
-      <text x={150} y={40} textAnchor="middle" fontSize={22} fontWeight={700} className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(22) }} x={150} y={40} textAnchor="middle" fontWeight={700} className="fill-zinc-500 dark:fill-zinc-400">
         −
       </text>
       {box(170, 6, 126, `(${f(a.sum)})² / ${a.n}`, f(correction), "fill-amber-100 stroke-amber-500 dark:fill-amber-500/15 dark:stroke-amber-400")}
       <path d="M 67 62 L 67 84 L 233 84 L 233 62" fill="none" strokeWidth={1.5} className="stroke-zinc-400 dark:stroke-zinc-500" />
       <line x1={150} y1={84} x2={150} y2={100} strokeWidth={1.5} className="stroke-zinc-400 dark:stroke-zinc-500" />
       {box(60, 100, 180, t("shortcutLabel"), f(a.sumSquaresShortcut), "fill-violet-100 stroke-violet-500 dark:fill-violet-500/15 dark:stroke-violet-400")}
-      <text x={150} y={176} textAnchor="middle" fontSize={20} fontWeight={700} className={match ? "fill-emerald-600 dark:fill-emerald-400" : "fill-red-600 dark:fill-red-400"}>
+      <text style={{ fontSize: svgPx(20) }} x={150} y={176} textAnchor="middle" fontWeight={700} className={match ? "fill-emerald-600 dark:fill-emerald-400" : "fill-red-600 dark:fill-red-400"}>
         {match ? "=" : "≈"}
       </text>
       <rect x={60} y={184} width={180} height={32} rx={10} strokeWidth={1.5} className="fill-emerald-50 stroke-emerald-600 dark:fill-emerald-500/10 dark:stroke-emerald-400" />
-      <text x={150} y={205} textAnchor="middle" fontSize={13} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+      <text style={{ fontSize: svgPx(13) }} x={150} y={205} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
         {`Σ(x − μ)² = ${f(a.sumSquares)}`}
       </text>
     </svg>

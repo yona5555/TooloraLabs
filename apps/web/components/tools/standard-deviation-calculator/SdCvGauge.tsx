@@ -3,6 +3,7 @@ import { useId } from "react";
 import { useTranslations } from "next-intl";
 import SdIndicatorCard from "./SdIndicatorCard";
 import { useSdModel } from "./SdLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 260;
 const H = 170;
@@ -52,7 +53,7 @@ export default function SdCvGauge() {
       {ticks.map((v) => {
         const [tx, ty] = polar(Math.PI * (1 - v / LIMIT), R - 24);
         return (
-          <text key={v} x={tx} y={ty + 4} textAnchor="middle" fontSize={10} className="fill-zinc-500 dark:fill-zinc-400">
+          <text style={{ fontSize: svgPx(12) }} key={v} x={tx} y={ty + 4} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
             {`${v}%`}
           </text>
         );
@@ -61,7 +62,7 @@ export default function SdCvGauge() {
         <line x1={CX} y1={CY} x2={nx} y2={ny} strokeWidth={3.5} strokeLinecap="round" className="stroke-zinc-800 dark:stroke-zinc-100" style={{ transition: "all 500ms ease" }} />
       )}
       <circle cx={CX} cy={CY} r={6} className="fill-zinc-800 dark:fill-zinc-100" />
-      <text x={CX} y={CY + 26} textAnchor="middle" fontSize={13} fontWeight={700} className="fill-zinc-800 dark:fill-zinc-100">
+      <text style={{ fontSize: svgPx(13) }} x={CX} y={CY + 26} textAnchor="middle" fontWeight={700} className="fill-zinc-800 dark:fill-zinc-100">
         {cv === null ? tl("cvUndefined") : `${f(cv, 1)}% · ${t(`zones.${cvZone(cv)}`)}`}
       </text>
     </svg>

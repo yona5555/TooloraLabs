@@ -2,6 +2,7 @@
 import { createContext, useContext, useId, useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { ChevronDown } from "lucide-react";
+import DesktopAdSlot from "./DesktopAdSlot";
 
 type SectionCardProps = {
   title: ReactNode;
@@ -113,6 +114,9 @@ export default function SectionCard({ title, action, onToggle, children, bodyCla
   const heading = <h2 className="font-bold text-white max-md:me-auto">{title}</h2>;
 
   return (
+    <>
+    {/* Desktop ad candidate on the boundary before a top-level card (lib/ads.ts picks 3 per page). */}
+    {!nested && <DesktopAdSlot />}
     <div
       ref={ref}
       id={id}
@@ -157,5 +161,6 @@ export default function SectionCard({ title, action, onToggle, children, bodyCla
         </CardOpenedContext.Provider>
       </div>
     </div>
+    </>
   );
 }

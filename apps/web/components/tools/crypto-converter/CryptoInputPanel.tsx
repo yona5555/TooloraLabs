@@ -7,7 +7,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import CryptoCoinPicker from "./CryptoCoinPicker";
 import FiatPicker from "@/components/tools/markets/FiatPicker";
-import QuickConversionTable, { quickAmounts } from "@/components/tools/markets/QuickConversionTable";
+import QuickConversionTable, { quickAmountDigits, quickAmounts } from "@/components/tools/markets/QuickConversionTable";
 import { useCryptoFormatters } from "./cryptoFormat";
 import type { FiatRate } from "./types";
 
@@ -33,7 +33,8 @@ type CryptoInputPanelProps = {
   digitStyle: DigitStyle;
 };
 
-const QUICK_AMOUNTS = quickAmounts(-4, 6);
+const QUICK_MIN_EXP = -4;
+const QUICK_AMOUNTS = quickAmounts(QUICK_MIN_EXP, 6);
 
 export default function CryptoInputPanel({
   coins,
@@ -123,7 +124,7 @@ export default function CryptoInputPanel({
         <QuickConversionTable
           title={t("quickTitle")}
           columns={[fromCoin.symbol, toCoin.symbol, f.currency]}
-          rows={QUICK_AMOUNTS.map((a) => [f.num(a, 3), f.amount(convertCryptoAmount(a, fromPrice, toPrice)), f.compactMoney(a * fromPrice)])}
+          rows={QUICK_AMOUNTS.map((a) => [f.num(a, quickAmountDigits(QUICK_MIN_EXP)), f.amount(convertCryptoAmount(a, fromPrice, toPrice)), f.compactMoney(a * fromPrice)])}
         />
       )}
     </SectionCard>

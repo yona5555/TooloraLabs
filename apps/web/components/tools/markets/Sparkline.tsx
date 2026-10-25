@@ -1,5 +1,6 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
+import { useRenderedAt } from "./RenderClock";
 
 export const SPARK_W = 112;
 export const SPARK_H = 34;
@@ -22,17 +23,20 @@ export default function Sparkline({ values, up, width = SPARK_W, height = SPARK_
   );
 }
 
-/** "now" / "5 minutes ago" for a timestamp, re-rendered every minute. */
-export function useRelativeUpdatedLabel(lastUpdated: number, locale: string): string {
-  const [now, setNow] = useState(() => Date.now());
+const MINUTE = 60_000;
+const minuteNow = () => Math.floor(Date.now() / MINUTE) * MINUTE;
+const subscribeMinutes = (tick: () => void) => {
+  const interval = setInterval(tick, MINUTE);
+  return () => clearInterval(interval);
+};
 
-  useEffect(() => {
-    const interval = setInterval(() => setNow(Date.now()), 60_000);
-    return () => clearInterval(interval);
-  }, []);
+/** "now" / "5 minutes ago" for a timestamp, re-rendered every minute. Hydrates on the server's clock. */
+export function useRelativeUpdatedLabel(lastUpdated: number, locale: string): string {
+  const renderedAt = useRenderedAt();
+  const now = useSyncExternalStore(subscribeMinutes, minuteNow, () => renderedAt ?? minuteNow());
 
   const rtf = new Intl.RelativeTimeFormat(locale, { numeric: "auto" });
-  const minutes = Math.max(0, Math.round((now - lastUpdated) / 60_000));
+  const minutes = Math.max(0, Math.round((now - lastUpdated) / MINUTE));
   if (minutes < 60) return rtf.format(-minutes, "minute");
   const hours = Math.round(minutes / 60);
   return hours < 48 ? rtf.format(-hours, "hour") : rtf.format(-Math.round(hours / 24), "day");

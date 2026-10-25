@@ -63,11 +63,11 @@ export default function TriangleAngleDragSensitivity() {
             <Line.Segment point1={[CX, CY]} point2={drag.point} color={Theme.blue} />
             <Line.Segment point1={B} point2={drag.point} color={Theme.green} />
             <Point x={lowerPoint[0]} y={lowerPoint[1]} color={Theme.indigo} />
-            <Text x={lowerPoint[0]} y={lowerPoint[1] + 0.5} size={11} color={Theme.indigo}>
+            <Text x={lowerPoint[0]} y={lowerPoint[1] + 0.5} size={12} color={Theme.indigo}>
               {`${Math.round(angleSensitivity.lower.angleC)}°`}
             </Text>
             <Point x={higherPoint[0]} y={higherPoint[1]} color={Theme.pink} />
-            <Text x={higherPoint[0]} y={higherPoint[1] + 0.5} size={11} color={Theme.pink}>
+            <Text x={higherPoint[0]} y={higherPoint[1] + 0.5} size={12} color={Theme.pink}>
               {`${Math.round(angleSensitivity.higher.angleC)}°`}
             </Text>
             {drag.element}

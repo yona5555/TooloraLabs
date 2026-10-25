@@ -1,6 +1,7 @@
 "use client";
 import { civilToUtcMs, civilWeekday, daysInMonth, formatIsoDate, gregorianToHijri, type CivilDate, type WeekendPreset } from "@tooloralabs/tools";
 import { DATE_COLORS, isWeekendDay, type Formatters } from "./dateModel";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 type Props = {
   /** Month to draw (the end date or the resulting date). */
@@ -37,16 +38,15 @@ export default function DateMonthGrid({ focus, from, toExclusive, weekend, holid
 
   return (
     <svg width="100%" height="100%" viewBox={`0 0 ${W} ${H}`} role="img" aria-label={f.monthYear(focus)} style={{ direction: "ltr" }} className="mx-auto block max-h-[340px]">
-      <text x={W / 2} y={13} textAnchor="middle" fontSize={12} fontWeight={800} className="fill-zinc-800 dark:fill-zinc-100">
+      <text style={{ fontSize: svgPx(12) }} x={W / 2} y={13} textAnchor="middle" fontWeight={800} className="fill-zinc-800 dark:fill-zinc-100">
         {f.monthYear(focus)}
       </text>
       {Array.from({ length: 7 }, (_, i) => (
-        <text
+        <text style={{ fontSize: svgPx(12) }}
           key={i}
           x={col(i) * CELL + CELL / 2}
           y={TOP + 14}
           textAnchor="middle"
-          fontSize={9.5}
           fontWeight={700}
           fill={isWeekendDay(weekend, i) ? DATE_COLORS.danger : undefined}
           className={isWeekendDay(weekend, i) ? "" : "fill-zinc-500 dark:fill-zinc-400"}
@@ -80,10 +80,10 @@ export default function DateMonthGrid({ focus, from, toExclusive, weekend, holid
               stroke={isFocus ? DATE_COLORS.danger : "none"}
               strokeWidth={isFocus ? 2.5 : 0}
             />
-            <text x={x + CELL / 2} y={y + 21} textAnchor="middle" fontSize={13} fontWeight={800} className={inRange && !isWe ? "fill-white" : "fill-zinc-800 dark:fill-zinc-100"}>
+            <text style={{ fontSize: svgPx(13) }} x={x + CELL / 2} y={y + 21} textAnchor="middle" fontWeight={800} className={inRange && !isWe ? "fill-white" : "fill-zinc-800 dark:fill-zinc-100"}>
               {f.int(c.day)}
             </text>
-            <text x={x + CELL / 2} y={y + 34} textAnchor="middle" fontSize={8.5} fontWeight={600} fill={inRange && !isWe ? "#ecfdf5" : DATE_COLORS.hijri}>
+            <text style={{ fontSize: svgPx(12) }} x={x + CELL / 2} y={y + 34} textAnchor="middle" fontWeight={600} fill={inRange && !isWe ? "#ecfdf5" : DATE_COLORS.hijri}>
               {f.int(h.day)}
             </text>
           </g>

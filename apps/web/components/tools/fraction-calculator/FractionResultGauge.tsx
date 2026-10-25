@@ -26,6 +26,7 @@ import { GlassHandle, useValueFlash } from "@/components/tool-ui/glass/GlassPrim
 import { avoidOverlap1D } from "@/components/tool-ui/glass/glass-label-placement";
 import { useFractionLive } from "./FractionLiveContext";
 import { formatMathValue } from "@tooloralabs/tools";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 type Props = { numerator: number; denominator: number; caption: string };
 
@@ -203,7 +204,7 @@ export default function FractionResultGauge({ numerator, denominator, caption }:
           {CARDINAL.map((c) => {
             const p = point(c.deg, LABEL_R);
             return (
-              <text key={c.frac} x={p.x} y={p.y} textAnchor="middle" dominantBaseline="middle" fontSize="10" fontWeight="600" fill="var(--glass-muted)" data-role="label">
+              <text style={{ fontSize: svgPx(12) }} key={c.frac} x={p.x} y={p.y} textAnchor="middle" dominantBaseline="middle" fontWeight="600" fill="var(--glass-muted)" data-role="label">
                 {c.frac}
               </text>
             );
@@ -248,15 +249,15 @@ export default function FractionResultGauge({ numerator, denominator, caption }:
               Two short lines (value, then degree) rather than one wide "value · deg" string --
               narrower halves the odds two labels at a close angle overlap horizontally, which is
               exactly the axis a purely radial gap does nothing for at a side angle (§39). */}
-          <text x={point(resolvedAngles.A, LABEL_R2).x} y={point(resolvedAngles.A, LABEL_R2).y} textAnchor="middle" fontSize="10" fontWeight="700" fill="var(--glass-danger-strong)" data-role="label">
+          <text style={{ fontSize: svgPx(12) }} x={point(resolvedAngles.A, LABEL_R2).x} y={point(resolvedAngles.A, LABEL_R2).y} textAnchor="middle" fontWeight="700" fill="var(--glass-danger-strong)" data-role="label">
             <tspan x={point(resolvedAngles.A, LABEL_R2).x} dy="-0.3em">{`${formatMathValue(numeratorA)}/${formatMathValue(denominatorA)}`}</tspan>
             <tspan x={point(resolvedAngles.A, LABEL_R2).x} dy="1.1em">{`${degA}°`}</tspan>
           </text>
-          <text x={point(resolvedAngles.B, LABEL_R2).x} y={point(resolvedAngles.B, LABEL_R2).y} textAnchor="middle" fontSize="10" fontWeight="700" fill="var(--glass-success-strong)" data-role="label">
+          <text style={{ fontSize: svgPx(12) }} x={point(resolvedAngles.B, LABEL_R2).x} y={point(resolvedAngles.B, LABEL_R2).y} textAnchor="middle" fontWeight="700" fill="var(--glass-success-strong)" data-role="label">
             <tspan x={point(resolvedAngles.B, LABEL_R2).x} dy="-0.3em">{`${formatMathValue(numeratorB)}/${formatMathValue(denominatorB)}`}</tspan>
             <tspan x={point(resolvedAngles.B, LABEL_R2).x} dy="1.1em">{`${degB}°`}</tspan>
           </text>
-          <text x={point(resolvedAngles.result, LABEL_R2).x} y={point(resolvedAngles.result, LABEL_R2).y} textAnchor="middle" fontSize="10" fontWeight="700" fill="var(--glass-accent-5-strong)" data-role="label">
+          <text style={{ fontSize: svgPx(12) }} x={point(resolvedAngles.result, LABEL_R2).x} y={point(resolvedAngles.result, LABEL_R2).y} textAnchor="middle" fontWeight="700" fill="var(--glass-accent-5-strong)" data-role="label">
             <tspan x={point(resolvedAngles.result, LABEL_R2).x} dy="-0.3em">{`${formatMathValue(numerator)}/${formatMathValue(den)}`}</tspan>
             <tspan x={point(resolvedAngles.result, LABEL_R2).x} dy="1.1em">{`${degResult}°`}</tspan>
           </text>
@@ -265,10 +266,10 @@ export default function FractionResultGauge({ numerator, denominator, caption }:
               drag changes the result (an SVG <text> has no renderable background of its own,
               so the flash is this sibling rect, not a className on the text itself) */}
           {flashing && <rect x={CX - 26} y={CY - 16} width="52" height="20" rx="4" className="glass-value-flash" />}
-          <text x={CX} y={CY - 4} textAnchor="middle" fontSize="20" fontWeight="700" fill="var(--glass-title)" data-role="label">
+          <text style={{ fontSize: svgPx(20) }} x={CX} y={CY - 4} textAnchor="middle" fontWeight="700" fill="var(--glass-title)" data-role="label">
             {formatMathValue(numerator)}/{formatMathValue(den)}
           </text>
-          <text x={CX} y={CY + 16} textAnchor="middle" fontSize="11" fill="var(--glass-muted)" data-role="label">
+          <text style={{ fontSize: svgPx(12) }} x={CX} y={CY + 16} textAnchor="middle" fill="var(--glass-muted)" data-role="label">
             {`${degResult}°`}
           </text>
 

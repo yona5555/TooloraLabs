@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import B64IndicatorCard, { B64IndicatorUnavailable } from "./B64IndicatorCard";
 import { useB64Model } from "./B64LiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 210;
@@ -41,13 +42,13 @@ export default function B64AlphabetBars() {
           <g key={p.key}>
             <rect x={x} y={y(p.v)} width={w} height={BASE - y(p.v)} rx={4} className={p.key === "padding" ? "fill-rose-500 dark:fill-rose-400" : "fill-blue-600 dark:fill-blue-400"} />
             {ideal > 0 && <line x1={x - 4} y1={y(ideal)} x2={x + w + 4} y2={y(ideal)} strokeWidth={2} strokeDasharray="3 2" className="stroke-amber-500" />}
-            <text x={x + w / 2} y={y(Math.max(p.v, ideal)) - 6} textAnchor="middle" fontSize={12} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={x + w / 2} y={y(Math.max(p.v, ideal)) - 6} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
               {f(p.v)}
             </text>
-            <text x={x + w / 2} y={BASE + 16} textAnchor="middle" fontSize={12} className="fill-zinc-600 dark:fill-zinc-300">
+            <text style={{ fontSize: svgPx(12) }} x={x + w / 2} y={BASE + 16} textAnchor="middle" className="fill-zinc-600 dark:fill-zinc-300">
               {t(p.key)}
             </text>
-            <text x={x + w / 2} y={BASE + 31} textAnchor="middle" fontSize={11} fontFamily="ui-monospace, monospace" className="fill-zinc-400 dark:fill-zinc-500">
+            <text style={{ fontSize: svgPx(12) }} x={x + w / 2} y={BASE + 31} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-400 dark:fill-zinc-500">
               {p.key === "upper" ? "A–Z" : p.key === "lower" ? "a–z" : p.key === "digits" ? "0–9" : p.key === "symbols" ? (draft.variant === "urlSafe" ? "- _" : "+ /") : "="}
             </text>
           </g>

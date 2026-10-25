@@ -39,20 +39,20 @@ export default function ImageQualityCurve({ s, points, current, originalSize, fo
         {yTicks.map((v) => (
           <g key={v}>
             <line x1={PAD.l} x2={W - PAD.r} y1={px2(y(v * 1024))} y2={px2(y(v * 1024))} style={LINE} strokeWidth={1} strokeDasharray="3 4" />
-            <T x={PAD.l - 6} y={px2(y(v * 1024)) + 4} text={kb(v)} anchor="end" size={10.5} style={MUTED} />
+            <T x={PAD.l - 6} y={px2(y(v * 1024)) + 4} text={kb(v)} anchor="end" size={12} style={MUTED} />
           </g>
         ))}
         {[10, 25, 50, 75, 100].map((q) => (
-          <T key={q} x={px2(x(q))} y={H - 10} text={`${q}`} size={10.5} style={MUTED} />
+          <T key={q} x={px2(x(q))} y={H - 10} text={`${q}`} size={12} style={MUTED} />
         ))}
         {originalSize > 0 && (
           <g>
             <line x1={PAD.l} x2={W - PAD.r} y1={px2(y(originalSize))} y2={px2(y(originalSize))} style={{ stroke: "var(--ph-ink-muted)" }} strokeWidth={1.5} />
             {/* Left end unless the quality marker sits there (the curve's steep top end is on the right). */}
             {x(s.value) > PAD.l + 120 ? (
-              <T x={PAD.l + 4} y={px2(y(originalSize)) - 5} text={`${t("original")} ${formatBytes(originalSize)}`} anchor="start" size={10.5} style={INK} />
+              <T x={PAD.l + 4} y={px2(y(originalSize)) - 5} text={`${t("original")} ${formatBytes(originalSize)}`} anchor="start" size={12} style={INK} />
             ) : (
-              <T x={W - PAD.r - 40} y={px2(y(originalSize)) - 5} text={`${t("original")} ${formatBytes(originalSize)}`} anchor="end" size={10.5} style={INK} />
+              <T x={W - PAD.r - 40} y={px2(y(originalSize)) - 5} text={`${t("original")} ${formatBytes(originalSize)}`} anchor="end" size={12} style={INK} />
             )}
           </g>
         )}

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
-import { categories } from "@/data/categories";
+import { categoryPages as categories } from "@/data/categories";
 import { tools } from "@/data/tools";
 import ToolCard from "@/components/tool-ui/ToolCard";
 import BackButton from "@/components/tool-ui/BackButton";
