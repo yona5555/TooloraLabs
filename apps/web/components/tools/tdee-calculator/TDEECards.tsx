@@ -439,7 +439,8 @@ function AdjustmentGauge({ side }: { side: Side }) {
   const [hover, setHover] = useState<string | null>(null);
   const HMIN = 270;
   const geo = (W: number, H: number) => {
-    const R = Math.max(70, Math.min(W / 2 - 50, H - 86));
+    // H − 92: room above the arc for the "0%" tick label (§39: never clipped)
+    const R = Math.max(70, Math.min(W / 2 - 50, H - 92));
     return { cx: W / 2, cy: H - 58, R };
   };
   const d = useDrawing(HMIN, s, (x, y, W, H) => {

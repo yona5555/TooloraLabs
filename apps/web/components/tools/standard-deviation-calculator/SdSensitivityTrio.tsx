@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import SdIndicatorCard from "./SdIndicatorCard";
 import { useSdModel } from "./SdLiveContext";
 import { svgPx } from "@/components/tool-ui/svgPx";
+import { labelW } from "@/components/tool-ui/labelLayout";
 
 const W = 300;
 const H = 200;
@@ -44,7 +45,7 @@ export default function SdSensitivityTrio() {
                 {`${d >= 0 ? "+" : "−"}${f(Math.abs(d), 1)}%`}
               </text>
             )}
-            <text style={{ fontSize: svgPx(12) }} x={cx} y={BASE + 16} textAnchor="middle" fontWeight={600} className="fill-zinc-700 dark:fill-zinc-200">
+            <text style={{ fontSize: svgPx(12) }} x={Math.max(labelW(t(it.key)) / 2 + 2, Math.min(W - labelW(t(it.key)) / 2 - 2, cx))} y={BASE + 16} textAnchor="middle" fontWeight={600} className="fill-zinc-700 dark:fill-zinc-200">
               {t(it.key)}
             </text>
             <text style={{ fontSize: svgPx(12) }} x={cx} y={BASE + 30} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">

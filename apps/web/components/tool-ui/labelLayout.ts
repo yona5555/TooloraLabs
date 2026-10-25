@@ -91,15 +91,17 @@ export function flowRows(widths: number[], width: number, gap = 12): { at: { x: 
  * order (most important first), takes the first free spot beside its point — on its preferred side,
  * then the other, then moved up or down a line at a time — that stays inside the `w`×`h` drawing.
  * `lw` is the label width and `lh` its line height in the drawing's units; `x`/`y` the point. Returns
- * the text x, baseline y and anchor of each label.
+ * the text x, baseline y and anchor of each label. `blocked` boxes (left a, right b, top t, bottom u) are
+ * kept clear too (other text in the drawing).
  */
 export function placeLabels(
   items: { x: number; y: number; lw: number; lh: number; side?: "start" | "end" }[],
   w: number,
   h: number,
   off = 7,
+  blocked: { a: number; b: number; t: number; u: number }[] = [],
 ): { x: number; y: number; anchor: "start" | "end" }[] {
-  const placed: { a: number; b: number; t: number; u: number }[] = [];
+  const placed: { a: number; b: number; t: number; u: number }[] = [...blocked];
   return items.map((it) => {
     const first = it.side ?? (it.x + off + it.lw <= w ? "start" : "end");
     type Spot = { x: number; y: number; anchor: "start" | "end" };

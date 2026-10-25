@@ -48,6 +48,9 @@ function Dial({ s, d, f }: Props) {
     }),
     S,
     S,
+    7,
+    // the UTC clock in the centre
+    [{ a: c - (inner - 14), b: c + (inner - 14), t: c - (inner - 14), u: c + (inner - 14) }],
   );
 
   return (

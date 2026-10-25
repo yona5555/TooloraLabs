@@ -44,10 +44,10 @@ export default function TrigWaveCurve() {
               <Plot.OfX y={(x) => Math.cos((x * Math.PI) / 180)} color={colors.emerald} />
               <Point x={dims.angleDeg} y={sin} color={colors.rose} />
               <Point x={dims.angleDeg} y={cos} color={colors.emerald} />
-              <Text x={20} y={1.15} size={12} color={colors.rose}>
+              <Text x={45} y={1.15} size={12} color={colors.rose}>
                 sin(x)
               </Text>
-              <Text x={20} y={-1.15} size={12} color={colors.emerald}>
+              <Text x={45} y={-1.15} size={12} color={colors.emerald}>
                 cos(x)
               </Text>
             </Mafs>

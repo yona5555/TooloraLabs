@@ -20,7 +20,10 @@ function Ribbon2D({ n }: { n: number }) {
   const cw = (W - 24) / PER_ROW;
   const rh = (H - 16) / rows;
   const wide = cw >= 44;
-  const short = (word: string) => (word.length > 8 ? `${word.slice(0, 7)}…` : word);
+  // words cut to what their column holds at 12px (13.5px estimate for the extra-bold flagged words),
+  // so neighbours never touch (§39); narrow boxes label only the flagged words, up to 8 characters
+  const maxChars = wide ? Math.max(3, Math.min(8, Math.floor((cw - 4) / labelW("m", 13.5)))) : 8;
+  const short = (word: string) => (word.length > maxChars ? `${word.slice(0, maxChars - 1)}…` : word);
   // a word in the first or last column stays whole inside the drawing
   // (measured as 13.5px text: the flagged words are drawn extra bold, wider than the 12px estimate)
   const inside = (cx: number, word: string) => Math.max(labelW(short(word), 13.5) / 2 + 2, Math.min(W - labelW(short(word), 13.5) / 2 - 2, cx));

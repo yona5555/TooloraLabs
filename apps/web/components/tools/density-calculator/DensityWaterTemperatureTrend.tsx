@@ -53,7 +53,7 @@ export default function DensityWaterTemperatureTrend() {
           </g>
         ))}
         {[0, 20, 40, 60, 80, 100].map((c) => (
-          <text style={{ fontSize: svgPx(12) }} key={c} x={x(c)} y={T + PH + 16} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
+          <text style={{ fontSize: svgPx(12) }} key={c} x={x(c)} y={T + PH + 16} textAnchor={c === 100 ? "end" : "middle"} className="fill-zinc-500 dark:fill-zinc-400">
             {`${c} °C`}
           </text>
         ))}

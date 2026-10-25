@@ -18,7 +18,8 @@ const WIDTH = 340;
 const HEIGHT = 170;
 const PAD_LEFT = 44;
 const PAD_RIGHT = 16;
-const PAD_TOP = 16;
+// room above the highest point for its 12px value label
+const PAD_TOP = 24;
 const PAD_BOTTOM = 32;
 
 export default function EduLineChart({ points, ariaLabel, lineColorClass = "stroke-violet-500 dark:stroke-violet-400", dotColorClass = "fill-violet-500 dark:fill-violet-400" }: Props) {
