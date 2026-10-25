@@ -107,7 +107,7 @@ export default function DocsSidebarNav() {
                           <ToolIcon size={14} className="shrink-0 text-zinc-400" />
                           <span className="flex-1 truncate">{tTools(`${tool.slug}.title`)}</span>
                           {!isPilotReady && (
-                            <span className="shrink-0 rounded-full bg-zinc-100 px-1.5 py-0.5 text-[10px] font-semibold text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400">
+                            <span className="shrink-0 rounded-full bg-zinc-100 px-1.5 py-0.5 text-[10px] font-semibold text-[#5e5e67] dark:bg-zinc-800 dark:text-zinc-400">
                               {t("soon")}
                             </span>
                           )}
