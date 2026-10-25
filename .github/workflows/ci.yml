@@ -8,13 +8,13 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
-          node-version: 20
+          node-version-file: .nvmrc
           cache: npm
 
       - name: Install dependencies
@@ -59,15 +59,19 @@ jobs:
           node ../../tests/phone-card-order.mjs --ids http://localhost:3001 en
 
   # The approved phone home page is locked (.claude/rules/visuals.md, "APPROVED — LOCKED").
-  # Its baseline is measured on macOS (Arial), so this job runs on a macOS runner for the same fonts.
+  # Chromium only, so no macOS runner is needed. The page uses system fonts (Arial), so each OS has
+  # its own baseline: tests/baselines/home-phone.json (macOS, local) and home-phone.linux.json (this runner).
+  # Runner moved from macOS to Ubuntu with Yousef's approval (2026-10-25).
+  # The PR label "approve-home-phone-baseline" is the CI form of --approve: it rewrites the Linux
+  # baseline and uploads it as an artifact to be reviewed and committed.
   home-phone-lock:
-    runs-on: macos-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
-          node-version: 20
+          node-version-file: .nvmrc
           cache: npm
 
       - name: Install dependencies
@@ -77,11 +81,22 @@ jobs:
         run: npm run build --workspace=apps/web
 
       - name: Install Playwright Chromium
-        run: npx playwright install chromium
+        run: npx playwright install --with-deps chromium
 
       - name: Approved phone home page unchanged (rects, fonts, texts, order)
         working-directory: apps/web
         run: |
           npx next start -p 3001 > /tmp/next.log 2>&1 &
           for i in $(seq 1 60); do curl -sf -o /dev/null http://localhost:3001/en && break; sleep 2; done
-          cd ../.. && npm run test:home-phone
+          cd ../..
+          if [ "$APPROVE_BASELINE" = "true" ]; then npm run baseline:home-phone -- --approve; fi
+          npm run test:home-phone
+        env:
+          APPROVE_BASELINE: ${{ contains(github.event.pull_request.labels.*.name, 'approve-home-phone-baseline') }}
+
+      - name: Upload the rewritten Linux baseline
+        if: contains(github.event.pull_request.labels.*.name, 'approve-home-phone-baseline')
+        uses: actions/upload-artifact@v7
+        with:
+          name: home-phone-linux-baseline
+          path: tests/baselines/home-phone.linux.json
