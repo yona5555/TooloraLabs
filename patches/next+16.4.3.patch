@@ -1,8 +1,8 @@
 diff --git a/node_modules/next/dist/server/dev/next-dev-server.js b/node_modules/next/dist/server/dev/next-dev-server.js
-index 64966ab..ec1201b 100644
+index 95a71fd..816d421 100644
 --- a/node_modules/next/dist/server/dev/next-dev-server.js
 +++ b/node_modules/next/dist/server/dev/next-dev-server.js
-@@ -657,38 +657,49 @@ class DevServer extends _nextserver.default {
+@@ -595,38 +595,49 @@ class DevServer extends _nextserver.default {
              (!isAppPath || prerenderedRoutes && prerenderedRoutes.length > 0)) {
                  // we write the static paths to partial manifest for
                  // fallback handling inside of entry handler's
@@ -15,7 +15,7 @@ index 64966ab..ec1201b 100644
 -                // the route whose pathname matches the page pattern (e.g.
 -                // /dynamic-params/[slug]) and has fallback route params describing
 -                // which params are unknown at build time.
--                const fallbackPrerenderedRoute = prerenderedRoutes == null ? void 0 : prerenderedRoutes.find((route)=>route.pathname === pathname);
+-                const fallbackRoute = (prerenderRouteMatchers == null ? void 0 : prerenderRouteMatchers.find((route)=>route.pathname === pathname)) ?? (prerenderedRoutes == null ? void 0 : prerenderedRoutes.find((route)=>route.pathname === pathname));
 -                existingManifest.dynamicRoutes[pathname] = {
 -                    dataRoute: null,
 -                    dataRouteRegex: null,
@@ -24,8 +24,8 @@ index 64966ab..ec1201b 100644
 -                    fallbackExpire: undefined,
 -                    fallbackHeaders: undefined,
 -                    fallbackStatus: undefined,
--                    fallbackRootParams: fallbackPrerenderedRoute == null ? void 0 : fallbackPrerenderedRoute.fallbackRootParams,
--                    fallbackRouteParams: fallbackPrerenderedRoute == null ? void 0 : fallbackPrerenderedRoute.fallbackRouteParams,
+-                    fallbackRootParams: fallbackRoute == null ? void 0 : fallbackRoute.fallbackRootParams,
+-                    fallbackRouteParams: fallbackRoute == null ? void 0 : fallbackRoute.fallbackRouteParams,
 -                    fallbackSourceRoute: pathname,
 -                    prefetchDataRoute: undefined,
 -                    prefetchDataRouteRegex: undefined,
@@ -50,7 +50,7 @@ index 64966ab..ec1201b 100644
 +                    // the route whose pathname matches the page pattern (e.g.
 +                    // /dynamic-params/[slug]) and has fallback route params describing
 +                    // which params are unknown at build time.
-+                    const fallbackPrerenderedRoute = prerenderedRoutes == null ? void 0 : prerenderedRoutes.find((route)=>route.pathname === pathname);
++                    const fallbackRoute = (prerenderRouteMatchers == null ? void 0 : prerenderRouteMatchers.find((route)=>route.pathname === pathname)) ?? (prerenderedRoutes == null ? void 0 : prerenderedRoutes.find((route)=>route.pathname === pathname));
 +                    existingManifest.dynamicRoutes[pathname] = {
 +                        dataRoute: null,
 +                        dataRouteRegex: null,
@@ -59,8 +59,8 @@ index 64966ab..ec1201b 100644
 +                        fallbackExpire: undefined,
 +                        fallbackHeaders: undefined,
 +                        fallbackStatus: undefined,
-+                        fallbackRootParams: fallbackPrerenderedRoute == null ? void 0 : fallbackPrerenderedRoute.fallbackRootParams,
-+                        fallbackRouteParams: fallbackPrerenderedRoute == null ? void 0 : fallbackPrerenderedRoute.fallbackRouteParams,
++                        fallbackRootParams: fallbackRoute == null ? void 0 : fallbackRoute.fallbackRootParams,
++                        fallbackRouteParams: fallbackRoute == null ? void 0 : fallbackRoute.fallbackRouteParams,
 +                        fallbackSourceRoute: pathname,
 +                        prefetchDataRoute: undefined,
 +                        prefetchDataRouteRegex: undefined,
@@ -83,4 +83,4 @@ index 64966ab..ec1201b 100644
 +                await manifestUpdate;
              }
              this.staticPathsCache.set(pathname, value);
-             // Since generateStaticParams runs in the background, the fallbackParams
+             // Since generateStaticParams runs in the background, the
