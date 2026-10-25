@@ -12,6 +12,9 @@ import { ADS_ENABLED, DESKTOP_ADS_BOOT, desktopAdLayout } from "@/lib/ads";
  * (no server HTML) the layout effect runs the same pass before paint. It also lands `#section` links
  * on a section that rule B flattened (scrollToHashTarget), on load and on hashchange.
  * With desktop ads on, the desktop ad pass (lib/ads.ts) rides the same sentinel and timing.
+ * `<link rel="expect" blocking="render">` holds the first paint until the sentinel is parsed: on a
+ * long page (crypto-converter has ~345 KB of HTML before it) the parser otherwise yields and paints
+ * the cards before the pass has run, then the pass reorders and opens them (CLS 0.7 on phone).
  */
 export default function PhoneLayoutScript() {
   const inserted = useRef(false);
@@ -20,6 +23,7 @@ export default function PhoneLayoutScript() {
     inserted.current = true;
     return (
       <>
+        <link rel="expect" href="#phone-end" blocking="render" />
         <script id="phone-layout" dangerouslySetInnerHTML={{ __html: PHONE_LAYOUT_BOOT }} />
         {ADS_ENABLED && <script id="desktop-ads" dangerouslySetInnerHTML={{ __html: DESKTOP_ADS_BOOT }} />}
       </>
@@ -40,5 +44,5 @@ export default function PhoneLayoutScript() {
       window.removeEventListener("hashchange", scrollToHashTarget);
     };
   }, []);
-  return <span ref={ref} data-phone-end="" hidden />;
+  return <span ref={ref} id="phone-end" data-phone-end="" hidden />;
 }

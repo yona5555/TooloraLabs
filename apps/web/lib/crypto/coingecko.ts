@@ -30,12 +30,16 @@ type CoinGeckoMarketCoin = {
   last_updated?: string | null;
 };
 
+// /markets returns the 250×250 "large" logo; every icon on the page is 14–24px, so the 50×50
+// "small" variant (same path, ~10× lighter) stays sharp at 2× and saves ~1.5 MB per page load.
+const toSmallLogo = (url: string) => url.replace("/large/", "/small/");
+
 function mapMarketCoin(raw: CoinGeckoMarketCoin): CryptoCoin {
   return {
     id: raw.id,
     symbol: raw.symbol,
     name: raw.name,
-    image: raw.image,
+    image: toSmallLogo(raw.image),
     currentPrice: raw.current_price,
     priceChangePercentage24h: raw.price_change_percentage_24h,
     marketCap: raw.market_cap,
