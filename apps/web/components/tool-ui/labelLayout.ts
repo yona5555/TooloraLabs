@@ -71,3 +71,41 @@ export function flowRows(widths: number[], width: number, gap = 12): { at: { x: 
   }
   return { at, rows: widths.length ? row + 1 : 0 };
 }
+
+/**
+ * Point labels (a city on a map, a dot on a dial) placed so none touch (§39): each label, in `items`
+ * order (most important first), takes the first free spot beside its point — on its preferred side,
+ * then the other, then moved up or down a line at a time — that stays inside the `w`×`h` drawing.
+ * `lw` is the label width and `lh` its line height in the drawing's units; `x`/`y` the point. Returns
+ * the text x, baseline y and anchor of each label.
+ */
+export function placeLabels(
+  items: { x: number; y: number; lw: number; lh: number; side?: "start" | "end" }[],
+  w: number,
+  h: number,
+  off = 7,
+): { x: number; y: number; anchor: "start" | "end" }[] {
+  const placed: { a: number; b: number; t: number; u: number }[] = [];
+  return items.map((it) => {
+    const first = it.side ?? (it.x + off + it.lw <= w ? "start" : "end");
+    type Spot = { x: number; y: number; anchor: "start" | "end" };
+    let pick: Spot | null = null;
+    let fallback: Spot | null = null;
+    for (const step of [0, 1, -1, 2, -2, 3, -3]) {
+      for (const anchor of [first, first === "start" ? "end" : "start"] as const) {
+        const x = anchor === "start" ? it.x + off : it.x - off;
+        const y = it.y + it.lh * 0.3 + step * it.lh;
+        const box = { a: anchor === "start" ? x : x - it.lw, b: anchor === "start" ? x + it.lw : x, t: y - it.lh * 0.8, u: y + it.lh * 0.2 };
+        if (box.a < 0 || box.b > w || box.t < 0 || box.u > h) continue;
+        fallback ??= { x, y, anchor };
+        if (placed.every((p) => box.a >= p.b + 2 || box.b <= p.a - 2 || box.t >= p.u || box.u <= p.t)) {
+          pick = { x, y, anchor };
+          placed.push(box);
+          break;
+        }
+      }
+      if (pick) break;
+    }
+    return pick ?? fallback ?? { x: it.x + off, y: it.y + it.lh * 0.3, anchor: "start" };
+  });
+}

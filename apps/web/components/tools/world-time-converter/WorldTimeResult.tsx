@@ -6,6 +6,8 @@ import LiveTable3DLayout, { LiveTableFill, type LiveTableGroup } from "@/compone
 import { STATUS_COLORS, type Derived, type Fmt, type WtState } from "./state";
 import { px2 } from "@/components/tool-ui/indicator-kit/SvgBits";
 import { svgPx } from "@/components/tool-ui/svgPx";
+import { useSvgUnitsPerPx } from "@/components/tool-ui/useFitWidth";
+import { labelW, placeLabels } from "@/components/tool-ui/labelLayout";
 
 type Props = { s: WtState; d: Derived; f: Fmt };
 
@@ -33,9 +35,23 @@ function Dial({ s, d, f }: Props) {
     return `M${x0},${y0} A${r1},${r1} 0 ${large} 1 ${x1},${y1} L${x2},${y2} A${r0},${r0} 0 ${large} 0 ${x3},${y3} Z`;
   };
   const r = (i: number) => outer - i * gap;
+  // city labels at their rendered size (the dial is scaled to its box): two cities an hour or so apart
+  // take different lines instead of printing over each other (§39)
+  const [dialRef, k] = useSvgUnitsPerPx(S);
+  const fs = 12 * k;
+  const label = (city: WtCity) => `${f.city(city).split(" / ")[0].slice(0, 12)} ${f.time(d.conv.utcMs, city.zone)}`;
+  const spots = placeLabels(
+    d.all.map((city, i) => {
+      const m = d.conv.rows[i].parts.hour * 60 + d.conv.rows[i].parts.minute;
+      const [x, y] = pt(m, r(i));
+      return { x, y, lw: labelW(label(city), fs), lh: fs * 1.25, side: Math.cos(ang(m)) >= 0 ? ("start" as const) : ("end" as const) };
+    }),
+    S,
+    S,
+  );
 
   return (
-    <svg viewBox={`0 0 ${S} ${S}`} width="100%" height="100%" overflow="visible" style={{ direction: "ltr" }} role="img" aria-label="24h dial">
+    <svg ref={dialRef} viewBox={`0 0 ${S} ${S}`} width="100%" height="100%" overflow="visible" style={{ direction: "ltr" }} role="img" aria-label="24h dial">
       <circle cx={c} cy={c} r={outer + 18} className="fill-zinc-50 dark:fill-zinc-800/60" />
       <path d={arc(22 * 60, 7 * 60, inner - 10, outer + 8)} fill={STATUS_COLORS.night} fillOpacity={0.18} />
       <path d={arc(s.ws, s.we % 1440 === s.ws ? s.ws + 1439 : s.we, inner - 10, outer + 8)} fill={STATUS_COLORS.work} fillOpacity={0.2} />
@@ -60,14 +76,13 @@ function Dial({ s, d, f }: Props) {
         const [x, y] = pt(m, r(i));
         const el = wtSolarElevation({ lat: city.lat, lon: city.lon }, sub);
         const col = RING_COLORS[i % RING_COLORS.length];
-        const lx = x + (Math.cos(ang(m)) >= 0 ? 7 : -7);
         return (
           <g key={city.id} style={{ transition: "all 400ms ease" }}>
             <circle cx={c} cy={c} r={r(i)} fill="none" stroke={col} strokeOpacity={0.25} strokeWidth={1} />
             <line x1={c} y1={c} x2={x} y2={y} stroke={col} strokeOpacity={i === 0 ? 0.9 : 0.35} strokeWidth={i === 0 ? 2.5 : 1} />
             <circle cx={x} cy={y} r={i === 0 ? 6 : 4.5} fill={el > -0.833 ? "#fbbf24" : "#1e3a8a"} stroke={col} strokeWidth={2} />
-            <text style={{ fontSize: svgPx(12) }} x={lx} y={y + 3} textAnchor={Math.cos(ang(m)) >= 0 ? "start" : "end"} fontWeight={i === 0 ? 800 : 600} fill={col}>
-              {f.city(city).split(" / ")[0].slice(0, 12)} {f.time(d.conv.utcMs, city.zone)}
+            <text style={{ fontSize: svgPx(12) }} x={spots[i].x} y={spots[i].y} textAnchor={spots[i].anchor} fontWeight={i === 0 ? 800 : 600} fill={col}>
+              {label(city)}
             </text>
           </g>
         );

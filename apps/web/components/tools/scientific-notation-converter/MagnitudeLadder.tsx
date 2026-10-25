@@ -5,22 +5,41 @@
  * (or −/+) moves the result's exponent and re-runs the converter live; the readout names the
  * nearest reference and how many of it the number is, read in metres.
  */
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { LADDER_MIN, LADDER_MAX, LADDER_REFERENCES, clampLadder, log10Of, nearestLadderReference, type NormalizedScientific } from "@tooloralabs/tools";
 import { coef, sup } from "./sciFormat";
 import { svgPx } from "@/components/tool-ui/svgPx";
+import { useFitWidth } from "@/components/tool-ui/useFitWidth";
+import { labelW, staggerRows } from "@/components/tool-ui/labelLayout";
 
-const W = 400;
+const MAX_W = 400;
 const X0 = 36;
-const X1 = 364;
-const AXIS_Y = 92;
-const H = 184;
-const xOf = (e: number) => X0 + ((Math.min(LADDER_MAX, Math.max(LADDER_MIN, e)) - LADDER_MIN) / (LADDER_MAX - LADDER_MIN)) * (X1 - X0);
+/** One reference band: name + value lines and the gap to the next band. */
+const BAND = 28;
 
 export default function MagnitudeLadder({ sci, onSetExponent }: { sci: NormalizedScientific; onSetExponent: (exponent: number) => void }) {
   const t = useTranslations("tools.scientific-notation-converter.result.ladder");
-  const svgRef = useRef<SVGSVGElement>(null);
+  // laid out at its on-screen width (true px) so the 12px labels keep their size; on a narrow card the
+  // references of one side that would touch drop to a second band further from the axis (§39)
+  const [svgRef, W] = useFitWidth(MAX_W);
+  const X1 = W - 36;
+  const xOf = (e: number) => X0 + ((Math.min(LADDER_MAX, Math.max(LADDER_MIN, e)) - LADDER_MIN) / (LADDER_MAX - LADDER_MIN)) * (X1 - X0);
+  const refs = LADDER_REFERENCES.map((r, i) => ({
+    r,
+    up: i % 2 === 0,
+    x: xOf(Math.log10(r.coefficient) + r.exponent),
+    w: Math.max(labelW(t(`refs.${r.key}`)), labelW(`${coef(r.coefficient, 4)}×10${sup(r.exponent)} m`)),
+  }));
+  const bandOf = new Map<string, number>();
+  for (const side of [true, false]) {
+    const group = refs.filter((g) => g.up === side);
+    staggerRows(group, 8).forEach((row, k) => bandOf.set(group[k].r.key, row));
+  }
+  const upBands = 1 + Math.max(0, ...refs.filter((g) => g.up).map((g) => bandOf.get(g.r.key) ?? 0));
+  const downBands = 1 + Math.max(0, ...refs.filter((g) => !g.up).map((g) => bandOf.get(g.r.key) ?? 0));
+  const AXIS_Y = 92 + (upBands - 1) * BAND;
+  const H = AXIS_Y + 92 + (downBands - 1) * BAND;
   const [dragging, setDragging] = useState(false);
   const lv = log10Of(sci);
   const off = lv > LADDER_MAX + 1 ? "right" : lv < LADDER_MIN ? "left" : null;
@@ -70,11 +89,10 @@ export default function MagnitudeLadder({ sci, onSetExponent }: { sci: Normalize
           );
         })}
         {/* reference objects alternate above / below so no two labels share a band (§39) */}
-        {LADDER_REFERENCES.map((r, i) => {
-          const x = xOf(Math.log10(r.coefficient) + r.exponent);
-          const up = i % 2 === 0;
+        {refs.map(({ r, up, x }) => {
           const active = r.key === ref.key;
-          const y = up ? 20 : AXIS_Y + 46;
+          const band = bandOf.get(r.key) ?? 0;
+          const y = up ? 20 + (upBands - 1 - band) * BAND : AXIS_Y + 46 + band * BAND;
           return (
             <g key={r.key} data-ref={r.key}>
               <line x1={x} y1={up ? y + 14 : AXIS_Y + 26} x2={x} y2={up ? AXIS_Y - 8 : y - 10} className={active ? "stroke-blue-500" : "stroke-zinc-300 dark:stroke-zinc-600"} strokeDasharray={active ? undefined : "2 2"} />

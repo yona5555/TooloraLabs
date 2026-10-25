@@ -17,6 +17,7 @@ import type { CardProps } from "./state";
 import { px2 } from "@/components/tool-ui/indicator-kit/SvgBits";
 import { svgPx } from "@/components/tool-ui/svgPx";
 import { useFitWidth } from "@/components/tool-ui/useFitWidth";
+import { labelW, thinLabels, wrapLabel } from "@/components/tool-ui/labelLayout";
 
 const axisText = "fill-zinc-500 dark:fill-zinc-400";
 const valueText = "fill-zinc-800 dark:fill-zinc-100";
@@ -40,6 +41,8 @@ export function WtDstTimelineCard({ d, f }: CardProps) {
     const p = zonedParts(start, "UTC");
     return Date.UTC(p.year, p.month - 1 + i, 1);
   }).filter((ms) => ms > start && ms < end);
+  // month names that fit side by side at 12px; on a narrow card every other one (§39: fewer ticks)
+  const monthStep = months.length > 1 && x(months[1]) - x(months[0]) < Math.max(...months.map((ms) => labelW(f.month(ms)))) + 6 ? 2 : 1;
   const upcoming = rows
     .flatMap((r) => r.tr.slice(0, 1).map((tr) => ({ c: r.c, tr })))
     .sort((a, b) => a.tr.utcMs - b.tr.utcMs);
@@ -56,10 +59,10 @@ export function WtDstTimelineCard({ d, f }: CardProps) {
         workedExampleTitle={t("worked")}
         indicator={
           <svg viewBox={`0 0 ${W} ${H}`} ref={fitRef} width={W} height={H} style={{ direction: "ltr" }} className="h-auto max-w-full" role="img" aria-label={t("dst.title")}>
-            {months.map((ms) => (
+            {months.map((ms, i) => (
               <g key={ms}>
                 <line x1={x(ms)} x2={x(ms)} y1={T - 6} y2={H - 6} stroke="currentColor" strokeOpacity={0.1} />
-                <text style={{ fontSize: svgPx(12) }} x={x(ms) + 2} y={T - 10} className={axisText}>{f.month(ms)}</text>
+                {i % monthStep === 0 && x(ms) + 2 + labelW(f.month(ms)) <= W && <text style={{ fontSize: svgPx(12) }} x={x(ms) + 2} y={T - 10} className={axisText}>{f.month(ms)}</text>}
               </g>
             ))}
             <line x1={x(start)} x2={x(start)} y1={T - 8} y2={H - 6} stroke="#2563eb" strokeWidth={2} />
@@ -122,6 +125,15 @@ export function WtHijriCard({ d, f }: CardProps) {
   const list = [...groups.values()].sort((a, b) => a.delta - b.delta);
   const [fitRef, W] = useFitWidth(470);
   const CW = (W - 20) / 30;
+  // day numbers that fit: the marked days first (home city's first), then 1, 5, 10 … (§39)
+  const dayItems = Array.from({ length: 30 }, (_, i) => ({ x: 10 + i * CW + (CW - 2) / 2, w: labelW(String(i + 1)) }));
+  const wanted = (day: number) => day <= len && (day === 1 || day % 5 === 0 || list.some((g) => g.hijriDay === day));
+  const dayOrder = [home.hijri.day, ...list.map((g) => g.hijriDay), ...Array.from({ length: 30 }, (_, i) => i + 1)]
+    .filter((day, i, a) => a.indexOf(day) === i && wanted(day))
+    .map((day) => day - 1);
+  const showDay = thinLabels(dayItems, 2, dayOrder);
+  const noteLines = wrapLabel(t("hijri.stripNote", { n: len }), W - 20);
+  const SH = 64 + (noteLines.length - 1) * 15;
   const g0 = civilToUtcMs(home.parts) + 12 * 3_600_000;
   const toNext = len - home.hijri.day + 1;
 
@@ -132,7 +144,7 @@ export function WtHijriCard({ d, f }: CardProps) {
         workedExampleTitle={t("worked")}
         indicator={
           <div className="w-full max-w-[470px] space-y-3">
-            <svg viewBox={`0 0 ${W} 64`} ref={fitRef} width={W} height={64} style={{ direction: "ltr" }} className="h-auto max-w-full" role="img" aria-label={t("hijri.strip")}>
+            <svg viewBox={`0 0 ${W} ${SH}`} ref={fitRef} width={W} height={SH} style={{ direction: "ltr" }} className="h-auto max-w-full" role="img" aria-label={t("hijri.strip")}>
               <text style={{ fontSize: svgPx(12) }} x={10} y={11} fontWeight={700} className={valueText}>{f.hijriMonth(g0)} {home.hijri.year}</text>
               {Array.from({ length: 30 }, (_, i) => {
                 const day = i + 1;
@@ -141,13 +153,15 @@ export function WtHijriCard({ d, f }: CardProps) {
                 return (
                   <g key={day}>
                     <rect x={10 + i * CW} y={18} width={CW - 2} height={24} rx={3} fill={!inMonth ? "transparent" : mark ? (day === home.hijri.day ? "#059669" : "#34d399") : "#e4e4e7"} className={!inMonth || mark ? "" : "dark:fill-zinc-700"} stroke={!inMonth ? "currentColor" : "none"} strokeOpacity={0.2} strokeDasharray="2 2" />
-                    {(day === 1 || day % 5 === 0 || mark) && inMonth && (
+                    {showDay[i] && (
                       <text style={{ fontSize: svgPx(12) }} x={10 + i * CW + (CW - 2) / 2} y={34} textAnchor="middle" fontWeight={700} fill={mark ? "white" : undefined} className={mark ? "" : axisText}>{day}</text>
                     )}
                   </g>
                 );
               })}
-              <text style={{ fontSize: svgPx(12) }} x={10} y={58} className={axisText}>{t("hijri.stripNote", { n: len })}</text>
+              {noteLines.map((line, i) => (
+                <text key={i} style={{ fontSize: svgPx(12) }} x={10} y={58 + i * 15} className={axisText}>{line}</text>
+              ))}
             </svg>
             <ul className="space-y-1.5">
               {list.map((g) => (
@@ -206,7 +220,7 @@ export function WtDaylightCard({ s, d, f, now }: CardProps) {
             {[0, 360, 720, 1080, 1440].map((m) => (
               <g key={m}>
                 <line x1={X(m)} x2={X(m)} y1={T - 4} y2={H - 4} stroke="currentColor" strokeOpacity={0.12} />
-                <text style={{ fontSize: svgPx(12) }} x={X(m)} y={T - 6} textAnchor="middle" className={axisText}>{m === 1440 ? "24:00" : f.hhmm(m)}</text>
+                <text style={{ fontSize: svgPx(12) }} x={X(m)} y={T - 6} textAnchor={m === 1440 ? "end" : "middle"} className={axisText}>{m === 1440 ? "24:00" : f.hhmm(m)}</text>
               </g>
             ))}
             {rows.map((r, i) => {

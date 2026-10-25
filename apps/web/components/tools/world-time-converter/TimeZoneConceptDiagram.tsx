@@ -11,6 +11,8 @@ const EXAMPLES: ClockExample[] = [
 const CLOCK_R = 26;
 const SPACING = 110;
 const CLOCK_Y = 70;
+/** Room for the three label lines at up to 1.5× (a 440-unit diagram on a ~300px phone card). */
+const HEIGHT = 166;
 
 function clockHandPoints(hour: number, minute: number) {
   const hourAngle = ((hour % 12) + minute / 60) * 30 - 90;
@@ -36,7 +38,7 @@ export default function TimeZoneConceptDiagram({ sameInstantLabel, caption }: Ti
   return (
     <figure className="my-2">
       <div dir="ltr" className="overflow-x-auto">
-        <svg viewBox={`0 0 ${width} 150`} role="img" aria-label={caption} className="h-auto w-full min-w-[480px] max-md:min-w-0">
+        <svg viewBox={`0 0 ${width} ${HEIGHT}`} role="img" aria-label={caption} className="h-auto w-full min-w-[480px] max-md:min-w-0">
           <line x1={SPACING / 2} y1={18} x2={width - SPACING / 2} y2={18} stroke="currentColor" strokeWidth={1.5} />
           <text style={{ fontSize: svgPx(12) }} x={width / 2} y={12} textAnchor="middle" fontWeight={700} fill="currentColor">
             {sameInstantLabel}
@@ -60,14 +62,16 @@ export default function TimeZoneConceptDiagram({ sameInstantLabel, caption }: Ti
                 <line x1={cx} y1={CLOCK_Y} x2={cx + minuteX} y2={CLOCK_Y + minuteY} stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" />
                 <circle cx={cx} cy={CLOCK_Y} r={2} fill="currentColor" />
 
-                <text style={{ fontSize: svgPx(12) }} x={cx} y={CLOCK_Y + CLOCK_R + 20} textAnchor="middle" fontWeight={700} fill="currentColor">
-                  {example.label}
-                </text>
-                <text style={{ fontSize: svgPx(12) }} x={cx} y={CLOCK_Y + CLOCK_R + 36} textAnchor="middle" fill="currentColor" opacity={0.75}>
-                  {example.offsetLabel}
-                </text>
-                <text style={{ fontSize: svgPx(12) }} x={cx} y={CLOCK_Y + CLOCK_R + 50} textAnchor="middle" fontFamily="monospace" fill="currentColor">
-                  {String(example.hour).padStart(2, "0")}:{String(example.minute).padStart(2, "0")}
+                {/* line gaps in em, not viewBox units: on a phone the 12px labels are scaled up in viewBox units
+                    (SvgLabelScale), and fixed gaps let the three lines run into each other (§39) */}
+                <text style={{ fontSize: svgPx(12) }} x={cx} y={CLOCK_Y + CLOCK_R + 20} textAnchor="middle" fill="currentColor">
+                  <tspan fontWeight={700}>{example.label}</tspan>
+                  <tspan x={cx} dy="1.3em" opacity={0.75}>
+                    {example.offsetLabel}
+                  </tspan>
+                  <tspan x={cx} dy="1.25em" fontFamily="monospace">
+                    {String(example.hour).padStart(2, "0")}:{String(example.minute).padStart(2, "0")}
+                  </tspan>
                 </text>
               </g>
             );

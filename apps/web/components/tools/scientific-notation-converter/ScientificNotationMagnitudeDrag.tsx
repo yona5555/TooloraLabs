@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef } from "react";
 import { useTranslations } from "next-intl";
-import { Mafs, Coordinates, Text, useMovablePoint } from "mafs";
+import { Mafs, Coordinates, useMovablePoint } from "mafs";
 import "mafs/core.css";
 import "@/components/tool-ui/mafsTheme.css";
 import { ScientificNotationConverter } from "@tooloralabs/tools";
@@ -114,12 +114,11 @@ export default function ScientificNotationMagnitudeDrag() {
         <span className="rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-semibold text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-400">{`${t("resultLabel")}: ${ok ? `${round2(output.data.scientific.coefficient)} × 10^${output.data.scientific.exponent}` : "—"}`}</span>
       </div>
 
+      {/* axis title above the plot, not inside it: drawn at the top of the y axis it ran into the "9" tick (§39) */}
+      <p dir="ltr" className="mb-1 text-center text-xs text-zinc-500 dark:text-zinc-400">{t("axisHint")}</p>
       <div dir="ltr" aria-label={t("ariaLabel")} className="mafs-canvas w-full overflow-hidden rounded-xl">
         <Mafs viewBox={{ x: [EXP_MIN, EXP_MAX], y: [COEF_MIN, COEF_MAX] }} height={260} pan={false} zoom={false} preserveAspectRatio={false}>
           <Coordinates.Cartesian xAxis={{ lines: 3 }} yAxis={{ lines: 1 }} />
-          <Text x={0} y={COEF_MAX - 0.6} size={12} color={isDark ? "#71717a" : "#a1a1aa"}>
-            {t("axisHint")}
-          </Text>
           {pointA.element}
           {showB && pointB.element}
         </Mafs>
