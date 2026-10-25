@@ -1,4 +1,5 @@
 import { svgPx } from "@/components/tool-ui/svgPx";
+import { labelW } from "@/components/tool-ui/labelLayout";
 type GaugeZone = {
   key: string;
   from: number;
@@ -72,14 +73,16 @@ export default function RatioGauge({ value, domainMin, domainMax, zones, valueLa
   const needleX2 = round(CX + needleOuterR * Math.cos(needleAngleRad));
   const needleY2 = round(CY + needleOuterR * Math.sin(needleAngleRad));
 
-  const tickPoint = (tick: number) => {
+  const tickPoint = (tick: number, text: string) => {
     const t = span > 0 ? ((Math.min(Math.max(tick, domainMin), domainMax) - domainMin) / span) * 180 : 0;
     const angleRad = ((t + 180) * Math.PI) / 180;
     const tickR = R + STROKE / 2 + 12;
-    // Anchor the extreme ticks toward the inside of the viewBox instead of centering on the point
-    // — a centered label at the very end of the arc (0deg/180deg) would run past the SVG's edge.
-    const anchor: "start" | "end" | "middle" = t < 15 ? "start" : t > 165 ? "end" : "middle";
-    return { x: round(CX + tickR * Math.cos(angleRad)), y: round(CY + tickR * Math.sin(angleRad)), anchor };
+    const x = round(CX + tickR * Math.cos(angleRad));
+    // Anchor a tick toward the inside of the viewBox whenever its centred label would run past the
+    // SVG's edge — at the very ends of the arc, and for a wide label ("90%") high up on either side.
+    const half = labelW(text) / 2 + 2;
+    const anchor: "start" | "end" | "middle" = t < 15 || x - half < 0 ? "start" : t > 165 || x + half > SIZE_W ? "end" : "middle";
+    return { x, y: round(CY + tickR * Math.sin(angleRad)), anchor };
   };
 
   return (
@@ -102,10 +105,11 @@ export default function RatioGauge({ value, domainMin, domainMax, zones, valueLa
         ))}
 
         {ticks.map((tick) => {
-          const p = tickPoint(tick);
+          const text = String(tickFormatter ? tickFormatter(tick) : tick);
+          const p = tickPoint(tick, text);
           return (
             <text style={{ fontSize: svgPx(12) }} key={tick} x={p.x} y={p.y} textAnchor={p.anchor} dominantBaseline="middle" className="fill-zinc-400 dark:fill-zinc-500">
-              {tickFormatter ? tickFormatter(tick) : tick}
+              {text}
             </text>
           );
         })}

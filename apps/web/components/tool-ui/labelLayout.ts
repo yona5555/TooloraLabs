@@ -34,6 +34,20 @@ export function staggerRows(items: { x: number; w: number }[], gap = 6): number[
 }
 
 /**
+ * Like `staggerRows`, with as many rows as needed: each centred label (sorted by `x`) takes the first
+ * row where it clears that row's last label by `gap` px.
+ */
+export function laneRows(items: { x: number; w: number }[], gap = 6): number[] {
+  const end: number[] = [];
+  return items.map(({ x, w }) => {
+    let row = end.findIndex((e) => x - w / 2 >= e + gap);
+    if (row < 0) row = end.length;
+    end[row] = x + w / 2;
+    return row;
+  });
+}
+
+/**
  * Which centred tick labels to draw so none touch (§39: fewer ticks, never smaller text): labels are
  * taken in `order` (indices, most important first; default left to right) and kept only when clear of
  * every label already kept by `gap` px.

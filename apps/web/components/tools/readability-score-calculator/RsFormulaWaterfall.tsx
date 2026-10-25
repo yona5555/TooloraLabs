@@ -4,9 +4,10 @@ import RsIndicatorCard from "./RsIndicatorCard";
 import { useRsLive } from "./RsLiveContext";
 import { easeColor } from "./rsScales";
 import { svgPx } from "@/components/tool-ui/svgPx";
+import { useSvgUnitsPerPx } from "@/components/tool-ui/useFitWidth";
+import { wrapLabel } from "@/components/tool-ui/labelLayout";
 
 const W = 340;
-const H = 200;
 const LEFT = 30;
 const RIGHT = 8;
 const TOP = 18;
@@ -37,8 +38,19 @@ export default function RsFormulaWaterfall() {
     { key: "score", from: Math.min(0, score), to: Math.max(0, score), fill: easeColor(score), label: f(score, 1) },
   ];
 
+  // column captions at their rendered size (svgPx grows them in chart units when a phone scales the
+  // chart down): a caption wider than its column breaks at its operator onto a second line (§39)
+  const [svgRef, k] = useSvgUnitsPerPx(W);
+  const fs = 12 * k;
+  const line = fs * 1.15;
+  const captions = cols.map((c, i) => [
+    ...wrapLabel(tl(`cols.${c.key}`), slot - 6, fs).map((text) => ({ text, formula: false })),
+    ...wrapLabel(i === 1 ? `1.015 × ${f(asl, 2)}` : i === 2 ? `84.6 × ${f(asw, 2)}` : i === 0 ? tl("constant") : "=", slot - 6, fs).map((text) => ({ text, formula: true })),
+  ]);
+  const H = BOTTOM + 4 + Math.max(...captions.map((c) => c.length)) * line + 4;
+
   const indicator = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={tl("aria")} className="block max-w-full">
+    <svg ref={svgRef} direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={tl("aria")} className="block max-w-full">
       {[0, 50, 100, 150, 200].map((v) => (
         <g key={v}>
           <line x1={LEFT} y1={y(v)} x2={W - RIGHT} y2={y(v)} className={v === 0 ? "stroke-zinc-400 dark:stroke-zinc-500" : "stroke-zinc-200 dark:stroke-zinc-700/70"} />
@@ -60,12 +72,20 @@ export default function RsFormulaWaterfall() {
             <text style={{ fontSize: svgPx(12) }} x={bx + barW / 2} y={top - 4} textAnchor="middle" fontWeight={800} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
               {c.label}
             </text>
-            <text style={{ fontSize: svgPx(12) }} x={bx + barW / 2} y={BOTTOM + 14} textAnchor="middle" fontWeight={600} className="fill-zinc-600 dark:fill-zinc-300">
-              {tl(`cols.${c.key}`)}
-            </text>
-            <text style={{ fontSize: svgPx(12) }} x={bx + barW / 2} y={BOTTOM + 26} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-400 dark:fill-zinc-500">
-              {i === 1 ? `1.015 × ${f(asl, 2)}` : i === 2 ? `84.6 × ${f(asw, 2)}` : i === 0 ? tl("constant") : "="}
-            </text>
+            {captions[i].map((cap, j) => (
+              <text
+                key={j}
+                style={{ fontSize: svgPx(12) }}
+                x={bx + barW / 2}
+                y={BOTTOM + 4 + (j + 0.85) * line}
+                textAnchor="middle"
+                fontWeight={cap.formula ? undefined : 600}
+                fontFamily={cap.formula ? "ui-monospace, monospace" : undefined}
+                className={cap.formula ? "fill-zinc-400 dark:fill-zinc-500" : "fill-zinc-600 dark:fill-zinc-300"}
+              >
+                {cap.text}
+              </text>
+            ))}
           </g>
         );
       })}

@@ -1,5 +1,7 @@
+"use client";
 import { useId } from "react";
 import { svgPx } from "@/components/tool-ui/svgPx";
+import { useSvgUnitsPerPx } from "@/components/tool-ui/useFitWidth";
 type LossyLosslessDiagramProps = {
   losslessLabel: string;
   lossyLabel: string;
@@ -12,8 +14,6 @@ type LossyLosslessDiagramProps = {
 };
 
 const WIDTH = 480;
-const ROW_H = 104;
-const HEIGHT = 224;
 const BOX_W = 88;
 const BOX_H = 40;
 
@@ -27,7 +27,9 @@ function Row({
   compressedOpacity,
   resultOpacity,
   arrowId,
+  fs,
 }: {
+  fs: number;
   arrowId: string;
   y: number;
   rowLabel: string;
@@ -40,7 +42,9 @@ function Row({
 }) {
   const boxY = y + 20;
   const xs = [10, 196, 382];
-  const labelY = boxY + BOX_H + 16;
+  // label lines spaced by the rendered label size (fs, chart units): a phone draws this 480-unit
+  // diagram at ~300px, and fixed gaps let the 12px lines run into each other (§39)
+  const labelY = boxY + BOX_H + 4 + fs;
 
   return (
     <g>
@@ -79,7 +83,7 @@ function Row({
         {resultLabel}
       </text>
 
-      <text style={{ fontSize: svgPx(12) }} x={xs[2] + BOX_W / 2} y={labelY + 16} textAnchor="middle" fill="currentColor" opacity={0.7}>
+      <text style={{ fontSize: svgPx(12) }} x={WIDTH - 2} y={labelY + fs * 1.3} textAnchor="end" fill="currentColor" opacity={0.7}>
         {noteLabel}
       </text>
     </g>
@@ -97,16 +101,21 @@ export default function LossyLosslessDiagram({
   caption,
 }: LossyLosslessDiagramProps) {
   const svgId = useId();
+  const [svgRef, k] = useSvgUnitsPerPx(WIDTH);
+  const fs = 12 * k;
+  // row: title, boxes (20 below it), two caption lines, then the gap to the next row
+  const ROW_H = 20 + BOX_H + 4 + fs * 2.3 + 18;
+  const HEIGHT = 14 + ROW_H + 20 + BOX_H + 4 + fs * 2.3 + 6;
   return (
     <figure className="my-2">
       <div dir="ltr" className="overflow-x-auto">
-        <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={caption} className="h-auto w-full min-w-[420px] text-current max-md:min-w-0">
+        <svg ref={svgRef} viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={caption} className="h-auto w-full min-w-[420px] text-current max-md:min-w-0">
           <defs>
             <marker id={`${svgId}arrow`} markerWidth={8} markerHeight={8} refX={6} refY={3} orient="auto">
               <path d="M0,0 L6,3 L0,6 Z" fill="currentColor" opacity={0.6} />
             </marker>
           </defs>
-          <Row arrowId={`${svgId}arrow`}
+          <Row arrowId={`${svgId}arrow`} fs={fs}
             y={14}
             rowLabel={losslessLabel}
             originalLabel={originalLabel}
@@ -116,7 +125,7 @@ export default function LossyLosslessDiagram({
             compressedOpacity={0.15}
             resultOpacity={0.15}
           />
-          <Row arrowId={`${svgId}arrow`}
+          <Row arrowId={`${svgId}arrow`} fs={fs}
             y={14 + ROW_H}
             rowLabel={lossyLabel}
             originalLabel={originalLabel}

@@ -5,9 +5,9 @@ import TlIndicatorCard from "./TlIndicatorCard";
 import { useTlLive } from "./TlLiveContext";
 import { STYLE_FILLS } from "./tlMath";
 import { svgPx } from "@/components/tool-ui/svgPx";
+import { useFitWidth } from "@/components/tool-ui/useFitWidth";
+import { labelW } from "@/components/tool-ui/labelLayout";
 
-const W = 330;
-const LEFT = 78;
 const ROW = 22;
 const MIN = 10;
 const MAX = 160;
@@ -16,6 +16,10 @@ const MAX = 160;
 export default function TlBudget() {
   const t = useTranslations("tools.text-logo-generator.live.budget");
   const { styles, active, activeStyle, setActiveStyle, styleName, f } = useTlLive();
+  // laid out at its on-screen width, the name column as wide as the longest style name at 12px, so
+  // names never run off the left edge on a phone (§39)
+  const [fitRef, W] = useFitWidth(330);
+  const LEFT = Math.max(78, Math.ceil(Math.max(...styles.map((s) => labelW(styleName(s.style)))) + 10));
   const [limit, setLimit] = useState(30);
   const max = Math.max(limit * 1.25, ...styles.map((s) => s.utf16));
   const sx = (v: number) => LEFT + (v / max) * (W - LEFT - 8);
@@ -29,7 +33,7 @@ export default function TlBudget() {
         <input type="range" min={MIN} max={MAX} value={limit} onChange={(e) => setLimit(Number(e.target.value))} aria-label={t("limit")} className="w-full accent-blue-600" />
         <span dir="ltr" className="w-8 shrink-0 text-end font-mono font-semibold">{f(limit)}</span>
       </label>
-      <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
+      <svg ref={fitRef} direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
         <rect x={sx(limit)} y={0} width={Math.max(0, W - sx(limit))} height={H - 14} className="fill-rose-100 dark:fill-rose-500/10" style={{ transition: "x 150ms ease" }} />
         {styles.map((s, i) => {
           const y = 2 + i * ROW;

@@ -8,7 +8,9 @@ import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 230;
-const L = 34;
+// room for the turned axis title beside the tick numbers, also when a phone shows them larger in
+// chart units (svgPx, up to ~1.15×) (§39)
+const L = 46;
 const R = 10;
 const T = 10;
 const B = 34;
@@ -78,7 +80,7 @@ export default function RsReadabilityPlane() {
         <text style={{ fontSize: svgPx(12) }} x={(L + W - R) / 2} y={H - 6} textAnchor="middle" fontWeight={600} className="fill-zinc-600 dark:fill-zinc-300">
           {t("xAxis")}
         </text>
-        <text style={{ fontSize: svgPx(12) }} x={10} y={(T + H - B) / 2} textAnchor="middle" fontWeight={600} transform={`rotate(-90 10 ${(T + H - B) / 2})`} className="fill-zinc-600 dark:fill-zinc-300">
+        <text style={{ fontSize: svgPx(12) }} x={12} y={(T + H - B) / 2} textAnchor="middle" fontWeight={600} transform={`rotate(-90 12 ${(T + H - B) / 2})`} className="fill-zinc-600 dark:fill-zinc-300">
           {t("yAxis")}
         </text>
         <text style={{ fontSize: svgPx(12) }} x={L + 6} y={H - B - 6} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">{tr("bands.very-easy")}</text>

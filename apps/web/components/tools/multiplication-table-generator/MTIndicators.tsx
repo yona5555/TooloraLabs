@@ -22,6 +22,7 @@ import IndicatorCard from "@/components/tools/markets/IndicatorCard";
 import SensitivityBars from "@/components/tools/markets/SensitivityBars";
 import type { MtView, PickFact } from "./types";
 import { svgPx } from "@/components/tool-ui/svgPx";
+import { useFitWidth } from "@/components/tool-ui/useFitWidth";
 
 type P = { view: MtView; onPick: PickFact };
 
@@ -635,7 +636,7 @@ export function MemoryStairs({ view }: P) {
   );
 }
 
-const TW = 560;
+const TREND_MAX_W = 560;
 const TH = 220;
 const TP = { l: 40, r: 16, t: 16, b: 30 };
 
@@ -648,6 +649,9 @@ export function DistinctTrend({ view }: P) {
   const [pick, setPick] = useState<{ from: number; n: number }>({ from: startN, n: startN });
   const n = pick.from === startN ? pick.n : startN;
   const point = trend[n - 1];
+  // laid out at its on-screen width (true px), not scaled down to the phone, so its 12px axis labels
+  // keep their size and room (§39)
+  const [fitRef, TW] = useFitWidth(TREND_MAX_W);
   const x = (k: number) => TP.l + ((TW - TP.l - TP.r) * (k - 1)) / 29;
   const y = (s: number) => TP.t + (TH - TP.t - TP.b) * (1 - s);
   const path = trend.map((p, i) => `${i ? "L" : "M"} ${x(p.n)} ${y(p.share)}`).join(" ");
@@ -682,7 +686,7 @@ export function DistinctTrend({ view }: P) {
       }}
     >
       <div dir="ltr" className="overflow-x-auto" data-testid="mt-trend" data-distinct={point.distinct}>
-        <svg width="100%" height={TH} viewBox={`0 0 ${TW} ${TH}`} preserveAspectRatio="xMidYMid meet" role="img" aria-label={t("trend.title")} className="min-w-[420px] max-md:min-w-0">
+        <svg ref={fitRef} width="100%" height={TH} viewBox={`0 0 ${TW} ${TH}`} preserveAspectRatio="xMidYMid meet" role="img" aria-label={t("trend.title")} className="min-w-[420px] max-md:min-w-0">
           {[0, 0.25, 0.5, 0.75, 1].map((s) => (
             <g key={s}>
               <line x1={TP.l} x2={TW - TP.r} y1={y(s)} y2={y(s)} className="stroke-zinc-200 dark:stroke-zinc-700" />

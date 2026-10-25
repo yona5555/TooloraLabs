@@ -4,22 +4,26 @@ import TlIndicatorCard from "./TlIndicatorCard";
 import { useTlLive } from "./TlLiveContext";
 import { STYLE_FILLS } from "./tlMath";
 import { svgPx } from "@/components/tool-ui/svgPx";
+import { useFitWidth } from "@/components/tool-ui/useFitWidth";
+import { labelW } from "@/components/tool-ui/labelLayout";
 
-const W = 330;
-const LEFT = 78;
 const ROW = 20;
 
 /** Ranked horizontal bars (§31 #5): UTF-16 code units per style — what many character counters see — against the visible characters (dashed line). */
 export default function TlUtf16Length() {
   const t = useTranslations("tools.text-logo-generator.live.utf16");
   const { styles, plain, active, activeStyle, setActiveStyle, styleName, f } = useTlLive();
+  // laid out at its on-screen width, the name column as wide as the longest style name at 12px, so
+  // names never run off the left edge on a phone (§39)
+  const [fitRef, W] = useFitWidth(330);
+  const LEFT = Math.max(78, Math.ceil(Math.max(...styles.map((s) => labelW(styleName(s.style)))) + 10));
   const ranked = styles.map((s, i) => ({ ...s, fill: STYLE_FILLS[i] })).sort((a, b) => b.utf16 - a.utf16);
   const max = Math.max(...ranked.map((s) => s.utf16), 1);
   const H = ranked.length * ROW + 22;
   const sx = (v: number) => LEFT + (v / max) * (W - LEFT - 34);
 
   const indicator = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
+    <svg ref={fitRef} direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
       {ranked.map((s, i) => {
         const y = 4 + i * ROW;
         const on = s.style === activeStyle;

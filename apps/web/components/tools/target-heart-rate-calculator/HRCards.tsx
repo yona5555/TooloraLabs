@@ -8,6 +8,7 @@ import { clamp, f2 } from "@/components/tool-ui/indicator-kit/format";
 import { Card } from "../macro-calculator/MacroCards";
 import { useHRLive } from "./HRLiveContext";
 import { ACSM, BELOW_COLOR, MAX_FORMULAS, REST_DEFAULT, ZONES, ahaOf, fox, maxBy, pctAt, r0, tanaka, targetAt, zoneColor, zoneIndex } from "./hr";
+import { labelW } from "@/components/tool-ui/labelLayout";
 import { svgPx } from "@/components/tool-ui/svgPx";
 
 /**
@@ -278,10 +279,12 @@ export function HRFormulaBarsCard({ side }: { side: Side }) {
   const [hover, setHover] = useState<string | null>(null);
   const HMIN = 260;
   const bars = MAX_FORMULAS.map((f, fi) => ({ ...f, fi, v: maxBy(f.key, age) })).sort((a, b) => b.v - a.v);
-  const LW = 112;
   const top = 18;
   const d = useDrawing(HMIN, s, (_x, y, _W, H) => bars[clamp(Math.floor(((y - top) / (H - top - 30)) * bars.length), 0, bars.length - 1)].fi);
   const { W, H } = d;
+  // the name column as wide as the longest formula name at 12px, so "Gulati 2010 (women)" never runs
+  // off the left edge (§39); at most half the drawing
+  const LW = Math.min(W / 2, Math.max(112, Math.ceil(Math.max(...bars.map((b) => labelW(t(`names.${b.key}`))))) + 12));
   const rowH = (H - top - 30) / bars.length;
   const vmax = Math.max(...bars.map((b) => b.v)) * 1.12;
   const xv = (v: number) => LW + (v / vmax) * (W - LW - X0);
@@ -387,7 +390,8 @@ function AgeCurve({ side }: { side: Side }) {
             <T key={v} x={xa(v)} y={base + 16} text={String(v)} size={12} />
           ))}
           <T x={W - 18} y={base + 32} text={t("ageLabel")} anchor="end" size={12} bold />
-          <T x={6} y={top - 6} text="HRmax" anchor="start" size={12} bold />
+          {/* beside the axis, not above its tick numbers: over the "210" tick it touched it (§39) */}
+          <T x={PL + 4} y={top - 6} text="HRmax" anchor="start" size={12} bold />
           <polyline points={line(tanaka)} fill="none" style={{ stroke: "var(--ph-neutral)" }} strokeWidth={hover === "tan" ? 4 : 2.5} strokeDasharray="6 5" />
           <polyline points={line(fox)} fill="none" style={{ stroke: "var(--ph-accent-strong)" }} strokeWidth={hover === "fox" ? 4.5 : 3} />
           <T x={xa(A1) - 4} y={yb(fox(A1)) + 16} text="Fox" anchor="end" size={12} bold style={INK} />
@@ -608,7 +612,9 @@ export function HRAcsmStepsCard({ side }: { side: Side }) {
   const d = useDrawing(HMIN, s, (x, _y, W) => clamp(Math.floor(((x - X0) / (W - 2 * X0)) * n), 0, n - 1));
   const { W, H } = d;
   const slot = (W - 2 * X0) / n;
-  const base = H - 40;
+  // a range wider than its step (a phone) is set on two lines, "146–" over "182", so neighbours never touch (§39)
+  const wrap = labelW("000–000") > slot - 4;
+  const base = H - (wrap ? 53 : 40);
   const top = 34;
   const yp = (p: number) => base - (p / 100) * (base - top);
   const c = ACSM[s.value];
@@ -644,13 +650,24 @@ export function HRAcsmStepsCard({ side }: { side: Side }) {
             return (
               <g key={a.key}>
                 <rect x={x} y={yp(a.max[1])} width={slot - 6} height={base - yp(a.max[1])} rx={4} style={{ fill: a.color, opacity: on ? 1 : 0.45, ...lit(on && hover === "pmax") }} />
-                <T x={x + (slot - 6) / 2} y={yp(a.max[1]) - 8} text={`${r0((max * a.max[0]) / 100)}–${r0((max * a.max[1]) / 100)}`} size={12} bold={on} style={on ? INK : MUTED} />
-                <T x={x + (slot - 6) / 2} y={base + 16} text={`${a.max[0]}–${a.max[1]}%`} size={12} bold={on} style={on ? INK : MUTED} />
+                {wrap ? (
+                  <>
+                    <T x={x + (slot - 6) / 2} y={yp(a.max[1]) - 21} text={`${r0((max * a.max[0]) / 100)}–`} size={12} bold={on} style={on ? INK : MUTED} />
+                    <T x={x + (slot - 6) / 2} y={yp(a.max[1]) - 8} text={String(r0((max * a.max[1]) / 100))} size={12} bold={on} style={on ? INK : MUTED} />
+                    <T x={x + (slot - 6) / 2} y={base + 16} text={`${a.max[0]}–`} size={12} bold={on} style={on ? INK : MUTED} />
+                    <T x={x + (slot - 6) / 2} y={base + 29} text={`${a.max[1]}%`} size={12} bold={on} style={on ? INK : MUTED} />
+                  </>
+                ) : (
+                  <>
+                    <T x={x + (slot - 6) / 2} y={yp(a.max[1]) - 8} text={`${r0((max * a.max[0]) / 100)}–${r0((max * a.max[1]) / 100)}`} size={12} bold={on} style={on ? INK : MUTED} />
+                    <T x={x + (slot - 6) / 2} y={base + 16} text={`${a.max[0]}–${a.max[1]}%`} size={12} bold={on} style={on ? INK : MUTED} />
+                  </>
+                )}
               </g>
             );
           })}
           <T x={X0} y={16} text="bpm" anchor="start" size={12} bold />
-          <T x={W - X0} y={base + 32} text="% HRmax" anchor="end" size={12} bold />
+          <T x={W - X0} y={base + (wrap ? 45 : 32)} text="% HRmax" anchor="end" size={12} bold />
         </Drawing>
       }
     />
