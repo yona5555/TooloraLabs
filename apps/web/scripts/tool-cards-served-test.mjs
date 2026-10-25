@@ -41,6 +41,8 @@ for (const locale of ["ar", "en"])
         fails.push(`${where}: HTTP ${res?.status()}`);
         continue;
       }
+      // A section with fewer than 3 live tools has no page; next.config.ts 301-redirects it elsewhere.
+      if (res.request().redirectedFrom()) continue;
       if ((await page.evaluate(() => document.documentElement.classList.contains("dark"))) !== (theme === "dark")) {
         fails.push(`${where}: theme is not ${theme}`);
         continue;
