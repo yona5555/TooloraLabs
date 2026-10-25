@@ -48,7 +48,7 @@ export default function TriangleCompactnessZoneStrip() {
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
       <GapFreeRow className="mt-4">
         <div dir="ltr" className="shrink-0">
-          <svg viewBox={`-10 0 ${W + 20} ${H}`} role="img" aria-label={`${t("title")}: ${round(compactnessIndex)} — ${tZones(zone)}`} className="mx-auto block w-full max-w-[280px]">
+          <svg viewBox={`-10 -6 ${W + 20} ${H + 6}`} role="img" aria-label={`${t("title")}: ${round(compactnessIndex)} — ${tZones(zone)}`} className="mx-auto block w-full max-w-[280px]">
             {ZONES.map((z) => {
               const x = ((z.from - compactnessMin) / domain) * W;
               const w = ((z.to - z.from) / domain) * W;

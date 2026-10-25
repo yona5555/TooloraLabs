@@ -94,7 +94,8 @@ export function DailyLoadCard({ d }: StudyIndicatorProps) {
   const exams = upcomingExams(d);
   const n = Math.max(1, days.length);
   const [fitRef, W] = useFitWidth(400);
-  const H = 180;
+  // the legend sits a full line under the day numbers (§39)
+  const H = 190;
   const L = 28;
   const B = 150;
   const maxM = Math.max(60, ...days.map((x) => Math.max(x.capacityMinutes, x.usedMinutes)));
@@ -155,7 +156,7 @@ export function DailyLoadCard({ d }: StudyIndicatorProps) {
               );
             })}
             <line x1={L} x2={W - 4} y1={B} y2={B} stroke="currentColor" strokeOpacity={0.35} />
-            <g transform={`translate(${L}, ${H - 10})`}>
+            <g transform={`translate(${L}, ${H - 5})`}>
               <line x1={0} x2={14} y1={-3} y2={-3} stroke="#ef4444" strokeWidth={1.5} />
               <text style={{ fontSize: svgPx(12) }} x={18} y={0} fontWeight={600} className={valueText}>
                 {t("ind.load.capacity")}

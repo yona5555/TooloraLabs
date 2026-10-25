@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import ZipIndicatorCard, { ZipIndicatorUnavailable } from "./ZipIndicatorCard";
 import { formatBytes, useZipModel } from "./ZipLiveContext";
 import { svgPx } from "@/components/tool-ui/svgPx";
+import { labelW } from "@/components/tool-ui/labelLayout";
 
 const W = 340;
 const H = 190;
@@ -40,6 +41,13 @@ export default function ZipKindDonut() {
     const total = vals.reduce((s, v) => s + v, 0) || 1;
     return vals.map((_, i) => [vals.slice(0, i).reduce((s, v) => s + v, 0) / total, vals.slice(0, i + 1).reduce((s, v) => s + v, 0) / total]);
   };
+  // size change after compression: "−62%" when it shrank, "+3%" when it grew (already-compressed media
+  // can), "0%" when unchanged — never "−-0%"
+  const change = (i: number) => {
+    if (!orig[i]) return "—";
+    const saved = Math.round((1 - comp[i] / orig[i]) * 100);
+    return saved === 0 ? "0%" : saved > 0 ? `−${f(saved, 0)}%` : `+${f(-saved, 0)}%`;
+  };
   const co = cum(orig);
   const cc = cum(comp);
 
@@ -49,14 +57,17 @@ export default function ZipKindDonut() {
       {KINDS.map((k, i) => (comp[i] > 0 ? <path key={k.key} d={ring(36, 58, cc[i][0], cc[i][1])} className={`${k.fill} stroke-white opacity-60 dark:stroke-zinc-900`} strokeWidth={1.5} /> : null))}
       {KINDS.map((k, i) => {
         const y = 22 + i * 30;
+        const value = change(i);
+        // the change moves under its name when the two would touch (a long name on a phone) (§39)
+        const under = 220 + labelW(t(k.key)) * 1.15 + 6 > W - 4 - labelW(value) * 1.15;
         return (
           <g key={k.key} opacity={orig[i] ? 1 : 0.4}>
             <circle cx={208} cy={y} r={6} className={k.fill} />
             <text style={{ fontSize: svgPx(12) }} x={220} y={y + 4} className="fill-zinc-600 dark:fill-zinc-300">
               {t(k.key)}
             </text>
-            <text style={{ fontSize: svgPx(12) }} x={W - 4} y={y + 4} textAnchor="end" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
-              {orig[i] ? `−${f((1 - comp[i] / orig[i]) * 100, 0)}%` : "—"}
+            <text style={{ fontSize: svgPx(12) }} x={under ? 220 : W - 4} y={under ? y + 18 : y + 4} textAnchor={under ? "start" : "end"} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+              {value}
             </text>
           </g>
         );

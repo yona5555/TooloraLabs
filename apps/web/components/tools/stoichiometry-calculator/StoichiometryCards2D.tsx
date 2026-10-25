@@ -153,7 +153,7 @@ export function StoProgressCard({ side }: { side: Side }) {
               </g>
             ))}
             {[0, 25, 50, 75, 100].map((q) => (
-              <text key={q} x={xp(q)} y={H - 12} textAnchor="middle" style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
+              <text key={q} x={xp(q)} y={H - 12} textAnchor={q === 100 ? "end" : "middle"} style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
                 {`${q} %`}
               </text>
             ))}

@@ -10,6 +10,7 @@ import { uniFormula } from "../chemical-equation-balancer/chemMath";
 import { SvgMolecule } from "../chemical-equation-balancer/Molecules2D";
 import { AVOGADRO, M, rd, SUBSTANCE_SEED, SUBSTANCES } from "./stoichMath";
 import { svgPx } from "@/components/tool-ui/svgPx";
+import { labelW, staggerRows } from "@/components/tool-ui/labelLayout";
 
 const RatioScene3D = dynamic(() => import("./StoichiometryScenes3D").then((m) => m.RatioScene3D), { ssr: false, loading: () => null });
 const TanksScene3D = dynamic(() => import("./StoichiometryScenes3D").then((m) => m.TanksScene3D), { ssr: false, loading: () => null });
@@ -172,7 +173,10 @@ function Mole2D({ index }: { index: number }) {
   const rMax = Math.min((W - 40) / n / 2 - 1, (H - 70) / 2);
   const step = (W - 40 - 2 * rMax) / (n - 1);
   const rOf = (mm: number) => rd(rMax * Math.cbrt(mm / 180.16));
-  const base = H - 34;
+  // formulas that would touch their neighbour (a phone) take turns on two lines (§39)
+  const fRow = staggerRows(SUBSTANCES.map((sb, i) => ({ x: 20 + rMax + i * step, w: labelW(uniFormula(sb.formula)) })));
+  const two = fRow.some((r) => r === 1);
+  const base = H - 34 - (two ? 17 : 0);
   return (
     <div ref={box} className="relative w-full flex-1">
       <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={uniFormula(SUBSTANCES[index].formula)}>
@@ -186,7 +190,7 @@ function Mole2D({ index }: { index: number }) {
               <text x={x} y={base - 2 * r - 8 - (i % 2) * 14} fontWeight={sel ? 800 : 600} textAnchor="middle" style={{ fontSize: svgPx(sel ? 12 : 12), fill: "var(--ph-ink)" }}>
                 {Math.round(sb.mm)}
               </text>
-              <text x={x} y={H - 10 - (i % 2) * 0} textAnchor="middle" style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
+              <text x={x} y={H - 10 - (two && fRow[i] === 0 ? 17 : 0)} textAnchor="middle" style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
                 <SvgChem text={uniFormula(sb.formula)} />
               </text>
             </g>

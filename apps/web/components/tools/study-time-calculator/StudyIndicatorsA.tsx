@@ -5,6 +5,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import IndicatorWithTable from "@/components/tool-ui/IndicatorWithTable";
 import { BREAK_COLORS, useFmt, useStudyT, type Derived, type StudioState } from "./studio";
 import { svgPx } from "@/components/tool-ui/svgPx";
+import { labelW } from "@/components/tool-ui/labelLayout";
 import { useFitWidth } from "@/components/tool-ui/useFitWidth";
 
 export type StudyIndicatorProps = { state: StudioState; setState: (s: StudioState) => void; d: Derived };
@@ -16,6 +17,9 @@ export function upcomingExams(d: Derived) {
   return d.plan.exams.filter((e) => e.status === "upcoming" || e.status === "today");
 }
 
+
+/** A centred axis label at `x`, moved in just enough to stay whole inside a `W`-wide drawing (§39). */
+const inside = (x: number, text: string, W: number) => Math.max(labelW(text) / 2 + 2, Math.min(W - labelW(text) / 2 - 2, x));
 /** Shared exam picker (chips in the exam colors). */
 export function ExamChips({ d, value, onPick }: { d: Derived; value: string; onPick: (id: string) => void }) {
   return (
@@ -109,7 +113,7 @@ export function PomodoroCycleCard({ state, setState, d }: StudyIndicatorProps) {
               {Array.from({ length: Math.floor(total / tick) + 1 }, (_, i) => i * tick).map((m) => (
                 <g key={m}>
                   <line x1={x(m)} x2={x(m)} y1={70} y2={74} stroke="currentColor" strokeOpacity={0.4} />
-                  <text style={{ fontSize: svgPx(12) }} x={x(m)} y={85} textAnchor="middle" className={axisText}>
+                  <text style={{ fontSize: svgPx(12) }} x={inside(x(m), clock(m), W)} y={85} textAnchor="middle" className={axisText}>
                     {clock(m)}
                   </text>
                 </g>
@@ -152,7 +156,9 @@ export function ReviewScheduleCard({ d }: StudyIndicatorProps) {
   const RH = 30;
   const H = 18 + exams.length * RH + 30;
   const x = (i: number) => LW + ((i + 0.5) / n) * (W - LW - 6);
-  const step = Math.ceil(n / 9);
+  // a date every `step` days: at most nine, and never closer than the widest date label (§39)
+  const dayW = (W - LW - 6) / n;
+  const step = Math.max(Math.ceil(n / 9), Math.ceil((Math.max(...days.map((day) => labelW(f.short(day.date)))) + 6) / dayW));
   const reviewsTotal = exams.reduce((a, e) => a + e.reviewDays.length, 0);
   const reviewMinutes = exams.reduce((a, e) => a + e.reviewMinutes, 0);
 
@@ -196,7 +202,7 @@ export function ReviewScheduleCard({ d }: StudyIndicatorProps) {
               <line x1={LW} x2={W - 6} y1={H - 24} y2={H - 24} stroke="currentColor" strokeOpacity={0.3} />
               {days.map((day) =>
                 day.index % step === 0 ? (
-                  <text style={{ fontSize: svgPx(12) }} key={day.index} x={x(day.index)} y={H - 12} textAnchor="middle" className={axisText}>
+                  <text style={{ fontSize: svgPx(12) }} key={day.index} x={inside(x(day.index), f.short(day.date), W)} y={H - 12} textAnchor="middle" className={axisText}>
                     {f.short(day.date)}
                   </text>
                 ) : null,

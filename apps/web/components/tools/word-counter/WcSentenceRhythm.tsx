@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import WcIndicatorCard from "./WcIndicatorCard";
 import { useWcLive } from "./WcLiveContext";
 import { svgPx } from "@/components/tool-ui/svgPx";
+import { labelW } from "@/components/tool-ui/labelLayout";
 
 const W = 340;
 const H = 180;
@@ -37,11 +38,34 @@ export default function WcSentenceRhythm() {
   const active = activeSentence != null ? all[activeSentence] : undefined;
   const longCount = all.filter((s) => s.words > LONG).length;
 
+  // the "25 · long" line label takes the first free spot (right or left end, over or under its line)
+  // where no bar's value label sits (§39); widths allow for a phone's up-to-1.15×
+  const longText = `${f(LONG)} · ${t("longLine")}`;
+  const longW = labelW(longText) * 1.15;
+  const valueBoxes =
+    shown.length <= 24
+      ? shown.map((s, i) => {
+          const cx = PAD_X + i * slot + slot / 2;
+          const half = (labelW(f(s.words)) * 1.15) / 2;
+          return { a: cx - half, b: cx + half, base: y(s.words) - 3 };
+        })
+      : [];
+  const longSpot =
+    [
+      { x: W - PAD_X, anchor: "end" as const, base: y(LONG) - 3 },
+      { x: W - PAD_X, anchor: "end" as const, base: y(LONG) + 14 },
+      { x: PAD_X, anchor: "start" as const, base: y(LONG) - 3 },
+      { x: PAD_X, anchor: "start" as const, base: y(LONG) + 14 },
+    ].find((c) => {
+      const a = c.anchor === "end" ? c.x - longW : c.x;
+      return valueBoxes.every((v) => v.b < a - 2 || v.a > a + longW + 2 || Math.abs(v.base - c.base) >= 16);
+    }) ?? { x: W - PAD_X, anchor: "end" as const, base: y(LONG) - 3 };
+
   const indicator = (
     <div>
       <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
         <line x1={PAD_X} y1={y(LONG)} x2={W - PAD_X} y2={y(LONG)} strokeDasharray="2 3" className="stroke-rose-400" />
-        <text style={{ fontSize: svgPx(12) }} x={W - PAD_X} y={y(LONG) - 3} textAnchor="end" className="fill-rose-500 dark:fill-rose-400">{`${f(LONG)} · ${t("longLine")}`}</text>
+        <text style={{ fontSize: svgPx(12) }} x={longSpot.x} y={longSpot.base} textAnchor={longSpot.anchor} className="fill-rose-500 dark:fill-rose-400">{longText}</text>
         {shown.map((s, i) => {
           const x = PAD_X + i * slot + (slot - barW) / 2;
           const isActive = s.index === activeSentence;

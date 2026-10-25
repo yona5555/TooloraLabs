@@ -39,7 +39,7 @@ export default function VectorDotAngleCurve() {
               </g>
             ))}
             {[0, 45, 90, 135, 180].map((d) => (
-              <text style={{ fontSize: svgPx(12) }} key={d} x={x(d)} y={H - PAD.b + 16} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">{d}°</text>
+              <text style={{ fontSize: svgPx(12) }} key={d} x={x(d)} y={H - PAD.b + 16} textAnchor={d === 180 ? "end" : "middle"} className="fill-zinc-500 dark:fill-zinc-400">{d}°</text>
             ))}
             <text style={{ fontSize: svgPx(12) }} x={W - PAD.r} y={H - 2} textAnchor="end" className="fill-zinc-400 dark:fill-zinc-500">{t("axisAngle")}</text>
             <path d={path} fill="none" strokeWidth={3} className="stroke-blue-500 dark:stroke-blue-400" />

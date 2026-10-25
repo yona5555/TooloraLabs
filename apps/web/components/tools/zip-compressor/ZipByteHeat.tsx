@@ -5,7 +5,8 @@ import { useZipModel } from "./ZipLiveContext";
 import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
-const LABEL = 78;
+// room for a 10-character file name in 12px monospace, also at the up-to-1.15× a phone draws it at
+const LABEL = 92;
 const ROW = 30;
 
 /**
@@ -38,7 +39,7 @@ export default function ZipByteHeat() {
         );
       })}
       {[0, 4, 8, 12, 15].map((k) => (
-        <text style={{ fontSize: svgPx(12) }} key={k} x={LABEL + k * cw + cw / 2} y={H - 6} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+        <text style={{ fontSize: svgPx(12) }} key={k} x={k === 15 ? W - 2 : LABEL + k * cw + cw / 2} y={H - 6} textAnchor={k === 15 ? "end" : "middle"} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
           {k * 16}
         </text>
       ))}

@@ -5,7 +5,8 @@ import { useWcLive } from "./WcLiveContext";
 import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 330;
-const H = 40;
+// room under the strip for the 12px limit numbers and their descent
+const H = 45;
 const STRIP_Y = 16;
 const STRIP_H = 12;
 

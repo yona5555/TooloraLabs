@@ -8,6 +8,8 @@ import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import { projectOntoActiveAngleBase, isDegenerateTriangle, angleAtVertex, triangleAreaFromVertices } from "@tooloralabs/tools";
 import type { TrianglePoint } from "./types";
 import { MafsHoverSegment, MafsHoverPoint } from "./MafsHoverPrimitives";
+import { useMeasuredSize } from "@/components/tool-ui/indicator-kit/CardKit";
+import { labelW } from "@/components/tool-ui/labelLayout";
 import TriangleAngleSinCosCurve from "./TriangleAngleSinCosCurve";
 
 type Vector2 = [number, number];
@@ -146,6 +148,9 @@ export default function TriangleInteractiveDiagram({ vertices: initialVertices, 
 
   const [activeIndex, setActiveIndex] = useState<0 | 1 | 2>(0);
   const [viewBox] = useState(() => computeViewBox(initialVertices));
+  const [plotRef, { w: plotW }] = useMeasuredSize<HTMLDivElement>({ w: 600, h: 300 });
+  const edgeX = edgeSafeLabels(viewBox.x);
+  const edgeY = edgeSafeLabels(viewBox.y);
 
   const marginX = (viewBox.x[1] - viewBox.x[0]) * 0.04;
   const marginY = (viewBox.y[1] - viewBox.y[0]) * 0.04;
@@ -249,6 +254,13 @@ export default function TriangleInteractiveDiagram({ vertices: initialVertices, 
 
   const heightLabelPos = outwardOffsetFromSegment(projection.farVertex, projection.foot, centroid, 0.38);
   const adjacentLabelPos = outwardOffsetFromSegment(projection.activeVertex, projection.foot, centroid, 0.38);
+  // axis numbers under the "b·cosA = 3.2" label give way to it (§39): its box in plot units, from the
+  // plot's real width (Mafs keeps one scale for both axes, 300px tall)
+  const u = Math.max((viewBox.x[1] - viewBox.x[0]) / Math.max(1, plotW), (viewBox.y[1] - viewBox.y[0]) / 300);
+  const adjHalfW = (labelW(adjacentFormulaText) / 2 + 12) * u;
+  const adjHalfH = 14 * u;
+  const xLabels = (n: number) => (Math.abs(n - adjacentLabelPos.x) < adjHalfW && adjacentLabelPos.y < 6 * u && adjacentLabelPos.y > -34 * u ? "" : edgeX(n));
+  const yLabels = (n: number) => (Math.abs(n - adjacentLabelPos.y) < adjHalfH + 8 * u && adjacentLabelPos.x > -adjHalfW - 30 * u && adjacentLabelPos.x < adjHalfW + 6 * u ? "" : edgeY(n));
   const footLabelPos = outwardFromCentroid(centroid, projection.foot, 0.32);
 
   const vertexLabelPositions = pts.map((p) => outwardFromCentroid(centroid, p, 0.42));
@@ -290,6 +302,7 @@ export default function TriangleInteractiveDiagram({ vertices: initialVertices, 
       </div>
 
       <div
+        ref={plotRef}
         dir="ltr"
         aria-label={t("ariaLabel")}
         data-preview="visual"
@@ -300,7 +313,7 @@ export default function TriangleInteractiveDiagram({ vertices: initialVertices, 
         onTouchEnd={handleDragEnd}
       >
         <Mafs viewBox={viewBox} height={300} pan={false} zoom={false}>
-          <Coordinates.Cartesian xAxis={{ axis: false, lines: false, labels: edgeSafeLabels(viewBox.x) }} yAxis={{ axis: false, lines: false, labels: edgeSafeLabels(viewBox.y) }} />
+          <Coordinates.Cartesian xAxis={{ axis: false, lines: false, labels: xLabels }} yAxis={{ axis: false, lines: false, labels: yLabels }} />
 
           <Polygon points={[A.point, B.point, C.point]} color={colors.blueA} fillOpacity={0.1} strokeOpacity={0} />
 
