@@ -7,7 +7,8 @@
 //   npm run test:home-phone                        -> compare (exit 1 on any change)
 //   npm run baseline:home-phone -- --approve       -> rewrite the baseline (only with --approve)
 // Options: --base http://localhost:3001
-// The baseline is measured on macOS (Arial); CI runs this on a macOS runner for the same fonts.
+// The page uses system fonts (Arial), so each OS has its own baseline: home-phone.json on macOS
+// (local), home-phone.linux.json on Linux (CI runner ubuntu-24.04).
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -15,7 +16,7 @@ import { createRequire } from "node:module";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const { chromium } = createRequire(join(ROOT, "apps/web/package.json"))("playwright");
-const BASELINE = join(ROOT, "tests/baselines/home-phone.json");
+const BASELINE = join(ROOT, `tests/baselines/home-phone${process.platform === "linux" ? ".linux" : ""}.json`);
 const arg = (name, def) => {
   const i = process.argv.indexOf(`--${name}`);
   return i > -1 ? process.argv[i + 1] : def;

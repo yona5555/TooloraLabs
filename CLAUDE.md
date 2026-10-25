@@ -18,6 +18,7 @@ TooloraLabs-Claude-Instructions.md is a historical archive; the binding rules ar
 - Details matter: clipping, cropping, stale cache and wrong elements are bugs. Check them before saying done.
 - CI: check the run ONCE with gh run view (or gh run list --limit 1). If it is still running, give Yousef the run URL and stop. Never loop, poll or use gh run watch.
 - Performance numbers: the only official metric is Lighthouse mobile (CLI, default throttling), 3 runs per page, median, on a production build. Any other timing method may be used only to compare two builds and must be labelled as such in the report.
+- Zero warnings: any CI annotation, deprecation, build, lint or console warning is fixed immediately at the root. A report that mentions a warning without fixing it is not accepted.
 
 ## Hard rules
 - Always reply to Yousef in Modern Standard Arabic, even when the command or task is written in English. Code, commands and identifiers stay in English.
