@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import TlIndicatorCard from "./TlIndicatorCard";
 import { useTlLive } from "./TlLiveContext";
 import { STYLE_FILLS } from "./tlMath";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 330;
 const LEFT = 78;
@@ -36,13 +37,13 @@ export default function TlBudget() {
           const over = s.utf16 > limit;
           return (
             <g key={s.style} className="cursor-pointer" onClick={() => setActiveStyle(s.style)} opacity={on ? 1 : 0.6} style={{ transition: "opacity 200ms ease" }}>
-              <text x={LEFT - 6} y={y + 12} textAnchor="end" fontSize={9} fontWeight={on ? 700 : 500} className="fill-zinc-700 dark:fill-zinc-200">
+              <text style={{ fontSize: svgPx(12) }} x={LEFT - 6} y={y + 12} textAnchor="end" fontWeight={on ? 700 : 500} className="fill-zinc-700 dark:fill-zinc-200">
                 {styleName(s.style)}
               </text>
               <rect x={LEFT} y={y + 2} width={sx(s.utf16) - LEFT} height={7} rx={2} className={STYLE_FILLS[i]} style={{ transition: "width 400ms ease" }} />
               <rect x={LEFT} y={y + 11} width={sx(s.characters) - LEFT} height={5} rx={2} className="fill-zinc-400 dark:fill-zinc-500" style={{ transition: "width 400ms ease" }} />
               {over && (
-                <text x={W - 4} y={y + 12} textAnchor="end" fontSize={8.5} fontWeight={700} className="fill-rose-600 dark:fill-rose-400">
+                <text style={{ fontSize: svgPx(12) }} x={W - 4} y={y + 12} textAnchor="end" fontWeight={700} className="fill-rose-600 dark:fill-rose-400">
                   +{f(s.utf16 - limit)}
                 </text>
               )}
@@ -50,7 +51,7 @@ export default function TlBudget() {
           );
         })}
         <line x1={sx(limit)} y1={0} x2={sx(limit)} y2={H - 14} strokeWidth={2} className="stroke-rose-600 dark:stroke-rose-400" style={{ transition: "x1 150ms ease, x2 150ms ease" }} />
-        <text x={sx(limit)} y={H - 3} textAnchor="middle" fontSize={8.5} fontWeight={700} className="fill-rose-600 dark:fill-rose-400">
+        <text style={{ fontSize: svgPx(12) }} x={sx(limit)} y={H - 3} textAnchor="middle" fontWeight={700} className="fill-rose-600 dark:fill-rose-400">
           {f(limit)}
         </text>
       </svg>

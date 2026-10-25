@@ -1,4 +1,5 @@
 import { useId } from "react";
+import { svgPx } from "@/components/tool-ui/svgPx";
 type LossyLosslessDiagramProps = {
   losslessLabel: string;
   lossyLabel: string;
@@ -43,12 +44,12 @@ function Row({
 
   return (
     <g>
-      <text x={0} y={y + 2} fontSize={12} fontWeight={700} fill="currentColor">
+      <text style={{ fontSize: svgPx(12) }} x={0} y={y + 2} fontWeight={700} fill="currentColor">
         {rowLabel}
       </text>
 
       <rect x={xs[0]} y={boxY} width={BOX_W} height={BOX_H} rx={6} fill="none" stroke="currentColor" strokeWidth={1.5} />
-      <text x={xs[0] + BOX_W / 2} y={labelY} textAnchor="middle" fontSize={10.5} fill="currentColor">
+      <text style={{ fontSize: svgPx(12) }} x={xs[0] + BOX_W / 2} y={labelY} textAnchor="middle" fill="currentColor">
         {originalLabel}
       </text>
 
@@ -61,7 +62,7 @@ function Row({
       />
 
       <rect x={xs[1]} y={boxY} width={BOX_W} height={BOX_H} rx={6} fill="currentColor" opacity={compressedOpacity} stroke="currentColor" strokeWidth={1} />
-      <text x={xs[1] + BOX_W / 2} y={labelY} textAnchor="middle" fontSize={10.5} fill="currentColor">
+      <text style={{ fontSize: svgPx(12) }} x={xs[1] + BOX_W / 2} y={labelY} textAnchor="middle" fill="currentColor">
         {compressedLabel}
       </text>
 
@@ -74,11 +75,11 @@ function Row({
       />
 
       <rect x={xs[2]} y={boxY} width={BOX_W} height={BOX_H} rx={6} fill="currentColor" opacity={resultOpacity} stroke="currentColor" strokeWidth={1} />
-      <text x={xs[2] + BOX_W / 2} y={labelY} textAnchor="middle" fontSize={10.5} fill="currentColor">
+      <text style={{ fontSize: svgPx(12) }} x={xs[2] + BOX_W / 2} y={labelY} textAnchor="middle" fill="currentColor">
         {resultLabel}
       </text>
 
-      <text x={xs[2] + BOX_W / 2} y={labelY + 16} textAnchor="middle" fontSize={10} fill="currentColor" opacity={0.7}>
+      <text style={{ fontSize: svgPx(12) }} x={xs[2] + BOX_W / 2} y={labelY + 16} textAnchor="middle" fill="currentColor" opacity={0.7}>
         {noteLabel}
       </text>
     </g>

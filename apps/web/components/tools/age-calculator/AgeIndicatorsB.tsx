@@ -6,6 +6,8 @@ import IndicatorWithTable from "@/components/tool-ui/IndicatorWithTable";
 import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { AGE_COLORS } from "./ageModel";
 import { axisText, useDualT, useIndicatorT, valueText, type IndicatorProps } from "./AgeIndicatorsA";
+import { svgPx } from "@/components/tool-ui/svgPx";
+import { useFitWidth } from "@/components/tool-ui/useFitWidth";
 
 const STAGE_COLORS: Record<LifeStageKey, string> = {
   childhood: "#38bdf8",
@@ -21,7 +23,7 @@ export function AgeLifeStagesCard({ d, f }: IndicatorProps) {
   const td = useDualT();
   const { report: r, life } = d;
   const stages = lifeStageDays(r.birth, r.reference, r.leapRule);
-  const W = 400;
+  const [fitRef, W] = useFitWidth(400);
   const H = 150;
   const L = 8;
   const R = 8;
@@ -38,7 +40,7 @@ export function AgeLifeStagesCard({ d, f }: IndicatorProps) {
       <IndicatorWithTable
         workedExampleTitle={t("worked")}
         indicator={
-          <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("stages.title")} className="max-w-full">
+          <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("stages.title")} className="max-w-full">
             <rect x={L} y={44} width={W - L - R} height={36} rx={6} fill="currentColor" fillOpacity={0.07} />
             {stages.map((s, i) => {
               const w = s.days * unit;
@@ -48,22 +50,22 @@ export function AgeLifeStagesCard({ d, f }: IndicatorProps) {
                 <g key={s.stage}>
                   <rect x={x0} y={44} width={w} height={36} fill={STAGE_COLORS[s.stage]} fillOpacity={s.complete ? 0.85 : 1} style={{ transition: "all 500ms ease" }} />
                   {w > 34 && (
-                    <text x={x0 + w / 2} y={66} textAnchor="middle" fontSize={10} fontWeight={800} fill="white">
+                    <text style={{ fontSize: svgPx(12) }} x={x0 + w / 2} y={66} textAnchor="middle" fontWeight={800} fill="white">
                       {f.int(s.days)}
                     </text>
                   )}
-                  <text x={x0 + w / 2} y={i % 2 ? 100 : 34} textAnchor="middle" fontSize={9} fontWeight={700} fill={STAGE_COLORS[s.stage]}>
+                  <text style={{ fontSize: svgPx(12) }} x={x0 + w / 2} y={i % 2 ? 100 : 34} textAnchor="middle" fontWeight={700} fill={STAGE_COLORS[s.stage]}>
                     {tStage(s.stage)}
                   </text>
                 </g>
               );
             })}
             <line x1={L + horizon * unit} x2={L + horizon * unit} y1={38} y2={86} stroke={AGE_COLORS.danger} strokeDasharray="3 2" />
-            <text x={W - R} y={H - 22} textAnchor="end" fontSize={9} fill={AGE_COLORS.danger}>
+            <text style={{ fontSize: svgPx(12) }} x={W - R} y={H - 22} textAnchor="end" fill={AGE_COLORS.danger}>
               {t("stages.horizon", { y: f.num(life.lifeExpectancyYears, 1) })}
             </text>
-            <text x={L} y={H - 6} fontSize={9} className={axisText}>{r.birth.year}</text>
-            <text x={W - R} y={H - 6} textAnchor="end" fontSize={9} className={axisText}>{td("result.days")}: {f.int(r.totalDays)}</text>
+            <text style={{ fontSize: svgPx(12) }} x={L} y={H - 6} className={axisText}>{r.birth.year}</text>
+            <text style={{ fontSize: svgPx(12) }} x={W - R} y={H - 6} textAnchor="end" className={axisText}>{td("result.days")}: {f.int(r.totalDays)}</text>
           </svg>
         }
         rows={[
@@ -115,17 +117,17 @@ export function AgeLifeGaugeCard({ state, setState, d, f }: IndicatorProps) {
               {[0, 25, 50, 75, 100].map((v) => {
                 const a = Math.PI * (1 - v / 100);
                 return (
-                  <text key={v} x={cx + Math.cos(a) * (R + 18)} y={cy - Math.sin(a) * (R + 18) + 3} textAnchor="middle" fontSize={9} className={axisText}>
+                  <text style={{ fontSize: svgPx(12) }} key={v} x={cx + Math.cos(a) * (R + 18)} y={cy - Math.sin(a) * (R + 18) + 3} textAnchor="middle" className={axisText}>
                     {f.int(v)}%
                   </text>
                 );
               })}
               <line x1={cx} y1={cy} x2={nx} y2={ny} stroke="currentColor" strokeWidth={3} strokeLinecap="round" style={{ transition: "all 600ms ease" }} />
               <circle cx={cx} cy={cy} r={7} fill="currentColor" />
-              <text x={cx} y={cy - 40} textAnchor="middle" fontSize={24} fontWeight={800} className={valueText}>
+              <text style={{ fontSize: svgPx(24) }} x={cx} y={cy - 40} textAnchor="middle" fontWeight={800} className={valueText}>
                 {f.pct(p)}
               </text>
-              <text x={cx} y={cy + 28} textAnchor="middle" fontSize={10} className={axisText}>
+              <text style={{ fontSize: svgPx(12) }} x={cx} y={cy + 28} textAnchor="middle" className={axisText}>
                 {t("life.of", { y: f.num(life.lifeExpectancyYears, 1) })}
               </text>
             </svg>
@@ -170,7 +172,7 @@ export function AgeUnitsLadderCard({ d, f }: IndicatorProps) {
     { key: "minutes", v: r.totalMinutes, color: "#f97316" },
     { key: "seconds", v: r.totalSeconds, color: "#ef4444" },
   ];
-  const W = 400;
+  const [fitRef, W] = useFitWidth(400);
   const H = 240;
   const L = 30;
   const R = 10;
@@ -184,11 +186,11 @@ export function AgeUnitsLadderCard({ d, f }: IndicatorProps) {
       <IndicatorWithTable
         workedExampleTitle={t("worked")}
         indicator={
-          <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("units.title")} className="max-w-full">
+          <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("units.title")} className="max-w-full">
             {Array.from({ length: maxExp + 1 }, (_, e) => (
               <g key={e}>
                 <line x1={x(10 ** e)} x2={x(10 ** e)} y1={4} y2={H - 18} stroke="currentColor" strokeOpacity={e % 3 === 0 ? 0.25 : 0.1} />
-                <text x={x(10 ** e)} y={H - 4} textAnchor="middle" fontSize={9} className={axisText}>{`10${["⁰", "¹", "²", "³", "⁴", "⁵", "⁶", "⁷", "⁸", "⁹", "¹⁰"][e]}`}</text>
+                <text style={{ fontSize: svgPx(12) }} x={x(10 ** e)} y={H - 4} textAnchor={e === maxExp ? "end" : "middle"} className={axisText}>{`10${["⁰", "¹", "²", "³", "⁴", "⁵", "⁶", "⁷", "⁸", "⁹", "¹⁰"][e]}`}</text>
               </g>
             ))}
             {units.map((u, i) => {
@@ -197,8 +199,8 @@ export function AgeUnitsLadderCard({ d, f }: IndicatorProps) {
               return (
                 <g key={u.key}>
                   <rect x={L} y={y} width={Math.max(2, xe - L)} height={RH - 9} rx={4} fill={u.color} fillOpacity={0.85} style={{ transition: "width 500ms ease" }} />
-                  <text x={L + 4} y={y + 13} fontSize={9} fontWeight={800} fill="white">{t(`units.${u.key}`)}</text>
-                  <text x={Math.min(xe + 4, W - R)} y={y + 13} textAnchor={xe > W - 90 ? "end" : "start"} fontSize={10} fontWeight={800} className={xe > W - 90 ? "fill-white" : valueText} dx={xe > W - 90 ? -8 : 0}>
+                  <text style={{ fontSize: svgPx(12) }} x={L + 4} y={y + 13} fontWeight={800} fill="white">{t(`units.${u.key}`)}</text>
+                  <text style={{ fontSize: svgPx(12) }} x={Math.min(xe + 4, W - R)} y={y + 13} textAnchor={xe > W - 90 ? "end" : "start"} fontWeight={800} className={xe > W - 90 ? "fill-white" : valueText} dx={xe > W - 90 ? -8 : 0}>
                     {f.int(u.v)}
                   </text>
                 </g>
@@ -265,7 +267,7 @@ export function AgeFormulaCard({ d, f }: IndicatorProps) {
       <IndicatorWithTable
         workedExampleTitle={t("worked")}
         indicator={
-          <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("formula.title")} className="max-w-full">
+          <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("formula.title")} data-annotation="" className="max-w-full">
             <text x={0} y={14} fontSize={11} fontWeight={800} fill={AGE_COLORS.gregorian}>
               {td("cal.gregorian")} = {td("ymd", { y: f.int(g.years), m: f.int(g.months), d: f.int(g.days) })}
             </text>

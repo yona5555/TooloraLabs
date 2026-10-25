@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import RsIndicatorCard from "./RsIndicatorCard";
 import { useRsLive } from "./RsLiveContext";
 import { easeBand } from "./rsScales";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 176;
@@ -59,7 +60,7 @@ export default function RsSentenceMap() {
                 <title>{t("barTitle", { n: f(s.index + 1), words: f(s.words) })}</title>
               </rect>
               {shown.length <= 24 && (
-                <text x={x + barW / 2} y={y(s.words) - 4} textAnchor="middle" fontSize={9} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
+                <text style={{ fontSize: svgPx(12) }} x={x + barW / 2} y={y(s.words) - 4} textAnchor="middle" fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
                   {s.terminated ? f(s.ease, 0) : "×"}
                 </text>
               )}
@@ -67,9 +68,9 @@ export default function RsSentenceMap() {
           );
         })}
         <line x1={PAD_X} y1={BASE} x2={W - PAD_X} y2={BASE} className="stroke-zinc-300 dark:stroke-zinc-600" />
-        <text x={PAD_X} y={BASE + 14} fontSize={9} className="fill-zinc-500 dark:fill-zinc-400">{`#${f(1)}`}</text>
-        <text x={W - PAD_X} y={BASE + 14} textAnchor="end" fontSize={9} className="fill-zinc-500 dark:fill-zinc-400">{`#${f(shown.length)}`}</text>
-        <text x={W / 2} y={BASE + 26} textAnchor="middle" fontSize={9} className="fill-zinc-500 dark:fill-zinc-400">{t("axis")}</text>
+        <text style={{ fontSize: svgPx(12) }} x={PAD_X} y={BASE + 14} className="fill-zinc-500 dark:fill-zinc-400">{`#${f(1)}`}</text>
+        <text style={{ fontSize: svgPx(12) }} x={W - PAD_X} y={BASE + 14} textAnchor="end" className="fill-zinc-500 dark:fill-zinc-400">{`#${f(shown.length)}`}</text>
+        <text style={{ fontSize: svgPx(12) }} x={W / 2} y={BASE + 26} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">{t("axis")}</text>
       </svg>
       {focus && (
         <blockquote dir="auto" className="mt-1 line-clamp-3 border-s-4 border-amber-400 ps-2 text-xs italic leading-5 text-zinc-600 dark:text-zinc-300">

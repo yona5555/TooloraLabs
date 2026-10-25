@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { PT_TO_MM } from "@tooloralabs/tools";
 import PdfIndicatorCard, { PdfIndicatorUnavailable } from "./PdfIndicatorCard";
 import { SOURCE_FILL, usePdfModel } from "./PdfLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 220;
@@ -43,7 +44,7 @@ export default function PdfPageMap() {
           return (
             <g key={i} onClick={() => setPick(i)} className="cursor-pointer">
               <rect x={x} y={y} width={w} height={h} rx={2} className={`${SOURCE_FILL[p.source % SOURCE_FILL.length]} ${on ? "" : "opacity-60"}`} strokeWidth={on ? 3 : 0} stroke="currentColor" />
-              <text x={x + w / 2} y={y + h / 2 + 5} textAnchor="middle" fontSize={13} fontWeight={700} className="fill-white">
+              <text style={{ fontSize: svgPx(13) }} x={x + w / 2} y={y + h / 2 + 5} textAnchor="middle" fontWeight={700} className="fill-white">
                 {i + 1}
               </text>
             </g>

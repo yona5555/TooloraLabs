@@ -23,6 +23,7 @@ import WxSplit, { type WxRow } from "./WxSplit";
 import WeatherIcon from "./WeatherIcon";
 import { moonPath } from "./WxSkyScene";
 import { dateKeyMs, tempColor, useChartWidth, useIsRtl, useWxT, type WxCardProps } from "./wx";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const axis = "fill-zinc-500 dark:fill-zinc-400";
 const strong = "fill-zinc-800 dark:fill-zinc-100";
@@ -131,11 +132,11 @@ export function WxHourlyCard({ d, f }: WxCardProps) {
               {Array.from({ length: ticks + 1 }, (_, k) => lo + ((hi - lo) * k) / ticks).map((v) => (
                 <g key={v}>
                   <line x1={PL} x2={W - PR} y1={Y(v)} y2={Y(v)} className={grid} />
-                  <text x={tempAxisX} y={Y(v) + 3} textAnchor={tempAnchor} fontSize={12} className={axis}>{f.num(v)}°</text>
+                  <text style={{ fontSize: svgPx(12) }} x={tempAxisX} y={Y(v) + 3} textAnchor={tempAnchor} className={axis}>{f.num(v)}°</text>
                 </g>
               ))}
               {[0, 0.5, 1].map((k) => (
-                <text key={k} x={precipAxisX} y={H - B - P(pMax * k) + 3} textAnchor={precipAnchor} fontSize={12} className="fill-sky-600 dark:fill-sky-400">{f.num(weatherPrecip(pMax * k, f.units), 1)}</text>
+                <text style={{ fontSize: svgPx(12) }} key={k} x={precipAxisX} y={H - B - P(pMax * k) + 3} textAnchor={precipAnchor} className="fill-sky-600 dark:fill-sky-400">{f.num(weatherPrecip(pMax * k, f.units), 1)}</text>
               ))}
               {hours.map((x, k) => (
                 <rect key={k} x={X(k) - 4} y={H - B - P(x.precipMm)} width={8} height={P(x.precipMm)} className="fill-sky-500/60" />
@@ -144,14 +145,14 @@ export function WxHourlyCard({ d, f }: WxCardProps) {
               <path d={line(temps)} fill="none" stroke="#f97316" strokeWidth={2.6} strokeLinejoin="round" />
               {hours.map((x, k) =>
                 k % 6 === 0 ? (
-                  <text key={k} x={X(k)} y={H - B + 17} textAnchor="middle" fontSize={12} className={axis}>{f.hour(x.t, d.place.zone)}</text>
+                  <text style={{ fontSize: svgPx(12) }} key={k} x={X(k)} y={H - B + 17} textAnchor="middle" className={axis}>{f.hour(x.t, d.place.zone)}</text>
                 ) : null,
               )}
               {hours.map((x, k) =>
                 k > 0 && f.hour(x.t, d.place.zone) === "00" ? (
                   <g key={`d${k}`}>
                     <line x1={X(k)} x2={X(k)} y1={T} y2={H - B} stroke="currentColor" strokeOpacity={0.3} strokeDasharray="2 3" />
-                    <text x={X(k) + (rtl ? -3 : 3)} y={H - 5} textAnchor={rtl ? "end" : "start"} fontSize={12} fontWeight={700} className={strong}>{f.weekday(x.t, d.place.zone)}</text>
+                    <text style={{ fontSize: svgPx(12) }} x={X(k) + (rtl ? -3 : 3)} y={H - 5} textAnchor={rtl ? "end" : "start"} fontWeight={700} className={strong}>{f.weekday(x.t, d.place.zone)}</text>
                   </g>
                 ) : null,
               )}
@@ -159,7 +160,7 @@ export function WxHourlyCard({ d, f }: WxCardProps) {
               <circle cx={X(i)} cy={Y(temps[i])} r={5} fill="#2563eb" stroke="#fff" strokeWidth={1.5} />
               <circle cx={X(i)} cy={Y(fl[i])} r={3.5} fill="#a855f7" />
               <rect x={Math.min(W - PR - 104, Math.max(PL, X(i) - 52))} y={T - 18} width={104} height={20} rx={4} fill="#1d4ed8" />
-              <text x={Math.min(W - PR - 52, Math.max(PL + 52, X(i)))} y={T - 4} textAnchor="middle" fontSize={12} fontWeight={700} fill="#fff">
+              <text style={{ fontSize: svgPx(12) }} x={Math.min(W - PR - 52, Math.max(PL + 52, X(i)))} y={T - 4} textAnchor="middle" fontWeight={700} fill="#fff">
                 {f.hour(h.t, d.place.zone)}:00 · {f.deg(h.tempC)}
               </text>
             </svg>
@@ -274,7 +275,7 @@ export function WxWindCard({ d, f }: WxCardProps) {
                   <g key={k}>
                     <line x1={c + Math.cos(a) * (r - (major ? 10 : 5))} y1={c + Math.sin(a) * (r - (major ? 10 : 5))} x2={c + Math.cos(a) * r} y2={c + Math.sin(a) * r} stroke="currentColor" strokeOpacity={0.5} />
                     {major && (
-                      <text x={c + Math.cos(a) * (r + 9)} y={c + Math.sin(a) * (r + 9) + 4} textAnchor="middle" fontSize={12} fontWeight={700} className={strong}>
+                      <text style={{ fontSize: svgPx(12) }} x={c + Math.cos(a) * (r + 9)} y={c + Math.sin(a) * (r + 9) + 4} textAnchor="middle" fontWeight={700} className={strong}>
                         {["N", "E", "S", "W"][k / 4]}
                       </text>
                     )}
@@ -291,8 +292,8 @@ export function WxWindCard({ d, f }: WxCardProps) {
                 <path d={`M${c},${c - r + 14} L${c + 9},${c - r + 34} L${c + 3},${c - r + 34} L${c + 3},${c + 36} L${c - 3},${c + 36} L${c - 3},${c - r + 34} L${c - 9},${c - r + 34}Z`} fill="#2563eb" />
               </g>
               <circle cx={c} cy={c} r={26} className="fill-white dark:fill-zinc-900" stroke="#2563eb" strokeWidth={2} />
-              <text x={c} y={c + 2} textAnchor="middle" fontSize={15} fontWeight={800} className={strong}>{f.num(weatherWind(cur.windKmh, f.units))}</text>
-              <text x={c} y={c + 14} textAnchor="middle" fontSize={12} className={axis}>{f.windUnit}</text>
+              <text style={{ fontSize: svgPx(15) }} x={c} y={c + 2} textAnchor="middle" fontWeight={800} className={strong}>{f.num(weatherWind(cur.windKmh, f.units))}</text>
+              <text style={{ fontSize: svgPx(12) }} x={c} y={c + 14} textAnchor="middle" className={axis}>{f.windUnit}</text>
             </svg>
             <div dir="ltr" className="flex gap-0.5" aria-label={t("result.beaufort")}>
               {Array.from({ length: 13 }, (_, k) => (
@@ -355,7 +356,7 @@ export function WxPressureCard({ d, f }: WxCardProps) {
               return (
                 <g key={k}>
                   <line x1={rtl ? R : L} x2={rtl ? W - L : W - R} y1={Y(v)} y2={Y(v)} className={grid} />
-                  <text x={rtl ? W - L + 4 : L - 4} y={Y(v) + 3} textAnchor={rtl ? "start" : "end"} fontSize={12} className={axis}>{f.num(weatherPressure(v, f.units), f.units === "us" ? 2 : 0)}</text>
+                  <text style={{ fontSize: svgPx(12) }} x={rtl ? W - L + 4 : L - 4} y={Y(v) + 3} textAnchor={rtl ? "start" : "end"} className={axis}>{f.num(weatherPressure(v, f.units), f.units === "us" ? 2 : 0)}</text>
                 </g>
               );
             })}
@@ -363,10 +364,10 @@ export function WxPressureCard({ d, f }: WxCardProps) {
             <path d={vals.map((v, i) => `${i ? "L" : "M"}${X(i).toFixed(1)},${Y(v).toFixed(1)}`).join("")} fill="none" stroke={color} strokeWidth={2.4} />
             <circle cx={X(0)} cy={Y(p0)} r={5} fill={color} />
             <circle cx={X(3)} cy={Y(p3)} r={4} fill="#fff" stroke={color} strokeWidth={2} />
-            <text x={X(minI)} y={Y(vals[minI]) + 14} textAnchor="middle" fontSize={12} fontWeight={700} className={strong}>{f.num(weatherPressure(vals[minI], f.units), f.units === "us" ? 2 : 0)}</text>
-            <text x={X(maxI)} y={Y(vals[maxI]) - 6} textAnchor="middle" fontSize={12} fontWeight={700} className={strong}>{f.num(weatherPressure(vals[maxI], f.units), f.units === "us" ? 2 : 0)}</text>
-            {hours.map((x, k) => (k % 12 === 0 ? <text key={k} x={X(k)} y={H - 6} textAnchor="middle" fontSize={12} className={axis}>{f.weekday(x.t, d.place.zone)} {f.hour(x.t, d.place.zone)}</text> : null))}
-            <text x={rtl ? R : W - R} y={T + 2} textAnchor={rtl ? "start" : "end"} fontSize={12} className={axis}>{f.pressureUnit}</text>
+            <text style={{ fontSize: svgPx(12) }} x={X(minI)} y={Y(vals[minI]) + 14} textAnchor="middle" fontWeight={700} className={strong}>{f.num(weatherPressure(vals[minI], f.units), f.units === "us" ? 2 : 0)}</text>
+            <text style={{ fontSize: svgPx(12) }} x={X(maxI)} y={Y(vals[maxI]) - 6} textAnchor="middle" fontWeight={700} className={strong}>{f.num(weatherPressure(vals[maxI], f.units), f.units === "us" ? 2 : 0)}</text>
+            {hours.map((x, k) => (k % 12 === 0 ? <text style={{ fontSize: svgPx(12) }} key={k} x={X(k)} y={H - 6} textAnchor="middle" className={axis}>{f.weekday(x.t, d.place.zone)} {f.hour(x.t, d.place.zone)}</text> : null))}
+            <text style={{ fontSize: svgPx(12) }} x={rtl ? R : W - R} y={T + 2} textAnchor={rtl ? "start" : "end"} className={axis}>{f.pressureUnit}</text>
           </svg></div>
         }
         rows={[
@@ -490,13 +491,13 @@ export function WxUvCard({ d, f }: WxCardProps) {
               })}
               {[0, 3, 6, 8, 11, 14].map((v) => {
                 const [x, y] = pt(v, r + 20);
-                return <text key={v} x={x} y={y + 3} textAnchor="middle" fontSize={12} className={axis}>{v === 14 ? "14+" : v}</text>;
+                return <text style={{ fontSize: svgPx(12) }} key={v} x={x} y={y + 3} textAnchor="middle" className={axis}>{v === 14 ? "14+" : v}</text>;
               })}
               <g style={{ transition: "transform 900ms ease" }}>
                 <line x1={c} y1={150} x2={pt(val, r - 18)[0]} y2={pt(val, r - 18)[1]} stroke="#0f172a" strokeWidth={3} strokeLinecap="round" className="dark:stroke-white" />
               </g>
               <circle cx={c} cy={150} r={7} className="fill-zinc-900 dark:fill-white" />
-              <text x={c} y={128} textAnchor="middle" fontSize={26} fontWeight={800} className={strong}>{f.num(val, 1)}</text>
+              <text style={{ fontSize: svgPx(26) }} x={c} y={128} textAnchor="middle" fontWeight={800} className={strong}>{f.num(val, 1)}</text>
             </svg>
             <p className="text-sm font-bold" style={{ color: colors[UV_BANDS.findIndex((b) => b.key === level)] }}>{t(`uv.${level}`)}</p>
             <p className="mt-1 max-w-[260px] text-center text-xs text-zinc-600 dark:text-zinc-300">{t(`uvAdvice.${level}`)}</p>
@@ -548,20 +549,20 @@ export function WxSunCard({ d, f }: WxCardProps) {
             {ok && <rect {...bar(s.sunrise!, s.sunset!)} y={60} height={22} fill="#fcd34d" />}
             {s.polar === "day" && <rect x={20} y={60} width={W - 40} height={22} rx={11} fill="#fcd34d" />}
             {[0, 360, 720, 1080, 1440].map((m) => (
-              <text key={m} x={X(m)} y={104} textAnchor="middle" fontSize={12} className={axis}>{m === 1440 ? "24:00" : f.hhmm(m)}</text>
+              <text style={{ fontSize: svgPx(12) }} key={m} x={X(m)} y={104} textAnchor="middle" className={axis}>{m === 1440 ? "24:00" : f.hhmm(m)}</text>
             ))}
             {stations.map((st, k) =>
               st.m === null ? null : (
                 <g key={st.key}>
                   <line x1={X(st.m)} x2={X(st.m)} y1={k % 2 ? 84 : 36} y2={k % 2 ? 112 : 58} stroke={st.color} strokeWidth={2} />
                   <circle cx={X(st.m)} cy={71} r={5} fill={st.color} stroke="#fff" strokeWidth={1.5} />
-                  <text x={X(st.m)} y={k % 2 ? 126 : 30} textAnchor="middle" fontSize={12} fontWeight={700} fill={st.color}>{f.hhmm(st.m)}</text>
+                  <text style={{ fontSize: svgPx(12) }} x={X(st.m)} y={k % 2 ? 126 : 30} textAnchor="middle" fontWeight={700} fill={st.color}>{f.hhmm(st.m)}</text>
                 </g>
               ),
             )}
             <g style={{ transition: "transform 600ms ease" }}>
               <line x1={X(d.localMinutes)} x2={X(d.localMinutes)} y1={50} y2={92} stroke="#ef4444" strokeWidth={2.5} />
-              <text x={X(d.localMinutes)} y={156} textAnchor="middle" fontSize={12} fontWeight={800} fill="#ef4444">▲ {f.time(d.now, d.place.zone)}</text>
+              <text style={{ fontSize: svgPx(12) }} x={X(d.localMinutes)} y={156} textAnchor="middle" fontWeight={800} fill="#ef4444">▲ {f.time(d.now, d.place.zone)}</text>
             </g>
           </svg></div>
         }

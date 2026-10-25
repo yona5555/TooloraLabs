@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import GcfLcmIndicatorCard from "./GcfLcmIndicatorCard";
 import { useGcfLcmModel } from "./GcfLcmLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const PAD = 18;
@@ -34,13 +35,13 @@ export default function GcfLcmLogScale() {
         {Array.from({ length: Math.floor(top / step) + 1 }, (_, i) => i * step).map((p) => (
           <g key={p}>
             <line x1={x(10 ** p)} x2={x(10 ** p)} y1={64} y2={70} className="stroke-zinc-400" />
-            <text x={x(10 ** p)} y={80} textAnchor="middle" className="fill-zinc-400 font-mono text-[9px]">{`10^${p}`}</text>
+            <text style={{ fontSize: svgPx(12) }} x={x(10 ** p)} y={80} textAnchor="middle" className="fill-zinc-400 font-mono">{`10^${p}`}</text>
           </g>
         ))}
         {marks.map((m, i) => (
           <g key={i}>
             <circle cx={x(m.v)} cy={58} r={5} className={m.cls} />
-            <text x={x(m.v)} y={m.up ? 42 - (i % 2) * 12 : 98 + (i % 2) * 12} textAnchor="middle" className={`${m.cls} font-mono text-[10px] font-bold`}>
+            <text style={{ fontSize: svgPx(12) }} x={x(m.v)} y={m.up ? 42 - (i % 2) * 12 : 98 + (i % 2) * 12} textAnchor="middle" className={`${m.cls} font-mono font-bold`}>
               {m.label}
             </text>
           </g>

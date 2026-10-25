@@ -21,6 +21,7 @@ import {
 import IndicatorCard from "@/components/tools/markets/IndicatorCard";
 import SensitivityBars from "@/components/tools/markets/SensitivityBars";
 import type { MtView, PickFact } from "./types";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 type P = { view: MtView; onPick: PickFact };
 
@@ -213,14 +214,14 @@ export function DistributiveBalance({ view }: P) {
             <line x1={70} y1={120} x2={70} y2={84} strokeWidth={1.5} className="stroke-zinc-400" />
             <line x1={290} y1={120} x2={290} y2={84} strokeWidth={1.5} className="stroke-zinc-400" />
             <rect x={20} y={44} width={100} height={40} rx={8} className="fill-blue-600" />
-            <text x={70} y={60} textAnchor="middle" className="fill-white font-mono text-[11px]">{`${f(view.a)} × ${f(view.b)}`}</text>
-            <text x={70} y={77} textAnchor="middle" className="fill-white font-mono text-[13px] font-bold">{f(left)}</text>
+            <text style={{ fontSize: svgPx(12) }} x={70} y={60} textAnchor="middle" className="fill-white font-mono">{`${f(view.a)} × ${f(view.b)}`}</text>
+            <text style={{ fontSize: svgPx(13) }} x={70} y={77} textAnchor="middle" className="fill-white font-mono font-bold">{f(left)}</text>
             <rect x={230} y={44} width={120} height={40} rx={8} className={balanced ? "fill-emerald-500" : "fill-amber-500"} />
-            <text x={290} y={60} textAnchor="middle" className="fill-white font-mono text-[10px]">{`${f(view.a * c)} + ${f(view.a * d)}`}</text>
-            <text x={290} y={77} textAnchor="middle" className="fill-white font-mono text-[13px] font-bold">{f(right)}</text>
+            <text style={{ fontSize: svgPx(12) }} x={290} y={60} textAnchor="middle" className="fill-white font-mono">{`${f(view.a * c)} + ${f(view.a * d)}`}</text>
+            <text style={{ fontSize: svgPx(13) }} x={290} y={77} textAnchor="middle" className="fill-white font-mono font-bold">{f(right)}</text>
           </g>
           <circle cx={180} cy={120} r={6} className="fill-zinc-800 dark:fill-zinc-100" />
-          <text x={180} y={20} textAnchor="middle" className={`font-sans text-[12px] font-semibold ${balanced ? "fill-emerald-600 dark:fill-emerald-400" : "fill-amber-600 dark:fill-amber-400"}`}>
+          <text style={{ fontSize: svgPx(12) }} x={180} y={20} textAnchor="middle" className={`font-sans font-semibold ${balanced ? "fill-emerald-600 dark:fill-emerald-400": "fill-amber-600 dark:fill-amber-400"}`}>
             {balanced ? t("balance.balanced") : t("balance.tipped")}
           </text>
         </svg>
@@ -685,13 +686,13 @@ export function DistinctTrend({ view }: P) {
           {[0, 0.25, 0.5, 0.75, 1].map((s) => (
             <g key={s}>
               <line x1={TP.l} x2={TW - TP.r} y1={y(s)} y2={y(s)} className="stroke-zinc-200 dark:stroke-zinc-700" />
-              <text x={TP.l - 6} y={y(s) + 3} textAnchor="end" className="fill-zinc-400 font-mono text-[10px]">
+              <text style={{ fontSize: svgPx(12) }} x={TP.l - 6} y={y(s) + 3} textAnchor="end" className="fill-zinc-400 font-mono">
                 {s * 100}%
               </text>
             </g>
           ))}
           {[1, 5, 10, 15, 20, 25, 30].map((k) => (
-            <text key={k} x={x(k)} y={TH - 10} textAnchor="middle" className="fill-zinc-400 font-mono text-[10px]">
+            <text style={{ fontSize: svgPx(12) }} key={k} x={x(k)} y={TH - 10} textAnchor="middle" className="fill-zinc-400 font-mono">
               {k}
             </text>
           ))}
@@ -700,7 +701,7 @@ export function DistinctTrend({ view }: P) {
           <circle cx={x(n)} cy={y(point.share)} r={7} className="fill-emerald-500 stroke-white dark:stroke-zinc-900" strokeWidth={2} />
           <g transform={`translate(${Math.min(x(n) + 10, TW - 150)} ${Math.max(y(point.share) - 34, TP.t)})`}>
             <rect width={138} height={26} rx={6} className="fill-zinc-900/85 dark:fill-white/90" />
-            <text x={69} y={17} textAnchor="middle" className="fill-white font-mono text-[11px] font-semibold dark:fill-zinc-900">
+            <text style={{ fontSize: svgPx(12) }} x={69} y={17} textAnchor="middle" className="fill-white font-mono font-semibold dark:fill-zinc-900">
               {`N=${n}: ${point.distinct}/${n * n} = ${Math.round(point.share * 100)}%`}
             </text>
           </g>

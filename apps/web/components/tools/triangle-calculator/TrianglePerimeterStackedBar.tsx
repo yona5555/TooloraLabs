@@ -5,6 +5,7 @@ import TriangleWorkedExampleNote from "./TriangleWorkedExampleNote";
 import { EXAMPLE, round } from "./triangleEducationMath";
 import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 300;
 const H = 48;
@@ -36,10 +37,10 @@ export default function TrianglePerimeterStackedBar() {
               {segments.map((s) => (
                 <g key={s.key}>
                   <rect x={s.x} y={8} width={Math.max(s.w, 1)} height={24} className={s.colorClass} />
-                  <text x={s.x + s.w / 2} y={24} textAnchor="middle" fontSize={11} fontWeight={700} fill="white">
+                  <text style={{ fontSize: svgPx(12) }} x={s.x + s.w / 2} y={24} textAnchor="middle" fontWeight={700} fill="white">
                     {s.value}
                   </text>
-                  <text x={s.x + s.w / 2} y={44} textAnchor="middle" fontSize={10} fill="currentColor" opacity={0.7}>
+                  <text style={{ fontSize: svgPx(12) }} x={s.x + s.w / 2} y={44} textAnchor="middle" fill="currentColor" opacity={0.7}>
                     {round(s.pct, 0)}%
                   </text>
                 </g>

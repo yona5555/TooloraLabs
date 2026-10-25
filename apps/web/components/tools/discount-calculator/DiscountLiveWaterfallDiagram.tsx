@@ -1,3 +1,4 @@
+import { svgPx } from "@/components/tool-ui/svgPx";
 type DiscountLiveWaterfallDiagramProps = {
   stages: { label: string; price: number }[];
   formatValue: (value: number) => string;
@@ -23,10 +24,10 @@ export default function DiscountLiveWaterfallDiagram({ stages, formatValue, capt
               <g key={i}>
                 <rect x={0} y={y} width={WIDTH} height={BAR_HEIGHT} rx={4} fill="none" stroke="currentColor" strokeWidth={1} opacity={0.25} />
                 <rect x={0} y={y} width={width} height={BAR_HEIGHT} rx={4} className={i === stages.length - 1 ? "fill-blue-600 dark:fill-blue-400" : "fill-zinc-400 dark:fill-zinc-600"} />
-                <text x={8} y={y + BAR_HEIGHT / 2 + 4} fontSize={11} fontWeight={700} className="fill-white">
+                <text style={{ fontSize: svgPx(12) }} x={8} y={y + BAR_HEIGHT / 2 + 4} fontWeight={700} className="fill-white">
                   {stage.label}
                 </text>
-                <text x={WIDTH - 8} y={y + BAR_HEIGHT / 2 + 4} textAnchor="end" fontSize={11} fontWeight={700} className="fill-white">
+                <text style={{ fontSize: svgPx(12) }} x={WIDTH - 8} y={y + BAR_HEIGHT / 2 + 4} textAnchor="end" fontWeight={700} className="fill-white">
                   {formatValue(stage.price)}
                 </text>
               </g>

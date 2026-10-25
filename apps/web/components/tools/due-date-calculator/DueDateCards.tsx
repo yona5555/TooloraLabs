@@ -102,7 +102,7 @@ export function DueTimelineCard({ side }: { side: Side }) {
           {TRIMESTERS.map((tm) => (
             <g key={tm.n}>
               <rect x={xs(tm.from)} y={bandY} width={xs(tm.to) - xs(tm.from)} height={22} fill={tm.color} style={lit(hover === "tri" && trimesterOf(g0) === tm.n)} />
-              <T x={(xs(tm.from) + xs(tm.to)) / 2} y={bandY + 15} text={tr(`trimesterValue.${tm.n}`)} size={10.5} bold style={{ fill: "#fff" }} />
+              <T x={(xs(tm.from) + xs(tm.to)) / 2} y={bandY + 15} text={tr(`trimesterValue.${tm.n}`)} size={12} bold style={{ fill: "#fff" }} />
             </g>
           ))}
           <rect x={xs(TERM_DAYS)} y={bandY} width={xs(D) - xs(TERM_DAYS)} height={22} style={{ fill: "var(--ph-ink-muted)" }} opacity={0.25} />
@@ -118,7 +118,7 @@ export function DueTimelineCard({ side }: { side: Side }) {
               <g key={m.key}>
                 <line x1={X0} y1={y} x2={W - X0} y2={y} style={{ stroke: "var(--ph-grid)" }} />
                 <rect x={a} y={y - 6} width={Math.max(3, b - a)} height={12} rx={4} fill={m.color} opacity={on ? 1 : 0.55} style={on ? { stroke: "var(--ph-focus)", strokeWidth: 2 } : undefined} />
-                <T x={after ? b + 6 : a - 6} y={y + 4} text={name} anchor={after ? "start" : "end"} size={10} bold={on} style={on ? INK : MUTED} />
+                <T x={after ? b + 6 : a - 6} y={y + 4} text={name} anchor={after ? "start" : "end"} size={12} bold={on} style={on ? INK : MUTED} />
               </g>
             );
           })}
@@ -129,7 +129,7 @@ export function DueTimelineCard({ side }: { side: Side }) {
           <line x1={sx} y1={24} x2={sx} y2={base} style={{ stroke: "var(--ph-ink)" }} strokeWidth={2} />
           {/* Week axis */}
           {[0, 8, 16, 24, 32, 40].map((k) => (
-            <T key={k} x={xs(k * 7)} y={base + 18} text={String(k)} size={10} />
+            <T key={k} x={xs(k * 7)} y={base + 18} text={String(k)} size={12} />
           ))}
           <SvgTrack W={W} y={trackY} frac={w / 42} lo="0+0" hi="42+0" />
         </Drawing>
@@ -197,7 +197,7 @@ export function DueTermWindowCard({ side }: { side: Side }) {
           <line x1={xs(TERM_DAYS)} y1={stripY - 4} x2={xs(TERM_DAYS)} y2={stripY + 36} style={{ stroke: "#fff" }} strokeWidth={2} strokeDasharray="4 3" />
           {/* Boundary weeks under the strip */}
           {[245, 259, 273, 287, 294, 301].map((g, i, all) => (
-            <T key={g} x={xs(g)} y={stripY + 50} text={wd(g)} anchor={i === 0 ? "start" : i === all.length - 1 ? "end" : "middle"} size={10} bold={g === 259 || g === 294} />
+            <T key={g} x={xs(g)} y={stripY + 50} text={wd(g)} anchor={i === 0 ? "start" : i === all.length - 1 ? "end" : "middle"} size={12} bold={g === 259 || g === 294} />
           ))}
           {/* Selected birth day */}
           <line x1={mx} y1={stripY - 10} x2={mx} y2={stripY + 38} style={{ stroke: "var(--ph-ink)" }} strokeWidth={3} />
@@ -209,7 +209,7 @@ export function DueTermWindowCard({ side }: { side: Side }) {
             return (
               <g key={`lg${z.key}`}>
                 <rect x={X0} y={y - 10} width={11} height={11} rx={2} fill={z.color} />
-                <T x={X0 + 17} y={y} text={`${tc(`zones.${z.key}`)} · ${range(z)}`} anchor="start" size={10.5} bold={on} style={on ? INK : MUTED} />
+                <T x={X0 + 17} y={y} text={`${tc(`zones.${z.key}`)} · ${range(z)}`} anchor="start" size={12} bold={on} style={on ? INK : MUTED} />
               </g>
             );
           })}
@@ -269,7 +269,7 @@ export function DueBirthOddsCard({ side }: { side: Side }) {
       caption={t("caption", { week: ltr(String(sel)), p: ltr(PCT(p)), by: ltr(PCT(byEnd)) })}
       visual={
         <Drawing {...d} hMin={HMIN} label={t("handle")} valueText={valueText} handle={{ x: X0 + ((sel - W_LO) / (W_HI - W_LO)) * (W - 2 * X0), y: trackY, dir: "horizontal" }} s={s} testId="due-c3">
-          <T x={X0} y={18} text={t("axis")} anchor="start" size={10.5} bold />
+          <T x={X0} y={18} text={t("axis")} anchor="start" size={12} bold />
           {weeks.map((wk, i) => {
             const x = X0 + i * cw + cw * 0.15;
             const bw = cw * 0.7;
@@ -279,8 +279,8 @@ export function DueBirthOddsCard({ side }: { side: Side }) {
             return (
               <g key={wk}>
                 <rect x={x} y={y} width={bw} height={Math.max(1, base - y)} rx={3} fill={zone.color} opacity={on ? 1 : 0.55} style={lit(on && hover === "p")} />
-                <T x={x + bw / 2} y={y - 6} text={`${(ps[i] * 100).toFixed(ps[i] < 0.1 ? 1 : 0)}`} size={on ? 11.5 : 9.5} bold={on} style={on ? INK : MUTED} />
-                <T x={x + bw / 2} y={base + 16} text={wk === W_LO ? `≤${wk}` : wk === W_HI ? `${wk}+` : String(wk)} size={10} bold={on} style={on ? INK : MUTED} />
+                <T x={x + bw / 2} y={y - 6} text={`${(ps[i] * 100).toFixed(ps[i] < 0.1 ? 1 : 0)}`} size={on ? 12 : 12} bold={on} style={on ? INK : MUTED} />
+                <T x={x + bw / 2} y={base + 16} text={wk === W_LO ? `≤${wk}` : wk === W_HI ? `${wk}+` : String(wk)} size={12} bold={on} style={on ? INK : MUTED} />
               </g>
             );
           })}
@@ -344,18 +344,18 @@ export function DueCycleCard({ side }: { side: Side }) {
       caption={t(isLmp ? "caption" : "captionOther", { c: ltr(`${c} ${dd}`), shift: ltr(`${signed(c - 28)} ${dd}`), date: ltr(f.long(adj)) })}
       visual={
         <Drawing {...d} hMin={HMIN} label={t("handle")} valueText={valueText} handle={{ x: X0 + ((c - 20) / 25) * (W - 2 * X0), y: trackY, dir: "horizontal" }} s={s} testId="due-c4">
-          <T x={PL - 8} y={18} text={t("axisY")} anchor="start" size={10.5} bold />
+          <T x={PL - 8} y={18} text={t("axisY")} anchor="start" size={12} bold />
           {/* Typical cycle band 24–38 days */}
           <rect x={xc(24)} y={top} width={xc(38) - xc(24)} height={base - top} fill="#22c55e" opacity={0.1} />
-          <T x={(xc(24) + xc(38)) / 2} y={top + 14} text={`24–38 ${dd} · ${t("typical")}`} size={10} style={{ fill: "#16a34a" }} bold />
+          <T x={(xc(24) + xc(38)) / 2} y={top + 14} text={`24–38 ${dd} · ${t("typical")}`} size={12} style={{ fill: "#16a34a" }} bold />
           {/* Grid + y ticks */}
           {[-5, 0, 5, 10, 15].map((v) => (
             <g key={v}>
               <line x1={PL} y1={ys(v)} x2={W - PR} y2={ys(v)} style={{ stroke: v === 0 ? "var(--ph-ink-muted)" : "var(--ph-grid)" }} strokeDasharray={v === 0 ? "5 4" : undefined} />
-              <T x={PL - 6} y={ys(v) + 4} text={signed(v)} anchor="end" size={10} />
+              <T x={PL - 6} y={ys(v) + 4} text={signed(v)} anchor="end" size={12} />
             </g>
           ))}
-          <T x={W - PR} y={ys(0) - 6} text={`28 ${dd} = ${t("classic")}`} anchor="end" size={10} bold style={INK} />
+          <T x={W - PR} y={ys(0) - 6} text={`28 ${dd} = ${t("classic")}`} anchor="end" size={12} bold style={INK} />
           {/* Shift line: one day later per day of cycle */}
           <line x1={xc(20)} y1={ys(-8)} x2={xc(45)} y2={ys(17)} style={{ stroke: "var(--ph-accent-strong)" }} strokeWidth={3} />
           {/* Reference point */}
@@ -363,7 +363,7 @@ export function DueCycleCard({ side }: { side: Side }) {
           <circle cx={px} cy={py} r={hover === "adj" || hover === "shift" ? 9 : 7} style={{ fill: "var(--ph-accent-strong)", stroke: "var(--ph-surface)" }} strokeWidth={2} />
           <T x={tagRight ? px + 12 : px - 12} y={py - 10} text={tag} anchor={tagRight ? "start" : "end"} size={12} bold style={INK} />
           {[20, 25, 30, 35, 40, 45].map((v) => (
-            <T key={v} x={xc(v)} y={base + 16} text={String(v)} size={10} bold={v === c} />
+            <T key={v} x={xc(v)} y={base + 16} text={String(v)} size={12} bold={v === c} />
           ))}
           <SvgTrack W={W} y={trackY} frac={(c - 20) / 25} lo={`20 ${dd}`} hi={`45 ${dd}`} />
         </Drawing>
@@ -419,10 +419,10 @@ export function DueMethodsCard({ side }: { side: Side }) {
       visual={
         <Drawing {...d} hMin={HMIN} label={t("handle")} valueText={valueText} handle={{ x: X0 + ((N - 2) / 4) * (W - 2 * X0), y: trackY, dir: "horizontal" }} s={s} testId="due-c5">
           {/* Due date box */}
-          <T x={dx + dw / 2} y={top - 10} text={tr("dueDate")} size={10.5} bold />
+          <T x={dx + dw / 2} y={top - 10} text={tr("dueDate")} size={12} bold />
           <rect x={dx} y={top} width={dw} height={bottom - top} rx={10} fill="#16a34a" style={lit(hover === "due")} />
           <T x={dx + dw / 2} y={(top + bottom) / 2 - 4} text={f.short(snap.due)} size={13} bold style={{ fill: "#fff" }} />
-          <T x={dx + dw / 2} y={(top + bottom) / 2 + 14} text="40+0" size={11} bold style={{ fill: "#fff" }} />
+          <T x={dx + dw / 2} y={(top + bottom) / 2 + 14} text="40+0" size={12} bold style={{ fill: "#fff" }} />
           {flows.map((fl, i) => {
             const cy = top + laneH * i + laneH / 2;
             const on = fl.on || hover === fl.key;
@@ -435,7 +435,7 @@ export function DueMethodsCard({ side }: { side: Side }) {
                 <line x1={ax + 4} y1={cy} x2={dx - 10} y2={cy} style={{ stroke: on ? "var(--ph-accent-strong)" : "var(--ph-ink-muted)" }} strokeWidth={on ? 3 : 2} />
                 <path d={`M ${dx - 12} ${cy - 6} L ${dx - 2} ${cy} L ${dx - 12} ${cy + 6} Z`} style={{ fill: on ? "var(--ph-accent-strong)" : "var(--ph-ink-muted)" }} />
                 <rect x={(ax + dx) / 2 - 30} y={cy - 11} width={60} height={22} rx={11} style={{ fill: "var(--ph-surface)", stroke: "var(--ph-line)" }} />
-                <T x={(ax + dx) / 2 - 3} y={cy + 4} text={`+${fl.days} ${dd}`} size={11} bold style={INK} />
+                <T x={(ax + dx) / 2 - 3} y={cy + 4} text={`+${fl.days} ${dd}`} size={12} bold style={INK} />
               </g>
             );
           })}
@@ -517,7 +517,7 @@ export function DueCountdownCard({ side }: { side: Side }) {
             return <path key={k} d={`M ${p0[0]} ${p0[1]} A ${r} ${r} 0 0 1 ${p1[0]} ${p1[1]}`} fill="none" stroke={k <= g % 7 ? "#14b8a6" : "var(--ph-grid)"} strokeWidth={sw} style={k <= g % 7 ? undefined : { stroke: "var(--ph-grid)" }} />;
           })}
           <T x={cx} y={cy + 2} text={left >= 0 ? String(left) : `−${-left}`} size={Math.min(30, R * 0.36)} bold style={INK} />
-          <T x={cx} y={cy + Math.min(30, R * 0.36) * 0.75} text={`${dd} · ${wd(g)}`} size={11} bold />
+          <T x={cx} y={cy + Math.min(30, R * 0.36) * 0.75} text={`${dd} · ${wd(g)}`} size={12} bold />
           {/* Legend */}
           {[
             { c: "#2563eb", text: `${t("ring280")} · ${Math.min(100, (g / TERM_DAYS) * 100).toFixed(0)}%` },
@@ -526,7 +526,7 @@ export function DueCountdownCard({ side }: { side: Side }) {
           ].map((l, i) => (
             <g key={i}>
               <rect x={X0} y={legendY + 8 + i * 18 - 9} width={10} height={10} rx={2} fill={l.c} />
-              <T x={X0 + 15} y={legendY + 8 + i * 18} text={l.text} anchor="start" size={10.5} bold style={INK} />
+              <T x={X0 + 15} y={legendY + 8 + i * 18} text={l.text} anchor="start" size={12} bold style={INK} />
             </g>
           ))}
           <SvgTrack W={W} y={trackY} frac={(off + 84) / 168} lo={`−84 ${dd}`} hi={`+84 ${dd}`} stops={[{ frac: 0.5, text: tc("abbr.today"), on: off === 0 }]} />
@@ -595,7 +595,7 @@ export function DueCalendarCard({ side }: { side: Side }) {
         <Drawing {...d} hMin={HMIN} label={t("handle")} valueText={valueText} handle={{ x: X0 + (M ? k / M : 0) * (W - 2 * X0), y: trackY, dir: "horizontal" }} s={s} testId="due-c7">
           <T x={W / 2} y={20} text={f.month(m0)} size={14} bold style={INK} />
           {Array.from({ length: 7 }, (_, i) => (
-            <T key={i} x={gx0 + cw * i + cw / 2} y={gy0 - 10} text={f.weekday(i)} size={10.5} bold />
+            <T key={i} x={gx0 + cw * i + cw / 2} y={gy0 - 10} text={f.weekday(i)} size={12} bold />
           ))}
           {Array.from({ length: m1 - m0 }, (_, i) => {
             const day = m0 + i;
@@ -622,7 +622,7 @@ export function DueCalendarCard({ side }: { side: Side }) {
                 />
                 {isToday && <rect x={x + 1.5} y={y + 1.5} width={cw - 3} height={ch - 3} rx={5} fill="none" style={{ stroke: "var(--ph-accent-strong)" }} strokeWidth={2.5} />}
                 {isDue && <rect x={x + 1.5} y={y + 1.5} width={cw - 3} height={ch - 3} rx={5} fill="#16a34a" />}
-                <T x={x + cw / 2} y={y + ch / 2 + 4} text={String(i + 1)} size={11} bold={isDue || isToday} style={isDue ? { fill: "#fff" } : inPreg ? INK : MUTED} />
+                <T x={x + cw / 2} y={y + ch / 2 + 4} text={String(i + 1)} size={12} bold={isDue || isToday} style={isDue ? { fill: "#fff" } : inPreg ? INK : MUTED} />
                 {ms && <circle cx={x + cw - 7} cy={y + 7} r={3.5} fill={ms.color} />}
               </g>
             );
@@ -691,7 +691,7 @@ export function DueErrorTrioCard({ side }: { side: Side }) {
                 <rect x={x} y={14} width={cw - 8} height={boxH} rx={10} style={{ fill: c.key === "cur" ? "var(--ph-accent-soft)" : "var(--ph-surface)", ...lit(on) }} />
                 <T x={x + (cw - 8) / 2} y={34} text={c.name} size={Math.min(10.5, (cw - 14) / (c.name.length * 0.56))} bold style={MUTED} />
                 <T x={x + (cw - 8) / 2} y={14 + boxH / 2 + 6} text={f.short(c.due)} size={c.key === "cur" ? 15 : 13} bold style={out ? { fill: "#dc2626" } : INK} />
-                <T x={x + (cw - 8) / 2} y={14 + boxH - 12} text={wd(c.ga)} size={11} bold />
+                <T x={x + (cw - 8) / 2} y={14 + boxH - 12} text={wd(c.ga)} size={12} bold />
               </g>
             );
           })}
@@ -701,10 +701,10 @@ export function DueErrorTrioCard({ side }: { side: Side }) {
           {[-21, -14, -7, 0, 7, 14, 21].map((v) => (
             <g key={v}>
               <line x1={xs(v)} y1={axisY - 4} x2={xs(v)} y2={axisY + 4} style={LINE} />
-              <T x={xs(v)} y={axisY + 26} text={signed(v)} size={10} bold={v === 0} />
+              <T x={xs(v)} y={axisY + 26} text={signed(v)} size={12} bold={v === 0} />
             </g>
           ))}
-          <T x={xs(thr)} y={axisY - 18} text={`±${thr}`} size={10} bold style={{ fill: "#16a34a" }} />
+          <T x={xs(thr)} y={axisY - 18} text={`±${thr}`} size={12} bold style={{ fill: "#16a34a" }} />
           {cols.map((c) => {
             const v = c.due - snap.due;
             const out = c.key !== "cur" && redate;

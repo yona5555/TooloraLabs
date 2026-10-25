@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import LiIndicatorCard from "./LiIndicatorCard";
 import { ENGLISH_LETTERS, VOWELS } from "./liMath";
 import { useLiLive } from "./LiLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const TOP = 12;
 const W = 330;
@@ -39,7 +40,7 @@ export default function LiLetterFrequency() {
               <rect x={x + 3 + slot * 0.48} y={H - BOTTOM - eh} width={slot * 0.3} height={eh} rx={2} className="fill-zinc-300 dark:fill-zinc-600" style={{ transition: "y 300ms ease, height 300ms ease" }}>
                 <title>{`${t("legendEnglish")} ${l.letter}: ${pct(l.english)}`}</title>
               </rect>
-              <text x={x + slot / 2} y={H - 4} textAnchor="middle" fontSize={10} fontWeight={600} fontFamily="ui-monospace, monospace" className="fill-zinc-600 dark:fill-zinc-300">
+              <text style={{ fontSize: svgPx(12) }} x={x + slot / 2} y={H - 4} textAnchor="middle" fontWeight={600} fontFamily="ui-monospace, monospace" className="fill-zinc-600 dark:fill-zinc-300">
                 {l.letter}
               </text>
             </g>

@@ -4,6 +4,7 @@ import { primeExponentTable } from "@tooloralabs/tools";
 import { useIsDarkMode } from "@/lib/use-dark-mode";
 import GcfLcmIndicatorCard from "./GcfLcmIndicatorCard";
 import { sup, useGcfLcmModel } from "./GcfLcmLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const S = 168;
 const C = S / 2;
@@ -50,8 +51,8 @@ export default function GcfLcmPrimeDonut() {
         <circle cx={C} cy={C} r={48} fill="none" strokeWidth={14} className="stroke-zinc-100 dark:stroke-zinc-800" />
         {ring("max", 72, lnL)}
         {lnG > 0 && ring("min", 48, lnG)}
-        <text x={C} y={C - 4} textAnchor="middle" className="fill-violet-700 font-mono text-[13px] font-bold dark:fill-violet-300">{f(result.lcm)}</text>
-        <text x={C} y={C + 12} textAnchor="middle" className="fill-emerald-700 font-mono text-[11px] font-semibold dark:fill-emerald-300">{f(result.gcf)}</text>
+        <text style={{ fontSize: svgPx(13) }} x={C} y={C - 4} textAnchor="middle" className="fill-violet-700 font-mono font-bold dark:fill-violet-300">{f(result.lcm)}</text>
+        <text style={{ fontSize: svgPx(12) }} x={C} y={C + 12} textAnchor="middle" className="fill-emerald-700 font-mono font-semibold dark:fill-emerald-300">{f(result.gcf)}</text>
       </svg>
       <ul className="w-full space-y-1 text-xs">
         <li className="text-zinc-500 dark:text-zinc-400">{t("outer")} · {t("inner")}</li>

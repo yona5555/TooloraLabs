@@ -6,6 +6,9 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import IndicatorWithTable from "@/components/tool-ui/IndicatorWithTable";
 import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { fmtInZone, fmtShortWeekday, hms, num, pct, type CdState, type Derived } from "./model";
+import { svgPx } from "@/components/tool-ui/svgPx";
+import { labelW, thinLabels } from "@/components/tool-ui/indicator-kit/SvgBits";
+import { useFitWidth } from "@/components/tool-ui/useFitWidth";
 
 export type IndicatorProps = { state: CdState; setState: (s: CdState) => void; d: Derived };
 
@@ -61,8 +64,8 @@ export function CdRingsCard({ d }: IndicatorProps) {
                 </g>
               );
             })}
-            <text x={C} y={C - 2} textAnchor="middle" fontSize={20} fontWeight={800} className={valueText}>{num(b.days)}</text>
-            <text x={C} y={C + 15} textAnchor="middle" fontSize={11} fontWeight={700} fill={BLUE} style={{ fontFamily: "ui-monospace, monospace" }}>
+            <text style={{ fontSize: svgPx(20) }} x={C} y={C - 2} textAnchor="middle" fontWeight={800} className={valueText}>{num(b.days)}</text>
+            <text x={C} y={C + 15} textAnchor="middle" fontWeight={700} fill={BLUE} style={{ fontSize: svgPx(12), fontFamily: "ui-monospace, monospace" }}>
               {hms(b.hours, b.minutes, b.seconds)}
             </text>
           </svg>
@@ -91,7 +94,7 @@ export function CdTimelineCard({ state, d }: IndicatorProps) {
   const tm = useTranslations("tools.countdown-to-event-calculator.pro.milestones");
   const locale = useLocale();
   const [preview, setPreview] = useState<number | null>(null);
-  const W = 420;
+  const [fitRef, W] = useFitWidth(420);
   const H = 150;
   const L = 18;
   const R = 18;
@@ -107,6 +110,8 @@ export function CdTimelineCard({ state, d }: IndicatorProps) {
   const stations = [
     ...d.milestones.filter((m) => m.utcMs > start && m.utcMs < end).map((m) => ({ key: m.key, ms: m.utcMs, label: tm(`${m.key}Short`), passed: m.passed })),
   ];
+  // labels alternate above and below the track; one that would touch its row neighbour is left out (§39)
+  const shown = [0, 1].map((row) => thinLabels(stations.map((s, i) => (i % 2 === row ? { x: x(s.ms), w: labelW(s.label) } : { x: -1e6, w: 0 }))));
   return (
     <SectionCard title={t("timeline.title")}>
       <p className="mb-3 text-sm text-zinc-600 dark:text-zinc-300">{t("timeline.intro")}</p>
@@ -114,23 +119,23 @@ export function CdTimelineCard({ state, d }: IndicatorProps) {
         workedExampleTitle={t("worked")}
         indicator={
           <div className="w-[420px] max-w-full">
-            <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("timeline.title")} className="max-w-full" style={{ direction: "ltr" }}>
+            <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("timeline.title")} className="max-w-full" style={{ direction: "ltr" }}>
               <line x1={L} x2={W - R} y1={Y} y2={Y} stroke="currentColor" strokeOpacity={0.2} strokeWidth={8} strokeLinecap="round" />
               <line x1={L} x2={x(d.nowMs)} y1={Y} y2={Y} stroke={BLUE} strokeWidth={8} strokeLinecap="round" style={{ transition: "all 600ms ease" }} />
               {stations.map((s, i) => (
                 <g key={s.key}>
                   <circle cx={x(s.ms)} cy={Y} r={6} fill={s.passed ? AMBER : "white"} stroke={AMBER} strokeWidth={2} />
-                  <text x={x(s.ms)} y={i % 2 ? Y + 24 : Y - 14} textAnchor="middle" fontSize={10} fontWeight={700} className={valueText}>{s.label}</text>
+                  {shown[i % 2][i] && <text style={{ fontSize: svgPx(12) }} x={x(s.ms)} y={i % 2 ? Y + 24 : Y - 14} textAnchor="middle" fontWeight={700} className={valueText}>{s.label}</text>}
                 </g>
               ))}
               <circle cx={L} cy={Y} r={7} fill={BLUE} />
-              <text x={L} y={Y + 42} textAnchor="start" fontSize={9} className={axisText}>{fmtInZone(locale, start, state.zone, false)}</text>
+              <text style={{ fontSize: svgPx(12) }} x={L} y={Y + 42} textAnchor="start" className={axisText}>{fmtInZone(locale, start, state.zone, false)}</text>
               <circle cx={W - R} cy={Y} r={8} fill={GREEN} />
-              <text x={W - R} y={Y + 42} textAnchor="end" fontSize={9} className={axisText}>{fmtInZone(locale, end, state.zone, false)}</text>
+              <text style={{ fontSize: svgPx(12) }} x={W - R} y={Y + 42} textAnchor="end" className={axisText}>{fmtInZone(locale, end, state.zone, false)}</text>
               <g style={{ transition: preview === null ? "transform 600ms ease" : "none" }} transform={`translate(${x(pMs)} 0)`}>
                 <line x1={0} x2={0} y1={Y - 34} y2={Y + 12} stroke={VIOLET} strokeWidth={2} />
                 <rect x={-30} y={Y - 52} width={60} height={18} rx={9} fill={VIOLET} />
-                <text x={0} y={Y - 39} textAnchor="middle" fontSize={10} fontWeight={800} fill="white">{pct(frac, 0)}</text>
+                <text style={{ fontSize: svgPx(12) }} x={0} y={Y - 39} textAnchor="middle" fontWeight={800} fill="white">{pct(frac, 0)}</text>
               </g>
             </svg>
             <input
@@ -202,8 +207,8 @@ export function CdBusinessSplitCard({ state, setState, d }: IndicatorProps) {
                   <svg width={W - 20} height={BH} viewBox={`0 0 ${W} ${BH}`} className="max-w-full" style={{ direction: "ltr" }} aria-hidden>
                     <rect x={L} y={0} width={Math.max(0, bw)} height={BH} rx={6} fill={BLUE} style={{ transition: "width 500ms ease" }} />
                     <rect x={L + bw} y={0} width={Math.max(0, ww)} height={BH} rx={6} fill={AMBER} style={{ transition: "all 500ms ease" }} />
-                    {bw > 36 && <text x={L + bw / 2} y={BH / 2 + 5} textAnchor="middle" fontSize={14} fontWeight={800} fill="white">{num(bar.c.businessDays)}</text>}
-                    {ww > 30 && <text x={L + bw + ww / 2} y={BH / 2 + 5} textAnchor="middle" fontSize={14} fontWeight={800} fill="white">{num(bar.c.weekendDays)}</text>}
+                    {bw > 36 && <text style={{ fontSize: svgPx(14) }} x={L + bw / 2} y={BH / 2 + 5} textAnchor="middle" fontWeight={800} fill="white">{num(bar.c.businessDays)}</text>}
+                    {ww > 30 && <text style={{ fontSize: svgPx(14) }} x={L + bw + ww / 2} y={BH / 2 + 5} textAnchor="middle" fontWeight={800} fill="white">{num(bar.c.weekendDays)}</text>}
                   </svg>
                 </button>
               );
@@ -230,7 +235,7 @@ export function CdBusinessSplitCard({ state, setState, d }: IndicatorProps) {
 export function CdWeekdayBarsCard({ state, d }: IndicatorProps) {
   const t = useIndT();
   const locale = useLocale();
-  const W = 400;
+  const [fitRef, W] = useFitWidth(400);
   const H = 210;
   const B = 34;
   const off = new Set(weekendDays(state.weekend));
@@ -245,7 +250,7 @@ export function CdWeekdayBarsCard({ state, d }: IndicatorProps) {
         workedExampleTitle={t("worked")}
         indicator={
           <PhoneMini slot={1} title={t("weekdays.title")}>
-          <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("weekdays.title")} className="max-w-full" style={{ direction: "ltr" }}>
+          <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("weekdays.title")} className="max-w-full" style={{ direction: "ltr" }}>
             {order.map((dow, i) => {
               const v = d.weekdayCounts[dow];
               const h = (v / max) * (H - B - 30);
@@ -253,8 +258,8 @@ export function CdWeekdayBarsCard({ state, d }: IndicatorProps) {
               return (
                 <g key={dow}>
                   <rect x={cx - bw * 0.34} y={H - B - h} width={bw * 0.68} height={Math.max(2, h)} rx={4} fill={off.has(dow) ? AMBER : BLUE} fillOpacity={0.9} style={{ transition: "all 500ms ease" }} />
-                  <text x={cx} y={H - B - h - 5} textAnchor="middle" fontSize={12} fontWeight={800} className={valueText}>{num(v)}</text>
-                  <text x={cx} y={H - B + 15} textAnchor="middle" fontSize={11} fontWeight={700} className={valueText}>{fmtShortWeekday(locale, dow)}</text>
+                  <text style={{ fontSize: svgPx(12) }} x={cx} y={H - B - h - 5} textAnchor="middle" fontWeight={800} className={valueText}>{num(v)}</text>
+                  <text style={{ fontSize: svgPx(12) }} x={cx} y={H - B + 15} textAnchor="middle" fontWeight={700} className={valueText}>{fmtShortWeekday(locale, dow)}</text>
                   {dow === eventDow && <circle cx={cx} cy={H - B + 26} r={4} fill={GREEN} />}
                 </g>
               );

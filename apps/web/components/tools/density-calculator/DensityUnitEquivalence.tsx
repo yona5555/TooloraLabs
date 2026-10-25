@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { LB_FT3_PER_G_CM3 } from "@tooloralabs/tools";
 import DensityIndicatorCard, { DensityIndicatorUnavailable } from "./DensityIndicatorCard";
 import { useDensityModel } from "./DensityLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 214;
@@ -37,17 +38,17 @@ export default function DensityUnitEquivalence() {
         return (
           <g key={c.unit}>
             <rect x={x} y={y} width={BOX_W} height={BOX_H} rx={10} strokeWidth={c.strong ? 3 : 1.5} className={`fill-white dark:fill-zinc-900 ${c.cls}`} />
-            <text x={x + BOX_W / 2} y={y + 22} textAnchor="middle" fontSize={14} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(14) }} x={x + BOX_W / 2} y={y + 22} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
               {c.value}
             </text>
-            <text x={x + BOX_W / 2} y={y + 38} textAnchor="middle" fontSize={10.5} fontWeight={600} className="fill-zinc-600 dark:fill-zinc-300">
+            <text style={{ fontSize: svgPx(12) }} x={x + BOX_W / 2} y={y + 38} textAnchor="middle" fontWeight={600} className="fill-zinc-600 dark:fill-zinc-300">
               {c.unit}
             </text>
-            <text x={x + BOX_W / 2} y={y + BOX_H + 10} textAnchor="middle" fontSize={8.5} fontFamily="ui-monospace, monospace" className="fill-zinc-400 dark:fill-zinc-500">
+            <text style={{ fontSize: svgPx(12) }} x={x + BOX_W / 2} y={y + BOX_H + 10} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-400 dark:fill-zinc-500">
               {c.factor}
             </text>
             {i % 2 === 0 && (
-              <text x={W / 2} y={y + 32} textAnchor="middle" fontSize={18} fontWeight={700} className="fill-zinc-400 dark:fill-zinc-500">
+              <text style={{ fontSize: svgPx(18) }} x={W / 2} y={y + 32} textAnchor="middle" fontWeight={700} className="fill-zinc-400 dark:fill-zinc-500">
                 =
               </text>
             )}

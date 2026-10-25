@@ -4,6 +4,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import TriangleWorkedExampleNote from "./TriangleWorkedExampleNote";
 import { EXAMPLE, compactnessIndex, compactnessMin, compactnessMax, round } from "./triangleEducationMath";
 import GapFreeRow from "@/components/tool-ui/GapFreeRow";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 type ZoneKey = "compact" | "balanced" | "elongated";
 const ZONES: { key: ZoneKey; from: number; to: number; colorClass: string }[] = [
@@ -60,10 +61,10 @@ export default function TriangleCompactnessZoneStrip() {
             })}
             <line x1={markerX} y1={BAR_Y - 10} x2={markerX} y2={BAR_Y + BAR_H + 10} stroke="currentColor" strokeWidth={2.5} />
             <circle cx={markerX} cy={BAR_Y - 10} r={4} fill="currentColor" />
-            <text x={labelX} y={BAR_Y - 16} textAnchor={labelAnchor} fontSize={12} fontWeight={700} fill="currentColor">
+            <text style={{ fontSize: svgPx(12) }} x={labelX} y={BAR_Y - 16} textAnchor={labelAnchor} fontWeight={700} fill="currentColor">
               {round(compactnessIndex)}
             </text>
-            <text x={labelX} y={BAR_Y + BAR_H + 24} textAnchor={labelAnchor} fontSize={11} fontWeight={600} className={CAPTION_COLOR[zone]}>
+            <text style={{ fontSize: svgPx(12) }} x={labelX} y={BAR_Y + BAR_H + 24} textAnchor={labelAnchor} fontWeight={600} className={CAPTION_COLOR[zone]}>
               {tZones(zone)}
             </text>
           </svg>

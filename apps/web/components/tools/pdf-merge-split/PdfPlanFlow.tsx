@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { chunkRanges } from "@tooloralabs/tools";
 import PdfIndicatorCard, { PdfIndicatorUnavailable } from "./PdfIndicatorCard";
 import { SOURCE_FILL, usePdfLive, usePdfModel } from "./PdfLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const ROW = 34;
@@ -36,12 +37,12 @@ export default function PdfPlanFlow() {
           return (
             <g key={i}>
               <rect x={0} y={y} width={120} height={26} rx={13} className="fill-zinc-200 dark:fill-zinc-700" />
-              <text x={60} y={y + 17} textAnchor="middle" fontSize={12} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-100">
+              <text style={{ fontSize: svgPx(12) }} x={60} y={y + 17} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-100">
                 {it.left.length > 15 ? `${it.left.slice(0, 14)}…` : it.left}
               </text>
               <path d={`M 124 ${y + 13} H 176 m -6 -5 l 6 5 l -6 5`} fill="none" strokeWidth={1.5} className="stroke-zinc-400 dark:stroke-zinc-500" />
               <rect x={182} y={y} width={W - 182} height={26} rx={13} className={it.ok ? SOURCE_FILL[i % SOURCE_FILL.length] : "fill-rose-500 dark:fill-rose-400"} />
-              <text x={182 + (W - 182) / 2} y={y + 17} textAnchor="middle" fontSize={12} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-white">
+              <text style={{ fontSize: svgPx(12) }} x={182 + (W - 182) / 2} y={y + 17} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-white">
                 {it.mid}
               </text>
             </g>

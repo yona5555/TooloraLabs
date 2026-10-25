@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import DiscountWorkedExampleNote from "./DiscountWorkedExampleNote";
 import GapFreeRow from "@/components/tool-ui/GapFreeRow";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 // Illustrative, not data-driven: 100 -> 70 (30% off) -> 63 (further 10% off).
 const WIDTH = 320;
@@ -32,7 +33,7 @@ export default async function DiscountStackDiagram() {
                 <g key={i}>
                   <rect x={0} y={y} width={WIDTH} height={BAR_HEIGHT} rx={4} fill="none" stroke="currentColor" strokeWidth={1} opacity={0.3} />
                   <rect x={0} y={y} width={row.width} height={BAR_HEIGHT} rx={4} fill="currentColor" opacity={0.15 + i * 0.25} />
-                  <text x={8} y={y + BAR_HEIGHT / 2 + 4} fontSize={11} fontWeight={700} fill="currentColor">
+                  <text style={{ fontSize: svgPx(12) }} x={8} y={y + BAR_HEIGHT / 2 + 4} fontWeight={700} fill="currentColor">
                     {labels[i]}
                   </text>
                 </g>

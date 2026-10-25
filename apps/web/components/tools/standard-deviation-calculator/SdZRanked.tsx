@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import SdIndicatorCard from "./SdIndicatorCard";
 import { BAND_FILL, bandOf, useSdModel } from "./SdLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 300;
 const ROW = 24;
@@ -27,7 +28,7 @@ export default function SdZRanked() {
       {[1, 2, 3].map((k) => (
         <g key={k}>
           <line x1={sx(k)} y1={0} x2={sx(k)} y2={rows.length * ROW} strokeDasharray="3 3" className="stroke-zinc-300 dark:stroke-zinc-600" />
-          <text x={sx(k)} y={rows.length * ROW + 14} textAnchor="middle" fontSize={10} className="fill-zinc-500 dark:fill-zinc-400">
+          <text style={{ fontSize: svgPx(12) }} x={sx(k)} y={rows.length * ROW + 14} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
             {`${k}σ`}
           </text>
         </g>
@@ -36,11 +37,11 @@ export default function SdZRanked() {
         const y = i * ROW;
         return (
           <g key={r.index}>
-            <text x={LABEL_W - 6} y={y + 16} textAnchor="end" fontSize={11} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
+            <text style={{ fontSize: svgPx(12) }} x={LABEL_W - 6} y={y + 16} textAnchor="end" fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
               {`x = ${f(r.value)}`}
             </text>
             <rect x={LABEL_W} y={y + 5} width={Math.max(2, sx(r.z) - LABEL_W)} height={ROW - 9} rx={4} className={BAND_FILL[bandOf(r.z)]} />
-            <text x={W} y={y + 16} textAnchor="end" fontSize={11} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={W} y={y + 16} textAnchor="end" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
               {`${r.z >= 0 ? "+" : "−"}${f(Math.abs(r.z), 2)}`}
             </text>
           </g>

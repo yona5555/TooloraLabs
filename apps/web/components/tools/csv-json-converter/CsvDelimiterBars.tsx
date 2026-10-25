@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import CsvIndicatorCard, { CsvIndicatorUnavailable } from "./CsvIndicatorCard";
 import { delimiterName, useCsvModel } from "./CsvLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 210;
@@ -38,21 +39,20 @@ export default function CsvDelimiterBars() {
           <g key={s.d}>
             <rect x={cx - 22} y={y(s.mean)} width={44} height={Math.max(2, BASE - y(s.mean))} rx={4} className={on ? "fill-blue-600 dark:fill-blue-400" : "fill-zinc-300 dark:fill-zinc-600"} />
             {s.max > s.min && <line x1={cx} y1={y(s.max)} x2={cx} y2={y(s.min)} strokeWidth={2} className="stroke-rose-500" />}
-            <text x={cx} y={y(Math.max(s.mean, s.max)) - 6} textAnchor="middle" fontSize={12} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={cx} y={y(Math.max(s.mean, s.max)) - 6} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
               {f(s.mean, 1)}
             </text>
-            <text
+            <text style={{ fontSize: svgPx(14) }}
               x={cx}
               y={BASE + 18}
               textAnchor="middle"
-              fontSize={14}
               fontWeight={700}
               fontFamily="ui-monospace, monospace"
               className={on ? "fill-blue-700 dark:fill-blue-300" : "fill-zinc-600 dark:fill-zinc-300"}
             >
               {delimiterName(s.d)}
             </text>
-            <text x={cx} y={BASE + 33} textAnchor="middle" fontSize={11} className={s.consistent && s.mean > 0 ? "fill-emerald-600 dark:fill-emerald-400" : "fill-zinc-400 dark:fill-zinc-500"}>
+            <text style={{ fontSize: svgPx(12) }} x={cx} y={BASE + 33} textAnchor="middle" className={s.consistent && s.mean > 0 ? "fill-emerald-600 dark:fill-emerald-400" : "fill-zinc-400 dark:fill-zinc-500"}>
               {s.consistent && s.mean > 0 ? t("steady") : s.mean > 0 ? t("varies") : t("absent")}
             </text>
           </g>

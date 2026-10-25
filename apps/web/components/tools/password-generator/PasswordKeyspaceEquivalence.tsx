@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import PasswordIndicatorCard, { PasswordIndicatorUnavailable } from "./PasswordIndicatorCard";
 import { usePasswordModel } from "./PasswordLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const ROW = 40;
@@ -34,13 +35,13 @@ export default function PasswordKeyspaceEquivalence() {
         const gap = (W - LABEL - 52) / maxDots;
         return (
           <g key={r.key}>
-            <text x={LABEL - 8} y={y + 4} textAnchor="end" fontSize={12} fontWeight={600} className="fill-zinc-700 dark:fill-zinc-200">
+            <text style={{ fontSize: svgPx(12) }} x={LABEL - 8} y={y + 4} textAnchor="end" fontWeight={600} className="fill-zinc-700 dark:fill-zinc-200">
               {t(r.key)}
             </text>
             {Array.from({ length: shown }, (_, k) => (
               <circle key={k} cx={LABEL + k * gap + gap / 2} cy={y} r={Math.min(6, gap / 2 - 1)} className={r.cls} />
             ))}
-            <text x={W - 2} y={y + 4} textAnchor="end" fontSize={12} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={W - 2} y={y + 4} textAnchor="end" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
               {f(r.value, 1)}
             </text>
           </g>

@@ -6,7 +6,9 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import IndicatorWithTable from "@/components/tool-ui/IndicatorWithTable";
 import { AMBER, axisText, BLUE, GREEN, useIndT, valueText, VIOLET, type IndicatorProps } from "./CountdownIndicatorsA";
 import { fmtHijri, fmtInZone, formatOffset, hijriMonthName, num, two, zoneName, type CdState } from "./model";
-import { px2 } from "@/components/tool-ui/indicator-kit/SvgBits";
+import { labelW, px2 } from "@/components/tool-ui/indicator-kit/SvgBits";
+import { svgPx } from "@/components/tool-ui/svgPx";
+import { useFitWidth } from "@/components/tool-ui/useFitWidth";
 
 const DAY_MS = 86_400_000;
 
@@ -23,7 +25,7 @@ export function CdLogScaleCard({ d }: IndicatorProps) {
     { key: "months", v: s / 2_629_746, div: "2629746" },
     { key: "years", v: s / 31_556_952, div: "31556952" },
   ];
-  const W = 420;
+  const [fitRef, W] = useFitWidth(420);
   const RH = 27;
   const L = 64;
   const R = 70;
@@ -31,6 +33,8 @@ export function CdLogScaleCard({ d }: IndicatorProps) {
   const maxExp = Math.max(2, Math.ceil(Math.log10(s)));
   const minExp = -2;
   const x = (v: number) => L + ((Math.log10(Math.max(10 ** minExp, v)) - minExp) / (maxExp - minExp)) * (W - L - R);
+  // every nth power of ten is labelled when a decade is narrower than its label (§39: fewer ticks, same size)
+  const every = Math.max(1, Math.ceil((labelW("10-2") + 6) / ((W - L - R) / (maxExp - minExp))));
   const colors = [AMBER, GREEN, VIOLET, BLUE, "#0ea5e9", "#ec4899", "#64748b"];
   const fmt = (v: number) => (v >= 100 ? num(Math.floor(v)) : num(v, v >= 1 ? 2 : 3));
   return (
@@ -39,18 +43,18 @@ export function CdLogScaleCard({ d }: IndicatorProps) {
       <IndicatorWithTable
         workedExampleTitle={t("worked")}
         indicator={
-          <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("log.title")} className="max-w-full" style={{ direction: "ltr" }}>
+          <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("log.title")} className="max-w-full" style={{ direction: "ltr" }}>
             {Array.from({ length: maxExp - minExp + 1 }, (_, i) => minExp + i).map((e) => (
               <g key={e}>
                 <line x1={x(10 ** e)} x2={x(10 ** e)} y1={0} y2={H - 18} stroke="currentColor" strokeOpacity={e === 0 ? 0.35 : 0.1} />
-                <text x={x(10 ** e)} y={H - 5} textAnchor="middle" fontSize={8.5} className={axisText}>10<tspan baselineShift="super" fontSize={6.5}>{e}</tspan></text>
+                {e % every === 0 && <text style={{ fontSize: svgPx(12) }} x={x(10 ** e)} y={H - 5} textAnchor="middle" className={axisText}>10<tspan style={{ fontSize: svgPx(12) }} baselineShift="super">{e}</tspan></text>}
               </g>
             ))}
             {units.map((u, i) => (
               <g key={u.key}>
-                <text x={L - 6} y={i * RH + 17} textAnchor="end" fontSize={10} fontWeight={700} className={valueText}>{t(`log.u.${u.key}`)}</text>
+                <text style={{ fontSize: svgPx(12) }} x={L - 6} y={i * RH + 17} textAnchor="end" fontWeight={700} className={valueText}>{t(`log.u.${u.key}`)}</text>
                 <rect x={L} y={i * RH + 5} width={Math.max(2, x(u.v) - L)} height={RH - 9} rx={4} fill={colors[i]} style={{ transition: "width 900ms linear" }} />
-                <text x={x(u.v) + 5} y={i * RH + 17} fontSize={10} fontWeight={800} className={valueText}>{fmt(u.v)}</text>
+                <text style={{ fontSize: svgPx(12) }} x={x(u.v) + 5} y={i * RH + 17} fontWeight={800} className={valueText}>{fmt(u.v)}</text>
               </g>
             ))}
           </svg>
@@ -80,10 +84,10 @@ function ClockFace({ cx, cy, h, m, color, dayShift }: { cx: number; cy: number; 
       <line x1={cx} y1={cy} x2={px2(cx + 24 * Math.cos(rad(ha)))} y2={px2(cy + 24 * Math.sin(rad(ha)))} stroke={night ? "#f8fafc" : "#0f172a"} strokeWidth={3.5} strokeLinecap="round" style={{ transition: "all 600ms ease" }} />
       <line x1={cx} y1={cy} x2={px2(cx + 36 * Math.cos(rad(ma)))} y2={px2(cy + 36 * Math.sin(rad(ma)))} stroke={color} strokeWidth={2.2} strokeLinecap="round" style={{ transition: "all 600ms ease" }} />
       <circle cx={cx} cy={cy} r={3} fill={color} />
-      <text x={cx} y={cy + r + 18} textAnchor="middle" fontSize={15} fontWeight={800} className={valueText} style={{ fontFamily: "ui-monospace, monospace" }}>
+      <text x={cx} y={cy + r + 18} textAnchor="middle" fontWeight={800} className={valueText} style={{ fontSize: svgPx(15), fontFamily: "ui-monospace, monospace" }}>
         {`${two(h)}:${two(m)}`}
         {dayShift !== 0 && (
-          <tspan fontSize={10} fill={AMBER}>{` ${dayShift > 0 ? "+" : "−"}${Math.abs(dayShift)}d`}</tspan>
+          <tspan style={{ fontSize: svgPx(12) }} fill={AMBER}>{` ${dayShift > 0 ? "+" : "−"}${Math.abs(dayShift)}d`}</tspan>
         )}
       </text>
     </g>
@@ -119,8 +123,8 @@ export function CdZoneEquivalenceCard({ state, d }: IndicatorProps) {
               {parts.map((z, i) => (
                 <ClockFace key={z.zone + i} cx={70 + i * 140} cy={56} h={z.p.hour} m={z.p.minute} color={z.color} dayShift={z.shift} />
               ))}
-              <text x={140} y={60} textAnchor="middle" fontSize={20} fontWeight={800} className={axisText}>=</text>
-              <text x={280} y={60} textAnchor="middle" fontSize={20} fontWeight={800} className={axisText}>=</text>
+              <text style={{ fontSize: svgPx(20) }} x={140} y={60} textAnchor="middle" fontWeight={800} className={axisText}>=</text>
+              <text style={{ fontSize: svgPx(20) }} x={280} y={60} textAnchor="middle" fontWeight={800} className={axisText}>=</text>
             </svg>
             <div className="grid grid-cols-3 text-center text-[11px] font-semibold text-zinc-600 dark:text-zinc-300" dir="ltr">
               {parts.map((z, i) => (
@@ -155,7 +159,7 @@ export function CdHijriYearCard({ state, d }: IndicatorProps) {
   const months = useMemo(() => Array.from({ length: 12 }, (_, i) => ({ m: i + 1, len: hijriMonthLength(hy, i + 1), name: hijriMonthName(locale, hy, i + 1) })), [hy, locale]);
   const yearLen = months.reduce((s, m) => s + m.len, 0);
   const today = gregorianToHijri(countdownCivilInZone(d.nowMs, state.zone));
-  const W = 420;
+  const [fitRef, W] = useFitWidth(420);
   const H = 120;
   const L = 6;
   const BW = W - 2 * L;
@@ -171,28 +175,28 @@ export function CdHijriYearCard({ state, d }: IndicatorProps) {
       <IndicatorWithTable
         workedExampleTitle={t("worked")}
         indicator={
-          <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("hijri.title")} className="max-w-full" style={{ direction: "ltr" }}>
+          <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("hijri.title")} className="max-w-full" style={{ direction: "ltr" }}>
             {months.map((m) => {
               const x0 = L + (startOf(m.m) / yearLen) * BW;
               const w = (m.len / yearLen) * BW;
               return (
                 <g key={m.m}>
                   <rect x={x0 + 0.5} y={40} width={w - 1} height={34} fill={color(m.m)} rx={3} />
-                  <text x={x0 + w / 2} y={61} textAnchor="middle" fontSize={11} fontWeight={800} fill={m.m === 9 || m.m === 12 || m.m === 1 ? "white" : "#0f172a"}>{m.m}</text>
-                  <text x={x0 + w / 2} y={88} textAnchor="middle" fontSize={8.5} className={axisText}>{m.len}</text>
+                  <text style={{ fontSize: svgPx(12) }} x={x0 + w / 2} y={61} textAnchor="middle" fontWeight={800} fill={m.m === 9 || m.m === 12 || m.m === 1 ? "white" : "#0f172a"}>{m.m}</text>
+                  <text style={{ fontSize: svgPx(12) }} x={x0 + w / 2} y={88} textAnchor="middle" className={axisText}>{m.len}</text>
                 </g>
               );
             })}
             {today.year === hy && (
               <g>
                 <line x1={pos(today.month, today.day)} x2={pos(today.month, today.day)} y1={36} y2={78} stroke={VIOLET} strokeWidth={2.5} strokeDasharray="3 2" />
-                <text x={pos(today.month, today.day)} y={104} textAnchor="middle" fontSize={9} fontWeight={700} fill={VIOLET}>▲</text>
+                <text style={{ fontSize: svgPx(12) }} x={pos(today.month, today.day)} y={104} textAnchor="middle" fontWeight={700} fill={VIOLET}>▲</text>
               </g>
             )}
             <g style={{ transition: "transform 500ms ease" }} transform={`translate(${eventPos} 0)`}>
               <line x1={0} x2={0} y1={22} y2={78} stroke="#dc2626" strokeWidth={2.5} />
               <rect x={-26} y={6} width={52} height={17} rx={8} fill="#dc2626" />
-              <text x={0} y={18} textAnchor="middle" fontSize={10} fontWeight={800} fill="white">{`${d.hijri.day}/${d.hijri.month}`}</text>
+              <text style={{ fontSize: svgPx(12) }} x={0} y={18} textAnchor="middle" fontWeight={800} fill="white">{`${d.hijri.day}/${d.hijri.month}`}</text>
             </g>
           </svg>
         }

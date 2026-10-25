@@ -7,6 +7,7 @@ import { Drawing, INK, lit, MUTED, px2, SvgLabel as T, useDrawing } from "@/comp
 import { DualRingGauge } from "@/components/tool-ui/indicator-kit/DualRingGauge";
 import type { IssueType } from "./types";
 import { A_EXCEPTIONS, align, AN_EXCEPTIONS, ARTICLE_PHRASES, check, CLEAN, INJECT, ISSUE_TYPES, MESSY, MESSY_B, RULES, ruleOf, sentencesOf, SPELL_LIST, suggestionFor, TYPE_COLOR, type Op } from "./sgMath";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 /**
  * The seven 2D spelling & grammar indicator cards (the 3D word ribbon lives in SGCard3D). Each card
@@ -66,8 +67,8 @@ export function SGLettersCard({ side }: { side: Side }) {
       table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
       visual={
         <Drawing {...d} hMin={HMIN} label={t("handle")} valueText={valueText} handle={{ x: X0 + (s.value / (SPELL_LIST.length - 1)) * (W - 2 * X0), y: trackY, dir: "horizontal" }} s={s} testId="sg-c1">
-          <T x={X0} y={20} text={t("typed")} anchor="start" size={10.5} bold style={{ fill: "var(--ai-d)" }} />
-          <T x={X0} y={yBot + 40} text={t("suggested")} anchor="start" size={10.5} bold style={{ fill: "var(--ai-c)" }} />
+          <T x={X0} y={20} text={t("typed")} anchor="start" size={12} bold style={{ fill: "var(--ai-d)" }} />
+          <T x={X0} y={yBot + 40} text={t("suggested")} anchor="start" size={12} bold style={{ fill: "var(--ai-c)" }} />
           {cur.ops.map((o, i) => {
             const n = o.op === "swap" ? 2 : 1;
             const cx0 = x0 + cw * (col + 0.5);
@@ -157,7 +158,7 @@ export function SGSlipsCard({ side }: { side: Side }) {
             const bh = Math.min(30, rowH * 0.55);
             return (
               <g key={k.k} onPointerEnter={() => setHover("n")} onPointerLeave={() => setHover(null)}>
-                <T x={X0 - 10} y={y + 4} text={t(`op.${k.k}`)} anchor="end" size={11.5} bold style={on ? INK : MUTED} />
+                <T x={X0 - 10} y={y + 4} text={t(`op.${k.k}`)} anchor="end" size={12} bold style={on ? INK : MUTED} />
                 <rect x={X0} y={y - bh / 2} width={Math.max(bh, xl(k.n) - X0)} height={bh} rx={bh / 2} style={{ fill: OP_COLOR[k.k], opacity: on ? 1 : 0.5, ...lit(on && hover === "n") }} />
                 <T x={xl(k.n) - 10} y={y + 4} text={String(k.n)} anchor="end" size={12} bold style={{ fill: "var(--ph-surface)" }} />
               </g>
@@ -229,7 +230,7 @@ export function SGArticleCard({ side }: { side: Side }) {
                 {i > 0 && narrow && <path d={`M ${x + w / 2} ${y - 17} L ${x + w / 2} ${y - 3} M ${x + w / 2 - 5} ${y - 8} L ${x + w / 2} ${y - 3} L ${x + w / 2 + 5} ${y - 8}`} fill="none" style={{ stroke: "var(--ph-ink-muted)" }} strokeWidth={2} />}
                 <rect x={x} y={y} width={w} height={h} rx={h / 2} style={{ fill, ...lit(hover === n.key) }} />
                 <T x={x + w / 2} y={y + h / 2 + 5} text={n.label} size={13} bold style={{ fill: dim ? "var(--ph-ink-muted)" : "var(--ph-surface)" }} />
-                {narrow ? <T x={X0} y={y + h / 2 + 4} text={n.sub} anchor="start" size={10.5} /> : <T x={x + nw / 2} y={ny + 74} text={n.sub} size={10.5} />}
+                {narrow ? <T x={X0} y={y + h / 2 + 4} text={n.sub} anchor="start" size={12} /> : <T x={x + nw / 2} y={ny + 74} text={n.sub} size={12} />}
               </g>
             );
           })}
@@ -352,14 +353,14 @@ export function SGTypesCard({ side }: { side: Side }) {
               ) : null,
             )}
             <T x={cx} y={cy - 2} text={String(out.issues.length)} size={20} bold style={INK} />
-            <T x={cx} y={cy + 16} text={t("centre")} size={10.5} />
+            <T x={cx} y={cy + 16} text={t("centre")} size={12} />
             {parts.map((p, i) => {
               const y = cy - 54 + i * 36;
               return (
                 <g key={p.key} onPointerEnter={() => setHover(p.key)} onPointerLeave={() => setHover(null)}>
                   <circle cx={lx} cy={y} r={7} style={{ fill: p.color }} />
-                  <T x={lx + 14} y={y - 2} text={tl(p.key)} anchor="start" size={11.5} bold style={INK} />
-                  <T x={lx + 14} y={y + 13} text={`${p.v} · ${((p.v / total) * 100).toFixed(0)} %`} anchor="start" size={10.5} />
+                  <T x={lx + 14} y={y - 2} text={tl(p.key)} anchor="start" size={12} bold style={INK} />
+                  <T x={lx + 14} y={y + 13} text={`${p.v} · ${((p.v / total) * 100).toFixed(0)} %`} anchor="start" size={12} />
                 </g>
               );
             })}
@@ -421,9 +422,9 @@ export function SGRulesCard({ side }: { side: Side }) {
               <g key={r} onPointerEnter={() => setHover(on ? "fired" : null)} onPointerLeave={() => setHover(null)}>
                 <line x1={xc(i)} y1={base} x2={xc(i)} y2={yc(c)} style={{ stroke: on ? TYPE_COLOR[ty] : "var(--ph-grid)" }} strokeWidth={3} />
                 <circle cx={xc(i)} cy={yc(c)} r={on ? 12 : 6} style={{ fill: on ? TYPE_COLOR[ty] : "var(--ph-surface)", ...lit(on && hover === "fired") }} />
-                {on && <T x={xc(i)} y={yc(c) + 4} text={String(c)} size={11} bold style={{ fill: "var(--ph-surface)" }} />}
+                {on && <T x={xc(i)} y={yc(c) + 4} text={String(c)} size={12} bold style={{ fill: "var(--ph-surface)" }} />}
                 <g transform={`translate(${px2(xc(i) + 4)} ${base + 14}) rotate(${cw < 60 ? -70 : -35})`}>
-                  <text x={0} y={0} fontSize={cw < 60 ? 9 : 10.5} fontWeight={600} textAnchor="end" style={{ fill: on ? "var(--ph-ink)" : "var(--ph-ink-muted)" }}>
+                  <text x={0} y={0} fontWeight={600} textAnchor="end" style={{ fontSize: svgPx(cw < 60 ? 12 : 12), fill: on ? "var(--ph-ink)" : "var(--ph-ink-muted)" }}>
                     {t(`rule.${r}`)}
                   </text>
                 </g>
@@ -493,7 +494,7 @@ export function SGScanCard({ side }: { side: Side }) {
           {[0, Math.round(total / 2), total].map((v) => (
             <g key={v}>
               <line x1={X0} y1={yc(v)} x2={W - 16} y2={yc(v)} style={{ stroke: "var(--ph-grid)" }} />
-              <T x={X0 - 6} y={yc(v) + 4} text={String(v)} anchor="end" size={10} />
+              <T x={X0 - 6} y={yc(v) + 4} text={String(v)} anchor="end" size={12} />
             </g>
           ))}
           <path d={`${steps} L ${px2(xc(MESSY.length))} ${bot} Z`} style={{ fill: "var(--glass-track)" }} />

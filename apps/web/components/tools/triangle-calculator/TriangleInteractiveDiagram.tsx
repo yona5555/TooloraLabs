@@ -328,10 +328,10 @@ export default function TriangleInteractiveDiagram({ vertices: initialVertices, 
             {`${fmt(angles[activeIndex])}°`}
           </Text>
 
-          <Text x={heightLabelPos.x} y={heightLabelPos.y} size={11} color={colors.red}>
+          <Text x={heightLabelPos.x} y={heightLabelPos.y} size={12} color={colors.red}>
             {heightFormulaText}
           </Text>
-          <Text x={adjacentLabelPos.x} y={adjacentLabelPos.y} size={11} color={colors.green}>
+          <Text x={adjacentLabelPos.x} y={adjacentLabelPos.y} size={12} color={colors.green}>
             {adjacentFormulaText}
           </Text>
 

@@ -1,5 +1,6 @@
 "use client";
 import { useMeasuredWidth } from "@/components/tool-ui/useMeasuredWidth";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 type Point = { rate: number; total: number };
 
@@ -46,13 +47,13 @@ export default function SalesTaxTotalByRateDiagram({ points, currentRate, captio
           <path d={pathD} fill="none" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" className="stroke-amber-600 dark:stroke-amber-400" />
           <line x1={currentX} y1={MARGIN.top} x2={currentX} y2={MARGIN.top + PLOT_HEIGHT} strokeWidth={1} strokeDasharray="3 3" stroke="currentColor" opacity={0.4} />
           <circle cx={currentX} cy={currentY} r={4} className="fill-amber-600 dark:fill-amber-400" />
-          <text x={MARGIN.left} y={HEIGHT - 6} fontSize={12} fill="currentColor" opacity={0.6}>
+          <text style={{ fontSize: svgPx(12) }} x={MARGIN.left} y={HEIGHT - 6} fill="currentColor" opacity={0.6}>
             {minRate}%
           </text>
-          <text x={WIDTH - MARGIN.right} y={HEIGHT - 6} textAnchor="end" fontSize={12} fill="currentColor" opacity={0.6}>
+          <text style={{ fontSize: svgPx(12) }} x={WIDTH - MARGIN.right} y={HEIGHT - 6} textAnchor="end" fill="currentColor" opacity={0.6}>
             {maxRate}%
           </text>
-          <text x={WIDTH / 2} y={HEIGHT - 6} textAnchor="middle" fontSize={12} fill="currentColor" opacity={0.6}>
+          <text style={{ fontSize: svgPx(12) }} x={WIDTH / 2} y={HEIGHT - 6} textAnchor="middle" fill="currentColor" opacity={0.6}>
             {xLabel}
           </text>
         </svg>

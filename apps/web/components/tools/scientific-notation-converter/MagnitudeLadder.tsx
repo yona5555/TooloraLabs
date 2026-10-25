@@ -9,6 +9,7 @@ import { useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { LADDER_MIN, LADDER_MAX, LADDER_REFERENCES, clampLadder, log10Of, nearestLadderReference, type NormalizedScientific } from "@tooloralabs/tools";
 import { coef, sup } from "./sciFormat";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 400;
 const X0 = 36;
@@ -63,7 +64,7 @@ export default function MagnitudeLadder({ sci, onSetExponent }: { sci: Normalize
             <g key={e}>
               <line x1={xOf(e)} y1={AXIS_Y - (main ? 8 : 4)} x2={xOf(e)} y2={AXIS_Y + (main ? 8 : 4)} className="stroke-zinc-400 dark:stroke-zinc-500" strokeWidth={main ? 1.4 : 0.8} />
               {main && (
-                <text x={xOf(e)} y={AXIS_Y + 20} textAnchor="middle" fontSize="10" fontWeight="700" className="fill-zinc-600 dark:fill-zinc-300">{`10${sup(e)}`}</text>
+                <text style={{ fontSize: svgPx(12) }} x={xOf(e)} y={AXIS_Y + 20} textAnchor="middle" fontWeight="700" className="fill-zinc-600 dark:fill-zinc-300">{`10${sup(e)}`}</text>
               )}
             </g>
           );
@@ -78,10 +79,10 @@ export default function MagnitudeLadder({ sci, onSetExponent }: { sci: Normalize
             <g key={r.key} data-ref={r.key}>
               <line x1={x} y1={up ? y + 14 : AXIS_Y + 26} x2={x} y2={up ? AXIS_Y - 8 : y - 10} className={active ? "stroke-blue-500" : "stroke-zinc-300 dark:stroke-zinc-600"} strokeDasharray={active ? undefined : "2 2"} />
               <circle cx={x} cy={AXIS_Y} r="2.5" className={active ? "fill-blue-600 dark:fill-blue-400" : "fill-zinc-400"} />
-              <text x={x} y={y} textAnchor="middle" fontSize="10.5" fontWeight={active ? 800 : 600} className={active ? "fill-blue-700 dark:fill-blue-300" : "fill-zinc-700 dark:fill-zinc-300"}>
+              <text style={{ fontSize: svgPx(12) }} x={x} y={y} textAnchor="middle" fontWeight={active ? 800 : 600} className={active ? "fill-blue-700 dark:fill-blue-300" : "fill-zinc-700 dark:fill-zinc-300"}>
                 {t(`refs.${r.key}`)}
               </text>
-              <text x={x} y={y + 12} textAnchor="middle" fontSize="9" className="fill-zinc-500 dark:fill-zinc-400">{`${coef(r.coefficient, 4)}×10${sup(r.exponent)} m`}</text>
+              <text style={{ fontSize: svgPx(12) }} x={x} y={y + 12} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">{`${coef(r.coefficient, 4)}×10${sup(r.exponent)} m`}</text>
             </g>
           );
         })}
@@ -89,7 +90,7 @@ export default function MagnitudeLadder({ sci, onSetExponent }: { sci: Normalize
         <g style={{ cursor: dragging ? "grabbing" : "grab" }} data-testid="ladder-thumb">
           <line x1={tx} y1={AXIS_Y - 22} x2={tx} y2={AXIS_Y + 8} className="stroke-blue-600 dark:stroke-blue-400" strokeWidth="2" />
           <rect x={tx - 22} y={AXIS_Y - 38} width="44" height="17" rx="8.5" className="fill-blue-600 dark:fill-blue-500" />
-          <text x={tx} y={AXIS_Y - 26} textAnchor="middle" fontSize="10" fontWeight="800" fill="white">{off ? `${off === "right" ? "" : "←"}10${sup(sci.exponent)}${off === "right" ? "→" : ""}` : `10${sup(sci.exponent)}`}</text>
+          <text style={{ fontSize: svgPx(12) }} x={tx} y={AXIS_Y - 26} textAnchor="middle" fontWeight="800" fill="white">{off ? `${off === "right" ? "" : "←"}10${sup(sci.exponent)}${off === "right" ? "→" : ""}` : `10${sup(sci.exponent)}`}</text>
           <circle cx={tx} cy={AXIS_Y} r="8" className="fill-white stroke-blue-600 dark:fill-zinc-900 dark:stroke-blue-400" strokeWidth="3" />
           <circle
             cx={tx}

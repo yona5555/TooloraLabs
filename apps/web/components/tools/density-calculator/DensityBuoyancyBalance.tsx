@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { DENSITY_WATER, STANDARD_GRAVITY } from "@tooloralabs/tools";
 import DensityIndicatorCard, { DensityIndicatorUnavailable } from "./DensityIndicatorCard";
 import { useDensityModel } from "./DensityLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 320;
 const H = 210;
@@ -37,10 +38,10 @@ export default function DensityBuoyancyBalance() {
       <line x1={x} y1={y} x2={x - 30} y2={y + 34} strokeWidth={1.2} className="stroke-zinc-400 dark:stroke-zinc-500" />
       <line x1={x} y1={y} x2={x + 30} y2={y + 34} strokeWidth={1.2} className="stroke-zinc-400 dark:stroke-zinc-500" />
       <path d={`M${x - 36},${y + 34} Q${x},${y + 52} ${x + 36},${y + 34} Z`} className={cls} />
-      <text x={x} y={y + 68} textAnchor="middle" fontSize={11} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
+      <text style={{ fontSize: svgPx(12) }} x={x} y={y + 68} textAnchor="middle" fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
         {label}
       </text>
-      <text x={x} y={y + 83} textAnchor="middle" fontSize={11} fontFamily="ui-monospace, monospace" className="fill-zinc-600 dark:fill-zinc-300">
+      <text style={{ fontSize: svgPx(12) }} x={x} y={y + 83} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-600 dark:fill-zinc-300">
         {value}
       </text>
     </g>
@@ -48,7 +49,7 @@ export default function DensityBuoyancyBalance() {
 
   const svg = (
     <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
-      <text x={CX} y={18} textAnchor="middle" fontSize={12} fontWeight={700} className={sinks ? "fill-red-600 dark:fill-red-400" : "fill-emerald-600 dark:fill-emerald-400"}>
+      <text style={{ fontSize: svgPx(12) }} x={CX} y={18} textAnchor="middle" fontWeight={700} className={sinks ? "fill-red-600 dark:fill-red-400" : "fill-emerald-600 dark:fill-emerald-400"}>
         {sinks ? t("sinks") : t("floats")}
       </text>
       <path d={`M${CX - 22},${H - 8} L${CX},${PIVOT} L${CX + 22},${H - 8} Z`} className="fill-zinc-200 dark:fill-zinc-700" />

@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import PdfIndicatorCard, { PdfIndicatorUnavailable } from "./PdfIndicatorCard";
 import { formatBytes, SOURCE_FILL, usePdfModel } from "./PdfLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 220;
@@ -41,10 +42,10 @@ export default function PdfSizeBars() {
         return (
           <g key={i}>
             <rect x={x} y={BASE - h} width={w} height={h} rx={4} className={b.cls} />
-            <text x={x + w / 2} y={BASE - h - 6} textAnchor="middle" fontSize={11} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={x + w / 2} y={BASE - h - 6} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
               {formatBytes(b.v)}
             </text>
-            <text x={x + w / 2} y={BASE + 16} textAnchor="middle" fontSize={11} fontFamily="ui-monospace, monospace" className="fill-zinc-600 dark:fill-zinc-300">
+            <text style={{ fontSize: svgPx(12) }} x={x + w / 2} y={BASE + 16} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-600 dark:fill-zinc-300">
               {b.label.length > 9 ? `${b.label.slice(0, 8)}…` : b.label}
             </text>
           </g>

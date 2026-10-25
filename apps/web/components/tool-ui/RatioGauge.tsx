@@ -1,3 +1,4 @@
+import { svgPx } from "@/components/tool-ui/svgPx";
 type GaugeZone = {
   key: string;
   from: number;
@@ -103,7 +104,7 @@ export default function RatioGauge({ value, domainMin, domainMax, zones, valueLa
         {ticks.map((tick) => {
           const p = tickPoint(tick);
           return (
-            <text key={tick} x={p.x} y={p.y} textAnchor={p.anchor} dominantBaseline="middle" fontSize={10} className="fill-zinc-400 dark:fill-zinc-500">
+            <text style={{ fontSize: svgPx(12) }} key={tick} x={p.x} y={p.y} textAnchor={p.anchor} dominantBaseline="middle" className="fill-zinc-400 dark:fill-zinc-500">
               {tickFormatter ? tickFormatter(tick) : tick}
             </text>
           );
@@ -112,11 +113,11 @@ export default function RatioGauge({ value, domainMin, domainMax, zones, valueLa
         <line x1={needleX1} y1={needleY1} x2={needleX2} y2={needleY2} strokeWidth={3} strokeLinecap="round" className="stroke-zinc-900 dark:stroke-zinc-50" />
         <circle cx={needleX2} cy={needleY2} r={4} className="fill-zinc-900 dark:fill-zinc-50" />
 
-        <text x={CX} y={CY - 6} textAnchor="middle" fontSize={22} fontWeight={700} className="fill-zinc-900 dark:fill-zinc-50">
+        <text style={{ fontSize: svgPx(22) }} x={CX} y={CY - 6} textAnchor="middle" fontWeight={700} className="fill-zinc-900 dark:fill-zinc-50">
           {valueLabel}
         </text>
         {caption && (
-          <text x={CX} y={CY + 26} textAnchor="middle" fontSize={12} fontWeight={600} className={captionColorClass ?? "fill-zinc-500 dark:fill-zinc-400"}>
+          <text style={{ fontSize: svgPx(12) }} x={CX} y={CY + 26} textAnchor="middle" fontWeight={600} className={captionColorClass ?? "fill-zinc-500 dark:fill-zinc-400"}>
             {caption}
           </text>
         )}

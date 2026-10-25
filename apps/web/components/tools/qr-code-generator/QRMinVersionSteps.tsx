@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { QR_LEVELS, QR_RECOVERY } from "@tooloralabs/tools";
 import QRIndicatorCard, { QRIndicatorUnavailable } from "./QRIndicatorCard";
 import { useQRModel } from "./QRLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 210;
@@ -32,18 +33,18 @@ export default function QRMinVersionSteps() {
         return (
           <g key={l}>
             <rect x={i * step + 6} y={y(v)} width={step - 12} height={BASE - y(v)} rx={4} className={active ? "fill-blue-600/80 dark:fill-blue-400/80" : "fill-blue-200 dark:fill-blue-900"} />
-            <text x={i * step + step / 2} y={y(v) - 6} textAnchor="middle" fontSize={12} fontWeight={700} className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={i * step + step / 2} y={y(v) - 6} textAnchor="middle" fontWeight={700} className="fill-zinc-800 dark:fill-zinc-100">
               {v > 40 ? "—" : `v${v}`}
             </text>
             {v <= 40 && (
-              <text x={i * step + step / 2} y={BASE - 8} textAnchor="middle" fontSize={11} fontFamily="ui-monospace, monospace" className={active ? "fill-white" : "fill-blue-800 dark:fill-blue-200"}>
+              <text style={{ fontSize: svgPx(12) }} x={i * step + step / 2} y={BASE - 8} textAnchor="middle" fontFamily="ui-monospace, monospace" className={active ? "fill-white" : "fill-blue-800 dark:fill-blue-200"}>
                 {17 + 4 * v}²
               </text>
             )}
-            <text x={i * step + step / 2} y={BASE + 16} textAnchor="middle" fontSize={13} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
+            <text style={{ fontSize: svgPx(13) }} x={i * step + step / 2} y={BASE + 16} textAnchor="middle" fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
               {l}
             </text>
-            <text x={i * step + step / 2} y={BASE + 32} textAnchor="middle" fontSize={11} className="fill-zinc-500 dark:fill-zinc-400">
+            <text style={{ fontSize: svgPx(12) }} x={i * step + step / 2} y={BASE + 32} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
               {Math.round(QR_RECOVERY[l] * 100)}%
             </text>
           </g>

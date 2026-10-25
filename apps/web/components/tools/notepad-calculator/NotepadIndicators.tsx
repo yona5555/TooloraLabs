@@ -18,6 +18,8 @@ import {
 import IndicatorCard, { PillGroup } from "@/components/tools/markets/IndicatorCard";
 import SensitivityBars from "@/components/tools/markets/SensitivityBars";
 import { KIND_COLORS, OP_COLORS, compact, lineNo, num, pct, raw, signed } from "./format";
+import { svgPx } from "@/components/tool-ui/svgPx";
+import { useFitWidth } from "@/components/tool-ui/useFitWidth";
 
 export type IndicatorProps = { a: NotepadAnalysis; text: string };
 type LineProps = IndicatorProps & { line: number; onLine: (i: number) => void };
@@ -55,7 +57,7 @@ function VariablePicker({ names, value, onChange }: { names: string[]; value: st
 export function LineValuesTrend({ a }: IndicatorProps) {
   const t = useInd();
   const pts = calculated(a);
-  const W = 560;
+  const [fitRef, W] = useFitWidth(560);
   const H = 220;
   const P = { l: 52, r: 16, t: 24, b: 30 };
   const vals = pts.map((l) => l.value as number);
@@ -91,17 +93,17 @@ export function LineValuesTrend({ a }: IndicatorProps) {
       }
     >
       <div className="overflow-x-auto" dir="ltr">
-        <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("trend.title")} data-testid="ind-trend" className="mx-auto h-auto max-w-full">
+        <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("trend.title")} data-testid="ind-trend" className="mx-auto h-auto max-w-full">
           {[lo, (lo + hi) / 2, hi].map((v) => (
             <g key={v}>
               <line x1={P.l} x2={W - P.r} y1={y(v)} y2={y(v)} className="stroke-zinc-200 dark:stroke-zinc-700" />
-              <text x={P.l - 6} y={y(v) + 3} textAnchor="end" className="fill-zinc-400 font-mono text-[10px]">
+              <text style={{ fontSize: svgPx(12) }} x={P.l - 6} y={y(v) + 3} textAnchor="end" className="fill-zinc-400 font-mono">
                 {compact(v)}
               </text>
             </g>
           ))}
           <line x1={P.l} x2={W - P.r} y1={y(mean)} y2={y(mean)} strokeDasharray="5 4" className="stroke-amber-500" />
-          <text x={W - P.r} y={y(mean) - 5} textAnchor="end" className="fill-amber-600 text-[10px] font-semibold dark:fill-amber-400">
+          <text style={{ fontSize: svgPx(12) }} x={W - P.r} y={y(mean) - 5} textAnchor="end" className="fill-amber-600 font-semibold dark:fill-amber-400">
             {t("trend.mean", { v: compact(mean) })}
           </text>
           <polyline points={pts.map((l, i) => `${x(i)},${y(l.value as number)}`).join(" ")} fill="none" strokeWidth={2.5} className="stroke-blue-600 transition-all duration-500 dark:stroke-blue-400" />
@@ -110,10 +112,10 @@ export function LineValuesTrend({ a }: IndicatorProps) {
             return (
               <g key={l.index}>
                 <circle cx={x(i)} cy={y(l.value as number)} r={isLast ? 7 : 4} className={isLast ? "fill-emerald-500 stroke-white" : "fill-blue-600 dark:fill-blue-400"} strokeWidth={2} />
-                <text x={x(i)} y={H - 10} textAnchor="middle" className="fill-zinc-500 font-mono text-[10px]">
+                <text style={{ fontSize: svgPx(12) }} x={x(i)} y={H - 10} textAnchor="middle" className="fill-zinc-500 font-mono">
                   {lineNo(l.index)}
                 </text>
-                <text x={x(i)} y={y(l.value as number) - 10} textAnchor="middle" className={`font-mono text-[10px] font-semibold ${isLast ? "fill-emerald-600 dark:fill-emerald-400" : "fill-zinc-700 dark:fill-zinc-200"}`}>
+                <text style={{ fontSize: svgPx(12) }} x={x(i)} y={y(l.value as number) - 10} textAnchor="middle" className={`font-mono font-semibold ${isLast ? "fill-emerald-600 dark:fill-emerald-400": "fill-zinc-700 dark:fill-zinc-200"}`}>
                   {compact(l.value as number)}
                 </text>
               </g>
@@ -168,10 +170,10 @@ export function CompositionDonut({ a }: IndicatorProps) {
         <svg width={S} height={S} viewBox={`0 0 ${S} ${S}`} role="img" aria-label={t("donut.title")}>
           {ring(kinds.map((k) => a.counts[k]), kinds.map((k) => KIND_COLORS[k]), 70, 18)}
           {totalOps > 0 ? ring(ops.map((k) => a.opTotals[k]), ops.map((k) => OP_COLORS[k]), 46, 14) : <circle cx={c} cy={c} r={46} fill="none" strokeWidth={14} className="stroke-zinc-100 dark:stroke-zinc-800" />}
-          <text x={c} y={c - 2} textAnchor="middle" className="fill-zinc-900 font-mono text-lg font-bold dark:fill-zinc-100">
+          <text style={{ fontSize: svgPx(18) }} x={c} y={c - 2} textAnchor="middle" className="fill-zinc-900 font-mono font-bold dark:fill-zinc-100">
             {pct(a.coverage, 0)}
           </text>
-          <text x={c} y={c + 14} textAnchor="middle" className="fill-zinc-500 text-[9px]">
+          <text style={{ fontSize: svgPx(12) }} x={c} y={c + 14} textAnchor="middle" className="fill-zinc-500">
             {t("donut.center")}
           </text>
         </svg>
@@ -561,7 +563,7 @@ export function SensitivityTrio({ a, text, variable, onVariable }: VarProps) {
 export function InputImpactBars({ a, text }: IndicatorProps) {
   const t = useInd();
   const impacts = useMemo(() => inputImpacts(a, text, 10), [a, text]);
-  const W = 560;
+  const [fitRef, W] = useFitWidth(560);
   const H = 230;
   const P = { t: 28, b: 58 };
   const max = Math.max(...impacts.map((i) => Math.abs(i.delta)), 1e-12);
@@ -593,7 +595,7 @@ export function InputImpactBars({ a, text }: IndicatorProps) {
       }
     >
       <div className="overflow-x-auto" dir="ltr">
-        <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("impact.title")} className="mx-auto h-auto max-w-full" data-testid="ind-impact">
+        <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("impact.title")} className="mx-auto h-auto max-w-full" data-testid="ind-impact">
           <line x1={10} x2={W - 10} y1={zero} y2={zero} className="stroke-zinc-300 dark:stroke-zinc-600" />
           {impacts.map((im, i) => {
             const cx = r2(20 + ((i + 0.5) * (W - 40)) / impacts.length);
@@ -602,13 +604,13 @@ export function InputImpactBars({ a, text }: IndicatorProps) {
             return (
               <g key={im.name}>
                 <rect x={cx - bw / 2} y={yTop} width={bw} height={Math.max(h, 1)} rx={4} className={`transition-all duration-500 ${im.delta >= 0 ? "fill-emerald-500" : "fill-red-500"}`} />
-                <text x={cx} y={im.delta >= 0 ? yTop - 6 : yTop + h + 14} textAnchor="middle" className="fill-zinc-900 font-mono text-[11px] font-bold dark:fill-zinc-100">
+                <text style={{ fontSize: svgPx(12) }} x={cx} y={im.delta >= 0 ? yTop - 6 : yTop + h + 14} textAnchor="middle" className="fill-zinc-900 font-mono font-bold dark:fill-zinc-100">
                   {signed(im.delta)}
                 </text>
-                <text x={cx} y={H - 22} textAnchor="middle" className="fill-zinc-700 font-mono text-[11px] font-semibold dark:fill-zinc-200">
+                <text style={{ fontSize: svgPx(12) }} x={cx} y={H - 22} textAnchor="middle" className="fill-zinc-700 font-mono font-semibold dark:fill-zinc-200">
                   {im.name}
                 </text>
-                <text x={cx} y={H - 8} textAnchor="middle" className="fill-zinc-400 font-mono text-[10px]">
+                <text style={{ fontSize: svgPx(12) }} x={cx} y={H - 8} textAnchor="middle" className="fill-zinc-400 font-mono">
                   {pct(im.elasticity * 10)}
                 </text>
               </g>
@@ -628,7 +630,7 @@ export function MagnitudeScale({ a }: IndicatorProps) {
   const mags = pts.map((l) => Math.log10(Math.abs(l.value as number)));
   const lo = Math.floor(Math.min(...mags, 0));
   const hi = Math.ceil(Math.max(...mags, 1));
-  const W = 560;
+  const [fitRef, W] = useFitWidth(560);
   const P = 30;
   const x = (m: number) => r2(P + ((m - lo) / (hi - lo || 1)) * (W - 2 * P));
   const big = pts.reduce((b, l) => (Math.abs(l.value as number) > Math.abs(b.value as number) ? l : b), pts[0]);
@@ -657,7 +659,7 @@ export function MagnitudeScale({ a }: IndicatorProps) {
       }
     >
       <div className="overflow-x-auto" dir="ltr">
-        <svg width={W} height={76 + 20 * Math.min(pts.length, 6)} viewBox={`0 0 ${W} ${76 + 20 * Math.min(pts.length, 6)}`} role="img" aria-label={t("mag.title")} className="mx-auto h-auto max-w-full" data-testid="ind-mag">
+        <svg ref={fitRef} width={W} height={76 + 20 * Math.min(pts.length, 6)} viewBox={`0 0 ${W} ${76 + 20 * Math.min(pts.length, 6)}`} role="img" aria-label={t("mag.title")} className="mx-auto h-auto max-w-full" data-testid="ind-mag">
           <defs>
             <linearGradient id={`${svgId}np-mag`} x1="0" x2="1">
               <stop offset="0" stopColor="#bfdbfe" />
@@ -668,7 +670,7 @@ export function MagnitudeScale({ a }: IndicatorProps) {
           {Array.from({ length: hi - lo + 1 }, (_, i) => lo + i).map((m) => (
             <g key={m}>
               <line x1={x(m)} x2={x(m)} y1={16} y2={38} className="stroke-white dark:stroke-zinc-900" strokeWidth={1.5} />
-              <text x={x(m)} y={52} textAnchor="middle" className="fill-zinc-500 font-mono text-[10px]">
+              <text style={{ fontSize: svgPx(12) }} x={x(m)} y={52} textAnchor="middle" className="fill-zinc-500 font-mono">
                 {`10^${m}`}
               </text>
             </g>
@@ -680,7 +682,7 @@ export function MagnitudeScale({ a }: IndicatorProps) {
               <g key={l.index}>
                 <line x1={px} x2={px} y1={34} y2={row - 10} className="stroke-zinc-300 dark:stroke-zinc-600" strokeDasharray="2 2" />
                 <circle cx={px} cy={27} r={5} className={l.index === a.finalIndex ? "fill-emerald-500 stroke-white" : "fill-white stroke-blue-700"} strokeWidth={2} />
-                <text x={px} y={row} textAnchor={px > W - 120 ? "end" : px < 120 ? "start" : "middle"} className={`font-mono text-[10px] ${l.index === a.finalIndex ? "fill-emerald-600 font-bold dark:fill-emerald-400" : "fill-zinc-700 dark:fill-zinc-200"}`}>
+                <text style={{ fontSize: svgPx(12) }} x={px} y={row} textAnchor={px > W - 120 ? "end" : px < 120 ? "start" : "middle"} className={`font-mono ${l.index === a.finalIndex ? "fill-emerald-600 font-bold dark:fill-emerald-400": "fill-zinc-700 dark:fill-zinc-200"}`}>
                   {`${labelOf(l)} ${compact(l.value as number)}`}
                 </text>
               </g>

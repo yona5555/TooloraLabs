@@ -7,6 +7,7 @@ import { IndicatorCard, KitControls, KitTable, KitTrack, useMeasuredSize, useSte
 import { ViewportScene } from "@/components/tool-ui/three/ViewportScene";
 import { ballPoints } from "@/components/tool-ui/indicator-kit/format";
 import { ALT_MAX_KM, AVOGADRO, g4, isa, K_B, R_LATM, sciText, speeds, tempCss, ZERO_C } from "./gasMath";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const SpheresScene3D = dynamic(() => import("./GasScenes3D").then((m) => m.SpheresScene3D), { ssr: false, loading: () => null });
 const SpeedScene3D = dynamic(() => import("./GasScenes3D").then((m) => m.SpeedScene3D), { ssr: false, loading: () => null });
@@ -40,7 +41,7 @@ function Spheres2D({ v0, v25 }: { v0: number; v25: number }) {
           return (
             <g key={i}>
               <circle cx={cx} cy={base - rr} r={rr} style={{ fill: it.fill, fillOpacity: 0.55, stroke: "var(--ph-line)" }} strokeWidth={1.5} />
-              <text x={cx} y={Math.max(14, base - 2 * rr - 8)} fontSize={12} fontWeight={700} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+              <text x={cx} y={Math.max(14, base - 2 * rr - 8)} fontWeight={700} textAnchor="middle" style={{ fontSize: svgPx(12), fill: "var(--ph-ink)" }}>
                 {it.label}
               </text>
             </g>
@@ -113,7 +114,7 @@ function Speed2D({ tK, rms }: { tK: number; rms: number }) {
             </g>
           );
         })}
-        <text x={W - 12} y={cy - 6} fontSize={13} fontWeight={800} textAnchor="end" style={{ fill: "var(--ph-ink)" }}>
+        <text x={W - 12} y={cy - 6} fontWeight={800} textAnchor="end" style={{ fontSize: svgPx(13), fill: "var(--ph-ink)" }}>
           {`${g4(rms)} m/s`}
         </text>
         <rect x={lx} y={cy + 6} width={Math.max(30, W - lx - 12)} height={12} rx={6} style={{ fill: "var(--glass-track)", stroke: "var(--ph-line)" }} strokeWidth={1} />
@@ -175,7 +176,7 @@ function Altitude2D({ hKm, ratio }: { hKm: number; ratio: number }) {
         <line x1={14} y1={bottom} x2={W - 14} y2={bottom} style={{ stroke: "var(--ph-line)" }} strokeWidth={2} strokeLinecap="round" />
         <line x1={mast} y1={y(0)} x2={mast} y2={y(ALT_MAX_KM)} style={{ stroke: "var(--ph-line)" }} strokeWidth={3} strokeLinecap="round" />
         {[0, 2, 4, 6, 8, 10].map((k) => (
-          <text key={k} x={mast + 14} y={y(k) + 4} fontSize={11} style={{ fill: "var(--ph-ink-muted)" }}>
+          <text key={k} x={mast + 14} y={y(k) + 4} style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
             {`${k} km`}
           </text>
         ))}

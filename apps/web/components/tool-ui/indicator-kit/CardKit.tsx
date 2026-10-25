@@ -483,7 +483,7 @@ export function KitTrack({ s, label, valueText, testId, ticks }: { s: Stepper; l
         <span className="sr-only">{valueText}</span>
       </div>
       {ticks && (
-        <div data-ph-ticks className="relative mt-0.5 h-4 text-[11px] tabular-nums" style={{ color: "var(--ph-ink-muted)" }}>
+        <div data-ph-ticks className="relative mt-0.5 h-4 text-xs tabular-nums" style={{ color: "var(--ph-ink-muted)" }}>
           {ticks.map((tk, i) => (
             <span
               key={tk.at}

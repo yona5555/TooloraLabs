@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { PT_TO_MM } from "@tooloralabs/tools";
 import PdfIndicatorCard, { PdfIndicatorUnavailable } from "./PdfIndicatorCard";
 import { usePdfModel } from "./PdfLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 210;
@@ -43,10 +44,10 @@ export default function PdfPaperCompare() {
       {unique.map((p, i) => (
         <g key={i}>
           <circle cx={W - 132} cy={24 + i * 40} r={6} className={FILL[i]} />
-          <text x={W - 120} y={28 + i * 40} fontSize={12} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
+          <text style={{ fontSize: svgPx(12) }} x={W - 120} y={28 + i * 40} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
             {p.paper === "other" ? tp("other") : p.paper}
           </text>
-          <text x={W - 120} y={44 + i * 40} fontSize={11} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+          <text style={{ fontSize: svgPx(12) }} x={W - 120} y={44 + i * 40} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
             {f(p.width * PT_TO_MM, 0)} × {f(p.height * PT_TO_MM, 0)} mm
           </text>
         </g>

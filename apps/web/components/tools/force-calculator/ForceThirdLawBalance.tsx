@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import ForceIndicatorCard, { ForceIndicatorUnavailable } from "./ForceIndicatorCard";
 import { useForceModel } from "./ForceLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 220;
@@ -36,28 +37,28 @@ export default function ForceThirdLawBalance() {
     <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <path d={`M ${CX} ${BEAM_Y} L ${CX - 16} ${BEAM_Y + 32} L ${CX + 16} ${BEAM_Y + 32} z`} className="fill-zinc-400 dark:fill-zinc-500" />
       <rect x={CX - ARM - 10} y={BEAM_Y - 4} width={ARM * 2 + 20} height={8} rx={4} className="fill-zinc-700 dark:fill-zinc-300" />
-      <text x={CX} y={BEAM_Y - 34} textAnchor="middle" fontSize={11} fontWeight={700} className="fill-emerald-600 dark:fill-emerald-400">
+      <text style={{ fontSize: svgPx(12) }} x={CX} y={BEAM_Y - 34} textAnchor="middle" fontWeight={700} className="fill-emerald-600 dark:fill-emerald-400">
         {t("level")}
       </text>
-      <text x={CX} y={BEAM_Y - 18} textAnchor="middle" fontSize={11} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-red-600 dark:fill-red-400">
+      <text style={{ fontSize: svgPx(12) }} x={CX} y={BEAM_Y - 18} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-red-600 dark:fill-red-400">
         {`F₁₂ = F₂₁ = ${f(gr.force)} N`}
       </text>
       {pans.map((p, i) => (
         <g key={p.name}>
           <line x1={p.x} y1={BEAM_Y + 4} x2={p.x} y2={BEAM_Y + 50 - p.r} strokeWidth={1.5} className="stroke-zinc-400 dark:stroke-zinc-500" />
           <circle cx={p.x} cy={BEAM_Y + 50} r={p.r} className={p.cls} />
-          <text x={p.x} y={BEAM_Y + 54} textAnchor="middle" fontSize={11} fontWeight={700} fill="#ffffff">
+          <text style={{ fontSize: svgPx(12) }} x={p.x} y={BEAM_Y + 54} textAnchor="middle" fontWeight={700} fill="#ffffff">
             {p.name}
           </text>
-          <text x={p.x} y={BEAM_Y + 94} textAnchor="middle" fontSize={10.5} fontFamily="ui-monospace, monospace" className="fill-zinc-600 dark:fill-zinc-300">
+          <text style={{ fontSize: svgPx(12) }} x={p.x} y={BEAM_Y + 94} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-600 dark:fill-zinc-300">
             {`${f(p.mass)} kg`}
           </text>
-          <text x={p.x} y={BEAM_Y + 112} textAnchor="middle" fontSize={11} fontWeight={700} fontFamily="ui-monospace, monospace" className={i === 0 ? "fill-blue-700 dark:fill-blue-300" : "fill-amber-600 dark:fill-amber-400"}>
+          <text style={{ fontSize: svgPx(12) }} x={p.x} y={BEAM_Y + 112} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className={i === 0 ? "fill-blue-700 dark:fill-blue-300" : "fill-amber-600 dark:fill-amber-400"}>
             {`a = ${f(p.acc)} m/s²`}
           </text>
         </g>
       ))}
-      <text x={CX} y={H - 8} textAnchor="middle" fontSize={10} className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={CX} y={H - 8} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
         {t("ratioLine", { ratio: f(ratio) })}
       </text>
     </svg>

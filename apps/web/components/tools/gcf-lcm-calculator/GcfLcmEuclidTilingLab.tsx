@@ -6,6 +6,7 @@ import { euclidTiling, gcd2 } from "@tooloralabs/tools";
 import { useIsDarkMode } from "@/lib/use-dark-mode";
 import GcfLcmIndicatorCard from "./GcfLcmIndicatorCard";
 import { useGcfLcmModel, useSetGcfLcmNumber } from "./GcfLcmLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 320;
 const H = 230;
@@ -99,7 +100,7 @@ export default function GcfLcmEuclidTilingLab() {
                 strokeWidth={px > 6 ? 1.5 : 0.5}
               />
               {px >= 26 && (
-                <text x={ox + (s.x + s.size / 2) * k} y={oy + (s.y + s.size / 2) * k + 4} textAnchor="middle" className="fill-zinc-900 font-mono text-[11px] font-bold dark:fill-white">
+                <text style={{ fontSize: svgPx(12) }} x={ox + (s.x + s.size / 2) * k} y={oy + (s.y + s.size / 2) * k + 4} textAnchor="middle" className="fill-zinc-900 font-mono font-bold dark:fill-white">
                   {f(s.size)}
                 </text>
               )}

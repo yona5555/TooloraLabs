@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import ZipIndicatorCard, { ZipIndicatorUnavailable } from "./ZipIndicatorCard";
 import { formatBytes, useZipModel } from "./ZipLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const LABEL = 100;
@@ -27,11 +28,10 @@ export default function ZipSavedRanking() {
         const w = Math.max(3, (Math.abs(r.saved) / peak) * BAR_W);
         return (
           <g key={r.name}>
-            <text
+            <text style={{ fontSize: svgPx(12) }}
               x={LABEL}
               y={y + 19}
               textAnchor="end"
-              fontSize={12}
               fontFamily="ui-monospace, monospace"
               className={i === 0 ? "fill-blue-700 font-bold dark:fill-blue-300" : "fill-zinc-600 dark:fill-zinc-300"}
             >
@@ -45,7 +45,7 @@ export default function ZipSavedRanking() {
               rx={3}
               className={r.saved > 0 ? (i === 0 ? "fill-blue-600 dark:fill-blue-400" : "fill-blue-300 dark:fill-blue-800") : "fill-rose-400 dark:fill-rose-600"}
             />
-            <text x={BAR_X + w + 5} y={y + 19} fontSize={11} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
+            <text style={{ fontSize: svgPx(12) }} x={BAR_X + w + 5} y={y + 19} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
               {r.saved < 0 ? "+" : ""}
               {formatBytes(Math.abs(r.saved))}
             </text>

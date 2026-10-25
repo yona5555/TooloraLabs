@@ -1,6 +1,7 @@
 "use client";
 import type { GpaScaleDef } from "@tooloralabs/tools";
 import { HONOR_COLORS } from "./planner";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 type Props = {
   scale: GpaScaleDef;
@@ -57,7 +58,7 @@ export default function GpaHonorsGauge({ scale, cumulative, semester, target, va
       {ticks.map((v) => {
         const [x, y] = pt(v, R + STROKE / 2 + 12);
         return (
-          <text key={v} x={x} y={y} textAnchor="middle" dominantBaseline="middle" fontSize={10} className="fill-zinc-500 dark:fill-zinc-400">
+          <text style={{ fontSize: svgPx(12) }} key={v} x={x} y={y} textAnchor="middle" dominantBaseline="middle" className="fill-zinc-500 dark:fill-zinc-400">
             {v.toFixed(2)}
           </text>
         );
@@ -68,13 +69,13 @@ export default function GpaHonorsGauge({ scale, cumulative, semester, target, va
         <line x1={CX} y1={CY} x2={CX - R + 14} y2={CY} strokeWidth={4} strokeLinecap="round" className="stroke-zinc-800 dark:stroke-zinc-100" />
       </g>
       <circle cx={CX} cy={CY} r={7} className="fill-zinc-800 dark:fill-zinc-100" />
-      <text x={CX} y={CY - 30} textAnchor="middle" fontSize={26} fontWeight={800} className="fill-blue-700 dark:fill-blue-300">
+      <text style={{ fontSize: svgPx(26) }} x={CX} y={CY - 30} textAnchor="middle" fontWeight={800} className="fill-blue-700 dark:fill-blue-300">
         {valueLabel}
       </text>
-      <text x={CX} y={CY - 12} textAnchor="middle" fontSize={10} className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={CX} y={CY - 12} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
         / {scale.max.toFixed(2)}
       </text>
-      <g fontSize={10} fontWeight={600}>
+      <g style={{ fontSize: svgPx(12) }} fontWeight={600}>
         <rect x={8} y={H - 14} width={10} height={4} fill="#f59e0b" />
         <text x={22} y={H - 9} className="fill-zinc-600 dark:fill-zinc-300">{semesterLabel}</text>
         <rect x={W / 2 + 10} y={H - 14} width={10} height={4} fill="#ef4444" />

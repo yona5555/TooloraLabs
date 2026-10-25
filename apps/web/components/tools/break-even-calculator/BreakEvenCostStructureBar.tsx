@@ -1,3 +1,4 @@
+import { svgPx } from "@/components/tool-ui/svgPx";
 type BreakEvenCostStructureBarProps = {
   fixedCosts: number;
   variableCosts: number;
@@ -39,20 +40,20 @@ export default function BreakEvenCostStructureBar({
           <rect x={0} y={0} width={fixedWidth} height={BAR_HEIGHT} rx={6} className="fill-zinc-500 dark:fill-zinc-500" />
           <rect x={fixedWidth} y={0} width={variableWidth} height={BAR_HEIGHT} rx={6} className="fill-purple-600 dark:fill-purple-400" />
           {fixedWidth > 50 && (
-            <text x={10} y={BAR_HEIGHT / 2 + 4} fontSize={11} fontWeight={700} className="fill-white">
+            <text style={{ fontSize: svgPx(12) }} x={10} y={BAR_HEIGHT / 2 + 4} fontWeight={700} className="fill-white">
               {fixedFormatted}
             </text>
           )}
           {variableWidth > 50 && (
-            <text x={fixedWidth + variableWidth / 2} y={BAR_HEIGHT / 2 + 4} textAnchor="middle" fontSize={11} fontWeight={700} className="fill-white">
+            <text style={{ fontSize: svgPx(12) }} x={fixedWidth + variableWidth / 2} y={BAR_HEIGHT / 2 + 4} textAnchor="middle" fontWeight={700} className="fill-white">
               {variableFormatted}
             </text>
           )}
 
-          <text x={0} y={BAR_HEIGHT + 16} fontSize={10} className="fill-zinc-500 dark:fill-zinc-400">
+          <text style={{ fontSize: svgPx(12) }} x={0} y={BAR_HEIGHT + 16} className="fill-zinc-500 dark:fill-zinc-400">
             {fixedLabel}
           </text>
-          <text x={WIDTH} y={BAR_HEIGHT + 16} textAnchor="end" fontSize={10} className="fill-zinc-500 dark:fill-zinc-400">
+          <text style={{ fontSize: svgPx(12) }} x={WIDTH} y={BAR_HEIGHT + 16} textAnchor="end" className="fill-zinc-500 dark:fill-zinc-400">
             {variableLabel}
           </text>
         </svg>

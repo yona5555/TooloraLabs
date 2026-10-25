@@ -5,6 +5,8 @@ import IndicatorWithTable from "@/components/tool-ui/IndicatorWithTable";
 import { BREAK_COLORS, runPlan, useFmt, useStudyT } from "./studio";
 import { axisText, upcomingExams, valueText, type StudyIndicatorProps } from "./StudyIndicatorsA";
 import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
+import { svgPx } from "@/components/tool-ui/svgPx";
+import { useFitWidth } from "@/components/tool-ui/useFitWidth";
 
 /* 5 · Hours per exam: learning + reviews against the target, shortfall in red (ranked bars) */
 export function HoursPerExamCard({ d }: StudyIndicatorProps) {
@@ -13,7 +15,7 @@ export function HoursPerExamCard({ d }: StudyIndicatorProps) {
   const f = useFmt();
   const exams = [...upcomingExams(d)].sort((a, b) => b.targetMinutes - a.targetMinutes);
   const max = Math.max(60, ...exams.map((e) => e.targetMinutes));
-  const W = 400;
+  const [fitRef, W] = useFitWidth(400);
   const RH = 30;
   const L = 22;
   const H = exams.length * RH + 30;
@@ -28,7 +30,7 @@ export function HoursPerExamCard({ d }: StudyIndicatorProps) {
         indicator={
           <PhoneMini slot={0} title={t("ind.hours.title")}>
             <div className="w-[400px] max-w-full">
-              <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.hours.title")} className="max-w-full">
+              <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.hours.title")} className="max-w-full">
                 <defs>
                   <pattern id={`${svgId}study-hatch`} width={6} height={6} patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
                     <rect width={6} height={6} fill="#ef4444" fillOpacity={0.15} />
@@ -42,14 +44,14 @@ export function HoursPerExamCard({ d }: StudyIndicatorProps) {
                   return (
                     <g key={e.id}>
                       <circle cx={9} cy={y + 11} r={7} fill={c} />
-                      <text x={9} y={y + 14.5} textAnchor="middle" fontSize={9} fontWeight={800} fill="white">
+                      <text style={{ fontSize: svgPx(12) }} x={9} y={y + 14.5} textAnchor="middle" fontWeight={800} fill="white">
                         {idx + 1}
                       </text>
                       <rect x={L} y={y + 2} width={sx(e.targetMinutes)} height={18} rx={4} fill="none" stroke="currentColor" strokeOpacity={0.3} strokeDasharray="3 2" />
                       <rect x={L} y={y + 2} width={sx(e.learnMinutes)} height={18} rx={4} fill={c} style={{ transition: "width 400ms ease" }} />
                       <rect x={L + sx(e.learnMinutes)} y={y + 2} width={sx(e.reviewMinutes)} height={18} fill={c} fillOpacity={0.45} style={{ transition: "all 400ms ease" }} />
                       {e.shortfallMinutes > 0 && <rect x={L + sx(e.plannedMinutes)} y={y + 2} width={sx(e.shortfallMinutes)} height={18} fill={`url(#${svgId}study-hatch)`} />}
-                      <text x={L + sx(e.targetMinutes) + 5} y={y + 15} fontSize={10.5} fontWeight={700} className={valueText}>
+                      <text style={{ fontSize: svgPx(12) }} x={L + sx(e.targetMinutes) + 5} y={y + 15} fontWeight={700} className={valueText}>
                         {`${f.n(e.plannedMinutes / 60, 1)}/${f.n(e.targetMinutes / 60, 1)}`}
                       </text>
                     </g>
@@ -62,7 +64,7 @@ export function HoursPerExamCard({ d }: StudyIndicatorProps) {
                 ].map((lg, i) => (
                   <g key={lg.k} transform={`translate(${L + i * 110}, ${H - 18})`}>
                     <rect width={12} height={12} rx={2} fill={lg.fill} fillOpacity={lg.o} />
-                    <text x={16} y={10} fontSize={10} fontWeight={600} className={valueText}>
+                    <text style={{ fontSize: svgPx(12) }} x={16} y={10} fontWeight={600} className={valueText}>
                       {t(`ind.hours.${lg.k}`)}
                     </text>
                   </g>
@@ -91,7 +93,7 @@ export function DailyLoadCard({ d }: StudyIndicatorProps) {
   const days = d.plan.days;
   const exams = upcomingExams(d);
   const n = Math.max(1, days.length);
-  const W = 400;
+  const [fitRef, W] = useFitWidth(400);
   const H = 180;
   const L = 28;
   const B = 150;
@@ -113,11 +115,11 @@ export function DailyLoadCard({ d }: StudyIndicatorProps) {
       <IndicatorWithTable
         workedExampleTitle={t("ind.worked")}
         indicator={
-          <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.load.title")} className="max-w-full">
+          <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.load.title")} className="max-w-full">
             {Array.from({ length: top / 60 + 1 }, (_, i) => i * 60).map((m) => (
               <g key={m}>
                 <line x1={L} x2={W - 4} y1={y(m)} y2={y(m)} stroke="currentColor" strokeOpacity={0.1} />
-                <text x={L - 4} y={y(m) + 3} textAnchor="end" fontSize={9} className={axisText}>
+                <text style={{ fontSize: svgPx(12) }} x={L - 4} y={y(m) + 3} textAnchor="end" className={axisText}>
                   {`${m / 60}${t("units.h")}`}
                 </text>
               </g>
@@ -140,12 +142,12 @@ export function DailyLoadCard({ d }: StudyIndicatorProps) {
                   })}
                   {day.capacityMinutes > 0 && <line x1={x0 + 1} x2={x0 + cw - 1} y1={y(day.capacityMinutes)} y2={y(day.capacityMinutes)} stroke="#ef4444" strokeWidth={1.5} />}
                   {day.examIds.length > 0 && (
-                    <text x={x0 + cw / 2} y={y(day.capacityMinutes) - 3} textAnchor="middle" fontSize={11} fill={d.colorOf(day.examIds[0])}>
+                    <text style={{ fontSize: svgPx(12) }} x={x0 + cw / 2} y={y(day.capacityMinutes) - 3} textAnchor="middle" fill={d.colorOf(day.examIds[0])}>
                       ★
                     </text>
                   )}
                   {day.index % step === 0 && (
-                    <text x={x0 + cw / 2} y={B + 13} textAnchor="middle" fontSize={9} className={axisText}>
+                    <text style={{ fontSize: svgPx(12) }} x={x0 + cw / 2} y={B + 13} textAnchor="middle" className={axisText}>
                       {Number(day.date.slice(8))}
                     </text>
                   )}
@@ -155,7 +157,7 @@ export function DailyLoadCard({ d }: StudyIndicatorProps) {
             <line x1={L} x2={W - 4} y1={B} y2={B} stroke="currentColor" strokeOpacity={0.35} />
             <g transform={`translate(${L}, ${H - 10})`}>
               <line x1={0} x2={14} y1={-3} y2={-3} stroke="#ef4444" strokeWidth={1.5} />
-              <text x={18} y={0} fontSize={9.5} fontWeight={600} className={valueText}>
+              <text style={{ fontSize: svgPx(12) }} x={18} y={0} fontWeight={600} className={valueText}>
                 {t("ind.load.capacity")}
               </text>
             </g>
@@ -185,7 +187,7 @@ export function SlackBalanceCard({ state, d }: StudyIndicatorProps) {
   const diff = cap - need;
   const span = Math.max(60, need, cap);
   const angle = Math.max(-14, Math.min(14, (diff / span) * 28));
-  const W = 360;
+  const [fitRef, W] = useFitWidth(360);
   const H = 190;
   const CX = W / 2;
   const PY = 70;
@@ -203,10 +205,10 @@ export function SlackBalanceCard({ state, d }: StudyIndicatorProps) {
       <line x1={px} x2={px - 30} y1={py} y2={py + 34} stroke="currentColor" strokeOpacity={0.4} />
       <line x1={px} x2={px + 30} y1={py} y2={py + 34} stroke="currentColor" strokeOpacity={0.4} />
       <path d={`M ${px - 38} ${py + 34} Q ${px} ${py + 58} ${px + 38} ${py + 34} Z`} fill={color} fillOpacity={0.85} />
-      <text x={px} y={py + 47} textAnchor="middle" fontSize={11} fontWeight={800} fill="white">
+      <text style={{ fontSize: svgPx(12) }} x={px} y={py + 47} textAnchor="middle" fontWeight={800} fill="white">
         {f.h(v, 1)}
       </text>
-      <text x={px} y={py + 74} textAnchor="middle" fontSize={10} fontWeight={700} className={valueText}>
+      <text style={{ fontSize: svgPx(12) }} x={px} y={py + 74} textAnchor="middle" fontWeight={700} className={valueText}>
         {label}
       </text>
     </g>
@@ -226,13 +228,13 @@ export function SlackBalanceCard({ state, d }: StudyIndicatorProps) {
               </span>
               <input type="range" min={-2} max={3} step={0.5} value={extra} onChange={(e) => setExtra(Number(e.target.value))} className="w-full accent-blue-600" aria-label={t("ind.slack.extra")} />
             </label>
-            <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.slack.title")} className="max-w-full">
+            <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.slack.title")} className="max-w-full">
               <path d={`M ${CX - 26} ${H - 6} L ${CX + 26} ${H - 6} L ${CX} ${PY + 6} Z`} fill="currentColor" fillOpacity={0.15} />
               <line x1={lx} y1={ly} x2={rx} y2={ry} stroke="currentColor" strokeOpacity={0.6} strokeWidth={4} strokeLinecap="round" style={{ transition: "all 400ms ease" }} />
               <circle cx={CX} cy={PY} r={6} fill={vColor} />
               {pan(lx, ly, t("ind.slack.needed"), need, "#8b5cf6")}
               {pan(rx, ry, t("ind.slack.capacity"), cap, "#2563eb")}
-              <text x={CX} y={20} textAnchor="middle" fontSize={13} fontWeight={800} fill={vColor}>
+              <text style={{ fontSize: svgPx(13) }} x={CX} y={20} textAnchor="middle" fontWeight={800} fill={vColor}>
                 {`${t(`ind.slack.${verdict}`)} · ${diff >= 0 ? "+" : "−"}${f.h(Math.abs(diff), 1)}`}
               </text>
             </svg>
@@ -292,17 +294,17 @@ export function FocusRatioCard({ d }: StudyIndicatorProps) {
                     <g key={a.k}>
                       <path d={a.d} fill="none" stroke={a.c} strokeWidth={26} style={{ transition: "all 400ms ease" }} />
                       {a.sweep > 0.35 && (
-                        <text x={C + R * Math.cos(a.mid)} y={C + R * Math.sin(a.mid) + 4} textAnchor="middle" fontSize={10} fontWeight={800} fill="white">
+                        <text style={{ fontSize: svgPx(12) }} x={C + R * Math.cos(a.mid)} y={C + R * Math.sin(a.mid) + 4} textAnchor="middle" fontWeight={800} fill="white">
                           {f.pct(a.v / wall)}
                         </text>
                       )}
                     </g>
                   ) : null,
                 )}
-                <text x={C} y={C + 4} textAnchor="middle" fontSize={24} fontWeight={800} className={valueText}>
+                <text style={{ fontSize: svgPx(24) }} x={C} y={C + 4} textAnchor="middle" fontWeight={800} className={valueText}>
                   {f.pct(ratio)}
                 </text>
-                <text x={C} y={C + 20} textAnchor="middle" fontSize={9} className={axisText}>
+                <text style={{ fontSize: svgPx(12) }} x={C} y={C + 20} textAnchor="middle" className={axisText}>
                   {t("ind.ratio.focus")}
                 </text>
               </svg>

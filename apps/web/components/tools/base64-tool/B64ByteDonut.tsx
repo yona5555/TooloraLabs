@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import B64IndicatorCard, { B64IndicatorUnavailable } from "./B64IndicatorCard";
 import { useB64Model } from "./B64LiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 190;
@@ -40,21 +41,21 @@ export default function B64ByteDonut() {
   const svg = (
     <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {KINDS.map((k, i) => (vals[i] > 0 ? <path key={k.key} d={ring(52, 88, cum[i][0], cum[i][1])} className={`${k.fill} stroke-white dark:stroke-zinc-900`} strokeWidth={1.5} /> : null))}
-      <text x={CX} y={CY - 2} textAnchor="middle" fontSize={20} fontWeight={700} className="fill-zinc-800 dark:fill-zinc-100">
+      <text style={{ fontSize: svgPx(20) }} x={CX} y={CY - 2} textAnchor="middle" fontWeight={700} className="fill-zinc-800 dark:fill-zinc-100">
         {f(a.byteCount)}
       </text>
-      <text x={CX} y={CY + 15} textAnchor="middle" fontSize={12} className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={CX} y={CY + 15} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
         {t("bytes")}
       </text>
       {KINDS.map((k, i) => {
         const y = 22 + i * 30;
         return (
           <g key={k.key} opacity={vals[i] ? 1 : 0.45}>
-            <circle cx={208} cy={y} r={6} className={k.fill} />
-            <text x={220} y={y + 4} fontSize={12} className="fill-zinc-600 dark:fill-zinc-300">
+            <circle cx={194} cy={y} r={6} className={k.fill} />
+            <text style={{ fontSize: svgPx(12) }} x={205} y={y + 4} className="fill-zinc-600 dark:fill-zinc-300">
               {t(k.key)}
             </text>
-            <text x={W - 4} y={y + 4} textAnchor="end" fontSize={12} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={W - 4} y={y + 4} textAnchor="end" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
               {f(vals[i])}
             </text>
           </g>

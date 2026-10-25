@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import FsIndicatorCard, { FsIndicatorUnavailable } from "./FsIndicatorCard";
 import { useFsModel } from "./FsLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 210;
@@ -41,19 +42,19 @@ export default function FsGapBars() {
               rx={4}
               className="fill-emerald-600 dark:fill-emerald-400"
             />
-            <text x={cx - 19} y={y(d.value) - 5} textAnchor="middle" fontSize={10} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-blue-700 dark:fill-blue-300">
+            <text style={{ fontSize: svgPx(12) }} x={cx - 19} y={y(d.value) - 5} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-blue-700 dark:fill-blue-300">
               {f(d.value, d.value < 10 ? 2 : 0)}
             </text>
-            <text x={cx + 19} y={y(b.value) - 5} textAnchor="middle" fontSize={10} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-emerald-700 dark:fill-emerald-300">
+            <text style={{ fontSize: svgPx(12) }} x={cx + 19} y={y(b.value) - 5} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-emerald-700 dark:fill-emerald-300">
               {f(b.value, b.value < 10 ? 2 : 0)}
             </text>
-            <text x={cx} y={BASE + 16} textAnchor="middle" fontSize={12} fontWeight={600} className="fill-zinc-600 dark:fill-zinc-300">
+            <text style={{ fontSize: svgPx(12) }} x={cx} y={BASE + 16} textAnchor="middle" fontWeight={600} className="fill-zinc-600 dark:fill-zinc-300">
               {d.unit} / {b.unit}
             </text>
           </g>
         );
       })}
-      <text x={0} y={12} fontSize={11} className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={0} y={12} className="fill-zinc-500 dark:fill-zinc-400">
         {t("axis")}
       </text>
     </svg>

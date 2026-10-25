@@ -1,3 +1,4 @@
+import { svgPx } from "@/components/tool-ui/svgPx";
 type SeriesPoint = { unitsSold: number; value: number };
 
 type InventoryMethodValueLineChartProps = {
@@ -46,13 +47,13 @@ export default function InventoryMethodValueLineChart({ fifoSeries, lifoSeries, 
         <path d={buildPath(fifoSeries, maxUnits, maxValue)} fill="none" className="stroke-indigo-500 dark:stroke-indigo-400" strokeWidth={2.5} strokeLinejoin="round" strokeLinecap="round" />
         <path d={buildPath(lifoSeries, maxUnits, maxValue)} fill="none" className="stroke-amber-500 dark:stroke-amber-400" strokeWidth={2.5} strokeLinejoin="round" strokeLinecap="round" />
 
-        <text x={LABEL_X} y={fifoEndY + (labelsClose ? -5 : 4)} textAnchor="start" fontSize={9} fontWeight={700} className="fill-indigo-600 dark:fill-indigo-400">
+        <text style={{ fontSize: svgPx(12) }} x={LABEL_X} y={fifoEndY + (labelsClose ? -5 : 4)} textAnchor="start" fontWeight={700} className="fill-indigo-600 dark:fill-indigo-400">
           {fifoLabel}: ${fifoSeries[fifoSeries.length - 1].value}
         </text>
-        <text x={LABEL_X} y={lifoEndY + (labelsClose ? 9 : 4)} textAnchor="start" fontSize={9} fontWeight={700} className="fill-amber-600 dark:fill-amber-400">
+        <text style={{ fontSize: svgPx(12) }} x={LABEL_X} y={lifoEndY + (labelsClose ? 9 : 4)} textAnchor="start" fontWeight={700} className="fill-amber-600 dark:fill-amber-400">
           {lifoLabel}: ${lifoSeries[lifoSeries.length - 1].value}
         </text>
-        <text x={CHART_LEFT} y={HEIGHT - 6} textAnchor="start" fontSize={8} className="fill-zinc-500 dark:fill-zinc-400">
+        <text style={{ fontSize: svgPx(12) }} x={CHART_LEFT} y={HEIGHT - 6} textAnchor="start" className="fill-zinc-500 dark:fill-zinc-400">
           {xLabel}
         </text>
       </svg>

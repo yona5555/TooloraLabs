@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import MmmIndicatorCard, { scaleX } from "./MmmIndicatorCard";
 import { useMmmModel } from "./MmmLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 type Pivot = "mean" | "median" | "midrange";
 const W = 360;
@@ -68,16 +69,16 @@ export default function MmmBalanceBeam() {
         </g>
         <polygon points={`${px},${BEAM_Y + 8} ${px - 16},${BEAM_Y + 40} ${px + 16},${BEAM_Y + 40}`} className="fill-blue-600 dark:fill-blue-400" />
         <rect x={0} y={BEAM_Y + 40} width={W} height={3} className="fill-zinc-300 dark:fill-zinc-700" />
-        <text x={px} y={BEAM_Y + 58} textAnchor="middle" fontSize={12} fontWeight={700} className="fill-blue-700 dark:fill-blue-300">
+        <text style={{ fontSize: svgPx(12) }} x={px} y={BEAM_Y + 58} textAnchor="middle" fontWeight={700} className="fill-blue-700 dark:fill-blue-300">
           {`${t("pivot")} ${f(pv)}`}
         </text>
-        <text x={18} y={22} fontSize={12} fontWeight={700} className="fill-rose-600 dark:fill-rose-400">
+        <text style={{ fontSize: svgPx(12) }} x={18} y={22} fontWeight={700} className="fill-rose-600 dark:fill-rose-400">
           {`← ${f(left)}`}
         </text>
-        <text x={W - 18} y={22} textAnchor="end" fontSize={12} fontWeight={700} className="fill-sky-600 dark:fill-sky-400">
+        <text style={{ fontSize: svgPx(12) }} x={W - 18} y={22} textAnchor="end" fontWeight={700} className="fill-sky-600 dark:fill-sky-400">
           {`${f(right)} →`}
         </text>
-        <text x={W / 2} y={22} textAnchor="middle" fontSize={12} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
+        <text style={{ fontSize: svgPx(12) }} x={W / 2} y={22} textAnchor="middle" fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
           {verdict}
         </text>
       </svg>

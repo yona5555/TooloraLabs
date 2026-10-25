@@ -4,6 +4,7 @@ import { textLogoBlockOf, type TextLogoBlock } from "@tooloralabs/tools";
 import TlIndicatorCard from "./TlIndicatorCard";
 import { hex, useTlLive } from "./TlLiveContext";
 import { STYLE_FILLS } from "./tlMath";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 330;
 const LEFT = 64;
@@ -39,7 +40,7 @@ export default function TlBlockMap() {
       {ZONES.map((z) => (
         <g key={z.block}>
           <rect x={sx(z.from)} y={TOP - 4} width={Math.max(3, sx(z.to) - sx(z.from))} height={styles.length * ROW} rx={2} className={z.fill} />
-          <text x={sx(z.from)} y={TOP - 8} fontSize={7.5} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+          <text style={{ fontSize: svgPx(12) }} x={sx(z.from)} y={TOP - 8} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
             {hex(z.from)}
           </text>
         </g>
@@ -49,7 +50,7 @@ export default function TlBlockMap() {
         const on = s.style === activeStyle;
         return (
           <g key={s.style} className="cursor-pointer" onClick={() => setActiveStyle(s.style)} opacity={on ? 1 : 0.5} style={{ transition: "opacity 200ms ease" }}>
-            <text x={LEFT - 6} y={y + 3} textAnchor="end" fontSize={9} fontWeight={on ? 700 : 500} className="fill-zinc-700 dark:fill-zinc-200">
+            <text style={{ fontSize: svgPx(12) }} x={LEFT - 6} y={y + 3} textAnchor="end" fontWeight={on ? 700 : 500} className="fill-zinc-700 dark:fill-zinc-200">
               {styleName(s.style)}
             </text>
             {s.glyphs.map((g, gi) => (

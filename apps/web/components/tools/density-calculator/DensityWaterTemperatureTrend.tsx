@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { WATER_DENSITY_BY_TEMPERATURE, waterDensityAt } from "@tooloralabs/tools";
 import DensityIndicatorCard, { DensityIndicatorUnavailable } from "./DensityIndicatorCard";
 import { useDensityModel } from "./DensityLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 330;
 const H = 200;
@@ -40,32 +41,32 @@ export default function DensityWaterTemperatureTrend() {
   const indicator = (
     <div className="w-full max-w-[330px]">
       <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
-        <text x={L - 6} y={12} textAnchor="end" fontSize={9} className="fill-zinc-500 dark:fill-zinc-400">
+        <text style={{ fontSize: svgPx(12) }} x={L - 6} y={12} textAnchor="end" className="fill-zinc-500 dark:fill-zinc-400">
           g/cm³
         </text>
         {Y_TICKS.map((v) => (
           <g key={v}>
             <line x1={L} y1={y(v)} x2={W - R} y2={y(v)} className="stroke-zinc-200 dark:stroke-zinc-700" />
-            <text x={L - 6} y={y(v) + 3} textAnchor="end" fontSize={9} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+            <text style={{ fontSize: svgPx(12) }} x={L - 6} y={y(v) + 3} textAnchor="end" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
               {f(v, 2)}
             </text>
           </g>
         ))}
         {[0, 20, 40, 60, 80, 100].map((c) => (
-          <text key={c} x={x(c)} y={T + PH + 16} textAnchor="middle" fontSize={9} className="fill-zinc-500 dark:fill-zinc-400">
+          <text style={{ fontSize: svgPx(12) }} key={c} x={x(c)} y={T + PH + 16} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
             {`${c} °C`}
           </text>
         ))}
         <path d={CURVE} fill="none" strokeWidth={2.5} className="stroke-sky-500 dark:stroke-sky-400" />
         {/* the 4 °C maximum */}
         <circle cx={x(4)} cy={y(1)} r={4} className="fill-white stroke-sky-600 dark:fill-zinc-900 dark:stroke-sky-300" strokeWidth={2} />
-        <text x={x(4) + 7} y={y(1) + 12} fontSize={9.5} fontWeight={600} className="fill-sky-700 dark:fill-sky-300">
+        <text style={{ fontSize: svgPx(12) }} x={x(4) + 7} y={y(1) + 12} fontWeight={600} className="fill-sky-700 dark:fill-sky-300">
           {t("max")}
         </text>
         {/* the chosen temperature */}
         <line x1={px} y1={T} x2={px} y2={T + PH} strokeDasharray="3 3" className="stroke-blue-400 dark:stroke-blue-500" />
         <circle cx={px} cy={py} r={6} className="fill-blue-600 dark:fill-blue-400" />
-        <text x={px} y={Math.max(T + 10, py - 10)} textAnchor={anchor} fontSize={11} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-blue-700 dark:fill-blue-300">
+        <text style={{ fontSize: svgPx(12) }} x={px} y={Math.max(T + 10, py - 10)} textAnchor={anchor} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-blue-700 dark:fill-blue-300">
           {`${f(rho, 4)} · ${temp} °C`}
         </text>
       </svg>

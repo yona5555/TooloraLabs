@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import WcIndicatorCard from "./WcIndicatorCard";
 import { useWcLive } from "./WcLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 330;
 const H = 40;
@@ -36,14 +37,14 @@ function Strip({ zones, max, value, ticks, f }: { zones: Zone[]; max: number; va
       {ticks.map((v) => (
         <g key={v}>
           <line x1={sx(v)} y1={STRIP_Y} x2={sx(v)} y2={STRIP_Y + STRIP_H + 3} className="stroke-zinc-500 dark:stroke-zinc-400" />
-          <text x={sx(v)} y={STRIP_Y + STRIP_H + 12} textAnchor="middle" fontSize={8.5} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">{f(v)}</text>
+          <text style={{ fontSize: svgPx(12) }} x={sx(v)} y={STRIP_Y + STRIP_H + 12} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">{f(v)}</text>
         </g>
       ))}
       <g style={{ transform: `translateX(${x}px)`, transition: "transform 250ms ease" }}>
         <path d={`M-5 2 L5 2 L0 ${STRIP_Y - 1} Z`} className="fill-blue-700 dark:fill-blue-400" />
         <line x1={0} y1={STRIP_Y - 1} x2={0} y2={STRIP_Y + STRIP_H} strokeWidth={2} className="stroke-blue-700 dark:stroke-blue-400" />
       </g>
-      {value > max && <text x={W - 2} y={10} textAnchor="end" fontSize={10} fontWeight={700} className="fill-rose-600 dark:fill-rose-400">»</text>}
+      {value > max && <text style={{ fontSize: svgPx(12) }} x={W - 2} y={10} textAnchor="end" fontWeight={700} className="fill-rose-600 dark:fill-rose-400">»</text>}
     </svg>
   );
 }

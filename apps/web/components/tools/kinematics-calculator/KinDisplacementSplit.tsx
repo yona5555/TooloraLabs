@@ -3,6 +3,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { ltr } from "@/components/tool-ui/MixedText";
 import KinIndicatorCard, { KinIndicatorUnavailable } from "./KinIndicatorCard";
 import { r2, useKinModel } from "./KinLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 400;
 const H = 190;
@@ -35,7 +36,7 @@ export default function KinDisplacementSplit() {
   const sp = seg(0, k.pathLength);
 
   const label = (x: number, w: number, y: number, text: string, cls: string, words = false) => (
-    <text x={r2(Math.min(R - 4, Math.max(L + 4, x + w / 2)))} y={y - 6} textAnchor="middle" direction={words && rtl ? "rtl" : "ltr"} fontSize={10.5} fontWeight={700} className={cls}>{text}</text>
+    <text style={{ fontSize: svgPx(12) }} x={r2(Math.min(R - 4, Math.max(L + 4, x + w / 2)))} y={y - 6} textAnchor="middle" direction={words && rtl ? "rtl" : "ltr"} fontWeight={700} className={cls}>{text}</text>
   );
 
   const svg = (
@@ -45,7 +46,7 @@ export default function KinDisplacementSplit() {
       <rect x={s1.x} y={ROWS[0]} width={s1.w} height={BAR} rx={3} className="fill-sky-500 dark:fill-sky-400" />
       <rect x={s2.x} y={ROWS[0] + (a2 < 0 ? BAR / 2 : 0)} width={s2.w} height={a2 < 0 ? BAR / 2 : BAR} rx={3} className={a2 < 0 ? "fill-amber-500 dark:fill-amber-400" : "fill-violet-500 dark:fill-violet-400"} />
       {label(s1.x, s1.w, ROWS[0], `v₀t = ${f(a1, 1)}`, "fill-sky-700 dark:fill-sky-300")}
-      <text x={r2(Math.min(R - 4, Math.max(L + 4, s2.x + s2.w / 2)))} y={ROWS[0] + BAR + 13} textAnchor="middle" fontSize={10.5} fontWeight={700} className={a2 < 0 ? "fill-amber-700 dark:fill-amber-300" : "fill-violet-700 dark:fill-violet-300"}>{`½at² = ${f(a2, 1)}`}</text>
+      <text style={{ fontSize: svgPx(12) }} x={r2(Math.min(R - 4, Math.max(L + 4, s2.x + s2.w / 2)))} y={ROWS[0] + BAR + 13} textAnchor="middle" fontWeight={700} className={a2 < 0 ? "fill-amber-700 dark:fill-amber-300" : "fill-violet-700 dark:fill-violet-300"}>{`½at² = ${f(a2, 1)}`}</text>
       {/* row 2: the net displacement */}
       <rect x={sn.x} y={ROWS[1] + 8} width={sn.w} height={BAR} rx={3} className="fill-blue-600 dark:fill-blue-400" />
       {label(sn.x, sn.w, ROWS[1] + 8, `Δx = ${f(net, 1)} m`, "fill-blue-700 dark:fill-blue-300")}

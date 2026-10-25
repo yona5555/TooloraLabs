@@ -24,6 +24,7 @@ import SemiGauge from "@/components/tools/markets/SemiGauge";
 import SensitivityBars from "@/components/tools/markets/SensitivityBars";
 import { pc, type RngFormatters } from "./format";
 import { PRESETS, type PresetKey } from "./types";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 /** Everything the indicators read about the current draw, computed once by the page. */
 export type Draw = {
@@ -154,7 +155,7 @@ export function RunningAverage({ d, f }: IndicatorProps) {
         {[d.lo, d.mu, d.hi].map((v) => (
           <g key={v}>
             <line x1={L} x2={W - R} y1={y(v)} y2={y(v)} className={v === d.mu ? "stroke-amber-500" : "stroke-zinc-200 dark:stroke-zinc-700"} strokeDasharray={v === d.mu ? "5 4" : undefined} strokeWidth={v === d.mu ? 2 : 1} />
-            <text x={L - 6} y={y(v) + 3} textAnchor="end" className={`font-mono text-[13px] ${v === d.mu ? "fill-amber-600 dark:fill-amber-400" : "fill-zinc-400"}`}>
+            <text style={{ fontSize: svgPx(13) }} x={L - 6} y={y(v) + 3} textAnchor="end" className={`font-mono ${v === d.mu ? "fill-amber-600 dark:fill-amber-400": "fill-zinc-400"}`}>
               {f.num(v, 1)}
             </text>
           </g>
@@ -163,14 +164,14 @@ export function RunningAverage({ d, f }: IndicatorProps) {
         {last && (
           <g>
             <circle cx={x(last.index)} cy={clampY(last.mean)} r={6} className="fill-blue-600 stroke-white dark:fill-blue-400 dark:stroke-zinc-900" strokeWidth={2} />
-            <text x={x(last.index) - 8} y={clampY(last.mean) - 10} textAnchor="end" className="fill-blue-700 font-mono text-[14px] font-bold dark:fill-blue-300">
+            <text style={{ fontSize: svgPx(14) }} x={x(last.index) - 8} y={clampY(last.mean) - 10} textAnchor="end" className="fill-blue-700 font-mono font-bold dark:fill-blue-300">
               {f.num(last.mean, 2)}
             </text>
           </g>
         )}
-        <text x={L} y={H - 8} className="fill-zinc-400 font-mono text-[13px]">1</text>
-        <text x={W - R} y={H - 8} textAnchor="end" className="fill-zinc-400 font-mono text-[13px]">{f.int(d.k)}</text>
-        <text x={(L + W - R) / 2} y={H - 8} textAnchor="middle" className="fill-zinc-400 text-[13px]">{t("mean.axisDraws")}</text>
+        <text style={{ fontSize: svgPx(13) }} x={L} y={H - 8} className="fill-zinc-400 font-mono">1</text>
+        <text style={{ fontSize: svgPx(13) }} x={W - R} y={H - 8} textAnchor="end" className="fill-zinc-400 font-mono">{f.int(d.k)}</text>
+        <text style={{ fontSize: svgPx(13) }} x={(L + W - R) / 2} y={H - 8} textAnchor="middle" className="fill-zinc-400">{t("mean.axisDraws")}</text>
       </svg>
       <div className="mt-2 flex flex-wrap gap-4 text-xs text-zinc-500 dark:text-zinc-400">
         <span className="flex items-center gap-1.5"><span className="w-4 border-t-2 border-blue-600" />{t("mean.legendMean")}</span>
@@ -280,7 +281,7 @@ export function SpreadInRange({ d, f }: IndicatorProps) {
         {marks.map((m) => (
           <g key={m.label}>
             <line x1={x(m.v)} x2={x(m.v)} y1={m.y + 4} y2={lineY + 18} strokeWidth={1.5} strokeDasharray="4 3" className={m.cls} />
-            <text x={x(m.v)} y={m.y} textAnchor={anchor(m.v)} className={`font-mono text-[14px] font-semibold ${m.tcls}`}>
+            <text style={{ fontSize: svgPx(14) }} x={x(m.v)} y={m.y} textAnchor={anchor(m.v)} className={`font-mono font-semibold ${m.tcls}`}>
               {m.label}
             </text>
           </g>
@@ -290,9 +291,9 @@ export function SpreadInRange({ d, f }: IndicatorProps) {
           stack.set(v, level + 1);
           return <circle key={i} cx={x(v)} cy={lineY + 6 - Math.min(level, 6) * 6 - 6} r={4} className="fill-blue-600/80 dark:fill-blue-400/80" />;
         })}
-        <text x={L} y={lineY + 36} className="fill-zinc-500 font-mono text-[14px]">{f.int(d.lo)}</text>
-        <text x={W - R} y={lineY + 36} textAnchor="end" className="fill-zinc-500 font-mono text-[14px]">{f.int(d.hi)}</text>
-        <text x={(sdLo + sdHi) / 2} y={lineY + 36} textAnchor="middle" className="fill-blue-600 text-[13px] dark:fill-blue-400">±1 SD</text>
+        <text style={{ fontSize: svgPx(14) }} x={L} y={lineY + 36} className="fill-zinc-500 font-mono">{f.int(d.lo)}</text>
+        <text style={{ fontSize: svgPx(14) }} x={W - R} y={lineY + 36} textAnchor="end" className="fill-zinc-500 font-mono">{f.int(d.hi)}</text>
+        <text style={{ fontSize: svgPx(13) }} x={(sdLo + sdHi) / 2} y={lineY + 36} textAnchor="middle" className="fill-blue-600 dark:fill-blue-400">±1 SD</text>
       </svg>
     </IndicatorCard>
   );

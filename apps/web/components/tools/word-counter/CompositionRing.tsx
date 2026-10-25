@@ -1,6 +1,7 @@
 "use client";
 import { useTranslations } from "next-intl";
 import { useWcLive } from "./WcLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const SIZE = 176;
 const C = SIZE / 2;
@@ -69,10 +70,10 @@ export default function CompositionRing() {
             { value: repeated, stroke: "stroke-emerald-200 dark:stroke-emerald-800" },
           ]}
         />
-        <text x={C} y={C - 4} textAnchor="middle" fontSize={22} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-900 dark:fill-zinc-100">
+        <text style={{ fontSize: svgPx(22) }} x={C} y={C - 4} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-900 dark:fill-zinc-100">
           {f(totalChars)}
         </text>
-        <text x={C} y={C + 14} textAnchor="middle" fontSize={10} className="fill-zinc-500 dark:fill-zinc-400">
+        <text style={{ fontSize: svgPx(12) }} x={C} y={C + 14} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
           {t("center")}
         </text>
       </svg>

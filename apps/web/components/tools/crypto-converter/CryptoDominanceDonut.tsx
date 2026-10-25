@@ -5,6 +5,7 @@ import type { CryptoCoin, CryptoGlobalStats } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { useCryptoFormatters } from "./cryptoFormat";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 type CryptoDominanceDonutProps = {
   stats: CryptoGlobalStats;
@@ -65,10 +66,10 @@ export default function CryptoDominanceDonut({ stats, fromCoin, toCoin, digitSty
                 </g>
               );
             })}
-            <text x={SIZE / 2} y={SIZE / 2 + 2} textAnchor="middle" className="fill-zinc-900 font-mono text-[15px] font-bold dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(15) }} x={SIZE / 2} y={SIZE / 2 + 2} textAnchor="middle" className="fill-zinc-900 font-mono font-bold dark:fill-zinc-100">
               {pctFmt(stats.btcDominancePercentage)}
             </text>
-            <text x={SIZE / 2} y={SIZE / 2 + 15} textAnchor="middle" className="fill-zinc-500 text-[8px] dark:fill-zinc-400">
+            <text style={{ fontSize: svgPx(12) }} x={SIZE / 2} y={SIZE / 2 + 15} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
               BTC
             </text>
           </svg>

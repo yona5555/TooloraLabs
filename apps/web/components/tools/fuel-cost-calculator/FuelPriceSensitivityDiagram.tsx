@@ -1,6 +1,7 @@
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import type { CurrencyCode } from "@/lib/currency";
 import AutoFitText from "@/components/tool-ui/AutoFitText";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 type Point = { price: number; cost: number };
 
@@ -78,10 +79,10 @@ export default function FuelPriceSensitivityDiagram({ lowPoint, currentPoint, hi
                     <AutoFitText text={costText} steps={costSteps} allowWrap={false} className={`font-mono font-bold ${s.tone.textClass.replace("fill-", "text-")}`} />
                   </div>
                 </foreignObject>
-                <text x={x + BAR_WIDTH / 2} y={BASELINE_Y + 16} textAnchor="middle" fontSize={10} fontWeight={700} fill="currentColor">
+                <text style={{ fontSize: svgPx(12) }} x={x + BAR_WIDTH / 2} y={BASELINE_Y + 16} textAnchor="middle" fontWeight={700} fill="currentColor">
                   {money(s.point.price)}
                 </text>
-                <text x={x + BAR_WIDTH / 2} y={BASELINE_Y + 30} textAnchor="middle" fontSize={9} fill="currentColor" opacity={0.65}>
+                <text style={{ fontSize: svgPx(12) }} x={x + BAR_WIDTH / 2} y={BASELINE_Y + 30} textAnchor="middle" fill="currentColor" opacity={0.65}>
                   {s.label}
                 </text>
               </g>

@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import RtIndicatorCard from "./RtIndicatorCard";
 import { useRtLive } from "./RtLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 176;
@@ -33,7 +34,7 @@ export default function RtSentenceTimes() {
     <div>
       <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
         <line x1={PAD_X} y1={y(SLOW_SECONDS)} x2={W - PAD_X} y2={y(SLOW_SECONDS)} strokeDasharray="2 3" className="stroke-rose-400" />
-        <text x={W - PAD_X} y={y(SLOW_SECONDS) - 3} textAnchor="end" fontSize={9} className="fill-rose-500 dark:fill-rose-400">{t("slowLine", { s: f(SLOW_SECONDS) })}</text>
+        <text style={{ fontSize: svgPx(12) }} x={W - PAD_X} y={y(SLOW_SECONDS) - 3} textAnchor="end" className="fill-rose-500 dark:fill-rose-400">{t("slowLine", { s: f(SLOW_SECONDS) })}</text>
         {shown.map((s, i) => {
           const x = PAD_X + i * slot + (slot - barW) / 2;
           const on = selected === s;
@@ -53,7 +54,7 @@ export default function RtSentenceTimes() {
                 <title>{t("barTitle", { n: f(s.index + 1), s: f(v) })}</title>
               </rect>
               {shown.length <= 20 && (
-                <text x={x + barW / 2} y={y(v) - 3} textAnchor="middle" fontSize={9} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">{f(v, 0)}</text>
+                <text style={{ fontSize: svgPx(12) }} x={x + barW / 2} y={y(v) - 3} textAnchor="middle" fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">{f(v, 0)}</text>
               )}
             </g>
           );
@@ -61,13 +62,13 @@ export default function RtSentenceTimes() {
         {avg > 0 && (
           <>
             <line x1={PAD_X} y1={y(avg)} x2={W - PAD_X} y2={y(avg)} strokeWidth={1.5} className="stroke-emerald-600 dark:stroke-emerald-400" style={{ transition: "all 250ms ease" }} />
-            <text x={PAD_X} y={y(avg) - 3} fontSize={9} fontWeight={600} className="fill-emerald-700 dark:fill-emerald-300">{t("avgLine", { s: f(avg) })}</text>
+            <text style={{ fontSize: svgPx(12) }} x={PAD_X} y={y(avg) - 3} fontWeight={600} className="fill-emerald-700 dark:fill-emerald-300">{t("avgLine", { s: f(avg) })}</text>
           </>
         )}
         <line x1={PAD_X} y1={BASE} x2={W - PAD_X} y2={BASE} className="stroke-zinc-300 dark:stroke-zinc-600" />
-        <text x={PAD_X} y={BASE + 14} fontSize={9} className="fill-zinc-500 dark:fill-zinc-400">{f(1)}</text>
-        <text x={W - PAD_X} y={BASE + 14} textAnchor="end" fontSize={9} className="fill-zinc-500 dark:fill-zinc-400">{f(shown.length)}</text>
-        <text x={W / 2} y={BASE + 14} textAnchor="middle" fontSize={9} className="fill-zinc-500 dark:fill-zinc-400">{t("axis")}</text>
+        <text style={{ fontSize: svgPx(12) }} x={PAD_X} y={BASE + 14} className="fill-zinc-500 dark:fill-zinc-400">{f(1)}</text>
+        <text style={{ fontSize: svgPx(12) }} x={W - PAD_X} y={BASE + 14} textAnchor="end" className="fill-zinc-500 dark:fill-zinc-400">{f(shown.length)}</text>
+        <text style={{ fontSize: svgPx(12) }} x={W / 2} y={BASE + 14} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">{t("axis")}</text>
       </svg>
       <p className="mt-1 text-[11px] text-amber-700 dark:text-amber-300">
         {t("hint")}

@@ -8,6 +8,7 @@ import { useFuelLiveInputs } from "./FuelLiveInputsContext";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import FuelWorkedExampleNote from "./FuelWorkedExampleNote";
 import GapFreeRow from "@/components/tool-ui/GapFreeRow";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 /** Worked example of the tool's own formula: cost = (distance / efficiency) * price. Reference numbers, not fabricated placeholders. */
 const DISTANCE = 300;
@@ -95,10 +96,10 @@ export default function FuelFormulaDiagram() {
               </div>
             </foreignObject>
 
-            <text x={STOP_ZONE_W} y={HEIGHT - 8} textAnchor="middle" fontSize={11} fontWeight={700} fill="currentColor" opacity={0.55}>
+            <text style={{ fontSize: svgPx(12) }} x={STOP_ZONE_W} y={HEIGHT - 8} textAnchor="middle" fontWeight={700} fill="currentColor" opacity={0.55}>
               ÷
             </text>
-            <text x={STOP_ZONE_W * 2} y={HEIGHT - 8} textAnchor="middle" fontSize={11} fontWeight={700} fill="currentColor" opacity={0.55}>
+            <text style={{ fontSize: svgPx(12) }} x={STOP_ZONE_W * 2} y={HEIGHT - 8} textAnchor="middle" fontWeight={700} fill="currentColor" opacity={0.55}>
               ×
             </text>
           </svg>

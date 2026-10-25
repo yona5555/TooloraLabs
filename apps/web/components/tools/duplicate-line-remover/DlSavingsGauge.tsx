@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import DlIndicatorCard, { DlIndicatorUnavailable } from "./DlIndicatorCard";
 import { useDlModel } from "./DlLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 300;
 const H = 176;
@@ -38,14 +39,14 @@ export default function DlSavingsGauge() {
       {[0, 25, 50, 75, 100].map((v) => {
         const [x, y] = pt(v / 100, R + 24);
         return (
-          <text key={v} x={x} y={Number(y) + 4} textAnchor="middle" fontSize={11} className="fill-zinc-500 dark:fill-zinc-400">
+          <text style={{ fontSize: svgPx(12) }} key={v} x={x} y={Number(y) + 4} textAnchor={Number(x) > W - 40 ? "end" : Number(x) < 40 ? "start" : "middle"} className="fill-zinc-500 dark:fill-zinc-400">
             {v}%
           </text>
         );
       })}
       <line x1={CX} y1={CY} x2={nx} y2={ny} strokeWidth={4} strokeLinecap="round" className="stroke-zinc-800 dark:stroke-zinc-100" />
       <circle cx={CX} cy={CY} r={7} className="fill-zinc-800 dark:fill-zinc-100" />
-      <text x={CX} y={CY - 38} textAnchor="middle" fontSize={22} fontWeight={700} className="fill-blue-700 dark:fill-blue-300">
+      <text style={{ fontSize: svgPx(22) }} x={CX} y={CY - 38} textAnchor="middle" fontWeight={700} className="fill-blue-700 dark:fill-blue-300">
         {f(share * 100, 1)}%
       </text>
     </svg>

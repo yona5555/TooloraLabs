@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { dialMinutes, SEGMENT_DOTS, SEGMENT_STROKES } from "./rtMath";
 import { useRtLive } from "./RtLiveContext";
 import { px2 } from "@/components/tool-ui/indicator-kit/SvgBits";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const SIZE = 184;
 const C = SIZE / 2;
@@ -70,10 +71,10 @@ export default function ReadingDial() {
         </g>
         <circle cx={C} cy={C} r={30} className="fill-white dark:fill-zinc-900" />
         <circle cx={C} cy={C} r={3} className="fill-amber-500 dark:fill-amber-400" />
-        <text x={C} y={C - 8} textAnchor="middle" fontSize={20} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-900 dark:fill-zinc-100">
+        <text style={{ fontSize: svgPx(20) }} x={C} y={C - 8} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-900 dark:fill-zinc-100">
           {clock(result.totalSeconds)}
         </text>
-        <text x={C} y={C + 18} textAnchor="middle" fontSize={9} className="fill-zinc-500 dark:fill-zinc-400">
+        <text style={{ fontSize: svgPx(12) }} x={C} y={C + 18} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
           {t("scale", { n: f(span) })}
         </text>
       </svg>

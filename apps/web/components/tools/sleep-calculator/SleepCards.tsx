@@ -114,14 +114,14 @@ export function SleepHypnogramCard({ side }: { side: Side }) {
           {LEVELS.map((st) => (
             <g key={st}>
               <line x1={PL} y1={ly(st)} x2={W - PR} y2={ly(st)} style={{ stroke: "var(--ph-grid)" }} />
-              <T x={PL - 6} y={ly(st) + 4} text={tc(`stages.${st}`)} anchor="end" size={10} bold style={{ fill: STAGE_COLORS[st] }} />
+              <T x={PL - 6} y={ly(st) + 4} text={tc(`stages.${st}`)} anchor="end" size={12} bold style={{ fill: STAGE_COLORS[st] }} />
             </g>
           ))}
           {/* Cycle boundaries */}
           {Array.from({ length: Math.floor(T_MAX / CYCLE_MIN) + 1 }, (_, i) => (
             <g key={i}>
               <line x1={xt(i * CYCLE_MIN)} y1={top - 8} x2={xt(i * CYCLE_MIN)} y2={base} style={{ stroke: "var(--ph-line)" }} strokeDasharray="3 4" />
-              {i < Math.floor(T_MAX / CYCLE_MIN) + 1 && i * CYCLE_MIN + 45 < T_MAX && <T x={xt(i * CYCLE_MIN + 45)} y={top - 12} text={`C${i + 1}`} size={9.5} />}
+              {i < Math.floor(T_MAX / CYCLE_MIN) + 1 && i * CYCLE_MIN + 45 < T_MAX && <T x={xt(i * CYCLE_MIN + 45)} y={top - 12} text={`C${i + 1}`} size={12} />}
             </g>
           ))}
           {/* Hypnogram: connectors, then coloured stage runs (past the wake-up faded) */}
@@ -141,7 +141,7 @@ export function SleepHypnogramCard({ side }: { side: Side }) {
           <T x={tagRight ? mx + 6 : mx - 6} y={18} text={`${wakeClock} · ${stageName}`} anchor={tagRight ? "start" : "end"} size={12} bold style={{ fill: FEEL_COLORS[feel] }} />
           {/* Hours asleep axis */}
           {[0, 2, 4, 6, 8, 10].map((h) => (
-            <T key={h} x={xt(h * 60)} y={base + 18} text={`${h} h`} size={10} />
+            <T key={h} x={xt(h * 60)} y={base + 18} text={`${h} h`} size={12} />
           ))}
           <SvgTrack W={W} y={trackY} frac={(tm - T_MIN) / (T_MAX - T_MIN)} lo="1 h" hi="10 h" />
         </Drawing>
@@ -233,7 +233,7 @@ export function SleepDialCard({ side }: { side: Side }) {
           {[0, 6, 12, 18].map((h) => {
             const [x, y] = pt(h * 60, Rh + 32);
             const side = h > 0 && h < 12 ? "start" : h > 12 ? "end" : "middle";
-            return <T key={h} x={side === "start" ? x - 5 : side === "end" ? x + 5 : x} y={y + 4} text={String(h)} anchor={side} size={11} bold />;
+            return <T key={h} x={side === "start" ? x - 5 : side === "end" ? x + 5 : x} y={y + 4} text={String(h)} anchor={side} size={12} bold />;
           })}
           {/* Hand to the handle */}
           <line x1={cx} y1={cy} x2={ex} y2={ey} style={{ stroke: "var(--ph-ink)" }} strokeWidth={2.5} strokeLinecap="round" opacity={0.85} />
@@ -246,7 +246,7 @@ export function SleepDialCard({ side }: { side: Side }) {
             return (
               <g key={`lg${o.cycles}`}>
                 <rect x={lx} y={lyy - 9} width={10} height={10} rx={2} fill={OPTION_COLORS[o.cycles]} />
-                <T x={lx + 15} y={lyy} text={`${o.cycles}× ${hrs(o.sleepMinutes)} · ${clock(o.clockMinutes)}`} anchor="start" size={10.5} bold={o.cycles >= 5} style={INK} />
+                <T x={lx + 15} y={lyy} text={`${o.cycles}× ${hrs(o.sleepMinutes)} · ${clock(o.clockMinutes)}`} anchor="start" size={12} bold={o.cycles >= 5} style={INK} />
               </g>
             );
           })}
@@ -311,11 +311,11 @@ export function SleepStagesCard({ side }: { side: Side }) {
                   return (
                     <g key={k}>
                       <rect x={x} y={y} width={w} height={h} style={{ fill: STAGE_COLORS[k], ...lit(hover === k) }} />
-                      {h > 15 && used && <T x={x + w / 2} y={y + h / 2 + 4} text={String(c[k])} size={10} bold style={{ fill: "#fff" }} />}
+                      {h > 15 && used && <T x={x + w / 2} y={y + h / 2 + 4} text={String(c[k])} size={12} bold style={{ fill: "#fff" }} />}
                     </g>
                   );
                 })}
-                <T x={x + w / 2} y={top - 8} text={`C${i + 1}`} size={10.5} bold={used} style={used ? INK : MUTED} />
+                <T x={x + w / 2} y={top - 8} text={`C${i + 1}`} size={12} bold={used} style={used ? INK : MUTED} />
               </g>
             );
           })}
@@ -326,7 +326,7 @@ export function SleepStagesCard({ side }: { side: Side }) {
             return (
               <g key={`lg${k}`}>
                 <rect x={lx} y={lyy - 10} width={11} height={11} rx={2} fill={STAGE_COLORS[k]} />
-                <T x={lx + 16} y={lyy} text={`${tc(`stages.${k}`)} ${tot[k]} min (${Math.round((tot[k] / total) * 100)}%)`} anchor="start" size={10.5} bold style={INK} />
+                <T x={lx + 16} y={lyy} text={`${tc(`stages.${k}`)} ${tot[k]} min (${Math.round((tot[k] / total) * 100)}%)`} anchor="start" size={12} bold style={INK} />
               </g>
             );
           })}
@@ -387,7 +387,7 @@ export function SleepAgeCard({ side }: { side: Side }) {
           <rect x={xh(g.may[0])} y={sy} width={xh(g.may[1]) - xh(g.may[0])} height={sh} fill={VERDICT_COLORS.may} opacity={hover === "may" ? 0.85 : 0.55} />
           <rect x={xh(g.rec[0])} y={sy} width={xh(g.rec[1]) - xh(g.rec[0])} height={sh} fill={VERDICT_COLORS.rec} opacity={hover === "rec" ? 0.95 : 0.7} />
           {bounds.map((b) => (
-            <T key={b} x={xh(b)} y={sy + sh + 15} text={String(b)} size={10.5} bold style={INK} />
+            <T key={b} x={xh(b)} y={sy + sh + 15} text={String(b)} size={12} bold style={INK} />
           ))}
           {/* Options as markers on the strip */}
           {snap.nights.map((o) => {
@@ -396,14 +396,14 @@ export function SleepAgeCard({ side }: { side: Side }) {
             return (
               <g key={o.cycles}>
                 <line x1={xh(h)} y1={sy - 6} x2={xh(h)} y2={sy + sh + 2} style={{ stroke: "var(--ph-ink)" }} strokeWidth={on ? 4 : 2.5} />
-                <T x={xh(h)} y={sy - 26} text={`${o.cycles}×`} size={10} bold style={{ fill: OPTION_COLORS[o.cycles] }} />
-                <T x={xh(h)} y={sy - 11} text={`${f1(h)}`} size={10.5} bold style={INK} />
+                <T x={xh(h)} y={sy - 26} text={`${o.cycles}×`} size={12} bold style={{ fill: OPTION_COLORS[o.cycles] }} />
+                <T x={xh(h)} y={sy - 11} text={`${f1(h)}`} size={12} bold style={INK} />
               </g>
             );
           })}
           {/* Hours axis */}
           {[4, 8, 12, 16, 20].map((h) => (
-            <T key={h} x={xh(h)} y={sy + sh + 36} text={`${h} h`} size={9.5} />
+            <T key={h} x={xh(h)} y={sy + sh + 36} text={`${h} h`} size={12} />
           ))}
           {/* Legend */}
           {(["rec", "may", "no"] as const).map((v, i) => {
@@ -412,7 +412,7 @@ export function SleepAgeCard({ side }: { side: Side }) {
             return (
               <g key={v}>
                 <rect x={lx} y={lyy - 10} width={11} height={11} rx={2} fill={VERDICT_COLORS[v]} opacity={0.8} />
-                <T x={lx + 15} y={lyy} text={tc(`verdict.${v}`)} anchor="start" size={10} bold style={INK} />
+                <T x={lx + 15} y={lyy} text={tc(`verdict.${v}`)} anchor="start" size={12} bold style={INK} />
               </g>
             );
           })}
@@ -490,13 +490,13 @@ function Efficiency({ side }: { side: Side }) {
           })}
           {[70, 80, 85, 90, 95, 100].map((v) => {
             const [x, y] = pt(v, R + 26);
-            return <T key={v} x={x} y={y + 4} text={`${v}`} size={10.5} />;
+            return <T key={v} x={x} y={y + 4} text={`${v}`} size={12} />;
           })}
           <line x1={cx} y1={cy} x2={nx} y2={ny} style={{ stroke: "var(--ph-ink)" }} strokeWidth={hover === "eff" ? 4.5 : 3.5} strokeLinecap="round" />
           <circle cx={cx} cy={cy} r={7} style={{ fill: "var(--ph-ink)" }} />
           <T x={cx} y={cy + 24} text={`${f1(eff)}% · ${dur(best.sleepMinutes)} / ${dur(inBed)}`} size={14} bold style={INK} />
-          <T x={cx} y={cy + 42} text={t(`zones.${zone.key}`)} size={11} bold style={{ fill: zone.color }} />
-          <T x={cx} y={cy + 58} text={t(`latency.${lk}`)} size={10.5} bold />
+          <T x={cx} y={cy + 42} text={t(`zones.${zone.key}`)} size={12} bold style={{ fill: zone.color }} />
+          <T x={cx} y={cy + 58} text={t(`latency.${lk}`)} size={12} bold />
           <SvgTrack W={W} y={trackY} frac={L / L_MAX} lo="0 min" hi={`${L_MAX} min`} stops={[30, 45].map((v) => ({ frac: v / L_MAX, text: `${v}` }))} />
         </Drawing>
       }
@@ -554,7 +554,7 @@ export function SleepWindDownCard({ side }: { side: Side }) {
           <line x1={xs(0)} y1={lineY} x2={xs(stations.length - 3)} y2={lineY} style={{ stroke: "var(--ph-ink-muted)" }} strokeWidth={3} strokeDasharray="1 0" />
           <line x1={xs(stations.length - 3)} y1={lineY} x2={xs(stations.length - 2)} y2={lineY} stroke={STAGE_COLORS.wake} strokeWidth={5} />
           <line x1={xs(stations.length - 2)} y1={lineY} x2={xs(stations.length - 1)} y2={lineY} stroke={OPTION_COLORS[N]} strokeWidth={8} strokeLinecap="round" />
-          <T x={(xs(stations.length - 2) + xs(stations.length - 1)) / 2} y={lineY + 26} text={hrs(N * CYCLE_MIN)} size={11} bold style={{ fill: OPTION_COLORS[N] }} />
+          <T x={(xs(stations.length - 2) + xs(stations.length - 1)) / 2} y={lineY + 26} text={hrs(N * CYCLE_MIN)} size={12} bold style={{ fill: OPTION_COLORS[N] }} />
           {stations.map((st, i) => {
             const up = i % 2 === 0;
             const far = four && i % 4 >= 2 ? 30 : 0;
@@ -565,24 +565,24 @@ export function SleepWindDownCard({ side }: { side: Side }) {
             return (
               <g key={st.key}>
                 <circle cx={x} cy={lineY} r={on ? 10 : 8} style={{ fill: st.key === "bed" ? "var(--ph-accent-strong)" : "var(--ph-surface)", stroke: "var(--ph-ink)" }} strokeWidth={2} />
-                <T x={tx} y={up ? lineY - 36 - far : lineY + 46 + far} text={st.name} anchor={anchor} size={10} bold={on} style={on ? INK : MUTED} />
-                <T x={tx} y={up ? lineY - 20 - far : lineY + 62 + far} text={clock(st.at)} anchor={anchor} size={11} bold style={INK} />
+                <T x={tx} y={up ? lineY - 36 - far : lineY + 46 + far} text={st.name} anchor={anchor} size={12} bold={on} style={on ? INK : MUTED} />
+                <T x={tx} y={up ? lineY - 20 - far : lineY + 62 + far} text={clock(st.at)} anchor={anchor} size={12} bold style={INK} />
               </g>
             );
           })}
           {/* To scale: wind-down, falling asleep, then each 90-minute cycle */}
           <rect x={xsc(0)} y={stripY} width={xsc(360) - xsc(0)} height={24} rx={4} style={{ fill: "var(--ph-ink-muted)" }} opacity={0.3} />
-          <T x={(xsc(0) + xsc(360)) / 2} y={stripY + 16} text="6 h" size={11} bold style={INK} />
+          <T x={(xsc(0) + xsc(360)) / 2} y={stripY + 16} text="6 h" size={12} bold style={INK} />
           <rect x={xsc(360)} y={stripY} width={Math.max(1, xsc(360 + snap.latency) - xsc(360))} height={24} fill={STAGE_COLORS.wake} />
           {Array.from({ length: N }, (_, k) => {
             const a = xsc(360 + snap.latency + k * CYCLE_MIN);
             const b2 = xsc(360 + snap.latency + (k + 1) * CYCLE_MIN);
             return <rect key={k} x={a + 0.75} y={stripY} width={Math.max(0, b2 - a - 1.5)} height={24} rx={3} fill={OPTION_COLORS[N]} opacity={0.6 + 0.4 * ((k + 1) / N)} />;
           })}
-          <T x={(xsc(360 + snap.latency) + xsc(span)) / 2} y={stripY + 16} text={`${N} × 90 min = ${hrs(N * CYCLE_MIN)}`} size={11} bold style={{ fill: "#fff" }} />
-          <T x={xsc(0)} y={stripY + 42} text={clock(stations[0].at)} anchor="start" size={10.5} bold style={INK} />
-          <T x={xsc(360)} y={stripY + 42} text={clock(bed)} size={10.5} bold style={INK} />
-          <T x={xsc(span)} y={stripY + 42} text={clock(wake)} anchor="end" size={10.5} bold style={INK} />
+          <T x={(xsc(360 + snap.latency) + xsc(span)) / 2} y={stripY + 16} text={`${N} × 90 min = ${hrs(N * CYCLE_MIN)}`} size={12} bold style={{ fill: "#fff" }} />
+          <T x={xsc(0)} y={stripY + 42} text={clock(stations[0].at)} anchor="start" size={12} bold style={INK} />
+          <T x={xsc(360)} y={stripY + 42} text={clock(bed)} size={12} bold style={INK} />
+          <T x={xsc(span)} y={stripY + 42} text={clock(wake)} anchor="end" size={12} bold style={INK} />
           <SvgTrack W={W} y={trackY} frac={(N - 3) / 3} stops={[3, 4, 5, 6].map((m, i) => ({ frac: i / 3, text: `${m}×`, on: m === N }))} />
         </Drawing>
       }
@@ -633,7 +633,7 @@ export function SleepCycleTrioCard({ side }: { side: Side }) {
       caption={t("caption", { dx: ltr(`${dx} min`), shift: ltr(dur(shift)), what })}
       visual={
         <Drawing {...d} hMin={HMIN} label={t("handle")} valueText={valueText} handle={{ x: X0 + ((dx - 5) / 25) * (W - 2 * X0), y: trackY, dir: "horizontal" }} s={s} testId="sleep-c7">
-          <T x={X0} y={18} text={`${what} · ${best.cycles}×`} anchor="start" size={11} bold />
+          <T x={X0} y={18} text={`${what} · ${best.cycles}×`} anchor="start" size={12} bold />
           {cols.map((c, ci) => {
             const x = X0 + cw * ci + cw * 0.2;
             const w = cw * 0.6;
@@ -646,9 +646,9 @@ export function SleepCycleTrioCard({ side }: { side: Side }) {
                   const y0 = yv(k * c.len);
                   return <rect key={k} x={x} y={y1} width={w} height={Math.max(0, y0 - y1 - 1.5)} style={{ fill: OPTION_COLORS[best.cycles], opacity: 0.55 + 0.45 * ((k + 1) / best.cycles), ...lit(hover === c.key) }} />;
                 })}
-                {h > 18 && <T x={x + w / 2} y={base - h / 2 + 4} text={hrs(c.sleep)} size={11} bold style={{ fill: "#fff" }} />}
-                <T x={x + w / 2} y={yv(c.sleep) - 8} text={clock(c.at)} size={on ? 12.5 : 11} bold style={INK} />
-                <T x={x + w / 2} y={base + 18} text={`${c.len} min`} size={11} bold={on} style={on ? INK : MUTED} />
+                {h > 18 && <T x={x + w / 2} y={base - h / 2 + 4} text={hrs(c.sleep)} size={12} bold style={{ fill: "#fff" }} />}
+                <T x={x + w / 2} y={yv(c.sleep) - 8} text={clock(c.at)} size={on ? 12.5 : 12} bold style={INK} />
+                <T x={x + w / 2} y={base + 18} text={`${c.len} min`} size={12} bold={on} style={on ? INK : MUTED} />
               </g>
             );
           })}
@@ -686,7 +686,7 @@ export function SleepFormulaCard({ side }: { side: Side }) {
   const box = (i: number, y: number, text: string, fill: string, ink: { fill: string }, on: boolean) => (
     <g>
       <rect x={bx(i)} y={y} width={bw} height={bh} rx={8} style={{ fill, ...lit(on) }} />
-      <T x={bx(i) + bw / 2} y={y + bh / 2 + 4.5} text={text} size={bw < 78 ? 10 : 12} bold style={ink} />
+      <T x={bx(i) + bw / 2} y={y + bh / 2 + 4.5} text={text} size={bw < 78 ? 12 : 12} bold style={ink} />
     </g>
   );
   return (

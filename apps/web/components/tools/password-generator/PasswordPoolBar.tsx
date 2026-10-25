@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { CHAR_CLASSES } from "@tooloralabs/tools";
 import PasswordIndicatorCard, { PasswordIndicatorUnavailable } from "./PasswordIndicatorCard";
 import { CLASS_FILL, usePasswordModel } from "./PasswordLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const BAR_Y = 26;
@@ -27,7 +28,7 @@ export default function PasswordPoolBar() {
 
   const svg = (
     <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
-      <text x={0} y={14} fontSize={12} className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={0} y={14} className="fill-zinc-500 dark:fill-zinc-400">
         {words ? t("axisWords", { n: f(s.wordListSize) }) : t("axis", { n: s.poolSize, full: FULL })}
       </text>
       <rect x={0} y={BAR_Y} width={W} height={BAR_H} rx={5} className="fill-zinc-100 dark:fill-zinc-800" />
@@ -42,10 +43,10 @@ export default function PasswordPoolBar() {
         return (
           <g key={c} opacity={on || words ? 1 : 0.45}>
             <circle cx={6} cy={y - 4} r={6} className={words ? "fill-zinc-300 dark:fill-zinc-600" : CLASS_FILL[c]} />
-            <text x={20} y={y} fontSize={12} className="fill-zinc-600 dark:fill-zinc-300">
+            <text style={{ fontSize: svgPx(12) }} x={20} y={y} className="fill-zinc-600 dark:fill-zinc-300">
               {tc(c)}
             </text>
-            <text x={W} y={y} textAnchor="end" fontSize={12} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={W} y={y} textAnchor="end" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
               {words ? "—" : on ? f(s.pool[c]) : t("off")}
             </text>
           </g>

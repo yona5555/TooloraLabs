@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { KitControls, SvgHandle, useMeasuredSize, useSvgDrag, type Stepper } from "@/components/tool-ui/indicator-kit/CardKit";
 import { snap } from "@/components/tool-ui/indicator-kit/format";
 import { places, ROMAN_MAX, ROMAN_MIN, toRoman } from "./romanMath";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 /**
  * §44 (2D): the main visual at the top of the Roman Result card — a Roman counting board. One rail
@@ -70,13 +71,13 @@ export default function RomanScene({ value, seed, onSet }: { value: number; seed
                   const y = on ? bar + 5 + r + k * (2 * r + 3) : bottom + 4 - r - (3 - k) * (2 * r + 3);
                   return <circle key={k} cx={x} cy={y} r={r} style={{ fill: on ? "var(--cv-from)" : "var(--ph-surface)", stroke: "var(--ph-line)" }} strokeWidth={1} />;
                 })}
-                <text x={x} y={22} fontSize={17} fontWeight={800} textAnchor="middle" style={{ fill: p.d ? "var(--ph-ink)" : "var(--ph-ink-muted)" }}>
+                <text x={x} y={22} fontWeight={800} textAnchor="middle" style={{ fontSize: svgPx(17), fill: p.d ? "var(--ph-ink)" : "var(--ph-ink-muted)" }}>
                   {p.piece || "—"}
                 </text>
-                <text x={x} y={42} fontSize={11} fontWeight={600} textAnchor="middle" className="tabular-nums" style={{ fill: "var(--ph-ink-muted)" }}>
+                <text x={x} y={42} fontWeight={600} textAnchor="middle" className="tabular-nums" style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
                   {p.value.toLocaleString("en-US")}
                 </text>
-                <text x={x} y={bottom + 34} fontSize={10.5} fontWeight={600} textAnchor="middle" style={{ fill: "var(--ph-ink-muted)" }}>
+                <text x={x} y={bottom + 34} fontWeight={600} textAnchor="middle" style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
                   {t(`place.${PLACE_KEYS[i]}`)}
                 </text>
               </g>
@@ -85,7 +86,7 @@ export default function RomanScene({ value, seed, onSet }: { value: number; seed
           <line x1={X0} y1={trackY} x2={X1} y2={trackY} style={{ stroke: "var(--glass-track)" }} strokeWidth={10} strokeLinecap="round" />
           <line x1={X0} y1={trackY} x2={xv(value)} y2={trackY} style={{ stroke: "var(--cv-from)" }} strokeWidth={10} strokeLinecap="round" />
           {[1, 1000, 2000, 3000, 3999].map((v) => (
-            <text key={v} x={xv(v)} y={trackY + 22} fontSize={10.5} fontWeight={600} textAnchor={v === 1 ? "start" : v === 3999 ? "end" : "middle"} className="tabular-nums" style={{ fill: "var(--ph-ink-muted)" }}>
+            <text key={v} x={xv(v)} y={trackY + 22} fontWeight={600} textAnchor={v === 1 ? "start" : v === 3999 ? "end" : "middle"} className="tabular-nums" style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
               {v.toLocaleString("en-US")}
             </text>
           ))}

@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 /**
  * Static illustrative chart for the education intro — not tied to the user's live inputs (same
@@ -72,11 +73,11 @@ export default function AffordableLoanPayoffCurveDiagram() {
             >
               <circle cx={x(p.year)} cy={y(p.balance)} r={hoverYear === p.year ? 5 : 3.5} className="fill-blue-600 dark:fill-blue-400" />
               {hoverYear === p.year && (
-                <text x={x(p.year)} y={y(p.balance) - 10} textAnchor="middle" fontSize={11} fontWeight={700} className="fill-zinc-900 dark:fill-zinc-50">
+                <text style={{ fontSize: svgPx(12) }} x={x(p.year)} y={y(p.balance) - 10} textAnchor="middle" fontWeight={700} className="fill-zinc-900 dark:fill-zinc-50">
                   {money(p.balance)}
                 </text>
               )}
-              <text x={x(p.year)} y={CHART_HEIGHT - 6} textAnchor="middle" fontSize={10} fill="currentColor" opacity={0.7}>
+              <text style={{ fontSize: svgPx(12) }} x={x(p.year)} y={CHART_HEIGHT - 6} textAnchor="middle" fill="currentColor" opacity={0.7}>
                 {t("yearLabel", { year: p.year })}
               </text>
             </g>

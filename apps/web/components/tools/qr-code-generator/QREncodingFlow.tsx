@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import QRIndicatorCard, { QRIndicatorUnavailable } from "./QRIndicatorCard";
 import { useQRModel } from "./QRLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const STEP = 46;
@@ -35,10 +36,10 @@ export default function QREncodingFlow() {
           <g key={s.key}>
             {i < steps.length - 1 && <path d={`M ${W / 2} ${y + 30} V ${y + STEP} m -5 -7 l 5 7 l 5 -7`} fill="none" strokeWidth={1.5} className="stroke-zinc-400 dark:stroke-zinc-500" />}
             <rect x={x0} y={y} width={PILL_W} height={30} rx={15} className={s.cls} />
-            <text x={x0 + 14} y={y + 20} fontSize={12} fontWeight={600} className="fill-white">
+            <text style={{ fontSize: svgPx(12) }} x={x0 + 14} y={y + 20} fontWeight={600} className="fill-white">
               {t(s.key)}
             </text>
-            <text x={x0 + PILL_W - 14} y={y + 20} textAnchor="end" fontSize={12} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-white">
+            <text style={{ fontSize: svgPx(12) }} x={x0 + PILL_W - 14} y={y + 20} textAnchor="end" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-white">
               {s.value}
             </text>
           </g>

@@ -9,6 +9,7 @@ import { ViewportScene } from "@/components/tool-ui/three/ViewportScene";
 import { ballPoints, f2, snap } from "@/components/tool-ui/indicator-kit/format";
 import { particleCounts, PH_MAX, PH_MIN, PH_SEED, uiCss } from "./phMath";
 import type { HeroProjection } from "./PhHeroScene3D";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const HeroScene3D = dynamic(() => import("./PhHeroScene3D"), { ssr: false, loading: () => null });
 
@@ -57,7 +58,7 @@ function Hero2D({ s, valueText, label }: { s: Stepper; valueText: string; label:
         ))}
         <rect x={BAR_X - 7} y={BAR_TOP - 7} width={14} height={BAR_BOTTOM - BAR_TOP + 14} rx={7} fill={`url(#${svgId}ph-hero-bar)`} style={{ stroke: "var(--ph-line)" }} strokeWidth={1} />
         {[0, 2, 4, 7, 10, 12, 14].map((tk) => (
-          <text key={tk} x={BAR_X + 24} y={yFor(tk) + 4} fontSize={11} style={{ fill: "var(--ph-ink-muted)" }}>
+          <text key={tk} x={BAR_X + 24} y={yFor(tk) + 4} style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
             {tk}
           </text>
         ))}

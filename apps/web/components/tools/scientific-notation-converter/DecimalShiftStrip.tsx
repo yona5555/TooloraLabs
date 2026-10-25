@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { decimalShift } from "@tooloralabs/tools";
 import { sup } from "./sciFormat";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 type Cell = { text: string; span: number; wide: boolean };
 const CW = 20;
@@ -83,7 +84,7 @@ export default function DecimalShiftStrip({ coefficient, exponent }: { coefficie
     <div data-testid="shift-strip">
       <svg viewBox={`0 0 ${vbW} ${H}`} width="100%" className="block max-h-24" role="img" aria-label={t("aria", { places: s.places })} style={{ direction: "ltr" }}>
         {s.negative && (
-          <text x={6} y={TOP + CH / 2 + 5} fontSize="15" fontWeight="700" fill="currentColor" className="text-zinc-500">−</text>
+          <text style={{ fontSize: svgPx(15) }} x={6} y={TOP + CH / 2 + 5} fontWeight="700" fill="currentColor" className="text-zinc-500">−</text>
         )}
         {cells.map((c, i) => {
           const w = c.wide ? WIDE : CW;
@@ -91,11 +92,11 @@ export default function DecimalShiftStrip({ coefficient, exponent }: { coefficie
           return (
             <g key={i}>
               <rect x={x + 1} y={TOP} width={w - 2} height={CH} rx="5" className="fill-zinc-100 dark:fill-zinc-800" />
-              <text x={x + w / 2} y={TOP + CH / 2 + 5} textAnchor="middle" fontSize={c.wide ? 11 : 14} fontWeight="700" className="fill-zinc-800 dark:fill-zinc-100">
+              <text style={{ fontSize: svgPx(c.wide ? 12 : 14) }} x={x + w / 2} y={TOP + CH / 2 + 5} textAnchor="middle" fontWeight="700" className="fill-zinc-800 dark:fill-zinc-100">
                 {c.text}
               </text>
               {c.wide && (
-                <text x={x + w / 2} y={TOP - 3} textAnchor="middle" fontSize="8" className="fill-zinc-500 dark:fill-zinc-400">{`×${c.span}`}</text>
+                <text style={{ fontSize: svgPx(12) }} x={x + w / 2} y={TOP - 3} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">{`×${c.span}`}</text>
               )}
             </g>
           );
@@ -109,7 +110,7 @@ export default function DecimalShiftStrip({ coefficient, exponent }: { coefficie
             <g key={i}>
               <path d={`M ${a} ${TOP - 2} Q ${mid} ${TOP - 18} ${b} ${TOP - 2}`} fill="none" className="stroke-emerald-500" strokeWidth="1.5" />
               {(i + 1) % labelEvery === 0 && (
-                <text x={mid} y={TOP - 17} textAnchor="middle" fontSize="9" fontWeight="700" className="fill-emerald-700 dark:fill-emerald-300">
+                <text style={{ fontSize: svgPx(12) }} x={mid} y={TOP - 17} textAnchor="middle" fontWeight="700" className="fill-emerald-700 dark:fill-emerald-300">
                   {i + 1}
                 </text>
               )}

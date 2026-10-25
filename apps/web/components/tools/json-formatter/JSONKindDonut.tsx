@@ -4,6 +4,7 @@ import { JSON_VALUE_KINDS } from "@tooloralabs/tools";
 import JSONIndicatorCard, { JSONIndicatorUnavailable } from "./JSONIndicatorCard";
 import { KIND_FILL, useJSONModel } from "./JSONLiveContext";
 import { ringPath, turns } from "./jsonSvg";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 190;
@@ -33,10 +34,10 @@ export default function JSONKindDonut() {
       )}
       {containers > 0 && <path d={ringPath(CX, CY, 34, 58, inner[0][0], inner[0][1])} className="fill-blue-300 stroke-white dark:fill-blue-800 dark:stroke-zinc-900" strokeWidth={1.5} />}
       {scalars > 0 && <path d={ringPath(CX, CY, 34, 58, inner[1][0], inner[1][1])} className="fill-emerald-200 stroke-white dark:fill-emerald-900 dark:stroke-zinc-900" strokeWidth={1.5} />}
-      <text x={CX} y={CY - 2} textAnchor="middle" fontSize={20} fontWeight={700} className="fill-zinc-800 dark:fill-zinc-100">
+      <text style={{ fontSize: svgPx(20) }} x={CX} y={CY - 2} textAnchor="middle" fontWeight={700} className="fill-zinc-800 dark:fill-zinc-100">
         {f(a.nodes)}
       </text>
-      <text x={CX} y={CY + 15} textAnchor="middle" fontSize={12} className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={CX} y={CY + 15} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
         {t("values")}
       </text>
       {JSON_VALUE_KINDS.map((k, i) => {
@@ -44,10 +45,10 @@ export default function JSONKindDonut() {
         return (
           <g key={k}>
             <circle cx={208} cy={y} r={6} className={KIND_FILL[k]} />
-            <text x={220} y={y + 4} fontSize={12} className="fill-zinc-600 dark:fill-zinc-300">
+            <text style={{ fontSize: svgPx(12) }} x={220} y={y + 4} className="fill-zinc-600 dark:fill-zinc-300">
               {tk(k)}
             </text>
-            <text x={W - 4} y={y + 4} textAnchor="end" fontSize={12} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={W - 4} y={y + 4} textAnchor="end" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
               {f(counts[i])}
             </text>
           </g>

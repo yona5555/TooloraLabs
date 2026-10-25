@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import CsvIndicatorCard, { CsvIndicatorUnavailable } from "./CsvIndicatorCard";
 import { TYPE_BG, TYPE_FILL, useCsvModel } from "./CsvLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 180;
@@ -35,7 +36,7 @@ export default function CsvColumnExplorer() {
         <line x1={0} y1={y(0)} x2={W} y2={y(0)} className="stroke-zinc-300 dark:stroke-zinc-600" />
         {nums.map((v, i) =>
           v === null ? (
-            <text key={i} x={i * slot + slot / 2} y={base - 4} textAnchor="middle" fontSize={11} className="fill-amber-500">
+            <text style={{ fontSize: svgPx(12) }} key={i} x={i * slot + slot / 2} y={base - 4} textAnchor="middle" className="fill-amber-500">
               ∅
             </text>
           ) : (
@@ -43,10 +44,10 @@ export default function CsvColumnExplorer() {
           ),
         )}
         <line x1={0} y1={y(col.numeric.mean)} x2={W} y2={y(col.numeric.mean)} strokeDasharray="5 4" strokeWidth={1.5} className="stroke-rose-500 dark:stroke-rose-400" />
-        <text x={W - 2} y={y(col.numeric.mean) - 5} textAnchor="end" fontSize={11} fontWeight={700} className="fill-rose-600 dark:fill-rose-300">
+        <text style={{ fontSize: svgPx(12) }} x={W - 2} y={y(col.numeric.mean) - 5} textAnchor="end" fontWeight={700} className="fill-rose-600 dark:fill-rose-300">
           {t("mean", { v: f(col.numeric.mean, 2) })}
         </text>
-        <text x={0} y={H - 6} fontSize={11} className="fill-zinc-500 dark:fill-zinc-400">
+        <text style={{ fontSize: svgPx(12) }} x={0} y={H - 6} className="fill-zinc-500 dark:fill-zinc-400">
           {t("rowsAxis", { n: nums.length })}
         </text>
       </svg>
@@ -60,11 +61,11 @@ export default function CsvColumnExplorer() {
           const w = Math.max(4, (x.count / peak) * 150);
           return (
             <g key={x.value}>
-              <text x={120} y={y + 16} textAnchor="end" fontSize={12} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
+              <text style={{ fontSize: svgPx(12) }} x={120} y={y + 16} textAnchor="end" fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
                 {x.value.length > 14 ? `${x.value.slice(0, 13)}…` : x.value}
               </text>
               <rect x={128} y={y + 4} width={w} height={18} rx={3} className={TYPE_FILL[col.type]} />
-              <text x={134 + w} y={y + 17} fontSize={12} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
+              <text style={{ fontSize: svgPx(12) }} x={134 + w} y={y + 17} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
                 ×{x.count}
               </text>
             </g>

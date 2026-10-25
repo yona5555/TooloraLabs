@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { charEntropy, passphraseEntropy } from "@tooloralabs/tools";
 import PasswordIndicatorCard, { PasswordIndicatorUnavailable } from "./PasswordIndicatorCard";
 import { usePasswordLive, usePasswordModel } from "./PasswordLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 220;
@@ -70,23 +71,23 @@ export default function PasswordLengthCurve() {
       {TIERS.filter((b) => b < maxY).map((b) => (
         <g key={b}>
           <line x1={L} y1={y(b)} x2={W - R} y2={y(b)} strokeDasharray="3 4" className="stroke-zinc-300 dark:stroke-zinc-600" />
-          <text x={L - 5} y={y(b) + 4} textAnchor="end" fontSize={11} className="fill-zinc-500 dark:fill-zinc-400">
+          <text style={{ fontSize: svgPx(12) }} x={L - 5} y={y(b) + 4} textAnchor="end" className="fill-zinc-500 dark:fill-zinc-400">
             {b}
           </text>
         </g>
       ))}
       {[lo, Math.round((lo + hi) / 2), hi].map((k) => (
-        <text key={k} x={x(k)} y={H - B + 16} textAnchor="middle" fontSize={12} className="fill-zinc-500 dark:fill-zinc-400">
+        <text style={{ fontSize: svgPx(12) }} key={k} x={x(k)} y={H - B + 16} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
           {k}
         </text>
       ))}
-      <text x={(L + W - R) / 2} y={H - 4} textAnchor="middle" fontSize={12} className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={(L + W - R) / 2} y={H - 4} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
         {words ? t("axisWords") : t("axisChars")}
       </text>
       <path d={curve} fill="none" strokeWidth={2.5} className="stroke-blue-600 dark:stroke-blue-400" />
       <line x1={x(n)} y1={y(entropyAt(n))} x2={x(n)} y2={H - B} strokeDasharray="3 3" className="stroke-amber-500" />
       <circle cx={x(n)} cy={y(entropyAt(n))} r={9} strokeWidth={3} className="fill-amber-500 stroke-white dark:fill-amber-400 dark:stroke-zinc-900" />
-      <text x={Math.min(x(n) + 12, W - 80)} y={Math.max(y(entropyAt(n)) - 10, 14)} fontSize={12} fontWeight={700} className="fill-amber-700 dark:fill-amber-300">
+      <text style={{ fontSize: svgPx(12) }} x={Math.min(x(n) + 12, W - 80)} y={Math.max(y(entropyAt(n)) - 10, 14)} fontWeight={700} className="fill-amber-700 dark:fill-amber-300">
         {f(entropyAt(n), 1)} {t("bits")}
       </text>
     </svg>

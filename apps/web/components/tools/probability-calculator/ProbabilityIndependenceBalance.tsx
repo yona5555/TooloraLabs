@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import ProbabilityIndicatorCard from "./ProbabilityIndicatorCard";
 import { useProbabilityModel } from "./ProbabilityLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 320;
 const H = 200;
@@ -34,8 +35,8 @@ export default function ProbabilityIndependenceBalance() {
       <line x1={x} y1={y} x2={x - 26} y2={y + 34} className="stroke-zinc-400" />
       <line x1={x} y1={y} x2={x + 26} y2={y + 34} className="stroke-zinc-400" />
       <path d={`M${x - 34},${y + 34} Q${x},${y + 56} ${x + 34},${y + 34} Z`} className={tone} />
-      <text x={x} y={y + 74} textAnchor="middle" className="fill-zinc-800 font-mono text-[12px] font-bold dark:fill-zinc-100">{value}</text>
-      <text x={x} y={y + 88} textAnchor="middle" className="fill-zinc-500 text-[10px] dark:fill-zinc-400">{label}</text>
+      <text style={{ fontSize: svgPx(12) }} x={x} y={y + 74} textAnchor="middle" className="fill-zinc-800 font-mono font-bold dark:fill-zinc-100">{value}</text>
+      <text style={{ fontSize: svgPx(12) }} x={x} y={y + 88} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">{label}</text>
     </g>
   );
 
@@ -46,7 +47,7 @@ export default function ProbabilityIndependenceBalance() {
       <circle cx={CX} cy={PIVOT} r={6} className="fill-zinc-700 dark:fill-zinc-200" />
       {pan(lx, ly, "P(A∩B)", pct(b.pAB), "fill-violet-500/80 dark:fill-violet-400/80")}
       {pan(rx, ry, "P(A)·P(B)", pct(b.independentProduct), "fill-blue-500/80 dark:fill-blue-400/80")}
-      <text x={CX} y={22} textAnchor="middle" className={`text-[12px] font-bold ${level ? "fill-emerald-600 dark:fill-emerald-400" : "fill-amber-600 dark:fill-amber-400"}`}>
+      <text style={{ fontSize: svgPx(12) }} x={CX} y={22} textAnchor="middle" className={`font-bold ${level ? "fill-emerald-600 dark:fill-emerald-400" : "fill-amber-600 dark:fill-amber-400"}`}>
         {tl(`relations.${b.relation}`)}
       </text>
     </svg>

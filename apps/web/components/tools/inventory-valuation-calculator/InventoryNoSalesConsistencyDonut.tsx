@@ -1,3 +1,4 @@
+import { svgPx } from "@/components/tool-ui/svgPx";
 const SIZE = 150;
 const STROKE = 18;
 const RADIUS = (SIZE - STROKE) / 2;
@@ -24,10 +25,10 @@ export default function InventoryNoSalesConsistencyDonut({ centerLabel }: Invent
           transform={`rotate(-90 ${center} ${center})`}
           className="stroke-emerald-500 dark:stroke-emerald-400"
         />
-        <text x={center} y={center - 4} textAnchor="middle" fontSize={18} fontWeight={700} className="fill-zinc-900 dark:fill-zinc-50">
+        <text style={{ fontSize: svgPx(18) }} x={center} y={center - 4} textAnchor="middle" fontWeight={700} className="fill-zinc-900 dark:fill-zinc-50">
           $50
         </text>
-        <text x={center} y={center + 15} textAnchor="middle" fontSize={9} className="fill-zinc-500 dark:fill-zinc-400">
+        <text style={{ fontSize: svgPx(12) }} x={center} y={center + 15} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
           {centerLabel}
         </text>
       </svg>

@@ -7,6 +7,7 @@ import { IndicatorCard, KitControls, KitTable, KitTrack, SvgChem, useMeasuredSiz
 import { ViewportScene } from "@/components/tool-ui/three/ViewportScene";
 import { ballPoints, clamp } from "@/components/tool-ui/indicator-kit/format";
 import { AVOGADRO, g3, liquidCss, sciText, SEED, SOLUTE_SEED_INDEX, SOLUTES } from "./molMath";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const CylindersScene3D = dynamic(() => import("./MolarityScenes3D").then((m) => m.CylindersScene3D), { ssr: false, loading: () => null });
 const DropletScene3D = dynamic(() => import("./MolarityScenes3D").then((m) => m.DropletScene3D), { ssr: false, loading: () => null });
@@ -26,7 +27,7 @@ function Cylinders2D({ c1, v1, c2, v2 }: { c1: number; v1: number; c2: number; v
     return (
       <g>
         <rect x={cx - w / 2} y={base - h} width={w} height={h} rx={Math.min(10, w / 2, h / 2)} style={{ fill: liquidCss(c), stroke: "var(--ph-line)" }} strokeWidth={1.5} />
-        <text x={cx} y={base - h - 10} fontSize={12} fontWeight={700} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+        <text x={cx} y={base - h - 10} fontWeight={700} textAnchor="middle" style={{ fontSize: svgPx(12), fill: "var(--ph-ink)" }}>
           {label}
         </text>
       </g>
@@ -38,7 +39,7 @@ function Cylinders2D({ c1, v1, c2, v2 }: { c1: number; v1: number; c2: number; v
         <line x1={12} y1={base} x2={W - 12} y2={base} style={{ stroke: "var(--ph-line)" }} strokeWidth={2} strokeLinecap="round" />
         {body(W * 0.28, c1, v1, `${g3(c1)} M · ${g3(v1)} L`)}
         {body(W * 0.72, c2, v2, `${g3(c2)} M · ${g3(v2)} L`)}
-        <text x={W / 2} y={H - 8} fontSize={11} textAnchor="middle" style={{ fill: "var(--ph-ink-muted)" }}>
+        <text x={W / 2} y={H - 8} textAnchor="middle" style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
           {`n = ${g3(c1 * v1)} mol`}
         </text>
       </svg>
@@ -110,7 +111,7 @@ function Droplet2D({ count, molarity }: { count: number; molarity: number }) {
         {DROP.slice(0, count).map(([x, y], i) => (
           <circle key={i} cx={cx + x * r * 0.86} cy={cy + y * r * 0.86} r={Math.max(3.5, r / 22)} style={{ fill: "var(--chem-solute)", stroke: "var(--ph-knob)" }} strokeWidth={1} />
         ))}
-        <text x={W - 12} y={cy - 12} fontSize={12} fontWeight={700} textAnchor="end" style={{ fill: "var(--ph-ink)" }}>
+        <text x={W - 12} y={cy - 12} fontWeight={700} textAnchor="end" style={{ fontSize: svgPx(12), fill: "var(--ph-ink)" }}>
           {`${g3(molarity)} mol/L`}
         </text>
         <rect x={lx} y={cy} width={lw} height={12} rx={6} style={{ fill: "var(--glass-track)", stroke: "var(--ph-line)" }} strokeWidth={1} />
@@ -177,13 +178,13 @@ function Heaps2D({ index }: { index: number }) {
           return (
             <g key={sol.key}>
               <path d={`M ${x - half} ${base} Q ${x} ${base - h * 1.15} ${x + half} ${base} Z`} style={{ fill: sel ? "var(--chem-stock)" : "var(--chem-solvent)", stroke: sel ? "var(--ph-focus)" : "var(--ph-line)" }} strokeWidth={sel ? 2.5 : 1} />
-              <text x={x} y={base - h * 0.6 - (i % 2 === 0 ? 10 : 26)} fontSize={sel ? 12 : 10.5} fontWeight={sel ? 800 : 600} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+              <text x={x} y={base - h * 0.6 - (i % 2 === 0 ? 10 : 26)} fontWeight={sel ? 800 : 600} textAnchor="middle" style={{ fontSize: svgPx(sel ? 12 : 12), fill: "var(--ph-ink)" }}>
                 {sol.molarMass.toFixed(0)}
               </text>
             </g>
           );
         })}
-        <text x={W - 10} y={H - 4} fontSize={11} textAnchor="end" style={{ fill: "var(--ph-ink-muted)" }}>
+        <text x={W - 10} y={H - 4} textAnchor="end" style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
           <SvgChem text="g / 1 mol" />
         </text>
       </svg>

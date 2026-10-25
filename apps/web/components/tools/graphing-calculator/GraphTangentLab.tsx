@@ -59,7 +59,7 @@ export default function GraphTangentLab() {
                       fillOpacity={0.12}
                       weight={1}
                     />
-                    <Text x={tan.x + run} y={tan.y + (tan.slope * run) / 2} attach="e" size={11} color={c.tangent}>
+                    <Text x={tan.x + run} y={tan.y + (tan.slope * run) / 2} attach="e" size={12} color={c.tangent}>
                       {`Δy=${fmtNum(tan.slope * run, 2)}`}
                     </Text>
                   </>

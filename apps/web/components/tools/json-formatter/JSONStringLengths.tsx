@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import JSONIndicatorCard, { JSONIndicatorUnavailable } from "./JSONIndicatorCard";
 import { useJSONModel } from "./JSONLiveContext";
 import { clip } from "./jsonSvg";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 200;
@@ -46,17 +47,17 @@ export default function JSONStringLengths() {
         return (
           <g key={i}>
             {h > 0 && <rect x={x} y={BASE - h} width={barW} height={h} rx={4} className={i === meanBucket ? "fill-emerald-600 dark:fill-emerald-400" : "fill-emerald-300 dark:fill-emerald-800"} />}
-            <text x={x + barW / 2} y={BASE - h - 5} textAnchor="middle" fontSize={12} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={x + barW / 2} y={BASE - h - 5} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
               {f(b.count)}
             </text>
-            <text x={x + barW / 2} y={BASE + 16} textAnchor="middle" fontSize={12} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+            <text style={{ fontSize: svgPx(12) }} x={x + barW / 2} y={BASE + 16} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
               {b.to === null ? `${b.from}+` : `${b.from}–${b.to}`}
             </text>
           </g>
         );
       })}
       <line x1={meanX} y1={TOP - 4} x2={meanX} y2={BASE} strokeDasharray="4 3" strokeWidth={1.5} className="stroke-rose-500 dark:stroke-rose-400" />
-      <text x={Math.min(Math.max(meanX, 40), W - 40)} y={TOP - 10} textAnchor="middle" fontSize={12} fontWeight={700} className="fill-rose-600 dark:fill-rose-300">
+      <text style={{ fontSize: svgPx(12) }} x={Math.min(Math.max(meanX, 40), W - 40)} y={TOP - 10} textAnchor="middle" fontWeight={700} className="fill-rose-600 dark:fill-rose-300">
         {t("mean", { n: f(s.meanLength, 1) })}
       </text>
     </svg>

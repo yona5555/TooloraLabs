@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import JSONIndicatorCard, { JSONIndicatorUnavailable } from "./JSONIndicatorCard";
 import { formatBytes, useJSONModel } from "./JSONLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const BAR_Y = 30;
@@ -30,7 +31,7 @@ export default function JSONByteComposition() {
 
   const svg = (
     <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
-      <text x={0} y={16} fontSize={12} className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={0} y={16} className="fill-zinc-500 dark:fill-zinc-400">
         {t("axis", { total: formatBytes(b.total) })}
       </text>
       {PARTS.map((p, i) => {
@@ -40,7 +41,7 @@ export default function JSONByteComposition() {
           <g key={p.key}>
             <rect x={x} y={BAR_Y} width={Math.max(0, w - 1)} height={BAR_H} rx={4} className={p.fill} />
             {w > 34 && (
-              <text x={x + w / 2} y={BAR_Y + BAR_H / 2 + 4} textAnchor="middle" fontSize={12} fontWeight={700} className="fill-white">
+              <text style={{ fontSize: svgPx(12) }} x={x + w / 2} y={BAR_Y + BAR_H / 2 + 4} textAnchor="middle" fontWeight={700} className="fill-white">
                 {pct(b[p.key], b.total)}
               </text>
             )}
@@ -52,13 +53,13 @@ export default function JSONByteComposition() {
         return (
           <g key={p.key}>
             <circle cx={6} cy={y - 4} r={6} className={p.fill} />
-            <text x={20} y={y} fontSize={12} className="fill-zinc-600 dark:fill-zinc-300">
+            <text style={{ fontSize: svgPx(12) }} x={20} y={y} className="fill-zinc-600 dark:fill-zinc-300">
               {t(p.key)}
             </text>
-            <text x={W - 70} y={y} textAnchor="end" fontSize={12} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+            <text style={{ fontSize: svgPx(12) }} x={W - 70} y={y} textAnchor="end" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
               {pct(b[p.key], b.total)}
             </text>
-            <text x={W} y={y} textAnchor="end" fontSize={12} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={W} y={y} textAnchor="end" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
               {f(b[p.key])} B
             </text>
           </g>

@@ -117,7 +117,7 @@ export default function ScientificNotationMagnitudeDrag() {
       <div dir="ltr" aria-label={t("ariaLabel")} className="mafs-canvas w-full overflow-hidden rounded-xl">
         <Mafs viewBox={{ x: [EXP_MIN, EXP_MAX], y: [COEF_MIN, COEF_MAX] }} height={260} pan={false} zoom={false} preserveAspectRatio={false}>
           <Coordinates.Cartesian xAxis={{ lines: 3 }} yAxis={{ lines: 1 }} />
-          <Text x={0} y={COEF_MAX - 0.6} size={11} color={isDark ? "#71717a" : "#a1a1aa"}>
+          <Text x={0} y={COEF_MAX - 0.6} size={12} color={isDark ? "#71717a" : "#a1a1aa"}>
             {t("axisHint")}
           </Text>
           {pointA.element}

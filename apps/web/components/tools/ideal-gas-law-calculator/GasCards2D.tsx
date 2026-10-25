@@ -5,6 +5,7 @@ import { ltr } from "@/components/tool-ui/MixedText";
 import { IndicatorCard, KitControls, KitTable, SvgChem, SvgHandle, useMeasuredSize, useStepper, useSvgDrag, type KitRow, type Stepper } from "@/components/tool-ui/indicator-kit/CardKit";
 import { clamp } from "@/components/tool-ui/indicator-kit/format";
 import { g4, GAS_SEED_INDEX, GASES, PRESSURE_SEED_INDEX, PRESSURES, R_LATM, SEED, tempCss, ZERO_C } from "./gasMath";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 /**
  * The five 2D gas law indicator cards. Each drawing is laid out in real pixels at the measured
@@ -43,23 +44,23 @@ function GasBoylePlot({ s, on }: { s: Stepper; on: boolean }) {
         {[0, 1, 2, 3, 4].map((p) => (
           <g key={p}>
             <line x1={X0} y1={yp(p)} x2={X1} y2={yp(p)} style={{ stroke: "var(--ph-grid)" }} strokeWidth={1} />
-            <text x={X0 - 8} y={yp(p) + 4} fontSize={11} textAnchor="end" style={{ fill: "var(--ph-ink-muted)" }}>
+            <text x={X0 - 8} y={yp(p) + 4} textAnchor="end" style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
               {p}
             </text>
           </g>
         ))}
         {[0, 10, 20, 30, 40, 50].map((x) => (
-          <text key={x} x={xv(x)} y={Y0 + 18} fontSize={11} textAnchor={x === 0 ? "start" : x === 50 ? "end" : "middle"} style={{ fill: "var(--ph-ink-muted)" }}>
+          <text key={x} x={xv(x)} y={Y0 + 18} textAnchor={x === 0 ? "start" : x === 50 ? "end" : "middle"} style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
             {x}
           </text>
         ))}
-        <text x={X1} y={Y0 + 36} fontSize={11} textAnchor="end" style={{ fill: "var(--ph-ink-muted)" }}>
+        <text x={X1} y={Y0 + 36} textAnchor="end" style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
           {t("axisV")}
         </text>
         <line x1={X0} y1={Y0} x2={X1} y2={Y0} style={{ stroke: "var(--ph-line)" }} strokeWidth={1.5} strokeLinecap="round" />
         <rect x={X0} y={yp(s.value)} width={rd(xv(v) - X0)} height={rd(Y0 - yp(s.value))} rx={4} style={{ fill: "var(--chem-gas)", fillOpacity: on ? 0.28 : 0.16 }} />
         <polyline points={pts.join(" ")} fill="none" style={{ stroke: "var(--ph-accent-strong)" }} strokeWidth={3} strokeLinejoin="round" strokeLinecap="round" />
-        <text x={X0 + 6} y={14} fontSize={12} fontWeight={800} style={{ fill: "var(--ph-ink)" }}>
+        <text x={X0 + 6} y={14} fontWeight={800} style={{ fontSize: svgPx(12), fill: "var(--ph-ink)" }}>
           {`${g4(s.value)} atm × ${g4(v)} L = ${g4(NRT)} L·atm`}
         </text>
       </svg>
@@ -151,17 +152,17 @@ export function GasCharlesCard({ side, n: cardN }: { side: Side; n: number }) {
             {CHARLES_T.map((c) => (
               <g key={c}>
                 <rect x={xt(c) - bw / 2} y={yv(vAt(c))} width={bw} height={Y0 - yv(vAt(c))} rx={bw / 2} style={{ fill: tempCss(c + ZERO_C), fillOpacity: 0.75 }} />
-                <text x={xt(c)} y={Y0 + 16} fontSize={10.5} textAnchor="middle" style={{ fill: "var(--ph-ink-muted)" }}>
+                <text x={xt(c)} y={Y0 + 16} textAnchor="middle" style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
                   {c}
                 </text>
               </g>
             ))}
             <circle cx={xt(-ZERO_C)} cy={Y0} r={5} style={{ fill: "var(--ph-knob)", ...lit(hover === "zero") }} />
             <line x1={xt(s.value)} y1={yv(v)} x2={xt(s.value)} y2={Y0} style={{ stroke: "var(--ph-focus)" }} strokeWidth={2} strokeDasharray="3 3" />
-            <text x={X0} y={16} fontSize={12} fontWeight={800} style={{ fill: "var(--ph-ink)" }}>
+            <text x={X0} y={16} fontWeight={800} style={{ fontSize: svgPx(12), fill: "var(--ph-ink)" }}>
               {`${s.value} °C → ${g4(v)} L`}
             </text>
-            <text x={X1} y={16} fontSize={11} textAnchor="end" style={{ fill: "var(--ph-ink-muted)" }}>
+            <text x={X1} y={16} textAnchor="end" style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
               V (L) · T (°C)
             </text>
           </svg>
@@ -221,11 +222,11 @@ export function GasDensityCard({ side, n: cardN }: { side: Side; n: number }) {
               const w = Math.max(8, ((X1 - X0) * rho(gas.M)) / max);
               return (
                 <g key={gas.key}>
-                  <text x={LBL} y={yRow(i) + 4} fontSize={sel ? 12.5 : 11.5} fontWeight={sel ? 800 : 600} textAnchor="end" style={{ fill: "var(--ph-ink)" }}>
+                  <text x={LBL} y={yRow(i) + 4} fontWeight={sel ? 800 : 600} textAnchor="end" style={{ fontSize: svgPx(sel ? 12.5 : 12), fill: "var(--ph-ink)" }}>
                     <SvgChem text={gas.formula} />
                   </text>
                   <rect x={X0} y={yRow(i) - 8} width={w} height={16} rx={8} style={{ fill: sel ? "var(--chem-gas)" : "var(--glass-track)", ...lit(sel) }} />
-                  <text x={X0 + w + (sel ? 28 : 8)} y={yRow(i) + 4} fontSize={11} fontWeight={sel ? 800 : 500} style={{ fill: "var(--ph-ink)" }}>
+                  <text x={X0 + w + (sel ? 28 : 8)} y={yRow(i) + 4} fontWeight={sel ? 800 : 500} style={{ fontSize: svgPx(12), fill: "var(--ph-ink)" }}>
                     {g4(rho(gas.M))}
                   </text>
                 </g>
@@ -282,7 +283,7 @@ function GasDialPlot({ s }: { s: Stepper }) {
         {[0.1, 1, 10, 100, 1000].map((p) => {
           const [x, y] = at(p, R + 20);
           return (
-            <text key={p} x={x} y={y + 4} fontSize={11} textAnchor={p === 0.1 ? "end" : p === 1000 ? "start" : "middle"} style={{ fill: "var(--ph-ink-muted)" }}>
+            <text key={p} x={x} y={y + 4} textAnchor={p === 0.1 ? "end" : p === 1000 ? "start" : "middle"} style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
               {String(p)}
             </text>
           );
@@ -293,7 +294,7 @@ function GasDialPlot({ s }: { s: Stepper }) {
         })}
         <line x1={cx} y1={cy} x2={tip[0]} y2={tip[1]} style={{ stroke: "var(--ph-ink)" }} strokeWidth={3} strokeLinecap="round" />
         <circle cx={cx} cy={cy} r={8} style={{ fill: "var(--ph-ink)" }} />
-        <text x={cx} y={H - 8} fontSize={13} fontWeight={800} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+        <text x={cx} y={H - 8} fontWeight={800} textAnchor="middle" style={{ fontSize: svgPx(13), fill: "var(--ph-ink)" }}>
           {`${g4(src.p)} atm`}
         </text>
       </svg>
@@ -370,10 +371,10 @@ export function GasBalanceCard({ side, n: cardN }: { side: Side; n: number }) {
     <g onPointerEnter={() => setHover(key)} onPointerLeave={() => setHover(null)}>
       <line x1={x} y1={beamY} x2={x} y2={beamY + 30} style={{ stroke: "var(--ph-line)" }} strokeWidth={1.5} />
       <ellipse cx={x} cy={beamY + 56} rx={58} ry={26} style={{ fill: "var(--ph-surface)", ...lit(hover === key) }} />
-      <text x={x} y={beamY + 52} fontSize={13} fontWeight={800} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+      <text x={x} y={beamY + 52} fontWeight={800} textAnchor="middle" style={{ fontSize: svgPx(13), fill: "var(--ph-ink)" }}>
         {title}
       </text>
-      <text x={x} y={beamY + 68} fontSize={11} textAnchor="middle" style={{ fill: "var(--ph-ink-muted)" }}>
+      <text x={x} y={beamY + 68} textAnchor="middle" style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
         {value}
       </text>
     </g>
@@ -392,7 +393,7 @@ export function GasBalanceCard({ side, n: cardN }: { side: Side; n: number }) {
       visual={
         <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
           <svg ref={ref} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={`PV = nRT = ${g4(nrt)} L·atm`}>
-            <text x={cx} y={20} fontSize={13} fontWeight={800} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+            <text x={cx} y={20} fontWeight={800} textAnchor="middle" style={{ fontSize: svgPx(13), fill: "var(--ph-ink)" }}>
               {`${g4(P * v)} = ${g4(nrt)} L·atm`}
             </text>
             <line x1={cx - arm} y1={beamY} x2={cx + arm} y2={beamY} style={{ stroke: "var(--ph-ink)" }} strokeWidth={4} strokeLinecap="round" />

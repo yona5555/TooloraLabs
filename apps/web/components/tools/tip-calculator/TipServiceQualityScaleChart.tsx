@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import TipWorkedExampleNote from "./TipWorkedExampleNote";
 import GapFreeRow from "@/components/tool-ui/GapFreeRow";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 /** Documented full-service-dining tipping convention by service tier, applied to the same $85 bill — shown as a colored quality scale (poor→excellent) rather than a bar list, matching what this diagram is actually about. */
 const BILL = 85;
@@ -38,10 +39,10 @@ export default async function TipServiceQualityScaleChart() {
               return (
                 <g key={tier.key}>
                   <rect x={0} y={y} width={barWidth} height={SEGMENT_HEIGHT} rx={6} className={tier.colorClass} opacity={0.85} />
-                  <text x={10} y={y + SEGMENT_HEIGHT / 2 + 4} fontSize={12} fontWeight={700} fill="white">
+                  <text style={{ fontSize: svgPx(12) }} x={10} y={y + SEGMENT_HEIGHT / 2 + 4} fontWeight={700} fill="white">
                     {tTiers(tier.key)} ({tier.percent}%)
                   </text>
-                  <text x={WIDTH} y={y + SEGMENT_HEIGHT / 2 + 4} textAnchor="end" fontSize={12} fontWeight={700} fill="currentColor">
+                  <text style={{ fontSize: svgPx(12) }} x={WIDTH} y={y + SEGMENT_HEIGHT / 2 + 4} textAnchor="end" fontWeight={700} fill="currentColor">
                     ${tip.toFixed(2)}
                   </text>
                 </g>

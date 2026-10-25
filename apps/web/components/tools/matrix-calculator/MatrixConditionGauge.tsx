@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { conditionNumber2, singularValues2 } from "@tooloralabs/tools";
 import MatrixIndicatorCard from "./MatrixIndicatorCard";
 import { useMatrixModel } from "./MatrixLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 300;
 const H = 190;
@@ -48,15 +49,15 @@ export default function MatrixConditionGauge() {
       {[0, 1, 2, 3, 4].map((p) => {
         const [tx, ty] = polar(p / MAX_LOG, R + 18);
         return (
-          <text key={p} x={tx} y={ty} textAnchor="middle" className="fill-zinc-500 font-mono text-[10px] dark:fill-zinc-400">
+          <text style={{ fontSize: svgPx(12) }} key={p} x={tx} y={ty} textAnchor="middle" className="fill-zinc-500 font-mono dark:fill-zinc-400">
             {p === 0 ? "1" : `10${["", "¹", "²", "³", "⁴"][p]}`}
           </text>
         );
       })}
       <line x1={CX} y1={CY} x2={nx} y2={ny} strokeWidth={4} strokeLinecap="round" className="stroke-zinc-800 dark:stroke-zinc-100" />
       <circle cx={CX} cy={CY} r={7} className="fill-zinc-800 dark:fill-zinc-100" />
-      <text x={CX} y={CY - 34} textAnchor="middle" className="fill-zinc-800 font-mono text-[18px] font-bold dark:fill-zinc-100">{`κ = ${f(k, 2)}`}</text>
-      <text x={CX} y={CY - 16} textAnchor="middle" className="fill-zinc-500 text-[11px] font-semibold dark:fill-zinc-400">{t(`bands.${band}`)}</text>
+      <text style={{ fontSize: svgPx(18) }} x={CX} y={CY - 34} textAnchor="middle" className="fill-zinc-800 font-mono font-bold dark:fill-zinc-100">{`κ = ${f(k, 2)}`}</text>
+      <text style={{ fontSize: svgPx(12) }} x={CX} y={CY - 16} textAnchor="middle" className="fill-zinc-500 font-semibold dark:fill-zinc-400">{t(`bands.${band}`)}</text>
     </svg>
   );
 

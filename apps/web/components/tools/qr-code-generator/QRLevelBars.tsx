@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { QR_LEVELS, QR_RECOVERY } from "@tooloralabs/tools";
 import QRIndicatorCard, { QRIndicatorUnavailable } from "./QRIndicatorCard";
 import { useQRLive, useQRModel } from "./QRLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 210;
@@ -42,20 +43,20 @@ export default function QRLevelBars() {
               rx={5}
               className={active ? "fill-blue-600 dark:fill-blue-400" : fits ? "fill-blue-300 hover:fill-blue-400 dark:fill-blue-800" : "fill-zinc-300 dark:fill-zinc-700"}
             />
-            <text x={x + w / 2} y={y(cap) - 6} textAnchor="middle" fontSize={12} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={x + w / 2} y={y(cap) - 6} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
               {f(cap)}
             </text>
-            <text x={x + w / 2} y={BASE + 16} textAnchor="middle" fontSize={13} fontWeight={700} className={active ? "fill-blue-700 dark:fill-blue-300" : "fill-zinc-600 dark:fill-zinc-300"}>
+            <text style={{ fontSize: svgPx(13) }} x={x + w / 2} y={BASE + 16} textAnchor="middle" fontWeight={700} className={active ? "fill-blue-700 dark:fill-blue-300" : "fill-zinc-600 dark:fill-zinc-300"}>
               {l}
             </text>
-            <text x={x + w / 2} y={BASE + 32} textAnchor="middle" fontSize={11} className="fill-zinc-500 dark:fill-zinc-400">
+            <text style={{ fontSize: svgPx(12) }} x={x + w / 2} y={BASE + 32} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
               {Math.round(QR_RECOVERY[l] * 100)}%
             </text>
           </g>
         );
       })}
       <line x1={0} y1={y(a.payloadBytes)} x2={W} y2={y(a.payloadBytes)} strokeDasharray="5 4" strokeWidth={1.5} className="stroke-rose-500 dark:stroke-rose-400" />
-      <text x={W} y={y(a.payloadBytes) - 5} textAnchor="end" fontSize={11} fontWeight={600} className="fill-rose-600 dark:fill-rose-300">
+      <text style={{ fontSize: svgPx(12) }} x={W} y={y(a.payloadBytes) - 5} textAnchor="end" fontWeight={600} className="fill-rose-600 dark:fill-rose-300">
         {t("payload", { n: a.payloadBytes })}
       </text>
     </svg>

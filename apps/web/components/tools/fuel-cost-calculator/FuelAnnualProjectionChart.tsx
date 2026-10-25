@@ -8,6 +8,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import FuelWorkedExampleNote from "./FuelWorkedExampleNote";
 import { ltrIsolate } from "@/lib/bidi";
 import GapFreeRow from "@/components/tool-ui/GapFreeRow";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 /** Cumulative cost at 3/6/9/12 months for a fixed monthly distance — same cost formula, projected over time as a running total. */
 const MONTHLY_DISTANCE = 1000;
@@ -75,7 +76,7 @@ export default function FuelAnnualProjectionChart() {
                       <AutoFitText text={p.formatted} steps={VALUE_STEPS} allowWrap={false} className="font-mono font-bold text-violet-700 dark:text-violet-300" />
                     </div>
                   </foreignObject>
-                  <text x={x + STEP_W / 2} y={HEIGHT - 6} textAnchor="middle" fontSize={11} fontWeight={700} fill="currentColor" opacity={0.8}>
+                  <text style={{ fontSize: svgPx(12) }} x={x + STEP_W / 2} y={HEIGHT - 6} textAnchor="middle" fontWeight={700} fill="currentColor" opacity={0.8}>
                     {p.label}
                   </text>
                 </g>

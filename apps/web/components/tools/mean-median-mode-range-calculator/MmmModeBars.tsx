@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import MmmIndicatorCard from "./MmmIndicatorCard";
 import { useMmmModel } from "./MmmLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 360;
 const H = 200;
@@ -30,10 +31,10 @@ export default function MmmModeBars() {
         return (
           <g key={fr.value}>
             <rect x={x + bw * 0.12} y={BASE - h} width={bw * 0.76} height={h} rx={3} className={mode ? "fill-amber-500 dark:fill-amber-400" : "fill-blue-500 dark:fill-blue-400"} />
-            <text x={x + bw / 2} y={BASE - h - 5} textAnchor="middle" fontSize={11} fontWeight={700} className={mode ? "fill-amber-700 dark:fill-amber-300" : "fill-zinc-700 dark:fill-zinc-200"}>
+            <text style={{ fontSize: svgPx(12) }} x={x + bw / 2} y={BASE - h - 5} textAnchor="middle" fontWeight={700} className={mode ? "fill-amber-700 dark:fill-amber-300" : "fill-zinc-700 dark:fill-zinc-200"}>
               {`×${fr.count}`}
             </text>
-            <text x={x + bw / 2} y={BASE + 15} textAnchor="middle" fontSize={k > 10 ? 9 : 11} className="fill-zinc-600 dark:fill-zinc-300">
+            <text style={{ fontSize: svgPx(k > 10 ? 12 : 12) }} x={x + bw / 2} y={BASE + 15} textAnchor="middle" className="fill-zinc-600 dark:fill-zinc-300">
               {f(fr.value)}
             </text>
           </g>

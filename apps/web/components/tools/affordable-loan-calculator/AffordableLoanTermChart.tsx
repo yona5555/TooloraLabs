@@ -4,10 +4,12 @@ import { Calculator } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import { useBelowLg } from "@/components/tool-ui/useBelowLg";
 import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { computeNiceTicks } from "./niceTicks";
 import type { CurrencyCode } from "@/lib/currency";
 import type { TermComparisonRow } from "./types";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 type AffordableLoanTermChartProps = {
   hasCalculated: boolean;
@@ -31,6 +33,7 @@ export default function AffordableLoanTermChart({ hasCalculated, rows, digitStyl
   const containerRef = useRef<HTMLDivElement>(null);
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
   const [containerWidth, setContainerWidth] = useState(0);
+  const belowLg = useBelowLg();
 
   useLayoutEffect(() => {
     const el = containerRef.current;
@@ -51,7 +54,7 @@ export default function AffordableLoanTermChart({ hasCalculated, rows, digitStyl
     );
   }
 
-  const step = Math.max(MIN_STEP, (containerWidth - MARGIN.left - MARGIN.right) / rows.length);
+  const step = Math.max(belowLg && containerWidth > 0 ? 0 : MIN_STEP, (containerWidth - MARGIN.left - MARGIN.right) / rows.length);
   const barWidth = step * BAR_WIDTH_RATIO;
   const plotWidth = rows.length * step;
   const chartWidth = MARGIN.left + plotWidth + MARGIN.right;
@@ -112,7 +115,7 @@ export default function AffordableLoanTermChart({ hasCalculated, rows, digitStyl
           {valueTicks.map((tick) => (
             <g key={tick}>
               <line x1={MARGIN.left} y1={yForValue(tick)} x2={chartWidth - MARGIN.right} y2={yForValue(tick)} stroke="currentColor" strokeWidth={1} opacity={0.08} />
-              <text x={MARGIN.left - 8} y={yForValue(tick) + 3} textAnchor="end" fontSize={9} fill="currentColor" opacity={0.6}>
+              <text style={{ fontSize: svgPx(12) }} x={MARGIN.left - 8} y={yForValue(tick) + 3} textAnchor="end" fill="currentColor" opacity={0.6}>
                 {money(tick)}
               </text>
             </g>
@@ -122,10 +125,10 @@ export default function AffordableLoanTermChart({ hasCalculated, rows, digitStyl
           {rows.map((row, i) => (
             <g key={row.termYears} opacity={hoverIndex === null || i === hoverIndex ? 1 : 0.5}>
               <rect x={barX(i)} y={yForValue(row.maxLoanForPayment)} width={barWidth} height={Math.max(mainBottom - yForValue(row.maxLoanForPayment), 0)} rx={3} className="fill-blue-600 dark:fill-blue-400" />
-              <text x={groupCenterX(i)} y={yForValue(row.maxLoanForPayment) - 8} textAnchor="middle" fontSize={11} fontWeight={700} className="fill-zinc-900 dark:fill-zinc-100">
+              <text style={{ fontSize: svgPx(12) }} x={groupCenterX(i)} y={yForValue(row.maxLoanForPayment) - 8} textAnchor="middle" fontWeight={700} className="fill-zinc-900 dark:fill-zinc-100">
                 {money(row.maxLoanForPayment)}
               </text>
-              <text x={groupCenterX(i)} y={mainBottom + XAXIS_HEIGHT - 6} textAnchor="middle" fontSize={10} fill="currentColor" opacity={0.7}>
+              <text style={{ fontSize: svgPx(12) }} x={groupCenterX(i)} y={mainBottom + XAXIS_HEIGHT - 6} textAnchor="middle" fill="currentColor" opacity={0.7}>
                 {t("termChart.termLabel", { years: row.termYears })}
               </text>
             </g>
@@ -136,13 +139,13 @@ export default function AffordableLoanTermChart({ hasCalculated, rows, digitStyl
               <line x1={groupCenterX(activeIndex)} y1={MARGIN.top} x2={groupCenterX(activeIndex)} y2={mainBottom} stroke="currentColor" strokeWidth={1} strokeDasharray="3 3" opacity={0.35} />
               <g transform={`translate(${tooltipX}, ${tooltipY})`}>
                 <rect width={TOOLTIP_WIDTH} height={TOOLTIP_HEIGHT} rx={6} className="fill-white stroke-zinc-200 dark:fill-zinc-900 dark:stroke-zinc-700" strokeWidth={1} />
-                <text x={10} y={17} fontSize={10} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
+                <text style={{ fontSize: svgPx(12) }} x={10} y={17} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
                   {t("termChart.termLabel", { years: active.termYears })}
                 </text>
-                <text x={10} y={35} fontSize={10} className="fill-blue-700 dark:fill-blue-400">
+                <text style={{ fontSize: svgPx(12) }} x={10} y={35} className="fill-blue-700 dark:fill-blue-400">
                   {t("termChart.maxLoanLabel")}: {money(active.maxLoanForPayment)}
                 </text>
-                <text x={10} y={50} fontSize={10} className="fill-zinc-600 dark:fill-zinc-300">
+                <text style={{ fontSize: svgPx(12) }} x={10} y={50} className="fill-zinc-600 dark:fill-zinc-300">
                   {t("termChart.paymentForLoanLabel")}: {money(active.monthlyPaymentForLoan)}
                 </text>
               </g>

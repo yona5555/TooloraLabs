@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import TlIndicatorCard from "./TlIndicatorCard";
 import { useTlLive } from "./TlLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 330;
 const LEFT = 78;
@@ -30,7 +31,7 @@ export default function TlCoverage() {
           let x = LEFT;
           return (
             <g key={s.style} className="cursor-pointer" onClick={() => setActiveStyle(s.style)} opacity={on ? 1 : 0.6} style={{ transition: "opacity 200ms ease" }}>
-              <text x={LEFT - 6} y={y + 11} textAnchor="end" fontSize={9} fontWeight={on ? 700 : 500} className="fill-zinc-700 dark:fill-zinc-200">
+              <text style={{ fontSize: svgPx(12) }} x={LEFT - 6} y={y + 11} textAnchor="end" fontWeight={on ? 700 : 500} className="fill-zinc-700 dark:fill-zinc-200">
                 {styleName(s.style)}
               </text>
               {SEGMENTS.map((seg) => {

@@ -114,25 +114,25 @@ function Riegel({ side }: { side: Side }) {
       caption={t("caption", { d: ltr(dT(D2)), t: ltr(clock(T2)), p: ltr(pT(T2 / D2)) })}
       visual={
         <Drawing {...d} hMin={HMIN} label={t("handle")} valueText={valueText} handle={{ x: X0 + fracOf(D2) * (W - 2 * X0), y: trackY, dir: "horizontal" }} s={s} testId="pace-c1">
-          <T x={6} y={16} text={`${tv("paceAxis")} (/${u})`} anchor="start" size={10.5} bold />
+          <T x={6} y={16} text={`${tv("paceAxis")} (/${u})`} anchor="start" size={12} bold />
           {ticks.map((p, i) => (
             <g key={i}>
               <line x1={PL} y1={ys(p)} x2={W - PR} y2={ys(p)} style={{ stroke: "var(--ph-grid)" }} />
-              <T x={PL - 6} y={ys(p) + 4} text={clock(pacePer(p, u))} anchor="end" size={10} />
+              <T x={PL - 6} y={ys(p) + 4} text={clock(pacePer(p, u))} anchor="end" size={12} />
             </g>
           ))}
           {RACES.filter((r) => r.key !== "mile" && r.key !== "15k" && r.key !== "30k").map((r) => (
             <g key={r.key}>
               <line x1={xs(r.km)} y1={top} x2={xs(r.km)} y2={base} style={{ stroke: "var(--ph-grid)" }} strokeDasharray="3 4" />
-              <T x={xs(r.km)} y={base + 16} text={`${f1(r.km)}`} size={10} />
+              <T x={xs(r.km)} y={base + 16} text={`${f1(r.km)}`} size={12} />
             </g>
           ))}
-          <T x={W - PR} y={base + 32} text={`${tv("distanceAxis")} (km, log)`} anchor="end" size={10} />
+          <T x={W - PR} y={base + 32} text={`${tv("distanceAxis")} (km, log)`} anchor="end" size={12} />
           <line x1={PL} y1={yy} x2={W - PR} y2={yy} stroke={ACCENT} strokeWidth={hover === "even" ? 2.5 : 1.5} strokeDasharray="6 4" opacity={0.8} />
           <path d={curve} fill="none" stroke={AMBER} strokeWidth={hover === "pace" || hover === "t2" ? 4 : 3} />
           <line x1={tx} y1={ty} x2={tx} y2={base} style={{ stroke: "var(--ph-ink)" }} strokeWidth={1.2} strokeDasharray="2 3" />
           <circle cx={yx} cy={yy} r={hover === "known" ? 8 : 6} fill={ACCENT} stroke="#fff" strokeWidth={2} />
-          <T x={yx > W / 2 ? yx - 12 : yx + 12} y={Math.min(base - 6, yy + 18)} text={`${t("you")} ${dT(snap.km)} · ${clock(snap.sec)}`} size={10.5} bold style={{ fill: ACCENT }} anchor={yx > W / 2 ? "end" : "start"} />
+          <T x={yx > W / 2 ? yx - 12 : yx + 12} y={Math.min(base - 6, yy + 18)} text={`${t("you")} ${dT(snap.km)} · ${clock(snap.sec)}`} size={12} bold style={{ fill: ACCENT }} anchor={yx > W / 2 ? "end" : "start"} />
           <circle cx={tx} cy={ty} r={9} fill="none" style={{ stroke: "var(--ph-ink)" }} strokeWidth={2.5} />
           <circle cx={tx} cy={ty} r={3} fill={AMBER} />
           <T x={tx} y={Math.max(top - 8, ty - 16)} text={label} anchor={anchor} size={12} bold style={INK} />
@@ -217,7 +217,7 @@ function SpeedGauge({ side }: { side: Side }) {
           })}
           {[4, 8, 12, 16, 20, 24].map((sp) => {
             const [x, y] = pt(sp, R + 25);
-            return <T key={sp} x={x} y={y + 4} text={String(sp)} size={10.5} />;
+            return <T key={sp} x={x} y={y + 4} text={String(sp)} size={12} />;
           })}
           {/* World-record marathon speeds (from the records table on this page) */}
           {[wrMen, wrWomen]
@@ -229,14 +229,14 @@ function SpeedGauge({ side }: { side: Side }) {
             })}
           {wrMen > 0 && (() => {
             const [lx, ly] = pt((wrMen + wrWomen) / 2, R - 36);
-            return <T x={lx} y={ly + 4} text={`WR ♂ ${f1(wrMen)} · ♀ ${f1(wrWomen)}`} anchor="end" size={9.5} bold style={INK} />;
+            return <T x={lx} y={ly + 4} text={`WR ♂ ${f1(wrMen)} · ♀ ${f1(wrWomen)}`} anchor="end" size={12} bold style={INK} />;
           })()}
           {/* Your actual speed: a blue tick across the arc */}
           <line x1={yx1} y1={yy1} x2={yx2} y2={yy2} stroke={ACCENT} strokeWidth={4} strokeLinecap="round" />
           <line x1={cx} y1={cy} x2={nx} y2={ny} style={{ stroke: "var(--ph-ink)" }} strokeWidth={hover === "speed" ? 4.5 : 3.5} strokeLinecap="round" />
           <circle cx={cx} cy={cy} r={7} style={{ fill: "var(--ph-ink)" }} />
           <T x={cx} y={cy + 26} text={`${f1(v)} km/h · ${pT(vPk)}`} size={15} bold style={INK} />
-          <T x={cx} y={cy + 44} text={`${tZone(zone.key)} · ${t("yours")} ${f1(yours)}`} size={11.5} bold style={{ fill: zone.color }} />
+          <T x={cx} y={cy + 44} text={`${tZone(zone.key)} · ${t("yours")} ${f1(yours)}`} size={12} bold style={{ fill: zone.color }} />
           <SvgTrack stopAnchor="frac" W={W} y={trackY} frac={(v - SMIN) / (SMAX - SMIN)} lo={`${SMIN} km/h`} hi={`${SMAX} km/h`} />
         </Drawing>
       }
@@ -298,11 +298,11 @@ function Splits({ side }: { side: Side }) {
       caption={t("caption", { kind: t(kind), first: ltr(pT(paces[0])), last: ltr(pT(paces[N - 1])), total: ltr(clock(snap.sec)) })}
       visual={
         <Drawing {...d} hMin={HMIN} label={t("handle")} valueText={valueText} handle={{ x: X0 + ((s.value + 10) / 20) * (W - 2 * X0), y: trackY, dir: "horizontal" }} s={s} testId="pace-c3">
-          <T x={6} y={16} text={`${t("axis")} · ${dT(segKm)}`} anchor="start" size={10.5} bold />
+          <T x={6} y={16} text={`${t("axis")} · ${dT(segKm)}`} anchor="start" size={12} bold />
           {[lo, (lo + hiT) / 2, hiT].map((v, i) => (
             <g key={i}>
               <line x1={PL} y1={yv(v)} x2={W - 12} y2={yv(v)} style={{ stroke: "var(--ph-grid)" }} />
-              <T x={PL - 6} y={yv(v) + 4} text={clock(v)} anchor="end" size={9.5} />
+              <T x={PL - 6} y={yv(v) + 4} text={clock(v)} anchor="end" size={12} />
             </g>
           ))}
           {times.map((tm, i) => {
@@ -313,8 +313,8 @@ function Splits({ side }: { side: Side }) {
             return (
               <g key={i}>
                 <rect x={x} y={yv(tm)} width={w} height={base - yv(tm)} rx={4} style={{ fill: inFirst ? ACCENT : AMBER, ...lit(on) }} opacity={0.9} />
-                <T x={x + w / 2} y={yv(tm) - 6} text={clock(pacePer(paces[i], u))} size={colW > 44 ? 10.5 : 8.5} bold style={INK} />
-                <T x={x + w / 2} y={base + 15} text={String(i + 1)} size={10} />
+                <T x={x + w / 2} y={yv(tm) - 6} text={clock(pacePer(paces[i], u))} size={colW > 44 ? 12 : 12} bold style={INK} />
+                <T x={x + w / 2} y={base + 15} text={String(i + 1)} size={12} />
               </g>
             );
           })}
@@ -370,13 +370,13 @@ function Rulers({ side }: { side: Side }) {
         return (
           <g key={v}>
             <line x1={x} y1={y - 8} x2={x} y2={y + 8} stroke={color} strokeWidth={2} />
-            <T x={x} y={y - 14} text={clock(toKm(v) * pk)} size={9.5} bold style={INK} />
-            <T x={x} y={y + 22} text={`${v}`} size={10} />
+            <T x={x} y={y - 14} text={clock(toKm(v) * pk)} size={12} bold style={INK} />
+            <T x={x} y={y + 22} text={`${v}`} size={12} />
           </g>
         );
       })}
       <line x1={W - X0} y1={y - 10} x2={W - X0} y2={y + 10} stroke={color} strokeWidth={3} />
-      <T x={W - X0} y={y + 22} text={`${unit === "km" ? f1(D) : f2(Dmi)} ${unit}`} anchor="end" size={10.5} bold style={{ fill: color }} />
+      <T x={W - X0} y={y + 22} text={`${unit === "km" ? f1(D) : f2(Dmi)} ${unit}`} anchor="end" size={12} bold style={{ fill: color }} />
     </g>
   );
   return (
@@ -392,9 +392,9 @@ function Rulers({ side }: { side: Side }) {
       caption={t("caption", { km: ltr(`${f1(D)} km`), mi: ltr(`${f2(Dmi)} mi`), t: ltr(clock(D * pk)) })}
       visual={
         <Drawing {...d} hMin={HMIN} label={t("handle")} valueText={valueText} handle={{ x: X0 + ((D - 1) / 41.2) * (W - 2 * X0), y: trackY, dir: "horizontal" }} s={s} testId="pace-c4">
-          <T x={X0} y={22} text={`${t("kmRuler")} · ${clock(pk)} /km`} anchor="start" size={11} bold style={{ fill: ACCENT }} />
+          <T x={X0} y={22} text={`${t("kmRuler")} · ${clock(pk)} /km`} anchor="start" size={12} bold style={{ fill: ACCENT }} />
           {ruler(kmY, kmTicks, (v) => v, "km", ACCENT, hover === "pkm" || hover === "tkm")}
-          <T x={X0} y={miY - 48} text={`${t("miRuler")} · ${clock(pk * KM_PER_MILE)} /mi`} anchor="start" size={11} bold style={{ fill: AMBER }} />
+          <T x={X0} y={miY - 48} text={`${t("miRuler")} · ${clock(pk * KM_PER_MILE)} /mi`} anchor="start" size={12} bold style={{ fill: AMBER }} />
           {ruler(miY, miTicks, (v) => v * KM_PER_MILE, "mi", AMBER, hover === "pmi" || hover === "tmi")}
           <line x1={W - X0} y1={kmY + 26} x2={W - X0} y2={miY - 30} style={{ stroke: "var(--ph-ink)" }} strokeDasharray="3 3" />
           <SvgTrack stopAnchor="frac" W={W} y={trackY} frac={(D - 1) / 41.2} lo="1 km" hi="42.2 km" />
@@ -449,7 +449,7 @@ export function PaceSensitivityCard({ side }: { side: Side }) {
       caption={t("caption", { dx: ltr(valueText), d: ltr(dT(snap.km)), delta: ltr(clock(delta)) })}
       visual={
         <Drawing {...d} hMin={HMIN} label={t("handle")} valueText={valueText} handle={{ x: X0 + ((dx - 5) / 55) * (W - 2 * X0), y: trackY, dir: "horizontal" }} s={s} testId="pace-c5">
-          <T x={X0} y={18} text={`${t("axis")} · ${dT(snap.km)}`} anchor="start" size={10.5} bold />
+          <T x={X0} y={18} text={`${t("axis")} · ${dT(snap.km)}`} anchor="start" size={12} bold />
           {cols.map((c, ci) => {
             const x = X0 + cw * ci + cw * 0.18;
             const w = cw * 0.64;
@@ -457,8 +457,8 @@ export function PaceSensitivityCard({ side }: { side: Side }) {
             return (
               <g key={c.key}>
                 <rect x={x} y={yv(c.time)} width={w} height={base - yv(c.time)} rx={6} style={{ fill: c.color, ...lit(on || (hover === "delta" && c.key !== "now")) }} opacity={c.key === "now" ? 1 : 0.85} />
-                <T x={x + w / 2} y={yv(c.time) - 8} text={clock(c.time)} size={c.key === "now" ? 13 : 11.5} bold style={INK} />
-                <T x={x + w / 2} y={base + 16} text={pT(u === "km" ? c.pace : c.pace / KM_PER_MILE)} size={10.5} bold={c.key === "now"} style={c.key === "now" ? INK : MUTED} />
+                <T x={x + w / 2} y={yv(c.time) - 8} text={clock(c.time)} size={c.key === "now" ? 13 : 12} bold style={INK} />
+                <T x={x + w / 2} y={base + 16} text={pT(u === "km" ? c.pace : c.pace / KM_PER_MILE)} size={12} bold={c.key === "now"} style={c.key === "now" ? INK : MUTED} />
               </g>
             );
           })}
@@ -515,12 +515,12 @@ export function PaceFatigueCard({ side }: { side: Side }) {
             const on = hover === "mar" && b.key === "marathon";
             return (
               <g key={b.key}>
-                <T x={LW - 8} y={y + bh / 2 + 4} text={tRace(b.key)} anchor="end" size={10.5} bold={on} style={on ? INK : MUTED} />
+                <T x={LW - 8} y={y + bh / 2 + 4} text={tRace(b.key)} anchor="end" size={12} bold={on} style={on ? INK : MUTED} />
                 <rect x={LW} y={y} width={Math.max(2, xv(b.time) - LW)} height={bh} rx={4} style={{ fill: AMBER, ...lit(on) }} opacity={0.6 + 0.4 * (bi / bars.length)} />
                 {/* Even pace (e = 1) and the standard 1.06 as thin marks inside the row */}
                 <line x1={xv(b.even)} y1={y - 2} x2={xv(b.even)} y2={y + bh + 2} stroke={ACCENT} strokeWidth={hover === "even" ? 3.5 : 2.5} />
                 <line x1={xv(b.std)} y1={y - 2} x2={xv(b.std)} y2={y + bh + 2} style={{ stroke: "var(--ph-ink)" }} strokeWidth={hover === "std" ? 3 : 1.6} strokeDasharray="3 2" />
-                <T x={Math.max(xv(b.time), xv(b.std), xv(b.even)) + 6} y={y + bh / 2 + 4} text={clock(b.time)} anchor="start" size={10.5} bold style={INK} />
+                <T x={Math.max(xv(b.time), xv(b.std), xv(b.even)) + 6} y={y + bh / 2 + 4} text={clock(b.time)} anchor="start" size={12} bold style={INK} />
               </g>
             );
           })}
@@ -590,7 +590,7 @@ export function PaceTimelineCard({ side }: { side: Side }) {
                 <circle cx={x} cy={lineY} r={on || i === 4 ? 11 : 9} fill={i === 0 ? "#22c55e" : i === 4 ? "#ef4444" : ACCENT} stroke="#fff" strokeWidth={2.5} />
                 <line x1={x} y1={up ? lineY - 14 : lineY + 14} x2={x} y2={up ? lineY - 34 : lineY + 34} style={{ stroke: "var(--ph-line)" }} />
                 <T x={ax} y={up ? lineY - 58 : lineY + 52} text={tod(start + st.el / 60)} anchor={anchor} size={14} bold style={INK} />
-                <T x={ax} y={up ? lineY - 41 : lineY + 69} text={i === 0 ? t("gun") : W < 420 ? dT(st.km) : `${st.pct}% · ${dT(st.km)}`} anchor={anchor} size={10} />
+                <T x={ax} y={up ? lineY - 41 : lineY + 69} text={i === 0 ? t("gun") : W < 420 ? dT(st.km) : `${st.pct}% · ${dT(st.km)}`} anchor={anchor} size={12} />
               </g>
             );
           })}
@@ -648,7 +648,7 @@ function Goal({ side }: { side: Side }) {
       <line x1={x} y1={y} x2={x + 34} y2={y + 46} style={{ stroke: "var(--ph-line)" }} />
       <path d={`M ${x - 44} ${y + 46} Q ${x} ${y + 72} ${x + 44} ${y + 46} Z`} fill={color} opacity={on ? 1 : 0.85} />
       <T x={x} y={y + 92} text={value} size={13} bold style={INK} />
-      <T x={x} y={y + 108} text={label} size={10.5} />
+      <T x={x} y={y + 108} text={label} size={12} />
     </g>
   );
   return (
@@ -665,7 +665,7 @@ function Goal({ side }: { side: Side }) {
       visual={
         <Drawing {...d} hMin={HMIN} label={t("handle")} valueText={valueText} handle={{ x: X0 + ((goal - lo) / (hi - lo)) * (W - 2 * X0), y: trackY, dir: "horizontal" }} s={s} testId="pace-c8">
           <T x={cx} y={22} text={`${sClock(gap)} · ${status}`} size={13} bold style={{ fill: gap < 0 ? "#16a34a" : gap > 0 ? "#dc2626" : "var(--ph-ink)" }} />
-          <T x={cx} y={40} text={`${sClock(dPace)} /${u}`} size={11} />
+          <T x={cx} y={40} text={`${sClock(dPace)} /${u}`} size={12} />
           <path d={`M ${cx - 16} ${pivotY + 74} L ${cx} ${pivotY} L ${cx + 16} ${pivotY + 74} Z`} style={{ fill: "var(--ph-ink-muted)" }} />
           <line x1={lx} y1={ly} x2={rx} y2={ry} style={{ stroke: "var(--ph-ink)" }} strokeWidth={4} strokeLinecap="round" />
           <circle cx={cx} cy={pivotY} r={6} style={{ fill: "var(--ph-ink)" }} />

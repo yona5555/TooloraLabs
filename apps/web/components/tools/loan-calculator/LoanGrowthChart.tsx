@@ -4,8 +4,11 @@ import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import type { LoanGrowthRow } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import { useBelowLg } from "@/components/tool-ui/useBelowLg";
 import { computeNiceTicks } from "./niceTicks";
 import type { CurrencyCode } from "@/lib/currency";
+import { svgPx } from "@/components/tool-ui/svgPx";
+import { wrapLabel } from "@/components/tool-ui/indicator-kit/SvgBits";
 
 type LoanGrowthChartProps = {
   schedule: LoanGrowthRow[];
@@ -35,6 +38,7 @@ export default function LoanGrowthChart({ schedule, loanAmount, totalInterest, d
   const containerRef = useRef<HTMLDivElement>(null);
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
   const [containerWidth, setContainerWidth] = useState(0);
+  const belowLg = useBelowLg();
 
   useLayoutEffect(() => {
     const el = containerRef.current;
@@ -46,7 +50,7 @@ export default function LoanGrowthChart({ schedule, loanAmount, totalInterest, d
 
   if (schedule.length === 0) return null;
 
-  const step = Math.max(MIN_STEP, (containerWidth - MARGIN.left - MARGIN.right) / schedule.length);
+  const step = Math.max(belowLg && containerWidth > 0 ? 0 : MIN_STEP, (containerWidth - MARGIN.left - MARGIN.right) / schedule.length);
   const barWidth = step * BAR_WIDTH_RATIO;
   const plotWidth = schedule.length * step;
   const chartWidth = MARGIN.left + plotWidth + MARGIN.right;
@@ -117,7 +121,7 @@ export default function LoanGrowthChart({ schedule, loanAmount, totalInterest, d
           {valueTicks.map((tick) => (
             <g key={tick}>
               <line x1={MARGIN.left} y1={yForValue(tick)} x2={chartWidth - MARGIN.right} y2={yForValue(tick)} stroke="currentColor" strokeWidth={1} opacity={0.08} />
-              <text x={MARGIN.left - 8} y={yForValue(tick) + 3} textAnchor="end" fontSize={9} fill="currentColor" opacity={0.6}>
+              <text style={{ fontSize: svgPx(12) }} x={MARGIN.left - 8} y={yForValue(tick) + 3} textAnchor="end" fill="currentColor" opacity={0.6}>
                 {money(tick)}
               </text>
             </g>
@@ -137,7 +141,7 @@ export default function LoanGrowthChart({ schedule, loanAmount, totalInterest, d
                   className="fill-amber-400 dark:fill-amber-500"
                 />
                 {isLast && (
-                  <text x={barCenterX(i)} y={yForValue(row.endingBalance) - 10} textAnchor="middle" fontSize={12} fontWeight={700} className="fill-zinc-900 dark:fill-zinc-100">
+                  <text style={{ fontSize: svgPx(12) }} x={barCenterX(i)} y={yForValue(row.endingBalance) - 10} textAnchor="middle" fontWeight={700} className="fill-zinc-900 dark:fill-zinc-100">
                     {money(row.endingBalance)}
                   </text>
                 )}
@@ -145,8 +149,12 @@ export default function LoanGrowthChart({ schedule, loanAmount, totalInterest, d
             );
           })}
 
-          <text x={MARGIN.left - 8} y={volumeTop + 8} textAnchor="end" fontSize={8} fill="currentColor" opacity={0.5}>
-            {tShared("interestLabel")}
+          <text style={{ fontSize: svgPx(12) }} x={MARGIN.left - 8} y={volumeTop + 8} textAnchor="end" fill="currentColor" opacity={0.5}>
+            {wrapLabel(tShared("interestLabel"), MARGIN.left - 10).map((line, li) => (
+              <tspan key={li} x={MARGIN.left - 8} dy={li ? 14 : 0}>
+                {line}
+              </tspan>
+            ))}
           </text>
           {schedule.map((row, i) => (
             <rect
@@ -163,7 +171,7 @@ export default function LoanGrowthChart({ schedule, loanAmount, totalInterest, d
           <line x1={MARGIN.left} y1={volumeBottom} x2={chartWidth - MARGIN.right} y2={volumeBottom} stroke="currentColor" strokeWidth={1} opacity={0.15} />
 
           {schedule.map((row, i) => (
-            <text key={`year-${row.year}`} x={barCenterX(i)} y={volumeBottom + XAXIS_HEIGHT - 6} textAnchor="middle" fontSize={9} fill="currentColor" opacity={0.6}>
+            <text style={{ fontSize: svgPx(12) }} key={`year-${row.year}`} x={barCenterX(i)} y={volumeBottom + XAXIS_HEIGHT - 6} textAnchor="middle" fill="currentColor" opacity={0.6}>
               {formatLocalizedNumber(row.year, digitStyle, { maximumFractionDigits: row.year % 1 === 0 ? 0 : 1 })}
             </text>
           ))}
@@ -173,16 +181,16 @@ export default function LoanGrowthChart({ schedule, loanAmount, totalInterest, d
               <line x1={barCenterX(activeIndex)} y1={MARGIN.top} x2={barCenterX(activeIndex)} y2={volumeBottom} stroke="currentColor" strokeWidth={1} strokeDasharray="3 3" opacity={0.35} />
               <g transform={`translate(${tooltipX}, ${tooltipY})`}>
                 <rect width={TOOLTIP_WIDTH} height={TOOLTIP_HEIGHT} rx={6} className="fill-white stroke-zinc-200 dark:fill-zinc-900 dark:stroke-zinc-700" strokeWidth={1} />
-                <text x={10} y={17} fontSize={10} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
+                <text style={{ fontSize: svgPx(12) }} x={10} y={17} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
                   {tShared("tooltipYearLabel")} {formatLocalizedNumber(active.year, digitStyle, { maximumFractionDigits: 1 })}
                 </text>
-                <text x={10} y={35} fontSize={10} className="fill-blue-700 dark:fill-blue-400">
+                <text style={{ fontSize: svgPx(12) }} x={10} y={35} className="fill-blue-700 dark:fill-blue-400">
                   {tShared("principalLabel")}: {money(loanAmount)}
                 </text>
-                <text x={10} y={50} fontSize={10} className="fill-amber-600 dark:fill-amber-500">
+                <text style={{ fontSize: svgPx(12) }} x={10} y={50} className="fill-amber-600 dark:fill-amber-500">
                   {tShared("interestLabel")}: {money(Math.max(active.endingBalance - loanAmount, 0))}
                 </text>
-                <text x={10} y={67} fontSize={10} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
+                <text style={{ fontSize: svgPx(12) }} x={10} y={67} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
                   {tShared("balanceLabel")}: {money(active.endingBalance)}
                 </text>
               </g>

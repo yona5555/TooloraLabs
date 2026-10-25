@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import VectorIndicatorCard from "./VectorIndicatorCard";
 import { useVectorAnalysis } from "./VectorLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 320;
 const H = 190;
@@ -31,8 +32,8 @@ export default function VectorTriangleBalance() {
       <line x1={x} y1={y} x2={x - 26} y2={y + 34} className="stroke-zinc-400 dark:stroke-zinc-500" />
       <line x1={x} y1={y} x2={x + 26} y2={y + 34} className="stroke-zinc-400 dark:stroke-zinc-500" />
       <rect x={x - 38} y={y + 34} width={76} height={36} rx={8} className={cls} />
-      <text x={x} y={y + 49} textAnchor="middle" className="fill-white text-[10px] font-semibold">{label}</text>
-      <text x={x} y={y + 64} textAnchor="middle" className="fill-white text-[12px] font-bold">{value}</text>
+      <text style={{ fontSize: svgPx(12) }} x={x} y={y + 49} textAnchor="middle" className="fill-white font-semibold">{label}</text>
+      <text style={{ fontSize: svgPx(12) }} x={x} y={y + 64} textAnchor="middle" className="fill-white font-bold">{value}</text>
     </g>
   );
 
@@ -48,7 +49,7 @@ export default function VectorTriangleBalance() {
             <circle cx={CX} cy={PIVOT_Y} r={6} className="fill-zinc-700 dark:fill-zinc-200" />
             {pan(lx, ly, t("direct"), n(direct, 2), "fill-violet-500 dark:fill-violet-500")}
             {pan(rx, ry, t("path"), n(path, 2), "fill-blue-600 dark:fill-blue-500")}
-            <text x={CX} y={16} textAnchor="middle" className={`text-[12px] font-bold ${balanced ? "fill-emerald-600 dark:fill-emerald-400" : "fill-zinc-700 dark:fill-zinc-200"}`}>
+            <text style={{ fontSize: svgPx(12) }} x={CX} y={16} textAnchor="middle" className={`font-bold ${balanced ? "fill-emerald-600 dark:fill-emerald-400" : "fill-zinc-700 dark:fill-zinc-200"}`}>
               {balanced ? t("balanced") : `${n(direct, 2)} < ${n(path, 2)}`}
             </text>
           </svg>

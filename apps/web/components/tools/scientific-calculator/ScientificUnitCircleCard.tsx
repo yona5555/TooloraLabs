@@ -14,6 +14,7 @@ import "@/components/tool-ui/glass/glass-tokens.css";
 import { unitCircleFacts } from "@tooloralabs/tools";
 import { useScientificCalcReadonly } from "./ScientificCalcReadonlyContext";
 import { round4 } from "./scientificAngleData";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const VB_W = 300;
 const CX = 150;
@@ -153,14 +154,14 @@ export default function ScientificUnitCircleCard({
               const p = point(deg, coord ? LABEL_R + 12 : diag ? LABEL_R + 4 : LABEL_R);
               if (coord) {
                 return (
-                  <text key={deg} x={p.x} y={p.y} textAnchor="middle" fontSize="11" fontWeight="700" fill="var(--glass-title)">
+                  <text style={{ fontSize: svgPx(12) }} key={deg} x={p.x} y={p.y} textAnchor="middle" fontWeight="700" fill="var(--glass-title)">
                     <tspan x={p.x} dy="-0.25em">{`${deg}°`}</tspan>
-                    <tspan x={p.x} dy="1.05em" fontSize="10" fontWeight="600" fill="var(--glass-muted)">{coord}</tspan>
+                    <tspan style={{ fontSize: svgPx(12) }} x={p.x} dy="1.05em" fontWeight="600" fill="var(--glass-muted)">{coord}</tspan>
                   </text>
                 );
               }
               return (
-                <text key={deg} x={p.x} y={p.y} textAnchor="middle" dominantBaseline="middle" fontSize={diag ? 10 : 11} fontWeight="600" fill="var(--glass-muted)">
+                <text style={{ fontSize: svgPx(diag ? 12 : 12) }} key={deg} x={p.x} y={p.y} textAnchor="middle" dominantBaseline="middle" fontWeight="600" fill="var(--glass-muted)">
                   {`${deg}°`}
                 </text>
               );
@@ -170,7 +171,7 @@ export default function ScientificUnitCircleCard({
               const p = point(q.deg, R * 0.6);
               const active = f.quadrant !== "axis" && QUADRANTS[f.quadrant - 1].label === q.label;
               return (
-                <text key={q.label} x={p.x} y={p.y} textAnchor="middle" dominantBaseline="middle" fontSize="15" fontWeight="800" fill={active ? "var(--glass-accent-1-strong)" : "var(--glass-border)"}>
+                <text style={{ fontSize: svgPx(15) }} key={q.label} x={p.x} y={p.y} textAnchor="middle" dominantBaseline="middle" fontWeight="800" fill={active ? "var(--glass-accent-1-strong)" : "var(--glass-border)"}>
                   {q.label}
                 </text>
               );
@@ -218,12 +219,12 @@ export default function ScientificUnitCircleCard({
               return (
                 <g key={deg}>
                   <line x1={x} y1={WAVE_Y0 + 2} x2={x} y2={WAVE_Y0 + WAVE_H - 2} stroke="var(--glass-border)" strokeDasharray="2 3" />
-                  <text x={x} y={WAVE_Y0 + WAVE_H + 13} textAnchor="middle" fontSize="10" fontWeight="600" fill="var(--glass-muted)">{`${deg}°`}</text>
+                  <text style={{ fontSize: svgPx(12) }} x={x} y={WAVE_Y0 + WAVE_H + 13} textAnchor="middle" fontWeight="600" fill="var(--glass-muted)">{`${deg}°`}</text>
                 </g>
               );
             })}
-            <text x={WAVE_X0 - 6} y={WAVE_Y0 + 8} textAnchor="end" fontSize="9" fill="var(--glass-muted)">1</text>
-            <text x={WAVE_X0 - 6} y={WAVE_Y0 + WAVE_H - 4} textAnchor="end" fontSize="9" fill="var(--glass-muted)">−1</text>
+            <text style={{ fontSize: svgPx(12) }} x={WAVE_X0 - 6} y={WAVE_Y0 + 8} textAnchor="end" fill="var(--glass-muted)">1</text>
+            <text style={{ fontSize: svgPx(12) }} x={WAVE_X0 - 6} y={WAVE_Y0 + WAVE_H - 4} textAnchor="end" fill="var(--glass-muted)">−1</text>
             <path d={wave.sin} fill="none" stroke="var(--glass-danger-strong)" strokeWidth="2.25" />
             <path d={wave.cos} fill="none" stroke="var(--glass-success-strong)" strokeWidth="2.25" />
             <line x1={wx} y1={WAVE_Y0} x2={wx} y2={WAVE_Y0 + WAVE_H} stroke="var(--glass-title)" strokeWidth="1.2" />

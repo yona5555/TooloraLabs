@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import SdIndicatorCard from "./SdIndicatorCard";
 import { useSdModel } from "./SdLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 300;
 const H = 200;
@@ -35,18 +36,18 @@ export default function SdSensitivityTrio() {
         return (
           <g key={it.key}>
             <rect x={cx - BAR / 2} y={BASE - h} width={BAR} height={Math.max(1, h)} rx={6} className={it.cls} />
-            <text x={cx} y={BASE - h - 16} textAnchor="middle" fontSize={12} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={cx} y={BASE - h - 16} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
               {f(it.v)}
             </text>
             {it.key !== "current" && (
-              <text x={cx} y={BASE - h - 4} textAnchor="middle" fontSize={10} fontWeight={600} className={d < 0 ? "fill-emerald-700 dark:fill-emerald-300" : "fill-amber-700 dark:fill-amber-300"}>
+              <text style={{ fontSize: svgPx(12) }} x={cx} y={BASE - h - 4} textAnchor="middle" fontWeight={600} className={d < 0 ? "fill-emerald-700 dark:fill-emerald-300" : "fill-amber-700 dark:fill-amber-300"}>
                 {`${d >= 0 ? "+" : "−"}${f(Math.abs(d), 1)}%`}
               </text>
             )}
-            <text x={cx} y={BASE + 16} textAnchor="middle" fontSize={11} fontWeight={600} className="fill-zinc-700 dark:fill-zinc-200">
+            <text style={{ fontSize: svgPx(12) }} x={cx} y={BASE + 16} textAnchor="middle" fontWeight={600} className="fill-zinc-700 dark:fill-zinc-200">
               {t(it.key)}
             </text>
-            <text x={cx} y={BASE + 30} textAnchor="middle" fontSize={10} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+            <text style={{ fontSize: svgPx(12) }} x={cx} y={BASE + 30} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
               {it.sub}
             </text>
           </g>

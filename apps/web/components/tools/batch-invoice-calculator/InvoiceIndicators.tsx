@@ -17,6 +17,8 @@ import SemiGauge from "@/components/tools/markets/SemiGauge";
 import SensitivityBars from "@/components/tools/markets/SensitivityBars";
 import { shortDate, type InvoiceFormatters } from "./format";
 import { VAT_CHECKED, VAT_TABLE } from "./types";
+import { svgPx } from "@/components/tool-ui/svgPx";
+import { useMeasuredWidth } from "@/components/tool-ui/useMeasuredWidth";
 
 export type IndicatorProps = { invoices: BatchInvoice[]; overview: BatchOverview; f: InvoiceFormatters };
 
@@ -142,10 +144,10 @@ export function CompositionDonut({ overview, f }: IndicatorProps) {
         <svg width={S} height={S} viewBox={`0 0 ${S} ${S}`} role="img" aria-label={t("donut.title")} className="shrink-0">
           {ring(per.map((r) => r.total), 82, 22, INVOICE_COLORS)}
           {ring([overview.net, overview.tax], 56, 18, [NET, TAX])}
-          <text x={c} y={c - 4} textAnchor="middle" className="fill-zinc-400 text-[10px]">
+          <text style={{ fontSize: svgPx(12) }} x={c} y={c - 4} textAnchor="middle" className="fill-zinc-400">
             {t("donut.center")}
           </text>
-          <text x={c} y={c + 12} textAnchor="middle" direction="ltr" className="fill-zinc-900 font-mono text-[12px] font-bold dark:fill-zinc-100">
+          <text style={{ fontSize: svgPx(12) }} x={c} y={c + 12} textAnchor="middle" direction="ltr" className="fill-zinc-900 font-mono font-bold dark:fill-zinc-100">
             {f.compact(overview.grand)}
           </text>
         </svg>
@@ -239,7 +241,9 @@ export function TotalsTrend({ invoices, overview, f }: IndicatorProps) {
   const t = useInd();
   const locale = useLocale();
   const pts = useMemo(() => invoicesByDate(invoices), [invoices]);
-  const W = 520;
+  // Drawn at the box width (true px) so the 12px labels keep their spacing on a phone.
+  const [boxRef, boxW] = useMeasuredWidth<HTMLDivElement>(520);
+  const W = Math.min(520, boxW);
   const H = 220;
   const pad = { l: 12, r: 12, t: 26, b: 34 };
   const max = Math.max(...pts.map((p) => p.total), overview.averageInvoice, 1e-9) * 1.1;
@@ -269,10 +273,10 @@ export function TotalsTrend({ invoices, overview, f }: IndicatorProps) {
           : null
       }
     >
-      <div className="overflow-x-auto" dir="ltr" data-testid="ind-trend">
+      <div ref={boxRef} className="overflow-x-auto" dir="ltr" data-testid="ind-trend">
         <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("trend.title")} className="mx-auto block">
           <line x1={pad.l} x2={W - pad.r} y1={y(overview.averageInvoice)} y2={y(overview.averageInvoice)} stroke="#f59e0b" strokeWidth={1.5} strokeDasharray="6 4" />
-          <text x={W - pad.r} y={y(overview.averageInvoice) - 5} textAnchor="end" className="fill-amber-600 font-mono text-[10px] font-semibold dark:fill-amber-400">
+          <text style={{ fontSize: svgPx(12) }} x={W - pad.r} y={y(overview.averageInvoice) - 5} textAnchor="end" className="fill-amber-600 font-mono font-semibold dark:fill-amber-400">
             {t("trend.avg")} {f.money(overview.averageInvoice)}
           </text>
           {pts.length > 1 && (
@@ -284,13 +288,13 @@ export function TotalsTrend({ invoices, overview, f }: IndicatorProps) {
           {pts.map((p, i) => (
             <g key={p.id}>
               <circle cx={x(i)} cy={y(p.total)} r={i === peak ? 7 : 5} fill={i === peak ? "#2563eb" : "white"} stroke="#2563eb" strokeWidth={2.5} />
-              <text x={x(i)} y={y(p.total) - 11} textAnchor="middle" className="fill-zinc-800 font-mono text-[10px] font-bold dark:fill-zinc-100">
+              <text style={{ fontSize: svgPx(12) }} x={x(i)} y={y(p.total) - 11} textAnchor="middle" className="fill-zinc-800 font-mono font-bold dark:fill-zinc-100">
                 {f.compact(p.total)}
               </text>
-              <text x={x(i)} y={H - pad.b + 15} textAnchor="middle" className="fill-zinc-500 text-[10px]">
+              <text style={{ fontSize: svgPx(12) }} x={x(i)} y={H - pad.b + 15} textAnchor="middle" className="fill-zinc-500">
                 {shortDate(p.date, locale)}
               </text>
-              <text x={x(i)} y={H - pad.b + 28} textAnchor="middle" className="fill-zinc-400 text-[9px]">
+              <text style={{ fontSize: svgPx(12) }} x={x(i)} y={H - pad.b + 28} textAnchor="middle" className="fill-zinc-400">
                 {p.number}
               </text>
             </g>
@@ -490,8 +494,8 @@ export function NetTaxBalance({ overview, f }: IndicatorProps) {
               <g className="transition-all duration-700">
                 <line x1={x} y1={y} x2={x} y2={y + 26} className="stroke-zinc-400" />
                 <rect x={x - 55} y={y + 26} width={110} height={44} rx={10} fill={fill} />
-                <text x={x} y={y + 44} textAnchor="middle" className={`${text} text-[11px] font-semibold`}>{k}</text>
-                <text x={x} y={y + 61} textAnchor="middle" className={`${text} font-mono text-[12px] font-bold`}>{v}</text>
+                <text style={{ fontSize: svgPx(12) }} x={x} y={y + 44} textAnchor="middle" className={`${text} font-semibold`}>{k}</text>
+                <text style={{ fontSize: svgPx(12) }} x={x} y={y + 61} textAnchor="middle" className={`${text} font-mono font-bold`}>{v}</text>
               </g>
             );
             return (
@@ -502,8 +506,8 @@ export function NetTaxBalance({ overview, f }: IndicatorProps) {
               </>
             );
           })()}
-          <text x={210} y={24} textAnchor="middle" className="fill-zinc-500 text-[11px]">{t("balance.per100", { amount: f.money(100) })}</text>
-          <text x={210} y={50} textAnchor="middle" className="fill-zinc-900 font-mono text-[22px] font-bold dark:fill-zinc-100">{f.money(per100)}</text>
+          <text style={{ fontSize: svgPx(12) }} x={210} y={24} textAnchor="middle" className="fill-zinc-500">{t("balance.per100", { amount: f.money(100) })}</text>
+          <text style={{ fontSize: svgPx(22) }} x={210} y={50} textAnchor="middle" className="fill-zinc-900 font-mono font-bold dark:fill-zinc-100">{f.money(per100)}</text>
         </svg>
       </div>
     </IndicatorCard>

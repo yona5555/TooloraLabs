@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { charPoly2, det2, eigen2, trace2 } from "@tooloralabs/tools";
 import MatrixIndicatorCard from "./MatrixIndicatorCard";
 import { useMatrixModel } from "./MatrixLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 230;
@@ -45,19 +46,19 @@ export default function MatrixEigenCurve() {
         [e.l1, e.l2].map((l, i) => (
           <g key={i}>
             <circle cx={sx(l)} cy={sy(0)} r={6} className="fill-rose-500 stroke-white dark:fill-rose-400 dark:stroke-zinc-900" strokeWidth={2} />
-            <text x={sx(l)} y={sy(0) + (i ? 20 : -12)} textAnchor="middle" className="fill-rose-700 font-mono text-[11px] font-bold dark:fill-rose-300">{`λ${i ? "₂" : "₁"} = ${f(l)}`}</text>
+            <text style={{ fontSize: svgPx(12) }} x={sx(l)} y={sy(0) + (i ? 20 : -12)} textAnchor="middle" className="fill-rose-700 font-mono font-bold dark:fill-rose-300">{`λ${i ? "₂" : "₁"} = ${f(l)}`}</text>
           </g>
         ))
       ) : (
         <g>
           <circle cx={sx(c)} cy={sy(vertex)} r={6} className="fill-amber-500 stroke-white dark:fill-amber-400 dark:stroke-zinc-900" strokeWidth={2} />
-          <text x={sx(c)} y={sy(vertex) + 20} textAnchor="middle" className="fill-amber-700 font-mono text-[11px] font-bold dark:fill-amber-300">{`λ = ${f(c)} ± ${f(e.im)}i`}</text>
+          <text style={{ fontSize: svgPx(12) }} x={sx(c)} y={sy(vertex) + 20} textAnchor="middle" className="fill-amber-700 font-mono font-bold dark:fill-amber-300">{`λ = ${f(c)} ± ${f(e.im)}i`}</text>
         </g>
       )}
-      <text x={PAD.l} y={H - 8} className="fill-zinc-500 font-mono text-[10px] dark:fill-zinc-400">{f(x0, 1)}</text>
-      <text x={W - PAD.r} y={H - 8} textAnchor="end" className="fill-zinc-500 font-mono text-[10px] dark:fill-zinc-400">{f(x1, 1)}</text>
-      <text x={W / 2} y={H - 8} textAnchor="middle" className="fill-zinc-500 font-mono text-[10px] dark:fill-zinc-400">λ</text>
-      <text x={4} y={PAD.t + 4} className="fill-zinc-500 font-mono text-[10px] dark:fill-zinc-400">p(λ)</text>
+      <text style={{ fontSize: svgPx(12) }} x={PAD.l} y={H - 8} className="fill-zinc-500 font-mono dark:fill-zinc-400">{f(x0, 1)}</text>
+      <text style={{ fontSize: svgPx(12) }} x={W - PAD.r} y={H - 8} textAnchor="end" className="fill-zinc-500 font-mono dark:fill-zinc-400">{f(x1, 1)}</text>
+      <text style={{ fontSize: svgPx(12) }} x={W / 2} y={H - 8} textAnchor="middle" className="fill-zinc-500 font-mono dark:fill-zinc-400">λ</text>
+      <text style={{ fontSize: svgPx(12) }} x={4} y={PAD.t + 4} className="fill-zinc-500 font-mono dark:fill-zinc-400">p(λ)</text>
     </svg>
   );
 

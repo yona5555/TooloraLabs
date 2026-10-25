@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import ForceIndicatorCard, { ForceIndicatorUnavailable } from "./ForceIndicatorCard";
 import { useForceModel } from "./ForceLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 320;
 const H = 210;
@@ -29,19 +30,19 @@ export default function ForceMassTrio() {
         return (
           <g key={it.factor}>
             <rect x={cx - BAR / 2} y={BASE - h} width={BAR} height={Math.max(1, h)} rx={6} className={CLS[i]} />
-            <text x={cx} y={BASE - h - 8} textAnchor="middle" fontSize={12} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={cx} y={BASE - h - 8} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
               {f(it.acceleration, 3)}
             </text>
-            <text x={cx} y={BASE + 16} textAnchor="middle" fontSize={11} fontWeight={600} className="fill-zinc-600 dark:fill-zinc-300">
+            <text style={{ fontSize: svgPx(12) }} x={cx} y={BASE + 16} textAnchor="middle" fontWeight={600} className="fill-zinc-600 dark:fill-zinc-300">
               {names[i]}
             </text>
-            <text x={cx} y={BASE + 31} textAnchor="middle" fontSize={10} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+            <text style={{ fontSize: svgPx(12) }} x={cx} y={BASE + 31} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
               {`${f(it.mass)} kg`}
             </text>
           </g>
         );
       })}
-      <text x={4} y={14} fontSize={10} className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={4} y={14} className="fill-zinc-500 dark:fill-zinc-400">
         {`a (m/s²) · F = ${f(sl.force)} N`}
       </text>
     </svg>

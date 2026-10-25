@@ -4,6 +4,8 @@ import { pomodoroForFocus, retentionCurve, sanitizePomodoro, type PomodoroSettin
 import SectionCard from "@/components/tool-ui/SectionCard";
 import IndicatorWithTable from "@/components/tool-ui/IndicatorWithTable";
 import { BREAK_COLORS, useFmt, useStudyT, type Derived, type StudioState } from "./studio";
+import { svgPx } from "@/components/tool-ui/svgPx";
+import { useFitWidth } from "@/components/tool-ui/useFitWidth";
 
 export type StudyIndicatorProps = { state: StudioState; setState: (s: StudioState) => void; d: Derived };
 
@@ -45,7 +47,7 @@ export function PomodoroCycleCard({ state, setState, d }: StudyIndicatorProps) {
   const peak = d.plan.totals.peakDay;
   const day = peak >= 0 ? d.plan.days[peak] : null;
   const s = pomodoroForFocus(day?.usedMinutes ?? 0, p);
-  const W = 400;
+  const [fitRef, W] = useFitWidth(400);
   const H = 112;
   const total = Math.max(30, s.wallMinutes);
   const x = (m: number) => 4 + (m / total) * (W - 8);
@@ -89,15 +91,15 @@ export function PomodoroCycleCard({ state, setState, d }: StudyIndicatorProps) {
                 </label>
               ))}
             </div>
-            <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.pomodoro.title")} className="max-w-full">
-              <text x={4} y={12} fontSize={10} fontWeight={700} className={valueText}>
+            <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.pomodoro.title")} className="max-w-full">
+              <text style={{ fontSize: svgPx(12) }} x={4} y={12} fontWeight={700} className={valueText}>
                 {day ? `${f.day(day.date)} · ${f.h(day.usedMinutes)}` : "—"}
               </text>
               {s.blocks.map((b, i) => (
                 <g key={i} style={{ transition: "all 300ms ease" }}>
                   <rect x={x(b.start)} y={b.kind === "work" ? 22 : 34} width={Math.max(1, x(b.start + b.minutes) - x(b.start) - 1)} height={b.kind === "work" ? 40 : 16} rx={4} fill={BREAK_COLORS[b.kind]} />
                   {b.kind === "work" && x(b.start + b.minutes) - x(b.start) > 14 && (
-                    <text x={(x(b.start) + x(b.start + b.minutes)) / 2} y={46} textAnchor="middle" fontSize={10} fontWeight={800} fill="white">
+                    <text style={{ fontSize: svgPx(12) }} x={(x(b.start) + x(b.start + b.minutes)) / 2} y={46} textAnchor="middle" fontWeight={800} fill="white">
                       {b.n}
                     </text>
                   )}
@@ -107,7 +109,7 @@ export function PomodoroCycleCard({ state, setState, d }: StudyIndicatorProps) {
               {Array.from({ length: Math.floor(total / tick) + 1 }, (_, i) => i * tick).map((m) => (
                 <g key={m}>
                   <line x1={x(m)} x2={x(m)} y1={70} y2={74} stroke="currentColor" strokeOpacity={0.4} />
-                  <text x={x(m)} y={85} textAnchor="middle" fontSize={9} className={axisText}>
+                  <text style={{ fontSize: svgPx(12) }} x={x(m)} y={85} textAnchor="middle" className={axisText}>
                     {clock(m)}
                   </text>
                 </g>
@@ -115,7 +117,7 @@ export function PomodoroCycleCard({ state, setState, d }: StudyIndicatorProps) {
               {(["work", "short", "long"] as const).map((k, i) => (
                 <g key={k} transform={`translate(${4 + i * 110}, 96)`}>
                   <rect width={10} height={10} rx={2} fill={BREAK_COLORS[k]} />
-                  <text x={14} y={9} fontSize={10} fontWeight={600} className={valueText}>
+                  <text style={{ fontSize: svgPx(12) }} x={14} y={9} fontWeight={600} className={valueText}>
                     {t(`ind.pomodoro.${k}`)}
                   </text>
                 </g>
@@ -145,7 +147,7 @@ export function ReviewScheduleCard({ d }: StudyIndicatorProps) {
   const exams = upcomingExams(d);
   const days = d.plan.days;
   const n = Math.max(1, days.length);
-  const W = 400;
+  const [fitRef, W] = useFitWidth(400);
   const LW = 20;
   const RH = 30;
   const H = 18 + exams.length * RH + 30;
@@ -161,14 +163,14 @@ export function ReviewScheduleCard({ d }: StudyIndicatorProps) {
         workedExampleTitle={t("ind.worked")}
         indicator={
           <div className="w-[400px] max-w-full">
-            <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.reviews.title")} className="max-w-full">
+            <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.reviews.title")} className="max-w-full">
               {exams.map((e, ri) => {
                 const y = 18 + ri * RH + RH / 2;
                 const c = d.colorOf(e.id);
                 return (
                   <g key={e.id}>
                     <circle cx={LW / 2} cy={y} r={7} fill={c} />
-                    <text x={LW / 2} y={y + 3.5} textAnchor="middle" fontSize={9} fontWeight={800} fill="white">
+                    <text style={{ fontSize: svgPx(12) }} x={LW / 2} y={y + 3.5} textAnchor="middle" fontWeight={800} fill="white">
                       {ri + 1}
                     </text>
                     <line x1={x(0)} x2={x(Math.max(0, e.examIndex))} y1={y} y2={y} stroke={c} strokeOpacity={0.35} strokeWidth={2} />
@@ -180,12 +182,12 @@ export function ReviewScheduleCard({ d }: StudyIndicatorProps) {
                     {e.reviewDays.map((rd) => (
                       <g key={rd}>
                         <rect x={x(rd) - 5} y={y - 5} width={10} height={10} transform={`rotate(45 ${x(rd)} ${y})`} fill="white" stroke={c} strokeWidth={2} />
-                        <text x={x(rd)} y={y - 9} textAnchor="middle" fontSize={8.5} fontWeight={700} fill={c}>
+                        <text style={{ fontSize: svgPx(12) }} x={x(rd)} y={y - 9} textAnchor="middle" fontWeight={700} fill={c}>
                           {`−${e.examIndex - rd}`}
                         </text>
                       </g>
                     ))}
-                    <text x={x(e.examIndex)} y={y + 4.5} textAnchor="middle" fontSize={14} fill={c}>
+                    <text style={{ fontSize: svgPx(14) }} x={x(e.examIndex)} y={y + 4.5} textAnchor="middle" fill={c}>
                       ★
                     </text>
                   </g>
@@ -194,7 +196,7 @@ export function ReviewScheduleCard({ d }: StudyIndicatorProps) {
               <line x1={LW} x2={W - 6} y1={H - 24} y2={H - 24} stroke="currentColor" strokeOpacity={0.3} />
               {days.map((day) =>
                 day.index % step === 0 ? (
-                  <text key={day.index} x={x(day.index)} y={H - 12} textAnchor="middle" fontSize={9} className={axisText}>
+                  <text style={{ fontSize: svgPx(12) }} key={day.index} x={x(day.index)} y={H - 12} textAnchor="middle" className={axisText}>
                     {f.short(day.date)}
                   </text>
                 ) : null,
@@ -227,7 +229,7 @@ export function ForgettingCurveCard({ d }: StudyIndicatorProps) {
   const exams = upcomingExams(d).filter((e) => e.status === "upcoming");
   const [pick, setPick] = useState<string>("");
   const e = exams.find((x) => x.id === pick) ?? exams.find((x) => x.reviewDays.length > 0) ?? exams[0];
-  const W = 400;
+  const [fitRef, W] = useFitWidth(400);
   const H = 180;
   const L = 34;
   const B = 150;
@@ -250,11 +252,11 @@ export function ForgettingCurveCard({ d }: StudyIndicatorProps) {
         indicator={
           <div className="w-[400px] max-w-full">
             <ExamChips d={d} value={e.id} onPick={setPick} />
-            <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.curve.title")} className="max-w-full">
+            <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.curve.title")} className="max-w-full">
               {[0, 0.25, 0.5, 0.75, 1].map((r) => (
                 <g key={r}>
                   <line x1={L} x2={W - 10} y1={y(r)} y2={y(r)} stroke="currentColor" strokeOpacity={0.12} />
-                  <text x={L - 4} y={y(r) + 3} textAnchor="end" fontSize={9} className={axisText}>{`${r * 100}%`}</text>
+                  <text style={{ fontSize: svgPx(12) }} x={L - 4} y={y(r) + 3} textAnchor="end" className={axisText}>{`${r * 100}%`}</text>
                 </g>
               ))}
               <path d={path(without.points)} fill="none" stroke="#94a3b8" strokeWidth={2} strokeDasharray="5 4" />
@@ -268,21 +270,21 @@ export function ForgettingCurveCard({ d }: StudyIndicatorProps) {
               <line x1={x(e.examIndex)} x2={x(e.examIndex)} y1={12} y2={B} stroke="#ef4444" strokeWidth={1.5} />
               <circle cx={x(e.examIndex)} cy={y(withR.atEnd)} r={5} fill={c} stroke="white" strokeWidth={1.5} />
               <circle cx={x(e.examIndex)} cy={y(without.atEnd)} r={4} fill="#94a3b8" stroke="white" strokeWidth={1.5} />
-              <text x={x(e.examIndex) - 8} y={y(withR.atEnd) + 4} textAnchor="end" fontSize={11} fontWeight={800} fill={c}>
+              <text style={{ fontSize: svgPx(12) }} x={x(e.examIndex) - 8} y={y(withR.atEnd) + 4} textAnchor="end" fontWeight={800} fill={c}>
                 {f.pct(withR.atEnd)}
               </text>
-              <text x={x(e.examIndex) - 8} y={Math.min(B - 4, y(without.atEnd) + 4)} textAnchor="end" fontSize={10} fontWeight={700} fill="#64748b">
+              <text style={{ fontSize: svgPx(12) }} x={x(e.examIndex) - 8} y={Math.min(B - 4, y(without.atEnd) + 4)} textAnchor="end" fontWeight={700} fill="#64748b">
                 {f.pct(without.atEnd)}
               </text>
               <line x1={L} x2={W - 10} y1={B} y2={B} stroke="currentColor" strokeOpacity={0.35} />
               {Array.from({ length: span + 1 }, (_, i) => i)
                 .filter((i) => i % Math.ceil((span + 1) / 8) === 0 || i === span)
                 .map((i) => (
-                  <text key={i} x={x(i)} y={B + 13} textAnchor="middle" fontSize={9} className={axisText}>
+                  <text style={{ fontSize: svgPx(12) }} key={i} x={x(i)} y={B + 13} textAnchor="middle" className={axisText}>
                     {i}
                   </text>
                 ))}
-              <text x={W - 10} y={B + 27} textAnchor="end" fontSize={9} className={axisText}>
+              <text style={{ fontSize: svgPx(12) }} x={W - 10} y={B + 27} textAnchor="end" className={axisText}>
                 {t("ind.curve.axis")}
               </text>
             </svg>
@@ -330,7 +332,7 @@ export function PriorityFormulaCard({ d }: StudyIndicatorProps) {
       <IndicatorWithTable
         workedExampleTitle={t("ind.worked")}
         indicator={
-          <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.priority.title")} className="max-w-full">
+          <svg data-annotation="" width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.priority.title")} className="max-w-full">
             {[
               { x: 22, k: "difficulty" },
               { x: 74, k: "credits" },

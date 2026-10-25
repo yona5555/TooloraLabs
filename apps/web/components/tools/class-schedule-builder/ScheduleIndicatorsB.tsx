@@ -8,6 +8,8 @@ import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { classColor, fmt, hm } from "./studio";
 import { axisText, gridLine, hourWindow, useDayOrder, useSchedT, useUnits, valueText } from "./ScheduleShared";
 import type { SchedIndicatorProps } from "./ScheduleIndicatorsA";
+import { svgPx } from "@/components/tool-ui/svgPx";
+import { useFitWidth } from "@/components/tool-ui/useFitWidth";
 
 const stepBtn =
   "flex h-7 w-7 items-center justify-center rounded-lg border border-zinc-300 text-zinc-600 transition hover:bg-zinc-100 disabled:opacity-40 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-800";
@@ -18,7 +20,7 @@ export function ScheduleWindowCard({ d }: SchedIndicatorProps) {
   const u = useUnits();
   const days = useDayOrder(d.shownDays);
   const [h0, h1] = hourWindow(d);
-  const W = 400;
+  const [fitRef, W] = useFitWidth(400);
   const AX = 38;
   const TOP = 20;
   const H = 210;
@@ -31,13 +33,13 @@ export function ScheduleWindowCard({ d }: SchedIndicatorProps) {
       <IndicatorWithTable
         workedExampleTitle={t("ind.worked")}
         indicator={
-          <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.window.title")} className="max-w-full">
+          <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.window.title")} className="max-w-full">
             {Array.from({ length: h1 - h0 + 1 }, (_, i) => h0 + i)
               .filter((h) => (h - h0) % 2 === 0)
               .map((h) => (
                 <g key={h}>
                   <line x1={AX} x2={W} y1={y(h * 60)} y2={y(h * 60)} className={gridLine} />
-                  <text x={AX - 4} y={y(h * 60) + 3} textAnchor="end" fontSize={9} className={axisText}>
+                  <text style={{ fontSize: svgPx(12) }} x={AX - 4} y={y(h * 60) + 3} textAnchor="end" className={axisText}>
                     {hm(h * 60)}
                   </text>
                 </g>
@@ -49,7 +51,7 @@ export function ScheduleWindowCard({ d }: SchedIndicatorProps) {
               const late = s.lastEnd !== null && s.lastEnd === d.stats.latestEnd;
               return (
                 <g key={day}>
-                  <text x={cx} y={12} textAnchor="middle" fontSize={10} fontWeight={700} className={s.classCount ? valueText : axisText}>
+                  <text style={{ fontSize: svgPx(12) }} x={cx} y={12} textAnchor="middle" fontWeight={700} className={s.classCount ? valueText : axisText}>
                     {t(`days.${day}`)}
                   </text>
                   {s.firstStart !== null && s.lastEnd !== null && (
@@ -61,12 +63,12 @@ export function ScheduleWindowCard({ d }: SchedIndicatorProps) {
                       <circle cx={cx} cy={y(s.firstStart)} r={5} fill={early ? "#10b981" : "#a5b4fc"} stroke="white" strokeWidth={1.5} />
                       <circle cx={cx} cy={y(s.lastEnd)} r={5} fill={late ? "#ef4444" : "#a5b4fc"} stroke="white" strokeWidth={1.5} />
                       {early && (
-                        <text x={cx} y={y(s.firstStart) - 8} textAnchor="middle" fontSize={9} fontWeight={800} fill="#059669">
+                        <text style={{ fontSize: svgPx(12) }} x={cx} y={y(s.firstStart) - 8} textAnchor="middle" fontWeight={800} fill="#059669">
                           {hm(s.firstStart)}
                         </text>
                       )}
                       {late && (
-                        <text x={cx} y={y(s.lastEnd) + 16} textAnchor="middle" fontSize={9} fontWeight={800} fill="#dc2626">
+                        <text style={{ fontSize: svgPx(12) }} x={cx} y={y(s.lastEnd) + 16} textAnchor="middle" fontWeight={800} fill="#dc2626">
                           {hm(s.lastEnd)}
                         </text>
                       )}
@@ -100,7 +102,7 @@ export function ScheduleCampusCard({ state, onChange, d }: SchedIndicatorProps) 
   const termTrips = termOccurrences({ days: campusDays }, state.termStart, state.termEnd, d.exclude).length;
   const weekly = campusDays.length * state.commute;
   const maxLoad = Math.max(1, ...d.stats.days.map((s) => s.scheduledMinutes));
-  const W = 400;
+  const [fitRef, W] = useFitWidth(400);
   const H = 130;
   const tw = W / 7;
   const setCommute = (v: number) => onChange({ ...state, commute: Math.max(0, Math.min(180, v)) });
@@ -112,7 +114,7 @@ export function ScheduleCampusCard({ state, onChange, d }: SchedIndicatorProps) 
         workedExampleTitle={t("ind.worked")}
         indicator={
           <div className="w-[400px] max-w-full">
-            <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.campus.title")} className="max-w-full">
+            <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.campus.title")} className="max-w-full">
               {days.map((day, i) => {
                 const s = d.stats.days[DAY_CODES.indexOf(day)];
                 const on = s.classCount > 0;
@@ -122,22 +124,22 @@ export function ScheduleCampusCard({ state, onChange, d }: SchedIndicatorProps) 
                   <g key={day}>
                     <rect x={i * tw + 4} y={6} width={tw - 8} height={70} rx={10} className={on ? "fill-blue-50 dark:fill-blue-500/10" : "fill-zinc-100 dark:fill-zinc-800"} stroke={on ? "#2563eb" : "none"} />
                     {on && <rect x={i * tw + 4} y={6 + 70 * (1 - fill)} width={tw - 8} height={70 * fill} rx={10} fill="#2563eb" fillOpacity={0.35} style={{ transition: "all 400ms ease" }} />}
-                    <text x={cx} y={30} textAnchor="middle" fontSize={11} fontWeight={800} className={on ? valueText : axisText}>
+                    <text style={{ fontSize: svgPx(12) }} x={cx} y={30} textAnchor="middle" fontWeight={800} className={on ? valueText : axisText}>
                       {t(`days.${day}`)}
                     </text>
                     <circle cx={cx} cy={45} r={7} fill={on ? "#2563eb" : "none"} stroke={on ? "#2563eb" : "currentColor"} strokeOpacity={on ? 1 : 0.35} strokeDasharray={on ? undefined : "3 2"} />
-                    <text x={cx} y={68} textAnchor="middle" fontSize={9} fontWeight={700} className={axisText}>
+                    <text style={{ fontSize: svgPx(12) }} x={cx} y={68} textAnchor="middle" fontWeight={700} className={axisText}>
                       {on ? fmt(s.scheduledMinutes / 60, 1) : "—"}
                     </text>
                     {on && state.commute > 0 && (
-                      <text x={cx} y={94} textAnchor="middle" fontSize={9} fontWeight={700} fill="#d97706">
+                      <text style={{ fontSize: svgPx(12) }} x={cx} y={94} textAnchor="middle" fontWeight={700} fill="#d97706">
                         {`+${fmt(state.commute)}′`}
                       </text>
                     )}
                   </g>
                 );
               })}
-              <text x={W / 2} y={120} textAnchor="middle" fontSize={11} fontWeight={800} className={valueText}>
+              <text style={{ fontSize: svgPx(12) }} x={W / 2} y={120} textAnchor="middle" fontWeight={800} className={valueText}>
                 {`${fmt(campusDays.length)}/7 · ${u.h(weekly)}`}
               </text>
             </svg>
@@ -176,7 +178,7 @@ export function ScheduleStreakCard({ d }: SchedIndicatorProps) {
   const [gap, setGap] = useState(15);
   const stats = weeklyScheduleStats(d.classes, { streakGapMinutes: gap });
   const days = useDayOrder(d.shownDays);
-  const W = 400;
+  const [fitRef, W] = useFitWidth(400);
   const H = 190;
   const B = 150;
   const maxN = Math.max(3, ...stats.days.map((s) => s.longestStreak));
@@ -205,7 +207,7 @@ export function ScheduleStreakCard({ d }: SchedIndicatorProps) {
                 </button>
               ))}
             </div>
-            <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.streak.title")} className="max-w-full">
+            <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.streak.title")} className="max-w-full">
               <line x1={0} x2={W} y1={B} y2={B} stroke="currentColor" strokeOpacity={0.35} />
               {days.map((day, i) => {
                 const s = stats.days[DAY_CODES.indexOf(day)];
@@ -222,13 +224,13 @@ export function ScheduleStreakCard({ d }: SchedIndicatorProps) {
                       );
                     })}
                     {isBest && <rect x={x0 - 3} y={B - chain.length * bh - 1} width={bw * 0.6 + 6} height={chain.length * bh + 1} rx={6} fill="none" stroke="#ef4444" strokeWidth={2} strokeDasharray="4 3" />}
-                    <text x={x0 + bw * 0.3} y={B - chain.length * bh - 6} textAnchor="middle" fontSize={11} fontWeight={800} className={valueText}>
+                    <text style={{ fontSize: svgPx(12) }} x={x0 + bw * 0.3} y={B - chain.length * bh - 6} textAnchor="middle" fontWeight={800} className={valueText}>
                       {s.longestStreak ? `×${fmt(s.longestStreak)}` : ""}
                     </text>
-                    <text x={x0 + bw * 0.3} y={B + 14} textAnchor="middle" fontSize={10} fontWeight={700} className={axisText}>
+                    <text style={{ fontSize: svgPx(12) }} x={x0 + bw * 0.3} y={B + 14} textAnchor="middle" fontWeight={700} className={axisText}>
                       {t(`days.${day}`)}
                     </text>
-                    <text x={x0 + bw * 0.3} y={B + 27} textAnchor="middle" fontSize={9} className={axisText}>
+                    <text style={{ fontSize: svgPx(12) }} x={x0 + bw * 0.3} y={B + 27} textAnchor="middle" className={axisText}>
                       {r && s.longestStreak > 1 ? u.h(r.minutes) : ""}
                     </text>
                   </g>
@@ -302,19 +304,19 @@ export function ScheduleWorkloadCard({ state, d }: SchedIndicatorProps) {
               {[0, 30, 45, 55, 70].map((v) => {
                 const [tx, ty] = pt(v / MAX, R + 18);
                 return (
-                  <text key={v} x={tx} y={ty} textAnchor="middle" dominantBaseline="middle" fontSize={9} className={axisText}>
+                  <text style={{ fontSize: svgPx(12) }} key={v} x={tx} y={ty} textAnchor="middle" dominantBaseline="middle" className={axisText}>
                     {v}
                   </text>
                 );
               })}
               <circle cx={ex} cy={ey} r={7} fill={color} stroke="white" strokeWidth={2} />
-              <text x={CX} y={CY - 26} textAnchor="middle" fontSize={28} fontWeight={800} fill={color}>
+              <text style={{ fontSize: svgPx(28) }} x={CX} y={CY - 26} textAnchor="middle" fontWeight={800} fill={color}>
                 {fmt(total, 1)}
               </text>
-              <text x={CX} y={CY - 8} textAnchor="middle" fontSize={10} className={axisText}>
+              <text style={{ fontSize: svgPx(12) }} x={CX} y={CY - 8} textAnchor="middle" className={axisText}>
                 {`${fmt(contact, 1)} + ${fmt(study, 1)} + ${fmt(commute, 1)}`}
               </text>
-              <text x={CX} y={CY + 22} textAnchor="middle" fontSize={11} fontWeight={800} fill={color}>
+              <text style={{ fontSize: svgPx(12) }} x={CX} y={CY + 22} textAnchor="middle" fontWeight={800} fill={color}>
                 {t(`ind.workload.zone.${zone}`)}
               </text>
             </svg>

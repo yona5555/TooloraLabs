@@ -8,6 +8,7 @@ import { ViewportScene } from "@/components/tool-ui/three/ViewportScene";
 import { g3 } from "../molarity-calculator/molMath";
 import { COLUMN_TERMS, molarMassOf, uniFormula } from "./chemMath";
 import { SvgMolecule } from "./Molecules2D";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const CopiesScene3D = dynamic(() => import("./BalancerScenes3D").then((m) => m.CopiesScene3D), { ssr: false, loading: () => null });
 const ScaleScene3D = dynamic(() => import("./BalancerScenes3D").then((m) => m.ScaleScene3D), { ssr: false, loading: () => null });
@@ -32,7 +33,7 @@ function Copies2D({ n, hover }: { n: number; hover: string | null }) {
           const inRow = row === rows - 1 ? n - row * cols : cols;
           return <SvgMolecule key={i} formula="H2O" x={W / 2 + ((i % cols) - (inRow - 1) / 2) * cell} y={14 + (row + 0.5) * cell} size={cell * 0.55} lit={hover === "n"} />;
         })}
-        <text x={W / 2} y={H - 10} fontSize={13} fontWeight={700} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+        <text x={W / 2} y={H - 10} fontWeight={700} textAnchor="middle" style={{ fontSize: svgPx(13), fill: "var(--ph-ink)" }}>
           <SvgChem text={`${n} H₂O`} />
         </text>
       </svg>
@@ -92,16 +93,16 @@ function Scale2D({ h2, o2, water, max }: { h2: number; o2: number; water: number
         {bar(R, base, water, "var(--chem-product)")}
         <line x1={L - 60} y1={base + 4} x2={R + 60} y2={base + 4} style={{ stroke: "var(--ph-ink-muted)" }} strokeWidth={4} strokeLinecap="round" />
         <path d={`M ${W / 2 - 16} ${base + 34} L ${W / 2} ${base + 6} L ${W / 2 + 16} ${base + 34} Z`} style={{ fill: "var(--ph-ink-muted)" }} />
-        <text x={L} y={base - (h2 + o2) * k - 10} fontSize={12.5} fontWeight={800} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+        <text x={L} y={base - (h2 + o2) * k - 10} fontWeight={800} textAnchor="middle" style={{ fontSize: svgPx(12.5), fill: "var(--ph-ink)" }}>
           {`${g3(h2 + o2)} g`}
         </text>
-        <text x={R} y={base - water * k - 10} fontSize={12.5} fontWeight={800} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+        <text x={R} y={base - water * k - 10} fontWeight={800} textAnchor="middle" style={{ fontSize: svgPx(12.5), fill: "var(--ph-ink)" }}>
           {`${g3(water)} g`}
         </text>
-        <text x={L} y={H - 6} fontSize={11} textAnchor="middle" style={{ fill: "var(--ph-ink-muted)" }}>
+        <text x={L} y={H - 6} textAnchor="middle" style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
           <SvgChem text="H₂ + O₂" />
         </text>
-        <text x={R} y={H - 6} fontSize={11} textAnchor="middle" style={{ fill: "var(--ph-ink-muted)" }}>
+        <text x={R} y={H - 6} textAnchor="middle" style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
           <SvgChem text="H₂O" />
         </text>
       </svg>
@@ -173,16 +174,16 @@ function Columns2D({ k }: { k: number }) {
             <g key={term.formula}>
               <rect x={xs[i] - 26} y={base - coef * unit} width={52} height={coef * unit} rx={12} style={{ fill, fillOpacity: 0.4 }} />
               <rect x={xs[i] - 26} y={base - term.base * unit} width={52} height={term.base * unit} rx={12} style={{ fill }} />
-              <text x={xs[i]} y={base - coef * unit - 8} fontSize={13} fontWeight={800} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+              <text x={xs[i]} y={base - coef * unit - 8} fontWeight={800} textAnchor="middle" style={{ fontSize: svgPx(13), fill: "var(--ph-ink)" }}>
                 {coef}
               </text>
-              <text x={xs[i]} y={H - 10} fontSize={11.5} textAnchor="middle" style={{ fill: "var(--ph-ink-muted)" }}>
+              <text x={xs[i]} y={H - 10} textAnchor="middle" style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
                 <SvgChem text={uniFormula(term.formula)} />
               </text>
             </g>
           );
         })}
-        <text x={W * 0.58} y={base - 20} fontSize={18} fontWeight={800} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+        <text x={W * 0.58} y={base - 20} fontWeight={800} textAnchor="middle" style={{ fontSize: svgPx(18), fill: "var(--ph-ink)" }}>
           →
         </text>
       </svg>

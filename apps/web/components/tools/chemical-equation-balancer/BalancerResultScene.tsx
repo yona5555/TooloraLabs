@@ -10,6 +10,7 @@ import { snap } from "@/components/tool-ui/indicator-kit/format";
 import { REACTIONS, uniFormula } from "./chemMath";
 import { SvgMolecule } from "./Molecules2D";
 import type { BalProjection, SceneTerm } from "./BalancerResultScene3D";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const Scene3D = dynamic(() => import("./BalancerResultScene3D"), { ssr: false, loading: () => null });
 const LAST = REACTIONS.length - 1;
@@ -41,7 +42,7 @@ function Scene2D({ s, terms, valueText, label }: { s: Stepper; terms: SceneTerm[
             const inRow = row === rows - 1 ? n - row * cols : cols;
             return <SvgMolecule key={i} formula={t.formula} x={cx + (col - (inRow - 1) / 2) * cell} y={panY - 8 - (row + 0.5) * cell} size={cell * 0.62} />;
           })}
-          <text x={cx} y={panY - rows * cell - 18} fontSize={12} fontWeight={700} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+          <text x={cx} y={panY - rows * cell - 18} fontWeight={700} textAnchor="middle" style={{ fontSize: svgPx(12), fill: "var(--ph-ink)" }}>
             <SvgChem text={`${t.coefficient > 1 ? t.coefficient : ""}${uniFormula(t.formula)}`} />
           </text>
         </g>
@@ -56,14 +57,14 @@ function Scene2D({ s, terms, valueText, label }: { s: Stepper; terms: SceneTerm[
         <rect x={14} y={panY - 4} width={W / 2 - 40} height={8} rx={4} style={{ fill: "var(--chem-reactant)" }} />
         <rect x={W / 2 + 26} y={panY - 4} width={W / 2 - 40} height={8} rx={4} style={{ fill: "var(--chem-product)" }} />
         <path d={`M ${W / 2 - 12} ${panY + 22} L ${W / 2} ${panY} L ${W / 2 + 12} ${panY + 22} Z`} style={{ fill: "var(--ph-ink-muted)" }} />
-        <text x={W / 2} y={panY - 30} fontSize={18} fontWeight={800} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+        <text x={W / 2} y={panY - 30} fontWeight={800} textAnchor="middle" style={{ fontSize: svgPx(18), fill: "var(--ph-ink)" }}>
           →
         </text>
         <line x1={RX0} y1={railY} x2={RX1} y2={railY} style={{ stroke: "var(--ph-line)" }} strokeWidth={3} strokeLinecap="round" />
         {REACTIONS.map((r, i) => (
           <g key={r.key}>
             <circle cx={xi(i)} cy={railY} r={4} style={{ fill: i === s.value ? "var(--ph-focus)" : "var(--ph-ink-muted)" }} />
-            <text x={xi(i)} y={railY + 22} fontSize={11} textAnchor="middle" style={{ fill: "var(--ph-ink-muted)" }}>
+            <text x={xi(i)} y={railY + 22} textAnchor="middle" style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
               {i + 1}
             </text>
           </g>

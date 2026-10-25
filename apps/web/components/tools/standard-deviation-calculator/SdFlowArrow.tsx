@@ -3,6 +3,7 @@ import { useId } from "react";
 import { useTranslations } from "next-intl";
 import SdIndicatorCard from "./SdIndicatorCard";
 import { useSdModel } from "./SdLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 280;
 const BOX_H = 38;
@@ -41,13 +42,13 @@ export default function SdFlowArrow() {
         return (
           <g key={i}>
             <rect x={x0} y={y} width={BOX_W} height={BOX_H} rx={9} strokeWidth={1.5} className={s.cls} />
-            <text x={cx} y={y + BOX_H / 2 + 5} textAnchor="middle" fontSize={13} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(13) }} x={cx} y={y + BOX_H / 2 + 5} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
               {s.text}
             </text>
             {i < ops.length && (
               <>
                 <line x1={cx} y1={y + BOX_H + 2} x2={cx} y2={y + BOX_H + GAP - 4} strokeWidth={2} markerEnd={`url(#${svgId}sd-flow-head)`} className="stroke-zinc-500 dark:stroke-zinc-400" />
-                <text x={cx + 14} y={y + BOX_H + GAP / 2 + 4} fontSize={11} fontWeight={600} className="fill-blue-700 dark:fill-blue-300">
+                <text style={{ fontSize: svgPx(12) }} x={cx + 14} y={y + BOX_H + GAP / 2 + 4} fontWeight={600} className="fill-blue-700 dark:fill-blue-300">
                   {ops[i]}
                 </text>
               </>

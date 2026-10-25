@@ -7,6 +7,7 @@ import { IndicatorCard, KitControls, KitTable, KitTrack, useMeasuredSize, useSte
 import { ViewportScene } from "@/components/tool-ui/three/ViewportScene";
 import { TYPE_COLOR } from "./sgMath";
 import { PER_ROW, RIBBON_WORDS } from "./sgWords";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 /** 6. (3D) The stored paragraph's real words in reading order; the words the tool flags stand tall. */
 const RibbonScene3D = dynamic(() => import("./SGScene3D"), { ssr: false, loading: () => null });
@@ -29,7 +30,7 @@ function Ribbon2D({ n }: { n: number }) {
               <circle cx={cx} cy={cy - 8} r={w.type ? 9 : 4} style={{ fill: w.type ? TYPE_COLOR[w.type] : "var(--ph-ink-muted)" }} />
               {/* Narrow boxes label only the flagged words, alternating above/below so neighbours never touch (§39). */}
               {(wide || w.type) && (
-                <text x={cx} y={wide ? cy + 14 : i % 2 ? cy + 24 : cy - 22} fontSize={9.5} fontWeight={w.type ? 800 : 500} textAnchor="middle" style={{ fill: w.type ? "var(--ph-ink)" : "var(--ph-ink-muted)" }}>
+                <text x={cx} y={wide ? cy + 14 : i % 2 ? cy + 24 : cy - 22} fontWeight={w.type ? 800 : 500} textAnchor="middle" style={{ fontSize: svgPx(12), fill: w.type ? "var(--ph-ink)" : "var(--ph-ink-muted)" }}>
                   {w.w.length > 8 ? `${w.w.slice(0, 7)}…` : w.w}
                 </text>
               )}

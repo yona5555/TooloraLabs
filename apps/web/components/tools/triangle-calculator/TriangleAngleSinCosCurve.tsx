@@ -82,7 +82,7 @@ export default function TriangleAngleSinCosCurve({ angleADeg, angleBDeg, angleCD
           />
 
           {RADIAN_TICKS.map(({ deg, label }) => (
-            <Text key={deg} x={deg} y={-1.2} size={10} color={colors.faint}>
+            <Text key={deg} x={deg} y={-1.2} size={12} color={colors.faint}>
               {label}
             </Text>
           ))}

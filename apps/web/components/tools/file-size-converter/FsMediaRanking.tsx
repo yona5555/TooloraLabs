@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import FsIndicatorCard, { FsIndicatorUnavailable } from "./FsIndicatorCard";
 import { useFsModel } from "./FsLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const LABEL = 92;
@@ -29,14 +30,14 @@ export default function FsMediaRanking() {
         const w = Math.max(4, Math.round(((Math.log10(Math.max(1, m.count)) + 0.15) / (maxLog + 0.15)) * BAR_W * 100) / 100);
         return (
           <g key={m.key}>
-            <text x={LABEL} y={y + 16} textAnchor="end" fontSize={12} fontWeight={600} className="fill-zinc-700 dark:fill-zinc-200">
+            <text style={{ fontSize: svgPx(12) }} x={LABEL} y={y + 16} textAnchor="end" fontWeight={600} className="fill-zinc-700 dark:fill-zinc-200">
               {tm(m.key)}
             </text>
-            <text x={LABEL} y={y + 30} textAnchor="end" fontSize={10} className="fill-zinc-400 dark:fill-zinc-500">
+            <text style={{ fontSize: svgPx(12) }} x={LABEL} y={y + 30} textAnchor="end" className="fill-zinc-400 dark:fill-zinc-500">
               {m.fill < 100 ? t("fill", { p: f(m.fill, 1) }) : ""}
             </text>
             <rect x={BAR_X} y={y + 8} width={w} height={ROW - 16} rx={4} className={m.count === 1 ? "fill-emerald-500 dark:fill-emerald-400" : "fill-blue-600 dark:fill-blue-400"} />
-            <text x={BAR_X + w + 5} y={y + 24} fontSize={12} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
+            <text style={{ fontSize: svgPx(12) }} x={BAR_X + w + 5} y={y + 24} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
               × {f(m.count, 0)}
             </text>
           </g>

@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import WcIndicatorCard from "./WcIndicatorCard";
 import { useWcLive } from "./WcLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 330;
 const H = 176;
@@ -29,8 +30,8 @@ export default function WcWordLengths() {
       {buckets.map((c, i) => (
         <g key={i}>
           <rect x={PAD + i * slot + 2} y={y(c)} width={slot - 4} height={BASE - y(c)} rx={2} className={i + 1 > 6 ? "fill-violet-500 dark:fill-violet-400" : "fill-sky-500 dark:fill-sky-400"} style={{ transition: "y 250ms ease, height 250ms ease" }} />
-          {c > 0 && <text x={PAD + i * slot + slot / 2} y={y(c) - 3} textAnchor="middle" fontSize={8.5} fontFamily="ui-monospace, monospace" className="fill-zinc-600 dark:fill-zinc-300">{f(c)}</text>}
-          <text x={PAD + i * slot + slot / 2} y={BASE + 12} textAnchor="middle" fontSize={9} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+          {c > 0 && <text style={{ fontSize: svgPx(12) }} x={PAD + i * slot + slot / 2} y={y(c) - 3} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-600 dark:fill-zinc-300">{f(c)}</text>}
+          <text style={{ fontSize: svgPx(12) }} x={PAD + i * slot + slot / 2} y={BASE + 12} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
             {i === buckets.length - 1 ? `${f(i + 1)}+` : f(i + 1)}
           </text>
         </g>
@@ -39,9 +40,9 @@ export default function WcWordLengths() {
       <g style={{ transform: `translateX(${avgX}px)`, transition: "transform 300ms ease" }}>
         <line x1={0} y1={18} x2={0} y2={BASE} strokeWidth={2} strokeDasharray="4 3" className="stroke-amber-500" />
         <rect x={-30} y={4} width={60} height={16} rx={8} className="fill-amber-500" />
-        <text x={0} y={15.5} textAnchor="middle" fontSize={10} fontWeight={700} className="fill-white">{`x̄ ${f(avg)}`}</text>
+        <text style={{ fontSize: svgPx(12) }} x={0} y={15.5} textAnchor="middle" fontWeight={700} className="fill-white">{`x̄ ${f(avg)}`}</text>
       </g>
-      <text x={W / 2} y={BASE + 28} textAnchor="middle" fontSize={9} className="fill-zinc-500 dark:fill-zinc-400">{t("axis")}</text>
+      <text style={{ fontSize: svgPx(12) }} x={W / 2} y={BASE + 28} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">{t("axis")}</text>
     </svg>
   );
 

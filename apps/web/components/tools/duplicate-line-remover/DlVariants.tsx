@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import DlIndicatorCard, { DlIndicatorUnavailable } from "./DlIndicatorCard";
 import { useDlModel } from "./DlLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const ROW = 46;
@@ -34,13 +35,13 @@ export default function DlVariants() {
         return (
           <g key={g.canonical}>
             <circle cx={12} cy={y + 22} r={10} className="fill-amber-500" />
-            <text x={12} y={y + 26} textAnchor="middle" fontSize={11} fontWeight={700} className="fill-white">
+            <text style={{ fontSize: svgPx(12) }} x={12} y={y + 26} textAnchor="middle" fontWeight={700} className="fill-white">
               {g.variants.length}
             </text>
-            <text x={30} y={y + 18} fontSize={12} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={30} y={y + 18} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
               {g.canonical.length > 34 ? `${g.canonical.slice(0, 33)}…` : g.canonical}
             </text>
-            <text x={30} y={y + 35} fontSize={11} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+            <text style={{ fontSize: svgPx(12) }} x={30} y={y + 35} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
               {g.variants
                 .map((v) => `"${v.replace(/ /g, "·")}"`)
                 .join("  ")

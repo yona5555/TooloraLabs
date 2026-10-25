@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import BarcodeIndicatorCard, { BarcodeIndicatorUnavailable } from "./BarcodeIndicatorCard";
 import { ROLE_FILL, useBarcodeModel } from "./BarcodeLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const STRIP_Y = 10;
@@ -57,7 +58,7 @@ export default function BarcodeSymbolExplorer() {
         {s.widths.map((w, i) => {
           const at = s.widths.slice(0, i).reduce((sum, v) => sum + v, 0);
           return (
-            <text key={i} x={zx + (at + w / 2) * zoom} y={ZOOM_Y + ZOOM_H + 16} textAnchor="middle" fontSize={12} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-600 dark:fill-zinc-300">
+            <text style={{ fontSize: svgPx(12) }} key={i} x={zx + (at + w / 2) * zoom} y={ZOOM_Y + ZOOM_H + 16} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-600 dark:fill-zinc-300">
               {w}
             </text>
           );

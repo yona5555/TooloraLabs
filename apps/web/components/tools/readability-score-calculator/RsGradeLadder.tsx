@@ -4,6 +4,7 @@ import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import RsIndicatorCard from "./RsIndicatorCard";
 import { useRsLive } from "./RsLiveContext";
 import { GRADE_BANDS, GRADE_MAX, gradeBand } from "./rsScales";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 176;
@@ -32,7 +33,7 @@ export default function RsGradeLadder() {
         {GRADE_BANDS.map((b, i) => (
           <g key={b.key}>
             <rect x={x(b.from)} y={topOf(i)} width={x(b.to) - x(b.from) - 1} height={BASE - topOf(i)} rx={3} fill={b.color} opacity={b === band ? 1 : 0.35} style={{ transition: "opacity 300ms" }} />
-            <text x={(x(b.from) + x(b.to)) / 2} y={BASE - 6} textAnchor="middle" fontSize={9} fontWeight={700} className="fill-white">
+            <text style={{ fontSize: svgPx(12) }} x={(x(b.from) + x(b.to)) / 2} y={BASE - 6} textAnchor="middle" fontWeight={700} className="fill-white">
               {`${f(b.from)}–${f(b.to)}`}
             </text>
           </g>
@@ -43,10 +44,10 @@ export default function RsGradeLadder() {
           <path d="M0 -22 l14 5 l-14 5 z" className="fill-blue-700 dark:fill-blue-300" />
           <circle cx={0} cy={0} r={4} className="fill-zinc-800 dark:fill-zinc-100" />
         </g>
-        <text x={W - PAD} y={16} textAnchor="end" fontSize={20} fontWeight={800} fontFamily="ui-monospace, monospace" className="fill-zinc-900 dark:fill-zinc-50">
+        <text style={{ fontSize: svgPx(20) }} x={W - PAD} y={16} textAnchor="end" fontWeight={800} fontFamily="ui-monospace, monospace" className="fill-zinc-900 dark:fill-zinc-50">
           {f(grade)}
         </text>
-        <text x={W - PAD} y={30} textAnchor="end" fontSize={10} fontWeight={700} fill={band.color}>
+        <text style={{ fontSize: svgPx(12) }} x={W - PAD} y={30} textAnchor="end" fontWeight={700} fill={band.color}>
           {tl("gradeLabel")}
         </text>
       </svg>

@@ -3,6 +3,7 @@ import { useId } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import type { DayCode } from "@tooloralabs/tools";
 import { classColor, fmt, hm, type Derived, type StudioState } from "./studio";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 export function useSchedT() {
   return useTranslations("tools.class-schedule-builder.studio");
@@ -92,7 +93,7 @@ export function WeekGrid({ state, d, onPick, compact = false }: { state: StudioS
         <g key={h}>
           <line x1={AX} x2={W} y1={y(h * 60)} y2={y(h * 60)} className={gridLine} strokeWidth={h % 2 ? 0.5 : 1} />
           {(h - h0) % (compact ? 2 : 1) === 0 && (
-            <text x={AX - 3} y={y(h * 60) + 3} textAnchor="end" fontSize={8} className={axisText}>
+            <text style={{ fontSize: svgPx(12) }} x={AX - 3} y={y(h * 60) + 3} textAnchor="end" className={axisText}>
               {hm(h * 60)}
             </text>
           )}
@@ -105,7 +106,7 @@ export function WeekGrid({ state, d, onPick, compact = false }: { state: StudioS
         return (
           <g key={day}>
             <rect x={x0 + 1} y={TOP} width={cw - 2} height={H - TOP - 4} rx={3} className="fill-zinc-100/60 dark:fill-zinc-800/40" />
-            <text x={x0 + cw / 2} y={11} textAnchor="middle" fontSize={9} fontWeight={800} className={ds?.classCount ? valueText : axisText}>
+            <text style={{ fontSize: svgPx(12) }} x={x0 + cw / 2} y={11} textAnchor="middle" fontWeight={800} className={ds?.classCount ? valueText : axisText}>
               {t(`days.${day}`)}
             </text>
             {(ds?.meetings ?? []).map((m) => {
@@ -118,7 +119,7 @@ export function WeekGrid({ state, d, onPick, compact = false }: { state: StudioS
               const bh = Math.max(3, y(m.endMinutes) - by);
               const on = state.selectedId === m.id;
               return (
-                <g key={m.id} onClick={onPick ? () => onPick(m.id) : undefined} style={{ cursor: onPick ? "pointer" : undefined }}>
+                <g key={m.id} data-annotation="" onClick={onPick ? () => onPick(m.id) : undefined} style={{ cursor: onPick ? "pointer" : undefined }}>
                   <title>{`${c.code} ${c.name} · ${hm(m.startMinutes)}–${hm(m.endMinutes)}${c.room ? ` · ${c.room}` : ""}`}</title>
                   <rect
                     x={bx + 0.5}

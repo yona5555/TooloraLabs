@@ -1,6 +1,7 @@
 "use client";
 import { useTranslations } from "next-intl";
 import { useTlLive } from "./TlLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const SIZE = 168;
 const C = SIZE / 2;
@@ -48,10 +49,10 @@ export default function TlStyleRings() {
             </g>
           );
         })}
-        <text x={C} y={C + 2} textAnchor="middle" fontSize={15} fontWeight={700} className="fill-zinc-900 dark:fill-zinc-50">
+        <text style={{ fontSize: svgPx(15) }} x={C} y={C + 2} textAnchor="middle" fontWeight={700} className="fill-zinc-900 dark:fill-zinc-50">
           {pct(active.characters ? active.mapped / active.characters : 0)}
         </text>
-        <text x={C} y={C + 15} textAnchor="middle" fontSize={8} className="fill-zinc-500 dark:fill-zinc-400">
+        <text style={{ fontSize: svgPx(12) }} x={C} y={C + 15} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
           {t("center")}
         </text>
       </svg>

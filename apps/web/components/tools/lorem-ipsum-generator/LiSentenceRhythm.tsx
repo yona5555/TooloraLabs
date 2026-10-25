@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { LOREM_WORDS_PER_SENTENCE as WPS } from "@tooloralabs/tools";
 import LiIndicatorCard from "./LiIndicatorCard";
 import { useLiLive } from "./LiLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 330;
 const H = 150;
@@ -34,7 +35,7 @@ export default function LiSentenceRhythm() {
         {[WPS.min, WPS.max].map((v) => (
           <g key={v}>
             <line x1={PAD_L} y1={y(v)} x2={W - PAD_R} y2={y(v)} strokeDasharray="3 3" className="stroke-emerald-500/70" />
-            <text x={PAD_L - 4} y={y(v) + 3} textAnchor="end" fontSize={9} className="fill-zinc-500 dark:fill-zinc-400">{f(v)}</text>
+            <text style={{ fontSize: svgPx(12) }} x={PAD_L - 4} y={y(v) + 3} textAnchor="end" className="fill-zinc-500 dark:fill-zinc-400">{f(v)}</text>
           </g>
         ))}
         {shown.map((s, i) => {
@@ -56,8 +57,8 @@ export default function LiSentenceRhythm() {
           );
         })}
         <line x1={PAD_L} y1={TOP + plotH} x2={W - PAD_R} y2={TOP + plotH} className="stroke-zinc-300 dark:stroke-zinc-600" />
-        <text x={PAD_L} y={H - 6} fontSize={9} className="fill-zinc-500 dark:fill-zinc-400">{f(1)}</text>
-        <text x={W - PAD_R} y={H - 6} textAnchor="end" fontSize={9} className="fill-zinc-500 dark:fill-zinc-400">{f(shown.length)}</text>
+        <text style={{ fontSize: svgPx(12) }} x={PAD_L} y={H - 6} className="fill-zinc-500 dark:fill-zinc-400">{f(1)}</text>
+        <text style={{ fontSize: svgPx(12) }} x={W - PAD_R} y={H - 6} textAnchor="end" className="fill-zinc-500 dark:fill-zinc-400">{f(shown.length)}</text>
       </svg>
       <p className="mt-1 text-[11px] text-zinc-500 dark:text-zinc-400">
         {t("legend", { min: f(WPS.min), max: f(WPS.max) })}

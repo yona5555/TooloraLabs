@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { collisionProbability } from "@tooloralabs/tools";
 import PasswordIndicatorCard, { PasswordIndicatorUnavailable } from "./PasswordIndicatorCard";
 import { usePasswordModel } from "./PasswordLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 200;
@@ -51,16 +52,16 @@ export default function PasswordCollisionTrio() {
               rx={5}
               className={p > 0.01 ? "fill-rose-500 dark:fill-rose-400" : p > 1e-9 ? "fill-amber-500 dark:fill-amber-400" : "fill-emerald-500 dark:fill-emerald-400"}
             />
-            <text x={cx} y={160 - h - 6} textAnchor="middle" fontSize={12} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={cx} y={160 - h - 6} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
               {probText(p, f)}
             </text>
-            <text x={cx} y={178} textAnchor="middle" fontSize={12} className="fill-zinc-600 dark:fill-zinc-300">
+            <text style={{ fontSize: svgPx(12) }} x={cx} y={178} textAnchor="middle" className="fill-zinc-600 dark:fill-zinc-300">
               {t(sc.key)}
             </text>
           </g>
         );
       })}
-      <text x={W / 2} y={196} textAnchor="middle" fontSize={11} className="fill-zinc-400 dark:fill-zinc-500">
+      <text style={{ fontSize: svgPx(12) }} x={W / 2} y={196} textAnchor="middle" className="fill-zinc-400 dark:fill-zinc-500">
         {t("axis")}
       </text>
     </svg>

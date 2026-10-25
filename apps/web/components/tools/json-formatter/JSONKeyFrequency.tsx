@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import JSONIndicatorCard, { JSONIndicatorUnavailable } from "./JSONIndicatorCard";
 import { useJSONModel } from "./JSONLiveContext";
 import { clip } from "./jsonSvg";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const LABEL = 96;
@@ -43,18 +44,17 @@ export default function JSONKeyFrequency() {
         const w = Math.max(3, (r.count / peak) * BAR_W);
         return (
           <g key={r.key}>
-            <text
+            <text style={{ fontSize: svgPx(12) }}
               x={LABEL}
               y={y + 14}
               textAnchor="end"
-              fontSize={12}
               fontFamily="ui-monospace, monospace"
               className={i === 0 ? "fill-blue-700 font-bold dark:fill-blue-300" : "fill-zinc-600 dark:fill-zinc-300"}
             >
               {clip(r.key, 12)}
             </text>
             <rect x={BAR_X} y={y + 3} width={w} height={ROW - 8} rx={3} className={r.count > 1 ? "fill-blue-500 dark:fill-blue-400" : "fill-zinc-300 dark:fill-zinc-600"} />
-            <text x={BAR_X + w + 5} y={y + 14} fontSize={12} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
+            <text style={{ fontSize: svgPx(12) }} x={BAR_X + w + 5} y={y + 14} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
               ×{f(r.count)}
             </text>
           </g>

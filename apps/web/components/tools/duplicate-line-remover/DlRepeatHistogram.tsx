@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import DlIndicatorCard, { DlIndicatorUnavailable } from "./DlIndicatorCard";
 import { useDlModel } from "./DlLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 210;
@@ -27,10 +28,10 @@ export default function DlRepeatHistogram() {
         return (
           <g key={i}>
             {h > 0 && <rect x={x} y={BASE - h} width={w} height={h} rx={4} className={i === 0 ? "fill-emerald-500 dark:fill-emerald-400" : "fill-rose-500 dark:fill-rose-400"} />}
-            <text x={x + w / 2} y={BASE - h - 6} textAnchor="middle" fontSize={12} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={x + w / 2} y={BASE - h - 6} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
               {f(c)}
             </text>
-            <text x={x + w / 2} y={BASE + 18} textAnchor="middle" fontSize={12} fontWeight={600} className="fill-zinc-600 dark:fill-zinc-300">
+            <text style={{ fontSize: svgPx(12) }} x={x + w / 2} y={BASE + 18} textAnchor="middle" fontWeight={600} className="fill-zinc-600 dark:fill-zinc-300">
               {LABELS[i]}
             </text>
           </g>

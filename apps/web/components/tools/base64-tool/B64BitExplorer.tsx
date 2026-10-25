@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import B64IndicatorCard, { B64IndicatorUnavailable } from "./B64IndicatorCard";
 import { useB64Model } from "./B64LiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 210;
@@ -32,19 +33,18 @@ export default function B64BitExplorer() {
       <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
         {[0, 1, 2].map((k) => (
           <g key={k}>
-            <text x={X0 + k * 8 * BIT + 4 * BIT} y={14} textAnchor="middle" fontSize={12} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
+            <text style={{ fontSize: svgPx(12) }} x={X0 + k * 8 * BIT + 4 * BIT} y={14} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
               {g.bytes[k] !== undefined ? `0x${g.bytes[k].toString(16).padStart(2, "0")} = ${g.bytes[k]}` : t("missing")}
             </text>
             <path d={`M ${X0 + k * 8 * BIT + 2} 22 H ${X0 + (k + 1) * 8 * BIT - 2}`} strokeWidth={2} className="stroke-zinc-400 dark:stroke-zinc-500" />
           </g>
         ))}
         {[...bits].map((b, i) => (
-          <text
+          <text style={{ fontSize: svgPx(13) }}
             key={i}
             x={X0 + i * BIT + BIT / 2}
             y={44}
             textAnchor="middle"
-            fontSize={13}
             fontWeight={700}
             fontFamily="ui-monospace, monospace"
             className={b === "·" ? "fill-zinc-300 dark:fill-zinc-600" : SEXTET_FILL[Math.floor(i / 6)]}
@@ -63,17 +63,17 @@ export default function B64BitExplorer() {
                 className={v === null ? "stroke-zinc-300 dark:stroke-zinc-600" : SEXTET_FILL[k].replace(/fill-/g, "stroke-")}
               />
               <path d={`M ${cx} 58 V 92`} strokeWidth={1.5} className="stroke-zinc-300 dark:stroke-zinc-600" />
-              <text x={cx} y={84} textAnchor="middle" fontSize={12} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+              <text style={{ fontSize: svgPx(12) }} x={cx} y={84} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
                 {v === null ? "—" : v}
               </text>
               <circle cx={cx} cy={126} r={26} className={v === null ? "fill-rose-100 dark:fill-rose-900/50" : SEXTET_FILL[k]} />
-              <text x={cx} y={135} textAnchor="middle" fontSize={24} fontWeight={700} fontFamily="ui-monospace, monospace" className={v === null ? "fill-rose-500" : "fill-white"}>
+              <text style={{ fontSize: svgPx(24) }} x={cx} y={135} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className={v === null ? "fill-rose-500" : "fill-white"}>
                 {g.chars[k] || "∅"}
               </text>
             </g>
           );
         })}
-        <text x={W / 2} y={184} textAnchor="middle" fontSize={12} className="fill-zinc-500 dark:fill-zinc-400">
+        <text style={{ fontSize: svgPx(12) }} x={W / 2} y={184} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
           {t("group", { n: gi + 1, total: a.groups.length })}
         </text>
       </svg>

@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { CVD_TYPES } from "@tooloralabs/tools";
 import PaletteIndicatorCard, { PaletteIndicatorUnavailable } from "./PaletteIndicatorCard";
 import { usePaletteModel } from "./PaletteLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const ROW = 46;
@@ -31,17 +32,16 @@ export default function PaletteColorBlind() {
         const ok = row.min >= SAFE;
         return (
           <g key={row.key}>
-            <text x={LABEL - 8} y={y + 4} textAnchor="end" fontSize={12} fontWeight={600} className="fill-zinc-700 dark:fill-zinc-200">
+            <text style={{ fontSize: svgPx(12) }} x={LABEL - 8} y={y + 4} textAnchor="end" fontWeight={600} className="fill-zinc-700 dark:fill-zinc-200">
               {t(row.key)}
             </text>
             {row.hexes.map((hex, i) => (
               <circle key={i} cx={LABEL + slot * i + slot / 2} cy={y} r={r} fill={hex} strokeWidth={1.5} className="stroke-zinc-300 dark:stroke-zinc-600" />
             ))}
-            <text
+            <text style={{ fontSize: svgPx(12) }}
               x={W - 2}
               y={y + 4}
               textAnchor="end"
-              fontSize={12}
               fontWeight={700}
               fontFamily="ui-monospace, monospace"
               className={ok ? "fill-emerald-700 dark:fill-emerald-300" : "fill-rose-600 dark:fill-rose-300"}

@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import BarcodeIndicatorCard, { BarcodeIndicatorUnavailable } from "./BarcodeIndicatorCard";
 import { PARITY_FILL, ROLE_FILL, useBarcodeModel } from "./BarcodeLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 130;
@@ -26,7 +27,7 @@ export default function BarcodeParityStrip() {
   const svg = (
     <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {!isCode128 && a.symbology === "ean-13" && (
-        <text x={0} y={16} fontSize={12} fontWeight={700} className="fill-violet-700 dark:fill-violet-300">
+        <text style={{ fontSize: svgPx(12) }} x={0} y={16} fontWeight={700} className="fill-violet-700 dark:fill-violet-300">
           {t("hidden", { d: a.fullText[0], p: a.parityPattern ?? "" })}
         </text>
       )}
@@ -37,14 +38,13 @@ export default function BarcodeParityStrip() {
         return (
           <g key={i}>
             <rect x={x + 1} y={Y} width={cw - 2} height={CELL_H} rx={5} className={fill} />
-            <text x={x + cw / 2} y={Y + 26} textAnchor="middle" fontSize={Math.min(15, cw * 0.55)} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-white">
+            <text style={{ fontSize: svgPx(Math.min(15, cw * 0.55)) }} x={x + cw / 2} y={Y + 26} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-white">
               {code}
             </text>
-            <text
+            <text style={{ fontSize: svgPx(Math.min(14, cw * 0.6)) }}
               x={x + cw / 2}
               y={Y + CELL_H + 20}
               textAnchor="middle"
-              fontSize={Math.min(14, cw * 0.6)}
               fontWeight={600}
               fontFamily="ui-monospace, monospace"
               className="fill-zinc-700 dark:fill-zinc-200"
@@ -55,7 +55,7 @@ export default function BarcodeParityStrip() {
         );
       })}
       {!isCode128 && (
-        <text x={W / 2} y={H - 4} textAnchor="middle" fontSize={12} className="fill-zinc-500 dark:fill-zinc-400">
+        <text style={{ fontSize: svgPx(12) }} x={W / 2} y={H - 4} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
           {t("legend")}
         </text>
       )}

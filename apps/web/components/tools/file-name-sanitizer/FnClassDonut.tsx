@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { NAME_CHAR_CLASSES } from "@tooloralabs/tools";
 import FnIndicatorCard, { FnIndicatorUnavailable } from "./FnIndicatorCard";
 import { CLASS_FILL, useFnModel } from "./FnLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 230;
@@ -32,7 +33,7 @@ export default function FnClassDonut() {
   const svg = (
     <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {NAME_CHAR_CLASSES.map((c, i) => (counts[i] > 0 ? <path key={c} d={ring(52, 88, cum[i][0], cum[i][1])} className={`${CLASS_FILL[c]} stroke-white dark:stroke-zinc-900`} strokeWidth={1.5} /> : null))}
-      <text x={CX} y={CY + 6} textAnchor="middle" fontSize={20} fontWeight={700} className="fill-zinc-800 dark:fill-zinc-100">
+      <text style={{ fontSize: svgPx(20) }} x={CX} y={CY + 6} textAnchor="middle" fontWeight={700} className="fill-zinc-800 dark:fill-zinc-100">
         {f(a.chars.length, 0)}
       </text>
       {NAME_CHAR_CLASSES.map((c, i) => {
@@ -40,10 +41,10 @@ export default function FnClassDonut() {
         return (
           <g key={c} opacity={counts[i] ? 1 : 0.4}>
             <circle cx={208} cy={y} r={6} className={CLASS_FILL[c]} />
-            <text x={220} y={y + 4} fontSize={12} className="fill-zinc-600 dark:fill-zinc-300">
+            <text style={{ fontSize: svgPx(12) }} x={220} y={y + 4} className="fill-zinc-600 dark:fill-zinc-300">
               {tc(c)}
             </text>
-            <text x={W - 4} y={y + 4} textAnchor="end" fontSize={12} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={W - 4} y={y + 4} textAnchor="end" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
               {f(counts[i], 0)}
             </text>
           </g>

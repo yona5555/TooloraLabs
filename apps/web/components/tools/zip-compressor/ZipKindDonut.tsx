@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import ZipIndicatorCard, { ZipIndicatorUnavailable } from "./ZipIndicatorCard";
 import { formatBytes, useZipModel } from "./ZipLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 190;
@@ -51,10 +52,10 @@ export default function ZipKindDonut() {
         return (
           <g key={k.key} opacity={orig[i] ? 1 : 0.4}>
             <circle cx={208} cy={y} r={6} className={k.fill} />
-            <text x={220} y={y + 4} fontSize={12} className="fill-zinc-600 dark:fill-zinc-300">
+            <text style={{ fontSize: svgPx(12) }} x={220} y={y + 4} className="fill-zinc-600 dark:fill-zinc-300">
               {t(k.key)}
             </text>
-            <text x={W - 4} y={y + 4} textAnchor="end" fontSize={11} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={W - 4} y={y + 4} textAnchor="end" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
               {orig[i] ? `−${f((1 - comp[i] / orig[i]) * 100, 0)}%` : "—"}
             </text>
           </g>

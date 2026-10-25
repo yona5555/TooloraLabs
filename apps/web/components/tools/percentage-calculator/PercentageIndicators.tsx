@@ -13,6 +13,8 @@ import {
 } from "@tooloralabs/tools";
 import IndicatorCard, { PillGroup } from "@/components/tools/markets/IndicatorCard";
 import { usePercentage } from "./PercentageLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
+import { useFitWidth } from "@/components/tool-ui/useFitWidth";
 
 function useInd() {
   return useTranslations("tools.percentage-calculator.ind");
@@ -171,11 +173,11 @@ export function PercentageEquivalentForms() {
           {Array.from({ length: maxX * 4 + 1 }, (_, i) => i / 4).map((v) => (
             <g key={v}>
               <line x1={X(v)} x2={X(v)} y1={22} y2={34} className="stroke-zinc-400" />
-              <text x={X(v)} y={50} textAnchor="middle" className="fill-zinc-400 font-mono text-[9px]">{v}</text>
+              <text style={{ fontSize: svgPx(12) }} x={X(v)} y={50} textAnchor="middle" className="fill-zinc-400 font-mono">{v}</text>
             </g>
           ))}
           <line x1={X(bench.percent / 100)} x2={X(bench.percent / 100)} y1={16} y2={40} className="stroke-amber-500" strokeWidth={2} strokeDasharray="3 2" />
-          <text x={X(bench.percent / 100)} y={12} textAnchor="middle" className="fill-amber-600 font-mono text-[10px] dark:fill-amber-400">{`${bench.num}/${bench.den}`}</text>
+          <text style={{ fontSize: svgPx(12) }} x={X(bench.percent / 100)} y={12} textAnchor="middle" className="fill-amber-600 font-mono dark:fill-amber-400">{`${bench.num}/${bench.den}`}</text>
           <circle cx={X(Math.abs(fm.decimal))} cy={28} r={6} className="fill-blue-600 stroke-white dark:fill-blue-400 dark:stroke-zinc-900" strokeWidth={2} />
         </svg>
       </div>
@@ -222,7 +224,7 @@ export function PercentageRingDonut() {
               </g>
             );
           })}
-          <text x={84} y={88} textAnchor="middle" className="fill-zinc-800 font-mono text-[12px] font-bold dark:fill-zinc-100">{`${n(q * 100, 2)}%`}</text>
+          <text style={{ fontSize: svgPx(12) }} x={84} y={88} textAnchor="middle" className="fill-zinc-800 font-mono font-bold dark:fill-zinc-100">{`${n(q * 100, 2)}%`}</text>
         </svg>
         <ul className="space-y-2 text-xs">
           {rings.map((ring) => (
@@ -292,7 +294,7 @@ export function PercentageCompoundTrend() {
   const B = frame.base;
   const p = frame.percent;
   const series = percentCompoundSeries(B, p, 10);
-  const W = 420;
+  const [fitRef, W] = useFitWidth(420);
   const H = 230;
   const L = 56;
   const Bm = 28;
@@ -324,21 +326,21 @@ export function PercentageCompoundTrend() {
       }}
     >
       <div dir="ltr">
-        <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} className="mx-auto block h-auto max-w-full" role="img" aria-label={t("trend.heading", { pct: f(p, 4) })}>
+        <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} className="mx-auto block h-auto max-w-full" role="img" aria-label={t("trend.heading", { pct: f(p, 4) })}>
           {[0, 0.5, 1].map((k) => (
             <g key={k}>
               <line x1={L} x2={W - R} y1={Y(lo + k * (hi - lo))} y2={Y(lo + k * (hi - lo))} className="stroke-zinc-200 dark:stroke-zinc-700" />
-              <text x={L - 6} y={Y(lo + k * (hi - lo)) + 3} textAnchor="end" className="fill-zinc-400 font-mono text-[9px]">{n(lo + k * (hi - lo), 1)}</text>
+              <text style={{ fontSize: svgPx(12) }} x={L - 6} y={Y(lo + k * (hi - lo)) + 3} textAnchor="end" className="fill-zinc-400 font-mono">{n(lo + k * (hi - lo), 1)}</text>
             </g>
           ))}
           {series.map((s) => (
-            <text key={s.step} x={X(s.step)} y={H - Bm + 14} textAnchor="middle" className="fill-zinc-400 font-mono text-[9px]">{s.step}</text>
+            <text style={{ fontSize: svgPx(12) }} key={s.step} x={X(s.step)} y={H - Bm + 14} textAnchor="middle" className="fill-zinc-400 font-mono">{s.step}</text>
           ))}
           <polyline points={line("simple")} fill="none" className="stroke-zinc-400" strokeWidth={2} strokeDasharray="5 4" />
           <polyline points={line("compound")} fill="none" className="stroke-blue-600 dark:stroke-blue-400" strokeWidth={2.5} />
           <line x1={X(2)} x2={X(2)} y1={T} y2={H - Bm} className="stroke-red-500" strokeDasharray="4 3" />
           <circle cx={X(2)} cy={Y(two.compound)} r={5} className="fill-blue-600 stroke-white dark:fill-blue-400 dark:stroke-zinc-900" strokeWidth={1.5} />
-          <text x={X(2) + 8} y={Y(two.compound) - 6} className="fill-blue-700 font-mono text-[10px] font-semibold dark:fill-blue-300">{n(two.compound, 2)}</text>
+          <text style={{ fontSize: svgPx(12) }} x={X(2) + 8} y={Y(two.compound) - 6} className="fill-blue-700 font-mono font-semibold dark:fill-blue-300">{n(two.compound, 2)}</text>
         </svg>
       </div>
       <div className="mt-2 flex flex-wrap gap-4 text-xs text-zinc-500 dark:text-zinc-400">
@@ -389,13 +391,13 @@ export function PercentageUndoBalance() {
             <line x1={290} x2={290} y1={74} y2={110} className="stroke-zinc-400" />
             <rect x={20} y={110} width={100} height={42} rx={8} className="fill-blue-100 stroke-blue-500 dark:fill-blue-500/20 dark:stroke-blue-400" />
             <rect x={240} y={110} width={100} height={42} rx={8} className="fill-amber-100 stroke-amber-500 dark:fill-amber-500/20 dark:stroke-amber-400" />
-            <text x={70} y={128} textAnchor="middle" className="fill-zinc-500 text-[10px] dark:fill-zinc-400">{t("balance.move")}</text>
-            <text x={70} y={145} textAnchor="middle" className="fill-blue-700 font-mono text-[13px] font-bold dark:fill-blue-300">{sp(p, 2)}</text>
-            <text x={290} y={128} textAnchor="middle" className="fill-zinc-500 text-[10px] dark:fill-zinc-400">{t("balance.undo")}</text>
-            <text x={290} y={145} textAnchor="middle" className="fill-amber-700 font-mono text-[13px] font-bold dark:fill-amber-300">{finite ? sp(undo, 2) : "—"}</text>
+            <text style={{ fontSize: svgPx(12) }} x={70} y={128} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">{t("balance.move")}</text>
+            <text style={{ fontSize: svgPx(13) }} x={70} y={145} textAnchor="middle" className="fill-blue-700 font-mono font-bold dark:fill-blue-300">{sp(p, 2)}</text>
+            <text style={{ fontSize: svgPx(12) }} x={290} y={128} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">{t("balance.undo")}</text>
+            <text style={{ fontSize: svgPx(13) }} x={290} y={145} textAnchor="middle" className="fill-amber-700 font-mono font-bold dark:fill-amber-300">{finite ? sp(undo, 2) : "—"}</text>
           </g>
           <circle cx={180} cy={70} r={6} className="fill-zinc-700 dark:fill-zinc-200" />
-          <text x={180} y={30} textAnchor="middle" className="fill-zinc-600 font-mono text-[11px] dark:fill-zinc-300">{`${f(B, 2)} → ${f(ud.up, 2)} → ${f(B, 2)}`}</text>
+          <text style={{ fontSize: svgPx(12) }} x={180} y={30} textAnchor="middle" className="fill-zinc-600 font-mono dark:fill-zinc-300">{`${f(B, 2)} → ${f(ud.up, 2)} → ${f(B, 2)}`}</text>
         </svg>
       </div>
     </IndicatorCard>
@@ -450,12 +452,12 @@ export function PercentageRangeGauge() {
           ))}
           {[0, 50, 100, 150, 200].map((x) => {
             const [tx, ty] = pt(x, r + 16);
-            return <text key={x} x={tx} y={ty + 3} textAnchor="middle" className="fill-zinc-400 font-mono text-[9px]">{`${x}%`}</text>;
+            return <text style={{ fontSize: svgPx(12) }} key={x} x={tx} y={ty + 3} textAnchor="middle" className="fill-zinc-400 font-mono">{`${x}%`}</text>;
           })}
           <line x1={cx} y1={cy} x2={nx} y2={ny} className="stroke-zinc-800 dark:stroke-zinc-100" strokeWidth={3} strokeLinecap="round" />
           <circle cx={cx} cy={cy} r={7} className="fill-zinc-800 dark:fill-zinc-100" />
           {/* Readout below the pivot, so the needle never crosses it at any value. */}
-          <text x={cx} y={cy + 34} textAnchor="middle" className="fill-zinc-900 font-mono text-[18px] font-bold dark:fill-zinc-50">{`${f(Math.abs(p), 2)}%`}</text>
+          <text style={{ fontSize: svgPx(18) }} x={cx} y={cy + 34} textAnchor="middle" className="fill-zinc-900 font-mono font-bold dark:fill-zinc-50">{`${f(Math.abs(p), 2)}%`}</text>
         </svg>
       </div>
     </IndicatorCard>

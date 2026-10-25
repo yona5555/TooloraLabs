@@ -3,11 +3,12 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { ltr } from "@/components/tool-ui/MixedText";
 import { useStepper, type KitRow, type Stepper } from "@/components/tool-ui/indicator-kit/CardKit";
-import { axisTicks, Drawing, INK, LINE, lit, MUTED, px2, SvgLabel as T, useDrawing } from "@/components/tool-ui/indicator-kit/SvgBits";
+import { axisTicks, Drawing, INK, LINE, lit, MUTED, px2, SvgLabel as T, useDrawing, labelW, staggerRows, wrapLabel } from "@/components/tool-ui/indicator-kit/SvgBits";
 import { clamp, f1, f2, snap } from "@/components/tool-ui/indicator-kit/format";
 import { Card } from "../macro-calculator/MacroCards";
 import { useBodyFatLive } from "./BodyFatLiveContext";
 import { ACSM, DOMAIN, ESSENTIAL, IN, aceClasses, aceCuts, aceOf, circIn, navyBf, waistFor, weightAtBf, type Measures } from "./ace";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 /**
  * The eight body-fat indicator cards (§31 library). All read the calculator's last valid
@@ -35,8 +36,8 @@ function SvgTrack({ W, y, frac, lo, hi }: { W: number; y: number; frac: number; 
     <g>
       <line x1={X0} y1={y} x2={W - X0} y2={y} style={LINE} strokeWidth={3} strokeLinecap="round" opacity={0.45} />
       <line x1={X0} y1={y} x2={x} y2={y} style={{ stroke: "var(--ph-accent-strong)" }} strokeWidth={4} strokeLinecap="round" />
-      <T x={X0} y={y + 22} text={lo} anchor="start" size={10.5} />
-      <T x={W - X0} y={y + 22} text={hi} anchor="end" size={10.5} />
+      <T x={X0} y={y + 22} text={lo} anchor="start" size={12} />
+      <T x={W - X0} y={y + 22} text={hi} anchor="end" size={12} />
     </g>
   );
 }
@@ -78,6 +79,7 @@ export function BodyFatZoneStripCard({ side }: { side: Side }) {
   const classes = aceClasses(g);
   const cls = aceOf(g, bf);
   const cuts = aceCuts(g);
+  const cutRows = staggerRows(cuts.map((c) => ({ x: xb(c), w: labelW(`${c}%`) })));
   const sy = H / 2 - 4;
   const SH = 34;
   const up = cuts.find((c) => c > bf);
@@ -114,11 +116,11 @@ export function BodyFatZoneStripCard({ side }: { side: Side }) {
             return (
               <g key={cm}>
                 <line x1={x} y1={sy - SH / 2 - 30} x2={x} y2={sy - SH / 2 - 22} style={LINE} />
-                <T x={x} y={sy - SH / 2 - 36} text={`${cm}`} size={10.5} />
+                <T x={x} y={sy - SH / 2 - 36} text={`${cm}`} size={12} />
               </g>
             );
           })}
-          <T x={X0} y={sy - SH / 2 - 52} text={t("axisWaist")} anchor="start" size={10.5} bold />
+          <T x={X0} y={sy - SH / 2 - 52} text={t("axisWaist")} anchor="start" size={12} bold />
           {/* ACSM healthy band under the strip */}
           <rect x={xb(aLo)} y={sy + SH / 2 + 4} width={xb(aHi) - xb(aLo)} height={5} rx={2} fill="#10b981" opacity={hover === "acsm" ? 1 : 0.6} />
           {classes.map((c) => {
@@ -130,7 +132,7 @@ export function BodyFatZoneStripCard({ side }: { side: Side }) {
               <g key={c.key}>
                 <rect x={a} y={sy - SH / 2} width={Math.max(0, b - a)} height={SH} style={{ fill: c.color, opacity: on ? 1 : 0.55, ...lit(on && hover === "cls") }} />
                 {b - a > name.length * 6.6 + 8 && (
-                  <text x={(a + b) / 2} y={sy + 4} fontSize={10.5} fontWeight={800} textAnchor="middle" fill="#fff">
+                  <text style={{ fontSize: svgPx(12) }} x={(a + b) / 2} y={sy + 4} fontWeight={800} textAnchor="middle" fill="#fff">
                     {name}
                   </text>
                 )}
@@ -138,10 +140,10 @@ export function BodyFatZoneStripCard({ side }: { side: Side }) {
             );
           })}
           <rect x={X0} y={sy - SH / 2} width={W - 2 * X0} height={SH} fill="none" style={LINE} rx={3} />
-          {cuts.map((c) => (
-            <T key={c} x={xb(c)} y={sy + SH / 2 + 24} text={`${c}%`} size={10.5} bold style={INK} />
+          {cuts.map((c, ci) => (
+            <T key={c} x={xb(c)} y={sy + SH / 2 + 24 + cutRows[ci] * 14} text={`${c}%`} size={12} bold style={INK} />
           ))}
-          <T x={X0} y={sy + SH / 2 + 44} text={t("axisBf")} anchor="start" size={10.5} bold />
+          <T x={X0} y={sy + SH / 2 + 44 + Math.max(0, ...cutRows) * 14} text={t("axisBf")} anchor="start" size={12} bold />
           <line x1={xb(bf)} y1={sy - SH / 2 - 6} x2={xb(bf)} y2={sy + SH / 2 + 6} style={{ stroke: "var(--ph-ink)" }} strokeWidth={2.5} />
           <T x={clamp(xb(bf), X0 + 70, W - X0 - 70)} y={H - 10} text={`${f1(m.waistCm)} cm · ${f1(bf)}%`} size={13} bold style={INK} />
         </Drawing>
@@ -214,16 +216,16 @@ export function BodyFatGaugeCard({ side }: { side: Side }) {
             return <path key={c.key} d={arc(a, b, R)} fill="none" stroke={c.color} strokeWidth={on ? 26 : 20} opacity={on ? 1 : 0.6} />;
           })}
           <path d={arc(aLo, aHi, R - 30)} fill="none" stroke="#10b981" strokeWidth={hover === "acsm" ? 8 : 5} strokeLinecap="round" />
-          <T x={pt((aLo + aHi) / 2, R - 46)[0]} y={pt((aLo + aHi) / 2, R - 46)[1] + 4} text="ACSM" size={10} bold style={{ fill: "#059669" }} />
+          <T x={pt((aLo + aHi) / 2, R - 46)[0]} y={pt((aLo + aHi) / 2, R - 46)[1] + 4} text="ACSM" size={12} bold style={{ fill: "#059669" }} />
           {aceCuts(g).map((p) => {
             const [x, y] = pt(p, R + 24);
-            return <T key={p} x={x} y={y + 4} text={`${p}%`} size={10.5} />;
+            return <T key={p} x={x} y={y + 4} text={`${p}%`} size={12} />;
           })}
           <line x1={cx} y1={cy} x2={gx} y2={gy} style={{ stroke: "var(--ph-ink-muted)" }} strokeWidth={2} strokeDasharray="4 4" opacity={hover === "bf" ? 1 : 0.7} />
           <line x1={cx} y1={cy} x2={nx} y2={ny} style={{ stroke: "var(--ph-ink)" }} strokeWidth={hover === "bf2" ? 4.5 : 3.5} strokeLinecap="round" />
           <circle cx={cx} cy={cy} r={7} style={{ fill: "var(--ph-ink)" }} />
           <T x={cx} y={cy + 26} text={`${f1(bf2)}%`} size={15} bold style={INK} />
-          <T x={cx} y={cy + 42} text={`${f1(w2)} cm`} size={11} />
+          <T x={cx} y={cy + 42} text={`${f1(w2)} cm`} size={12} />
         </Drawing>
       }
     />
@@ -293,7 +295,7 @@ export function BodyFatCompositionCard({ side }: { side: Side }) {
               <g key={sg.key}>
                 <rect x={a} y={by} width={Math.max(0, b - a)} height={bh} style={{ fill: sg.color, ...lit(hover === sg.key) }} />
                 {b - a > 34 && (
-                  <text x={(a + b) / 2} y={by + bh / 2 + 4} fontSize={11} fontWeight={800} textAnchor="middle" fill="#fff" className="tabular-nums">
+                  <text style={{ fontSize: svgPx(12) }} x={(a + b) / 2} y={by + bh / 2 + 4} fontWeight={800} textAnchor="middle" fill="#fff" className="tabular-nums">
                     {f1(sg.kg)}
                   </text>
                 )}
@@ -304,17 +306,17 @@ export function BodyFatCompositionCard({ side }: { side: Side }) {
           {ticks.map((v) => (
             <g key={v}>
               <line x1={xk(v)} y1={gy - 18} x2={xk(v)} y2={gy - 10} style={LINE} />
-              <T x={xk(v)} y={gy + 2} text={String(v)} size={10.5} />
+              <T x={xk(v)} y={gy + 2} text={String(v)} size={12} />
             </g>
           ))}
-          <T x={W - X0} y={gy + 18} text="kg" anchor="end" size={10.5} bold />
+          <T x={W - X0} y={gy + 18} text="kg" anchor="end" size={12} bold />
           {/* legend */}
           {segs.map((sg, i) => {
             const lx = X0 + i * ((W - 2 * X0) / 3);
             return (
               <g key={`lg${sg.key}`}>
                 <rect x={lx} y={H - 30} width={12} height={12} rx={3} fill={sg.color} />
-                <T x={lx + 18} y={H - 20} text={sg.label} anchor="start" size={10.5} bold={hover === sg.key} style={hover === sg.key ? INK : MUTED} />
+                <T x={lx + 18} y={H - 20} text={sg.label} anchor="start" size={12} bold={hover === sg.key} style={hover === sg.key ? INK : MUTED} />
               </g>
             );
           })}
@@ -382,13 +384,13 @@ export function BodyFatCutoffBarsCard({ side }: { side: Side }) {
             return (
               <g key={b.key}>
                 <rect x={x} y={yc(b.cm)} width={bw} height={base - yc(b.cm)} rx={4} style={{ fill: b.color, opacity: b.you || on ? 1 : 0.55, ...lit(on || (b.you && hover === "you")) }} />
-                <T x={x + bw / 2} y={yc(b.cm) - 6} text={f1(b.cm)} size={10.5} bold={on || b.you} style={on || b.you ? INK : MUTED} />
-                <T x={x + bw / 2} y={base + 16} text={b.label} size={10.5} bold={b.you} style={b.you ? INK : MUTED} />
+                <T x={x + bw / 2} y={yc(b.cm) - 6} text={f1(b.cm)} size={12} bold={on || b.you} style={on || b.you ? INK : MUTED} />
+                <T x={x + bw / 2} y={base + 16} text={b.label} size={12} bold={b.you} style={b.you ? INK : MUTED} />
               </g>
             );
           })}
-          <T x={X0} y={14} text={t("axisWaist")} anchor="start" size={10.5} bold />
-          <T x={W - X0} y={base + 32} text={t("axisBf")} anchor="end" size={10.5} bold />
+          <T x={X0} y={14} text={t("axisWaist")} anchor="start" size={12} bold />
+          <T x={W - X0} y={base + 32} text={t("axisBf")} anchor="end" size={12} bold />
         </Drawing>
       }
     />
@@ -459,17 +461,17 @@ function WaistCurve({ side }: { side: Side }) {
           {axisTicks(D0, D1, base - top, 26).map((v) => (
             <g key={v}>
               <line x1={PL} y1={yb(v)} x2={W - 18} y2={yb(v)} style={{ stroke: "var(--ph-grid)" }} />
-              <T x={PL - 6} y={yb(v) + 4} text={`${v}%`} anchor="end" size={10.5} />
+              <T x={PL - 6} y={yb(v) + 4} text={`${v}%`} anchor="end" size={12} />
             </g>
           ))}
           {axisTicks(lo, hi, W - PL - 18, 46).map((v) => (
-            <T key={v} x={xw(v)} y={base + 16} text={String(v)} size={10.5} />
+            <T key={v} x={xw(v)} y={base + 16} text={String(v)} size={12} />
           ))}
-          <T x={W - 18} y={base + 32} text={t("axisWaist")} anchor="end" size={10.5} bold />
+          <T x={W - 18} y={base + 32} text={t("axisWaist")} anchor="end" size={12} bold />
           <polyline points={pts} fill="none" style={{ stroke: "var(--ph-accent-strong)" }} strokeWidth={3} />
           {wAcsm >= lo && wAcsm <= hi && <line x1={xw(wAcsm)} y1={top} x2={xw(wAcsm)} y2={base} stroke="#10b981" strokeDasharray="4 4" strokeWidth={hover === "acsm" ? 2.5 : 1.5} />}
           <circle cx={xw(clamp(m.waistCm, lo, hi))} cy={yb(bf)} r={hover === "you" ? 8 : 6} style={{ fill: "var(--ph-ink)" }} />
-          <T x={xw(clamp(m.waistCm, lo, hi))} y={yb(bf) - 12} text={`${f1(bf)}%`} size={11} bold style={INK} />
+          <T x={xw(clamp(m.waistCm, lo, hi))} y={yb(bf) - 12} text={`${f1(bf)}%`} size={12} bold style={INK} />
         </Drawing>
       }
     />
@@ -530,7 +532,7 @@ export function BodyFatSensitivityCard({ side }: { side: Side }) {
               <g key={c.key}>
                 <rect x={x} y={yb(c.b)} width={bw} height={base - yb(c.b)} rx={5} style={{ fill: aceOf(g, c.b).color, opacity: ci === 1 ? 1 : 0.7, ...lit(on) }} />
                 <T x={x + bw / 2} y={yb(c.b) - 8} text={`${f1(c.b)}%`} size={12} bold style={INK} />
-                <T x={x + bw / 2} y={base + 16} text={c.label} size={10.5} bold={ci === 1} style={ci === 1 ? INK : MUTED} />
+                <T x={x + bw / 2} y={base + 16} text={c.label} size={12} bold={ci === 1} style={ci === 1 ? INK : MUTED} />
               </g>
             );
           })}
@@ -590,7 +592,9 @@ export function BodyFatFormulaCard({ side }: { side: Side }) {
       caption={t("caption", { stage: valueText })}
       visual={
         <Drawing {...d} hMin={HMIN} label={t("handle")} valueText={valueText} handle={{ x: X0 + ((st - 1) / 3) * (W - 2 * X0), y: trackY, dir: "horizontal" }} s={s} testId="bodyfat-c7">
-          <T x={W / 2} y={30} text={`%BF = ${A}·log(${male ? "W−N" : "W+Hip−N"}) − ${B}·log(H) ${K >= 0 ? "+" : "−"} ${Math.abs(K)}`} size={13} bold style={INK} />
+          {wrapLabel(`%BF = ${A}·log(${male ? "W−N" : "W+Hip−N"}) − ${B}·log(H) ${K >= 0 ? "+" : "−"} ${Math.abs(K)}`, W - 2 * X0, 13).map((line, li, all) => (
+            <T key={li} x={W / 2} y={30 - (all.length - 1) * 16 + li * 16} text={line} size={13} bold style={INK} />
+          ))}
           {stages.map((sg, gi) => {
             const x = X0 + gi * (boxW + gap);
             const shown = gi < st;
@@ -598,9 +602,13 @@ export function BodyFatFormulaCard({ side }: { side: Side }) {
             return (
               <g key={sg.key} opacity={shown ? 1 : 0.28}>
                 <rect x={x} y={by} width={boxW} height={bh} rx={10} style={{ fill: on ? "var(--ph-accent-soft)" : "var(--ph-surface)", ...lit(on) }} />
-                <T x={x + boxW / 2} y={by + 22} text={String(gi + 1)} size={11} bold />
-                <T x={x + boxW / 2} y={by + bh / 2} text={sg.top} size={10.5} />
-                <T x={x + boxW / 2} y={by + bh / 2 + 22} text={sg.bottom} size={12} bold style={INK} />
+                <T x={x + boxW / 2} y={by + 22} text={String(gi + 1)} size={12} bold />
+                {wrapLabel(sg.top, boxW - 6).map((line, li, all) => (
+                  <T key={li} x={x + boxW / 2} y={by + bh / 2 - (all.length - 1) * 14 + li * 14} text={line} size={12} />
+                ))}
+                {wrapLabel(sg.bottom, boxW - 6).map((line, li) => (
+                  <T key={`b${li}`} x={x + boxW / 2} y={by + bh / 2 + 22 + li * 14} text={line} size={12} bold style={INK} />
+                ))}
                 {gi < 3 && <path d={`M ${x + boxW + 3} ${by + bh / 2} l ${gap - 8} 0 m -6 -5 l 6 5 l -6 5`} fill="none" style={LINE} strokeWidth={2} opacity={gi + 1 < st ? 1 : 0.35} />}
               </g>
             );
@@ -646,7 +654,7 @@ export function BodyFatBalanceCard({ side }: { side: Side }) {
       <line x1={x} y1={y} x2={x + 34} y2={y + 46} style={LINE} />
       <path d={`M ${x - 46} ${y + 46} Q ${x} ${y + 72} ${x + 46} ${y + 46} Z`} style={{ fill: color, ...lit(on) }} opacity={0.9} />
       <T x={x} y={y + 92} text={`${f1(kg)} kg`} size={13} bold style={INK} />
-      <T x={x} y={y + 108} text={label} size={10.5} />
+      <T x={x} y={y + 108} text={label} size={12} />
     </g>
   );
   const valueText = `${f1(tb)}%`;

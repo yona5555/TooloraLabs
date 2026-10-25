@@ -4,6 +4,7 @@ import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { GlassIndicatorCard, GlassHandle, GlassTable } from "@/components/tool-ui/glass/GlassPrimitives";
 import { useFractionCardState } from "./useFractionCardState";
 import { formatMathValue, formatPercent } from "@tooloralabs/tools";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const R = 44;
 const CIRC = 2 * Math.PI * R;
@@ -69,7 +70,7 @@ export default function FractionPercentWaffleCard() {
                 transform="rotate(-90 50 50)"
                 className="transition-[stroke-dashoffset] duration-300 ease-out"
               />
-              <text x="50" y="54" textAnchor="middle" fontSize="15" fontWeight="700" fill="var(--glass-title)">
+              <text style={{ fontSize: svgPx(15) }} x="50" y="54" textAnchor="middle" fontWeight="700" fill="var(--glass-title)">
                 {`${formatPercent(pct)}%`}
               </text>
             </svg>

@@ -5,6 +5,7 @@ import { KitControls, SvgHandle, useMeasuredSize, useSvgDrag, type Stepper } fro
 import { snap } from "@/components/tool-ui/indicator-kit/format";
 import { axisTicks } from "@/components/tool-ui/indicator-kit/SvgBits";
 import { fmtTime, RATE_MAX, RATE_MIN, RATE_SEED, RATE_STEP, seconds, wordCount } from "./ttsMath";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 /**
  * §44 (2D): the main visual at the top of the Playback card — the speech queue on a time axis.
@@ -79,16 +80,16 @@ export default function TTSScene({ chunks, rate, onRate }: { chunks: string[]; r
       {/* Grows with the card's spare height (rows get taller), so the column ends flush (§41). */}
       <div ref={box} dir="ltr" data-preview="visual" className="relative min-h-[300px] w-full flex-1" data-testid="tts-hero-drawing">
         <svg ref={ref} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>
-          <text x={X0} y={16} fontSize={11} fontWeight={700} style={{ fill: "var(--ph-ink-muted)" }}>
+          <text x={X0} y={16} fontWeight={700} style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
             {t("queue", { n: chunks.length })}
           </text>
-          <text x={X1} y={16} fontSize={13} fontWeight={800} textAnchor="end" className="tabular-nums" style={{ fill: "var(--ph-ink)" }}>
+          <text x={X1} y={16} fontWeight={800} textAnchor="end" className="tabular-nums" style={{ fontSize: svgPx(13), fill: "var(--ph-ink)" }}>
             {`≈ ${fmtTime(total)}`}
           </text>
           {axisTicks(0, tMax, X1 - X0, 56).map((v) => (
             <g key={v}>
               <line x1={xt(v)} y1={top} x2={xt(v)} y2={axisY} style={{ stroke: "var(--ph-grid)" }} />
-              <text x={xt(v)} y={axisY + 16} fontSize={10.5} fontWeight={600} textAnchor={v === 0 ? "start" : "middle"} className="tabular-nums" style={{ fill: "var(--ph-ink-muted)" }}>
+              <text x={xt(v)} y={axisY + 16} fontWeight={600} textAnchor={v === 0 ? "start" : "middle"} className="tabular-nums" style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
                 {`${v} s`}
               </text>
             </g>
@@ -106,7 +107,7 @@ export default function TTSScene({ chunks, rate, onRate }: { chunks: string[]; r
             return (
               <g key={i}>
                 {lines.map((ln, k) => (
-                  <text key={k} x={X0} y={y - 8 - (lines.length - 1 - k) * 15} fontSize={11} fontWeight={500} style={{ fill: "var(--ph-ink-muted)" }}>
+                  <text key={k} x={X0} y={y - 8 - (lines.length - 1 - k) * 15} fontWeight={500} style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
                     {ln}
                   </text>
                 ))}
@@ -114,24 +115,23 @@ export default function TTSScene({ chunks, rate, onRate }: { chunks: string[]; r
                 <text
                   x={inside ? x + 10 : right ? x + w + 6 : x - 6}
                   y={y + barH / 2 + 4}
-                  fontSize={11}
                   fontWeight={700}
                   textAnchor={inside || right ? "start" : "end"}
                   className="tabular-nums"
-                  style={{ fill: inside ? "var(--ph-surface)" : "var(--ph-ink)" }}
+                  style={{ fontSize: svgPx(12), fill: inside ? "var(--ph-surface)" : "var(--ph-ink)" }}
                 >
                   {label}
                 </text>
               </g>
             );
           })}
-          <text x={X0} y={trackY - 16} fontSize={10.5} fontWeight={700} style={{ fill: "var(--ph-ink-muted)" }}>
+          <text x={X0} y={trackY - 16} fontWeight={700} style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
             {t("rateAxis")}
           </text>
           <line x1={X0} y1={trackY} x2={X1} y2={trackY} style={{ stroke: "var(--glass-track)" }} strokeWidth={10} strokeLinecap="round" />
           <line x1={X0} y1={trackY} x2={xr(rate)} y2={trackY} style={{ stroke: "var(--ai-a)" }} strokeWidth={10} strokeLinecap="round" />
           {[0.5, 1, 1.5, 2].map((v) => (
-            <text key={v} x={xr(v)} y={trackY + 22} fontSize={10.5} fontWeight={600} textAnchor={v === 0.5 ? "start" : v === 2 ? "end" : "middle"} className="tabular-nums" style={{ fill: "var(--ph-ink-muted)" }}>
+            <text key={v} x={xr(v)} y={trackY + 22} fontWeight={600} textAnchor={v === 0.5 ? "start" : v === 2 ? "end" : "middle"} className="tabular-nums" style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
               {`${v.toFixed(1)}×`}
             </text>
           ))}

@@ -5,6 +5,7 @@ import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { READING_SPEED_PRESETS } from "@tooloralabs/tools";
 import RtIndicatorCard from "./RtIndicatorCard";
 import { useRtLive } from "./RtLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 190;
@@ -40,33 +41,33 @@ export default function RtSpeedCurve() {
         {[0, 0.5, 1].map((k) => (
           <g key={k}>
             <line x1={L} y1={y(yMax * k)} x2={W - R} y2={y(yMax * k)} strokeDasharray="2 3" className="stroke-zinc-200 dark:stroke-zinc-700" />
-            <text x={L - 4} y={y(yMax * k) + 3} textAnchor="end" fontSize={9} className="fill-zinc-500 dark:fill-zinc-400">{clock(yMax * k)}</text>
+            <text style={{ fontSize: svgPx(12) }} x={L - 4} y={y(yMax * k) + 3} textAnchor="end" className="fill-zinc-500 dark:fill-zinc-400">{clock(yMax * k)}</text>
           </g>
         ))}
         <path d={`${path} L${x(MAX)},${BASE} L${x(MIN)},${BASE} Z`} className="fill-blue-500/10 dark:fill-blue-400/10" />
         <path d={path} fill="none" strokeWidth={2.5} className="stroke-blue-600 dark:stroke-blue-400" />
         <line x1={L} y1={BASE} x2={W - R} y2={BASE} className="stroke-zinc-300 dark:stroke-zinc-600" />
         {[100, 200, 300, 400, 500, 600].map((v) => (
-          <text key={v} x={x(v)} y={BASE + 13} textAnchor="middle" fontSize={9} className="fill-zinc-500 dark:fill-zinc-400">{f(v)}</text>
+          <text style={{ fontSize: svgPx(12) }} key={v} x={x(v)} y={BASE + 13} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">{f(v)}</text>
         ))}
-        <text x={W - R} y={BASE + 25} textAnchor="end" fontSize={9} fontWeight={600} className="fill-zinc-500 dark:fill-zinc-400">{t("axis")}</text>
+        <text style={{ fontSize: svgPx(12) }} x={W - R} y={BASE + 25} textAnchor="end" fontWeight={600} className="fill-zinc-500 dark:fill-zinc-400">{t("axis")}</text>
         {PRESET_KEYS.map((k) => {
           const v = READING_SPEED_PRESETS[k];
           return (
             <g key={k}>
               <circle cx={x(v)} cy={y(secondsFor(words, v))} r={3.5} className="fill-white stroke-blue-600 dark:fill-zinc-900 dark:stroke-blue-400" strokeWidth={1.5} />
-              <text x={x(v) + 5} y={y(secondsFor(words, v)) - 5} fontSize={9} className="fill-zinc-600 dark:fill-zinc-300">{tf(k)}</text>
+              <text style={{ fontSize: svgPx(12) }} x={x(v) + 5} y={y(secondsFor(words, v)) - 5} className="fill-zinc-600 dark:fill-zinc-300">{tf(k)}</text>
             </g>
           );
         })}
         <g style={{ transform: `translate(${x(trial)}px, ${y(tried)}px)`, transition: "transform 200ms ease" }}>
           <line x1={0} y1={0} x2={0} y2={BASE - y(tried)} strokeDasharray="3 2" className="stroke-amber-500" />
           <circle r={6} className="fill-amber-500 stroke-white dark:stroke-zinc-900" strokeWidth={2} />
-          <text x={trial > 480 ? -8 : 8} y={-8} textAnchor={trial > 480 ? "end" : "start"} fontSize={10} fontWeight={700} className="fill-amber-700 dark:fill-amber-300">{clock(tried)}</text>
+          <text style={{ fontSize: svgPx(12) }} x={trial > 480 ? -8 : 8} y={-8} textAnchor={trial > 480 ? "end" : "start"} fontWeight={700} className="fill-amber-700 dark:fill-amber-300">{clock(tried)}</text>
         </g>
         <g style={{ transform: `translate(${x(wpm)}px, ${y(yours)}px)`, transition: "transform 300ms ease" }}>
           <circle r={7} className="fill-blue-600 stroke-white dark:fill-blue-400 dark:stroke-zinc-900" strokeWidth={2} />
-          <text x={8} y={14} fontSize={10} fontWeight={700} className="fill-blue-700 dark:fill-blue-300">{`${t("yours")} ${clock(yours)}`}</text>
+          <text style={{ fontSize: svgPx(12) }} x={8} y={14} fontWeight={700} className="fill-blue-700 dark:fill-blue-300">{`${t("yours")} ${clock(yours)}`}</text>
         </g>
       </svg>
       <label className="mt-1 flex items-center gap-2 text-[11px] text-zinc-500 dark:text-zinc-400">

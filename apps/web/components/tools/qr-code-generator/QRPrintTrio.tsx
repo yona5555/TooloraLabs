@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import QRIndicatorCard, { QRIndicatorUnavailable } from "./QRIndicatorCard";
 import { useQRModel } from "./QRLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 200;
@@ -38,10 +39,10 @@ export default function QRPrintTrio() {
             {a.dark.map((d, i) =>
               d ? <rect key={i} x={x0 + (QUIET + (i % a.size)) * cell} y={y0 + (QUIET + Math.floor(i / a.size)) * cell} width={cell + 0.05} height={cell + 0.05} className="fill-zinc-900" /> : null,
             )}
-            <text x={x0 + side / 2} y={base + 16} textAnchor="middle" fontSize={12} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
+            <text style={{ fontSize: svgPx(12) }} x={x0 + side / 2} y={base + 16} textAnchor="middle" fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
               {t("module", { m })}
             </text>
-            <text x={x0 + side / 2} y={base + 32} textAnchor="middle" fontSize={12} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+            <text style={{ fontSize: svgPx(12) }} x={x0 + side / 2} y={base + 32} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
               {f(widths[k], 1)} mm
             </text>
           </g>

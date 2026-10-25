@@ -6,6 +6,7 @@ import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { useMathSolverLive } from "./MathSolverLiveContext";
 import { parseMathSolverDraft, deriveHeroEquation, evalPoly, fmt } from "./mathSolverEducationMath";
 import GapFreeRow from "@/components/tool-ui/GapFreeRow";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const R = 26;
 const CIRC = 2 * Math.PI * R;
@@ -29,7 +30,7 @@ function Gauge({ pct, label, value, color }: { pct: number; label: string; value
           transform="rotate(-90 34 34)"
           className="transition-all duration-300"
         />
-        <text x="34" y="38" textAnchor="middle" fontSize="12" fontWeight="700" fill="currentColor" className="text-zinc-700 dark:text-zinc-200">
+        <text style={{ fontSize: svgPx(12) }} x="34" y="38" textAnchor="middle" fontWeight="700" fill="currentColor" className="text-zinc-700 dark:text-zinc-200">
           {value}
         </text>
       </svg>

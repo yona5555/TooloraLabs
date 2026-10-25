@@ -5,6 +5,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import LiveTable3DLayout, { LiveTableFill, type LiveTableGroup } from "@/components/tool-ui/three/LiveTable3DLayout";
 import { STATUS_COLORS, type Derived, type Fmt, type WtState } from "./state";
 import { px2 } from "@/components/tool-ui/indicator-kit/SvgBits";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 type Props = { s: WtState; d: Derived; f: Fmt };
 
@@ -46,7 +47,7 @@ function Dial({ s, d, f }: Props) {
           <g key={h}>
             <line x1={x0} y1={y0} x2={x1} y2={y1} stroke="currentColor" strokeOpacity={0.45} />
             {h % 3 === 0 && (
-              <text x={tx} y={ty + 3} textAnchor="middle" fontSize={9} className="fill-zinc-500 dark:fill-zinc-400">
+              <text style={{ fontSize: svgPx(12) }} x={tx} y={ty + 3} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
                 {String(h).padStart(2, "0")}
               </text>
             )}
@@ -65,17 +66,17 @@ function Dial({ s, d, f }: Props) {
             <circle cx={c} cy={c} r={r(i)} fill="none" stroke={col} strokeOpacity={0.25} strokeWidth={1} />
             <line x1={c} y1={c} x2={x} y2={y} stroke={col} strokeOpacity={i === 0 ? 0.9 : 0.35} strokeWidth={i === 0 ? 2.5 : 1} />
             <circle cx={x} cy={y} r={i === 0 ? 6 : 4.5} fill={el > -0.833 ? "#fbbf24" : "#1e3a8a"} stroke={col} strokeWidth={2} />
-            <text x={lx} y={y + 3} textAnchor={Math.cos(ang(m)) >= 0 ? "start" : "end"} fontSize={9} fontWeight={i === 0 ? 800 : 600} fill={col}>
+            <text style={{ fontSize: svgPx(12) }} x={lx} y={y + 3} textAnchor={Math.cos(ang(m)) >= 0 ? "start" : "end"} fontWeight={i === 0 ? 800 : 600} fill={col}>
               {f.city(city).split(" / ")[0].slice(0, 12)} {f.time(d.conv.utcMs, city.zone)}
             </text>
           </g>
         );
       })}
       <circle cx={c} cy={c} r={inner - 14} className="fill-white dark:fill-zinc-900" stroke="currentColor" strokeOpacity={0.2} />
-      <text x={c} y={c - 2} textAnchor="middle" fontSize={13} fontWeight={800} className="fill-zinc-800 dark:fill-zinc-100">
+      <text style={{ fontSize: svgPx(13) }} x={c} y={c - 2} textAnchor="middle" fontWeight={800} className="fill-zinc-800 dark:fill-zinc-100">
         {f.time(d.conv.utcMs, "UTC")}
       </text>
-      <text x={c} y={c + 11} textAnchor="middle" fontSize={8} className="fill-zinc-500 dark:fill-zinc-400">UTC</text>
+      <text style={{ fontSize: svgPx(12) }} x={c} y={c + 11} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">UTC</text>
     </svg>
   );
 }

@@ -5,9 +5,11 @@ import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import type { DebtToIncomeResult as RatioResult } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import { useBelowLg } from "@/components/tool-ui/useBelowLg";
 import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { computeNiceTicks } from "./niceTicks";
 import type { CurrencyCode } from "@/lib/currency";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 type DebtToIncomeScenarioChartProps = {
   hasCalculated: boolean;
@@ -47,6 +49,7 @@ export default function DebtToIncomeScenarioChart({ hasCalculated, before, after
   const containerRef = useRef<HTMLDivElement>(null);
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
   const [containerWidth, setContainerWidth] = useState(0);
+  const belowLg = useBelowLg();
 
   useLayoutEffect(() => {
     const el = containerRef.current;
@@ -72,7 +75,7 @@ export default function DebtToIncomeScenarioChart({ hasCalculated, before, after
     { key: "after" as const, label: t("scenarioChart.afterLabel"), result: after },
   ];
 
-  const step = Math.max(MIN_STEP, (containerWidth - MARGIN.left - MARGIN.right) / points.length);
+  const step = Math.max(belowLg && containerWidth > 0 ? 0 : MIN_STEP, (containerWidth - MARGIN.left - MARGIN.right) / points.length);
   const barWidth = step * BAR_WIDTH_RATIO;
   const plotWidth = points.length * step;
   const chartWidth = MARGIN.left + plotWidth + MARGIN.right;
@@ -131,7 +134,7 @@ export default function DebtToIncomeScenarioChart({ hasCalculated, before, after
           {valueTicks.map((tick) => (
             <g key={tick}>
               <line x1={MARGIN.left} y1={yForValue(tick)} x2={chartWidth - MARGIN.right} y2={yForValue(tick)} stroke="currentColor" strokeWidth={1} opacity={0.08} />
-              <text x={MARGIN.left - 8} y={yForValue(tick) + 3} textAnchor="end" fontSize={9} fill="currentColor" opacity={0.6}>
+              <text style={{ fontSize: svgPx(12) }} x={MARGIN.left - 8} y={yForValue(tick) + 3} textAnchor="end" fill="currentColor" opacity={0.6}>
                 {formatLocalizedNumber(tick, digitStyle, { maximumFractionDigits: 0 })}%
               </text>
             </g>
@@ -163,10 +166,10 @@ export default function DebtToIncomeScenarioChart({ hasCalculated, before, after
                 rx={3}
                 className={CATEGORY_FILL[p.result.category]}
               />
-              <text x={groupCenterX(i)} y={yForValue(p.result.backEndRatio) - 8} textAnchor="middle" fontSize={12} fontWeight={700} className="fill-zinc-900 dark:fill-zinc-100">
+              <text style={{ fontSize: svgPx(12) }} x={groupCenterX(i)} y={yForValue(p.result.backEndRatio) - 8} textAnchor="middle" fontWeight={700} className="fill-zinc-900 dark:fill-zinc-100">
                 {percent(p.result.backEndRatio)}
               </text>
-              <text x={groupCenterX(i)} y={mainBottom + XAXIS_HEIGHT - 6} textAnchor="middle" fontSize={10} fill="currentColor" opacity={0.7}>
+              <text style={{ fontSize: svgPx(12) }} x={groupCenterX(i)} y={mainBottom + XAXIS_HEIGHT - 6} textAnchor="middle" fill="currentColor" opacity={0.7}>
                 {p.label}
               </text>
             </g>
@@ -177,16 +180,16 @@ export default function DebtToIncomeScenarioChart({ hasCalculated, before, after
               <line x1={groupCenterX(activeIndex)} y1={MARGIN.top} x2={groupCenterX(activeIndex)} y2={mainBottom} stroke="currentColor" strokeWidth={1} strokeDasharray="3 3" opacity={0.35} />
               <g transform={`translate(${tooltipX}, ${tooltipY})`}>
                 <rect width={TOOLTIP_WIDTH} height={TOOLTIP_HEIGHT} rx={6} className="fill-white stroke-zinc-200 dark:fill-zinc-900 dark:stroke-zinc-700" strokeWidth={1} />
-                <text x={10} y={17} fontSize={10} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
+                <text style={{ fontSize: svgPx(12) }} x={10} y={17} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
                   {active.label}
                 </text>
-                <text x={10} y={35} fontSize={10} className="fill-zinc-600 dark:fill-zinc-300">
+                <text style={{ fontSize: svgPx(12) }} x={10} y={35} className="fill-zinc-600 dark:fill-zinc-300">
                   {t("aboveFold.backEndRatioLabel")}: {percent(active.result.backEndRatio)}
                 </text>
-                <text x={10} y={50} fontSize={10} className="fill-zinc-600 dark:fill-zinc-300">
+                <text style={{ fontSize: svgPx(12) }} x={10} y={50} className="fill-zinc-600 dark:fill-zinc-300">
                   {t("aboveFold.totalMonthlyDebtLabel")}: {money(active.result.totalMonthlyDebt)}
                 </text>
-                <text x={10} y={67} fontSize={10} fontWeight={700} className={CATEGORY_TEXT[active.result.category]}>
+                <text style={{ fontSize: svgPx(12) }} x={10} y={67} fontWeight={700} className={CATEGORY_TEXT[active.result.category]}>
                   {t(`aboveFold.category.${active.result.category}`)}
                 </text>
               </g>

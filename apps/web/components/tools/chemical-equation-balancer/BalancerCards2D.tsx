@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { ltr } from "@/components/tool-ui/MixedText";
 import { IndicatorCard, KitControls, KitTable, KitTrack, SvgChem, SvgHandle, useMeasuredSize, useStepper, useSvgDrag, type KitRow } from "@/components/tool-ui/indicator-kit/CardKit";
 import { atomLedger, atomsOf, balance, balancedText, elToken, REACTIONS, uniFormula } from "./chemMath";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 /**
  * The five 2D balancer indicator cards. Each drawing is laid out in real pixels at the measured
@@ -70,13 +71,13 @@ export function BalMatrixCard({ side }: { side: Side }) {
         <div ref={box} className="relative w-full flex-1" style={{ minHeight: Math.max(250, HMIN) }}>
           <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>
             {terms.map((term, j) => (
-              <text key={j} x={cx(j)} y={22} fontSize={12} fontWeight={700} textAnchor="middle" style={{ fill: term.side === "reactant" ? "var(--chem-reactant)" : "var(--chem-product)" }}>
+              <text key={j} x={cx(j)} y={22} fontWeight={700} textAnchor="middle" style={{ fontSize: svgPx(12), fill: term.side === "reactant" ? "var(--chem-reactant)" : "var(--chem-product)" }}>
                 <SvgChem text={uniFormula(term.formula)} />
               </text>
             ))}
             {els.map((el, i) => (
               <g key={el} onPointerEnter={() => setHover(el)} onPointerLeave={() => setHover(null)}>
-                <text x={10} y={cy(i) + 4} fontSize={12.5} fontWeight={800} style={{ fill: "var(--ph-ink)" }}>
+                <text x={10} y={cy(i) + 4} fontWeight={800} style={{ fontSize: svgPx(12.5), fill: "var(--ph-ink)" }}>
                   {el}
                 </text>
                 {terms.map((term, j) => {
@@ -86,7 +87,7 @@ export function BalMatrixCard({ side }: { side: Side }) {
                   return (
                     <g key={j}>
                       <circle cx={cx(j)} cy={cy(i)} r={r} style={{ fill: term.side === "reactant" ? "var(--chem-reactant)" : "var(--chem-product)", fillOpacity: 0.3, ...lit(hover === el) }} />
-                      <text x={cx(j)} y={cy(i) + 4} fontSize={11.5} fontWeight={800} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+                      <text x={cx(j)} y={cy(i) + 4} fontWeight={800} textAnchor="middle" style={{ fontSize: svgPx(12), fill: "var(--ph-ink)" }}>
                         {term.side === "reactant" ? n : -n}
                       </text>
                     </g>
@@ -98,7 +99,7 @@ export function BalMatrixCard({ side }: { side: Side }) {
             {terms.map((term, j) => (
               <g key={j} onPointerEnter={() => setHover("coef")} onPointerLeave={() => setHover(null)}>
                 <circle cx={cx(j)} cy={cy(els.length)} r={Math.max(12, R * 0.6)} style={{ fill: "var(--ph-accent-soft)", ...lit(true) }} />
-                <text x={cx(j)} y={cy(els.length) + 4.5} fontSize={13} fontWeight={800} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+                <text x={cx(j)} y={cy(els.length) + 4.5} fontWeight={800} textAnchor="middle" style={{ fontSize: svgPx(13), fill: "var(--ph-ink)" }}>
                   {term.coefficient}
                 </text>
               </g>
@@ -165,7 +166,7 @@ export function BalChargeCard({ side }: { side: Side }) {
             {[0, 2, 4, 6, 8, 10, 12, 14].map((v) => (
               <g key={v}>
                 <line x1={xv(v)} y1={24} x2={xv(v)} y2={H - 30} style={{ stroke: "var(--ph-grid)" }} />
-                <text x={xv(v)} y={H - 12} fontSize={10.5} textAnchor="middle" style={{ fill: "var(--ph-ink-muted)" }}>
+                <text x={xv(v)} y={H - 12} textAnchor="middle" style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
                   {v}
                 </text>
               </g>
@@ -176,13 +177,13 @@ export function BalChargeCard({ side }: { side: Side }) {
               const on = hover === it.key || (it.key === "q" && hover === "qr");
               return (
                 <g key={it.key} onPointerEnter={() => setHover(it.key)} onPointerLeave={() => setHover(null)}>
-                  <text x={10} y={y + 4} fontSize={12} fontWeight={800} style={{ fill: "var(--ph-ink)" }}>
+                  <text x={10} y={y + 4} fontWeight={800} style={{ fontSize: svgPx(12), fill: "var(--ph-ink)" }}>
                     {it.label}
                   </text>
                   <line x1={xv(it.l)} y1={y} x2={xv(it.r)} y2={y} style={{ stroke: same ? "var(--ph-neutral)" : "var(--ph-acid)" }} strokeWidth={4} strokeLinecap="round" />
                   <circle cx={xv(it.l)} cy={y} r={9} style={{ fill: "var(--chem-reactant)", ...lit(on) }} />
                   <circle cx={xv(it.r)} cy={y} r={same ? 14 : 9} style={{ fill: same ? "none" : "var(--chem-product)", stroke: "var(--chem-product)" }} strokeWidth={same ? 3 : 1.25} />
-                  <text x={xv(Math.max(it.l, it.r)) + 18} y={y + 4} fontSize={11.5} fontWeight={700} style={{ fill: same ? "var(--ph-neutral)" : "var(--ph-acid)" }}>
+                  <text x={xv(Math.max(it.l, it.r)) + 18} y={y + 4} fontWeight={700} style={{ fontSize: svgPx(12), fill: same ? "var(--ph-neutral)" : "var(--ph-acid)" }}>
                     {same ? "=" : `Δ ${Math.abs(it.l - it.r)}`}
                   </text>
                 </g>
@@ -240,10 +241,10 @@ export function BalTrialCard({ side }: { side: Side }) {
       visual={
         <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
           <svg ref={ref} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>
-            <text x={CX - 12} y={18} fontSize={11.5} fontWeight={700} textAnchor="end" style={{ fill: "var(--chem-reactant)" }}>
+            <text x={CX - 12} y={18} fontWeight={700} textAnchor="end" style={{ fontSize: svgPx(12), fill: "var(--chem-reactant)" }}>
               <SvgChem text={`4Fe + ${x > 1 ? x : ""}O₂`} />
             </text>
-            <text x={CX + 12} y={18} fontSize={11.5} fontWeight={700} style={{ fill: "var(--chem-product)" }}>
+            <text x={CX + 12} y={18} fontWeight={700} style={{ fontSize: svgPx(12), fill: "var(--chem-product)" }}>
               <SvgChem text="2Fe₂O₃" />
             </text>
             <line x1={CX} y1={28} x2={CX} y2={H - 16} style={{ stroke: "var(--ph-line)" }} strokeWidth={2} />
@@ -254,10 +255,10 @@ export function BalTrialCard({ side }: { side: Side }) {
                 <g key={b.key} onPointerEnter={() => setHover(b.key)} onPointerLeave={() => setHover(null)}>
                   <rect x={CX - b.l * unit} y={b.y - 15} width={b.l * unit} height={30} rx={12} style={{ fill: `var(${elToken(b.el)})`, ...lit(on) }} />
                   <rect x={CX} y={b.y - 15} width={b.r * unit} height={30} rx={12} style={{ fill: `var(${elToken(b.el)})`, ...lit(on) }} />
-                  <text x={CX - b.l * unit - 28} y={b.y + 5} fontSize={13} fontWeight={800} textAnchor="end" style={{ fill: "var(--ph-ink)" }}>
+                  <text x={CX - b.l * unit - 28} y={b.y + 5} fontWeight={800} textAnchor="end" style={{ fontSize: svgPx(13), fill: "var(--ph-ink)" }}>
                     {`${b.el} ${b.l}`}
                   </text>
-                  <text x={CX + b.r * unit + 8} y={b.y + 5} fontSize={13} fontWeight={800} style={{ fill: "var(--ph-ink)" }}>
+                  <text x={CX + b.r * unit + 8} y={b.y + 5} fontWeight={800} style={{ fontSize: svgPx(13), fill: "var(--ph-ink)" }}>
                     {`${b.r} ${b.el}`}
                   </text>
                   {!same && <line x1={CX - 6 * unit} y1={b.y + 21} x2={CX - 6 * unit} y2={b.y - 21} style={{ stroke: "var(--ph-acid)" }} strokeWidth={2} strokeDasharray="3 3" />}
@@ -318,13 +319,13 @@ export function BalGrowthCard({ side }: { side: Side }) {
             {[0, 2, 4, 6, 8].map((e) => (
               <g key={e}>
                 <line x1={X0} y1={yL(10 ** e)} x2={X1} y2={yL(10 ** e)} style={{ stroke: "var(--ph-grid)" }} />
-                <text x={X0 - 8} y={yL(10 ** e) + 4} fontSize={10.5} textAnchor="end" style={{ fill: "var(--ph-ink-muted)" }}>
+                <text x={X0 - 8} y={yL(10 ** e) + 4} textAnchor="end" style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
                   <SvgChem text={`10${"⁰¹²³⁴⁵⁶⁷⁸⁹"[e]}`} />
                 </text>
               </g>
             ))}
             {[2, 3, 4, 5, 6, 7, 8].map((n) => (
-              <text key={n} x={xT(n)} y={H - 12} fontSize={10.5} textAnchor="middle" style={{ fill: "var(--ph-ink-muted)" }}>
+              <text key={n} x={xT(n)} y={H - 12} textAnchor="middle" style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
                 {n}
               </text>
             ))}
@@ -333,10 +334,10 @@ export function BalGrowthCard({ side }: { side: Side }) {
             <line x1={xT(T)} y1={Y1} x2={xT(T)} y2={Y0} style={{ stroke: "var(--ph-focus)" }} strokeDasharray="4 4" />
             <circle cx={xT(T)} cy={yL(trials)} r={6} style={{ fill: "var(--ph-acid)", stroke: "var(--ph-knob)" }} strokeWidth={2} />
             <circle cx={xT(T)} cy={yL(steps)} r={6} style={{ fill: "var(--ph-neutral)", stroke: "var(--ph-knob)" }} strokeWidth={2} />
-            <text x={X0 + 6} y={Y1 + 12} fontSize={11.5} fontWeight={700} style={{ fill: "var(--ph-acid)" }}>
+            <text x={X0 + 6} y={Y1 + 12} fontWeight={700} style={{ fontSize: svgPx(12), fill: "var(--ph-acid)" }}>
               {t("legendTrials")}
             </text>
-            <text x={X0 + 6} y={Y1 + 28} fontSize={11.5} fontWeight={700} style={{ fill: "var(--ph-neutral)" }}>
+            <text x={X0 + 6} y={Y1 + 28} fontWeight={700} style={{ fontSize: svgPx(12), fill: "var(--ph-neutral)" }}>
               {t("legendSteps")}
             </text>
           </svg>
@@ -405,16 +406,16 @@ export function BalRingsCard({ side }: { side: Side }) {
           <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>
             {ring(R * 0.42, R * 0.68, "l")}
             {ring(R * 0.74, R, "r")}
-            <text x={cx} y={cy + 5} fontSize={15} fontWeight={800} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+            <text x={cx} y={cy + 5} fontWeight={800} textAnchor="middle" style={{ fontSize: svgPx(15), fill: "var(--ph-ink)" }}>
               {total}
             </text>
-            <text x={lx} y={22} fontSize={11} fontWeight={700} style={{ fill: "var(--ph-ink-muted)" }}>
+            <text x={lx} y={22} fontWeight={700} style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
               {t("legend")}
             </text>
             {ledger.map((r, i) => (
               <g key={r.el} onPointerEnter={() => setHover(r.el)} onPointerLeave={() => setHover(null)}>
                 <circle cx={lx + 7} cy={46 + i * 24} r={7} style={{ fill: `var(${elToken(r.el)})`, stroke: "var(--ph-line)" }} strokeWidth={1} />
-                <text x={lx + 22} y={50 + i * 24} fontSize={12} fontWeight={hover === r.el ? 800 : 600} style={{ fill: "var(--ph-ink)" }}>
+                <text x={lx + 22} y={50 + i * 24} fontWeight={hover === r.el ? 800 : 600} style={{ fontSize: svgPx(12), fill: "var(--ph-ink)" }}>
                   {`${r.el}  ${r.l} = ${r.r}`}
                 </text>
               </g>

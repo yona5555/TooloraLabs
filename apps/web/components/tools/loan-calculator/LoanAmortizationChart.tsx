@@ -4,9 +4,12 @@ import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import type { LoanPaymentRow } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import { useBelowLg } from "@/components/tool-ui/useBelowLg";
 import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { computeNiceTicks } from "./niceTicks";
 import type { CurrencyCode } from "@/lib/currency";
+import { svgPx } from "@/components/tool-ui/svgPx";
+import { wrapLabel } from "@/components/tool-ui/indicator-kit/SvgBits";
 
 type LoanAmortizationChartProps = {
   schedule: LoanPaymentRow[];
@@ -24,6 +27,8 @@ const XAXIS_HEIGHT = 20;
 const CHART_HEIGHT = MARGIN.top + MAIN_HEIGHT + VOLUME_GAP + VOLUME_HEIGHT + XAXIS_HEIGHT;
 
 const MIN_STEP = 14;
+/** Year labels sit at least this many px apart: 12px labels never touch (§39). */
+const X_LABEL_GAP = 30;
 const BAR_WIDTH_RATIO = 9 / 14;
 const TOOLTIP_WIDTH = 168;
 const TOOLTIP_HEIGHT = 78;
@@ -50,6 +55,7 @@ function AmortizationPlot({ schedule, digitStyle, currency }: Pick<LoanAmortizat
   const containerRef = useRef<HTMLDivElement>(null);
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
   const [containerWidth, setContainerWidth] = useState(0);
+  const belowLg = useBelowLg();
 
   useLayoutEffect(() => {
     const el = containerRef.current;
@@ -61,7 +67,7 @@ function AmortizationPlot({ schedule, digitStyle, currency }: Pick<LoanAmortizat
 
   if (schedule.length === 0) return null;
 
-  const step = Math.max(MIN_STEP, (containerWidth - MARGIN.left - MARGIN.right) / schedule.length);
+  const step = Math.max(belowLg && containerWidth > 0 ? 0 : MIN_STEP, (containerWidth - MARGIN.left - MARGIN.right) / schedule.length);
   const barWidth = step * BAR_WIDTH_RATIO;
   const plotWidth = schedule.length * step;
   const chartWidth = MARGIN.left + plotWidth + MARGIN.right;
@@ -104,7 +110,7 @@ function AmortizationPlot({ schedule, digitStyle, currency }: Pick<LoanAmortizat
     : 0;
   const tooltipY = MARGIN.top + 4;
 
-  const labelEvery = Math.max(1, Math.ceil(schedule.length / MAX_DENSE_LABELS));
+  const labelEvery = Math.max(1, Math.ceil(schedule.length / MAX_DENSE_LABELS), Math.ceil(X_LABEL_GAP / step));
 
   return (
     <div ref={containerRef} dir="ltr" className="mt-4 overflow-x-auto">
@@ -123,7 +129,7 @@ function AmortizationPlot({ schedule, digitStyle, currency }: Pick<LoanAmortizat
         {valueTicks.map((tick) => (
           <g key={tick}>
             <line x1={MARGIN.left} y1={yForValue(tick)} x2={chartWidth - MARGIN.right} y2={yForValue(tick)} stroke="currentColor" strokeWidth={1} opacity={0.08} />
-            <text x={MARGIN.left - 8} y={yForValue(tick) + 3} textAnchor="end" fontSize={9} fill="currentColor" opacity={0.6}>
+            <text style={{ fontSize: svgPx(12) }} x={MARGIN.left - 8} y={yForValue(tick) + 3} textAnchor="end" fill="currentColor" opacity={0.6}>
               {money(tick)}
             </text>
           </g>
@@ -142,8 +148,12 @@ function AmortizationPlot({ schedule, digitStyle, currency }: Pick<LoanAmortizat
           );
         })}
 
-        <text x={MARGIN.left - 8} y={volumeTop + 8} textAnchor="end" fontSize={8} fill="currentColor" opacity={0.5}>
-          {t("payoffChart.interestLabel")}
+        <text style={{ fontSize: svgPx(12) }} x={MARGIN.left - 8} y={volumeTop + 8} textAnchor="end" fill="currentColor" opacity={0.5}>
+          {wrapLabel(t("payoffChart.interestLabel"), MARGIN.left - 10).map((line, li) => (
+              <tspan key={li} x={MARGIN.left - 8} dy={li ? 14 : 0}>
+                {line}
+              </tspan>
+            ))}
         </text>
         {schedule.map((row, i) => (
           <rect
@@ -161,7 +171,7 @@ function AmortizationPlot({ schedule, digitStyle, currency }: Pick<LoanAmortizat
 
         {schedule.map((row, i) =>
           i % labelEvery === 0 ? (
-            <text key={`period-${row.period}`} x={barCenterX(i)} y={volumeBottom + XAXIS_HEIGHT - 6} textAnchor="middle" fontSize={9} fill="currentColor" opacity={0.6}>
+            <text style={{ fontSize: svgPx(12) }} key={`period-${row.period}`} x={barCenterX(i)} y={volumeBottom + XAXIS_HEIGHT - 6} textAnchor="middle" fill="currentColor" opacity={0.6}>
               {formatLocalizedNumber(row.period, digitStyle, { maximumFractionDigits: 0 })}
             </text>
           ) : null
@@ -172,16 +182,16 @@ function AmortizationPlot({ schedule, digitStyle, currency }: Pick<LoanAmortizat
             <line x1={barCenterX(activeIndex)} y1={MARGIN.top} x2={barCenterX(activeIndex)} y2={volumeBottom} stroke="currentColor" strokeWidth={1} strokeDasharray="3 3" opacity={0.35} />
             <g transform={`translate(${tooltipX}, ${tooltipY})`}>
               <rect width={TOOLTIP_WIDTH} height={TOOLTIP_HEIGHT} rx={6} className="fill-white stroke-zinc-200 dark:fill-zinc-900 dark:stroke-zinc-700" strokeWidth={1} />
-              <text x={10} y={17} fontSize={10} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
+              <text style={{ fontSize: svgPx(12) }} x={10} y={17} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
                 {t("payoffChart.tooltipPeriodLabel")} {formatLocalizedNumber(active.period, digitStyle, { maximumFractionDigits: 0 })}
               </text>
-              <text x={10} y={35} fontSize={10} className="fill-blue-700 dark:fill-blue-400">
+              <text style={{ fontSize: svgPx(12) }} x={10} y={35} className="fill-blue-700 dark:fill-blue-400">
                 {t("payoffChart.principalLabel")}: {money(active.principalPaid)}
               </text>
-              <text x={10} y={50} fontSize={10} className="fill-amber-600 dark:fill-amber-500">
+              <text style={{ fontSize: svgPx(12) }} x={10} y={50} className="fill-amber-600 dark:fill-amber-500">
                 {t("payoffChart.interestLabel")}: {money(active.interestPaid)}
               </text>
-              <text x={10} y={67} fontSize={10} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
+              <text style={{ fontSize: svgPx(12) }} x={10} y={67} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
                 {t("payoffChart.balanceLabel")}: {money(active.endingBalance)}
               </text>
             </g>

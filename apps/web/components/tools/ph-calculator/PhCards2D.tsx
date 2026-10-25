@@ -5,6 +5,7 @@ import { ltr } from "@/components/tool-ui/MixedText";
 import { IndicatorCard, KitControls, SvgChem, KitTable, KitTrack, SvgHandle, useMeasuredSize, useStepper, useSvgDrag, type KitRow, type Stepper } from "@/components/tool-ui/indicator-kit/CardKit";
 import { clamp, f1, f2, ratio, sci, sup } from "@/components/tool-ui/indicator-kit/format";
 import { classify, DYES, dyeCss, dyeForm, EQUIVALENCE_ML, ions, KW_SEED_INDEX, KW_TABLE, PH_SEED, TITRATION, titrationPh, titrationSeed } from "./phMath";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 /**
  * The five 2D indicator cards. Each drawing is laid out in real pixels at the measured width of
@@ -65,24 +66,24 @@ export function PhLogLadderCard({ side }: { side: Side }) {
               const on = (hover === "cur" || hover === "cur-h") && cur ? true : (hover === "up" && near(p, s.value - 1)) || (hover === "down" && near(p, s.value + 1));
               return (
                 <g key={p}>
-                  <text x={8} y={y(p) + 4} fontSize={11.5} fontWeight={cur ? 800 : 500} style={{ fill: "var(--ph-ink)" }}>
+                  <text x={8} y={y(p) + 4} fontWeight={cur ? 800 : 500} style={{ fontSize: svgPx(12), fill: "var(--ph-ink)" }}>
                     {`pH ${p}`}
                   </text>
                   <line x1={XB} y1={y(p)} x2={XB + len} y2={y(p)} strokeWidth={cur || on ? 11 : 8} strokeLinecap="round" style={{ stroke: `var(--ph-ui-${p})` }} />
                   {(cur || on) && <line x1={XB} y1={y(p)} x2={XB + len} y2={y(p)} strokeWidth={15} strokeLinecap="round" style={{ stroke: "var(--ph-focus)", opacity: 0.3 }} />}
-                  <text x={XB + len + 8} y={y(p) + 4} fontSize={11} style={{ fill: "var(--ph-ink-muted)" }}>
+                  <text x={XB + len + 8} y={y(p) + 4} style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
                     <SvgChem text={`10${p === 0 ? "⁰" : sup(-p)}`} />
                   </text>
                 </g>
               );
             })}
             {s.value >= 0.5 && (
-              <text x={RAIL - 16} y={y(s.value - 0.5) + 4} fontSize={11} fontWeight={800} textAnchor="end" style={{ fill: "var(--ph-acid)" }}>
+              <text x={RAIL - 16} y={y(s.value - 0.5) + 4} fontWeight={800} textAnchor="end" style={{ fontSize: svgPx(12), fill: "var(--ph-acid)" }}>
                 ×10 ↑
               </text>
             )}
             {s.value <= 13.5 && (
-              <text x={RAIL - 16} y={y(s.value + 0.5) + 4} fontSize={11} fontWeight={800} textAnchor="end" style={{ fill: "var(--ph-base)" }}>
+              <text x={RAIL - 16} y={y(s.value + 0.5) + 4} fontWeight={800} textAnchor="end" style={{ fontSize: svgPx(12), fill: "var(--ph-base)" }}>
                 ÷10 ↓
               </text>
             )}
@@ -148,31 +149,31 @@ export function PhTitrationCard({ side }: { side: Side }) {
             {[0, 7, 14].map((p) => (
               <g key={p}>
                 <line x1={X0} y1={yp(p)} x2={X1} y2={yp(p)} style={{ stroke: "var(--ph-grid)" }} strokeWidth={1} />
-                <text x={X0 - 8} y={yp(p) + 4} fontSize={11} textAnchor="end" style={{ fill: "var(--ph-ink-muted)" }}>
+                <text x={X0 - 8} y={yp(p) + 4} textAnchor="end" style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
                   {p}
                 </text>
               </g>
             ))}
             {[0, 10, 20, 30, 40, 50].map((v) => (
-              <text key={v} x={xv(v)} y={Y0 + 18} fontSize={11} textAnchor={v === 50 ? "end" : v === 0 ? "start" : "middle"} style={{ fill: "var(--ph-ink-muted)" }}>
+              <text key={v} x={xv(v)} y={Y0 + 18} textAnchor={v === 50 ? "end" : v === 0 ? "start" : "middle"} style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
                 {v}
               </text>
             ))}
-            <text x={X1} y={Y0 + 36} fontSize={11} textAnchor="end" style={{ fill: "var(--ph-ink-muted)" }}>
+            <text x={X1} y={Y0 + 36} textAnchor="end" style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
               {t("axis")}
             </text>
-            <text x={4} y={14} fontSize={11} fontWeight={700} style={{ fill: "var(--ph-ink-muted)" }}>
+            <text x={4} y={14} fontWeight={700} style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
               pH
             </text>
             <line x1={X0} y1={Y0} x2={X1} y2={Y0} style={{ stroke: "var(--ph-line)" }} strokeWidth={1.5} strokeLinecap="round" />
             <line x1={xv(EQUIVALENCE_ML)} y1={Y1} x2={xv(EQUIVALENCE_ML)} y2={Y0} style={{ stroke: "var(--ph-neutral)" }} strokeWidth={epOn ? 2.5 : 1.5} strokeDasharray="5 4" />
             <polyline points={pts.join(" ")} fill="none" style={{ stroke: "var(--ph-accent-strong)" }} strokeWidth={3} strokeLinejoin="round" strokeLinecap="round" />
             <circle cx={xv(EQUIVALENCE_ML)} cy={yp(7)} r={epOn ? 7 : 5.5} style={{ fill: "var(--ph-neutral)", stroke: "var(--ph-knob)" }} strokeWidth={1.5} onPointerEnter={() => setHover("ep")} onPointerLeave={() => setHover(null)} />
-            <text x={xv(EQUIVALENCE_ML) + 7} y={Y0 - 8} fontSize={11} fontWeight={800} style={{ fill: "var(--ph-neutral)" }}>
+            <text x={xv(EQUIVALENCE_ML) + 7} y={Y0 - 8} fontWeight={800} style={{ fontSize: svgPx(12), fill: "var(--ph-neutral)" }}>
               {t("epShort")}
             </text>
             <line x1={xv(s.value)} y1={yp(pH)} x2={xv(s.value)} y2={Y0} style={{ stroke: "var(--ph-focus)", opacity: ptOn ? 0.9 : 0.45 }} strokeWidth={1.5} strokeDasharray="3 3" />
-            <text x={X0 + 6} y={14} fontSize={12} fontWeight={800} style={{ fill: "var(--ph-ink)" }}>
+            <text x={X0 + 6} y={14} fontWeight={800} style={{ fontSize: svgPx(12), fill: "var(--ph-ink)" }}>
               {readout}
             </text>
           </svg>
@@ -241,7 +242,7 @@ function PhKwDrawing({ pKw, pH, pOH, hover, setHover }: { pKw: number; pH: numbe
       <line x1={p[0]} y1={p[1]} x2={p[0]} y2={p[1] + 32} style={{ stroke: "var(--ph-line)" }} strokeWidth={1.5} />
       <ellipse cx={p[0]} cy={p[1] + 58} rx={48} ry={26} style={{ fill: "var(--ph-surface)", ...lit(hover === key) }} />
       <ellipse cx={p[0]} cy={p[1] + 58} rx={48} ry={26} style={{ fill: tint, opacity: 0.22 }} />
-      <text x={p[0]} y={p[1] + 62} fontSize={12.5} fontWeight={800} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+      <text x={p[0]} y={p[1] + 62} fontWeight={800} textAnchor="middle" style={{ fontSize: svgPx(12.5), fill: "var(--ph-ink)" }}>
         {text}
       </text>
     </g>
@@ -254,7 +255,7 @@ function PhKwDrawing({ pKw, pH, pOH, hover, setHover }: { pKw: number; pH: numbe
         <circle cx={cx} cy={cy} r={9} style={{ fill: "var(--ph-knob)", stroke: "var(--ph-line)" }} strokeWidth={2} />
         {pan(L, `pH ${f2(pH)}`, "ph", "var(--ph-ion-h)")}
         {pan(R, `pOH ${f2(pOH)}`, "poh", "var(--ph-ion-oh)")}
-        <text x={cx} y={cy - 62} fontSize={14} fontWeight={800} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+        <text x={cx} y={cy - 62} fontWeight={800} textAnchor="middle" style={{ fontSize: svgPx(14), fill: "var(--ph-ink)" }}>
           {`pKw = ${pKw.toFixed(3)}`}
         </text>
       </svg>
@@ -316,10 +317,10 @@ export function PhIndicatorRangesCard({ side }: { side: Side }) {
               const on = hover === d.key;
               return (
                 <g key={d.key} onPointerEnter={() => setHover(d.key)} onPointerLeave={() => setHover(null)}>
-                  <text x={X0} y={barY(i) - 15} fontSize={12} fontWeight={on ? 800 : 600} style={{ fill: "var(--ph-ink)" }}>
+                  <text x={X0} y={barY(i) - 15} fontWeight={on ? 800 : 600} style={{ fontSize: svgPx(12), fill: "var(--ph-ink)" }}>
                     {t(`names.${d.key}`)}
                   </text>
-                  <text x={X1} y={barY(i) - 15} fontSize={11} textAnchor="end" style={{ fill: "var(--ph-ink-muted)" }}>
+                  <text x={X1} y={barY(i) - 15} textAnchor="end" style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
                     {`${f1(d.lo)}–${f1(d.hi)}`}
                   </text>
                   <rect x={X0} y={barY(i) - 8} width={X1 - X0} height={16} rx={8} fill={`url(#ph-dye-${d.key})`} style={lit(on)} />
@@ -331,7 +332,7 @@ export function PhIndicatorRangesCard({ side }: { side: Side }) {
             })}
             <line x1={xp(s.value)} y1={34} x2={xp(s.value)} y2={barY(3) + 14} style={{ stroke: "var(--ph-focus)" }} strokeWidth={2} strokeLinecap="round" />
             {[0, 2, 4, 6, 8, 10, 12, 14].map((p) => (
-              <text key={p} x={xp(p)} y={H - 6} fontSize={11} textAnchor={p === 0 ? "start" : p === 14 ? "end" : "middle"} style={{ fill: "var(--ph-ink-muted)" }}>
+              <text key={p} x={xp(p)} y={H - 6} textAnchor={p === 0 ? "start" : p === 14 ? "end" : "middle"} style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
                 {p}
               </text>
             ))}
@@ -429,10 +430,10 @@ function PhDialDrawing({ s, hover, setHover }: { s: Stepper; hover: string | nul
           const [ix, iy] = pt(p === 0 ? 0.6 : p === 14 ? 13.4 : 7, RI - 19);
           return (
             <g key={p}>
-              <text x={ox} y={oy + 4} fontSize={11} fontWeight={800} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+              <text x={ox} y={oy + 4} fontWeight={800} textAnchor="middle" style={{ fontSize: svgPx(12), fill: "var(--ph-ink)" }}>
                 {p}
               </text>
-              <text x={ix} y={iy + 4} fontSize={10.5} textAnchor="middle" style={{ fill: "var(--ph-ink-muted)" }}>
+              <text x={ix} y={iy + 4} textAnchor="middle" style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
                 {14 - p}
               </text>
             </g>
@@ -440,20 +441,20 @@ function PhDialDrawing({ s, hover, setHover }: { s: Stepper; hover: string | nul
         })}
         {/* Pointer between the two rings only, so it never crosses a ring label. */}
         <line x1={pt(s.value, RI + 7)[0]} y1={pt(s.value, RI + 7)[1]} x2={pt(s.value, RO)[0]} y2={pt(s.value, RO)[1]} style={{ stroke: "var(--ph-ink)" }} strokeWidth={3} strokeLinecap="round" />
-        <text x={RX} y={ry[0]} fontSize={wide ? 26 : 17} fontWeight={800} textAnchor={anchor} style={{ fill: "var(--ph-ink)" }}>
+        <text x={RX} y={ry[0]} fontWeight={800} textAnchor={anchor} style={{ fontSize: svgPx(wide ? 26 : 17), fill: "var(--ph-ink)" }}>
           {`pH ${f2(x.pH)}`}
         </text>
-        <text x={RX2} y={ry[1]} fontSize={wide ? 17 : 13} fontWeight={700} textAnchor={anchor} style={{ fill: "var(--ph-ink-muted)" }}>
+        <text x={RX2} y={ry[1]} fontWeight={700} textAnchor={anchor} style={{ fontSize: svgPx(wide ? 17 : 13), fill: "var(--ph-ink-muted)" }}>
           {`pOH ${f2(x.pOH)}`}
         </text>
-        <text x={RX} y={ry[2]} fontSize={wide ? 14 : 12} fontWeight={on("h") ? 800 : 650} textAnchor={anchor} style={{ fill: "var(--ph-acid)" }}>
+        <text x={RX} y={ry[2]} fontWeight={on("h") ? 800 : 650} textAnchor={anchor} style={{ fontSize: svgPx(wide ? 14 : 12), fill: "var(--ph-acid)" }}>
           <SvgChem text={`[H⁺] ${sci(x.h)} M`} />
         </text>
-        <text x={RX2} y={ry[3]} fontSize={wide ? 14 : 12} fontWeight={on("oh") ? 800 : 650} textAnchor={anchor} style={{ fill: "var(--ph-base)" }}>
+        <text x={RX2} y={ry[3]} fontWeight={on("oh") ? 800 : 650} textAnchor={anchor} style={{ fontSize: svgPx(wide ? 14 : 12), fill: "var(--ph-base)" }}>
           <SvgChem text={`[OH⁻] ${sci(x.oh)} M`} />
         </text>
         {wide && (
-          <text x={RX} y={ry[4]} fontSize={14} fontWeight={600} textAnchor={anchor} style={{ fill: "var(--ph-ink-muted)" }}>
+          <text x={RX} y={ry[4]} fontWeight={600} textAnchor={anchor} style={{ fontSize: svgPx(14), fill: "var(--ph-ink-muted)" }}>
             <SvgChem text={`[H⁺] × [OH⁻] = ${sci(x.h * x.oh)}`} />
           </text>
         )}

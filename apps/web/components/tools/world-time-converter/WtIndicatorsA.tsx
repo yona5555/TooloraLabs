@@ -24,6 +24,8 @@ import IndicatorWithTable from "@/components/tool-ui/IndicatorWithTable";
 import { LAND, WATER } from "./worldLand";
 import { STATUS_COLORS, useNow, type CardProps } from "./state";
 import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
+import { svgPx } from "@/components/tool-ui/svgPx";
+import { useFitWidth } from "@/components/tool-ui/useFitWidth";
 
 export function useIndT() {
   return useTranslations("tools.world-time-converter.wt.ind");
@@ -95,7 +97,7 @@ export function WtDayNightMapCard({ d, f }: CardProps) {
                 {[-60, -30, 0, 30, 60].map((la) => (
                   <g key={la}>
                     <line x1={0} x2={W} y1={Y(la)} y2={Y(la)} stroke="currentColor" strokeOpacity={la === 0 ? 0.35 : 0.12} />
-                    <text x={3} y={Y(la) - 2} fontSize={8} className={axisText}>{la === 0 ? "0°" : `${Math.abs(la)}°${la > 0 ? "N" : "S"}`}</text>
+                    <text style={{ fontSize: svgPx(12) }} x={3} y={Y(la) - 2} className={axisText}>{la === 0 ? "0°" : `${Math.abs(la)}°${la > 0 ? "N" : "S"}`}</text>
                   </g>
                 ))}
                 {[23.44, -23.44].map((la) => (
@@ -111,12 +113,12 @@ export function WtDayNightMapCard({ d, f }: CardProps) {
                   <path key={i} d={line(l)} fill="none" stroke="#fbbf24" strokeWidth={1.6} />
                 ))}
                 <line x1={X(sub.lon)} x2={X(sub.lon)} y1={0} y2={H} stroke="#fbbf24" strokeDasharray="2 4" strokeOpacity={0.8} />
-                <text x={X(sub.lon) + 4} y={10} fontSize={9} fontWeight={700} fill="#b45309" className="dark:fill-amber-300">12:00 ☀</text>
+                <text style={{ fontSize: svgPx(12) }} x={X(sub.lon) + 4} y={10} fontWeight={700} fill="#b45309" className="dark:fill-amber-300">12:00 ☀</text>
                 <circle cx={X(sub.lon)} cy={Y(sub.lat)} r={16} fill="#fde047" fillOpacity={0.35}>
                   <animate attributeName="r" values="12;18;12" dur="3s" repeatCount="indefinite" />
                 </circle>
                 <circle cx={X(sub.lon)} cy={Y(sub.lat)} r={7} fill="#facc15" stroke="#b45309" strokeWidth={1.5} />
-                <text x={X(sub.lon)} y={Y(sub.lat) + 22} textAnchor="middle" fontSize={9} fontWeight={700} fill="#b45309" className="dark:fill-amber-300">
+                <text style={{ fontSize: svgPx(12) }} x={X(sub.lon)} y={Y(sub.lat) + 22} textAnchor="middle" fontWeight={700} fill="#b45309" className="dark:fill-amber-300">
                   {coord(sub.lat, "N", "S")} {coord(sub.lon, "E", "W")}
                 </text>
                 {cities.map(({ c, el }, i) => {
@@ -127,14 +129,14 @@ export function WtDayNightMapCard({ d, f }: CardProps) {
                   return (
                     <g key={c.id}>
                       <circle cx={x} cy={y} r={i === 0 ? 5.5 : 4} fill={day ? "#fbbf24" : "#93c5fd"} stroke={i === 0 ? "#1d4ed8" : "#0f172a"} strokeWidth={i === 0 ? 2 : 1} />
-                      <text x={right ? x + 7 : x - 7} y={y + 3 + (i % 2 ? 9 : 0)} textAnchor={right ? "start" : "end"} fontSize={9} fontWeight={i === 0 ? 800 : 600} className={day ? "fill-zinc-900 dark:fill-zinc-100" : "fill-blue-900 dark:fill-sky-200"}>
+                      <text style={{ fontSize: svgPx(12) }} x={right ? x + 7 : x - 7} y={y + 3 + (i % 2 ? 9 : 0)} textAnchor={right ? "start" : "end"} fontWeight={i === 0 ? 800 : 600} className={day ? "fill-zinc-900 dark:fill-zinc-100" : "fill-blue-900 dark:fill-sky-200"}>
                         {shortName(f.city(c))} {f.time(at, c.zone)}
                       </text>
                     </g>
                   );
                 })}
                 <rect x={W - 118} y={H - 22} width={114} height={18} rx={4} fill="#020617" fillOpacity={0.55} />
-                <text x={W - 61} y={H - 9} textAnchor="middle" fontSize={10} fontWeight={700} fill="#f8fafc">
+                <text style={{ fontSize: svgPx(12) }} x={W - 61} y={H - 9} textAnchor="middle" fontWeight={700} fill="#f8fafc">
                   UTC {f.time(at, "UTC")} · {f.shortDate(at, "UTC")}
                 </text>
               </svg>
@@ -253,12 +255,12 @@ export function WtMeetingCard({ s, d, f }: CardProps) {
               {plan.slots.map((sl, i) => {
                 const m = sl.localMinutes[0];
                 return m % 180 === 0 ? (
-                  <text key={i} x={LBL + i * CW} y={TOP - 6} fontSize={9} className={axisText}>{f.hhmm(m)}</text>
+                  <text style={{ fontSize: svgPx(12) }} key={i} x={LBL + i * CW} y={TOP - 6} className={axisText}>{f.hhmm(m)}</text>
                 ) : null;
               })}
               {d.all.map((c, r) => (
                 <g key={c.id}>
-                  <text x={LBL - 6} y={TOP + r * RH + RH / 2 + 3} textAnchor="end" fontSize={10} fontWeight={r === 0 ? 800 : 600} className={valueText}>
+                  <text style={{ fontSize: svgPx(12) }} x={LBL - 6} y={TOP + r * RH + RH / 2 + 3} textAnchor="end" fontWeight={r === 0 ? 800 : 600} className={valueText}>
                     {shortName(f.city(c)).slice(0, 15)}
                   </text>
                   {plan.slots.map((sl, i) => (
@@ -270,15 +272,15 @@ export function WtMeetingCard({ s, d, f }: CardProps) {
                 const h = (sl.available / Math.max(1, d.all.length)) * (RH - 6);
                 return <rect key={i} x={LBL + i * CW + 1} y={TOP + d.all.length * RH + RH - 2 - h} width={CW - 2} height={h} fill="#3b82f6" />;
               })}
-              <text x={LBL - 6} y={TOP + d.all.length * RH + RH / 2 + 3} textAnchor="end" fontSize={9} fontWeight={700} fill="#2563eb">{t("meet.available")}</text>
+              <text style={{ fontSize: svgPx(12) }} x={LBL - 6} y={TOP + d.all.length * RH + RH / 2 + 3} textAnchor="end" fontWeight={700} fill="#2563eb">{t("meet.available")}</text>
               {win && (
                 <g>
                   <rect x={LBL + win.start * CW - 1} y={TOP - 2} width={(win.end - win.start + 1) * CW + 2} height={d.all.length * RH + RH + 2} fill="none" stroke="#2563eb" strokeWidth={2} rx={3} strokeDasharray="5 3" />
-                  <text x={LBL + win.start * CW} y={H - 4} fontSize={9} fontWeight={700} fill="#2563eb">{t("meet.best")}</text>
+                  <text style={{ fontSize: svgPx(12) }} x={LBL + win.start * CW} y={H - 4} fontWeight={700} fill="#2563eb">{t("meet.best")}</text>
                 </g>
               )}
               <rect x={LBL + idx * CW} y={TOP - 4} width={CW} height={d.all.length * RH + RH + 4} fill="none" stroke="currentColor" strokeWidth={2} className="text-zinc-900 dark:text-white" style={{ transition: "x 120ms ease" }} />
-              <text x={Math.min(W - 40, LBL + idx * CW + CW / 2)} y={10} textAnchor="middle" fontSize={10} fontWeight={800} className={valueText}>{slotLabel(idx)}</text>
+              <text style={{ fontSize: svgPx(12) }} x={Math.min(W - 40, LBL + idx * CW + CW / 2)} y={10} textAnchor="middle" fontWeight={800} className={valueText}>{slotLabel(idx)}</text>
             </svg>
             <div className="mt-1 flex flex-wrap gap-3 text-[11px] text-zinc-600 dark:text-zinc-300">
               {(["work", "shoulder", "night", "weekend"] as const).map((k) => (
@@ -325,7 +327,7 @@ export function WtOverlapBarsCard({ s, d, f }: CardProps) {
     .map((c, k) => ({ c, j: k + 1, min: wtPairOverlapMinutes(plan, 0, k + 1), win: winOf(k + 1) }))
     .sort((a, b) => b.min - a.min);
   const all = { min: plan.allOverlapMinutes };
-  const W = 460;
+  const [fitRef, W] = useFitWidth(460);
   const RH = 28;
   const L = 118;
   const H = (rows.length + 1) * RH + 10;
@@ -339,13 +341,13 @@ export function WtOverlapBarsCard({ s, d, f }: CardProps) {
       <IndicatorWithTable
         workedExampleTitle={t("worked")}
         indicator={
-          <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} style={{ direction: "ltr" }} className="h-auto max-w-full" role="img" aria-label={t("overlap.title")}>
+          <svg viewBox={`0 0 ${W} ${H}`} ref={fitRef} width={W} height={H} style={{ direction: "ltr" }} className="h-auto max-w-full" role="img" aria-label={t("overlap.title")}>
             {[{ label: t("overlap.allCities"), min: all.min, all: true }, ...rows.map((r) => ({ label: shortName(f.city(r.c)), min: r.min, all: false }))].map((r, i) => (
               <g key={i}>
-                <text x={L - 6} y={i * RH + 19} textAnchor="end" fontSize={10} fontWeight={r.all ? 800 : 600} className={r.all ? "fill-blue-700 dark:fill-blue-300" : valueText}>{r.label}</text>
+                <text style={{ fontSize: svgPx(12) }} x={L - 6} y={i * RH + 19} textAnchor="end" fontWeight={r.all ? 800 : 600} className={r.all ? "fill-blue-700 dark:fill-blue-300" : valueText}>{r.label}</text>
                 <rect x={L} y={i * RH + 6} width={W - L - 70} height={RH - 10} rx={4} className="fill-zinc-100 dark:fill-zinc-800" />
                 <rect x={L} y={i * RH + 6} width={bar(r.min)} height={RH - 10} rx={4} fill={r.all ? "#2563eb" : r.min === 0 ? "#f43f5e" : "#10b981"} style={{ transition: "width 400ms ease" }} />
-                <text x={L + bar(r.min) + 5} y={i * RH + 19} fontSize={10} fontWeight={700} className={valueText}>{dur(r.min)}</text>
+                <text style={{ fontSize: svgPx(12) }} x={L + bar(r.min) + 5} y={i * RH + 19} fontWeight={700} className={valueText}>{dur(r.min)}</text>
               </g>
             ))}
           </svg>
@@ -365,7 +367,7 @@ export function WtOffsetBarsCard({ d, f }: CardProps) {
   const t = useIndT();
   const tu = useUnitT();
   const items = d.all.map((c, i) => ({ c, off: d.conv.rows[i].offsetMinutes, std: d.extra[i].std.standard })).sort((a, b) => a.off - b.off);
-  const W = 470;
+  const [fitRef, W] = useFitWidth(470);
   const H = 250;
   const T = 18;
   const B = 58;
@@ -388,11 +390,11 @@ export function WtOffsetBarsCard({ d, f }: CardProps) {
         workedExampleTitle={t("worked")}
         indicator={
           <PhoneMini slot={1} title={t("offsets.title")}>
-            <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} style={{ direction: "ltr" }} className="h-auto max-w-full" role="img" aria-label={t("offsets.title")}>
+            <svg viewBox={`0 0 ${W} ${H}`} ref={fitRef} width={W} height={H} style={{ direction: "ltr" }} className="h-auto max-w-full" role="img" aria-label={t("offsets.title")}>
               {ticks.map((h) => (
                 <g key={h}>
                   <line x1={L} x2={W} y1={y(h)} y2={y(h)} stroke="currentColor" strokeOpacity={h === 0 ? 0.5 : 0.1} />
-                  <text x={L - 4} y={y(h) + 3} textAnchor="end" fontSize={9} className={axisText}>{h > 0 ? `+${h}` : h}</text>
+                  <text style={{ fontSize: svgPx(12) }} x={L - 4} y={y(h) + 3} textAnchor="end" className={axisText}>{h > 0 ? `+${h}` : h}</text>
                 </g>
               ))}
               {items.map((it, i) => {
@@ -403,15 +405,15 @@ export function WtOffsetBarsCard({ d, f }: CardProps) {
                   <g key={it.c.id} style={{ transition: "all 400ms ease" }}>
                     <rect x={x(i)} y={Math.min(y(0), y(stdH))} width={bw} height={Math.abs(y(stdH) - y(0))} rx={2} fill="#3b82f6" />
                     {it.off !== it.std && <rect x={x(i)} y={Math.min(y(stdH), y(offH))} width={bw} height={Math.abs(y(offH) - y(stdH))} rx={2} fill="#f59e0b" />}
-                    <text x={cx} y={offH >= 0 ? y(offH) - 4 : y(offH) + 11} textAnchor="middle" fontSize={9} fontWeight={700} className={valueText}>{f.offset(it.off).replace("UTC", "")}</text>
-                    <text x={cx} y={H - B + 12} textAnchor="end" fontSize={9} transform={`rotate(-40 ${cx} ${H - B + 12})`} className={valueText}>{shortName(f.city(it.c)).slice(0, 13)}</text>
+                    <text style={{ fontSize: svgPx(12) }} x={cx} y={offH >= 0 ? y(offH) - 4 : y(offH) + 11} textAnchor="middle" fontWeight={700} className={valueText}>{f.offset(it.off).replace("UTC", "")}</text>
+                    <text style={{ fontSize: svgPx(12) }} x={cx} y={H - B + 12} textAnchor="end" transform={`rotate(-40 ${cx} ${H - B + 12})`} className={valueText}>{shortName(f.city(it.c)).slice(0, 13)}</text>
                   </g>
                 );
               })}
               <rect x={W - 150} y={4} width={9} height={9} fill="#3b82f6" />
-              <text x={W - 138} y={12} fontSize={9} className={axisText}>{t("offsets.std")}</text>
+              <text style={{ fontSize: svgPx(12) }} x={W - 138} y={12} className={axisText}>{t("offsets.std")}</text>
               <rect x={W - 80} y={4} width={9} height={9} fill="#f59e0b" />
-              <text x={W - 68} y={12} fontSize={9} className={axisText}>{t("offsets.dst")}</text>
+              <text style={{ fontSize: svgPx(12) }} x={W - 68} y={12} className={axisText}>{t("offsets.dst")}</text>
             </svg>
           </PhoneMini>
         }

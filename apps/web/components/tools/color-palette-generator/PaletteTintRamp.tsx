@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { hexToRgb, rgbToHsl } from "@tooloralabs/tools";
 import PaletteIndicatorCard, { PaletteIndicatorUnavailable } from "./PaletteIndicatorCard";
 import { usePaletteModel } from "./PaletteLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 342;
 const H = 120;
@@ -32,7 +33,7 @@ export default function PaletteTintRamp() {
           <g key={r.l}>
             <rect x={k * cw} y={Y} width={cw + 0.3} height={CELL_H} fill={r.hex} />
             {k % 2 === 0 && (
-              <text x={k * cw + cw / 2} y={Y + CELL_H / 2 + 4} textAnchor="middle" fontSize={11} fontWeight={700} fill={whiteText ? "#fff" : "#000"}>
+              <text style={{ fontSize: svgPx(12) }} x={k * cw + cw / 2} y={Y + CELL_H / 2 + 4} textAnchor="middle" fontWeight={700} fill={whiteText ? "#fff" : "#000"}>
                 {r.l}
               </text>
             )}
@@ -41,17 +42,16 @@ export default function PaletteTintRamp() {
       })}
       <rect x={0} y={Y} width={W} height={CELL_H} rx={6} fill="none" className="stroke-zinc-300 dark:stroke-zinc-600" />
       <path d={`M ${xOf(baseL)} ${Y - 4} l -6 -10 h 12 z`} className="fill-blue-600 dark:fill-blue-400" />
-      <text x={Math.min(Math.max(xOf(baseL), 30), W - 30)} y={12} textAnchor="middle" fontSize={12} fontWeight={700} className="fill-blue-700 dark:fill-blue-300">
+      <text style={{ fontSize: svgPx(12) }} x={Math.min(Math.max(xOf(baseL), 30), W - 30)} y={12} textAnchor="middle" fontWeight={700} className="fill-blue-700 dark:fill-blue-300">
         {t("base", { l: f(baseL, 0) })}
       </text>
       {lastWhite && (
         <g>
           <line x1={xOf(lastWhite.l) + cw / 2} y1={Y + CELL_H} x2={xOf(lastWhite.l) + cw / 2} y2={Y + CELL_H + 14} strokeWidth={2} className="stroke-emerald-600 dark:stroke-emerald-400" />
-          <text
+          <text style={{ fontSize: svgPx(12) }}
             x={Math.min(xOf(lastWhite.l) + cw / 2, W - 4)}
             y={Y + CELL_H + 28}
             textAnchor={xOf(lastWhite.l) > W - 90 ? "end" : "middle"}
-            fontSize={12}
             className="fill-emerald-700 dark:fill-emerald-300"
           >
             {t("whiteEnds", { l: lastWhite.l })}

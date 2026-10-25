@@ -1,3 +1,4 @@
+import { svgPx } from "@/components/tool-ui/svgPx";
 type ClockExample = { label: string; offsetLabel: string; hour: number; minute: number };
 
 const EXAMPLES: ClockExample[] = [
@@ -37,7 +38,7 @@ export default function TimeZoneConceptDiagram({ sameInstantLabel, caption }: Ti
       <div dir="ltr" className="overflow-x-auto">
         <svg viewBox={`0 0 ${width} 150`} role="img" aria-label={caption} className="h-auto w-full min-w-[480px] max-md:min-w-0">
           <line x1={SPACING / 2} y1={18} x2={width - SPACING / 2} y2={18} stroke="currentColor" strokeWidth={1.5} />
-          <text x={width / 2} y={12} textAnchor="middle" fontSize={12} fontWeight={700} fill="currentColor">
+          <text style={{ fontSize: svgPx(12) }} x={width / 2} y={12} textAnchor="middle" fontWeight={700} fill="currentColor">
             {sameInstantLabel}
           </text>
 
@@ -59,13 +60,13 @@ export default function TimeZoneConceptDiagram({ sameInstantLabel, caption }: Ti
                 <line x1={cx} y1={CLOCK_Y} x2={cx + minuteX} y2={CLOCK_Y + minuteY} stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" />
                 <circle cx={cx} cy={CLOCK_Y} r={2} fill="currentColor" />
 
-                <text x={cx} y={CLOCK_Y + CLOCK_R + 20} textAnchor="middle" fontSize={12} fontWeight={700} fill="currentColor">
+                <text style={{ fontSize: svgPx(12) }} x={cx} y={CLOCK_Y + CLOCK_R + 20} textAnchor="middle" fontWeight={700} fill="currentColor">
                   {example.label}
                 </text>
-                <text x={cx} y={CLOCK_Y + CLOCK_R + 36} textAnchor="middle" fontSize={10} fill="currentColor" opacity={0.75}>
+                <text style={{ fontSize: svgPx(12) }} x={cx} y={CLOCK_Y + CLOCK_R + 36} textAnchor="middle" fill="currentColor" opacity={0.75}>
                   {example.offsetLabel}
                 </text>
-                <text x={cx} y={CLOCK_Y + CLOCK_R + 50} textAnchor="middle" fontSize={10} fontFamily="monospace" fill="currentColor">
+                <text style={{ fontSize: svgPx(12) }} x={cx} y={CLOCK_Y + CLOCK_R + 50} textAnchor="middle" fontFamily="monospace" fill="currentColor">
                   {String(example.hour).padStart(2, "0")}:{String(example.minute).padStart(2, "0")}
                 </text>
               </g>

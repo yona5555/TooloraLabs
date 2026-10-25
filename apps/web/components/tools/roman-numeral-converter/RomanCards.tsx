@@ -6,6 +6,7 @@ import { IndicatorCard, KitControls, KitTable, useStepper, type KitRow } from "@
 import { Drawing, INK, LINE, lit, MUTED, px2, SvgLabel as T, useDrawing } from "@/components/tool-ui/indicator-kit/SvgBits";
 import { clamp, fmtSmart, sci } from "@/components/tool-ui/indicator-kit/format";
 import { additive, LENGTHS, ROMAN_MAX, SYMBOL_VALUE, terms, toRoman } from "./romanMath";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 /**
  * The eight 2D Roman-numeral indicator cards. Each card owns its state (seeded once, never linked
@@ -89,13 +90,13 @@ export function RomanWaterfallCard({ side }: { side: Side }) {
                 {i > 0 && <line x1={cx - cw} y1={yv(x.from)} x2={cx} y2={yv(x.from)} style={{ stroke: "var(--ph-grid)" }} strokeDasharray="3 3" />}
                 <rect x={cx - bw / 2} y={y0} width={bw} height={h} rx={Math.min(8, bw / 2, h / 2)} style={{ fill: neg ? "var(--cv-to)" : "var(--cv-from)", ...lit(on) }} />
                 <T x={cx} y={y0 - 6} text={x.sym} size={13} bold style={INK} />
-                <T x={cx} y={base + 16} text={`${neg ? "−" : "+"}${n0(Math.abs(x.value))}`} size={9.5} />
+                <T x={cx} y={base + 16} text={`${neg ? "−" : "+"}${n0(Math.abs(x.value))}`} size={12} />
               </g>
             );
           })}
           <rect x={X0 + cw * (cols - 0.5) - bw / 2} y={yv(n)} width={bw} height={Math.max(3, base - yv(n))} rx={Math.min(8, bw / 2)} style={{ fill: "var(--ph-ink)" }} />
           <T x={X0 + cw * (cols - 0.5)} y={yv(n) - 6} text="=" size={13} bold style={INK} />
-          <T x={X0 + cw * (cols - 0.5)} y={base + 16} text={n0(n)} size={9.5} bold style={INK} />
+          <T x={X0 + cw * (cols - 0.5)} y={base + 16} text={n0(n)} size={12} bold style={INK} />
           <Track x0={X0} x1={W - X0} y={trackY} f={(n - 1) / (WF_MAX - 1)} />
         </Drawing>
       }
@@ -151,18 +152,18 @@ export function RomanSubtractiveCard({ side }: { side: Side }) {
           {[0, small, v, big].map((k, i) => (
             <g key={i}>
               <line x1={xs(k)} y1={lineY - 6} x2={xs(k)} y2={lineY + 6} style={LINE} strokeWidth={1.5} />
-              {k !== small && <T x={xs(k)} y={lineY + 22} text={n0(k)} size={11} anchor={k === 0 ? "start" : "middle"} style={k === v ? INK : MUTED} />}
+              {k !== small && <T x={xs(k)} y={lineY + 22} text={n0(k)} size={12} anchor={k === 0 ? "start" : "middle"} style={k === v ? INK : MUTED} />}
             </g>
           ))}
           <g onPointerEnter={() => setHover("big")} onPointerLeave={() => setHover(null)}>
             <path d={`M ${xs(0)} ${lineY - 18} L ${xs(big) - 6} ${lineY - 18}`} style={{ stroke: "var(--cv-from)" }} strokeWidth={hover === "big" ? 5 : 4} strokeLinecap="round" />
             <path d={`M ${xs(big) - 12} ${lineY - 24} L ${xs(big) - 4} ${lineY - 18} L ${xs(big) - 12} ${lineY - 12}`} fill="none" style={{ stroke: "var(--cv-from)" }} strokeWidth={3} strokeLinecap="round" />
-            <T x={(xs(0) + xs(big)) / 2} y={lineY - 26} text={`+${pair[1]} (${n0(big)})`} size={11.5} bold style={{ fill: "var(--cv-from)" }} />
+            <T x={(xs(0) + xs(big)) / 2} y={lineY - 26} text={`+${pair[1]} (${n0(big)})`} size={12} bold style={{ fill: "var(--cv-from)" }} />
           </g>
           <g onPointerEnter={() => setHover("small")} onPointerLeave={() => setHover(null)}>
             <path d={`M ${xs(big)} ${lineY + 34} L ${xs(v) + 6} ${lineY + 34}`} style={{ stroke: "var(--cv-to)" }} strokeWidth={hover === "small" ? 5 : 4} strokeLinecap="round" />
             <path d={`M ${xs(v) + 12} ${lineY + 28} L ${xs(v) + 4} ${lineY + 34} L ${xs(v) + 12} ${lineY + 40}`} fill="none" style={{ stroke: "var(--cv-to)" }} strokeWidth={3} strokeLinecap="round" />
-            <T x={xs(v) - 8} y={lineY + 39} text={`−${pair[0]} (${n0(small)})`} size={11.5} bold anchor="end" style={{ fill: "var(--cv-to)" }} />
+            <T x={xs(v) - 8} y={lineY + 39} text={`−${pair[0]} (${n0(small)})`} size={12} bold anchor="end" style={{ fill: "var(--cv-to)" }} />
           </g>
           <circle cx={xs(v)} cy={lineY} r={6} style={{ fill: "var(--ph-ink)" }} />
         </Drawing>
@@ -224,7 +225,7 @@ export function RomanClockCard({ side }: { side: Side }) {
             return (
               <g key={hour} onPointerEnter={() => setHover("dial")} onPointerLeave={() => setHover(null)}>
                 {on && <circle cx={x} cy={y} r={17} style={{ fill: "var(--cv-from-soft)", stroke: "var(--cv-from)" }} strokeWidth={1.5} />}
-                <T x={x} y={y + 4.5} text={dial(hour)} size={R > 120 ? 13 : 11} bold style={on ? INK : MUTED} />
+                <T x={x} y={y + 4.5} text={dial(hour)} size={R > 120 ? 13 : 12} bold style={on ? INK : MUTED} />
               </g>
             );
           })}
@@ -293,11 +294,11 @@ export function RomanLengthCard({ side }: { side: Side }) {
           {[0, 5, 10, 15].map((l) => (
             <g key={l}>
               <line x1={X0} y1={yl(l)} x2={W - 14} y2={yl(l)} style={{ stroke: "var(--ph-grid)" }} />
-              <T x={X0 - 6} y={yl(l) + 4} text={String(l)} anchor="end" size={10.5} />
+              <T x={X0 - 6} y={yl(l) + 4} text={String(l)} anchor="end" size={12} />
             </g>
           ))}
           {[1, 1000, 2000, 3000, 3999].map((k) => (
-            <T key={k} x={xn(k)} y={Y0 + 18} text={n0(k)} size={10.5} anchor={k === 1 ? "start" : k === 3999 ? "end" : "middle"} />
+            <T key={k} x={xn(k)} y={Y0 + 18} text={n0(k)} size={12} anchor={k === 1 ? "start" : k === 3999 ? "end" : "middle"} />
           ))}
           <polygon points={[...top, ...bot].join(" ")} style={{ fill: "var(--cv-from-soft)", stroke: "var(--cv-from)" }} strokeWidth={hover === "len" ? 1.5 : 0.75} />
           <line x1={xn(n)} y1={Y0} x2={xn(n)} y2={yl(len)} style={{ stroke: "var(--ph-focus)" }} strokeWidth={1.5} strokeDasharray="4 4" />
@@ -353,8 +354,8 @@ export function RomanYearsCard({ side }: { side: Side }) {
             return (
               <g key={st} onPointerEnter={() => setHover("numeral")} onPointerLeave={() => setHover(null)}>
                 <circle cx={xy(st)} cy={lineY} r={5} style={{ fill: "var(--ph-surface)", stroke: "var(--ph-line)" }} strokeWidth={1.5} />
-                <T x={xy(st)} y={up ? lineY - 34 : lineY + 30} text={toRoman(st)} size={11} bold style={INK} anchor={i === 0 ? "start" : "middle"} />
-                <T x={xy(st)} y={up ? lineY - 20 : lineY + 44} text={String(st)} size={10} anchor={i === 0 ? "start" : "middle"} />
+                <T x={xy(st)} y={up ? lineY - 34 : lineY + 30} text={toRoman(st)} size={12} bold style={INK} anchor={i === 0 ? "start" : "middle"} />
+                <T x={xy(st)} y={up ? lineY - 20 : lineY + 44} text={String(st)} size={12} anchor={i === 0 ? "start" : "middle"} />
               </g>
             );
           })}
@@ -403,15 +404,15 @@ export function RomanVinculumCard({ side }: { side: Side }) {
         <Drawing {...d} hMin={HMIN} label={t("handle")} valueText={valueText} handle={{ x: xl(N), y: barY, dir: "horizontal" }} s={s} testId="roman-c6">
           <rect x={xl(1)} y={barY - 12} width={xl(ROMAN_MAX) - xl(1)} height={24} rx={12} style={{ fill: "var(--cv-from-soft)", ...lit(hover === "std") }} />
           <rect x={xl(4000)} y={barY - 12} width={xl(4e6) - xl(4000)} height={24} rx={12} style={{ fill: "var(--cv-to-soft)", ...lit(hover === "bar") }} />
-          <T x={(xl(1) + xl(ROMAN_MAX)) / 2} y={barY - 20} text={t("standardBand")} size={11} bold style={{ fill: "var(--cv-from)" }} />
-          <T x={(xl(4000) + xl(4e6)) / 2} y={barY - 20} text={t("barBand")} size={11} bold style={{ fill: "var(--cv-to)" }} />
+          <T x={(xl(1) + xl(ROMAN_MAX)) / 2} y={barY - 20} text={t("standardBand")} size={12} bold style={{ fill: "var(--cv-from)" }} />
+          <T x={(xl(4000) + xl(4e6)) / 2} y={barY - 20} text={t("barBand")} size={12} bold style={{ fill: "var(--cv-to)" }} />
           {[1, 10, 100, 1000, 1e4, 1e5, 1e6].map((v) => (
             <g key={v}>
               <line x1={xl(v)} y1={barY + 14} x2={xl(v)} y2={barY + 20} style={LINE} />
-              <T x={xl(v)} y={barY + 33} text={v < 1e4 ? n0(v) : `10${["⁴", "⁵", "⁶"][Math.log10(v) - 4]}`} size={10} anchor={v === 1 ? "start" : "middle"} />
+              <T x={xl(v)} y={barY + 33} text={v < 1e4 ? n0(v) : `10${["⁴", "⁵", "⁶"][Math.log10(v) - 4]}`} size={12} anchor={v === 1 ? "start" : "middle"} />
             </g>
           ))}
-          <text x={W / 2} y={30} fontSize={22} fontWeight={800} textAnchor="middle" textDecoration="overline" style={{ fill: "var(--ph-ink)" }}>
+          <text x={W / 2} y={30} fontWeight={800} textAnchor="middle" textDecoration="overline" style={{ fontSize: svgPx(22), fill: "var(--ph-ink)" }}>
             {bar}
           </text>
           <T x={W / 2} y={H - 12} text={`${bar} × 1,000 = ${n0(N)}`} size={12} bold style={INK} />
@@ -462,7 +463,7 @@ export function RomanTallyCard({ side }: { side: Side }) {
       table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
       visual={
         <Drawing {...d} hMin={HMIN} label={t("handle")} valueText={valueText} handle={{ x: endX, y: tallyY + sh + 18, dir: "horizontal" }} s={s} testId="roman-c7">
-          <T x={X0} y={tallyY - sh - 12} text={t("tallyRow")} anchor="start" size={10.5} />
+          <T x={X0} y={tallyY - sh - 12} text={t("tallyRow")} anchor="start" size={12} />
           <g onPointerEnter={() => setHover("marks")} onPointerLeave={() => setHover(null)}>
             {Array.from({ length: n }, (_, i) => {
               const fifth = i % 5 === 4;
@@ -476,7 +477,7 @@ export function RomanTallyCard({ side }: { side: Side }) {
           </g>
           <line x1={X0} y1={tallyY + sh + 18} x2={W - X0} y2={tallyY + sh + 18} style={{ stroke: "var(--glass-track)" }} strokeWidth={6} strokeLinecap="round" />
           <line x1={X0} y1={tallyY + sh + 18} x2={endX} y2={tallyY + sh + 18} style={{ stroke: "var(--cv-from)" }} strokeWidth={6} strokeLinecap="round" />
-          <T x={X0} y={letterY - 24} text={t("letterRow")} anchor="start" size={10.5} />
+          <T x={X0} y={letterY - 24} text={t("letterRow")} anchor="start" size={12} />
           <g onPointerEnter={() => setHover("numeral")} onPointerLeave={() => setHover(null)}>
             {[...r].map((c, i) => (
               <g key={i}>
@@ -541,11 +542,11 @@ export function RomanAdditionCard({ side }: { side: Side }) {
             const on = hover === l.key;
             return (
               <g key={l.key} onPointerEnter={() => setHover(l.key)} onPointerLeave={() => setHover(null)}>
-                <T x={X0} y={y + 4} text={l.label} anchor="start" size={11} bold style={l.key === "sum" ? INK : MUTED} />
+                <T x={X0} y={y + 4} text={l.label} anchor="start" size={12} bold style={l.key === "sum" ? INK : MUTED} />
                 {[...l.text].map((c, j) => (
                   <g key={j}>
                     <rect x={X0 + LBL + j * (pill + 3)} y={y - 12} width={pill} height={24} rx={12} style={{ fill: l.key === "sum" ? "var(--cv-to-soft)" : l.key === "pooled" ? "var(--glass-track)" : "var(--cv-from-soft)", ...lit(on) }} />
-                    <T x={X0 + LBL + j * (pill + 3) + pill / 2} y={y + 4.5} text={c} size={pill < 18 ? 10.5 : 12.5} bold style={INK} />
+                    <T x={X0 + LBL + j * (pill + 3) + pill / 2} y={y + 4.5} text={c} size={pill < 18 ? 12 : 12.5} bold style={INK} />
                   </g>
                 ))}
               </g>

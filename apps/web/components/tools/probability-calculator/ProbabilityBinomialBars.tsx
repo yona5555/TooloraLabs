@@ -4,6 +4,7 @@ import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { atLeastOnce, binomialDistribution } from "@tooloralabs/tools";
 import ProbabilityIndicatorCard from "./ProbabilityIndicatorCard";
 import { useProbabilityModel } from "./ProbabilityLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const N = 10;
 const W = 320;
@@ -38,16 +39,16 @@ export default function ProbabilityBinomialBars() {
           <g key={k}>
             <rect x={x} y={H - B - h} width={bw} height={Math.max(h, 0.5)} rx={3} className={top ? "fill-blue-600 dark:fill-blue-400" : "fill-blue-300 dark:fill-blue-500/60"} />
             {p >= 0.005 && (
-              <text x={x + bw / 2} y={H - B - h - 4} textAnchor="middle" className={`font-mono text-[8.5px] font-bold ${top ? "fill-blue-700 dark:fill-blue-300" : "fill-zinc-600 dark:fill-zinc-300"}`}>
+              <text style={{ fontSize: svgPx(12) }} x={x + bw / 2} y={H - B - h - 4} textAnchor="middle" className={`font-mono font-bold ${top ? "fill-blue-700 dark:fill-blue-300": "fill-zinc-600 dark:fill-zinc-300"}`}>
                 {f(p * 100, p >= 0.1 ? 0 : 1)}
               </text>
             )}
-            <text x={x + bw / 2} y={H - B + 13} textAnchor="middle" className="fill-zinc-600 font-mono text-[10px] dark:fill-zinc-300">{f(k, 0)}</text>
+            <text style={{ fontSize: svgPx(12) }} x={x + bw / 2} y={H - B + 13} textAnchor="middle" className="fill-zinc-600 font-mono dark:fill-zinc-300">{f(k, 0)}</text>
           </g>
         );
       })}
-      <text x={W / 2} y={H - 4} textAnchor="middle" className="fill-zinc-500 text-[10px] dark:fill-zinc-400">{t("axis")}</text>
-      <text x={W - L} y={12} textAnchor="end" className="fill-zinc-500 font-mono text-[10px] dark:fill-zinc-400">%</text>
+      <text style={{ fontSize: svgPx(12) }} x={W / 2} y={H - 4} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">{t("axis")}</text>
+      <text style={{ fontSize: svgPx(12) }} x={W - L} y={12} textAnchor="end" className="fill-zinc-500 font-mono dark:fill-zinc-400">%</text>
     </svg>
   );
 

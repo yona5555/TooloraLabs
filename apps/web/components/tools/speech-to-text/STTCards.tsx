@@ -6,6 +6,7 @@ import { IndicatorCard, KitControls, KitTable, KitTrack, useMeasuredSize, useSte
 import { Drawing, INK, lit, MUTED, px2, SvgLabel as T, useDrawing } from "@/components/tool-ui/indicator-kit/SvgBits";
 import { DualRingGauge } from "@/components/tool-ui/indicator-kit/DualRingGauge";
 import { capitalised, clean, EVENTS, EXAMPLE_SEGMENTS, LANG_SAMPLES, LOWER_SENTENCES, run } from "./sttMath";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 /**
  * The seven 2D speech-to-text indicator cards (the 3D word helix lives in STTCard3D). Each card owns
@@ -86,21 +87,21 @@ export function STTCleanupCard({ side }: { side: Side }) {
       table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
       visual={
         <Drawing {...d} hMin={HMIN} label={t("handle")} valueText={valueText} handle={{ x: xl(raw.length), y: dotY, dir: "horizontal" }} s={s} testId="stt-c1">
-          <T x={X0} y={rawY - 18} text={t("rawLabel")} anchor="start" size={10.5} bold />
-          <text x={X0} y={rawY} fontSize={12} fontWeight={600} style={{ fill: "var(--ai-d)" }} onPointerEnter={() => setHover("raw")} onPointerLeave={() => setHover(null)}>
+          <T x={X0} y={rawY - 18} text={t("rawLabel")} anchor="start" size={12} bold />
+          <text x={X0} y={rawY} fontWeight={600} style={{ fontSize: svgPx(12), fill: "var(--ai-d)" }} onPointerEnter={() => setHover("raw")} onPointerLeave={() => setHover(null)}>
             {raw.length > per ? `${show(raw.slice(0, per - 1))}…` : show(raw)}
           </text>
-          <T x={X0} y={cleanY - 18} text={t("cleanLabel")} anchor="start" size={10.5} bold />
-          <text x={X0} y={cleanY} fontSize={12} fontWeight={600} style={{ fill: "var(--ai-c)" }} onPointerEnter={() => setHover("clean")} onPointerLeave={() => setHover(null)}>
+          <T x={X0} y={cleanY - 18} text={t("cleanLabel")} anchor="start" size={12} bold />
+          <text x={X0} y={cleanY} fontWeight={600} style={{ fontSize: svgPx(12), fill: "var(--ai-c)" }} onPointerEnter={() => setHover("clean")} onPointerLeave={() => setHover(null)}>
             {show(out.transcript)}
           </text>
           <line x1={X0} y1={dotY} x2={W - X0} y2={dotY} style={{ stroke: "var(--glass-track)" }} strokeWidth={8} strokeLinecap="round" />
           <line x1={xl(out.transcript.length)} y1={dotY} x2={xl(raw.length)} y2={dotY} style={{ stroke: "var(--ai-b)" }} strokeWidth={hover === "removed" ? 8 : 5} strokeLinecap="round" />
           <circle cx={xl(out.transcript.length)} cy={dotY} r={9} style={{ fill: "var(--ai-c)", ...lit(hover === "clean") }} />
-          <T x={xl(out.transcript.length)} y={dotY + 28} text={String(out.transcript.length)} size={11} bold style={{ fill: "var(--ai-c)" }} />
-          <T x={Math.max(xl(raw.length), xl(out.transcript.length) + 34)} y={dotY + 28} text={String(raw.length)} size={11} bold style={{ fill: "var(--ai-d)" }} />
-          <T x={X0} y={H - 8} text="0" anchor="start" size={10} />
-          <T x={W - X0} y={H - 8} text={String(maxLen)} anchor="end" size={10} />
+          <T x={xl(out.transcript.length)} y={dotY + 28} text={String(out.transcript.length)} size={12} bold style={{ fill: "var(--ai-c)" }} />
+          <T x={Math.max(xl(raw.length), xl(out.transcript.length) + 34)} y={dotY + 28} text={String(raw.length)} size={12} bold style={{ fill: "var(--ai-d)" }} />
+          <T x={X0} y={H - 8} text="0" anchor="start" size={12} />
+          <T x={W - X0} y={H - 8} text={String(maxLen)} anchor="end" size={12} />
         </Drawing>
       }
     />
@@ -156,14 +157,14 @@ export function STTCapitalsCard({ side }: { side: Side }) {
               <g key={i} opacity={on ? 1 : 0.4} onPointerEnter={() => setHover("caps")} onPointerLeave={() => setHover(null)}>
                 <line x1={xc(i)} y1={base} x2={xc(i)} y2={yl(lens[i]) + 16} style={{ stroke: on ? "var(--ai-a)" : "var(--ph-line)" }} strokeWidth={2.5} />
                 <circle cx={xc(i)} cy={yl(lens[i])} r={16} style={{ fill: on ? "var(--ai-a)" : "var(--ph-surface)", ...lit(on && hover === "caps") }} />
-                <text x={xc(i)} y={yl(lens[i]) + 5.5} fontSize={15} fontWeight={800} textAnchor="middle" style={{ fill: on ? "var(--ph-surface)" : "var(--ph-ink-muted)" }}>
+                <text x={xc(i)} y={yl(lens[i]) + 5.5} fontWeight={800} textAnchor="middle" style={{ fontSize: svgPx(15), fill: on ? "var(--ph-surface)" : "var(--ph-ink-muted)" }}>
                   {letter}
                 </text>
-                <T x={xc(i)} y={base + 15} text={String(lens[i])} size={10} />
+                <T x={xc(i)} y={base + 15} text={String(lens[i])} size={12} />
               </g>
             );
           })}
-          <T x={X0} y={18} text={t("axis")} anchor="start" size={10.5} bold />
+          <T x={X0} y={18} text={t("axis")} anchor="start" size={12} bold />
           <line x1={X0} y1={H - 22} x2={W - X0} y2={H - 22} style={{ stroke: "var(--glass-track)" }} strokeWidth={8} strokeLinecap="round" />
           <line x1={X0} y1={H - 22} x2={xc(k - 1)} y2={H - 22} style={{ stroke: "var(--ai-a)" }} strokeWidth={8} strokeLinecap="round" />
         </Drawing>
@@ -215,8 +216,8 @@ export function STTInterimCard({ side }: { side: Side }) {
       table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
       visual={
         <Drawing {...d} hMin={HMIN} label={t("handle")} valueText={valueText} handle={{ x: xc(i - 1), y: H - 22, dir: "horizontal" }} s={s} testId="stt-c3">
-          <T x={10} y={lane1 + 4} text={t("laneInterim")} anchor="start" size={10.5} bold />
-          <T x={10} y={lane2 + 4} text={t("laneFinal")} anchor="start" size={10.5} bold />
+          <T x={10} y={lane1 + 4} text={t("laneInterim")} anchor="start" size={12} bold />
+          <T x={10} y={lane2 + 4} text={t("laneFinal")} anchor="start" size={12} bold />
           <line x1={X0} y1={lane1} x2={W - 16} y2={lane1} style={{ stroke: "var(--ph-grid)" }} strokeWidth={14} strokeLinecap="round" />
           <line x1={X0} y1={lane2} x2={W - 16} y2={lane2} style={{ stroke: "var(--ph-grid)" }} strokeWidth={14} strokeLinecap="round" />
           {EVENTS.map((e, j) => {
@@ -227,14 +228,14 @@ export function STTInterimCard({ side }: { side: Side }) {
               <g key={j} opacity={on ? 1 : 0.35} onPointerEnter={() => setHover(e.final ? "finals" : "interim")} onPointerLeave={() => setHover(null)}>
                 {e.final && j > 0 && <line x1={xc(j)} y1={lane1} x2={xc(j)} y2={lane2} style={{ stroke: "var(--ai-c)" }} strokeDasharray="3 3" />}
                 <circle cx={xc(j)} cy={y} r={e.final ? 11 : 4 + words * 1.4} style={{ fill: e.final ? "var(--ai-c)" : "var(--ai-b)", ...lit(on && hover === (e.final ? "finals" : "interim")) }} />
-                <T x={xc(j)} y={y + (e.final ? 28 : -14)} text={String(words)} size={10} bold style={INK} />
+                <T x={xc(j)} y={y + (e.final ? 28 : -14)} text={String(words)} size={12} bold style={INK} />
               </g>
             );
           })}
-          <T x={12} y={shownY - 18} text={t("shown")} anchor="start" size={10.5} bold />
+          <T x={12} y={shownY - 18} text={t("shown")} anchor="start" size={12} bold />
           {/* What the Transcript card shows at this event: committed text in ink, the interim guess faint. */}
           {[...wrap(out.transcript, per, 2).map((ln) => ({ ln, faint: false })), ...(interim ? [{ ln: `${interim}…`, faint: true }] : [])].slice(0, 3).map((r, j) => (
-            <text key={j} x={12} y={shownY + j * 17} fontSize={12} fontWeight={600} style={{ fill: r.faint ? "var(--ph-ink-muted)" : "var(--ph-ink)" }}>
+            <text key={j} x={12} y={shownY + j * 17} fontWeight={600} style={{ fontSize: svgPx(12), fill: r.faint ? "var(--ph-ink-muted)" : "var(--ph-ink)" }}>
               {r.ln}
             </text>
           ))}
@@ -305,14 +306,14 @@ export function STTJoinCard({ side }: { side: Side }) {
               <g key={p.j} opacity={on ? 1 : 0.3} onPointerEnter={() => setHover("sum")} onPointerLeave={() => setHover(null)}>
                 {p.j > 0 && on && <circle cx={xl(p.x0 - 0.5)} cy={barY + barH / 2} r={4} style={{ fill: "var(--ph-ink)", ...lit(hover === "spaces") }} />}
                 <rect x={xl(p.x0)} y={barY} width={xl(p.x1) - xl(p.x0)} height={barH} rx={10} style={{ fill: SEG_COLORS[p.j], ...lit(on && hover === "sum") }} />
-                <T x={(xl(p.x0) + xl(p.x1)) / 2} y={barY + barH / 2 + 4} text={String(CLEANED[p.j].length)} size={11} bold style={{ fill: "var(--ph-surface)" }} />
-                <T x={(xl(p.x0) + xl(p.x1)) / 2} y={barY - 10} text={`S${p.j + 1}`} size={10.5} bold style={on ? INK : MUTED} />
+                <T x={(xl(p.x0) + xl(p.x1)) / 2} y={barY + barH / 2 + 4} text={String(CLEANED[p.j].length)} size={12} bold style={{ fill: "var(--ph-surface)" }} />
+                <T x={(xl(p.x0) + xl(p.x1)) / 2} y={barY - 10} text={`S${p.j + 1}`} size={12} bold style={on ? INK : MUTED} />
               </g>
             );
           })}
           <line x1={X0} y1={barY + barH + 34} x2={W - X0} y2={barY + barH + 34} style={{ stroke: "var(--glass-track)" }} strokeWidth={8} strokeLinecap="round" />
           <line x1={X0} y1={barY + barH + 34} x2={xl(parts[k - 1].x1)} y2={barY + barH + 34} style={{ stroke: "var(--ai-a)" }} strokeWidth={8} strokeLinecap="round" />
-          <T x={W - X0} y={H - 6} text={t("total", { c: out.transcript.length })} anchor="end" size={11} bold style={INK} />
+          <T x={W - X0} y={H - 6} text={t("total", { c: out.transcript.length })} anchor="end" size={12} bold style={INK} />
         </Drawing>
       }
     />
@@ -385,14 +386,14 @@ export function STTWordLengthsCard({ side }: { side: Side }) {
               ) : null,
             )}
             <T x={cx} y={cy - 2} text={avg.toFixed(2)} size={18} bold style={INK} />
-            <T x={cx} y={cy + 16} text={t("centre")} size={10.5} />
+            <T x={cx} y={cy + 16} text={t("centre")} size={12} />
             {parts.map((p, i) => {
               const y = cy - 36 + i * 36;
               return (
                 <g key={p.key} onPointerEnter={() => setHover(p.key)} onPointerLeave={() => setHover(null)}>
                   <circle cx={lx} cy={y} r={7} style={{ fill: p.color }} />
-                  <T x={lx + 14} y={y - 2} text={t(`legend.${p.key}`)} anchor="start" size={11.5} bold style={INK} />
-                  <T x={lx + 14} y={y + 13} text={`${p.v} · ${((p.v / total) * 100).toFixed(1)} %`} anchor="start" size={10.5} />
+                  <T x={lx + 14} y={y - 2} text={t(`legend.${p.key}`)} anchor="start" size={12} bold style={INK} />
+                  <T x={lx + 14} y={y + 13} text={`${p.v} · ${((p.v / total) * 100).toFixed(1)} %`} anchor="start" size={12} />
                 </g>
               );
             })}
@@ -475,20 +476,20 @@ export function STTLanguagesCard({ side }: { side: Side }) {
             return (
               <g key={l.code} onPointerEnter={() => setHover("caps")} onPointerLeave={() => setHover(null)}>
                 <line x1={x0} y1={y0} x2={x1} y2={y1} style={{ stroke: on ? "var(--ai-a)" : "var(--ai-soft)" }} strokeWidth={on ? 14 : 11} strokeLinecap="round" />
-                {!on && <T x={lx} y={ly + 4} text={l.code.slice(0, 2)} size={10.5} bold style={MUTED} />}
+                {!on && <T x={lx} y={ly + 4} text={l.code.slice(0, 2)} size={12} bold style={MUTED} />}
               </g>
             );
           })}
           <T x={cx} y={cy + 5} text={`${cur.caps}/${cur.starts}`} size={13} bold style={INK} />
-          <T x={tx} y={ty} text={t("before")} anchor="start" size={10.5} bold />
+          <T x={tx} y={ty} text={t("before")} anchor="start" size={12} bold />
           {wrap(clean(cur.text), per, 2).map((ln, j) => (
-            <text key={`b${j}`} x={lx0} y={ty + 18 + j * 16} fontSize={12} fontWeight={600} direction={rtl ? "rtl" : "ltr"} textAnchor="start" style={{ fill: "var(--ph-ink-muted)" }}>
+            <text key={`b${j}`} x={lx0} y={ty + 18 + j * 16} fontWeight={600} direction={rtl ? "rtl" : "ltr"} textAnchor="start" style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
               {ln}
             </text>
           ))}
-          <T x={tx} y={ty + (narrow ? 58 : 66)} text={t("after")} anchor="start" size={10.5} bold />
+          <T x={tx} y={ty + (narrow ? 58 : 66)} text={t("after")} anchor="start" size={12} bold />
           {wrap(cur.out.transcript, per, 2).map((ln, j) => (
-            <text key={`a${j}`} x={lx0} y={ty + (narrow ? 76 : 84) + j * 16} fontSize={12} fontWeight={700} direction={rtl ? "rtl" : "ltr"} textAnchor="start" style={{ fill: "var(--ph-ink)" }}>
+            <text key={`a${j}`} x={lx0} y={ty + (narrow ? 76 : 84) + j * 16} fontWeight={700} direction={rtl ? "rtl" : "ltr"} textAnchor="start" style={{ fontSize: svgPx(12), fill: "var(--ph-ink)" }}>
               {ln}
             </text>
           ))}

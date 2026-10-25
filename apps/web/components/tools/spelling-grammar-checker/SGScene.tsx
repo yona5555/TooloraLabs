@@ -5,6 +5,7 @@ import { KitControls, SvgHandle, useMeasuredSize, useSvgDrag, type Stepper } fro
 import { snap } from "@/components/tool-ui/indicator-kit/format";
 import type { GrammarIssue } from "./types";
 import { ISSUE_TYPES, TYPE_COLOR } from "./sgMath";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 /**
  * §44 (2D): the main visual at the top of the Results card — an issue map. The axis is the full
@@ -49,7 +50,7 @@ export default function SGScene({ issues, checkedLen, sourceLen, words, totalWor
     <div data-ph-scene-block className="flex flex-1 flex-col gap-3">
       <div ref={box} dir="ltr" data-preview="visual" className="relative min-h-[260px] w-full flex-1" data-testid="sg-hero-drawing">
         <svg ref={ref} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>
-          <text x={12} y={16} fontSize={11} fontWeight={700} style={{ fill: "var(--ph-ink-muted)" }}>
+          <text x={12} y={16} fontWeight={700} style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
             {t("axis", { c: checkedLen, t: sourceLen })}
           </text>
           {/* The part of the source that is not being checked is shaded. */}
@@ -58,10 +59,10 @@ export default function SGScene({ issues, checkedLen, sourceLen, words, totalWor
             const y = top + li * laneH + laneH / 2;
             return (
               <g key={ty}>
-                <text x={12} y={y - 2} fontSize={11} fontWeight={700} style={{ fill: TYPE_COLOR[ty] }}>
+                <text x={12} y={y - 2} fontWeight={700} style={{ fontSize: svgPx(12), fill: TYPE_COLOR[ty] }}>
                   {t(`lane.${ty}`)}
                 </text>
-                <text x={12} y={y + 12} fontSize={10.5} fontWeight={700} className="tabular-nums" style={{ fill: "var(--ph-ink)" }}>
+                <text x={12} y={y + 12} fontWeight={700} className="tabular-nums" style={{ fontSize: svgPx(12), fill: "var(--ph-ink)" }}>
                   {counts[li]}
                 </text>
                 <line x1={X0} y1={y} x2={X1} y2={y} style={{ stroke: "var(--ph-grid)" }} strokeWidth={10} strokeLinecap="round" />
@@ -76,13 +77,13 @@ export default function SGScene({ issues, checkedLen, sourceLen, words, totalWor
             );
           })}
           {[0, Math.round(len / 2), len].map((c, i) => (
-            <text key={i} x={xc(c)} y={laneBot + 16} fontSize={10} fontWeight={600} textAnchor={i === 0 ? "start" : i === 2 ? "end" : "middle"} className="tabular-nums" style={{ fill: "var(--ph-ink-muted)" }}>
+            <text key={i} x={xc(c)} y={laneBot + 16} fontWeight={600} textAnchor={i === 0 ? "start" : i === 2 ? "end" : "middle"} className="tabular-nums" style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
               {c}
             </text>
           ))}
           <line x1={X0} y1={trackY} x2={X1} y2={trackY} style={{ stroke: "var(--glass-track)" }} strokeWidth={10} strokeLinecap="round" />
           <line x1={X0} y1={trackY} x2={xw(words)} y2={trackY} style={{ stroke: "var(--ai-a)" }} strokeWidth={10} strokeLinecap="round" />
-          <text x={12} y={trackY + 4} fontSize={10.5} fontWeight={700} style={{ fill: "var(--ph-ink-muted)" }}>
+          <text x={12} y={trackY + 4} fontWeight={700} style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
             {t("words")}
           </text>
         </svg>

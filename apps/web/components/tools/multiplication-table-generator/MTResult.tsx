@@ -5,6 +5,7 @@ import { Pause, Play } from "lucide-react";
 import { mtSkipCount } from "@tooloralabs/tools";
 import MultiplicationTableShareExportModal from "./MultiplicationTableShareExportModal";
 import type { MtView, MultiplicationTableOutput, PickFact } from "./types";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 type Props = {
   result: MultiplicationTableOutput;
@@ -71,7 +72,7 @@ function SkipCountFlow({ view }: { view: MtView }) {
                 style={{ strokeDasharray: len, strokeDashoffset: len, animation: `mt-draw 380ms ease-out ${Math.min(i, 30) * 60}ms forwards` }}
               />
               {(i % arcLabelEvery === 0 || view.b <= 6) && (
-                <text x={(x0 + x1) / 2} y={BASE - h * 0.85 - 4} textAnchor="middle" className="fill-blue-700 font-mono text-[9px] font-semibold dark:fill-blue-300">
+                <text style={{ fontSize: svgPx(12) }} x={(x0 + x1) / 2} y={BASE - h * 0.85 - 4} textAnchor="middle" className="fill-blue-700 font-mono font-semibold dark:fill-blue-300">
                   +{view.fmt(view.a)}
                 </text>
               )}
@@ -82,7 +83,7 @@ function SkipCountFlow({ view }: { view: MtView }) {
           <g key={`m${i}`}>
             <circle cx={x(v)} cy={BASE} r={i === marks.length - 1 ? 5 : 2.5} className={i === marks.length - 1 ? "fill-emerald-500" : "fill-zinc-400 dark:fill-zinc-500"} />
             {(i % labelEvery === 0 || i === marks.length - 1) && (
-              <text x={x(v)} y={BASE + 16} textAnchor="middle" className={`font-mono text-[9px] ${i === marks.length - 1 ? "fill-emerald-600 font-bold dark:fill-emerald-400" : "fill-zinc-500 dark:fill-zinc-400"}`}>
+              <text style={{ fontSize: svgPx(12) }} x={x(v)} y={BASE + 16} textAnchor="middle" className={`font-mono ${i === marks.length - 1 ? "fill-emerald-600 font-bold dark:fill-emerald-400": "fill-zinc-500 dark:fill-zinc-400"}`}>
                 {view.fmt(v)}
               </text>
             )}

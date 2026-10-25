@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { accelerationZone, KINEMATICS_G0 } from "@tooloralabs/tools";
 import KinIndicatorCard, { KinIndicatorUnavailable } from "./KinIndicatorCard";
 import { r2, useKinModel } from "./KinLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 400;
 const H = 150;
@@ -39,19 +40,19 @@ export default function KinAccelerationZones() {
       {ZONES.map((z) => (
         <g key={z.key}>
           <rect x={px(z.from)} y={Y} width={r2(px(z.to) - px(z.from))} height={BAND} className={z.cls} />
-          <text x={r2((px(z.from) + px(z.to)) / 2)} y={Y + BAND + 30} textAnchor="middle" fontSize={10} fontWeight={600} className="fill-zinc-600 dark:fill-zinc-300">{tg(z.key)}</text>
+          <text style={{ fontSize: svgPx(12) }} x={r2((px(z.from) + px(z.to)) / 2)} y={Y + BAND + 30} textAnchor="middle" fontWeight={600} className="fill-zinc-600 dark:fill-zinc-300">{tg(z.key)}</text>
         </g>
       ))}
       {[0, GRAVITY, 20, MAX].map((v) => (
-        <text key={v} x={px(v)} y={Y + BAND + 14} textAnchor="middle" fontSize={9.5} className="fill-zinc-500 dark:fill-zinc-400">{f(v, 1)}</text>
+        <text style={{ fontSize: svgPx(12) }} key={v} x={px(v)} y={Y + BAND + 14} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">{f(v, 1)}</text>
       ))}
       <line x1={px(KINEMATICS_G0)} y1={Y - 6} x2={px(KINEMATICS_G0)} y2={Y + BAND + 3} strokeWidth={1.5} strokeDasharray="3 2" className="stroke-zinc-700 dark:stroke-zinc-200" />
       {/* marker for |a| */}
       <path d={`M${mx - 7},${Y - 16} L${mx + 7},${Y - 16} L${mx},${Y - 4} Z`} className="fill-blue-700 dark:fill-blue-300" />
-      <text x={Math.min(R - 60, Math.max(L + 60, mx))} y={Y - 22} textAnchor="middle" fontSize={12} fontWeight={700} className="fill-blue-700 dark:fill-blue-300">
+      <text style={{ fontSize: svgPx(12) }} x={Math.min(R - 60, Math.max(L + 60, mx))} y={Y - 22} textAnchor="middle" fontWeight={700} className="fill-blue-700 dark:fill-blue-300">
         {`|a| = ${f(abs)} m/s²${abs > MAX ? " →" : ""}`}
       </text>
-      <text x={R} y={H - 4} textAnchor="end" fontSize={10} className="fill-zinc-500 dark:fill-zinc-400">m/s²</text>
+      <text style={{ fontSize: svgPx(12) }} x={R} y={H - 4} textAnchor="end" className="fill-zinc-500 dark:fill-zinc-400">m/s²</text>
     </svg>
   );
 

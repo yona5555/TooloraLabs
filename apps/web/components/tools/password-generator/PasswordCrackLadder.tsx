@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { GUESS_RATES } from "@tooloralabs/tools";
 import PasswordIndicatorCard, { PasswordIndicatorUnavailable } from "./PasswordIndicatorCard";
 import { pow10Text, SECONDS_PER_YEAR, usePasswordModel } from "./PasswordLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const L = 10;
@@ -41,15 +42,14 @@ export default function PasswordCrackLadder() {
         const y = 10 + i * 44;
         return (
           <g key={r.key}>
-            <text x={L} y={y + 10} fontSize={12} className="fill-zinc-600 dark:fill-zinc-300">
+            <text style={{ fontSize: svgPx(12) }} x={L} y={y + 10} className="fill-zinc-600 dark:fill-zinc-300">
               {trate(r.key)}
             </text>
             <rect x={L} y={y + 16} width={Math.max(3, x(v) - L)} height={14} rx={4} className={COLORS[i]} />
-            <text
+            <text style={{ fontSize: svgPx(12) }}
               x={Math.min(x(v) + 4, W - 4)}
               y={y + 28}
               textAnchor={x(v) > W - 70 ? "end" : "start"}
-              fontSize={11}
               fontWeight={700}
               fontFamily="ui-monospace, monospace"
               className={x(v) > W - 70 ? "fill-white" : "fill-zinc-700 dark:fill-zinc-200"}
@@ -63,7 +63,7 @@ export default function PasswordCrackLadder() {
       {MARKS.map((m, i) => (
         <g key={m.key}>
           <line x1={x(m.log10)} y1={8} x2={x(m.log10)} y2={AXIS_Y + 4} strokeDasharray="2 4" className="stroke-zinc-300 dark:stroke-zinc-600" />
-          <text x={x(m.log10)} y={AXIS_Y + 18 + (i % 2) * 14} textAnchor="middle" fontSize={11} className="fill-zinc-500 dark:fill-zinc-400">
+          <text style={{ fontSize: svgPx(12) }} x={x(m.log10)} y={AXIS_Y + 18 + (i % 2) * 14} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
             {t(m.key)}
           </text>
         </g>

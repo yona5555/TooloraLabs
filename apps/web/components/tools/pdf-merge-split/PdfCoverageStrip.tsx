@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import PdfIndicatorCard, { PdfIndicatorUnavailable } from "./PdfIndicatorCard";
 import { SOURCE_FILL, usePdfModel } from "./PdfLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 110;
@@ -24,7 +25,7 @@ export default function PdfCoverageStrip() {
 
   const svg = (
     <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
-      <text x={0} y={14} fontSize={12} className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={0} y={14} className="fill-zinc-500 dark:fill-zinc-400">
         {isSplit ? t("axisSplit", { n }) : t("axisMerge", { n })}
       </text>
       {Array.from({ length: n }, (_, i) => {
@@ -38,14 +39,14 @@ export default function PdfCoverageStrip() {
           <g key={i}>
             <rect x={i * cw + 1} y={Y} width={cw - 2} height={CELL_H} rx={4} className={cls} />
             {cw >= 16 && (
-              <text x={i * cw + cw / 2} y={Y + CELL_H / 2 + 5} textAnchor="middle" fontSize={12} fontWeight={700} className="fill-white">
+              <text style={{ fontSize: svgPx(12) }} x={i * cw + cw / 2} y={Y + CELL_H / 2 + 5} textAnchor="middle" fontWeight={700} className="fill-white">
                 {isSplit ? p : pages[i].page}
               </text>
             )}
           </g>
         );
       })}
-      <text x={0} y={H - 10} fontSize={12} className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={0} y={H - 10} className="fill-zinc-500 dark:fill-zinc-400">
         {isSplit ? t("legendSplit") : t("legendMerge")}
       </text>
     </svg>

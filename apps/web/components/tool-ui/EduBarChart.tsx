@@ -1,3 +1,4 @@
+import { svgPx } from "@/components/tool-ui/svgPx";
 /**
  * Lightweight, non-interactive SVG horizontal bar chart (§31 type #1/#5) for an education-page
  * diagram. Pure presentational (no "use client", no hooks) so it costs zero client JS. Shared
@@ -38,12 +39,12 @@ export default function EduBarChart({ bars, ariaLabel, barColorClass = "fill-blu
           const barW = Math.max((bar.value / maxValue) * plotWidth, 2);
           return (
             <g key={bar.label}>
-              <text x={labelWidth - 8} y={y + ROW_HEIGHT / 2 + 4} textAnchor="end" fontSize={11} fill="currentColor" opacity={0.75}>
+              <text style={{ fontSize: svgPx(12) }} x={labelWidth - 8} y={y + ROW_HEIGHT / 2 + 4} textAnchor="end" fill="currentColor" opacity={0.75}>
                 {bar.label}
               </text>
               <rect x={labelWidth} y={y} width={plotWidth} height={ROW_HEIGHT} rx={4} className="fill-current opacity-[0.06]" />
               <rect x={labelWidth} y={y} width={barW} height={ROW_HEIGHT} rx={4} className={bar.highlight ? highlightColorClass : barColorClass} />
-              <text x={labelWidth + plotWidth + 10} y={y + ROW_HEIGHT / 2 + 4} textAnchor="start" fontSize={11} fontWeight={700} fill="currentColor">
+              <text style={{ fontSize: svgPx(12) }} x={labelWidth + plotWidth + 10} y={y + ROW_HEIGHT / 2 + 4} textAnchor="start" fontWeight={700} fill="currentColor">
                 {bar.formatted}
               </text>
             </g>

@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import TriangleWorkedExampleNote from "./TriangleWorkedExampleNote";
 import GapFreeRow from "@/components/tool-ui/GapFreeRow";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 /**
  * The classic "tear off the three corners and line them up" proof sketch
@@ -30,7 +31,7 @@ export default function TriangleAngleSumDiagram() {
             <path d="M 57 156 L 60 175 A 25 25 0 0 1 90 168 Z" className="fill-amber-500/60 dark:fill-amber-400/60" />
             <path d="M 90 168 L 100 175 A 25 25 0 0 1 130 175 Z" className="fill-green-500/60 dark:fill-green-400/60" />
 
-            <text x="130" y="22" fontSize={13} fontWeight={700} textAnchor="middle" fill="currentColor">
+            <text style={{ fontSize: svgPx(13) }} x="130" y="22" fontWeight={700} textAnchor="middle" fill="currentColor">
               {d("caption180")}
             </text>
           </svg>

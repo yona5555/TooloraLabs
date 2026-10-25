@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import BackButton from "@/components/tool-ui/BackButton";
 import { categoryHref } from "@/data/categories";
 import PhoneLayoutScript from "./PhoneLayoutScript";
+import SvgLabelScale from "./SvgLabelScale";
 
 type ToolPageLayoutProps = {
   category: string;
@@ -50,6 +51,7 @@ export default function ToolPageLayout({
 
         <div data-phone-flow="" className="mt-4">{children}</div>
         <PhoneLayoutScript />
+        <SvgLabelScale />
       </main>
     );
   }
@@ -81,6 +83,7 @@ export default function ToolPageLayout({
         {children}
       </div>
       <PhoneLayoutScript />
+      <SvgLabelScale />
     </main>
   );
 }

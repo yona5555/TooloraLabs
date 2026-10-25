@@ -5,6 +5,7 @@ import { Pause, Play } from "lucide-react";
 import { kinematicsAt } from "@tooloralabs/tools";
 import ForceIndicatorCard, { ForceIndicatorUnavailable } from "./ForceIndicatorCard";
 import { toInput, useForceLive, useForceModel } from "./ForceLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 360;
 const H = 200;
@@ -71,7 +72,7 @@ export default function ForcePushLab() {
   const lab = (
     <div className="w-full max-w-[360px]">
       <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
-        <text x={W / 2} y={18} textAnchor="middle" fontSize={14} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+        <text style={{ fontSize: svgPx(14) }} x={W / 2} y={18} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
           {`t = ${time.toFixed(2)} s`}
         </text>
         {lane.map((ln, i) => {
@@ -79,10 +80,10 @@ export default function ForcePushLab() {
           const bx = X0 + frac(ln.now.x) * (TRACK - BLOCK);
           return (
             <g key={i}>
-              <text x={X0} y={y - 32} fontSize={11} fontWeight={600} className="fill-zinc-600 dark:fill-zinc-300">
+              <text style={{ fontSize: svgPx(12) }} x={X0} y={y - 32} fontWeight={600} className="fill-zinc-600 dark:fill-zinc-300">
                 {ln.label}
               </text>
-              <text x={X0 + TRACK} y={y - 32} textAnchor="end" fontSize={11} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+              <text style={{ fontSize: svgPx(12) }} x={X0 + TRACK} y={y - 32} textAnchor="end" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
                 {`v = ${f(ln.now.v, 2)} m/s · x = ${f(ln.now.x, 2)} m`}
               </text>
               <line x1={X0} y1={y} x2={X0 + TRACK} y2={y} strokeWidth={2} className="stroke-zinc-300 dark:stroke-zinc-600" />
@@ -92,7 +93,7 @@ export default function ForcePushLab() {
                   <g key={s}>
                     <line x1={tx} y1={y} x2={tx} y2={y + 6} strokeWidth={1.5} className="stroke-zinc-400 dark:stroke-zinc-500" />
                     {s >= 2 && (i === 0 || s === 4) && (
-                      <text x={tx} y={y + 17} textAnchor="middle" fontSize={9} className="fill-zinc-400 dark:fill-zinc-500">
+                      <text style={{ fontSize: svgPx(12) }} x={tx} y={y + 17} textAnchor="middle" className="fill-zinc-400 dark:fill-zinc-500">
                         {`${s} s`}
                       </text>
                     )}

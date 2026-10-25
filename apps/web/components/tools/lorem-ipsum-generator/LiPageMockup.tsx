@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import { greekLines, SEGMENT_FILLS } from "./liMath";
 import { useLiLive } from "./LiLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 176;
 const H = 214;
@@ -63,7 +64,7 @@ export default function LiPageMockup() {
         })}
         {!fits && <rect x={0} y={H - 30} width={W} height={29} rx={10} className="fill-white/80 dark:fill-zinc-900/70" />}
         {!fits && (
-          <text x={W / 2} y={H - 12} textAnchor="middle" fontSize={9} fontWeight={600} className="fill-zinc-500 dark:fill-zinc-400">
+          <text style={{ fontSize: svgPx(12) }} x={W / 2} y={H - 12} textAnchor="middle" fontWeight={600} className="fill-zinc-500 dark:fill-zinc-400">
             {t("more", { n: f(total - visible) })}
           </text>
         )}

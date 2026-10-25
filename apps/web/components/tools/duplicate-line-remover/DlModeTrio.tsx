@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import DlIndicatorCard, { DlIndicatorUnavailable } from "./DlIndicatorCard";
 import { useDlLive, useDlModel } from "./DlLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 200;
@@ -43,10 +44,10 @@ export default function DlModeTrio() {
             }}
           >
             <rect x={cx - 30} y={BASE - h} width={60} height={h} rx={5} className={active ? "fill-blue-600 dark:fill-blue-400" : "fill-blue-300 hover:fill-blue-400 dark:fill-blue-800"} />
-            <text x={cx} y={BASE - h - 6} textAnchor="middle" fontSize={13} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(13) }} x={cx} y={BASE - h - 6} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
               {f(m.v)}
             </text>
-            <text x={cx} y={BASE + 18} textAnchor="middle" fontSize={11} className="fill-zinc-600 dark:fill-zinc-300">
+            <text style={{ fontSize: svgPx(12) }} x={cx} y={BASE + 18} textAnchor="middle" className="fill-zinc-600 dark:fill-zinc-300">
               {t(m.key)}
             </text>
           </g>

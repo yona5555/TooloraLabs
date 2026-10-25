@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import PdfIndicatorCard, { PdfIndicatorUnavailable } from "./PdfIndicatorCard";
 import { SOURCE_FILL, usePdfModel } from "./PdfLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 190;
@@ -34,10 +35,10 @@ export default function PdfSourceDonut() {
       {counts.map((c, i) =>
         c > 0 ? <path key={i} d={ring(52, 88, cum[i][0], cum[i][1])} className={`${SOURCE_FILL[i % SOURCE_FILL.length]} stroke-white dark:stroke-zinc-900`} strokeWidth={1.5} /> : null,
       )}
-      <text x={CX} y={CY - 2} textAnchor="middle" fontSize={20} fontWeight={700} className="fill-zinc-800 dark:fill-zinc-100">
+      <text style={{ fontSize: svgPx(20) }} x={CX} y={CY - 2} textAnchor="middle" fontWeight={700} className="fill-zinc-800 dark:fill-zinc-100">
         {f(total)}
       </text>
-      <text x={CX} y={CY + 15} textAnchor="middle" fontSize={12} className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={CX} y={CY + 15} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
         {t("pages")}
       </text>
       {shown.map((s, i) => {
@@ -45,10 +46,10 @@ export default function PdfSourceDonut() {
         return (
           <g key={i}>
             <circle cx={208} cy={y} r={6} className={SOURCE_FILL[i % SOURCE_FILL.length]} />
-            <text x={220} y={y + 4} fontSize={12} fontFamily="ui-monospace, monospace" className="fill-zinc-600 dark:fill-zinc-300">
+            <text style={{ fontSize: svgPx(12) }} x={220} y={y + 4} fontFamily="ui-monospace, monospace" className="fill-zinc-600 dark:fill-zinc-300">
               {s.length > 12 ? `${s.slice(0, 11)}…` : s}
             </text>
-            <text x={W - 4} y={y + 4} textAnchor="end" fontSize={12} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={W - 4} y={y + 4} textAnchor="end" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
               {f(counts[i])}
             </text>
           </g>

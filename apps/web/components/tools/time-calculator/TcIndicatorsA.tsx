@@ -7,6 +7,9 @@ import { ShiftDial } from "./TcDrawings";
 import { useTcPhrases } from "./TcResult";
 import { C, type CardProps } from "./state";
 import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
+import { svgPx } from "@/components/tool-ui/svgPx";
+import { labelW } from "@/components/tool-ui/indicator-kit/SvgBits";
+import { useFitWidth } from "@/components/tool-ui/useFitWidth";
 
 const axisText = "fill-zinc-500 dark:fill-zinc-400";
 const valueText = "fill-zinc-800 dark:fill-zinc-100";
@@ -76,7 +79,7 @@ export function TcTimesheetStackCard({ s, d, f }: CardProps) {
   const t = useIndT();
   const { t: tc } = useTcPhrases();
   const sh = d.sheet;
-  const W = 420;
+  const [fitRef, W] = useFitWidth(420);
   const H = 190;
   const L = 10;
   const span = Math.max(1, sh.addedSeconds);
@@ -95,8 +98,8 @@ export function TcTimesheetStackCard({ s, d, f }: CardProps) {
         workedExampleTitle={t("worked")}
         indicator={
           <PhoneMini slot={0} title={t("stack.title")}>
-            <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("stack.title")} className="max-w-full">
-              <text x={L} y={18} fontSize={10} fontWeight={700} fill={C.add}>{`+ ${f.dur(sh.addedSeconds)}`}</text>
+            <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("stack.title")} className="max-w-full">
+              <text style={{ fontSize: svgPx(12) }} x={L} y={18} fontWeight={700} fill={C.add}>{`+ ${f.dur(sh.addedSeconds)}`}</text>
               {pos.map((e, k) => {
                 const x0 = x(posStart[k]);
                 const w = Math.max(1, x(posStart[k] + e.v) - x0);
@@ -105,8 +108,8 @@ export function TcTimesheetStackCard({ s, d, f }: CardProps) {
                     <rect x={x0} y={26} width={w} height={44} fill={greens[k % greens.length]} stroke="white" strokeWidth={1} style={{ transition: "all 350ms ease" }} />
                     {w > 38 && (
                       <>
-                        <text x={x0 + w / 2} y={44} textAnchor="middle" fontSize={9} fontWeight={700} fill="white">{(e.r.label || `#${e.i + 1}`).slice(0, 10)}</text>
-                        <text x={x0 + w / 2} y={60} textAnchor="middle" fontSize={9} fill="white">{f.durHm(e.v)}</text>
+                        <text style={{ fontSize: svgPx(12) }} x={x0 + w / 2} y={44} textAnchor="middle" fontWeight={700} fill="white">{(e.r.label || `#${e.i + 1}`).slice(0, 10)}</text>
+                        <text style={{ fontSize: svgPx(12) }} x={x0 + w / 2} y={60} textAnchor="middle" fill="white">{f.durHm(e.v)}</text>
                       </>
                     )}
                   </g>
@@ -118,15 +121,15 @@ export function TcTimesheetStackCard({ s, d, f }: CardProps) {
                 return (
                   <g key={e.r.id}>
                     <rect x={x0} y={80} width={Math.max(1, x1 - x0)} height={30} fill={C.sub} fillOpacity={0.85} style={{ transition: "all 350ms ease" }} />
-                    <text x={x0 - 4} y={99} textAnchor="end" fontSize={9} fontWeight={700} fill={C.sub}>{`−${f.durHm(e.v)}`}</text>
+                    <text style={{ fontSize: svgPx(12) }} x={x0 - 4} y={99} textAnchor="end" fontWeight={700} fill={C.sub}>{`−${f.durHm(e.v)}`}</text>
                   </g>
                 );
               })}
               <rect x={L} y={120} width={Math.max(1, x(net) - L)} height={30} rx={3} fill={C.main} style={{ transition: "all 350ms ease" }} />
-              <text x={Math.min(W - 60, x(net) + 6)} y={140} fontSize={11} fontWeight={800} fill={C.main}>{f.dur(sh.totalSeconds)}</text>
+              <text style={{ fontSize: svgPx(12) }} x={Math.min(W - 4 - labelW(f.dur(sh.totalSeconds)), x(net) + 6)} y={140} fontWeight={800} fill={C.main}>{f.dur(sh.totalSeconds)}</text>
               <line x1={x(net)} x2={x(net)} y1={22} y2={156} stroke={C.main} strokeDasharray="3 3" />
               {[0, 0.25, 0.5, 0.75, 1].map((q) => (
-                <text key={q} x={x(span * q)} y={172} textAnchor="middle" fontSize={8.5} className={axisText}>{f.durHm(span * q)}</text>
+                <text style={{ fontSize: svgPx(12) }} key={q} x={x(span * q)} y={172} textAnchor={q === 0 ? "start" : q === 1 ? "end" : "middle"} className={axisText}>{f.durHm(span * q)}</text>
               ))}
             </svg>
           </PhoneMini>
@@ -160,21 +163,21 @@ export function TcFlowCard({ s, d, f }: CardProps) {
         indicator={
           <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("flow.title")} className="max-w-full">
             <rect x={6} y={30} width={110} height={70} rx={10} fill={C.add} fillOpacity={0.15} stroke={C.add} />
-            <text x={61} y={58} textAnchor="middle" fontSize={17} fontWeight={800} className={valueText}>{f.clock(d.addClock)}</text>
-            <text x={61} y={78} textAnchor="middle" fontSize={9} className={axisText}>{f.shortDate(d.addDate)}</text>
+            <text style={{ fontSize: svgPx(17) }} x={61} y={58} textAnchor="middle" fontWeight={800} className={valueText}>{f.clock(d.addClock)}</text>
+            <text style={{ fontSize: svgPx(12) }} x={61} y={78} textAnchor="middle" className={axisText}>{f.shortDate(d.addDate)}</text>
             <path d="M 122 65 L 286 65" stroke={C.main} strokeWidth={10} />
             <path d="M 284 50 L 304 65 L 284 80 Z" fill={C.main} />
-            <text x={204} y={55} textAnchor="middle" fontSize={12} fontWeight={800} fill={C.main}>{`${sign}${f.dur(d.addDuration)}`}</text>
-            <text x={204} y={90} textAnchor="middle" fontSize={9} className={axisText}>{`${f.hours(d.addDuration)} h`}</text>
+            <text style={{ fontSize: svgPx(12) }} x={204} y={55} textAnchor="middle" fontWeight={800} fill={C.main}>{`${sign}${f.dur(d.addDuration)}`}</text>
+            <text style={{ fontSize: svgPx(12) }} x={204} y={90} textAnchor="middle" className={axisText}>{`${f.hours(d.addDuration)} h`}</text>
             <rect x={306} y={30} width={108} height={70} rx={10} fill={C.main} fillOpacity={0.15} stroke={C.main} />
-            <text x={360} y={58} textAnchor="middle" fontSize={17} fontWeight={800} className={valueText}>{f.clock(a.resultClock)}</text>
-            <text x={360} y={78} textAnchor="middle" fontSize={9} className={axisText}>{f.shortDate(a.resultDate)}</text>
+            <text style={{ fontSize: svgPx(17) }} x={360} y={58} textAnchor="middle" fontWeight={800} className={valueText}>{f.clock(a.resultClock)}</text>
+            <text style={{ fontSize: svgPx(12) }} x={360} y={78} textAnchor="middle" className={axisText}>{f.shortDate(a.resultDate)}</text>
             <rect x={330} y={8} width={60} height={18} rx={9} fill={a.dayOffset ? C.ot : C.add} />
-            <text x={360} y={21} textAnchor="middle" fontSize={9.5} fontWeight={800} fill="white">{a.dayOffset > 0 ? `+${a.dayOffset}d` : a.dayOffset < 0 ? `${a.dayOffset}d` : "0d"}</text>
+            <text style={{ fontSize: svgPx(12) }} x={360} y={21} textAnchor="middle" fontWeight={800} fill="white">{a.dayOffset > 0 ? `+${a.dayOffset}d` : a.dayOffset < 0 ? `${a.dayOffset}d` : "0d"}</text>
             {a.dstDeltaSeconds !== 0 && (
               <g>
                 <rect x={150} y={100} width={110} height={20} rx={10} fill={C.dst} />
-                <text x={205} y={114} textAnchor="middle" fontSize={9.5} fontWeight={800} fill="white">{`DST ${f.signedDur(a.dstDeltaSeconds).replace(/:00$/, "")}`}</text>
+                <text style={{ fontSize: svgPx(12) }} x={205} y={114} textAnchor="middle" fontWeight={800} fill="white">{`DST ${f.signedDur(a.dstDeltaSeconds).replace(/:00$/, "")}`}</text>
               </g>
             )}
             {Array.from({ length: ribbon }, (_, i) => {
@@ -185,13 +188,13 @@ export function TcFlowCard({ s, d, f }: CardProps) {
               return (
                 <g key={i}>
                   <rect x={6 + i * cw + 1} y={140} width={cw - 2} height={40} rx={6} fill={isEnd ? C.main : isStart ? C.add : "currentColor"} fillOpacity={isEnd || isStart ? 0.85 : 0.08} />
-                  <text x={6 + i * cw + cw / 2} y={164} textAnchor="middle" fontSize={9} fontWeight={700} className={isEnd || isStart ? "" : valueText} fill={isEnd || isStart ? "white" : undefined}>
+                  <text style={{ fontSize: svgPx(12) }} x={6 + i * cw + cw / 2} y={164} textAnchor="middle" fontWeight={700} className={isEnd || isStart ? "" : valueText} fill={isEnd || isStart ? "white" : undefined}>
                     {f.shortDate({ year: new Date(ms).getUTCFullYear(), month: new Date(ms).getUTCMonth() + 1, day: new Date(ms).getUTCDate() })}
                   </text>
                 </g>
               );
             })}
-            <text x={W / 2} y={198} textAnchor="middle" fontSize={8.5} className={axisText}>{zoneName(d.zone)}</text>
+            <text style={{ fontSize: svgPx(12) }} x={W / 2} y={198} textAnchor="middle" className={axisText}>{zoneName(d.zone)}</text>
           </svg>
         }
         rows={[
@@ -215,7 +218,7 @@ export function TcDstTimelineCard({ d, f }: CardProps) {
   const trs = zone ? findOffsetTransitions(zone, year) : [];
   const y0 = Date.UTC(year, 0, 1);
   const y1 = Date.UTC(year + 1, 0, 1);
-  const W = 420;
+  const [fitRef, W] = useFitWidth(420);
   const H = 210;
   const L = 40;
   const Rr = 12;
@@ -240,9 +243,9 @@ export function TcDstTimelineCard({ d, f }: CardProps) {
       <IndicatorWithTable
         workedExampleTitle={t("worked")}
         indicator={
-          <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("dstline.title")} className="max-w-full">
+          <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("dstline.title")} className="max-w-full">
             {[...new Set(offs)].map((o) => (
-              <text key={o} x={L - 4} y={y(o) + 3} textAnchor="end" fontSize={8.5} className={axisText}>{f.offset(o)}</text>
+              <text style={{ fontSize: svgPx(12) }} key={o} x={L - 4} y={y(o) + 3} textAnchor="end" className={axisText}>{f.offset(o)}</text>
             ))}
             {steps.map((st, i) => (
               <g key={i}>
@@ -252,7 +255,7 @@ export function TcDstTimelineCard({ d, f }: CardProps) {
             ))}
             <line x1={L} x2={W - Rr} y1={150} y2={150} stroke="currentColor" strokeOpacity={0.35} strokeWidth={2} />
             {Array.from({ length: 12 }, (_, m) => (
-              <text key={m} x={x(Date.UTC(year, m, 15))} y={166} textAnchor="middle" fontSize={8.5} className={axisText}>{f.month(m)}</text>
+              <text style={{ fontSize: svgPx(12) }} key={m} x={x(Date.UTC(year, m, 15))} y={166} textAnchor="middle" className={axisText}>{f.month(m)}</text>
             ))}
             {trs.map((tr, i) => {
               const longer = tr.offsetAfter < tr.offsetBefore;
@@ -260,17 +263,17 @@ export function TcDstTimelineCard({ d, f }: CardProps) {
                 <g key={i}>
                   <line x1={x(tr.utcMs)} x2={x(tr.utcMs)} y1={30} y2={150} stroke={C.dst} strokeDasharray="3 2" />
                   <circle cx={x(tr.utcMs)} cy={150} r={6} fill={C.dst} stroke="white" strokeWidth={1.5} />
-                  <text x={x(tr.utcMs)} y={22} textAnchor="middle" fontSize={9} fontWeight={800} fill={C.dst}>{longer ? "25h" : "23h"}</text>
-                  <text x={x(tr.utcMs)} y={184} textAnchor="middle" fontSize={8.5} fontWeight={700} className={valueText}>{f.instant(tr.utcMs, zone).split(",")[0]}</text>
+                  <text style={{ fontSize: svgPx(12) }} x={x(tr.utcMs)} y={22} textAnchor="middle" fontWeight={800} fill={C.dst}>{longer ? "25h" : "23h"}</text>
+                  <text style={{ fontSize: svgPx(12) }} x={x(tr.utcMs)} y={184} textAnchor="middle" fontWeight={700} className={valueText}>{f.instant(tr.utcMs, zone).split(",")[0]}</text>
                 </g>
               );
             })}
             <g>
               <path d={`M ${x(marker)} 136 l -6 -10 h 12 Z`} fill={C.ot} />
-              <text x={x(marker)} y={200} textAnchor="middle" fontSize={8.5} fontWeight={700} fill={C.ot}>{tc("input.start")}</text>
+              <text style={{ fontSize: svgPx(12) }} x={x(marker)} y={200} textAnchor="middle" fontWeight={700} fill={C.ot}>{tc("input.start")}</text>
             </g>
             {!trs.length && (
-              <text x={(L + W) / 2} y={30} textAnchor="middle" fontSize={10} fontWeight={700} className={valueText}>{zone ? t("dstline.noDst", { zone: zoneName(zone) }) : t("dstline.floating")}</text>
+              <text style={{ fontSize: svgPx(12) }} x={(L + W) / 2} y={30} textAnchor="middle" fontWeight={700} className={valueText}>{zone ? t("dstline.noDst", { zone: zoneName(zone) }) : t("dstline.floating")}</text>
             )}
           </svg>
         }

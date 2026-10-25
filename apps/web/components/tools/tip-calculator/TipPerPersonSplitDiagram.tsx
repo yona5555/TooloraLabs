@@ -1,5 +1,6 @@
 "use client";
 import { useMeasuredWidth } from "@/components/tool-ui/useMeasuredWidth";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 type TipPerPersonSplitDiagramProps = {
   people: number;
@@ -29,12 +30,12 @@ export default function TipPerPersonSplitDiagram({ people, amountPerPerson, form
             const y = MARGIN_TOP + i * (ROW_HEIGHT + ROW_GAP);
             return (
               <g key={i}>
-                <text x={LABEL_WIDTH - 8} y={y + ROW_HEIGHT / 2} textAnchor="end" dominantBaseline="middle" fontSize={12} fill="currentColor" opacity={0.75}>
+                <text style={{ fontSize: svgPx(12) }} x={LABEL_WIDTH - 8} y={y + ROW_HEIGHT / 2} textAnchor="end" dominantBaseline="middle" fill="currentColor" opacity={0.75}>
                   {`#${i + 1}`}
                 </text>
                 <rect x={LABEL_WIDTH} y={y} width={barMaxWidth} height={ROW_HEIGHT} rx={4} fill="currentColor" opacity={0.15} />
                 <rect x={LABEL_WIDTH} y={y} width={barMaxWidth} height={ROW_HEIGHT} rx={4} className="fill-blue-600 dark:fill-blue-400" />
-                <text x={LABEL_WIDTH + 10} y={y + ROW_HEIGHT / 2} dominantBaseline="middle" fontSize={12} fontWeight={700} className="fill-white">
+                <text style={{ fontSize: svgPx(12) }} x={LABEL_WIDTH + 10} y={y + ROW_HEIGHT / 2} dominantBaseline="middle" fontWeight={700} className="fill-white">
                   {formatValue(amountPerPerson)}
                 </text>
               </g>

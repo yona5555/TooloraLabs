@@ -5,6 +5,7 @@ import { parseLocalizedNumber } from "@tooloralabs/core";
 import { circleDistanceForOverlap } from "@tooloralabs/tools";
 import ProbabilityIndicatorCard, { REGION_FILL } from "./ProbabilityIndicatorCard";
 import { MODE_FIELDS, useProbabilityLive, useProbabilityModel, type ProbabilityFields } from "./ProbabilityLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 320;
 const H = 210;
@@ -71,15 +72,15 @@ export default function ProbabilityVennLab() {
         <circle cx={cxB} cy={cy} r={rB} clipPath={`url(#${clip})`} className={REGION_FILL[0]} fillOpacity={0.95} />
         <circle cx={cxA} cy={cy} r={rA} fill="none" strokeWidth={2} className="stroke-blue-700 dark:stroke-blue-300" />
         <circle cx={cxB} cy={cy} r={rB} fill="none" strokeWidth={2} className="stroke-emerald-700 dark:stroke-emerald-300" />
-        <text x={Math.max(14, cxA - rA * 0.55)} y={cy + 4} textAnchor="middle" className="fill-zinc-900 font-mono text-[11px] font-bold dark:fill-white">{pct(b.aOnly, 1)}</text>
-        <text x={Math.min(W - 14, cxB + rB * 0.55)} y={cy + 4} textAnchor="middle" className="fill-zinc-900 font-mono text-[11px] font-bold dark:fill-white">{pct(b.bOnly, 1)}</text>
+        <text style={{ fontSize: svgPx(12) }} x={Math.max(14, cxA - rA * 0.55)} y={cy + 4} textAnchor="middle" className="fill-zinc-900 font-mono font-bold dark:fill-white">{pct(b.aOnly, 1)}</text>
+        <text style={{ fontSize: svgPx(12) }} x={Math.min(W - 14, cxB + rB * 0.55)} y={cy + 4} textAnchor="middle" className="fill-zinc-900 font-mono font-bold dark:fill-white">{pct(b.bOnly, 1)}</text>
         {b.pAB > 0 && (
-          <text x={(cxA + rA + cxB - rB) / 2} y={cy + 4} textAnchor="middle" className="fill-white font-mono text-[11px] font-bold">{pct(b.pAB, 1)}</text>
+          <text style={{ fontSize: svgPx(12) }} x={(cxA + rA + cxB - rB) / 2} y={cy + 4} textAnchor="middle" className="fill-white font-mono font-bold">{pct(b.pAB, 1)}</text>
         )}
-        <text x={PAD + 4} y={22} className="fill-blue-700 text-[12px] font-bold dark:fill-blue-300">{`A ${pct(b.pA, 1)}`}</text>
-        <text x={W - PAD - 4} y={22} textAnchor="end" className="fill-emerald-700 text-[12px] font-bold dark:fill-emerald-300">{`B ${pct(b.pB, 1)}`}</text>
-        <text x={W - PAD - 4} y={H - 14} textAnchor="end" className="fill-zinc-600 font-mono text-[11px] font-semibold dark:fill-zinc-300">{`A′∩B′ ${pct(b.neither, 1)}`}</text>
-        <text x={PAD + 4} y={H - 14} className="fill-zinc-900 font-mono text-[12px] font-bold dark:fill-white">{`${symbol} = ${pct(r)}`}</text>
+        <text style={{ fontSize: svgPx(12) }} x={PAD + 4} y={22} className="fill-blue-700 font-bold dark:fill-blue-300">{`A ${pct(b.pA, 1)}`}</text>
+        <text style={{ fontSize: svgPx(12) }} x={W - PAD - 4} y={22} textAnchor="end" className="fill-emerald-700 font-bold dark:fill-emerald-300">{`B ${pct(b.pB, 1)}`}</text>
+        <text style={{ fontSize: svgPx(12) }} x={W - PAD - 4} y={H - 14} textAnchor="end" className="fill-zinc-600 font-mono font-semibold dark:fill-zinc-300">{`A′∩B′ ${pct(b.neither, 1)}`}</text>
+        <text style={{ fontSize: svgPx(12) }} x={PAD + 4} y={H - 14} className="fill-zinc-900 font-mono font-bold dark:fill-white">{`${symbol} = ${pct(r)}`}</text>
       </svg>
       <div className="mt-3 space-y-2">
         {MODE_FIELDS[mode].map((k) => (

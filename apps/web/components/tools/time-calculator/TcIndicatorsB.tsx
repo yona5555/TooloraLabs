@@ -8,6 +8,7 @@ import { useIndT } from "./TcIndicatorsA";
 import { useTcPhrases } from "./TcResult";
 import { C, INCREMENTS, type CardProps } from "./state";
 import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const axisText = "fill-zinc-500 dark:fill-zinc-400";
 const valueText = "fill-zinc-800 dark:fill-zinc-100";
@@ -102,13 +103,13 @@ export function TcOvertimeGaugeCard({ s, set, d, f }: CardProps) {
                 {[0, th, LIMIT, max].filter((v, i, a) => a.indexOf(v) === i && v <= max).map((v) => {
                   const p = pt(v, r + 18);
                   return (
-                    <text key={v} x={p.x} y={p.y + 3} textAnchor="middle" fontSize={9} fontWeight={v === th ? 800 : 500} className={axisText}>{`${f.num(v, 1)}h`}</text>
+                    <text style={{ fontSize: svgPx(12) }} key={v} x={p.x} y={p.y + 3} textAnchor="middle" fontWeight={v === th ? 800 : 500} className={axisText}>{`${f.num(v, 1)}h`}</text>
                   );
                 })}
                 <line x1={cx} y1={cy} x2={needle.x} y2={needle.y} stroke="currentColor" strokeWidth={3} strokeLinecap="round" style={{ transition: "all 400ms ease" }} />
                 <circle cx={cx} cy={cy} r={6} fill="currentColor" />
-                <text x={cx} y={cy - 40} textAnchor="middle" fontSize={20} fontWeight={800} className={valueText}>{f.durHm(w.totalSeconds)}</text>
-                <text x={cx} y={cy - 24} textAnchor="middle" fontSize={10} fontWeight={700} fill={total <= th ? C.add : total <= LIMIT ? C.ot : C.sub}>{status}</text>
+                <text style={{ fontSize: svgPx(20) }} x={cx} y={cy - 40} textAnchor="middle" fontWeight={800} className={valueText}>{f.durHm(w.totalSeconds)}</text>
+                <text style={{ fontSize: svgPx(12) }} x={cx} y={cy - 24} textAnchor="middle" fontWeight={700} fill={total <= th ? C.add : total <= LIMIT ? C.ot : C.sub}>{status}</text>
               </svg>
               <label className="mt-1 block text-xs font-semibold text-zinc-600 dark:text-zinc-300">
                 {tc("input.weeklyH")}: <span dir="ltr" className="font-mono text-blue-700 dark:text-blue-300">{f.num(th, 1)} h</span>
@@ -159,8 +160,8 @@ export function TcDecimalCard({ s, set, d, f }: CardProps) {
         indicator={
           <div className="w-[420px] max-w-full">
             <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("decimal.title")} className="max-w-full">
-              <text x={L} y={16} fontSize={10} fontWeight={700} fill={C.main}>{t("decimal.minutesRuler")}</text>
-              <text x={L} y={154} fontSize={10} fontWeight={700} fill={C.ot}>{t("decimal.decimalRuler")}</text>
+              <text style={{ fontSize: svgPx(12) }} x={L} y={16} fontWeight={700} fill={C.main}>{t("decimal.minutesRuler")}</text>
+              <text style={{ fontSize: svgPx(12) }} x={L} y={154} fontWeight={700} fill={C.ot}>{t("decimal.decimalRuler")}</text>
               <rect x={L} y={26} width={x(mins) - L} height={22} fill={C.main} fillOpacity={0.75} style={{ transition: "all 300ms ease" }} />
               <rect x={L} y={26} width={W - 2 * L} height={22} fill="none" stroke="currentColor" strokeOpacity={0.3} />
               <rect x={L} y={112} width={x(mins) - L} height={22} fill={C.ot} fillOpacity={0.75} style={{ transition: "all 300ms ease" }} />
@@ -168,13 +169,13 @@ export function TcDecimalCard({ s, set, d, f }: CardProps) {
               {Array.from({ length: 13 }, (_, i) => i * 5).map((m) => (
                 <g key={m}>
                   <line x1={x(m)} x2={x(m)} y1={48} y2={112} stroke="currentColor" strokeOpacity={m % 15 === 0 ? 0.35 : 0.12} strokeDasharray={m % 15 === 0 ? undefined : "2 3"} />
-                  <text x={x(m)} y={62} textAnchor="middle" fontSize={8.5} className={axisText}>{`${m}′`}</text>
-                  <text x={x(m)} y={104} textAnchor="middle" fontSize={8.5} className={axisText}>{f.num(m / 60, 2).replace(/^0/, "")}</text>
+                  <text style={{ fontSize: svgPx(12) }} x={x(m)} y={62} textAnchor="middle" className={axisText}>{`${m}′`}</text>
+                  <text style={{ fontSize: svgPx(12) }} x={x(m)} y={104} textAnchor="middle" className={axisText}>{f.num(m / 60, 2).replace(/^0/, "")}</text>
                 </g>
               ))}
               <line x1={x(mins)} x2={x(mins)} y1={20} y2={140} stroke="currentColor" strokeWidth={2} />
               <rect x={Math.min(W - 92, Math.max(4, x(mins) - 44))} y={72} width={88} height={20} rx={10} className="fill-white dark:fill-zinc-900" stroke="currentColor" strokeOpacity={0.4} />
-              <text x={Math.min(W - 48, Math.max(48, x(mins)))} y={86} textAnchor="middle" fontSize={10} fontWeight={800} className={valueText}>{`${f.num(mins, 1)}′ = ${f.num((mins / 60), 3).replace(/^0/, "")}`}</text>
+              <text style={{ fontSize: svgPx(12) }} x={Math.min(W - 48, Math.max(48, x(mins)))} y={86} textAnchor="middle" fontWeight={800} className={valueText}>{`${f.num(mins, 1)}′ = ${f.num((mins / 60), 3).replace(/^0/, "")}`}</text>
             </svg>
             <label className="mt-1 block text-xs font-semibold text-zinc-600 dark:text-zinc-300">
               {t("decimal.slider")}: <span dir="ltr" className="font-mono text-blue-700 dark:text-blue-300">{f.dur(sec)}</span>

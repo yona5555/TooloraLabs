@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import FnIndicatorCard, { FnIndicatorUnavailable } from "./FnIndicatorCard";
 import { useFnModel } from "./FnLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const ROW = 42;
@@ -28,14 +29,14 @@ export default function FnPipelineSteps() {
         const last = i === a.stages.length - 1;
         return (
           <g key={s.key}>
-            <text x={LABEL - 6} y={y + 16} textAnchor="end" fontSize={12} fontWeight={600} className="fill-zinc-700 dark:fill-zinc-200">
+            <text style={{ fontSize: svgPx(12) }} x={LABEL - 6} y={y + 16} textAnchor="end" fontWeight={600} className="fill-zinc-700 dark:fill-zinc-200">
               {t(s.key)}
             </text>
             <rect x={LABEL} y={y + 4} width={w} height={16} rx={4} className={last ? "fill-emerald-500 dark:fill-emerald-400" : "fill-blue-500 dark:fill-blue-400"} />
-            <text x={LABEL + w + 5} y={y + 16} fontSize={11} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
+            <text style={{ fontSize: svgPx(12) }} x={LABEL + w + 5} y={y + 16} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
               {f(lens[i], 0)}
             </text>
-            <text x={LABEL} y={y + 35} fontSize={11} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+            <text style={{ fontSize: svgPx(12) }} x={LABEL} y={y + 35} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
               {s.value.length > 40 ? `${s.value.slice(0, 39)}…` : s.value || "∅"}
             </text>
           </g>

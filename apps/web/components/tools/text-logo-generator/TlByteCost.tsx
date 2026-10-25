@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import TlIndicatorCard from "./TlIndicatorCard";
 import { useTlLive } from "./TlLiveContext";
 import { STYLE_FILLS, styleSample } from "./tlMath";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 330;
 const H = 170;
@@ -30,17 +31,17 @@ export default function TlByteCost() {
         return (
           <g key={b.key} className={b.style ? "cursor-pointer" : undefined} onClick={b.style ? () => setActiveStyle(b.style!) : undefined}>
             <rect x={x} y={H - BOTTOM - h} width={bw} height={h} rx={3} className={b.fill} opacity={b.style && !on ? 0.55 : 1} style={{ transition: "y 400ms ease, height 400ms ease, opacity 200ms ease" }} />
-            <text x={x + bw / 2} y={H - BOTTOM - h - 4} textAnchor="middle" fontSize={9} fontWeight={700} className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={x + bw / 2} y={H - BOTTOM - h - 4} textAnchor="middle" fontWeight={700} className="fill-zinc-800 dark:fill-zinc-100">
               {f(b.bytes)}
             </text>
             <title>{b.label}</title>
-            <text x={x + bw / 2} y={H - BOTTOM + 13} textAnchor="middle" fontSize={11} fontWeight={on ? 700 : 400} className="fill-zinc-700 dark:fill-zinc-200">
+            <text style={{ fontSize: svgPx(12) }} x={x + bw / 2} y={H - BOTTOM + 13} textAnchor="middle" fontWeight={on ? 700 : 400} className="fill-zinc-700 dark:fill-zinc-200">
               {styleSample(b.style)}
             </text>
           </g>
         );
       })}
-      <text x={W / 2} y={H - 6} textAnchor="middle" fontSize={8.5} className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={W / 2} y={H - 6} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
         {t("axis")}
       </text>
     </svg>

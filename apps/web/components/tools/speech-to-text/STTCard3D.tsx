@@ -8,6 +8,7 @@ import { px2 } from "@/components/tool-ui/indicator-kit/SvgBits";
 import { ViewportScene } from "@/components/tool-ui/three/ViewportScene";
 import { EXAMPLE_SEGMENTS, run } from "./sttMath";
 import { PER_TURN } from "./sttHelix";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 /** 6. (3D) The stored transcript's real words, in spoken order, as pillars wound on a helix. */
 const HelixScene3D = dynamic(() => import("./STTScene3D"), { ssr: false, loading: () => null });
@@ -29,7 +30,7 @@ function Spiral2D({ words }: { words: string[] }) {
           const r = R * (0.18 + (0.82 * i) / n);
           return <circle key={i} cx={px2(cx + r * Math.sin(a))} cy={px2(cy - r * Math.cos(a))} r={2 + w.length * 0.9} style={{ fill: color(w) }} />;
         })}
-        <text x={cx} y={cy + 5} fontSize={13} fontWeight={800} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+        <text x={cx} y={cy + 5} fontWeight={800} textAnchor="middle" style={{ fontSize: svgPx(13), fill: "var(--ph-ink)" }}>
           {words[words.length - 1]}
         </text>
       </svg>

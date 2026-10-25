@@ -7,14 +7,16 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import LiveFallback from "@/components/tools/markets/LiveFallback";
 import { useCryptoFormatters } from "./cryptoFormat";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 type Props = { coin: CryptoCoin | undefined; digitStyle: DigitStyle };
 
 const W = 240;
-const H = 140;
+// 12px dial labels need room: 10px above the top label, the two end labels sit under the arc ends
+const H = 154;
 const R = 100;
 const CX = W / 2;
-const CY = 120;
+const CY = 130;
 const GAUGE_MAX = 150; // % annualized at the right end of the dial
 
 const polar = (pct: number, r = R) => {
@@ -66,9 +68,10 @@ export default function CryptoVolatilityGauge({ coin, digitStyle }: Props) {
               <line x1={CX} y1={CY} x2={nx} y2={ny} strokeWidth={3} strokeLinecap="round" className="stroke-zinc-800 transition-all duration-700 dark:stroke-zinc-100" />
               <circle cx={CX} cy={CY} r={6} className="fill-zinc-800 dark:fill-zinc-100" />
               {[0, VOLATILITY_ZONE_LIMITS.low, VOLATILITY_ZONE_LIMITS.medium, GAUGE_MAX].map((v) => {
-                const [x, y] = polar(v, R + 14);
+                const end = v === 0 || v === GAUGE_MAX;
+                const [x, y] = end ? [polar(v)[0], CY + 20] : polar(v, R + 14);
                 return (
-                  <text key={v} x={x} y={y} textAnchor="middle" className="fill-zinc-400 font-mono text-[9px]">
+                  <text style={{ fontSize: svgPx(12) }} key={v} x={x} y={y} textAnchor="middle" className="fill-zinc-400 font-mono">
                     {v}%
                   </text>
                 );

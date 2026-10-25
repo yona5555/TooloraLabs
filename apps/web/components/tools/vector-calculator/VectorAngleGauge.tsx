@@ -3,6 +3,7 @@ import { useId } from "react";
 import { useTranslations } from "next-intl";
 import VectorIndicatorCard from "./VectorIndicatorCard";
 import { useVectorAnalysis } from "./VectorLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 260;
 const H = 186;
@@ -50,7 +51,7 @@ export default function VectorAngleGauge() {
               return (
                 <g key={d}>
                   <line x1={a1} y1={b1} x2={a2} y2={b2} className="stroke-white dark:stroke-zinc-900" strokeWidth={2} />
-                  <text x={tx} y={ty + 4} textAnchor="middle" className="fill-zinc-500 text-[10px] dark:fill-zinc-400">{d}°</text>
+                  <text style={{ fontSize: svgPx(12) }} x={tx} y={ty + 4} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">{d}°</text>
                 </g>
               );
             })}
@@ -61,8 +62,8 @@ export default function VectorAngleGauge() {
               </>
             )}
             {/* Readout below the pivot, so the needle never crosses it at any angle. */}
-            <text x={CX} y={CY + 28} textAnchor="middle" className="fill-zinc-900 text-[18px] font-bold dark:fill-zinc-50">{r.angleDeg === null ? tr("notApplicable") : `θ = ${n(theta, 1)}°`}</text>
-            <text x={CX} y={CY + 48} textAnchor="middle" className="fill-blue-700 text-[11px] font-semibold dark:fill-blue-300">{tr(`relation.${r.relation}`)}</text>
+            <text style={{ fontSize: svgPx(18) }} x={CX} y={CY + 28} textAnchor="middle" className="fill-zinc-900 font-bold dark:fill-zinc-50">{r.angleDeg === null ? tr("notApplicable") : `θ = ${n(theta, 1)}°`}</text>
+            <text style={{ fontSize: svgPx(12) }} x={CX} y={CY + 48} textAnchor="middle" className="fill-blue-700 font-semibold dark:fill-blue-300">{tr(`relation.${r.relation}`)}</text>
           </svg>
         </div>
       }

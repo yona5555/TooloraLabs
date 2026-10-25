@@ -67,18 +67,18 @@ export function TTSRateCurveCard({ side }: { side: Side }) {
           {axisTicks(0, yMax, bot - top, 34).map((v) => (
             <g key={v}>
               <line x1={X0} y1={ys(v)} x2={W - 20} y2={ys(v)} style={{ stroke: "var(--ph-grid)" }} />
-              <T x={X0 - 6} y={ys(v) + 4} text={`${v} s`} anchor="end" size={10} />
+              <T x={X0 - 6} y={ys(v) + 4} text={`${v} s`} anchor="end" size={12} />
             </g>
           ))}
           {[0.5, 1, 1.5, 2].map((v) => (
-            <T key={v} x={xr(v)} y={bot + 18} text={`${v.toFixed(1)}×`} anchor={v === 0.5 ? "start" : v === 2 ? "end" : "middle"} size={10.5} />
+            <T key={v} x={xr(v)} y={bot + 18} text={`${v.toFixed(1)}×`} anchor={v === 0.5 ? "start" : v === 2 ? "end" : "middle"} size={12} />
           ))}
           <line x1={X0} y1={bot} x2={W - 20} y2={bot} style={LINE} strokeWidth={1.25} />
           <path d={path} fill="none" style={{ stroke: "var(--ai-a)" }} strokeWidth={3} strokeLinecap="round" />
           <g onPointerEnter={() => setHover("diff")} onPointerLeave={() => setHover(null)}>
             <line x1={xr(1)} y1={ys(base)} x2={xr(1)} y2={bot} style={{ stroke: "var(--ai-b)" }} strokeDasharray="4 4" strokeWidth={hover === "diff" ? 2.5 : 1.5} />
             <circle cx={xr(1)} cy={ys(base)} r={5} style={{ fill: "var(--ai-b)" }} />
-            <T x={xr(1) + 8} y={ys(base) - 8} text={`1.0× · ${fmtTime(base)}`} anchor="start" size={10.5} bold style={{ fill: "var(--ai-b)" }} />
+            <T x={xr(1) + 8} y={ys(base) - 8} text={`1.0× · ${fmtTime(base)}`} anchor="start" size={12} bold style={{ fill: "var(--ai-b)" }} />
           </g>
           <line x1={xr(r)} y1={ys(sec)} x2={xr(r)} y2={bot} style={{ stroke: "var(--ai-a)" }} strokeWidth={hover === "time" ? 2.5 : 1.5} />
           <T x={xr(r) > W - 120 ? xr(r) - 14 : xr(r) + 14} y={ys(sec) - 14} text={fmtTime(sec)} anchor={xr(r) > W - 120 ? "end" : "start"} size={12} bold style={INK} />
@@ -186,7 +186,7 @@ export function TTSPackingCard({ side }: { side: Side }) {
           {[0, 100, 200].map((v) => (
             <g key={v}>
               <line x1={X0} y1={yl(v)} x2={W - 16} y2={yl(v)} style={{ stroke: v === CHUNK_LIMIT ? "var(--ai-d)" : "var(--ph-grid)" }} strokeDasharray={v === CHUNK_LIMIT ? "6 4" : undefined} strokeWidth={v === CHUNK_LIMIT ? 2 : 1} />
-              <T x={X0 - 6} y={yl(v) + 4} text={String(v)} anchor="end" size={10} style={v === CHUNK_LIMIT ? { fill: "var(--ai-d)" } : MUTED} />
+              <T x={X0 - 6} y={yl(v) + 4} text={String(v)} anchor="end" size={12} style={v === CHUNK_LIMIT ? { fill: "var(--ai-d)" } : MUTED} />
             </g>
           ))}
           {steps.map((st, i) => {
@@ -198,11 +198,11 @@ export function TTSPackingCard({ side }: { side: Side }) {
                 {!st.first && <line x1={cx - cw + bw / 2} y1={yl(st.from)} x2={cx - bw / 2} y2={yl(st.from)} style={{ stroke: "var(--ph-ink-muted)" }} strokeDasharray="3 3" />}
                 <rect x={cx - bw / 2} y={yl(st.to)} width={bw} height={Math.max(3, yl(st.from) - yl(st.to))} rx={Math.min(7, bw / 2)} style={{ fill: SERIES[st.ci % SERIES.length], ...lit(on) }} />
                 {yl(st.from) - yl(st.to) > 22 ? (
-                  <T x={cx} y={yl(st.to) + 15} text={String(st.to)} size={10} bold style={{ fill: "var(--ph-surface)" }} />
+                  <T x={cx} y={yl(st.to) + 15} text={String(st.to)} size={12} bold style={{ fill: "var(--ph-surface)" }} />
                 ) : (
-                  <T x={cx} y={yl(st.to) - 6} text={String(st.to)} size={10} bold style={INK} />
+                  <T x={cx} y={yl(st.to) - 6} text={String(st.to)} size={12} bold style={INK} />
                 )}
-                <T x={cx} y={bot + 15} text={`S${i + 1}`} size={10} />
+                <T x={cx} y={bot + 15} text={`S${i + 1}`} size={12} />
               </g>
             );
           })}
@@ -281,14 +281,14 @@ export function TTSCharMixCard({ side }: { side: Side }) {
               ) : null,
             )}
             <T x={cx} y={cy - 2} text={n0(out.characterCount)} size={18} bold style={INK} />
-            <T x={cx} y={cy + 16} text={t("centre")} size={10.5} />
+            <T x={cx} y={cy + 16} text={t("centre")} size={12} />
             {parts.map((p, i) => {
               const y = cy - 36 + i * 36;
               return (
                 <g key={p.key} onPointerEnter={() => setHover(p.key)} onPointerLeave={() => setHover(null)}>
                   <circle cx={lx} cy={y} r={7} style={{ fill: p.color }} />
-                  <T x={lx + 14} y={y - 2} text={t(`legend.${p.key}`)} anchor="start" size={11.5} bold style={INK} />
-                  <T x={lx + 14} y={y + 13} text={`${n0(p.v)} · ${pct(p.v)}`} anchor="start" size={10.5} />
+                  <T x={lx + 14} y={y - 2} text={t(`legend.${p.key}`)} anchor="start" size={12} bold style={INK} />
+                  <T x={lx + 14} y={y + 13} text={`${n0(p.v)} · ${pct(p.v)}`} anchor="start" size={12} />
                 </g>
               );
             })}
@@ -350,15 +350,15 @@ export function TTSPlayheadCard({ side }: { side: Side }) {
               <g key={i} onPointerEnter={() => setHover(now ? "chunk" : null)} onPointerLeave={() => setHover(null)}>
                 <rect x={x} y={laneY} width={w} height={laneH} rx={12} style={{ fill: now ? "var(--ai-a)" : done ? "var(--ai-soft)" : "var(--glass-track)", ...lit(now && hover === "chunk") }} />
                 {now && <rect x={x} y={laneY} width={Math.max(0, xt(tt) - x)} height={laneH} rx={12} style={{ fill: "var(--ai-c)" }} />}
-                <T x={x + w / 2} y={laneY - 10} text={`#${i + 1} · ${c.length}`} size={10.5} bold style={now ? INK : MUTED} />
-                <T x={x + w / 2} y={laneY + laneH / 2 + 4} text={fmtTime(CHUNK_SECS[i])} size={10.5} bold style={now ? { fill: "var(--ph-surface)" } : INK} />
+                <T x={x + w / 2} y={laneY - 10} text={`#${i + 1} · ${c.length}`} size={12} bold style={now ? INK : MUTED} />
+                <T x={x + w / 2} y={laneY + laneH / 2 + 4} text={fmtTime(CHUNK_SECS[i])} size={12} bold style={now ? { fill: "var(--ph-surface)" } : INK} />
               </g>
             );
           })}
           <line x1={xt(tt)} y1={laneY - 24} x2={xt(tt)} y2={laneY + laneH + 34} style={{ stroke: "var(--ai-d)" }} strokeWidth={2} />
           <line x1={X0} y1={laneY + laneH + 34} x2={W - X0} y2={laneY + laneH + 34} style={{ stroke: "var(--glass-track)" }} strokeWidth={8} strokeLinecap="round" />
-          <T x={X0} y={H - 8} text="0 s" anchor="start" size={10.5} />
-          <T x={W - X0} y={H - 8} text={fmtTime(STORY_SECS)} anchor="end" size={10.5} />
+          <T x={X0} y={H - 8} text="0 s" anchor="start" size={12} />
+          <T x={W - X0} y={H - 8} text={fmtTime(STORY_SECS)} anchor="end" size={12} />
         </Drawing>
       }
     />
@@ -419,14 +419,14 @@ export function TTSWordSplitCard({ side }: { side: Side }) {
           {[0, 100, 200].map((v) => (
             <g key={v}>
               <line x1={X0} y1={yl(v)} x2={W - 16} y2={yl(v)} style={{ stroke: v === CHUNK_LIMIT ? "var(--ai-d)" : "var(--ph-grid)" }} strokeDasharray={v === CHUNK_LIMIT ? "6 4" : undefined} strokeWidth={v === CHUNK_LIMIT ? 2 : 1} />
-              <T x={X0 - 6} y={yl(v) + 4} text={String(v)} anchor="end" size={10} style={v === CHUNK_LIMIT ? { fill: "var(--ai-d)" } : MUTED} />
+              <T x={X0 - 6} y={yl(v) + 4} text={String(v)} anchor="end" size={12} style={v === CHUNK_LIMIT ? { fill: "var(--ai-d)" } : MUTED} />
             </g>
           ))}
           <path d={path} fill="none" style={{ stroke: "var(--ai-a)" }} strokeWidth={2.5} strokeLinejoin="round" />
           {cuts.map((i) => (
             <g key={i} onPointerEnter={() => setHover("cuts")} onPointerLeave={() => setHover(null)}>
               <line x1={xw(i - 0.5)} y1={top} x2={xw(i - 0.5)} y2={bot} style={{ stroke: "var(--ai-b)" }} strokeWidth={hover === "cuts" ? 3 : 2} />
-              <T x={xw(i - 0.5)} y={bot + 14} text={String(i)} size={10} bold style={{ fill: "var(--ai-b)" }} />
+              <T x={xw(i - 0.5)} y={bot + 14} text={String(i)} size={12} bold style={{ fill: "var(--ai-b)" }} />
             </g>
           ))}
           <circle cx={xw(n - 1)} cy={yl(pts[pts.length - 1]?.len ?? 0)} r={5} style={{ fill: "var(--ai-a)" }} />
@@ -497,7 +497,7 @@ export function TTSRateCheckCard({ side }: { side: Side }) {
             />
           ))}
           {[0.1, 0.5, 1, 2, 10].map((v, i) => (
-            <T key={v} x={xl(Math.log10(v))} y={bandY - 8} text={`${v}×`} size={10.5} bold style={i === 2 ? INK : MUTED} anchor="middle" />
+            <T key={v} x={xl(Math.log10(v))} y={bandY - 8} text={`${v}×`} size={12} bold style={i === 2 ? INK : MUTED} anchor="middle" />
           ))}
           <line x1={xl(s.value)} y1={bandY - 2} x2={xl(s.value)} y2={bandY + bandH + 2} style={{ stroke: "var(--ph-ink)" }} strokeWidth={4} strokeLinecap="round" />
           <line x1={X0} y1={bandY + bandH + 28} x2={W - X0} y2={bandY + bandH + 28} style={{ stroke: "var(--glass-track)" }} strokeWidth={8} strokeLinecap="round" />

@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { rankDensity } from "@tooloralabs/tools";
 import DensityIndicatorCard, { DensityIndicatorUnavailable } from "./DensityIndicatorCard";
 import { useDensityModel } from "./DensityLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const ROW = 19;
@@ -34,7 +35,7 @@ export default function DensityMaterialRanking() {
 
   const svg = (
     <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
-      <text x={BAR_X} y={12} fontSize={10} className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={BAR_X} y={12} className="fill-zinc-500 dark:fill-zinc-400">
         {t("axis")}
       </text>
       <line x1={xWater} y1={TOP - 4} x2={xWater} y2={H - 4} strokeDasharray="4 3" className="stroke-sky-500 dark:stroke-sky-400" />
@@ -43,11 +44,11 @@ export default function DensityMaterialRanking() {
         const l = len(r.density);
         return (
           <g key={r.key}>
-            <text x={LABEL} y={y + 12} textAnchor="end" fontSize={11} fontWeight={r.yours ? 700 : 500} className={r.yours ? "fill-blue-700 dark:fill-blue-300" : "fill-zinc-600 dark:fill-zinc-300"}>
+            <text style={{ fontSize: svgPx(12) }} x={LABEL} y={y + 12} textAnchor="end" fontWeight={r.yours ? 700 : 500} className={r.yours ? "fill-blue-700 dark:fill-blue-300" : "fill-zinc-600 dark:fill-zinc-300"}>
               {r.yours ? t("yours") : tm(r.key)}
             </text>
             <rect x={BAR_X} y={y + 3} width={l} height={ROW - 6} rx={3} className={r.yours ? "fill-blue-600 dark:fill-blue-400" : r.density < 1 ? "fill-sky-300 dark:fill-sky-700" : "fill-zinc-300 dark:fill-zinc-600"} />
-            <text x={BAR_X + l + 4} y={y + 12} fontSize={10} fontWeight={r.yours ? 700 : 400} fontFamily="ui-monospace, monospace" className={r.yours ? "fill-blue-700 dark:fill-blue-300" : "fill-zinc-500 dark:fill-zinc-400"}>
+            <text style={{ fontSize: svgPx(12) }} x={BAR_X + l + 4} y={y + 12} fontWeight={r.yours ? 700 : 400} fontFamily="ui-monospace, monospace" className={r.yours ? "fill-blue-700 dark:fill-blue-300" : "fill-zinc-500 dark:fill-zinc-400"}>
               {f(r.density)}
             </text>
           </g>

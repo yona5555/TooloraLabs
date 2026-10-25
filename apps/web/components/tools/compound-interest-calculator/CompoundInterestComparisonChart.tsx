@@ -6,6 +6,9 @@ import { formatLocalizedNumber } from "@tooloralabs/core";
 import { calculateSimpleInterestSchedule } from "@tooloralabs/tools";
 import { useCompoundInterestLiveInputs } from "./CompoundInterestLiveInputsContext";
 import { computeNiceTicks } from "./niceTicks";
+import { svgPx } from "@/components/tool-ui/svgPx";
+import { wrapLabel } from "@/components/tool-ui/indicator-kit/SvgBits";
+import { useBelowLg } from "@/components/tool-ui/useBelowLg";
 
 const MARGIN = { top: 16, left: 56, right: 16 };
 const MAIN_HEIGHT = 170;
@@ -34,6 +37,7 @@ export default function CompoundInterestComparisonChart() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
   const [containerWidth, setContainerWidth] = useState(0);
+  const belowLg = useBelowLg();
 
   useLayoutEffect(() => {
     const el = containerRef.current;
@@ -72,7 +76,7 @@ export default function CompoundInterestComparisonChart() {
 
   // Stretches bar groups to fill the full measured card width when there's room; falls back to
   // MIN_STEP (and lets the wrapper scroll horizontally) once that would squeeze bars too thin to read.
-  const step = Math.max(MIN_STEP, (containerWidth - MARGIN.left - MARGIN.right) / points.length);
+  const step = Math.max(belowLg && containerWidth > 0 ? 0 : MIN_STEP, (containerWidth - MARGIN.left - MARGIN.right) / points.length);
   const groupWidth = step * GROUP_WIDTH_RATIO;
   const barGap = groupWidth * BAR_GAP_RATIO;
   const barWidth = (groupWidth - barGap) / 2;
@@ -156,7 +160,7 @@ export default function CompoundInterestComparisonChart() {
                 strokeWidth={1}
                 opacity={0.08}
               />
-              <text x={MARGIN.left - 8} y={yForValue(tick) + 3} textAnchor="end" fontSize={9} fill="currentColor" opacity={0.6}>
+              <text style={{ fontSize: svgPx(12) }} x={MARGIN.left - 8} y={yForValue(tick) + 3} textAnchor="end" fill="currentColor" opacity={0.6}>
                 {money(tick)}
               </text>
             </g>
@@ -184,8 +188,12 @@ export default function CompoundInterestComparisonChart() {
           ))}
 
           {/* volume row: that year's marginal (non-cumulative) gain from compounding */}
-          <text x={MARGIN.left - 8} y={volumeTop + 8} textAnchor="end" fontSize={8} fill="currentColor" opacity={0.5}>
-            {t("education.intro.diagram.volumeLabel")}
+          <text style={{ fontSize: svgPx(12) }} x={MARGIN.left - 8} y={volumeTop + 8} textAnchor="end" fill="currentColor" opacity={0.5}>
+            {wrapLabel(t("education.intro.diagram.volumeLabel"), MARGIN.left - 10).map((line, li) => (
+              <tspan key={li} x={MARGIN.left - 8} dy={li ? 14 : 0}>
+                {line}
+              </tspan>
+            ))}
           </text>
           {points.map((p, i) => (
             <rect
@@ -203,12 +211,11 @@ export default function CompoundInterestComparisonChart() {
 
           {/* x-axis: whole year labels, one per bar group */}
           {points.map((p, i) => (
-            <text
+            <text style={{ fontSize: svgPx(12) }}
               key={`year-${p.year}`}
               x={groupCenterX(i)}
               y={volumeBottom + XAXIS_HEIGHT - 6}
               textAnchor="middle"
-              fontSize={9}
               fill="currentColor"
               opacity={0.6}
             >
@@ -237,16 +244,16 @@ export default function CompoundInterestComparisonChart() {
                   className="fill-white stroke-zinc-200 dark:fill-zinc-900 dark:stroke-zinc-700"
                   strokeWidth={1}
                 />
-                <text x={10} y={17} fontSize={10} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
+                <text style={{ fontSize: svgPx(12) }} x={10} y={17} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
                   {t("education.intro.diagram.tooltipYearLabel")} {formatLocalizedNumber(active.year, live.digitStyle, { maximumFractionDigits: 0 })}
                 </text>
-                <text x={10} y={35} fontSize={10} className="fill-blue-700 dark:fill-blue-400">
+                <text style={{ fontSize: svgPx(12) }} x={10} y={35} className="fill-blue-700 dark:fill-blue-400">
                   {t("education.intro.diagram.compoundLabel")}: {money(active.compound, false)}
                 </text>
-                <text x={10} y={50} fontSize={10} className="fill-amber-600 dark:fill-amber-500">
+                <text style={{ fontSize: svgPx(12) }} x={10} y={50} className="fill-amber-600 dark:fill-amber-500">
                   {t("education.intro.diagram.simpleLabel")}: {money(active.simple, false)}
                 </text>
-                <text x={10} y={67} fontSize={10} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
+                <text style={{ fontSize: svgPx(12) }} x={10} y={67} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
                   {t("education.intro.diagram.tooltipDifferenceLabel")}: {money(active.gap, false)}
                 </text>
               </g>

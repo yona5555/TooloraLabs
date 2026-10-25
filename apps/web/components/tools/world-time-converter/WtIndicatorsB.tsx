@@ -15,6 +15,8 @@ import IndicatorWithTable from "@/components/tool-ui/IndicatorWithTable";
 import { useDuration, useIndT, useUnitT } from "./WtIndicatorsA";
 import type { CardProps } from "./state";
 import { px2 } from "@/components/tool-ui/indicator-kit/SvgBits";
+import { svgPx } from "@/components/tool-ui/svgPx";
+import { useFitWidth } from "@/components/tool-ui/useFitWidth";
 
 const axisText = "fill-zinc-500 dark:fill-zinc-400";
 const valueText = "fill-zinc-800 dark:fill-zinc-100";
@@ -28,7 +30,7 @@ export function WtDstTimelineCard({ d, f }: CardProps) {
   const start = d.conv.utcMs;
   const end = start + 365 * DAY;
   const rows = useMemo(() => d.all.map((c) => ({ c, tr: wtTransitionsBetween(c.zone, start, end) })), [d.all, start, end]);
-  const W = 560;
+  const [fitRef, W] = useFitWidth(560);
   const L = 110;
   const RH = 30;
   const T = 26;
@@ -53,28 +55,28 @@ export function WtDstTimelineCard({ d, f }: CardProps) {
       <IndicatorWithTable
         workedExampleTitle={t("worked")}
         indicator={
-          <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} style={{ direction: "ltr" }} className="h-auto max-w-full" role="img" aria-label={t("dst.title")}>
+          <svg viewBox={`0 0 ${W} ${H}`} ref={fitRef} width={W} height={H} style={{ direction: "ltr" }} className="h-auto max-w-full" role="img" aria-label={t("dst.title")}>
             {months.map((ms) => (
               <g key={ms}>
                 <line x1={x(ms)} x2={x(ms)} y1={T - 6} y2={H - 6} stroke="currentColor" strokeOpacity={0.1} />
-                <text x={x(ms) + 2} y={T - 10} fontSize={8} className={axisText}>{f.month(ms)}</text>
+                <text style={{ fontSize: svgPx(12) }} x={x(ms) + 2} y={T - 10} className={axisText}>{f.month(ms)}</text>
               </g>
             ))}
             <line x1={x(start)} x2={x(start)} y1={T - 8} y2={H - 6} stroke="#2563eb" strokeWidth={2} />
-            <text x={x(start) + 3} y={H - 8} fontSize={8} fontWeight={700} fill="#2563eb">{t("dst.today")}</text>
+            <text style={{ fontSize: svgPx(12) }} x={x(start) + 3} y={H - 8} fontWeight={700} fill="#2563eb">{t("dst.today")}</text>
             {rows.map((r, i) => {
               const yy = T + i * RH + RH / 2;
               return (
                 <g key={r.c.id}>
-                  <text x={L - 8} y={yy + 3} textAnchor="end" fontSize={10} fontWeight={i === 0 ? 800 : 600} className={valueText}>{shortName(f.city(r.c)).slice(0, 15)}</text>
+                  <text style={{ fontSize: svgPx(12) }} x={L - 8} y={yy + 3} textAnchor="end" fontWeight={i === 0 ? 800 : 600} className={valueText}>{shortName(f.city(r.c)).slice(0, 15)}</text>
                   <line x1={L} x2={W - 16} y1={yy} y2={yy} stroke="currentColor" strokeOpacity={r.tr.length ? 0.35 : 0.12} strokeDasharray={r.tr.length ? undefined : "3 4"} />
-                  {r.tr.length === 0 && <text x={L + 6} y={yy - 4} fontSize={8} className={axisText}>{t("dst.none")}</text>}
+                  {r.tr.length === 0 && <text style={{ fontSize: svgPx(12) }} x={L + 6} y={yy - 4} className={axisText}>{t("dst.none")}</text>}
                   {r.tr.map((tr) => {
                     const fwd = tr.offsetAfter > tr.offsetBefore;
                     return (
                       <g key={tr.utcMs}>
                         <circle cx={x(tr.utcMs)} cy={yy} r={6} fill={fwd ? "#f59e0b" : "#3b82f6"} stroke="white" strokeWidth={1.5} />
-                        <text x={x(tr.utcMs)} y={yy - 9} textAnchor="middle" fontSize={8} fontWeight={700} fill={fwd ? "#b45309" : "#1d4ed8"}>
+                        <text style={{ fontSize: svgPx(12) }} x={x(tr.utcMs)} y={yy - 9} textAnchor="middle" fontWeight={700} fill={fwd ? "#b45309" : "#1d4ed8"}>
                           {f.shortDate(tr.utcMs, r.c.zone)} {fwd ? "+" : "−"}{f.num(Math.abs(tr.offsetAfter - tr.offsetBefore) / 60)}
                         </text>
                       </g>
@@ -118,7 +120,7 @@ export function WtHijriCard({ d, f }: CardProps) {
     groups.set(key, g);
   });
   const list = [...groups.values()].sort((a, b) => a.delta - b.delta);
-  const W = 470;
+  const [fitRef, W] = useFitWidth(470);
   const CW = (W - 20) / 30;
   const g0 = civilToUtcMs(home.parts) + 12 * 3_600_000;
   const toNext = len - home.hijri.day + 1;
@@ -130,8 +132,8 @@ export function WtHijriCard({ d, f }: CardProps) {
         workedExampleTitle={t("worked")}
         indicator={
           <div className="w-full max-w-[470px] space-y-3">
-            <svg viewBox={`0 0 ${W} 64`} width={W} height={64} style={{ direction: "ltr" }} className="h-auto max-w-full" role="img" aria-label={t("hijri.strip")}>
-              <text x={10} y={11} fontSize={10} fontWeight={700} className={valueText}>{f.hijriMonth(g0)} {home.hijri.year}</text>
+            <svg viewBox={`0 0 ${W} 64`} ref={fitRef} width={W} height={64} style={{ direction: "ltr" }} className="h-auto max-w-full" role="img" aria-label={t("hijri.strip")}>
+              <text style={{ fontSize: svgPx(12) }} x={10} y={11} fontWeight={700} className={valueText}>{f.hijriMonth(g0)} {home.hijri.year}</text>
               {Array.from({ length: 30 }, (_, i) => {
                 const day = i + 1;
                 const inMonth = day <= len;
@@ -140,12 +142,12 @@ export function WtHijriCard({ d, f }: CardProps) {
                   <g key={day}>
                     <rect x={10 + i * CW} y={18} width={CW - 2} height={24} rx={3} fill={!inMonth ? "transparent" : mark ? (day === home.hijri.day ? "#059669" : "#34d399") : "#e4e4e7"} className={!inMonth || mark ? "" : "dark:fill-zinc-700"} stroke={!inMonth ? "currentColor" : "none"} strokeOpacity={0.2} strokeDasharray="2 2" />
                     {(day === 1 || day % 5 === 0 || mark) && inMonth && (
-                      <text x={10 + i * CW + (CW - 2) / 2} y={34} textAnchor="middle" fontSize={8} fontWeight={700} fill={mark ? "white" : undefined} className={mark ? "" : axisText}>{day}</text>
+                      <text style={{ fontSize: svgPx(12) }} x={10 + i * CW + (CW - 2) / 2} y={34} textAnchor="middle" fontWeight={700} fill={mark ? "white" : undefined} className={mark ? "" : axisText}>{day}</text>
                     )}
                   </g>
                 );
               })}
-              <text x={10} y={58} fontSize={9} className={axisText}>{t("hijri.stripNote", { n: len })}</text>
+              <text style={{ fontSize: svgPx(12) }} x={10} y={58} className={axisText}>{t("hijri.stripNote", { n: len })}</text>
             </svg>
             <ul className="space-y-1.5">
               {list.map((g) => (
@@ -183,7 +185,7 @@ export function WtDaylightCard({ s, d, f, now }: CardProps) {
     const nowP = zonedParts(now, c.zone);
     return { c, st, nowMin: nowP.hour * 60 + nowP.minute };
   });
-  const W = 520;
+  const [fitRef, W] = useFitWidth(520);
   const L = 110;
   const RH = 26;
   const T = 18;
@@ -200,11 +202,11 @@ export function WtDaylightCard({ s, d, f, now }: CardProps) {
       <IndicatorWithTable
         workedExampleTitle={t("worked")}
         indicator={
-          <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} style={{ direction: "ltr" }} className="h-auto max-w-full" role="img" aria-label={t("daylight.title")}>
+          <svg viewBox={`0 0 ${W} ${H}`} ref={fitRef} width={W} height={H} style={{ direction: "ltr" }} className="h-auto max-w-full" role="img" aria-label={t("daylight.title")}>
             {[0, 360, 720, 1080, 1440].map((m) => (
               <g key={m}>
                 <line x1={X(m)} x2={X(m)} y1={T - 4} y2={H - 4} stroke="currentColor" strokeOpacity={0.12} />
-                <text x={X(m)} y={T - 6} textAnchor="middle" fontSize={8} className={axisText}>{m === 1440 ? "24:00" : f.hhmm(m)}</text>
+                <text style={{ fontSize: svgPx(12) }} x={X(m)} y={T - 6} textAnchor="middle" className={axisText}>{m === 1440 ? "24:00" : f.hhmm(m)}</text>
               </g>
             ))}
             {rows.map((r, i) => {
@@ -215,7 +217,7 @@ export function WtDaylightCard({ s, d, f, now }: CardProps) {
               const civil2 = seg(r.st.sunset, r.st.civilDusk);
               return (
                 <g key={r.c.id}>
-                  <text x={L - 6} y={y + h / 2 + 3} textAnchor="end" fontSize={10} fontWeight={i === 0 ? 800 : 600} className={valueText}>{shortName(f.city(r.c)).slice(0, 15)}</text>
+                  <text style={{ fontSize: svgPx(12) }} x={L - 6} y={y + h / 2 + 3} textAnchor="end" fontWeight={i === 0 ? 800 : 600} className={valueText}>{shortName(f.city(r.c)).slice(0, 15)}</text>
                   <rect x={X(0)} y={y} width={X(1440) - X(0)} height={h} rx={3} fill="#1e293b" />
                   {civil1 && <rect x={X(civil1[0])} y={y} width={X(civil1[1]) - X(civil1[0])} height={h} fill="#818cf8" />}
                   {civil2 && <rect x={X(civil2[0])} y={y} width={X(civil2[1]) - X(civil2[0])} height={h} fill="#818cf8" />}
@@ -223,7 +225,7 @@ export function WtDaylightCard({ s, d, f, now }: CardProps) {
                   <rect x={X(s.ws)} y={y - 1} width={X(s.we) - X(s.ws)} height={h + 2} fill="none" stroke="#10b981" strokeWidth={1.5} rx={2} />
                   <circle cx={X(r.nowMin)} cy={y + h / 2} r={3.5} fill="#ef4444" stroke="white" strokeWidth={1} />
                   {day && r.st.polar === null && (
-                    <text x={(X(day[0]) + X(day[1])) / 2} y={y + h / 2 + 3} textAnchor="middle" fontSize={8} fontWeight={700} fill="#78350f">{dur(r.st.dayLengthMin)}</text>
+                    <text style={{ fontSize: svgPx(12) }} x={(X(day[0]) + X(day[1])) / 2} y={y + h / 2 + 3} textAnchor="middle" fontWeight={700} fill="#78350f">{dur(r.st.dayLengthMin)}</text>
                   )}
                 </g>
               );

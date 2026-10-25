@@ -4,6 +4,7 @@ import { ENERGY_GRAVITY } from "@tooloralabs/tools";
 import EnergyIndicatorCard from "./EnergyIndicatorCard";
 import { useEnergyModel } from "./EnergyLiveContext";
 import type { EnergyWorkPowerMode } from "./types";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 380;
 const ROW = 52;
@@ -68,16 +69,16 @@ export default function EnergyFormulaDiagram() {
           <g key={r.mode}>
             <rect x={2} y={y} width={W - 4} height={ROW - 8} rx={10} strokeWidth={on ? 3 : 1.2} className={`fill-white dark:fill-zinc-900 ${r.stroke}`} />
             <rect x={2} y={y} width={46} height={ROW - 8} rx={10} className={r.cls} opacity={0.15} />
-            <text x={25} y={y + 28} textAnchor="middle" fontSize={15} fontWeight={800} className={r.cls}>
+            <text style={{ fontSize: svgPx(15) }} x={25} y={y + 28} textAnchor="middle" fontWeight={800} className={r.cls}>
               {r.sym}
             </text>
-            <text x={58} y={y + 18} fontSize={12} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={58} y={y + 18} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
               {r.formula}
             </text>
-            <text x={58} y={y + 35} fontSize={10.5} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+            <text style={{ fontSize: svgPx(12) }} x={58} y={y + 35} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
               {r.sub}
             </text>
-            <text x={W - 12} y={y + 18} textAnchor="end" fontSize={12.5} fontWeight={700} fontFamily="ui-monospace, monospace" className={r.cls}>
+            <text style={{ fontSize: svgPx(12.5) }} x={W - 12} y={y + 18} textAnchor="end" fontWeight={700} fontFamily="ui-monospace, monospace" className={r.cls}>
               {`= ${r.value}`}
             </text>
           </g>

@@ -17,6 +17,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import LiveTable3DLayout, { LiveTableFill, type LiveTableGroup } from "@/components/tool-ui/three/LiveTable3DLayout";
 import { CopyButton, EntryText, fmt } from "./CitationShared";
 import { PART_COLORS, type StudioState } from "./studio";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 type Props = { state: StudioState; onChange: (next: StudioState) => void; source: CiteSource; index: number };
 
@@ -46,13 +47,13 @@ function StyleOrderMatrix({ source, index, style, onPick, names }: { source: Cit
         return (
           <g key={r.id} onClick={() => onPick(r.id)} style={{ cursor: "pointer" }}>
             <rect x={0} y={y} width={W} height={RH - 4} rx={8} className={on ? "fill-blue-100 dark:fill-blue-500/20" : "fill-transparent"} />
-            <text x={6} y={y + RH / 2 + 1} fontSize={11} fontWeight={on ? 800 : 600} className={on ? "fill-blue-700 dark:fill-blue-300" : "fill-zinc-600 dark:fill-zinc-300"}>
+            <text style={{ fontSize: svgPx(12) }} x={6} y={y + RH / 2 + 1} fontWeight={on ? 800 : 600} className={on ? "fill-blue-700 dark:fill-blue-300" : "fill-zinc-600 dark:fill-zinc-300"}>
               {names[r.id]}
             </text>
             {r.parts.map((p, pi) => (
               <g key={p} style={{ transition: "transform 400ms ease", transform: `translate(${LW + pi * cw}px, ${y + 4}px)` }}>
                 <rect width={cw - 3} height={RH - 12} rx={5} fill={PART_COLORS[p]} fillOpacity={on ? 0.95 : 0.6} />
-                <text x={(cw - 3) / 2} y={(RH - 12) / 2 + 4} textAnchor="middle" fontSize={10} fontWeight={700} fill="white">
+                <text style={{ fontSize: svgPx(12) }} x={(cw - 3) / 2} y={(RH - 12) / 2 + 4} textAnchor="middle" fontWeight={700} fill="white">
                   {pi + 1}
                 </text>
               </g>

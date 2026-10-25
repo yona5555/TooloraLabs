@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { code128Modules } from "@tooloralabs/tools";
 import BarcodeIndicatorCard, { BarcodeIndicatorUnavailable } from "./BarcodeIndicatorCard";
 import { useBarcodeModel } from "./BarcodeLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 210;
@@ -39,29 +40,29 @@ export default function BarcodeLengthTrend() {
       {ticks.map((v) => (
         <g key={v}>
           <line x1={L} y1={y(v)} x2={W - R} y2={y(v)} className="stroke-zinc-200 dark:stroke-zinc-700" />
-          <text x={L - 6} y={y(v) + 4} textAnchor="end" fontSize={12} className="fill-zinc-500 dark:fill-zinc-400">
+          <text style={{ fontSize: svgPx(12) }} x={L - 6} y={y(v) + 4} textAnchor="end" className="fill-zinc-500 dark:fill-zinc-400">
             {v}
           </text>
         </g>
       ))}
       {[1, Math.round(maxN / 2), maxN].map((k) => (
-        <text key={k} x={x(k)} y={H - B + 16} textAnchor="middle" fontSize={12} className="fill-zinc-500 dark:fill-zinc-400">
+        <text style={{ fontSize: svgPx(12) }} key={k} x={x(k)} y={H - B + 16} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
           {k}
         </text>
       ))}
-      <text x={(L + W - R) / 2} y={H - 4} textAnchor="middle" fontSize={12} className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={(L + W - R) / 2} y={H - 4} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
         {t("axisX")}
       </text>
       <line x1={L} y1={y(95)} x2={W - R} y2={y(95)} strokeDasharray="5 4" strokeWidth={1.5} className="stroke-emerald-500 dark:stroke-emerald-400" />
-      <text x={W - R} y={y(95) - 6} textAnchor="end" fontSize={12} fontWeight={600} className="fill-emerald-700 dark:fill-emerald-300">
+      <text style={{ fontSize: svgPx(12) }} x={W - R} y={y(95) - 6} textAnchor="end" fontWeight={600} className="fill-emerald-700 dark:fill-emerald-300">
         {t("eanLine")}
       </text>
       <path d={line} fill="none" strokeWidth={2.5} className="stroke-blue-600 dark:stroke-blue-400" />
-      <text x={x(maxN) - 4} y={y(code128Modules(maxN)) + 16} textAnchor="end" fontSize={12} fontWeight={600} className="fill-blue-700 dark:fill-blue-300">
+      <text style={{ fontSize: svgPx(12) }} x={x(maxN) - 4} y={y(code128Modules(maxN)) + 16} textAnchor="end" fontWeight={600} className="fill-blue-700 dark:fill-blue-300">
         Code 128
       </text>
       <circle cx={px} cy={py} r={7} className="fill-amber-500 stroke-white dark:fill-amber-400 dark:stroke-zinc-900" strokeWidth={2} />
-      <text x={Math.min(px + 10, W - 70)} y={py - 10} fontSize={12} fontWeight={700} className="fill-amber-700 dark:fill-amber-300">
+      <text style={{ fontSize: svgPx(12) }} x={Math.min(px + 10, W - 70)} y={py - 10} fontWeight={700} className="fill-amber-700 dark:fill-amber-300">
         {t("you", { m: f(isCode128 ? a.modules : 95) })}
       </text>
     </svg>

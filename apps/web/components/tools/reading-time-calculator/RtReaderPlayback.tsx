@@ -5,6 +5,7 @@ import { Pause, Play, RotateCcw } from "lucide-react";
 import RtIndicatorCard from "./RtIndicatorCard";
 import { readerWordIndex, SEGMENT_FILLS } from "./rtMath";
 import { useRtLive } from "./RtLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 132;
@@ -97,7 +98,7 @@ export default function RtReaderPlayback() {
   const indicator = (
     <div className="w-full sm:w-[340px]">
       <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
-        <text x={PAD} y={BAR_Y - 8} fontSize={9} fontWeight={600} className="fill-zinc-500 dark:fill-zinc-400">{t("paragraphsRow")}</text>
+        <text style={{ fontSize: svgPx(12) }} x={PAD} y={BAR_Y - 8} fontWeight={600} className="fill-zinc-500 dark:fill-zinc-400">{t("paragraphsRow")}</text>
         {paragraphs.map((p, i) => (
           <rect
             key={p.index}
@@ -115,7 +116,7 @@ export default function RtReaderPlayback() {
         ))}
         {paragraphs.map((p, i) =>
           xw(p.wordStart + p.words) - xw(p.wordStart) > 24 ? (
-            <text key={`l${p.index}`} x={xw(p.wordStart) + 5} y={BAR_Y + 21} fontSize={10} fontWeight={700} className="pointer-events-none fill-white">
+            <text style={{ fontSize: svgPx(12) }} key={`l${p.index}`} x={xw(p.wordStart) + 5} y={BAR_Y + 21} fontWeight={700} className="pointer-events-none fill-white">
               {`¶${f(i + 1)}`}
             </text>
           ) : null,
@@ -125,12 +126,12 @@ export default function RtReaderPlayback() {
           <line key={s.index} x1={xw(s.wordStart)} y1={SENT_Y - 5} x2={xw(s.wordStart)} y2={SENT_Y + 5} className={s === sent && reader ? "stroke-amber-500" : "stroke-zinc-400 dark:stroke-zinc-500"} strokeWidth={s === sent && reader ? 2.5 : 1} />
         ))}
         <line x1={PAD} y1={SENT_Y} x2={W - PAD} y2={SENT_Y} className="stroke-zinc-300 dark:stroke-zinc-600" />
-        <text x={W - PAD} y={SENT_Y - 8} textAnchor="end" fontSize={9} className="fill-zinc-500 dark:fill-zinc-400">{t("sentencesRow")}</text>
+        <text style={{ fontSize: svgPx(12) }} x={W - PAD} y={SENT_Y - 8} textAnchor="end" className="fill-zinc-500 dark:fill-zinc-400">{t("sentencesRow")}</text>
         <line x1={PAD} y1={AXIS_Y} x2={W - PAD} y2={AXIS_Y} className="stroke-zinc-300 dark:stroke-zinc-600" />
         {ticks.map((m) => (
           <g key={m} style={{ transform: `translateX(${x(m)}px)`, transition: "transform 300ms ease" }}>
             <line x1={0} y1={AXIS_Y} x2={0} y2={AXIS_Y + 5} className="stroke-zinc-400 dark:stroke-zinc-500" />
-            <text x={0} y={AXIS_Y + 16} textAnchor="middle" fontSize={9} className="fill-zinc-500 dark:fill-zinc-400">{clock(m)}</text>
+            <text style={{ fontSize: svgPx(12) }} x={0} y={AXIS_Y + 16} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">{clock(m)}</text>
           </g>
         ))}
         <g style={{ transform: `translateX(${x(at)}px)`, transition: playing ? "none" : "transform 200ms ease" }}>

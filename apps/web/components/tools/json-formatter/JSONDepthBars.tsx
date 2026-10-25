@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import JSONIndicatorCard, { JSONIndicatorUnavailable } from "./JSONIndicatorCard";
 import { useJSONModel } from "./JSONLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 200;
@@ -33,19 +34,19 @@ export default function JSONDepthBars() {
           <g key={i}>
             <rect x={x} y={BASE - h} width={barW} height={h} rx={4} className={i === widest ? "fill-blue-600 dark:fill-blue-400" : "fill-blue-300 dark:fill-blue-800"} />
             {(slot >= 18 || i === widest) && (
-              <text x={x + barW / 2} y={BASE - h - 5} textAnchor="middle" fontSize={12} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+              <text style={{ fontSize: svgPx(12) }} x={x + barW / 2} y={BASE - h - 5} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
                 {f(c)}
               </text>
             )}
             {(slot >= 18 || i % 2 === 0) && (
-              <text x={x + barW / 2} y={BASE + 16} textAnchor="middle" fontSize={12} className="fill-zinc-500 dark:fill-zinc-400">
+              <text style={{ fontSize: svgPx(12) }} x={x + barW / 2} y={BASE + 16} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
                 {i + 1}
               </text>
             )}
           </g>
         );
       })}
-      <text x={0} y={12} fontSize={12} className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={0} y={12} className="fill-zinc-500 dark:fill-zinc-400">
         {t("axis")}
       </text>
     </svg>

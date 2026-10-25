@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import PaletteIndicatorCard, { PaletteIndicatorUnavailable } from "./PaletteIndicatorCard";
 import { px2, usePaletteModel } from "./PaletteLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const W = 340;
 const H = 210;
@@ -27,7 +28,7 @@ export default function PaletteLuminanceSteps() {
       {[0, 0.5, 1].map((v) => (
         <g key={v}>
           <line x1={0} y1={y(v)} x2={W} y2={y(v)} className="stroke-zinc-200 dark:stroke-zinc-700" />
-          <text x={2} y={y(v) - 4} fontSize={11} className="fill-zinc-400 dark:fill-zinc-500">
+          <text style={{ fontSize: svgPx(12) }} x={2} y={y(v) - 4} className="fill-zinc-400 dark:fill-zinc-500">
             {v}
           </text>
         </g>
@@ -35,10 +36,10 @@ export default function PaletteLuminanceSteps() {
       {order.map(({ c, i }, k) => (
         <g key={i}>
           <rect x={k * step + 4} y={y(c.luminance)} width={step - 8} height={BASE - y(c.luminance) + 0.01} rx={4} fill={c.hex} className="stroke-zinc-300 dark:stroke-zinc-600" />
-          <text x={k * step + step / 2} y={y(c.luminance) - 6} textAnchor="middle" fontSize={12} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+          <text style={{ fontSize: svgPx(12) }} x={k * step + step / 2} y={y(c.luminance) - 6} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
             {f(c.luminance, 3)}
           </text>
-          <text x={k * step + step / 2} y={BASE + 18} textAnchor="middle" fontSize={12} className="fill-zinc-500 dark:fill-zinc-400">
+          <text style={{ fontSize: svgPx(12) }} x={k * step + step / 2} y={BASE + 18} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
             {t("color", { n: i + 1 })}
           </text>
         </g>

@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { atLeastOnce, trialsForConfidence } from "@tooloralabs/tools";
 import ProbabilityIndicatorCard from "./ProbabilityIndicatorCard";
 import { useProbabilityModel } from "./ProbabilityLiveContext";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const LEVELS = [0.5, 0.75, 0.9, 0.95, 0.99];
 const W = 320;
@@ -32,14 +33,14 @@ export default function ProbabilityTrialsStepped() {
         return (
           <g key={i}>
             <rect x={x} y={H - B - h} width={slot - 8} height={h} rx={4} className={i === LEVELS.length - 1 ? "fill-blue-600 dark:fill-blue-400" : "fill-blue-400/80 dark:fill-blue-500/70"} />
-            <text x={x + (slot - 8) / 2} y={H - B - h - 6} textAnchor="middle" className="fill-zinc-800 font-mono text-[11px] font-bold dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={x + (slot - 8) / 2} y={H - B - h - 6} textAnchor="middle" className="fill-zinc-800 font-mono font-bold dark:fill-zinc-100">
               {Number.isFinite(n) ? `n=${f(n, 0)}` : "∞"}
             </text>
-            <text x={x + (slot - 8) / 2} y={H - B + 14} textAnchor="middle" className="fill-zinc-600 font-mono text-[10px] dark:fill-zinc-300">{pct(LEVELS[i], 0)}</text>
+            <text style={{ fontSize: svgPx(12) }} x={x + (slot - 8) / 2} y={H - B + 14} textAnchor="middle" className="fill-zinc-600 font-mono dark:fill-zinc-300">{pct(LEVELS[i], 0)}</text>
           </g>
         );
       })}
-      <text x={W / 2} y={H - 3} textAnchor="middle" className="fill-zinc-500 text-[10px] dark:fill-zinc-400">{t("axis")}</text>
+      <text style={{ fontSize: svgPx(12) }} x={W / 2} y={H - 3} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">{t("axis")}</text>
     </svg>
   );
 

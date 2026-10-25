@@ -115,7 +115,7 @@ function Lab({ a, text, name, base, line, onApply }: { a: NotepadAnalysis; text:
                 <Polyline key={i} points={seg} color={blue} weight={3} />
               ))}
               <Point x={base} y={f0} color={grey} />
-              <Text x={base} y={f0} attach="n" attachDistance={14} size={11} color={grey}>
+              <Text x={base} y={f0} attach="n" attachDistance={14} size={12} color={grey}>
                 {t("lab.typed")}
               </Text>
               {point.element}

@@ -9,6 +9,7 @@ import { g3, sciText } from "../molarity-calculator/molMath";
 import { uniFormula } from "../chemical-equation-balancer/chemMath";
 import { SvgMolecule } from "../chemical-equation-balancer/Molecules2D";
 import { AVOGADRO, M, rd, SUBSTANCE_SEED, SUBSTANCES } from "./stoichMath";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const RatioScene3D = dynamic(() => import("./StoichiometryScenes3D").then((m) => m.RatioScene3D), { ssr: false, loading: () => null });
 const TanksScene3D = dynamic(() => import("./StoichiometryScenes3D").then((m) => m.TanksScene3D), { ssr: false, loading: () => null });
@@ -37,13 +38,13 @@ function Ratio2D({ k }: { k: number }) {
               {Array.from({ length: g.n }, (_, i) => (
                 <SvgMolecule key={i} formula={g.formula} x={g.x0 + w / 2 + ((i % cols) - (cols - 1) / 2) * cell} y={H - 36 - (Math.floor(i / cols) + 0.5) * cell} size={cell * 0.6} />
               ))}
-              <text x={g.x0 + w / 2} y={H - 12} fontSize={12} fontWeight={700} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+              <text x={g.x0 + w / 2} y={H - 12} fontWeight={700} textAnchor="middle" style={{ fontSize: svgPx(12), fill: "var(--ph-ink)" }}>
                 <SvgChem text={`${g.n > 1 ? g.n : ""}${uniFormula(g.formula)}`} />
               </text>
             </g>
           );
         })}
-        <text x={W * 0.52} y={H / 2} fontSize={18} fontWeight={800} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+        <text x={W * 0.52} y={H / 2} fontWeight={800} textAnchor="middle" style={{ fontSize: svgPx(18), fill: "var(--ph-ink)" }}>
           →
         </text>
       </svg>
@@ -108,16 +109,16 @@ function Tanks2D({ tonnes, masses }: { tonnes: number; masses: [number, number, 
           return (
             <g key={tk.f}>
               <rect x={tk.x - 30} y={base - h} width={60} height={h} rx={28} style={{ fill: tk.fill, stroke: "var(--ph-line)" }} strokeWidth={1} />
-              <text x={tk.x} y={base - h - 10} fontSize={12.5} fontWeight={800} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+              <text x={tk.x} y={base - h - 10} fontWeight={800} textAnchor="middle" style={{ fontSize: svgPx(12.5), fill: "var(--ph-ink)" }}>
                 {`${g3(masses[i])} t`}
               </text>
-              <text x={tk.x} y={H - 14} fontSize={11} textAnchor="middle" style={{ fill: "var(--ph-ink-muted)" }}>
+              <text x={tk.x} y={H - 14} textAnchor="middle" style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
                 <SvgChem text={`${tk.mol} mol ${tk.f}`} />
               </text>
             </g>
           );
         })}
-        <text x={W * 0.62} y={base - 20} fontSize={18} fontWeight={800} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+        <text x={W * 0.62} y={base - 20} fontWeight={800} textAnchor="middle" style={{ fontSize: svgPx(18), fill: "var(--ph-ink)" }}>
           →
         </text>
       </svg>
@@ -182,10 +183,10 @@ function Mole2D({ index }: { index: number }) {
           return (
             <g key={sb.formula}>
               <circle cx={x} cy={base - r} r={r} style={{ fill: sel ? "var(--chem-stock)" : "var(--chem-gas)", stroke: sel ? "var(--ph-focus)" : "var(--ph-line)" }} strokeWidth={sel ? 2.5 : 1} />
-              <text x={x} y={base - 2 * r - 8 - (i % 2) * 14} fontSize={sel ? 12 : 10.5} fontWeight={sel ? 800 : 600} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+              <text x={x} y={base - 2 * r - 8 - (i % 2) * 14} fontWeight={sel ? 800 : 600} textAnchor="middle" style={{ fontSize: svgPx(sel ? 12 : 12), fill: "var(--ph-ink)" }}>
                 {Math.round(sb.mm)}
               </text>
-              <text x={x} y={H - 10 - (i % 2) * 0} fontSize={10} textAnchor="middle" style={{ fill: "var(--ph-ink-muted)" }}>
+              <text x={x} y={H - 10 - (i % 2) * 0} textAnchor="middle" style={{ fontSize: svgPx(12), fill: "var(--ph-ink-muted)" }}>
                 <SvgChem text={uniFormula(sb.formula)} />
               </text>
             </g>
