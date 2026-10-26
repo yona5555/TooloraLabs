@@ -3,7 +3,7 @@ import { useTranslations } from "next-intl";
 import MmmIndicatorCard from "./MmmIndicatorCard";
 import { useMmmModel } from "./MmmLiveContext";
 
-const COLORS = ["bg-sky-400 dark:bg-sky-500", "bg-blue-600 dark:bg-blue-400", "bg-violet-600 dark:bg-violet-400", "bg-fuchsia-400 dark:bg-fuchsia-500"];
+const COLORS = ["bg-sky-400 dark:bg-sky-500", "bg-blue-600 max-md:dark:bg-blue-400", "bg-violet-600 max-md:dark:bg-violet-400", "bg-fuchsia-400 dark:bg-fuchsia-500"];
 
 /**
  * Type #15 (Stacked Segmented Bar): the range cut at Q1, the median and Q3 into four quarters

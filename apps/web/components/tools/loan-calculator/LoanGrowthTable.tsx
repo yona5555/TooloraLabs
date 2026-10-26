@@ -41,7 +41,7 @@ export default function LoanGrowthTable({ schedule, digitStyle, currency }: Loan
     <SectionCard
       id="amortization"
       title={t("amortizationTable.title")}
-      action={<DownloadButton content={csvContent} filename="loan-growth-schedule.csv" mimeType="text/csv;charset=utf-8" className="!text-white dark:!text-zinc-200" />}
+      action={<DownloadButton content={csvContent} filename="loan-growth-schedule.csv" mimeType="text/csv;charset=utf-8" className="!text-white dark:!text-zinc-200 md:dark:!text-white" />}
     >
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("amortizationTable.growthIntro")}</p>
 
