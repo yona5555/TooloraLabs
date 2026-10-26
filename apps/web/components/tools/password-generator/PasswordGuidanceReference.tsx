@@ -18,7 +18,7 @@ export default function PasswordGuidanceReference() {
             {row.recommended ? (
               <Check size={16} className="mt-0.5 shrink-0 text-emerald-600 dark:text-emerald-400" />
             ) : (
-              <X size={16} className="mt-0.5 shrink-0 text-red-500 dark:text-red-400" />
+              <X size={16} className="mt-0.5 shrink-0 text-red-600 dark:text-red-400" />
             )}
             <span className="text-zinc-600 dark:text-zinc-300">{row.text}</span>
           </div>

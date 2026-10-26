@@ -31,17 +31,17 @@ export default function MinMaxRangeFlowDiagram() {
         <div dir="ltr" className="flex shrink-0 flex-wrap items-center justify-center gap-2 text-center">
           <div className="rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 dark:border-blue-500/30 dark:bg-blue-500/10">
             <p className="font-mono text-lg font-bold text-blue-700 dark:text-blue-300">{round2(max)}</p>
-            <p className="text-xs text-blue-500/80">{t("maxLabel")}</p>
+            <p className="text-xs text-blue-600">{t("maxLabel")}</p>
           </div>
           <span className="text-xl font-bold text-zinc-400">−</span>
           <div className="rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 dark:border-rose-500/30 dark:bg-rose-500/10">
             <p className="font-mono text-lg font-bold text-rose-700 dark:text-rose-300">{round2(min)}</p>
-            <p className="text-xs text-rose-500/80">{t("minLabel")}</p>
+            <p className="text-xs text-rose-600">{t("minLabel")}</p>
           </div>
           <ArrowRight className="shrink-0 text-zinc-400" size={20} />
           <div className="rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 dark:border-emerald-500/30 dark:bg-emerald-500/10">
             <p className="font-mono text-lg font-bold text-emerald-700 dark:text-emerald-300">{round2(range)}</p>
-            <p className="text-xs text-emerald-600/80 dark:text-emerald-400/80">{t("rangeLabel")}</p>
+            <p className="text-xs text-emerald-600 dark:text-emerald-400/80">{t("rangeLabel")}</p>
           </div>
         </div>
         <WorkedExampleNote title={t("worked.title")} rows={[{ label: t("worked.formula"), value: `${round2(max)} − ${round2(min)} = ${round2(range)}`, emphasize: true }]} />

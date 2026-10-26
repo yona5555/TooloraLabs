@@ -24,6 +24,7 @@ import WeatherIcon from "./WeatherIcon";
 import { moonPath } from "./WxSkyScene";
 import { dateKeyMs, tempColor, useChartWidth, useIsRtl, useWxT, type WxCardProps } from "./wx";
 import { svgPx } from "@/components/tool-ui/svgPx";
+import { inkOn, paletteTextClass } from "@/lib/palette-text";
 
 const axis = "fill-zinc-500 dark:fill-zinc-400";
 const strong = "fill-zinc-800 dark:fill-zinc-100";
@@ -420,7 +421,7 @@ export function WxHumidityCard({ d, f }: WxCardProps) {
                   const from = Math.max(lo, z.from);
                   const to = Math.min(hi, z.to);
                   return (
-                    <div key={z.key} className={`flex items-center justify-center text-xs font-bold text-white ${zone === z.key ? "" : "opacity-60"}`} style={{ width: `${((to - from) / (hi - lo)) * 100}%`, background: colors[k] }}>
+                    <div key={z.key} className={`flex items-center justify-center text-xs ${zone === z.key ? "font-bold ring-2 ring-inset ring-zinc-900 dark:ring-white" : "font-medium"}`} style={{ width: `${((to - from) / (hi - lo)) * 100}%`, background: colors[k], color: inkOn(colors[k]) }}>
                       {f.num(weatherTemp(from, f.units))}°
                     </div>
                   );
@@ -433,7 +434,7 @@ export function WxHumidityCard({ d, f }: WxCardProps) {
             </div>
             <div className="mt-2 grid grid-cols-5 gap-1 text-center text-xs leading-4">
               {DEW_COMFORT_BANDS.map((z, k) => (
-                <span key={z.key} className={zone === z.key ? "font-bold text-zinc-900 dark:text-zinc-50" : "text-zinc-500 dark:text-zinc-400"} style={zone === z.key ? { color: colors[k] } : undefined}>
+                <span key={z.key} className={zone === z.key ? `font-bold ${paletteTextClass(colors[k])}` : "text-zinc-500 dark:text-zinc-400"}>
                   {t(`dewComfort.${z.key}`)}
                 </span>
               ))}
@@ -499,7 +500,7 @@ export function WxUvCard({ d, f }: WxCardProps) {
               <circle cx={c} cy={150} r={7} className="fill-zinc-900 dark:fill-white" />
               <text style={{ fontSize: svgPx(26) }} x={c} y={128} textAnchor="middle" fontWeight={800} className={strong}>{f.num(val, 1)}</text>
             </svg>
-            <p className="text-sm font-bold" style={{ color: colors[UV_BANDS.findIndex((b) => b.key === level)] }}>{t(`uv.${level}`)}</p>
+            <p className={`text-sm font-bold ${paletteTextClass(colors[UV_BANDS.findIndex((b) => b.key === level)])}`}>{t(`uv.${level}`)}</p>
             <p className="mt-1 max-w-[260px] text-center text-xs text-zinc-600 dark:text-zinc-300">{t(`uvAdvice.${level}`)}</p>
           </div>
         }

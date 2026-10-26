@@ -86,7 +86,7 @@ export default function TriangleAngleDragSensitivity() {
         />
       </GapFreeRow>
       <TriangleSinCosLiveCurve angles={[{ label: "C", deg: currentAngle }]} />
-      <p className="mt-3 text-xs opacity-60">{t("hint")}</p>
+      <p className="mt-3 text-xs text-zinc-500 dark:text-zinc-400">{t("hint")}</p>
     </SectionCard>
   );
 }

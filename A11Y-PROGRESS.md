@@ -5,6 +5,13 @@
       LEFT: ~261 nodes = white text on light 500 fills (badges, bar segments, calculator keys incl. the
       orange key), text-*-500 used as text (fix in components -> 600), opacity-60 / */80 text,
       hard-coded hex chart labels. Then home-phone baselines (--approve + CI label) + APPROVED — LOCKED note.
+      DONE (2026-10-26, not rescanned yet): card-header actions white (globals.css rule), glass-tokens.css
+      vars re-declared on body (resolve against AA tokens), lib/palette-text.ts (paletteTextClass/inkOn)
+      for hex series colors used as text (time, study-time, countdown, weather), home graph light palette
+      700/800, text-*-500/…/80 -> 600 (38 files), text opacity-60 -> zinc-500, tile opacity removed,
+      csv badges + gcf bars. NEXT: inventory batches (opacity fills), macro/multiplication/circle/word-counter/
+      lorem/readability/reading-time labels on fills (use inkOn), dlitem (discount/sales-tax/tip),
+      speech-word-count + batch-invoice dark panels (zinc-400 -> zinc-300), barcode share button. Rescan.
 - [~] 2 axe /en light: 16597 -> 273 nodes (261 contrast, 12 dlitem). Fixed: nav landmark labels,
       IndicatorWithTable/WxSplit/break-even dl structure, slider aria-valuetext (GlassHandle),
       Mafs canvas role=group, scroll regions tabIndex, empty th, labels/select names, tablist,

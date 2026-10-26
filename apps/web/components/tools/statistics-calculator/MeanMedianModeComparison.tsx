@@ -29,15 +29,15 @@ export default function MeanMedianModeComparison() {
       <GapFreeRow className="mt-4">
         <div dir="ltr" className="grid shrink-0 grid-cols-3 gap-2.5">
           <div className="rounded-xl border border-blue-200 bg-blue-50 p-3 text-center dark:border-blue-500/30 dark:bg-blue-500/10">
-            <p className="text-xs font-semibold uppercase tracking-wide text-blue-500 dark:text-blue-400">{t("meanLabel")}</p>
+            <p className="text-xs font-semibold uppercase tracking-wide text-blue-600 dark:text-blue-400">{t("meanLabel")}</p>
             <p className="mt-1 font-mono text-lg font-bold text-blue-700 dark:text-blue-300">{round2(mean)}</p>
           </div>
           <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-3 text-center dark:border-emerald-500/30 dark:bg-emerald-500/10">
-            <p className="text-xs font-semibold uppercase tracking-wide text-emerald-500 dark:text-emerald-400">{t("medianLabel")}</p>
+            <p className="text-xs font-semibold uppercase tracking-wide text-emerald-600 dark:text-emerald-400">{t("medianLabel")}</p>
             <p className="mt-1 font-mono text-lg font-bold text-emerald-700 dark:text-emerald-300">{round2(median)}</p>
           </div>
           <div className="rounded-xl border border-rose-200 bg-rose-50 p-3 text-center dark:border-rose-500/30 dark:bg-rose-500/10">
-            <p className="text-xs font-semibold uppercase tracking-wide text-rose-500 dark:text-rose-400">{t("modeLabel")}</p>
+            <p className="text-xs font-semibold uppercase tracking-wide text-rose-600 dark:text-rose-400">{t("modeLabel")}</p>
             <p className="mt-1 font-mono text-lg font-bold text-rose-700 dark:text-rose-300">{mode.length > 0 ? mode.map((m) => round2(m)).join(", ") : t("noMode")}</p>
           </div>
         </div>

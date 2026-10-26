@@ -35,7 +35,7 @@ export default function TriangleRadiiComparisonCards() {
               <p className="text-sm font-semibold text-zinc-800 dark:text-zinc-100">{t(`${card.key}.title`)}</p>
             </div>
             <p className="mt-2 text-xs text-zinc-500 dark:text-zinc-400">{t(`${card.key}.description`)}</p>
-            <p className="mt-3 font-mono text-xs opacity-60">{card.formula}</p>
+            <p className="mt-3 font-mono text-xs text-zinc-500 dark:text-zinc-400">{card.formula}</p>
             <p className="mt-1 text-2xl font-bold text-zinc-900 dark:text-zinc-50">
               {t("radiusLabel")} = {round(card.radius)}
             </p>
@@ -45,7 +45,7 @@ export default function TriangleRadiiComparisonCards() {
           </div>
         ))}
       </div>
-      <p className="mt-3 text-xs opacity-60">{t("note", { ratio: round(circumradius / inradius) })}</p>
+      <p className="mt-3 text-xs text-zinc-500 dark:text-zinc-400">{t("note", { ratio: round(circumradius / inradius) })}</p>
     </SectionCard>
   );
 }

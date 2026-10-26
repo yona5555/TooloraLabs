@@ -10,6 +10,7 @@ import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { svgPx } from "@/components/tool-ui/svgPx";
 import { labelW } from "@/components/tool-ui/labelLayout";
 import { useFitWidth } from "@/components/tool-ui/useFitWidth";
+import { paletteTextClass } from "@/lib/palette-text";
 
 const axisText = "fill-zinc-500 dark:fill-zinc-400";
 const valueText = "fill-zinc-800 dark:fill-zinc-100";
@@ -54,7 +55,7 @@ export function TcShiftDialCard({ s, set, d, f }: CardProps) {
               {(["start", "end"] as const).map((w) => (
                 <div key={w} className="flex items-center justify-center gap-1">
                   <button type="button" className={btn} onClick={() => nudge(w, -900)} aria-label="−15">−</button>
-                  <span className="min-w-[4.5rem] font-mono font-semibold" style={{ color: w === "start" ? C.add : C.main }}>{f.clock(w === "start" ? d.spanStart : d.spanEnd)}</span>
+                  <span className={`min-w-[4.5rem] font-mono font-semibold ${paletteTextClass(w === "start" ? C.add : C.main)}`}>{f.clock(w === "start" ? d.spanStart : d.spanEnd)}</span>
                   <button type="button" className={btn} onClick={() => nudge(w, 900)} aria-label="+15">+</button>
                 </div>
               ))}

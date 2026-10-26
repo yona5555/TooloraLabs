@@ -69,7 +69,7 @@ export default function KinematicsResult() {
       </div>
       <div className="p-4 lg:flex lg:flex-1 lg:flex-col lg:p-6">
         <p dir="ltr" className="text-center font-mono text-4xl font-bold text-blue-700 dark:text-blue-400">
-          {fmt(headline)} <span className="text-xl font-semibold text-blue-500 dark:text-blue-300">{unit}</span>
+          {fmt(headline)} <span className="text-xl font-semibold text-blue-600 dark:text-blue-300">{unit}</span>
         </p>
         <p dir="ltr" className="mt-1 text-center font-mono text-sm text-zinc-500 dark:text-zinc-400">
           {solvedFormula(model)}

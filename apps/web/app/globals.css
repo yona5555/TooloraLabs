@@ -675,6 +675,16 @@ body:has([data-coming-soon-page]) [data-bp-link="coming-soon"] {
     display: block;
   }
 }
+/* A control in a card's blue header (SectionCard) sits on blue-600 in both themes: white text and outline
+   (AA), even when its component (CopyButton, DownloadButton, a tool's own button) is styled for a light body.
+   A dialog or print area opened from the header keeps its own colors. */
+[data-card-header] :is(button, a):not([data-card-toggle], :is(dialog, [role="dialog"], [data-print-area]) *) {
+  color: #fff;
+  border-color: rgb(255 255 255 / 0.4);
+}
+[data-card-header] :is(button, a):not([data-card-toggle], :is(dialog, [role="dialog"], [data-print-area]) *):hover {
+  background-color: rgb(255 255 255 / 0.1);
+}
 @media (max-width: 767px) {
   [data-phone-cards] [data-card]:not([data-fixed]) > [data-card-header] > [data-card-toggle] {
     display: flex;

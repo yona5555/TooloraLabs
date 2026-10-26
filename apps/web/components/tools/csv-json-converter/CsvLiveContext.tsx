@@ -71,13 +71,14 @@ export const TYPE_FILL: Record<ColumnType, string> = {
   text: "fill-emerald-600 dark:fill-emerald-400",
   empty: "fill-zinc-400 dark:fill-zinc-500",
 };
+/** Badge fills under white text: AA in both themes (light 600 = the AA tokens, dark one step deeper where 600 is too light). */
 export const TYPE_BG: Record<ColumnType, string> = {
-  integer: "bg-blue-600 dark:bg-blue-500",
-  decimal: "bg-sky-500",
-  boolean: "bg-rose-500",
-  date: "bg-violet-500",
-  text: "bg-emerald-600 dark:bg-emerald-500",
-  empty: "bg-zinc-400",
+  integer: "bg-blue-600",
+  decimal: "bg-sky-600 dark:bg-sky-700",
+  boolean: "bg-rose-600 dark:bg-rose-700",
+  date: "bg-violet-600",
+  text: "bg-emerald-600 dark:bg-emerald-700",
+  empty: "bg-zinc-500 dark:bg-zinc-600",
 };
 
 export const delimiterName = (d: string) => (d === "\t" ? "TAB" : d);

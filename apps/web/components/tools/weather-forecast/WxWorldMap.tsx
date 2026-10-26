@@ -8,6 +8,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import { useIsDarkMode } from "@/lib/use-dark-mode";
 import { EVENT_COLORS, TEMP_STOPS, useWxT, type MapCity, type MapLayers, type WxDerived, type WxFmt } from "./wx";
 import WxCredits from "./WxCredits";
+import { paletteTextClass } from "@/lib/palette-text";
 
 const WxMapCanvas = dynamic(() => import("./WxMapCanvas"), { ssr: false });
 
@@ -141,7 +142,7 @@ export default function WxWorldMap({ d, f }: { d: WxDerived; f: WxFmt }) {
               <p className="text-xs font-semibold tracking-wide text-zinc-400 uppercase dark:text-zinc-500">{t("ind.worked")}</p>
               {sel ? (
                 <dl className="mt-2 space-y-1.5 text-sm">
-                  <div className="flex justify-between gap-2"><dt className="text-zinc-500">{t("map.d.type")}</dt><dd className="font-semibold" style={{ color: EVENT_COLORS[sel.kind] }}>{t(`map.kind.${sel.kind}`)}</dd></div>
+                  <div className="flex justify-between gap-2"><dt className="text-zinc-500">{t("map.d.type")}</dt><dd className={`font-semibold ${paletteTextClass(EVENT_COLORS[sel.kind])}`}>{t(`map.kind.${sel.kind}`)}</dd></div>
                   <div><dt className="text-zinc-500">{t("map.d.place")}</dt><dd dir="auto" className="font-semibold text-zinc-800 dark:text-zinc-100">{sel.title}</dd></div>
                   <div className="flex justify-between gap-2"><dt className="text-zinc-500">{t("map.d.size")}</dt><dd dir="ltr" className="font-semibold">{describe(sel)}</dd></div>
                   {sel.depthKm !== null && <div className="flex justify-between gap-2"><dt className="text-zinc-500">{t("map.d.depth")}</dt><dd dir="ltr">{km(sel.depthKm)}</dd></div>}

@@ -36,12 +36,12 @@ export default function SumToMeanFlowDiagram() {
           <ArrowRight className="shrink-0 text-blue-500" size={20} />
           <div className="rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 dark:border-blue-500/30 dark:bg-blue-500/10">
             <p className="font-mono text-lg font-bold text-blue-700 dark:text-blue-300">{`÷ ${count}`}</p>
-            <p className="text-xs text-blue-500/80">{t("countLabel")}</p>
+            <p className="text-xs text-blue-600">{t("countLabel")}</p>
           </div>
           <ArrowRight className="shrink-0 text-blue-500" size={20} />
           <div className="rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 dark:border-emerald-500/30 dark:bg-emerald-500/10">
             <p className="font-mono text-lg font-bold text-emerald-700 dark:text-emerald-300">{round2(mean)}</p>
-            <p className="text-xs text-emerald-600/80 dark:text-emerald-400/80">{t("meanLabel")}</p>
+            <p className="text-xs text-emerald-600 dark:text-emerald-400/80">{t("meanLabel")}</p>
           </div>
         </div>
         <WorkedExampleNote title={t("worked.title")} rows={[{ label: t("worked.formula"), value: `${round2(sum)} ÷ ${count} = ${round2(mean)}`, emphasize: true }]} />

@@ -66,13 +66,13 @@ export default function TriangleAngleReferenceDrag() {
           >
             <span className="h-2 w-2 shrink-0 rounded-full bg-indigo-500 dark:bg-indigo-400" />
             {tRef(ref.key)}
-            <span dir="ltr" className="font-mono opacity-70">
+            <span dir="ltr" className="font-mono text-zinc-500 dark:text-zinc-400">
               {round(ref.largestAngle)}°
             </span>
           </span>
         ))}
       </div>
-      <p className="mt-3 text-xs opacity-60">{t("hint")}</p>
+      <p className="mt-3 text-xs text-zinc-500 dark:text-zinc-400">{t("hint")}</p>
     </SectionCard>
   );
 }
