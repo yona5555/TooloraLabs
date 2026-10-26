@@ -52,8 +52,14 @@ Still to check one by one next session: commodities-tracker "Highest in history"
   after: 0 in en/ar x light/dark, with ads on (3101) and off (3103). Task start figure: 830 en / 468 ar.
 - Phone unchanged: test:home-phone PASS (1244 elements), phone card order 98/98, test:cards 780/780 (prod build).
 
+## 5. Tablet 820px (branch prod build, en + ar)
+- unit-converter, mortgage, crypto-converter, scientific, bmi, json-formatter: page overflow 0, elements out of the
+  viewport 0, card overlap 0 in both locales. unit-converter order: Your Value -> On the Measuring Instrument ->
+  Result -> Common Conversions (logical).
+- TO CHECK: bmi at 820px shows "Recommended Action" before "Your Result" (result should come first).
+
 ## Next steps
 1. Check the 4 remaining audit items above.
-3. Tablet 820px check (6 tools incl. unit-converter).
+3. Tablet: fix the bmi order item above (compare with the baseline at 820px first).
 4. Desktop lock (tests/desktop-lock.mjs, baselines desktop.json + desktop.linux.json, CI job desktop-lock, npm script).
 5. CLAUDE.md rule, verify all, PR, merge, delete this file.
