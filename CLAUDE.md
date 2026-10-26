@@ -29,6 +29,7 @@ TooloraLabs-Claude-Instructions.md is a historical archive; the binding rules ar
 - git pull before work; commit + push after each finished part; verify CI silently. No force push, no reset --hard.
 - Before each commit, once: lint, tsc, tests, build.
 - packages/core|sdk|tools are pure logic: no window/document/DOM.
+- Desktop layout is LOCKED (approved 2026-10-26): `npm run test:desktop-lock` (1440px, every tool + /, /tools, /categories, /docs, en+ar) must pass; rewrite its baseline (`baseline:desktop-lock -- --approve`, CI label `approve-desktop-baseline`) only with Yousef's approval.
 - Any new UI text goes into all 6 locales (en, ar, es, fr, de, hi) with 1:1 keys.
 - Tool route: /{locale}/tools/{slug}.
 - Never print secrets in any output, report, command or log: API keys, tokens, passwords, webhook/IPN secrets, private keys, connection strings, or values from .env* files. Refer to them by variable NAME only and mask the value (e.g. METALPRICE_API_KEY=****). Never cat or echo .env* files. Never commit secrets.

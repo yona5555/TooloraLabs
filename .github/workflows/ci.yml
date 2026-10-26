@@ -100,3 +100,45 @@ jobs:
         with:
           name: home-phone-linux-baseline
           path: tests/baselines/home-phone.linux.json
+
+  # The approved desktop layout is locked (DESKTOP phase, 2026-10-26): every tool page plus /, /tools,
+  # /categories and /docs at 1440px, en + ar (tests/desktop-lock.mjs). Same OS split as the phone lock:
+  # tests/baselines/desktop.json (macOS, local) and desktop.linux.json (this runner). The PR label
+  # "approve-desktop-baseline" is the CI form of --approve: it rewrites the Linux baseline and uploads it
+  # as an artifact to be reviewed and committed.
+  desktop-lock:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build web app
+        run: npm run build --workspace=apps/web
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Approved desktop layout unchanged (cards, charts, row layouts, headings, fonts)
+        working-directory: apps/web
+        run: |
+          npx next start -p 3001 > /tmp/next.log 2>&1 &
+          for i in $(seq 1 60); do curl -sf -o /dev/null http://localhost:3001/en && break; sleep 2; done
+          cd ../..
+          if [ "$APPROVE_BASELINE" = "true" ]; then npm run baseline:desktop-lock -- --approve; fi
+          npm run test:desktop-lock
+        env:
+          APPROVE_BASELINE: ${{ contains(github.event.pull_request.labels.*.name, 'approve-desktop-baseline') }}
+
+      - name: Upload the rewritten Linux baseline
+        if: contains(github.event.pull_request.labels.*.name, 'approve-desktop-baseline')
+        uses: actions/upload-artifact@v7
+        with:
+          name: desktop-linux-baseline
+          path: tests/baselines/desktop.linux.json

@@ -1,5 +1,6 @@
 "use client";
-import { createContext, useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
+import { createContext, useEffect, useRef, useState, type ReactNode } from "react";
+import { useWebGL } from "./webgl";
 
 /**
  * Viewport-gated WebGL slots for a tool page: a scene mounts its
@@ -31,21 +32,6 @@ function release(id: symbol) {
   }, COOL_DOWN_MS);
 }
 
-let webgl: boolean | null = null;
-function hasWebGL(): boolean {
-  if (webgl === null) {
-    try {
-      const c = document.createElement("canvas");
-      const gl = c.getContext("webgl2") ?? c.getContext("webgl");
-      webgl = !!gl;
-      (gl as WebGLRenderingContext | null)?.getExtension("WEBGL_lose_context")?.loseContext();
-    } catch {
-      webgl = false;
-    }
-  }
-  return webgl;
-}
-const noop = () => () => {};
 
 /** Set by DemandCanvas3D once its first frame exists; until then the 2D twin stays visible. */
 export const SceneReadyContext = createContext<(() => void) | null>(null);
@@ -54,7 +40,7 @@ export function ViewportScene({ render3d, fallback, className = "", testId }: { 
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
   const [live, setLive] = useState(false);
-  const gl = useSyncExternalStore(noop, hasWebGL, () => false);
+  const gl = useWebGL() === true;
   const id = useRef<symbol>(Symbol(testId));
 
   useEffect(() => {

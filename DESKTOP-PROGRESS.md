@@ -65,6 +65,19 @@ page-size label (text split into separate spans, same right edge).
   converter + actions before the result. After (820px scan, 98 tools): input then output on all tools with both roles;
   overflow 0 and overlap 0 en+ar. Phone unchanged (phone order 98/98, home-phone PASS 1244), test:cards 780/780.
 
+## 6. Desktop lock — DONE (local), Linux baseline pending
+- tests/desktop-lock.mjs + npm scripts test:desktop-lock / baseline:desktop-lock, CI job desktop-lock (label
+  approve-desktop-baseline writes desktop.linux.json and uploads it as an artifact). Baseline desktop.json (macOS):
+  204 pages (98 tools + 4 pages, en+ar) at 1440px, 5,784 items. 3 compares in a row PASS; it flags the old fuel-cost
+  side-by-side row (checked against 3101).
+- Stability: fixed clock + UTC, a fresh browser context per page (macro/study-time/time-calculator keep state in
+  localStorage), WebGL off (3D scenes show their 2D twin), reads repeated until two agree.
+- Bug found and FIXED by it: with WebGL off/unavailable, Scene3D (32 scenes) and the home Graph3D threw "Error
+  creating WebGL context" and blanked the whole page (macro-calculator lost <main>). Shared `useWebGL()`
+  (components/tool-ui/three/webgl.ts) now gates them; they show `common.live3d.unavailable` (6 locales) instead.
+- Not ours: headless Chromium prints "GL Driver Message ... GPU stall due to ReadPixels" with WebGL on, also on main.
+
 ## Next steps
-4. Desktop lock (tests/desktop-lock.mjs, baselines desktop.json + desktop.linux.json, CI job desktop-lock, npm script).
-5. CLAUDE.md rule, verify all, PR, merge, delete this file.
+1. PR with label approve-desktop-baseline -> download the desktop-linux-baseline artifact -> commit it -> remove
+   the label -> CI green.
+2. Merge, delete this file, stop 3100/3101/3103, remove ~/Projects/TooloraLabs-wt worktrees.
