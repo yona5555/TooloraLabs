@@ -8,11 +8,14 @@ on:
     # labeled: adding an approve-*-baseline label starts a run that sees it (labels are read from the
     # event, so a label added after the last push is otherwise ignored until the next push).
     types: [opened, synchronize, reopened, labeled]
-  # commit-baselines starts this after it pushes an approved baseline: a push made with GITHUB_TOKEN starts no
-  # workflow, so the dispatch is what runs the required checks on the new head commit.
+  # regenerate-baselines starts this after it commits an approved baseline and removes the label: a push made
+  # with GITHUB_TOKEN starts no workflow, but a dispatch always does. The dispatched run checks the branch tip
+  # (GITHUB_SHA = last commit on the ref), so its build / home-phone-lock / desktop-lock check runs land on
+  # the PR head commit and satisfy branch protection (same names, same GitHub Actions app; verified on run
+  # 40378913103).
   workflow_dispatch:
 
-# Read-only by default; only commit-baselines is elevated, and it runs no code from the PR.
+# Read-only by default; only regenerate-baselines is elevated.
 permissions:
   contents: read
 
@@ -78,12 +81,18 @@ jobs:
   # Chromium only, so no macOS runner is needed. The page uses system fonts (Arial), so each OS has
   # its own baseline: tests/baselines/home-phone.json (macOS, local) and home-phone.linux.json (this runner).
   # Runner moved from macOS to Ubuntu with Yousef's approval (2026-10-25).
-  # The PR label "approve-home-phone-baseline" is the CI form of --approve: it rewrites the Linux
-  # baseline and uploads it; commit-baselines commits it to the PR branch.
+  # Baseline approval is the label "approve-home-phone-baseline" (see regenerate-baselines). While it is on
+  # the PR this required check fails at once, so the PR can never merge before the new baseline is committed.
   home-phone-lock:
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
+      - name: No merge while a baseline approval is in progress
+        if: contains(github.event.pull_request.labels.*.name, 'approve-home-phone-baseline')
+        run: |
+          echo "::error::Baseline approval in progress: waiting for regenerate-baselines to commit the new baseline"
+          exit 1
+
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
@@ -108,29 +117,25 @@ jobs:
           npx next start -p 3001 > /tmp/next.log 2>&1 &
           for _ in $(seq 1 60); do curl -sf -o /dev/null http://localhost:3001/en && break; sleep 2; done
           cd ../..
-          if [ "$APPROVE_BASELINE" = "true" ]; then npm run baseline:home-phone -- --approve; fi
           npm run test:home-phone
-        env:
-          APPROVE_BASELINE: ${{ contains(github.event.pull_request.labels.*.name, 'approve-home-phone-baseline') }}
-
-      - name: Upload the rewritten Linux baseline
-        if: contains(github.event.pull_request.labels.*.name, 'approve-home-phone-baseline')
-        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
-        with:
-          name: home-phone-linux-baseline
-          path: tests/baselines/home-phone.linux.json
 
   # The approved desktop layout is locked (DESKTOP phase, 2026-10-26), tests/desktop-lock.mjs. CI checks the
   # home page plus 12 representative tools at 1440px, en + ar; the full 204-page check is the local
   # npm run test:desktop-lock:full. The build and its server answer every external fetch from
   # tests/fixtures/live (tests/fixtures/offline-fetch.mjs), so no page waits on the network and every wait is
   # bounded. Same OS split as the phone lock: tests/baselines/desktop.json (macOS, local) and
-  # desktop.linux.json (this runner). The PR label "approve-desktop-baseline" is the CI form of --approve: it
-  # rewrites the Linux baseline and uploads it; commit-baselines commits it to the PR branch.
+  # desktop.linux.json (this runner). Baseline approval is the label "approve-desktop-baseline" (see
+  # regenerate-baselines); while it is on the PR this required check fails at once.
   desktop-lock:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
+      - name: No merge while a baseline approval is in progress
+        if: contains(github.event.pull_request.labels.*.name, 'approve-desktop-baseline')
+        run: |
+          echo "::error::Baseline approval in progress: waiting for regenerate-baselines to commit the new baseline"
+          exit 1
+
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
@@ -150,11 +155,7 @@ jobs:
         run: npx playwright install --with-deps chromium
 
       - name: Approved desktop layout unchanged (cards, charts, row layouts, headings, fonts)
-        run: |
-          if [ "$APPROVE_BASELINE" = "true" ]; then npm run baseline:desktop-lock -- --approve; fi
-          npm run test:desktop-lock -- --timing desktop-lock-timing.txt
-        env:
-          APPROVE_BASELINE: ${{ contains(github.event.pull_request.labels.*.name, 'approve-desktop-baseline') }}
+        run: npm run test:desktop-lock -- --timing desktop-lock-timing.txt
 
       - name: Upload the per-page timing
         if: always()
@@ -164,62 +165,101 @@ jobs:
           path: desktop-lock-timing.txt
           if-no-files-found: ignore
 
-      - name: Upload the rewritten Linux baseline
-        if: contains(github.event.pull_request.labels.*.name, 'approve-desktop-baseline')
-        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
-        with:
-          name: desktop-linux-baseline
-          path: tests/baselines/desktop.linux.json
-
-  # The approve-*-baseline labels: commit the rewritten Linux baselines to the PR branch, remove the labels and
-  # rerun CI on the new head. Same-repository PRs only (a fork's token is read-only anyway). This job never runs
-  # code from the PR: it checks out the head commit only to add the two JSON files that the lock jobs uploaded.
-  commit-baselines:
-    needs: [home-phone-lock, desktop-lock]
+  # Baseline approval, in this order: (1) a label approve-desktop-baseline / approve-home-phone-baseline on a
+  # same-repository PR starts this job, and the matching required lock check fails at once; (2) this job
+  # measures the head commit ONCE on the CI runner (Linux) and writes the baseline (no compare here);
+  # (3) it commits the baseline to the PR branch, removes the label(s) and dispatches CI on the branch;
+  # (4) the dispatched run compares against the committed baseline, so only then can the locks pass.
+  # pull_request only (never pull_request_target): a fork never gets this token. It runs the PR's code with a
+  # write token, which is safe only because a same-repository PR author already has write access.
+  regenerate-baselines:
     if: >-
       github.event_name == 'pull_request' &&
       github.event.pull_request.head.repo.full_name == github.repository &&
       (contains(github.event.pull_request.labels.*.name, 'approve-desktop-baseline') ||
       contains(github.event.pull_request.labels.*.name, 'approve-home-phone-baseline'))
+    # One approval per PR at a time: a second run (label + push together) waits instead of racing the push.
+    concurrency:
+      group: regenerate-baselines-${{ github.event.pull_request.number }}
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
+    timeout-minutes: 40
     permissions:
       contents: write
       pull-requests: write
       actions: write
+    env:
+      PR_NUMBER: ${{ github.event.pull_request.number }}
+      HEAD_REF: ${{ github.event.pull_request.head.ref }}
+      HEAD_SHA: ${{ github.event.pull_request.head.sha }}
     steps:
+      # The labels in the event are a snapshot: skip when an earlier run already did the approval or the
+      # branch has moved on (its own run carries the label and does the work).
+      - name: Is the approval still pending on this head?
+        id: pending
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          pr=$(gh api "repos/$GITHUB_REPOSITORY/pulls/$PR_NUMBER")
+          head=$(jq -r .head.sha <<<"$pr")
+          labels=$(jq -r '[.labels[].name] | join(",")' <<<"$pr")
+          desktop=false; phone=false
+          [[ ",$labels," == *",approve-desktop-baseline,"* ]] && desktop=true
+          [[ ",$labels," == *",approve-home-phone-baseline,"* ]] && phone=true
+          if [ "$head" != "$HEAD_SHA" ]; then echo "The branch moved to $head; its own run does the approval."; desktop=false; phone=false; fi
+          echo "desktop=$desktop" >> "$GITHUB_OUTPUT"
+          echo "phone=$phone" >> "$GITHUB_OUTPUT"
+
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        if: steps.pending.outputs.desktop == 'true' || steps.pending.outputs.phone == 'true'
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           persist-credentials: false
 
-      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        if: steps.pending.outputs.desktop == 'true' || steps.pending.outputs.phone == 'true'
         with:
-          pattern: "*-linux-baseline"
-          path: ${{ runner.temp }}/baselines
+          node-version-file: .nvmrc
+          cache: npm
 
-      - name: Commit the approved baselines, remove the labels, rerun CI
+      - name: Install dependencies and Playwright Chromium
+        if: steps.pending.outputs.desktop == 'true' || steps.pending.outputs.phone == 'true'
+        run: |
+          npm ci
+          npx playwright install --with-deps chromium
+
+      - name: Write the Linux phone home baseline (one measurement)
+        if: steps.pending.outputs.phone == 'true'
+        run: |
+          npm run build --workspace=apps/web
+          (cd apps/web && npx next start -p 3001 > /tmp/next.log 2>&1 &)
+          for _ in $(seq 1 60); do curl -sf -o /dev/null http://localhost:3001/en && break; sleep 2; done
+          npm run baseline:home-phone -- --approve
+
+      - name: Write the Linux desktop baseline (one measurement)
+        if: steps.pending.outputs.desktop == 'true'
+        run: |
+          npm run build:desktop-lock
+          npm run baseline:desktop-lock -- --approve
+
+      - name: Commit the baselines, remove the labels, dispatch CI on the branch
+        if: steps.pending.outputs.desktop == 'true' || steps.pending.outputs.phone == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
-          HEAD_REF: ${{ github.event.pull_request.head.ref }}
-          PR_NUMBER: ${{ github.event.pull_request.number }}
-          APPROVE_DESKTOP: ${{ contains(github.event.pull_request.labels.*.name, 'approve-desktop-baseline') }}
-          APPROVE_PHONE: ${{ contains(github.event.pull_request.labels.*.name, 'approve-home-phone-baseline') }}
+          APPROVE_DESKTOP: ${{ steps.pending.outputs.desktop }}
+          APPROVE_PHONE: ${{ steps.pending.outputs.phone }}
         run: |
-          cp "$RUNNER_TEMP"/baselines/*/*.linux.json tests/baselines/
           git add tests/baselines/*.linux.json
           if git diff --cached --quiet; then
             echo "The Linux baselines are unchanged; nothing to commit."
           else
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git commit -m "test: commit the approved Linux baseline from CI" -m "Rewritten by the approve-*-baseline label on PR #$PR_NUMBER."
-            # Pushes the head commit it was measured on: if the branch moved meanwhile, the push is rejected.
+            git commit -m "test: commit the approved Linux baseline from CI" -m "Written by the approve-*-baseline label on PR #$PR_NUMBER."
+            # Pushes onto the head commit it measured: if the branch moved meanwhile, the push is rejected.
             AUTH=$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 -w0)
             echo "::add-mask::$AUTH"
             git -c "http.https://github.com/.extraheader=AUTHORIZATION: basic $AUTH" \
               push "https://github.com/$GITHUB_REPOSITORY.git" "HEAD:refs/heads/$HEAD_REF"
-            gh workflow run ci.yml --repo "$GITHUB_REPOSITORY" --ref "$HEAD_REF"
           fi
           if [ "$APPROVE_DESKTOP" = "true" ]; then
             gh api -X DELETE "repos/$GITHUB_REPOSITORY/issues/$PR_NUMBER/labels/approve-desktop-baseline" > /dev/null
@@ -227,3 +267,6 @@ jobs:
           if [ "$APPROVE_PHONE" = "true" ]; then
             gh api -X DELETE "repos/$GITHUB_REPOSITORY/issues/$PR_NUMBER/labels/approve-home-phone-baseline" > /dev/null
           fi
+          # Always: the locks failed on purpose while the label was on, and removing a label with GITHUB_TOKEN
+          # starts no run, so this dispatch is what re-runs the required checks (on the new head commit).
+          gh workflow run ci.yml --repo "$GITHUB_REPOSITORY" --ref "$HEAD_REF"

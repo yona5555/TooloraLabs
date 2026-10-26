@@ -14,6 +14,7 @@ TooloraLabs-Claude-Instructions.md is a historical archive; the binding rules ar
 ## قواعد لا تُخالَف
 - Never report a result you did not verify with a test or measurement.
 - Every task ends with: push the branch, open a PR, enable auto-merge (gh pr merge --auto --merge --delete-branch), report the PR URL, and stop. Never wait for CI, never poll, never ask Yousef to paste follow-up lines for CI. Progress files are deleted in the PR itself, before merge.
+- Auto-merge is always the LAST step, enabled only after git ls-remote confirms the pushed HEAD. Baseline approvals use the label flow; required lock checks fail while an approve label is present.
 - Never regenerate or overwrite approved work in bulk; change only what is broken, one item at a time. (Tool-card previews: approved images are locked in `apps/web/public/tool-previews/approved.json`; `npm run previews -- <slug>` skips them, `--force <slug>` redoes one; `npm run test:cards` checks the served cards.)
 - Every final report MUST end with: 'Context: <percent>% — <advice>'. Above 50% the advice is 'run /clear now'.
 - Details matter: clipping, cropping, stale cache and wrong elements are bugs. Check them before saying done.
