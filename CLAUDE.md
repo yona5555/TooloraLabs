@@ -13,10 +13,11 @@ TooloraLabs-Claude-Instructions.md is a historical archive; the binding rules ar
 
 ## قواعد لا تُخالَف
 - Never report a result you did not verify with a test or measurement.
+- Every task ends with: push the branch, open a PR, enable auto-merge (gh pr merge --auto --merge --delete-branch), report the PR URL, and stop. Never wait for CI, never poll, never ask Yousef to paste follow-up lines for CI. Progress files are deleted in the PR itself, before merge.
+- Auto-merge is always the LAST step, enabled only after git ls-remote confirms the pushed HEAD. Baseline approvals use the label flow; required lock checks fail while an approve label is present.
 - Never regenerate or overwrite approved work in bulk; change only what is broken, one item at a time. (Tool-card previews: approved images are locked in `apps/web/public/tool-previews/approved.json`; `npm run previews -- <slug>` skips them, `--force <slug>` redoes one; `npm run test:cards` checks the served cards.)
 - Every final report MUST end with: 'Context: <percent>% — <advice>'. Above 50% the advice is 'run /clear now'.
 - Details matter: clipping, cropping, stale cache and wrong elements are bugs. Check them before saying done.
-- CI: check the run ONCE with gh run view (or gh run list --limit 1). If it is still running, give Yousef the run URL and stop. Never loop, poll or use gh run watch.
 - Performance numbers: the only official metric is Lighthouse mobile (CLI, default throttling), 3 runs per page, median, on a production build. Any other timing method may be used only to compare two builds and must be labelled as such in the report.
 - Zero warnings: any CI annotation, deprecation, build, lint or console warning is fixed immediately at the root. A report that mentions a warning without fixing it is not accepted.
 
@@ -26,7 +27,7 @@ TooloraLabs-Claude-Instructions.md is a historical archive; the binding rules ar
 - Explain every terminal command in one sentence; translate terminal options to Arabic and give the option number.
 - Never take or review screenshots (no Playwright screenshots, no image review), to save quota. Yousef reviews pages himself in the browser. At the end of any visual task, give him the list of page URLs to review (e.g. http://localhost:3001/ar/tools/<slug>). Reading values from the DOM via Playwright is still allowed when needed.
 - If you cannot find what was asked for, say so plainly; never invent a fix. Apply a general rule to every element, no exceptions.
-- git pull before work; commit + push after each finished part; verify CI silently. No force push, no reset --hard.
+- git pull before work; work on a task branch and commit + push it after each finished part (main is protected: PR + green build, home-phone-lock, desktop-lock; GitHub auto-merges). No force push, no reset --hard.
 - Before each commit, once: lint, tsc, tests, build.
 - packages/core|sdk|tools are pure logic: no window/document/DOM.
 - Desktop layout is LOCKED (approved 2026-10-26): `npm run test:desktop-lock` (1440px, every tool + /, /tools, /categories, /docs, en+ar) must pass; rewrite its baseline (`baseline:desktop-lock -- --approve`, CI label `approve-desktop-baseline`) only with Yousef's approval.

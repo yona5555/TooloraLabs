@@ -15,7 +15,10 @@
 // preloaded: every external fetch (prices, rates, weather, hazards) is answered from tests/fixtures/live,
 // so no page waits on the network and live values never move the layout. Every wait is bounded (10s load,
 // 10s network idle, ~5s settling, 30s hard cap per page): a stuck page fails by name instead of hanging.
-// The clock is fixed (2026-10-20 12:00 UTC, timezone UTC) so the date tools render the same every day. The
+// The clock is fixed (2026-10-20 12:00 UTC, timezone UTC, server TZ=UTC and LANG=C.UTF-8) so the date tools
+// render the same every day; Math.random is seeded and WebSockets get no frames, so nothing else moves.
+// Approve mode (--write --approve) writes the baseline from that one measurement and exits; it never
+// re-measures (CI compares in a later run, against the committed baseline). The
 // pages use system fonts in places, so each OS has its own baseline: desktop.json on macOS (local),
 // desktop.linux.json on Linux (CI runner ubuntu-24.04, CI set only).
 import { spawn } from "node:child_process";
@@ -67,15 +70,19 @@ async function measure() {
   scrollTo(0, 0);
   await Promise.race([document.fonts.ready, new Promise((r) => setTimeout(r, 3000))]);
   // Lazy charts, measured layouts (GapFreeRow, FitNumbers) and hydration settle over a few frames: read
-  // until two reads 250ms apart agree (at most 20 reads, ~5s), so a slow load never records a half-built
-  // page. (Counted, not timed: the page clock is fixed.)
+  // until two reads 250ms apart agree AND no same-origin request is in flight (at most 40 reads, ~10s), so
+  // a slow load never records a half-built page. Two equal reads alone are not enough: a client fetch that
+  // is still running (the crypto 24h sparklines, /api/crypto/chart) swaps its same-size placeholder for an
+  // <svg> later, and one run recorded 3 charts while the next one recorded 5. (Counted, not timed: the
+  // page clock is fixed.)
   let last = "";
   let reads = 0;
-  for (let i = 0; i < 20; i++, reads++) {
+  for (let i = 0; i < 40; i++, reads++) {
     await new Promise((r) => setTimeout(r, 250));
     await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
     const now = JSON.stringify(read());
-    if (now === last) break;
+    const busy = await window.__lockInflight();
+    if (now === last && !busy) break;
     last = now;
   }
   return { reads, data: JSON.parse(last) };
@@ -112,7 +119,8 @@ if (OWN_SERVER) {
   server = spawn(process.execPath, [webRequire.resolve("next/dist/bin/next"), "start", "-p", String(PORT)], {
     cwd: WEB,
     stdio: ["ignore", "ignore", "inherit"],
-    env: { ...process.env, NEXT_TELEMETRY_DISABLED: "1", NEXT_DIST_DIR: ".next-lock", NODE_OPTIONS: `--import=${join(ROOT, "tests/fixtures/offline-fetch.mjs")}` },
+    // Fixed timezone and locale for the server too, so server-rendered dates match on every machine.
+    env: { ...process.env, TZ: "UTC", LANG: "C.UTF-8", LC_ALL: "C.UTF-8", NEXT_TELEMETRY_DISABLED: "1", NEXT_DIST_DIR: ".next-lock", NODE_OPTIONS: `--import=${join(ROOT, "tests/fixtures/offline-fetch.mjs")}` },
   });
   let up = false;
   for (let i = 0; i < 60 && !up; i++) {
@@ -150,15 +158,29 @@ async function worker() {
     // A fresh context per page: tools keep inputs and recent calculations in localStorage, so a page
     // must never see what an earlier page (or the other locale) stored.
     const ctx = await browser.newContext({ viewport: { width: WIDTH, height: 900 }, colorScheme: "light", reducedMotion: "reduce", timezoneId: "UTC", locale: "en-US" });
-    await ctx.addInitScript(() => document.addEventListener("DOMContentLoaded", () => {
-      const st = document.createElement("style");
-      st.textContent = "*,*::before,*::after{transition:none!important;animation:none!important;caret-color:transparent!important}";
-      document.head.appendChild(st);
-    }));
+    await ctx.addInitScript(() => {
+      // Seeded Math.random (mulberry32): any random sample or example renders the same on every run.
+      let seed = 0x2f6b9a1d;
+      Math.random = () => {
+        seed = (seed + 0x6d2b79f5) | 0;
+        let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+        t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+      };
+      document.addEventListener("DOMContentLoaded", () => {
+        const st = document.createElement("style");
+        st.textContent = "*,*::before,*::after{transition:none!important;animation:none!important;caret-color:transparent!important}";
+        document.head.appendChild(st);
+      });
+    });
     const page = await ctx.newPage();
     await page.route((url) => !sameOrigin(url.href), (route) => route.abort());
+    // page.route does not see WebSockets: the live Coinbase ticker would reach the real feed and move live
+    // prices. Every socket is answered locally and never sends a frame, so the snapshot (fixture) prices stay.
+    await page.routeWebSocket(/.*/, () => {});
     const started = new Map(), slow = [];
     page.on("request", (r) => started.set(r, Date.now()));
+    await page.exposeFunction("__lockInflight", () => [...started.keys()].filter((r) => sameOrigin(r.url())).length);
     const done = (r) => {
       const ms = Date.now() - started.get(r);
       started.delete(r);
@@ -173,7 +195,7 @@ async function worker() {
       const res = await page.goto(`${BASE}${job}`, { waitUntil: "load", timeout: 10000 });
       if (!res || res.status() !== 200) throw new Error(`answered ${res?.status()}`);
       // Ready signal: no request in flight for 500ms (lazy chunks, the market /api calls), then fonts and
-      // two equal reads inside measure(). Live data comes from fixtures, so this is quick on every page.
+      // two equal reads with no request in flight inside measure(). Live data comes from fixtures, so this is quick on every page.
       await page.waitForLoadState("networkidle", { timeout: 10000 }).catch(() => slow.push("network not idle after 10s"));
       t1 = Date.now();
       ({ reads, data: current[job] } = await page.evaluate(measure));

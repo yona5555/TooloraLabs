@@ -42,4 +42,4 @@
 ## 5. Git
 - لا commit محلياً بلا push.
 - رسالة الـcommit تشرح «لماذا». force push و`reset --hard` مسموحان فقط بطلب صريح.
-- بعد كل push افحص CI مرة واحدة فقط (`gh run list --limit 1` أو `gh run view`)؛ إن كان ما يزال يعمل فأعطِ يوسف رابط التشغيل وتوقف. لا حلقات انتظار ولا `gh run watch`.
+- نهاية كل مهمة: push للفرع، فتح PR، تفعيل الدمج التلقائي (`gh pr merge --auto --merge --delete-branch`)، ذكر رابط الـPR، ثم التوقف. لا انتظار لـCI ولا `gh run watch` (القاعدة في `CLAUDE.md`).
