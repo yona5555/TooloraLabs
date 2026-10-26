@@ -83,7 +83,8 @@ export default function FuelDistanceScaleChart() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("caption", { efficiency: EFFICIENCY, price: money(PRICE) })}</p>
-      <GapFreeRow className="mt-4">
+      {/* Stacked as approved (chart above its table): its 12px lanes would otherwise measure side-by-side. */}
+      <GapFreeRow className="mt-4" layout="stacked">
         <div dir="ltr" className="shrink-0 overflow-x-auto">
           <svg ref={svgRef} width={WIDTH} height={HEIGHT} viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={t("title")} className="block min-w-[320px] text-current">
             <line x1={PAD_LEFT} y1={AXIS_Y} x2={WIDTH - PAD_RIGHT} y2={AXIS_Y} className="stroke-teal-400 dark:stroke-teal-500" strokeWidth={3} strokeLinecap="round" />

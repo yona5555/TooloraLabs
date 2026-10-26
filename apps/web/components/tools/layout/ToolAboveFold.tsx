@@ -208,6 +208,7 @@ export default function ToolAboveFold({ input, result, sidebar, secondary, sideb
     <div
       ref={gridRef}
       data-afold={sidebarMatchRow ? layoutId : undefined}
+      data-above-fold
       className={`relative grid grid-cols-1 content-start items-start lg:grid-cols-[320px_minmax(360px,1fr)_320px] ${tight ? "gap-4" : "gap-6"}`}
       style={{ minHeight: sidebarHeight || undefined }}
     >

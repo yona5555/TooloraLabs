@@ -651,6 +651,29 @@ body:has([data-coming-soon-page]) [data-bp-link="coming-soon"] {
     display: block;
   }
 }
+/*
+ * Tablet order (768-1023px, the above-fold grid is one column): the result is always second, right after
+ * the input. Same roles as the phone order (SectionCard `phoneRole`): the markets tools' live output, the
+ * input, then the output card; the rest keep their DOM order. The wrappers between the grid and a role
+ * card stop boxing so CSS order can place the cards; the grid's 16px gap (§41) then spaces them.
+ */
+@media (min-width: 768px) and (max-width: 1023.98px) {
+  [data-above-fold] {
+    gap: 1rem;
+  }
+  [data-above-fold] :not([data-card], [data-card] *, dialog, dialog *, [role="dialog"], [role="dialog"] *, .hidden, .max-lg\:hidden):has([data-phone-role]) {
+    display: contents;
+  }
+  [data-above-fold] [data-phone-role="live-output"] {
+    order: -55;
+  }
+  [data-above-fold] [data-phone-role="input"] {
+    order: -50;
+  }
+  [data-above-fold] [data-phone-role="output"] {
+    order: -40;
+  }
+}
 /* A control in a card's blue header (SectionCard) sits on blue-600 in both themes: white text and outline
    (AA, every width), even when its component (CopyButton, DownloadButton, a tool's own button) is styled for a light body.
    A dialog or print area opened from the header keeps its own colors. */

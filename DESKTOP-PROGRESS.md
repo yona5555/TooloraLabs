@@ -33,14 +33,17 @@ Checked and NOT regressions (element rects identical in both builds; the diff ca
 from a different visible-occurrence order): graphing chips, ohms-law presets, kinematics, json/csv size label,
 batch-invoice "High risk", world-time dates, SectionNav, crypto table, energy-work-power, Quick examples buttons.
 APPROVED by consequence or as bug fixes:
-- A6 GapFreeRow picks side-by-side instead of stacked on fuel-cost "Total Cost by Trip Distance" (and the same chart
-  family on readability-score / study-time): the chart grew with its 12px labels (A1, commit 84280546), so the
-  measured height ratio now fits side-by-side. No code change in GapFreeRow.
+- A6 REJECTED by Yousef (2026-10-26) -> R2 FIXED: fuel-cost "Total Cost by Trip Distance" and readability
+  "Readability Formulas" had flipped from stacked (chart above the table, baseline) to side-by-side because their
+  12px-label geometry now measured no gap. Both pinned `layout="stacked"` (GapFreeRow / RsIndicatorCard ->
+  IndicatorWithTable). Verified 1440/820/390, en+ar: table below the chart, labels >= 12px rendered.
+  study-time charts only grew taller (same width/position), not a layout flip.
 - A7 Scale-bar end labels (scientific-notation, area, surface-area, volume) hang inward: baseline overhung the card
   by 40px (bug fix 214168b2).
 - A8 class-schedule-builder course fieldset 326 -> 286px: baseline spilled 6px out of its 320px card (bug fix).
-Still to check one by one next session: commodities-tracker "Highest in history" box, projectile-motion
-"g 1.62" row, color-palette hex label, pdf-merge-split page size label.
+Checked 2026-10-26, NOT regressions (no clipping, no overflow, same font size): commodities "Highest in history" (now
+fits one line, box 40 -> 56px tall), projectile "g 1.62" (identical rect), color-palette hex labels and pdf-merge-split
+page-size label (text split into separate spans, same right edge).
 
 ## 4. Unified background + AA — DONE
 - globals.css: the unified-background block now applies at every width; card-header controls are white at every
@@ -56,10 +59,12 @@ Still to check one by one next session: commodities-tracker "Highest in history"
 - unit-converter, mortgage, crypto-converter, scientific, bmi, json-formatter: page overflow 0, elements out of the
   viewport 0, card overlap 0 in both locales. unit-converter order: Your Value -> On the Measuring Instrument ->
   Result -> Common Conversions (logical).
-- TO CHECK: bmi at 820px shows "Recommended Action" before "Your Result" (result should come first).
+- FIXED: result second after the input at tablet width (768-1023px), every tool: ToolAboveFold grid gets
+  `data-above-fold`; globals.css flattens the wrappers holding role cards and orders live-output -> input -> output
+  (same phoneRole as the phone order), 16px gap. Before: ~50 tools showed Quick examples / a reference card / bmi's
+  converter + actions before the result. After (820px scan, 98 tools): input then output on all tools with both roles;
+  overflow 0 and overlap 0 en+ar. Phone unchanged (phone order 98/98, home-phone PASS 1244), test:cards 780/780.
 
 ## Next steps
-1. Check the 4 remaining audit items above.
-3. Tablet: fix the bmi order item above (compare with the baseline at 820px first).
 4. Desktop lock (tests/desktop-lock.mjs, baselines desktop.json + desktop.linux.json, CI job desktop-lock, npm script).
 5. CLAUDE.md rule, verify all, PR, merge, delete this file.

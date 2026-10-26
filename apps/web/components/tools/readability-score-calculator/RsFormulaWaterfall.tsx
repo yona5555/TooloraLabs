@@ -97,6 +97,8 @@ export default function RsFormulaWaterfall() {
       title={t("title")}
       intro={t("intro")}
       indicator={indicator}
+      // stacked as approved (chart above its table); its 12px captions would otherwise measure side-by-side
+      layout="stacked"
       rows={[
         { label: t("formulas.fleschReadingEase.label"), value: "", note: t("formulas.fleschReadingEase.expression") },
         { label: `1.015 × ${tr("averageWordsPerSentence")}`, value: f(sentencePenalty, 2), note: `1.015 × ${f(asl, 3)}` },
