@@ -65,7 +65,7 @@ function CoinNode({
     <div className="min-w-0 rounded-xl border border-zinc-200 bg-zinc-50 p-2.5 dark:border-zinc-700 dark:bg-zinc-800/50">
       <div className="flex items-center gap-2">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={coin.image} alt="" width={22} height={22} className="rounded-full" />
+        <img src={coin.image} alt="" width={22} height={22} className="rounded-full object-contain" />
         <span className="truncate text-sm font-semibold text-zinc-900 dark:text-zinc-100">{coin.name}</span>
         <span dir="ltr" className="ms-auto text-xs uppercase text-zinc-400">
           {coin.symbol}

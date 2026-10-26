@@ -108,7 +108,7 @@ export default function CryptoHistoricalChart({ coin, coins, onSelectCoin, digit
       name: c.name,
       sub: c.symbol,
       // eslint-disable-next-line @next/next/no-img-element
-      icon: <img src={c.image} alt="" width={18} height={18} className="shrink-0 rounded-full" />,
+      icon: <img src={c.image} alt="" width={18} height={18} className="shrink-0 rounded-full object-contain" />,
       price: f.money(tick?.price ?? c.currentPrice),
       change: c.priceChangePercentage24h,
       changeText: c.priceChangePercentage24h == null ? "—" : f.signedPct(c.priceChangePercentage24h, 1),

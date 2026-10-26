@@ -32,7 +32,7 @@ const TOOLTIP_WIDTH = 168;
 const TOOLTIP_HEIGHT = 78;
 
 export default function LoanGrowthChart({ schedule, loanAmount, totalInterest, digitStyle, currency, titleKey }: LoanGrowthChartProps) {
-  const t = useTranslations(`tools.loan-calculator.${titleKey}`);
+  const t = useTranslations(titleKey === "bondGrowthChart" ? "tools.loan-calculator.bondGrowthChart" : "tools.loan-calculator.deferredGrowthChart");
   const tShared = useTranslations("tools.loan-calculator.payoffChart");
   const svgRef = useRef<SVGSVGElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);

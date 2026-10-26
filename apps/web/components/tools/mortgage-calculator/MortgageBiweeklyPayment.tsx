@@ -96,26 +96,26 @@ export default function MortgageBiweeklyPayment({ result, digitStyle }: Mortgage
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
 
       <div className="mt-4 grid gap-3 sm:grid-cols-3">
-        <div className="rounded-xl bg-zinc-50 p-3 dark:bg-zinc-800/60">
+        <dl className="rounded-xl bg-zinc-50 p-3 dark:bg-zinc-800/60">
           <dt className="text-xs text-zinc-500 dark:text-zinc-400">{t("biweeklyPaymentLabel")}</dt>
           <dd dir="ltr" className="mt-1 font-mono font-semibold text-zinc-900 dark:text-zinc-100">
             {currency(biweekly.biweeklyPaymentAmount)}
           </dd>
-        </div>
-        <div className="rounded-xl bg-zinc-50 p-3 dark:bg-zinc-800/60">
+        </dl>
+        <dl className="rounded-xl bg-zinc-50 p-3 dark:bg-zinc-800/60">
           <dt className="text-xs text-zinc-500 dark:text-zinc-400" title={t("interestSavedNote")}>
             {t("interestSavedLabel")}
           </dt>
           <dd dir="ltr" className="mt-1 font-mono font-semibold text-zinc-900 dark:text-zinc-100">
             {currency(biweekly.interestSavedVsStandard)}
           </dd>
-        </div>
-        <div className="rounded-xl bg-zinc-50 p-3 dark:bg-zinc-800/60">
+        </dl>
+        <dl className="rounded-xl bg-zinc-50 p-3 dark:bg-zinc-800/60">
           <dt className="text-xs text-zinc-500 dark:text-zinc-400">{t("timeSavedLabel")}</dt>
           <dd dir="ltr" className="mt-1 font-mono font-semibold text-zinc-900 dark:text-zinc-100">
             {tAboveFold("payoffTimeValue", { years: fmt(timeSaved.years), months: fmt(timeSaved.months) })}
           </dd>
-        </div>
+        </dl>
       </div>
 
       <div className="mt-6 overflow-x-auto">

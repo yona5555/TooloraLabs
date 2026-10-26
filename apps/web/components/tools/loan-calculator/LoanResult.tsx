@@ -110,7 +110,7 @@ export default function LoanResult({
         </PhoneMini>
       </div>
 
-      <div className="mt-5 grid grid-cols-2 gap-2 border-t border-zinc-200 pt-5 text-center dark:border-zinc-800">
+      <dl className="mt-5 grid grid-cols-2 gap-2 border-t border-zinc-200 pt-5 text-center dark:border-zinc-800">
         <div>
           <dt className="text-xs text-zinc-500 dark:text-zinc-400">{t("aboveFold.loanAmountLabel")}</dt>
           <dd dir="ltr" className="mt-1 font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">
@@ -123,7 +123,7 @@ export default function LoanResult({
             {money(totalInterest)}
           </dd>
         </div>
-      </div>
+      </dl>
     </SectionCard>
   );
 }

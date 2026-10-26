@@ -29,7 +29,7 @@ export default function CryptoComparisonCards({ fromCoin, toCoin, digitStyle }: 
     <div className={`min-w-0 flex-1 rounded-xl border-2 p-3 ${accent}`}>
       <div className="flex items-center gap-2">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={coin.image} alt="" width={24} height={24} className="rounded-full" />
+        <img src={coin.image} alt="" width={24} height={24} className="rounded-full object-contain" />
         <span className="truncate font-semibold text-zinc-900 dark:text-zinc-100">{coin.name}</span>
         <span dir="ltr" className="ms-auto text-xs uppercase text-zinc-400">{coin.symbol}</span>
       </div>

@@ -29,12 +29,12 @@ const GAUGE_DOMAIN_MAX = 80;
 
 function Stat({ title, value }: { title: string; value: string }) {
   return (
-    <div className="rounded-xl bg-zinc-50 px-3 py-2.5 text-center dark:bg-zinc-800/60">
+    <dl className="rounded-xl bg-zinc-50 px-3 py-2.5 text-center dark:bg-zinc-800/60">
       <dt className="text-xs text-zinc-500 dark:text-zinc-400">{title}</dt>
       <dd dir="ltr" className="mt-0.5 font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">
         {value}
       </dd>
-    </div>
+    </dl>
   );
 }
 

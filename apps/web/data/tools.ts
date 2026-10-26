@@ -1,8 +1,6 @@
 export type Tool = {
   slug: string;
-  title: string;
   category: string;
-  description: string;
   featured: boolean;
   keywords: string[];
 };
@@ -10,10 +8,7 @@ export type Tool = {
 export const tools: Tool[] = [
   {
     slug: "crypto-converter",
-    title: "Crypto Converter",
     category: "financial-markets",
-    description:
-      "Live prices for the top 100 cryptocurrencies, a converter between any two coins, historical charts, and an educational investment-growth calculator.",
     featured: true,
     keywords: [
       "cryptocurrency",
@@ -28,10 +23,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "tdee-calculator",
-    title: "TDEE & BMR Calculator",
     category: "health-fitness",
-    description:
-      "Calculate your Basal Metabolic Rate and Total Daily Energy Expenditure using the Mifflin-St Jeor equation, plus a calorie target for weight loss, maintenance, or gain.",
     featured: true,
     keywords: [
       "tdee",
@@ -45,10 +37,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "compound-interest-calculator",
-    title: "Compound Interest Calculator",
     category: "financial-calculators",
-    description:
-      "See how your savings or investment grows over time with compound interest and optional monthly contributions, with a year-by-year growth chart.",
     featured: true,
     keywords: [
       "compound interest",
@@ -60,10 +49,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "loan-calculator",
-    title: "Loan Calculator",
     category: "financial-calculators",
-    description:
-      "Calculate the monthly payment, total interest, and full amortization schedule for any fixed-rate installment loan.",
     featured: true,
     keywords: [
       "loan calculator",
@@ -75,10 +61,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "affordable-loan-calculator",
-    title: "Affordable Loan Calculator",
     category: "financial-calculators",
-    description:
-      "Find the maximum loan amount a monthly payment you can afford will support, at a given interest rate and term.",
     featured: false,
     keywords: [
       "affordable loan calculator",
@@ -90,10 +73,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "retirement-calculator",
-    title: "Retirement Calculator",
     category: "financial-calculators",
-    description:
-      "Project your retirement savings balance from a starting amount plus regular monthly contributions, compounding at an expected annual return.",
     featured: false,
     keywords: [
       "retirement calculator",
@@ -105,10 +85,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "house-affordability-calculator",
-    title: "House Affordability Calculator",
     category: "financial-calculators",
-    description:
-      "Estimate the maximum home price you can afford based on your income, existing debts, down payment, and loan terms, using the standard 28/36 affordability rule.",
     featured: false,
     keywords: [
       "house affordability calculator",
@@ -120,10 +97,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "debt-to-income-calculator",
-    title: "Debt-to-Income Ratio Calculator",
     category: "financial-calculators",
-    description:
-      "Calculate your front-end and back-end debt-to-income (DTI) ratios from your income and monthly debt payments, with a category rating lenders commonly use.",
     featured: false,
     keywords: [
       "debt-to-income calculator",
@@ -135,10 +109,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "weather-forecast",
-    title: "Weather Forecast",
     category: "weather",
-    description:
-      "Live weather for major world and Arab cities: current conditions, a 48-hour hourly chart and up to a 10-day forecast from MET Norway, plus a world map of recent earthquakes and natural events.",
     featured: true,
     keywords: [
       "weather",
@@ -154,10 +125,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "commodities-tracker",
-    title: "Commodities Tracker",
     category: "financial-markets",
-    description:
-      "Track gold, silver, and oil prices in USD and SAR, convert any weight of metal or number of barrels into cash value, and see a 7-day gold price trend.",
     featured: true,
     keywords: [
       "gold price",
@@ -172,10 +140,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "forex-converter",
-    title: "Forex Converter",
     category: "financial-markets",
-    description:
-      "Convert between world currencies with daily-updated rates, a historical USD/EUR chart, and neutral educational content on how the foreign exchange market works.",
     featured: true,
     keywords: [
       "forex",
@@ -190,18 +155,13 @@ export const tools: Tool[] = [
   },
   {
     slug: "scientific-calculator",
-    title: "Scientific Calculator",
     category: "math",
-    description:
-      "A full scientific calculator with trigonometric, logarithmic, and power functions.",
     featured: true,
     keywords: ["scientific calculator", "trigonometry", "logarithm", "math"],
   },
   {
     slug: "age-calculator",
-    title: "Age Calculator",
     category: "date-time",
-    description: "Calculate your exact age in years, months and days.",
     featured: true,
     keywords: [
       "age",
@@ -218,18 +178,13 @@ export const tools: Tool[] = [
   },
   {
     slug: "bmi-calculator",
-    title: "BMI Calculator",
     category: "health-fitness",
-    description: "Calculate your Body Mass Index instantly.",
     featured: true,
     keywords: ["bmi", "body mass index", "health"],
   },
   {
     slug: "ideal-weight-calculator",
-    title: "Ideal Weight Calculator",
     category: "health-fitness",
-    description:
-      "Estimate ideal body weight from height and gender using four classic clinical formulas: Devine, Robinson, Miller, and Hamwi.",
     featured: false,
     keywords: [
       "ideal weight calculator",
@@ -241,10 +196,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "mortgage-calculator",
-    title: "Mortgage Calculator",
     category: "financial-calculators",
-    description:
-      "Calculate your monthly mortgage payment, full amortization schedule, PMI removal date, and extra-payment savings.",
     featured: true,
     keywords: [
       "mortgage",
@@ -262,10 +214,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "fraction-calculator",
-    title: "Fraction Calculator",
     category: "math",
-    description:
-      "Add, subtract, multiply, and divide fractions with full simplified steps, a mixed-number and decimal equivalent, and a diagram of every result.",
     featured: false,
     keywords: [
       "fraction calculator",
@@ -280,10 +229,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "scientific-notation-converter",
-    title: "Scientific Notation Converter",
     category: "math",
-    description:
-      "Convert numbers between standard and scientific notation, plus multiply and divide values already in scientific notation, with engineering notation and named magnitudes.",
     featured: false,
     keywords: [
       "scientific notation converter",
@@ -297,10 +243,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "significant-figures-calculator",
-    title: "Significant Figures Calculator",
     category: "math",
-    description:
-      "Count significant figures in a measured value, round to a chosen number of them, and correctly propagate measurement precision through addition, subtraction, multiplication, and division.",
     featured: false,
     keywords: [
       "significant figures calculator",
@@ -313,10 +256,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "density-calculator",
-    title: "Density Calculator",
     category: "physics",
-    description:
-      "Solve for density, mass, or volume from the other two, with the SI (kg/m³) equivalent and specific gravity relative to water.",
     featured: false,
     keywords: [
       "density calculator",
@@ -329,10 +269,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "ohms-law-calculator",
-    title: "Ohm's Law Calculator",
     category: "physics",
-    description:
-      "Solve for voltage, current, resistance, and power from any two known electrical quantities, with a dynamic Ohm's Law triangle diagram.",
     featured: false,
     keywords: [
       "ohms law calculator",
@@ -345,10 +282,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "ph-calculator",
-    title: "pH Calculator",
     category: "chemistry",
-    description:
-      "Convert between pH, pOH, hydrogen ion concentration, and hydroxide ion concentration for aqueous solutions at 25°C.",
     featured: false,
     keywords: [
       "ph calculator",
@@ -361,10 +295,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "statistics-calculator",
-    title: "Statistics Calculator",
     category: "math",
-    description:
-      "Calculate mean, median, mode, range, variance, and standard deviation for any data set, with a dynamic dot plot of the distribution.",
     featured: false,
     keywords: [
       "statistics calculator",
@@ -377,10 +308,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "molarity-calculator",
-    title: "Molarity & Dilution Calculator",
     category: "chemistry",
-    description:
-      "Calculate molar concentration from moles or mass, or solve dilution problems with C1V1 = C2V2, with a dynamic flask diagram.",
     featured: false,
     keywords: [
       "molarity calculator",
@@ -393,10 +321,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "ideal-gas-law-calculator",
-    title: "Ideal Gas Law Calculator",
     category: "chemistry",
-    description:
-      "Solve for pressure, volume, moles, or temperature using the ideal gas law, PV = nRT, with a dynamic gas cylinder diagram.",
     featured: false,
     keywords: [
       "ideal gas law calculator",
@@ -409,10 +334,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "energy-work-power-calculator",
-    title: "Energy, Work & Power Calculator",
     category: "physics",
-    description:
-      "Calculate mechanical work, kinetic energy, gravitational potential energy, or power, with a dynamic force-vector diagram.",
     featured: false,
     keywords: [
       "work calculator physics",
@@ -425,10 +347,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "kinematics-calculator",
-    title: "Kinematics Calculator",
     category: "physics",
-    description:
-      "Solve constant-acceleration motion problems for velocity, initial velocity, acceleration, time, or displacement, with a dynamic motion diagram.",
     featured: false,
     keywords: [
       "kinematics calculator",
@@ -441,10 +360,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "force-calculator",
-    title: "Force & Newton's Law Calculator",
     category: "physics",
-    description:
-      "Solve Newton's second law (F = ma) or the law of universal gravitation for force, mass, acceleration, or distance, with a dynamic force diagram.",
     featured: false,
     keywords: [
       "force calculator",
@@ -457,10 +373,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "projectile-motion-calculator",
-    title: "Projectile Motion Calculator",
     category: "physics",
-    description:
-      "Calculate time of flight, maximum height, range, and impact velocity for a projectile launched at an angle, with an interactive trajectory diagram.",
     featured: false,
     keywords: [
       "projectile motion calculator",
@@ -473,10 +386,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "readability-score-calculator",
-    title: "Readability Score Calculator",
     category: "text-tools",
-    description:
-      "Calculate the Flesch Reading Ease score and Flesch-Kincaid Grade Level for a passage of English text, with word, sentence, and syllable counts.",
     featured: false,
     keywords: [
       "readability score calculator",
@@ -489,10 +399,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "chemical-equation-balancer",
-    title: "Chemical Equation Balancer",
     category: "chemistry",
-    description:
-      "Balance a chemical equation by finding the smallest whole-number coefficients that conserve every element.",
     featured: false,
     keywords: [
       "chemical equation balancer",
@@ -505,10 +412,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "class-schedule-builder",
-    title: "Class Schedule Builder",
     category: "student-productivity",
-    description:
-      "Build a weekly class schedule and instantly detect time conflicts between classes.",
     featured: false,
     keywords: [
       "class schedule builder",
@@ -521,10 +425,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "citation-generator",
-    title: "Citation Generator",
     category: "student-productivity",
-    description:
-      "Generate APA, MLA, and Chicago style citations for books, journal articles, and websites.",
     featured: false,
     keywords: [
       "citation generator",
@@ -537,10 +438,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "area-calculator",
-    title: "Area Calculator",
     category: "math",
-    description:
-      "Calculate the area of squares, rectangles, triangles, circles, ellipses, trapezoids, parallelograms, and circular sectors.",
     featured: false,
     keywords: [
       "area calculator",
@@ -553,10 +451,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "surface-area-calculator",
-    title: "Surface Area Calculator",
     category: "math",
-    description:
-      "Calculate the total surface area of cubes, rectangular prisms, spheres, cylinders, cones, and square pyramids.",
     featured: false,
     keywords: [
       "surface area calculator",
@@ -569,10 +464,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "volume-calculator",
-    title: "Volume Calculator",
     category: "math",
-    description:
-      "Calculate the volume of cubes, rectangular prisms, spheres, cylinders, cones, and square pyramids.",
     featured: false,
     keywords: [
       "volume calculator",
@@ -585,10 +477,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "step-by-step-math-solver",
-    title: "Step-by-Step Math Solver",
     category: "math",
-    description:
-      "Solve linear equations, quadratic equations, fraction operations, and polynomial derivatives with the full working shown step by step.",
     featured: false,
     keywords: [
       "step by step math solver",
@@ -601,10 +490,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "stoichiometry-calculator",
-    title: "Stoichiometry Calculator",
     category: "chemistry",
-    description:
-      "Convert between moles or grams of two substances in a balanced chemical equation using mole-ratio stoichiometry.",
     featured: false,
     keywords: [
       "stoichiometry calculator",
@@ -617,10 +503,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "molar-mass-calculator",
-    title: "Molar Mass Calculator",
     category: "chemistry",
-    description:
-      "Calculate the molar mass of a chemical compound from its formula, with a per-element breakdown.",
     featured: false,
     keywords: [
       "molar mass calculator",
@@ -633,10 +516,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "matrix-calculator",
-    title: "Matrix Calculator",
     category: "math",
-    description:
-      "Compute the sum, difference, product, determinant, transpose, and inverse of two 2x2 matrices.",
     featured: false,
     keywords: [
       "matrix calculator",
@@ -649,10 +529,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "vector-calculator",
-    title: "Vector Calculator",
     category: "math",
-    description:
-      "Compute the magnitude, sum, difference, dot product, cross product, and angle between two 2D or 3D vectors.",
     featured: false,
     keywords: [
       "vector calculator",
@@ -665,10 +542,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "graphing-calculator",
-    title: "Graphing Calculator",
     category: "math",
-    description:
-      "Plot the graph of a mathematical function of x over a chosen range, with support for trigonometric, logarithmic, and power expressions.",
     featured: false,
     keywords: [
       "graphing calculator",
@@ -681,10 +555,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "notepad-calculator",
-    title: "Notepad Calculator",
     category: "math",
-    description:
-      "Type free-form notes mixed with math — every line with a calculation is evaluated live, with variables carried from line to line.",
     featured: false,
     keywords: [
       "notepad calculator",
@@ -697,10 +568,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "gcf-lcm-calculator",
-    title: "GCF & LCM Calculator",
     category: "math",
-    description:
-      "Find the greatest common factor and least common multiple of two or more numbers, with prime factorizations shown.",
     featured: false,
     keywords: [
       "gcf calculator",
@@ -713,10 +581,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "triangle-calculator",
-    title: "Triangle Calculator",
     category: "math",
-    description:
-      "Solve any triangle from three known sides or angles (SSS, SAS, ASA, or AAS), with the remaining sides, angles, area, and perimeter derived instantly.",
     featured: false,
     keywords: [
       "triangle calculator",
@@ -729,10 +594,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "probability-calculator",
-    title: "Probability Calculator",
     category: "math",
-    description:
-      "Calculate single-event probability and odds, or combine two events with AND, OR, and conditional probability rules.",
     featured: false,
     keywords: [
       "probability calculator",
@@ -744,10 +606,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "mean-median-mode-range-calculator",
-    title: "Mean, Median, Mode & Range Calculator",
     category: "math",
-    description:
-      "Calculate the mean, median, mode, and range of a data set, with a sorted breakdown and a dot-plot diagram showing how each measure relates to the data.",
     featured: false,
     keywords: [
       "mean median mode calculator",
@@ -759,10 +618,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "target-heart-rate-calculator",
-    title: "Target Heart Rate Calculator",
     category: "health-fitness",
-    description:
-      "Calculate your maximum heart rate and five training zones from your age, optionally refined with your resting heart rate using the Karvonen method.",
     featured: false,
     keywords: [
       "target heart rate calculator",
@@ -774,10 +630,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "sleep-calculator",
-    title: "Sleep Calculator",
     category: "health-fitness",
-    description:
-      "Find the best bedtimes or wake-up times based on 90-minute sleep cycles, so you wake up between cycles instead of mid-cycle.",
     featured: false,
     keywords: [
       "sleep calculator",
@@ -789,10 +642,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "body-fat-calculator",
-    title: "Body Fat Calculator",
     category: "health-fitness",
-    description:
-      "Estimate body fat percentage from neck, waist, and (for women) hip circumference using the US Navy method, with a category scale showing where your result falls.",
     featured: false,
     keywords: [
       "body fat calculator",
@@ -804,10 +654,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "due-date-calculator",
-    title: "Due Date Calculator",
     category: "health-fitness",
-    description:
-      "Estimate your due date from your last menstrual period, conception date, or IVF transfer date, with current gestational age and trimester.",
     featured: false,
     keywords: [
       "due date calculator",
@@ -819,10 +666,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "ovulation-calculator",
-    title: "Ovulation Calculator",
     category: "health-fitness",
-    description:
-      "Estimate your next ovulation date and fertile window from your last period and average cycle length, projected across the next three cycles.",
     featured: false,
     keywords: [
       "ovulation calculator",
@@ -834,10 +678,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "pregnancy-calculator",
-    title: "Pregnancy Calculator",
     category: "health-fitness",
-    description:
-      "Track your pregnancy week by week from your last menstrual period, with your current trimester, due date, and a size-comparison milestone for this week.",
     featured: false,
     keywords: [
       "pregnancy calculator",
@@ -849,10 +690,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "macro-calculator",
-    title: "Macro Calculator",
     category: "health-fitness",
-    description:
-      "Calculate your daily protein, carbohydrate, and fat targets in grams and calories from your total daily calories and goal.",
     featured: false,
     keywords: [
       "macro calculator",
@@ -864,10 +702,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "bmr-calculator",
-    title: "BMR Calculator",
     category: "health-fitness",
-    description:
-      "Calculate your Basal Metabolic Rate using the Harris-Benedict (1919) and Mifflin-St Jeor (1990) equations, with a side-by-side comparison.",
     featured: false,
     keywords: [
       "bmr calculator",
@@ -879,10 +714,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "date-calculator",
-    title: "Date Calculator",
     category: "date-time",
-    description:
-      "Find the difference between two dates in days, weeks, months, and years, or add/subtract a duration from a date.",
     featured: false,
     keywords: [
       "date calculator",
@@ -894,10 +726,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "time-calculator",
-    title: "Time Calculator",
     category: "date-time",
-    description:
-      "Add or subtract hours, minutes, and seconds between two durations.",
     featured: false,
     keywords: [
       "time calculator",
@@ -909,10 +738,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "fuel-cost-calculator",
-    title: "Fuel Cost Calculator",
     category: "business-finance",
-    description:
-      "Estimate the fuel cost of a trip from distance, fuel consumption rate, and fuel price.",
     featured: false,
     keywords: [
       "fuel cost calculator",
@@ -924,10 +750,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "batch-invoice-calculator",
-    title: "Batch Invoice Calculator",
     category: "business-finance",
-    description:
-      "Build multiple invoices with line items and tax, and track a running total across all of them. Saved in your browser.",
     featured: false,
     keywords: [
       "batch invoice calculator",
@@ -939,10 +762,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "study-time-calculator",
-    title: "Study Time / Pomodoro Calculator",
     category: "student-productivity",
-    description:
-      "Plan a study or work session using the Pomodoro Technique — see how many focus intervals and breaks fit in the time you have.",
     featured: false,
     keywords: [
       "pomodoro calculator",
@@ -955,10 +775,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "gpa-calculator",
-    title: "GPA / Grade Calculator",
     category: "student-productivity",
-    description:
-      "Calculate a credit-weighted grade point average from your courses, and find the GPA you need on upcoming credits to reach a target.",
     featured: false,
     keywords: [
       "gpa calculator",
@@ -971,66 +788,49 @@ export const tools: Tool[] = [
   },
   {
     slug: "percentage-calculator",
-    title: "Percentage Calculator",
     category: "math",
-    description: "Perform fast percentage calculations.",
     featured: true,
     keywords: ["percentage", "math"],
   },
   {
     slug: "tip-calculator",
-    title: "Tip Calculator",
     category: "business-finance",
-    description: "Calculate tip amount and split the bill between people.",
     featured: true,
     keywords: ["tip", "bill", "split", "restaurant"],
   },
   {
     slug: "discount-calculator",
-    title: "Discount Calculator",
     category: "business-finance",
-    description: "Calculate discounted price and how much you save.",
     featured: true,
     keywords: ["discount", "sale", "price", "savings"],
   },
   {
     slug: "sales-tax-calculator",
-    title: "Sales Tax Calculator",
     category: "business-finance",
-    description: "Calculate sales tax and total price.",
     featured: true,
     keywords: ["sales tax", "tax", "price", "total"],
   },
   {
     slug: "image-converter",
-    title: "Image Converter",
     category: "converters",
-    description: "Convert images between popular formats.",
     featured: true,
     keywords: ["image", "png", "jpg", "webp"],
   },
   {
     slug: "json-formatter",
-    title: "JSON Formatter",
     category: "developer-tools",
-    description: "Format and validate JSON online.",
     featured: true,
     keywords: ["json", "formatter", "developer"],
   },
   {
     slug: "barcode-generator",
-    title: "Barcode Generator",
     category: "developer-tools",
-    description: "Generate UPC-A, EAN-13, and Code 128 barcodes with a downloadable image and an optional logo alongside.",
     featured: true,
     keywords: ["barcode", "upc", "ean", "code128", "gs1", "generator"],
   },
   {
     slug: "color-palette-generator",
-    title: "Color Palette Generator",
     category: "developer-tools",
-    description:
-      "Generate complementary, analogous, triadic, and other color harmonies from a base color, with HEX, RGB, and HSL codes ready to copy.",
     featured: false,
     keywords: [
       "color palette generator",
@@ -1042,123 +842,91 @@ export const tools: Tool[] = [
   },
   {
     slug: "password-generator",
-    title: "Password Generator",
     category: "developer-tools",
-    description: "Generate strong and secure passwords.",
     featured: true,
     keywords: ["password", "security"],
   },
   {
     slug: "unit-converter",
-    title: "Unit Converter",
     category: "converters",
-    description: "Convert length, weight, temperature and more.",
     featured: true,
     keywords: ["unit", "converter", "measurement"],
   },
   {
     slug: "qr-code-generator",
-    title: "QR Code Generator",
     category: "developer-tools",
-    description: "Generate QR codes instantly.",
     featured: true,
     keywords: ["qr", "barcode"],
   },
   {
     slug: "word-counter",
-    title: "Word & Character Counter",
     category: "text-tools",
-    description:
-      "Count words, characters, sentences, and estimate reading time.",
     featured: false,
     keywords: ["word count", "character count", "text", "reading time"],
   },
   {
     slug: "base64-tool",
-    title: "Base64 Encoder/Decoder",
     category: "developer-tools",
-    description: "Encode text to Base64 or decode Base64 back to text.",
     featured: false,
     keywords: ["base64", "encode", "decode", "developer"],
   },
   {
     slug: "pdf-merge-split",
-    title: "PDF Merge & Split",
     category: "file-tools",
-    description: "Combine multiple PDF files into one, or split a single PDF into separate files by page range, entirely in your browser.",
     featured: false,
     keywords: ["pdf merge", "pdf split", "combine pdf", "pdf pages", "pdf tool"],
   },
   {
     slug: "zip-compressor",
-    title: "ZIP Compressor & Extractor",
     category: "file-tools",
-    description: "Compress multiple files into a single ZIP archive, or extract the contents of a ZIP file, entirely in your browser.",
     featured: false,
     keywords: ["zip compressor", "zip extractor", "compress files", "unzip", "archive"],
   },
   {
     slug: "csv-json-converter",
-    title: "CSV to JSON Converter",
     category: "file-tools",
-    description: "Convert CSV data to JSON or JSON back to CSV.",
     featured: false,
     keywords: ["csv", "json", "converter", "file", "spreadsheet"],
   },
   {
     slug: "file-size-converter",
-    title: "File Size Converter",
     category: "file-tools",
-    description: "Convert file sizes between bytes, KB, MB, GB, TB, and PB.",
     featured: false,
     keywords: ["file size", "bytes", "kb", "mb", "gb", "converter"],
   },
   {
     slug: "file-name-sanitizer",
-    title: "File Name Sanitizer",
     category: "file-tools",
-    description: "Clean up file names for safe use across operating systems and upload systems.",
     featured: false,
     keywords: ["file name", "sanitize", "clean", "rename", "slug"],
   },
   {
     slug: "duplicate-line-remover",
-    title: "Duplicate Line Remover",
     category: "file-tools",
-    description: "Remove duplicate lines from a list or file's text content.",
     featured: false,
     keywords: ["duplicate", "lines", "remove", "unique", "list", "file"],
   },
   {
     slug: "invoice-generator",
-    title: "Invoice Generator",
     category: "business-finance",
-    description: "Build an itemized invoice with subtotal, discount, and tax.",
     featured: false,
     keywords: ["invoice", "billing", "receipt", "tax", "business"],
   },
   {
     slug: "inventory-valuation-calculator",
-    title: "Inventory Valuation Calculator",
     category: "business-finance",
-    description: "Value your stock and flag items below their reorder threshold.",
     featured: false,
     keywords: ["inventory", "stock", "valuation", "warehouse", "reorder", "business"],
   },
   {
     slug: "break-even-calculator",
-    title: "Break-Even Point Calculator",
     category: "business-finance",
-    description: "Find how many units you need to sell to cover your fixed costs.",
     featured: false,
     keywords: ["break-even", "business", "profit", "fixed costs", "unit economics"],
   },
   {
     slug: "world-time-converter",
-    title: "World Time Converter",
     category: "date-time",
-    description:
-      "Convert the time between any two cities worldwide, see a live world clock for major time zones, and find the best overlapping meeting hours.",
     featured: true,
     keywords: [
       "time zone converter",
@@ -1171,10 +939,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "pace-calculator",
-    title: "Pace Calculator",
     category: "health-fitness",
-    description:
-      "Calculate running, walking, or cycling pace, time, or distance, log splits across multiple checkpoints, convert pace between km and miles, and predict a finish time for any race distance.",
     featured: false,
     keywords: [
       "pace calculator",
@@ -1187,10 +952,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "random-number-generator",
-    title: "Random Number Generator",
     category: "math",
-    description:
-      "Generate random integers within a range you choose, with control over how many results, whether duplicates are allowed, and the sort order of the output.",
     featured: false,
     keywords: [
       "random number generator",
@@ -1203,10 +965,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "standard-deviation-calculator",
-    title: "Standard Deviation Calculator",
     category: "math",
-    description:
-      "Calculate the population and sample standard deviation, variance, and mean of a data set, with every subtract-square-average step shown.",
     featured: false,
     keywords: [
       "standard deviation calculator",
@@ -1218,10 +977,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "circle-calculator",
-    title: "Circle Calculator",
     category: "math",
-    description:
-      "Calculate a circle's radius, diameter, circumference, and area from any one of the four, with a live interactive diagram scaled to your result.",
     featured: false,
     keywords: [
       "circle calculator",
@@ -1233,10 +989,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "text-to-speech",
-    title: "Text to Speech",
     category: "ai-tools",
-    description:
-      "Convert written text into spoken audio using your browser's built-in speech synthesis. No account, no server, no cost.",
     featured: false,
     keywords: [
       "text to speech",
@@ -1248,10 +1001,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "speech-to-text",
-    title: "Speech to Text",
     category: "ai-tools",
-    description:
-      "Convert spoken audio from your microphone into written text using your browser's built-in speech recognition. No account, no server, no cost.",
     featured: false,
     keywords: [
       "speech to text",
@@ -1263,10 +1013,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "spelling-grammar-checker",
-    title: "Spelling & Grammar Checker",
     category: "ai-tools",
-    description:
-      "Check text for common spelling mistakes and basic grammar issues, entirely in your browser. No account, no server, no cost.",
     featured: false,
     keywords: [
       "spelling checker",
@@ -1278,10 +1025,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "roman-numeral-converter",
-    title: "Roman Numeral Converter",
     category: "converters",
-    description:
-      "Convert between Arabic numerals and Roman numerals in both directions.",
     featured: false,
     keywords: [
       "roman numeral converter",
@@ -1293,10 +1037,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "reading-time-calculator",
-    title: "Reading Time Calculator",
     category: "text-tools",
-    description:
-      "Estimate how long it will take to read a piece of text at a given reading speed.",
     featured: false,
     keywords: [
       "reading time calculator",
@@ -1308,10 +1049,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "lorem-ipsum-generator",
-    title: "Lorem Ipsum Generator",
     category: "text-tools",
-    description:
-      "Generate placeholder text in paragraphs, sentences, or words, in classic or modern style.",
     featured: false,
     keywords: [
       "lorem ipsum generator",
@@ -1323,10 +1061,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "text-logo-generator",
-    title: "Text Logo Generator",
     category: "text-tools",
-    description:
-      "Transform text into stylized Unicode text designs using bold, italic, double-struck, and other font-like styles.",
     featured: false,
     keywords: [
       "text logo generator",
@@ -1338,10 +1073,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "multiplication-table-generator",
-    title: "Multiplication Table Generator",
     category: "math",
-    description:
-      "Generate a multiplication table for a single number or a printable grid for a range of numbers.",
     featured: false,
     keywords: [
       "multiplication table generator",
@@ -1353,10 +1085,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "speech-word-count-calculator",
-    title: "Speech Word Count Calculator",
     category: "text-tools",
-    description:
-      "Estimate how long a speech or presentation will take to deliver, based on word count and speaking pace.",
     featured: false,
     keywords: [
       "speech word count calculator",
@@ -1368,10 +1097,7 @@ export const tools: Tool[] = [
   },
   {
     slug: "countdown-to-event-calculator",
-    title: "Countdown to Event Calculator",
     category: "date-time",
-    description:
-      "A live countdown to a date and time you choose, updating automatically in days, hours, minutes, and seconds.",
     featured: false,
     keywords: [
       "countdown to event calculator",
