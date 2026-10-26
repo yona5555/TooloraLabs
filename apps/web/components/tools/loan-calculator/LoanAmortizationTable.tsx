@@ -42,7 +42,7 @@ export default function LoanAmortizationTable({ schedule, digitStyle, currency }
     <SectionCard phoneRole="output-secondary"
       id="amortization"
       title={t("amortizationTable.title")}
-      action={<DownloadButton content={csvContent} filename="loan-amortization-schedule.csv" mimeType="text/csv;charset=utf-8" className="!text-white dark:!text-zinc-200" />}
+      action={<DownloadButton content={csvContent} filename="loan-amortization-schedule.csv" mimeType="text/csv;charset=utf-8" className="!text-white dark:!text-zinc-200 md:dark:!text-white" />}
     >
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("amortizationTable.intro")}</p>
 

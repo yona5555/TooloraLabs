@@ -5,10 +5,14 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+    # labeled: adding an approve-*-baseline label starts a run that sees it (labels are read from the
+    # event, so a label added after the last push is otherwise ignored until the next push).
+    types: [opened, synchronize, reopened, labeled]
 
 jobs:
   build:
     runs-on: ubuntu-24.04
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v7
 
@@ -66,6 +70,7 @@ jobs:
   # baseline and uploads it as an artifact to be reviewed and committed.
   home-phone-lock:
     runs-on: ubuntu-24.04
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v7
 
@@ -100,3 +105,52 @@ jobs:
         with:
           name: home-phone-linux-baseline
           path: tests/baselines/home-phone.linux.json
+
+  # The approved desktop layout is locked (DESKTOP phase, 2026-10-26), tests/desktop-lock.mjs. CI checks the
+  # home page plus 12 representative tools at 1440px, en + ar; the full 204-page check is the local
+  # npm run test:desktop-lock:full. The build and its server answer every external fetch from
+  # tests/fixtures/live (tests/fixtures/offline-fetch.mjs), so no page waits on the network and every wait is
+  # bounded. Same OS split as the phone lock: tests/baselines/desktop.json (macOS, local) and
+  # desktop.linux.json (this runner). The PR label "approve-desktop-baseline" is the CI form of --approve: it
+  # rewrites the Linux baseline and uploads it as an artifact to be reviewed and committed.
+  desktop-lock:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build web app (live data from fixtures)
+        run: npm run build:desktop-lock
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Approved desktop layout unchanged (cards, charts, row layouts, headings, fonts)
+        run: |
+          if [ "$APPROVE_BASELINE" = "true" ]; then npm run baseline:desktop-lock -- --approve; fi
+          npm run test:desktop-lock -- --timing desktop-lock-timing.txt
+        env:
+          APPROVE_BASELINE: ${{ contains(github.event.pull_request.labels.*.name, 'approve-desktop-baseline') }}
+
+      - name: Upload the per-page timing
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: desktop-lock-timing
+          path: desktop-lock-timing.txt
+          if-no-files-found: ignore
+
+      - name: Upload the rewritten Linux baseline
+        if: contains(github.event.pull_request.labels.*.name, 'approve-desktop-baseline')
+        uses: actions/upload-artifact@v7
+        with:
+          name: desktop-linux-baseline
+          path: tests/baselines/desktop.linux.json

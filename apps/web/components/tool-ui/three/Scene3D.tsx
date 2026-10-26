@@ -2,7 +2,19 @@
 
 import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
+import { useTranslations } from "next-intl";
 import type { Scene3DCanvasProps } from "./Scene3DCanvas";
+import { useWebGL } from "./webgl";
+
+/** No WebGL in this browser: a still note in the scene's box instead of a canvas that would throw. */
+function NoWebGL() {
+  const t = useTranslations("common.live3d");
+  return (
+    <div className="flex h-full w-full items-center justify-center rounded-xl bg-gradient-to-br from-blue-50 to-zinc-100 p-4 text-center text-sm text-zinc-600 dark:from-zinc-800 dark:to-zinc-900 dark:text-zinc-300">
+      {t("unavailable")}
+    </div>
+  );
+}
 
 function Fallback() {
   return (
@@ -27,6 +39,7 @@ export default function Scene3D({
 }: Scene3DCanvasProps & { className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
+  const gl = useWebGL();
   useEffect(() => {
     const el = ref.current;
     if (!el || visible) return;
@@ -44,7 +57,7 @@ export default function Scene3D({
       dir="ltr"
       className={`relative h-full min-h-[280px] w-full cursor-grab touch-none overflow-hidden rounded-xl active:cursor-grabbing ${className}`}
     >
-      {visible ? <Scene3DCanvas {...props} /> : <Fallback />}
+      {gl === false ? <NoWebGL /> : visible && gl ? <Scene3DCanvas {...props} /> : <Fallback />}
     </div>
   );
 }
