@@ -7,7 +7,7 @@
  * navigation, where no server HTML is parsed. It runs once per page (`data-phone-layout` on the scope).
  * Everything it changes sits after the docs row, so it never moves the open cards above it.
  *
- * 1. Article ads (phone only): InfoSection renders a display:none phone slot before every section.
+ * 1. Article ads (phone only, ads on): InfoSection renders a display:none phone slot before every section.
  *    The slot before the article's first section is ad 2, shown and placed by globals.css alone (out of
  *    the paper, after the collapsed cards). Inside the article, slots are picked near 1/3 and 2/3 of its
  *    phone height, on section boundaries only, with at least 600px of article between ads and 300px
@@ -35,9 +35,10 @@ export function phoneLayout(anchor: Element | null): void {
     }
     return out;
   };
+  // With ads off (lib/ads.ts) InfoSection renders no slot: the sections still get their paper, and no ad is placed.
   const slots = Array.prototype.filter.call(root.querySelectorAll("[data-article-ad]"), topLevel) as Element[];
-  const sections = slots.map((slot) => slot.nextElementSibling).filter(Boolean) as Element[];
-  if (!slots.length || sections.length !== slots.length) return;
+  const sections = Array.prototype.filter.call(root.querySelectorAll("[data-info-section]"), topLevel) as Element[];
+  if (!sections.length || (slots.length && (sections.length !== slots.length || slots.some((slot, i) => slot.nextElementSibling !== sections[i])))) return;
   // Ad 2 is the first slot (globals.css shows it after the collapsed cards, out of the paper).
 
   // Rule 4 moves the disclaimer sections to the article's end, so the screen order of sections can differ
@@ -60,9 +61,9 @@ export function phoneLayout(anchor: Element | null): void {
     }
     return best;
   };
-  const first = pick(height / 3, 600);
+  const first = slots.length ? pick(height / 3, 600) : -1;
   const second = first > 0 ? pick((2 * height) / 3, offsets[first] + 600) : -1;
-  const picked = first > 0 && second > 0 ? [first, second] : [pick(height / 2, 600)].filter((i) => i > 0);
+  const picked = first > 0 && second > 0 ? [first, second] : slots.length ? [pick(height / 2, 600)].filter((i) => i > 0) : [];
   picked.forEach((i) => slots[i].setAttribute("data-show", ""));
   root.setAttribute("data-article-ads", String(picked.length));
 
@@ -70,7 +71,7 @@ export function phoneLayout(anchor: Element | null): void {
   // shorter than one ad, only ad 2 stays.
   const flow = root.querySelector("[data-phone-flow]");
   const ad1 = root.querySelector("[data-phone-docs] + [data-ad-slot]");
-  if (flow && ad1 && ad1.getClientRects().length) {
+  if (flow && ad1 && slots.length && ad1.getClientRects().length) {
     const a = ad1.getBoundingClientRect();
     const b = slots[0].getBoundingClientRect();
     const gap = parseFloat(getComputedStyle(flow).rowGap) || 0;

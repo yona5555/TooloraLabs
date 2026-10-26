@@ -1,9 +1,9 @@
 /**
- * Desktop ads switch. Off in production builds by default: until an ad network is wired up, no desktop
- * slot renders at all (in-content or the 300x600 sidebar), so the page shows no empty placeholders or
- * reserved gaps. `next dev` always shows them, at their approved size and position, so Yousef can review
- * the layout. Inlined at build time (NEXT_PUBLIC_ and NODE_ENV), so server and client always agree. The
- * approved phone slots (AdSpace `phone`) are not gated by it.
+ * Ads switch. Off in production builds by default: until an ad network is wired up, no ad slot renders at
+ * all (desktop in-content, the 300x600 sidebar, and the approved phone slots), so the page shows no empty
+ * placeholders or reserved gaps. `next dev` always shows them, at their approved size and position, so
+ * Yousef can review the layout. Inlined at build time (NEXT_PUBLIC_ and NODE_ENV), so server and client
+ * always agree.
  */
 export const ADS_ENABLED = process.env.NEXT_PUBLIC_ADS_ENABLED === "true" || process.env.NODE_ENV === "development";
 
