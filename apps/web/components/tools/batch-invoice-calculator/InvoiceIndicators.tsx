@@ -699,7 +699,7 @@ export function VatReferenceTable({ overview, f, onUseRate }: IndicatorProps & {
               <th className="px-2 py-2 text-end">{t("vat.rate")}</th>
               <th className="px-2 py-2 text-end">{t("vat.yourBatch")}</th>
               <th className="px-2 py-2 text-start">{t("vat.source")}</th>
-              <td className="px-2 py-2" />
+              <td className="px-2 py-2 font-bold" />
             </tr>
           </thead>
           <tbody className="divide-y divide-zinc-100 dark:divide-zinc-800">

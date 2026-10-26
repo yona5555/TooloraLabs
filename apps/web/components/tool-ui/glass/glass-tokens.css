@@ -6,11 +6,9 @@
  * (TooloraLabs-Claude-Instructions.md §34; the literal hex below is copied verbatim from
  * lib/category-palette.ts `categoryPalette.math.hex`, the single source of truth for that color
  * site-wide) -- never a color invented here. Dark-mode overrides follow the exact selector the
- * site's own theme toggle uses (`html.dark`, set by ThemeInitScript.tsx). Each block is declared
- * on body too, so its var(--color-*) resolves against the AA text tokens globals.css sets on body.
+ * site's own theme toggle uses (`html.dark`, set by ThemeInitScript.tsx).
  */
-:root,
-body {
+:root {
   --glass-font: var(--glass-font-inter, Inter), ui-sans-serif, system-ui, sans-serif;
   --glass-math-accent: #8b9dc9; /* lib/category-palette.ts categoryPalette.math.hex (§34) */
 
@@ -84,8 +82,7 @@ body {
   --glass-accent-5-oncolor: color-mix(in oklab, var(--color-violet-500) 30%, var(--color-zinc-900) 70%);
 }
 
-:root.dark,
-.dark body {
+:root.dark {
   --glass-surface: color-mix(in oklab, var(--color-zinc-900) 80%, var(--glass-math-accent) 14%);
   --glass-surface-strong: color-mix(in oklab, var(--color-zinc-900) 70%, var(--glass-math-accent) 18%);
   --glass-border: color-mix(in oklab, var(--color-white) 14%, transparent);
@@ -160,8 +157,7 @@ body {
  * read by the SVG indicators as var(--ph-*) and by the 3D scenes via getComputedStyle.
  * Spectrum = the conventional universal-indicator chart; dyes = their textbook acid/base forms.
  */
-:root,
-body {
+:root {
   --glass-chem-accent: #8fbcb5; /* lib/category-palette.ts categoryPalette.chemistry.hex (§34) */
   --ph-accent: var(--glass-chem-accent);
   --ph-accent-strong: color-mix(in oklab, var(--glass-chem-accent) 40%, var(--color-zinc-900) 60%);
@@ -208,8 +204,7 @@ body {
   --ph-dye-litmus-base: #3b4fa8;
 }
 
-:root.dark,
-.dark body {
+:root.dark {
   --ph-accent-strong: color-mix(in oklab, var(--glass-chem-accent) 70%, var(--color-white) 30%);
   --ph-accent-soft: color-mix(in oklab, var(--glass-chem-accent) 22%, var(--color-zinc-900) 78%);
   --ph-ink: var(--color-zinc-50);
@@ -247,8 +242,7 @@ body {
  * hot-cold temperature ramp of the gas law scenes. Read by SVG as var(--chem-*) and by 3D via
  * usePhColors.
  */
-:root,
-body {
+:root {
   --chem-solute: var(--color-violet-600);
   --chem-solvent: var(--color-sky-200);
   --chem-tint: var(--color-violet-500);
@@ -258,8 +252,7 @@ body {
   --chem-hot: var(--color-orange-600);
   --chem-piston: var(--color-zinc-500);
 }
-:root.dark,
-.dark body {
+:root.dark {
   --chem-solute: var(--color-violet-300);
   --chem-solvent: color-mix(in oklab, var(--color-sky-300) 30%, var(--color-zinc-700));
   --chem-tint: var(--color-violet-400);
@@ -274,8 +267,7 @@ body {
  * (CPK convention: H white, C black, O red, N blue, S yellow, Cl green, Fe orange, Na violet).
  * Read by SVG as var(--chem-el-*) and by 3D via usePhColors.
  */
-:root,
-body {
+:root {
   --chem-el-h: var(--color-zinc-300);
   --chem-el-c: var(--color-zinc-700);
   --chem-el-o: var(--color-red-600);
@@ -289,8 +281,7 @@ body {
   --chem-reactant: var(--color-amber-600);
   --chem-product: var(--color-teal-600);
 }
-:root.dark,
-.dark body {
+:root.dark {
   --chem-el-h: var(--color-zinc-100);
   --chem-el-c: var(--color-zinc-400);
   --chem-el-o: var(--color-red-400);
@@ -316,8 +307,7 @@ body {
  * --cv-from = the quantity in the unit you start from, --cv-to = the unit you convert to,
  * --cv-warm / --cv-cool = the ends of a temperature column, --cv-third = a third series.
  */
-:root,
-body {
+:root {
   --cv-from: var(--color-blue-600);
   --cv-from-soft: color-mix(in oklab, var(--color-blue-500) 22%, transparent);
   --cv-to: var(--color-amber-600);
@@ -327,8 +317,7 @@ body {
   --cv-cool: var(--color-sky-500);
   --cv-metal: var(--color-zinc-400);
 }
-:root.dark,
-.dark body {
+:root.dark {
   --cv-from: var(--color-blue-400);
   --cv-from-soft: color-mix(in oklab, var(--color-blue-400) 26%, transparent);
   --cv-to: var(--color-amber-400);
@@ -343,8 +332,7 @@ body {
  * AI tools pages (§44). Data colours defined once (light + dark): --ai-a..--ai-e are the five
  * series of the AI-tool visuals (chunks, words, issue types…), --ai-soft a translucent band.
  */
-:root,
-body {
+:root {
   --ai-a: var(--color-blue-600);
   --ai-b: var(--color-amber-600);
   --ai-c: var(--color-emerald-600);
@@ -352,8 +340,7 @@ body {
   --ai-e: var(--color-violet-600);
   --ai-soft: color-mix(in oklab, var(--color-blue-500) 16%, transparent);
 }
-:root.dark,
-.dark body {
+:root.dark {
   --ai-a: var(--color-blue-400);
   --ai-b: var(--color-amber-400);
   --ai-c: var(--color-emerald-400);

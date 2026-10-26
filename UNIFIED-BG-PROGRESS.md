@@ -11,6 +11,9 @@ Task: unified background on PHONE only (<768px) for all pages; DESKTOP identical
 - [x] ADS_ENABLED true in `next dev`.
 
 ## Next
-- [ ] Desktop diff 1440 en+ar, main prod (3100) vs branch prod (3101); fix diffs (mean-median-mode arrow, worked example width).
-- [ ] Phone 390 checks: axe color-contrast, phone guard, test:home-phone.
-- [ ] lint/tsc/tests/build, PR, CI once, merge, cleanup.
+- [x] Desktop diff 1440 en+ar, 426 pages, light+dark: 33 differed; fixed IndicatorWithTable notes, glass tokens
+      (reverted to main; phone AA grays on :root), empty th->td weight. Re-check: left only live data / random / timing
+      (main vs main shows the same noise).
+- [x] Phone 390: axe color-contrast 0 (7 pages x en/ar x light/dark), phone-card-order 98+98 ok, test:home-phone PASS.
+- [x] Dev ads: 1440 shows 3x 970x250 + 300x600, 390 shows 3x 300x250; prod 0.
+- [ ] PR, CI once, merge, cleanup.

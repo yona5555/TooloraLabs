@@ -189,11 +189,12 @@ body:has([data-coming-soon-page]),
   }
   /* AA text on the neutral surfaces: the grays (#71717b / #9f9fa9 fall under 4.5:1 on #f2f4f7 / white and
      #71717b on #172133) and the wordmark blue; the site header and footer bars turn neutral too. */
-  :where(html:not(.dark)) body {
+  /* on the root, so tokens read there (the glass and chart tokens) resolve to the AA values too */
+  :root:not(.dark) {
     --color-zinc-400: #6d6d77;
     --color-zinc-500: #6d6d77;
   }
-  :root.dark body {
+  :root.dark {
     --color-zinc-500: #9494a0;
   }
   /* the home calculator keeps its own theme: light grays in .calc-light, dark grays in .calc-dark */
