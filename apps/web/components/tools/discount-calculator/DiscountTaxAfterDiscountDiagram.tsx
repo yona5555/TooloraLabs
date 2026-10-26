@@ -25,7 +25,7 @@ export default function DiscountTaxAfterDiscountDiagram() {
   return (
     <SectionCard phoneRole="visual" title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div ref={wrap} dir="ltr" className="mt-4 overflow-x-auto">
+      <div ref={wrap} dir="ltr" tabIndex={0} className="mt-4 overflow-x-auto">
         <svg width={W} height={steps.length * 40 + 12} viewBox={`0 0 ${W} ${steps.length * 40 + 12}`} role="img" aria-label={t("title")} className="block min-w-[320px] text-current">
           {steps.map((step, i) => (
             <g key={step.label} transform={`translate(0, ${i * 40})`}>

@@ -674,7 +674,7 @@ export function PresetOddsTable({ d, f, active, onApply }: IndicatorProps & { ac
               <th className="py-2 text-start font-semibold">{t("table.colTag")}</th>
               <th className="py-2 text-end font-semibold">{t("table.colOdds")}</th>
               <th className="py-2 text-end font-semibold">{t("table.colRepeat")}</th>
-              <th className="py-2" />
+              <td className="py-2" />
             </tr>
           </thead>
           <tbody>

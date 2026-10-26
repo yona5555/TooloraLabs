@@ -131,7 +131,7 @@ export default function ScientificUnitCircleCard({
           <svg
             viewBox={`0 0 ${VB_W} ${VB_H}`}
             overflow="visible"
-            role="img"
+            role="group"
             aria-label={t("ariaLabel")}
             className="h-auto w-full touch-none select-none lg:absolute lg:inset-0 lg:h-full"
             onPointerMove={onMove}

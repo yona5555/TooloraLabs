@@ -122,7 +122,7 @@ export default function BarcodeResult() {
         ))}
       </dl>
 
-      <div className="mt-4 max-h-80 overflow-auto rounded-xl border border-zinc-200 lg:max-h-none lg:min-h-[10rem] lg:flex-1 lg:basis-0 dark:border-zinc-700">
+      <div tabIndex={0} className="mt-4 max-h-80 overflow-auto rounded-xl border border-zinc-200 lg:max-h-none lg:min-h-[10rem] lg:flex-1 lg:basis-0 dark:border-zinc-700">
         <table className="w-full text-sm">
           <thead className="sticky top-0 bg-zinc-100 text-xs text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400">
             <tr>

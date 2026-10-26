@@ -29,7 +29,7 @@ export default function Navbar() {
           <Wordmark className="text-[15px] md:hidden" />
         </Link>
 
-        <nav className="hidden items-center gap-8 lg:flex">
+        <nav aria-label={t("mainNav")} className="hidden items-center gap-8 lg:flex">
           <Link
             href="/"
             data-bp-nav="black"

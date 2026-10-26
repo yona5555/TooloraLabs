@@ -423,8 +423,10 @@ export function UnitsDigitTimeline({ view }: P) {
     >
       <div dir="ltr" className="relative px-2 pb-2" data-testid="mt-units" data-period={cyc.period}>
         {[0, 10].map((offset) => (
-          <ol key={offset} className={`relative grid grid-cols-10 gap-1 ${offset ? "mt-6" : ""}`}>
+          <div key={offset} className={`relative ${offset ? "mt-6" : ""}`}>
+            {/* the track line sits beside the list, not in it: an ol may only hold li */}
             <span className="absolute inset-x-4 top-[2rem] h-1 rounded-full bg-zinc-200 dark:bg-zinc-700" />
+            <ol className="relative grid grid-cols-10 gap-1">
             {cyc.digits.map((d, i) => {
               const k = offset + i + 1;
               const inCycle = i < cyc.period && offset === 0;
@@ -447,7 +449,8 @@ export function UnitsDigitTimeline({ view }: P) {
                 </li>
               );
             })}
-          </ol>
+            </ol>
+          </div>
         ))}
         {cyc.period < 10 && (
           <div className="mt-2 grid grid-cols-10 gap-1">

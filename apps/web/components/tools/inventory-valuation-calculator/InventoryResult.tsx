@@ -126,7 +126,7 @@ export default function InventoryResult({ result, hasCalculated, errorMessage, d
         <Stat title={t("result.lowStockCount")} value={formatLocalizedNumber(result.lowStockCount, digitStyle)} />
       </div>
 
-      <div className="mt-4 overflow-x-auto">
+      <div tabIndex={0} className="mt-4 overflow-x-auto">
         <table className="w-full text-start text-sm">
           <thead>
             <tr className="border-b border-zinc-200 text-zinc-500 dark:border-zinc-700 dark:text-zinc-400">

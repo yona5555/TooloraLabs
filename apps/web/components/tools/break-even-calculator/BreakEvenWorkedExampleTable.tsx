@@ -34,15 +34,18 @@ function isBadge(cell: string | WorkedExampleBadge): cell is WorkedExampleBadge 
 export default function BreakEvenWorkedExampleTable({ columns, rows, caption }: Props) {
   return (
     <figure className="my-2">
-      <div dir="ltr" className="overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-700">
+      <div dir="ltr" tabIndex={0} className="overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-700">
         <table className="w-full min-w-[420px] border-collapse text-sm">
           <thead>
             <tr className="border-b border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800/60">
-              {columns.map((col) => (
-                <th key={col} className="px-3 py-2 text-start font-semibold text-zinc-600 dark:text-zinc-300">
-                  {col}
-                </th>
-              ))}
+              {columns.map((col) => {
+                const Cell = col.trim() ? "th" : "td";
+                return (
+                  <Cell key={col} className="px-3 py-2 text-start font-semibold text-zinc-600 dark:text-zinc-300">
+                    {col}
+                  </Cell>
+                );
+              })}
             </tr>
           </thead>
           <tbody>

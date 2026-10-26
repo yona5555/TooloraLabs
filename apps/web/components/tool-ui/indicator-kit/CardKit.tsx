@@ -429,9 +429,10 @@ export function SvgHandle({
 }) {
   const style: CSSProperties = { left: `${(x / viewW) * 100}%`, top: `${(y / viewH) * 100}%`, transform: "translate(-50%, -50%)" };
   return (
-    <div {...drag} data-testid={testId} aria-valuetext={valueText} className="absolute h-11 w-11" style={style}>
+    <div {...drag} data-testid={testId} className="absolute h-11 w-11" style={style}>
       <GlassHandle
         direction={direction}
+        valueText={valueText}
         ariaLabel={label}
         onStep={(d) => (d > 0 ? s.inc() : s.dec())}
         valueNow={s.value}
@@ -478,6 +479,7 @@ export function KitTrack({ s, label, valueText, testId, ticks }: { s: Stepper; l
           valueNow={s.value}
           valueMin={s.min}
           valueMax={s.max}
+          valueText={valueText}
           style={{ left: `${pct}%`, top: "50%", transform: "translate(-50%, -50%)" }}
         />
         <span className="sr-only">{valueText}</span>

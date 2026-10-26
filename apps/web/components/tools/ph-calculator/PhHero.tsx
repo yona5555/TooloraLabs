@@ -109,7 +109,6 @@ export default function PhResultScene({ pH, onSetPh }: { pH: number; onSetPh: (p
               <div
                 data-testid="ph-hero-handle"
                 data-scale={[...proj.bottom, ...proj.top].map((n) => n.toFixed(1)).join(",")}
-                aria-valuetext={valueText}
                 className="absolute inset-0"
                 style={{ pointerEvents: "none" }}
               >
@@ -120,6 +119,7 @@ export default function PhResultScene({ pH, onSetPh }: { pH: number; onSetPh: (p
                 >
                   <GlassHandle
                     direction="vertical"
+                    valueText={valueText}
                     ariaLabel={t("handle")}
                     onStep={(d) => (d > 0 ? s.inc() : s.dec())}
                     valueNow={value}

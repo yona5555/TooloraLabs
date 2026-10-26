@@ -66,6 +66,7 @@ export default function PasswordInputPanel({ form, onChange, onClear }: Password
             </div>
             <input
               type="range"
+              aria-label={t("lengthLabel")}
               min={8}
               max={64}
               value={form.length}
@@ -112,6 +113,7 @@ export default function PasswordInputPanel({ form, onChange, onClear }: Password
             </div>
             <input
               type="range"
+              aria-label={t("wordCountLabel")}
               min={3}
               max={10}
               value={form.wordCount}

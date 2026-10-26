@@ -10,7 +10,7 @@ export default function PhQuickReference() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div dir="ltr" className="mt-4 overflow-x-auto">
+      <div dir="ltr" tabIndex={0} className="mt-4 overflow-x-auto">
         <table className="w-full min-w-[240px] border-collapse text-sm">
           <thead>
             <tr className="text-zinc-500 dark:text-zinc-400">

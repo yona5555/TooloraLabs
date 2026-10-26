@@ -3,9 +3,9 @@ import { hasWords } from "@/components/tool-ui/MixedText";
 
 export type WxRow = { label: string; value: string; emphasize?: boolean; /** Long value (a substituted formula): its own full-width line. */ wide?: boolean };
 
-function Cell({ r }: { r: WxRow }) {
+function Cell({ r, className = "" }: { r: WxRow; className?: string }) {
   return (
-    <div className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-x-3 py-1.5">
+    <div className={`grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-x-3 py-1.5 ${className}`}>
       <dt className="break-words text-zinc-500 dark:text-zinc-400">{r.label}</dt>
       <dd
         dir={hasWords(r.value) ? "auto" : "ltr"}
@@ -49,9 +49,7 @@ export default function WxSplit({ title, rows, chart, layout = "side" }: { title
           {heading}
           <dl className="mt-2 grid grid-cols-1 gap-x-6 text-sm sm:grid-cols-2 lg:grid-cols-3">
             {cells.map((r, i) => (
-              <div key={i} className="border-b border-zinc-200 dark:border-zinc-700">
-                <Cell r={r} />
-              </div>
+              <Cell key={i} r={r} className="border-b border-zinc-200 dark:border-zinc-700" />
             ))}
           </dl>
           {wide.length > 0 && (

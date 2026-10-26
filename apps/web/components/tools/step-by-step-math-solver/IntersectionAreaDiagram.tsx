@@ -59,7 +59,7 @@ export default function IntersectionAreaDiagram() {
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
       <GapFreeRow className="mt-4">
         <div dir="ltr" className="w-full lg:flex-1">
-          <div aria-label={t("ariaLabel")} className="mafs-canvas mx-auto w-full max-w-[420px] overflow-hidden rounded-xl">
+          <div role="group" aria-label={t("ariaLabel")} className="mafs-canvas mx-auto w-full max-w-[420px] overflow-hidden rounded-xl">
             <Mafs viewBox={{ x: domain, y: [-14, 14] }} height={230} pan={false} zoom={false} preserveAspectRatio={false}>
               <Coordinates.Cartesian xAxis={{ lines: 2 }} yAxis={{ lines: 4 }} />
               <Polygon points={points} color={colors.fill} fillOpacity={0.15} strokeOpacity={0} />

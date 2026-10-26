@@ -118,7 +118,7 @@ export default function STTControlPanel({
             </span>
           )}
         </div>
-        <ol className="flex flex-col gap-1.5 lg:min-h-0 lg:flex-1 lg:overflow-y-auto">
+        <ol tabIndex={0} className="flex flex-col gap-1.5 lg:min-h-0 lg:flex-1 lg:overflow-y-auto">
           {segments.map((sg, i) => (
             <li key={i} className="rounded-lg px-2.5 py-1.5 text-sm" style={{ background: "var(--ai-soft)" }}>
               <div className="flex items-center justify-between gap-2 text-xs font-bold tabular-nums" style={{ color: "var(--ph-ink-muted)" }}>

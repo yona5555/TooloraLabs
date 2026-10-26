@@ -37,23 +37,23 @@ function FormulaPieces({ text }: { text: string }) {
   ));
 }
 
-function RowView({ row }: { row: Row }) {
+function RowView({ row, className = "" }: { row: Row; className?: string }) {
+  // The row itself is the dl's div group (div > dt + dd, the only nesting HTML allows); a note is a
+  // second dd that wraps onto its own full-width line.
   return (
-    <div>
-      {/* a value too long to sit beside its label drops under it (label above value) */}
-      <div className="flex flex-wrap items-baseline justify-between gap-x-3 lg:flex-nowrap lg:gap-3">
-        <dt className="text-zinc-500 dark:text-zinc-400">
-          <Subs text={row.label} />
-        </dt>
-        {/* Words (e.g. Arabic "not reached") keep the sans font: monospace breaks Arabic letter joining. */}
-        <dd
-          dir={hasWords(row.value) ? "auto" : "ltr"}
-          className={`ms-auto max-w-full text-end font-semibold lg:ms-0 ${row.emphasize ? "text-base text-blue-700 dark:text-blue-300" : "text-zinc-800 dark:text-zinc-100"}`}
-        >
-          <FormulaPieces text={row.value} />
-        </dd>
-      </div>
-      {row.note && <p className="text-end text-xs text-zinc-400 dark:text-zinc-500"><Subs text={row.note} /></p>}
+    // a value too long to sit beside its label drops under it (label above value)
+    <div className={`flex flex-wrap items-baseline justify-between gap-x-3 ${row.note ? "" : "lg:flex-nowrap"} ${className}`}>
+      <dt className="text-zinc-500 dark:text-zinc-400">
+        <Subs text={row.label} />
+      </dt>
+      {/* Words (e.g. Arabic "not reached") keep the sans font: monospace breaks Arabic letter joining. */}
+      <dd
+        dir={hasWords(row.value) ? "auto" : "ltr"}
+        className={`ms-auto max-w-full text-end font-semibold lg:ms-0 ${row.emphasize ? "text-base text-blue-700 dark:text-blue-300" : "text-zinc-800 dark:text-zinc-100"}`}
+      >
+        <FormulaPieces text={row.value} />
+      </dd>
+      {row.note && <dd className="basis-full text-end text-xs text-zinc-400 dark:text-zinc-500"><Subs text={row.note} /></dd>}
     </div>
   );
 }
@@ -113,9 +113,7 @@ export default function IndicatorWithTable({ indicator, workedExampleTitle, rows
         {title}
         <dl className={`mt-3 text-sm ${twoCol ? "grid grid-cols-1 gap-x-6 gap-y-2 sm:grid-cols-2 lg:flex-1 lg:content-between" : stretch ? "space-y-2 lg:flex lg:flex-1 lg:flex-col lg:justify-between lg:space-y-0 lg:gap-2" : "space-y-2"}`}>
           {rows.map((row, i) => (
-            <div key={i} className={row.emphasize ? `border-t border-zinc-200 pt-2 dark:border-zinc-700 ${twoCol ? "sm:col-span-2" : ""}` : ""}>
-              <RowView row={row} />
-            </div>
+            <RowView key={i} row={row} className={row.emphasize ? `border-t border-zinc-200 pt-2 dark:border-zinc-700 ${twoCol ? "sm:col-span-2" : ""}` : ""} />
           ))}
         </dl>
       </div>

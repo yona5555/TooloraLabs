@@ -152,7 +152,7 @@ export default function MTInputPanel(props: Props) {
             </p>
             <p className="mt-1 text-[11px] text-zinc-500 dark:text-zinc-400">{dos.exact ? t("squaresExact") : t("squaresOdd")}</p>
           </div>
-          <ul dir="ltr" className="max-h-48 min-h-0 flex-1 divide-y lg:max-h-none lg:basis-0 divide-zinc-100 overflow-y-auto dark:divide-zinc-800">
+          <ul dir="ltr" tabIndex={0} className="max-h-48 min-h-0 flex-1 divide-y lg:max-h-none lg:basis-0 divide-zinc-100 overflow-y-auto dark:divide-zinc-800">
             {squares.map((n) => (
               <li key={n} className={`flex items-center justify-between px-3 py-1 font-mono text-xs ${n === dos.mid ? "bg-blue-50 font-bold text-blue-700 dark:bg-blue-500/10 dark:text-blue-300" : "text-zinc-600 dark:text-zinc-300"}`}>
                 <span>

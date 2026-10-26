@@ -63,6 +63,7 @@ export default function CsvJsonInputPanel({
           <span className="text-xs font-semibold text-zinc-500 dark:text-zinc-400">{t("delimiterLabel")}</span>
           <select
             value={delimiter}
+            aria-label={t("delimiterLabel")}
             onChange={(e) => onDelimiterChange(e.target.value as CsvDelimiter)}
             className="rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100"
           >

@@ -70,7 +70,7 @@ export default function ComplexPlaneDiagram() {
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
       <GapFreeRow className="mt-4">
         <div dir="ltr" className="w-full lg:flex-1">
-          <div aria-label={t("ariaLabel")} className="mafs-canvas mx-auto w-full max-w-[360px] overflow-hidden rounded-xl">
+          <div role="group" aria-label={t("ariaLabel")} className="mafs-canvas mx-auto w-full max-w-[360px] overflow-hidden rounded-xl">
             <Mafs viewBox={{ x: [-xMax, xMax], y: [-yMax, yMax] }} height={220} pan={false} zoom={false} preserveAspectRatio={false}>
               <Coordinates.Cartesian xAxis={{ lines: Math.max(1, Math.round(xMax / 4)), labels: () => "" }} yAxis={{ lines: Math.max(1, Math.round(yMax / 4)), labels: () => "" }} />
               {magnitude > 0 && <Circle center={[0, 0]} radius={magnitude} color={colors.circle} fillOpacity={0} strokeOpacity={0.35} />}

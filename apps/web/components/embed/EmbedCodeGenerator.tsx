@@ -73,6 +73,7 @@ export default function EmbedCodeGenerator() {
         </div>
         <textarea
           readOnly
+          aria-label={t("codeLabel")}
           dir="ltr"
           value={code}
           rows={3}

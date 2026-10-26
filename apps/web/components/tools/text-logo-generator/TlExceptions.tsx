@@ -23,7 +23,7 @@ export default function TlExceptions() {
   const mine = ROWS.filter((r) => r.style === activeStyle);
 
   const indicator = (
-    <div className="max-h-72 w-full max-w-sm overflow-y-auto rounded-xl border border-zinc-200 dark:border-zinc-700">
+    <div tabIndex={0} className="max-h-72 w-full max-w-sm overflow-y-auto rounded-xl border border-zinc-200 dark:border-zinc-700">
       <table className="w-full border-collapse text-xs">
         <thead className="sticky top-0 bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300">
           <tr>

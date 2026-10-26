@@ -36,7 +36,7 @@ export default function Footer() {
           </p>
         </div>
 
-        <nav className="flex flex-wrap items-center justify-start gap-6 max-md:gap-y-0 md:justify-center">
+        <nav aria-label={t("footerNav")} className="flex flex-wrap items-center justify-start gap-6 max-md:gap-y-0 md:justify-center">
           {links.map((link) => (
             <Link
               key={link.href}

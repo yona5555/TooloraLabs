@@ -70,10 +70,12 @@ export default function BMIMiniConverter() {
           inputMode="decimal"
           value={value}
           onChange={(e) => setValue(e.target.value)}
+          aria-label={t("miniConverterValue")}
           className="!py-2 text-base"
         />
         <select
           value={from}
+          aria-label={t("miniConverterFrom")}
           onChange={(e) => setFrom(e.target.value)}
           className="rounded-xl border border-zinc-300 bg-white px-2 py-2 text-sm dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100"
         >
@@ -92,6 +94,7 @@ export default function BMIMiniConverter() {
         </span>
         <select
           value={to}
+          aria-label={t("miniConverterTo")}
           onChange={(e) => setTo(e.target.value)}
           className="ms-auto rounded-xl border border-zinc-300 bg-white px-2 py-2 text-sm dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100"
         >

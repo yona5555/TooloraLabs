@@ -46,7 +46,7 @@ export default function MatrixBasisDragLab() {
 
   const plane = (
     <div className="w-full lg:w-[340px]">
-      <div dir="ltr" aria-label={t("aria")} className="mafs-canvas w-full overflow-hidden rounded-xl">
+      <div role="group" dir="ltr" aria-label={t("aria")} className="mafs-canvas w-full overflow-hidden rounded-xl">
         <Mafs viewBox={{ x: [-R, R], y: [-R, R] }} height={300} pan={false} zoom={false} preserveAspectRatio="contain">
           <Coordinates.Cartesian xAxis={{ lines: step }} yAxis={{ lines: step }} />
           <Polygon points={[[0, 0], [1, 0], [1, 1], [0, 1]]} color={c.muted} fillOpacity={0.08} strokeStyle="dashed" />

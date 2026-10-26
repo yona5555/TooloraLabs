@@ -105,7 +105,7 @@ export default function ScientificAngleExplorer() {
   return (
     <SectionCard title={t("title")} className="my-4" bodyClassName="p-4 lg:p-5">
       <div className="grid grid-cols-1 items-stretch gap-4 md:grid-cols-2">
-        <div dir="ltr" aria-label={t("ariaLabel")} className="mafs-canvas w-full overflow-hidden rounded-xl" data-testid="explorer-mafs">
+        <div role="group" dir="ltr" aria-label={t("ariaLabel")} className="mafs-canvas w-full overflow-hidden rounded-xl" data-testid="explorer-mafs">
           <Mafs viewBox={{ x: [-4, 4], y: [-4, 4] }} height={340} pan={false} zoom={false}>
             <Coordinates.Cartesian xAxis={{ lines: 1 }} yAxis={{ lines: 1 }} />
             <Circle center={[0, 0]} radius={RADIUS} color={colors.blue} fillOpacity={0} strokeOpacity={0.4} />

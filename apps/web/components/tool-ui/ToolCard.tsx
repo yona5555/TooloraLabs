@@ -34,6 +34,8 @@ type ToolCardProps = {
   /** Translated "Featured" label — shown only when both this and `tool.featured` are set. */
   featuredLabel?: string;
   maxTags?: number;
+  /** 2 where the card list sits right under the page h1 (category pages), else 3 under a section h2. */
+  headingLevel?: 2 | 3;
 };
 
 const previewDir = path.join(process.cwd(), "public/tool-previews");
@@ -53,7 +55,8 @@ function approvedPreview(slug: string, set: "ar" | "en", theme: "light" | "dark"
   return { src: `/tool-previews/${set}/${theme}/${slug}.webp?v=${a.sha256.slice(0, 16)}`, bg: a.bg };
 }
 
-export default async function ToolCard({ tool, titleText, descriptionText, featuredLabel, maxTags = 2 }: ToolCardProps) {
+export default async function ToolCard({ tool, titleText, descriptionText, featuredLabel, maxTags = 2, headingLevel = 3 }: ToolCardProps) {
+  const Heading = headingLevel === 2 ? "h2" : "h3";
   const t = await getTranslations("compareFinancialCalculators");
   const set = (await getLocale()) === "ar" ? "ar" : "en";
   const light = approvedPreview(tool.slug, set, "light");
@@ -84,7 +87,7 @@ export default async function ToolCard({ tool, titleText, descriptionText, featu
       </div>
 
       <div className="flex min-w-0 flex-1 flex-col gap-2 p-3 sm:p-4">
-        <h3 className="line-clamp-2 text-sm font-bold leading-snug text-zinc-900 sm:text-base dark:text-zinc-50">{titleText}</h3>
+        <Heading className="line-clamp-2 text-sm font-bold leading-snug text-zinc-900 sm:text-base dark:text-zinc-50">{titleText}</Heading>
 
         {(showFeatured || tags.length > 0) && (
           <div className="flex h-5 flex-wrap gap-1 overflow-hidden">

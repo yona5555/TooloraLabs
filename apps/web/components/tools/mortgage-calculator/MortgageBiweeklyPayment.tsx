@@ -122,7 +122,7 @@ export default function MortgageBiweeklyPayment({ result, digitStyle }: Mortgage
         <table className="w-full min-w-[480px] text-sm">
           <thead>
             <tr className="border-b border-zinc-200 dark:border-zinc-800">
-              <th className="py-2 text-start font-medium text-zinc-500 dark:text-zinc-400"></th>
+              <td className="py-2 text-start font-medium text-zinc-500 dark:text-zinc-400"></td>
               <th className="py-2 text-end font-medium text-zinc-500 dark:text-zinc-400">{t("standardLabel")}</th>
               <th className="py-2 text-end font-medium text-zinc-500 dark:text-zinc-400">{t("biweeklyLabel")}</th>
             </tr>

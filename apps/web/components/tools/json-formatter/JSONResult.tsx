@@ -49,7 +49,7 @@ export default function JSONResult() {
         <div
           dir="ltr"
           data-preview="visual"
-          className="mt-4 overflow-x-auto rounded-xl border border-zinc-200 bg-zinc-50 py-2 font-mono text-[13px] leading-6 lg:flex-1 dark:border-zinc-700 dark:bg-zinc-800/60"
+          tabIndex={0} className="mt-4 overflow-x-auto rounded-xl border border-zinc-200 bg-zinc-50 py-2 font-mono text-[13px] leading-6 lg:flex-1 dark:border-zinc-700 dark:bg-zinc-800/60"
         >
           {shown.map((line, i) => {
             const n = from + i + 1;

@@ -95,9 +95,9 @@ export default function MolarityResultScene({ p, seed, onSetVolume }: { p: Scene
           <div className="absolute inset-0" dir="ltr" data-testid="mol-hero-3d">
             <Scene3D {...p} dragging={dragging} onProject={setProj} />
             {proj && (
-              <div data-testid="mol-hero-handle" aria-valuetext={valueText} className="absolute inset-0" style={{ pointerEvents: "none" }}>
+              <div data-testid="mol-hero-handle" className="absolute inset-0" style={{ pointerEvents: "none" }}>
                 <div className="absolute h-11 w-11 touch-none" style={{ left: proj.marker[0], top: proj.marker[1], transform: "translate(-50%, -50%)", pointerEvents: "auto" }} {...drag3d}>
-                  <GlassHandle direction="vertical" ariaLabel={label} onStep={(d) => (d > 0 ? s.inc() : s.dec())} valueNow={value} valueMin={V_MIN} valueMax={V_MAX} style={{ left: 0, top: 0 }} />
+                  <GlassHandle direction="vertical" valueText={valueText} ariaLabel={label} onStep={(d) => (d > 0 ? s.inc() : s.dec())} valueNow={value} valueMin={V_MIN} valueMax={V_MAX} style={{ left: 0, top: 0 }} />
                 </div>
               </div>
             )}

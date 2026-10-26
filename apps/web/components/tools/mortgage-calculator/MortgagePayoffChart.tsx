@@ -129,7 +129,7 @@ export default function MortgagePayoffChart({ result, digitStyle }: MortgagePayo
     <SectionCard phoneRole="visual" title={t("payoffChart.title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("payoffChart.intro")}</p>
 
-      <div ref={containerRef} dir="ltr" className="mt-4 overflow-x-auto">
+      <div ref={containerRef} dir="ltr" tabIndex={0} className="mt-4 overflow-x-auto">
         <PhoneMini slot={1} title={t("payoffChart.title")}>
           <svg
             width={chartWidth}

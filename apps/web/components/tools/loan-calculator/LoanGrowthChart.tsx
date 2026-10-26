@@ -105,7 +105,7 @@ export default function LoanGrowthChart({ schedule, loanAmount, totalInterest, d
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
 
-      <div ref={containerRef} dir="ltr" className="mt-4 overflow-x-auto">
+      <div ref={containerRef} dir="ltr" tabIndex={0} className="mt-4 overflow-x-auto">
         <svg
           ref={svgRef}
           width={chartWidth}

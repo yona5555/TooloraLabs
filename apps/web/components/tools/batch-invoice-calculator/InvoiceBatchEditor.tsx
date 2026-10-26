@@ -89,7 +89,9 @@ export default function InvoiceBatchEditor(p: Props) {
       </label>
 
       <p className={`${label} mt-4`}>{t("invoices", { count: p.invoices.length })}</p>
-      <div className="flex flex-wrap gap-1.5" role="tablist" aria-label={t("invoices", { count: p.invoices.length })}>
+      <div className="flex flex-wrap gap-1.5">
+        {/* display:contents keeps the tabs in the same wrapping row as "Add invoice", which is not a tab */}
+        <div className="contents" role="tablist" aria-label={t("invoices", { count: p.invoices.length })}>
         {p.invoices.map((inv, i) => (
           <button
             key={inv.id}
@@ -107,6 +109,7 @@ export default function InvoiceBatchEditor(p: Props) {
             </span>
           </button>
         ))}
+        </div>
         <button type="button" onClick={p.onAddInvoice} data-testid="add-invoice" className="flex items-center gap-1 rounded-lg border border-dashed border-zinc-300 px-2.5 py-1.5 text-xs font-semibold text-blue-600 transition hover:bg-blue-50 dark:border-zinc-700 dark:text-blue-400 dark:hover:bg-blue-500/10">
           <FilePlus2 size={14} />
           {t("addInvoice")}

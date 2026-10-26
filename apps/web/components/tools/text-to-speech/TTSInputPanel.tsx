@@ -108,6 +108,7 @@ export default function TTSInputPanel({
         </div>
         <input
           type="range"
+          aria-label={t("rateLabel")}
           min={0.5}
           max={2}
           step={0.1}
@@ -126,6 +127,7 @@ export default function TTSInputPanel({
         </div>
         <input
           type="range"
+          aria-label={t("pitchLabel")}
           min={0}
           max={2}
           step={0.1}

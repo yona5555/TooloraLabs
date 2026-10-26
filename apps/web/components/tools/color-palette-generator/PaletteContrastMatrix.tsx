@@ -28,10 +28,11 @@ export default function PaletteContrastMatrix() {
       <table className="w-full border-separate border-spacing-1 text-center text-xs">
         <thead>
           <tr>
-            <th />
+            <td />
             {axis.map((c, j) => (
               <th key={j} className="pb-1">
                 <span className="mx-auto block h-5 w-5 rounded-full border border-zinc-300 dark:border-zinc-600" style={{ backgroundColor: c.hex }} />
+                <span className="sr-only">{c.hex}</span>
               </th>
             ))}
           </tr>
@@ -41,6 +42,7 @@ export default function PaletteContrastMatrix() {
             <tr key={i}>
               <th className="pe-1">
                 <span className="block h-5 w-5 rounded-full border border-zinc-300 dark:border-zinc-600" style={{ backgroundColor: row.hex }} />
+                <span className="sr-only">{row.hex}</span>
               </th>
               {axis.map((col, j) => {
                 if (j === i)

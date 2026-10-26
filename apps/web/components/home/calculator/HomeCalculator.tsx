@@ -68,7 +68,7 @@ export default function HomeCalculator({ className = "" }: { className?: string 
     // Phones (< md): one device frame — a tinted surface with 10px padding and 8px gaps, each
     // section a lighter-bordered card inside it; the history card moves above the display
     // (order in CalculatorDisplay). Every class below that changes this is max-md only.
-    <div className={`flex min-w-0 flex-col overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-lg calcdark:border-zinc-800 calcdark:bg-zinc-900 max-md:gap-2 max-md:bg-zinc-50 max-md:p-2.5 max-md:shadow-md max-md:calcdark:bg-zinc-950 ${calcDark ? "calc-dark" : ""} ${className}`}>
+    <div className={`flex min-w-0 flex-col overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-lg calcdark:border-zinc-800 calcdark:bg-zinc-900 max-md:gap-2 max-md:bg-zinc-50 max-md:p-2.5 max-md:shadow-md max-md:calcdark:bg-zinc-950 ${calcDark ? "calc-dark" : "calc-light"} ${className}`}>
       <CalculatorTopBar mode={mode} setMode={setMode} calcDark={calcDark} onToggleCalcDark={() => setCalcDark((v) => !v)} />
 
       {(mode === null || mode === "scientific") && (

@@ -64,6 +64,7 @@ export default function CsvJsonResult() {
       </div>
       <textarea
         readOnly
+        aria-label={t("form.outputLabel")}
         value={result}
         rows={7}
         dir="ltr"
@@ -72,7 +73,7 @@ export default function CsvJsonResult() {
       />
 
       <p className="mt-4 mb-2 text-xs font-semibold tracking-wide text-zinc-500 uppercase dark:text-zinc-400">{tr("table")}</p>
-      <div dir="ltr" data-preview="visual" className="max-h-80 shrink-0 overflow-auto rounded-xl border border-zinc-200 dark:border-zinc-700">
+      <div dir="ltr" data-preview="visual" tabIndex={0} className="max-h-80 shrink-0 overflow-auto rounded-xl border border-zinc-200 dark:border-zinc-700">
         <table className="w-full text-xs">
           <thead className="sticky top-0 bg-zinc-100 dark:bg-zinc-800">
             <tr>

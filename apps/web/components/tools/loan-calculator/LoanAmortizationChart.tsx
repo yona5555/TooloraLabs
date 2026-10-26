@@ -113,7 +113,7 @@ function AmortizationPlot({ schedule, digitStyle, currency }: Pick<LoanAmortizat
   const labelEvery = Math.max(1, Math.ceil(schedule.length / MAX_DENSE_LABELS), Math.ceil(X_LABEL_GAP / step));
 
   return (
-    <div ref={containerRef} dir="ltr" className="mt-4 overflow-x-auto">
+    <div ref={containerRef} dir="ltr" tabIndex={0} className="mt-4 overflow-x-auto">
       <svg
         ref={svgRef}
         width={chartWidth}

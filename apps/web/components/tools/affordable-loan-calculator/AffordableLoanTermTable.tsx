@@ -33,7 +33,7 @@ export default function AffordableLoanTermTable({ hasCalculated, rows, digitStyl
     <SectionCard title={t("termTable.title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("termTable.intro")}</p>
 
-      <div dir="ltr" className="mt-4 overflow-x-auto rounded-2xl border border-zinc-200 dark:border-zinc-800">
+      <div dir="ltr" tabIndex={0} className="mt-4 overflow-x-auto rounded-2xl border border-zinc-200 dark:border-zinc-800">
         <table className="w-full min-w-[420px] text-sm">
           <thead>
             <tr className="bg-zinc-50 text-xs text-zinc-500 dark:bg-zinc-900 dark:text-zinc-400">

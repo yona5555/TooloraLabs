@@ -75,7 +75,7 @@ export default function SdDragLab() {
 
   const plane = (
     <div className="w-full lg:w-[400px]">
-      <div dir="ltr" aria-label={t("aria")} className="mafs-canvas w-full overflow-hidden rounded-xl">
+      <div role="group" dir="ltr" aria-label={t("aria")} className="mafs-canvas w-full overflow-hidden rounded-xl">
         <Mafs viewBox={{ x: view.x, y: view.y, padding: 0 }} height={300} pan={false} zoom={false}>
           <Coordinates.Cartesian xAxis={{ lines: step, labels: (x) => f(x) }} yAxis={false} />
           {sigma > 0 && (

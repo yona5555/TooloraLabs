@@ -56,6 +56,7 @@ export default function Base64Result() {
     >
       <textarea
         readOnly
+        aria-label={t("aboveFold.resultTitle")}
         value={result}
         rows={4}
         dir={draft.mode === "decode" ? "auto" : "ltr"}

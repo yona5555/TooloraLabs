@@ -75,7 +75,7 @@ export default function MmmDragLab() {
 
   const plane = (
     <div className="w-full lg:w-[380px]">
-      <div dir="ltr" aria-label={t("aria")} className="mafs-canvas w-full overflow-hidden rounded-xl">
+      <div role="group" dir="ltr" aria-label={t("aria")} className="mafs-canvas w-full overflow-hidden rounded-xl">
         <Mafs viewBox={{ x: [vx0, vx1], y: [-1.9, top] }} height={280} pan={false} zoom={false} preserveAspectRatio={false}>
           <Coordinates.Cartesian xAxis={{ lines: step, labels: (x) => f(x) }} yAxis={false} />
           <Line.Segment point1={[a.min, -0.45]} point2={[a.max, -0.45]} color={c.range} weight={3} />

@@ -73,7 +73,7 @@ export default function LiveTable3DLayout({
     <div data-split="lt3d" className={`@container ${fill ? "lg:flex lg:flex-1 lg:flex-col" : ""} ${className}`}>
       <div className={`grid grid-cols-1 gap-4 @3xl:grid-cols-2 @3xl:items-stretch ${fill ? "lg:flex lg:flex-1 lg:flex-col" : ""}`}>
         <div data-part="table" className={fill ? "min-w-0 lg:relative lg:min-h-[520px] lg:flex-1" : "min-w-0"}>
-        <div className={`max-h-[520px] min-w-0 overflow-auto rounded-xl ${capHeight ? "@3xl:max-h-[600px]" : "@3xl:max-h-none"} border border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800/40 ${fill ? "lg:absolute lg:inset-0 lg:max-h-none" : "h-full"}`}>
+        <div tabIndex={0} className={`max-h-[520px] min-w-0 overflow-auto rounded-xl ${capHeight ? "@3xl:max-h-[600px]" : "@3xl:max-h-none"} border border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800/40 ${fill ? "lg:absolute lg:inset-0 lg:max-h-none" : "h-full"}`}>
           <table className="w-full text-sm">
             <thead className="sticky top-0 z-10 bg-zinc-50 dark:bg-zinc-800">
               <tr className="border-b border-zinc-200 text-xs tracking-wide text-zinc-500 uppercase dark:border-zinc-700 dark:text-zinc-400">
