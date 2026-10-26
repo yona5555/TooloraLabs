@@ -48,7 +48,7 @@ export default async function DiscountFormulaDiagram() {
             <defs>
               <linearGradient id="discountFormulaRibbon" x1="0" y1="0" x2="1" y2="0">
                 <stop offset="0%" stopColor="currentColor" className="text-blue-400 dark:text-blue-500" stopOpacity={0.85} />
-                <stop offset="100%" stopColor="currentColor" className="text-emerald-500 dark:text-emerald-400" stopOpacity={0.95} />
+                <stop offset="100%" stopColor="currentColor" className="text-emerald-500 max-md:text-emerald-600 dark:text-emerald-400" stopOpacity={0.95} />
               </linearGradient>
             </defs>
             <path d={ribbonPath} fill="url(#discountFormulaRibbon)" />

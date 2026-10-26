@@ -93,7 +93,7 @@ function ComparisonPlot({ rows, digitStyle, currency }: BorrowingComparisonChart
   const tooltipY = MARGIN.top + 4;
 
   return (
-    <div ref={containerRef} dir="ltr" data-preview="visual" className="mt-4 overflow-x-auto">
+    <div ref={containerRef} dir="ltr" data-preview="visual" tabIndex={0} className="mt-4 overflow-x-auto">
       <svg
         ref={svgRef}
         width={chartWidth}

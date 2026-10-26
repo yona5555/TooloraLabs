@@ -159,7 +159,7 @@ export default function FractionHero() {
 
         {/* Number line */}
         <div dir="ltr" className="w-full lg:flex-1">
-          <div aria-label={t("ariaLabel")} className="mafs-canvas w-full overflow-hidden rounded-xl">
+          <div role="group" aria-label={t("ariaLabel")} className="mafs-canvas w-full overflow-hidden rounded-xl">
             <Mafs viewBox={{ x: [dataMin, dataMax], y: [-0.5, 0.5] }} height={170} pan={false} zoom={false} preserveAspectRatio={false}>
               <Coordinates.Cartesian
                 xAxis={{

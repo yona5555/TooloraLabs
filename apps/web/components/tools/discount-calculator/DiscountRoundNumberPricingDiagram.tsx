@@ -29,7 +29,7 @@ export default async function DiscountRoundNumberPricingDiagram() {
           <span className="mt-1 text-2xl font-bold text-zinc-800 dark:text-zinc-100">${ROUND_FINAL.toFixed(2)}</span>
         </div>
       </div>
-      <p className="mt-3 text-center text-xs opacity-60">{t("note")}</p>
+      <p className="mt-3 text-center text-xs opacity-60 max-md:text-zinc-500 max-md:dark:text-zinc-400 max-md:opacity-100">{t("note")}</p>
     </SectionCard>
   );
 }

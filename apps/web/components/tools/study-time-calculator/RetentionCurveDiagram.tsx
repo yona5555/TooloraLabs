@@ -39,7 +39,7 @@ export default function RetentionCurveDiagram() {
   return (
     <SectionCard title={d("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{d("intro")}</p>
-      <div ref={wrap} dir="ltr" className="mt-4 overflow-x-auto">
+      <div ref={wrap} dir="ltr" tabIndex={0} className="mt-4 overflow-x-auto">
         <svg viewBox={`0 0 ${width} ${height}`} width={width} height={height} role="img" aria-label={d("ariaLabel")} className="block h-auto w-full text-current">
           <line x1={padLeft} y1={10} x2={padLeft} y2={height - padBottom} stroke="currentColor" strokeOpacity={0.3} strokeWidth={1} />
           <line x1={padLeft} y1={height - padBottom} x2={width - 10} y2={height - padBottom} stroke="currentColor" strokeOpacity={0.3} strokeWidth={1} />

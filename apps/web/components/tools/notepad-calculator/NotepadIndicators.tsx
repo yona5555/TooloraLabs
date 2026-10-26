@@ -478,7 +478,7 @@ export function ScopeTimeline({ a }: IndicatorProps) {
           : null
       }
     >
-      <div className="overflow-x-auto pb-2">
+      <div tabIndex={0} className="overflow-x-auto pb-2">
         {/* Phone: the stations wrap into rows instead of scrolling; the joining line only fits one row. */}
         <ol className="relative flex min-w-max gap-2 pt-4 sm:min-w-0 max-sm:min-w-0 max-sm:flex-wrap max-sm:justify-center max-sm:gap-y-3" data-testid="ind-timeline">
           <span aria-hidden className="absolute inset-x-4 top-[1.6rem] h-0.5 bg-zinc-200 dark:bg-zinc-700 max-sm:hidden" />

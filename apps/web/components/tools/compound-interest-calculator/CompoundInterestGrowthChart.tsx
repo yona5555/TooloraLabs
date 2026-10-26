@@ -127,7 +127,7 @@ export default function CompoundInterestGrowthChart({
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("growthChart.intro")}</p>
 
       <PhoneMini slot={1} title={t("growthChart.title")}>
-      <div ref={containerRef} dir="ltr" className="mt-4 overflow-x-auto">
+      <div ref={containerRef} dir="ltr" tabIndex={0} className="mt-4 overflow-x-auto">
         <svg
           width={chartWidth}
           height={CHART_HEIGHT}

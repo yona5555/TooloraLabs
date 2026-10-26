@@ -106,7 +106,7 @@ export default function MortgageAmortizationTable({ result, digitStyle }: Mortga
           content={csvContent}
           filename="mortgage-amortization-schedule.csv"
           mimeType="text/csv;charset=utf-8"
-          className="!text-white dark:!text-zinc-200"
+          className="md:!text-white md:dark:!text-zinc-200"
         />
       }
     >

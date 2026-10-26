@@ -29,7 +29,7 @@ export default function AreaVsScaleFactorCurve() {
       <GapFreeRow className="mt-4">
         <div dir="ltr" className="w-full lg:flex-1">
           <PhoneMini slot={1} title={t("title")}>
-          <div aria-label={t("ariaLabel")} className="mafs-canvas w-full overflow-hidden rounded-xl">
+          <div role="group" aria-label={t("ariaLabel")} className="mafs-canvas w-full overflow-hidden rounded-xl">
             <Mafs viewBox={{ x: [0.4, 2.1], y: [0, baseArea * 4.3] }} height={200} pan={false} zoom={false} preserveAspectRatio={false}>
               <Coordinates.Cartesian xAxis={{ lines: 0.25, labels: (x) => `${x}×` }} yAxis={{ lines: Math.max(1, Math.round((baseArea * 4) / 5)) }} />
               <Plot.OfX y={(factor) => baseArea * factor * factor} domain={[0.5, 2]} color={colors.curve} weight={2.5} />

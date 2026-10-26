@@ -71,7 +71,7 @@ export default function JSONCodeView({ text, unit, className = "" }: { text: str
   const lines = text.split("\n");
   const gutter = String(lines.length).length;
   return (
-    <div dir="ltr" className={`overflow-auto rounded-xl border border-zinc-200 bg-zinc-50 py-2 font-mono text-[13px] leading-6 dark:border-zinc-700 dark:bg-zinc-800/60 ${className}`}>
+    <div dir="ltr" tabIndex={0} className={`overflow-auto rounded-xl border border-zinc-200 bg-zinc-50 py-2 font-mono text-[13px] leading-6 dark:border-zinc-700 dark:bg-zinc-800/60 ${className}`}>
       {lines.map((line, n) => {
         const lead = line.match(/^[ \t]*/)?.[0] ?? "";
         const depth = unit ? Math.floor(lead.length / unit.length) : 0;

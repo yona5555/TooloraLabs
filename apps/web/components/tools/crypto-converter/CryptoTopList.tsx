@@ -52,7 +52,7 @@ export default function CryptoTopList({ coins, digitStyle, fromCoinId, toCoinId,
       <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
       {/* The 7-column table needs the full card width, so its worked example sits directly under it. */}
       <div className="mt-4 flex flex-col gap-4">
-        <div className="max-h-[480px] min-w-0 overflow-auto rounded-xl border border-zinc-100 dark:border-zinc-800">
+        <div tabIndex={0} className="max-h-[480px] min-w-0 overflow-auto rounded-xl border border-zinc-100 dark:border-zinc-800">
           <table className="w-full min-w-[600px] text-sm" data-testid="top-coins-table">
             <thead className="sticky top-0 z-10 bg-zinc-50 dark:bg-zinc-800">
               <tr className="text-xs text-zinc-500 dark:text-zinc-400">

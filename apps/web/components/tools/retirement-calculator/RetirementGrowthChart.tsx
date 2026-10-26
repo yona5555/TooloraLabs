@@ -129,7 +129,7 @@ export default function RetirementGrowthChart({ hasCalculated, yearlySchedule, c
     <SectionCard phoneRole="visual" title={t("growthChart.title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("growthChart.intro")}</p>
 
-      <div ref={containerRef} dir="ltr" className="mt-4 overflow-x-auto">
+      <div ref={containerRef} dir="ltr" tabIndex={0} className="mt-4 overflow-x-auto">
         <PhoneMini slot={1} title={t("growthChart.title")}>
           <svg
             width={chartWidth}

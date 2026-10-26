@@ -35,7 +35,7 @@ export default function CoefficientOfVariationCards() {
             <p className="mt-2 font-mono text-lg font-bold text-zinc-700 dark:text-zinc-200">{round2(populationStdDev)}</p>
           </div>
           <div className="rounded-xl border border-blue-200 bg-blue-50 p-4 text-center dark:border-blue-500/30 dark:bg-blue-500/10">
-            <p className="text-xs font-semibold uppercase tracking-wide text-blue-500 dark:text-blue-400">{t("cvLabel")}</p>
+            <p className="text-xs font-semibold uppercase tracking-wide text-blue-500 max-md:text-blue-600 dark:text-blue-400">{t("cvLabel")}</p>
             <p className="mt-2 font-mono text-lg font-bold text-blue-700 dark:text-blue-300">{`${cv}%`}</p>
           </div>
         </div>

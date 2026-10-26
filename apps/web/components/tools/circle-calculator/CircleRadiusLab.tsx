@@ -92,7 +92,7 @@ export default function CircleRadiusLab() {
         ],
       }}
     >
-      <div dir="ltr" className="mafs-canvas w-full overflow-hidden rounded-xl" aria-label={t("lab.aria")}>
+      <div role="group" dir="ltr" className="mafs-canvas w-full overflow-hidden rounded-xl" aria-label={t("lab.aria")}>
         <Mafs viewBox={{ x: [-2.3, 2.3], y: [-2.3, 2.3] }} height={320} pan={false} zoom={false}>
           {/* A radius is never negative: label only the positive whole grid steps (1, 2), so the
               tick labels stay far apart at any scale and in every locale. */}

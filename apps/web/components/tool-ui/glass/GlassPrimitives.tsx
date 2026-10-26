@@ -354,6 +354,7 @@ export function GlassHandle({
   valueNow = 50,
   valueMin = 0,
   valueMax = 100,
+  valueText,
 }: {
   direction: HandleDirection;
   ariaLabel: string;
@@ -369,6 +370,8 @@ export function GlassHandle({
   valueNow?: number;
   valueMin?: number;
   valueMax?: number;
+  /** Spoken value with its unit (e.g. "70.0 kg"); aria-valuetext belongs on the slider itself. */
+  valueText?: string;
 }) {
   const [touched, setTouched] = useState(false);
   const reducedMotion = usePrefersReducedMotion();
@@ -392,6 +395,7 @@ export function GlassHandle({
       aria-valuenow={valueNow}
       aria-valuemin={valueMin}
       aria-valuemax={valueMax}
+      aria-valuetext={valueText}
       tabIndex={0}
       data-role="handle"
       onPointerDown={() => setTouched(true)}

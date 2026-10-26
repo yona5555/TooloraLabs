@@ -60,7 +60,7 @@ export default async function CompareFinancialCalculatorsPage({ params }: PagePr
               <th className="px-4 py-3 text-start font-semibold">{t("columnQuestion")}</th>
               <th className="px-4 py-3 text-start font-semibold">{t("columnInputs")}</th>
               <th className="px-4 py-3 text-start font-semibold">{t("columnOutput")}</th>
-              <th className="px-4 py-3 text-start font-semibold"> </th>
+              <td className="px-4 py-3 text-start font-semibold"> </td>
             </tr>
           </thead>
           <tbody>

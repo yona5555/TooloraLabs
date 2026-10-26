@@ -94,7 +94,7 @@ export default function BalancerResult({ hasCalculated, result, digitStyle, reac
             <p className="text-center text-sm leading-6 text-zinc-600 dark:text-zinc-300">{t(errorKey ?? "cannotBalance")}</p>
           ) : (
             <>
-              <p dir="ltr" data-testid="bal-result-main" className="overflow-x-auto text-center text-2xl font-bold tabular-nums text-blue-700 sm:text-3xl dark:text-blue-400">
+              <p dir="ltr" data-testid="bal-result-main" tabIndex={0} className="overflow-x-auto text-center text-2xl font-bold tabular-nums text-blue-700 sm:text-3xl dark:text-blue-400">
                 <RichText text={balancedText(terms)} />
               </p>
               <p className="mt-1 text-center text-sm font-semibold text-zinc-600 dark:text-zinc-300">{t("balancedCaption")}</p>

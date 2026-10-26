@@ -627,7 +627,7 @@ export function EntropyZoneStrip({ d, f }: IndicatorProps) {
             <div key={z.zone} className={`rounded-md px-1 py-1 ${z.zone === zone ? "bg-zinc-100 font-bold text-zinc-900 dark:bg-zinc-800 dark:text-zinc-50" : "text-zinc-500 dark:text-zinc-400"}`}>
               <span className={`mx-auto mb-1 block h-1.5 w-6 rounded ${colors[i]}`} />
               {t(`entropy.zones.${z.zone}`)}
-              <span dir="ltr" className="block font-mono text-[10px] opacity-70">{`${i === 0 ? 0 : ENTROPY_ZONES[i - 1].to}${Number.isFinite(z.to) ? `–${z.to}` : "+"}`}</span>
+              <span dir="ltr" className="block font-mono text-[10px] opacity-70 max-md:text-zinc-500 max-md:dark:text-zinc-400 max-md:opacity-100">{`${i === 0 ? 0 : ENTROPY_ZONES[i - 1].to}${Number.isFinite(z.to) ? `–${z.to}` : "+"}`}</span>
             </div>
           ))}
         </div>
@@ -674,7 +674,7 @@ export function PresetOddsTable({ d, f, active, onApply }: IndicatorProps & { ac
               <th className="py-2 text-start font-semibold">{t("table.colTag")}</th>
               <th className="py-2 text-end font-semibold">{t("table.colOdds")}</th>
               <th className="py-2 text-end font-semibold">{t("table.colRepeat")}</th>
-              <th className="py-2" />
+              <td className="py-2" />
             </tr>
           </thead>
           <tbody>

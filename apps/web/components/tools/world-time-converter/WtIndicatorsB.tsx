@@ -284,7 +284,7 @@ export function WtWeekCard({ d, f }: CardProps) {
             <table className="w-full border-separate border-spacing-1 text-xs">
               <thead>
                 <tr>
-                  <th />
+                  <td />
                   {order.map((dd) => (
                     <th key={dd} className="font-semibold text-zinc-600 dark:text-zinc-300">{f.dayName(dd)}</th>
                   ))}

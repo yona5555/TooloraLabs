@@ -86,9 +86,9 @@ export default function GasResultScene({ p, seed, onSetTemperature }: { p: Scene
           <div className="absolute inset-0" dir="ltr" data-testid="gas-hero-3d">
             <Scene3D {...p} dragging={dragging} onProject={setProj} />
             {proj && (
-              <div data-testid="gas-hero-handle" aria-valuetext={valueText} className="absolute inset-0" style={{ pointerEvents: "none" }}>
+              <div data-testid="gas-hero-handle" className="absolute inset-0" style={{ pointerEvents: "none" }}>
                 <div className="absolute h-11 w-11 touch-none" style={{ left: proj.marker[0], top: proj.marker[1], transform: "translate(-50%, -50%)", pointerEvents: "auto" }} {...drag3d}>
-                  <GlassHandle direction="vertical" ariaLabel={t("handle")} onStep={(d) => (d > 0 ? s.inc() : s.dec())} valueNow={value} valueMin={T_MIN} valueMax={T_MAX} style={{ left: 0, top: 0 }} />
+                  <GlassHandle direction="vertical" valueText={valueText} ariaLabel={t("handle")} onStep={(d) => (d > 0 ? s.inc() : s.dec())} valueNow={value} valueMin={T_MIN} valueMax={T_MAX} style={{ left: 0, top: 0 }} />
                 </div>
               </div>
             )}

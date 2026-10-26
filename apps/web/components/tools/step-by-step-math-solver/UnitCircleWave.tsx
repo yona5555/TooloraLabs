@@ -43,7 +43,7 @@ export default function UnitCircleWave() {
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro", { coeff: fmt(leadCoeff) })}</p>
       <GapFreeRow className="mt-4">
         <div dir="ltr" className="flex w-full flex-col gap-3 sm:flex-row lg:flex-1">
-          <div aria-label={t("circleAriaLabel")} className="mafs-canvas mx-auto w-full max-w-[180px] overflow-hidden rounded-xl">
+          <div role="group" aria-label={t("circleAriaLabel")} className="mafs-canvas mx-auto w-full max-w-[180px] overflow-hidden rounded-xl">
             <Mafs viewBox={{ x: [-1.4, 1.4], y: [-1.4, 1.4] }} height={170} pan={false} zoom={false} preserveAspectRatio={false}>
               <Coordinates.Cartesian xAxis={{ lines: 100 }} yAxis={{ lines: 100 }} />
               <Circle center={[0, 0]} radius={1} color={colors.circle} fillOpacity={0} />
@@ -52,7 +52,7 @@ export default function UnitCircleWave() {
               {angle.element}
             </Mafs>
           </div>
-          <div aria-label={t("waveAriaLabel")} className="mafs-canvas mx-auto w-full max-w-[220px] overflow-hidden rounded-xl">
+          <div role="group" aria-label={t("waveAriaLabel")} className="mafs-canvas mx-auto w-full max-w-[220px] overflow-hidden rounded-xl">
             <Mafs viewBox={{ x: [0, 360], y: [-1.3, 1.3] }} height={170} pan={false} zoom={false} preserveAspectRatio={false}>
               <Coordinates.Cartesian xAxis={{ lines: 90 }} yAxis={{ lines: 0.5, labels: (v) => (Math.abs(v) <= 1 ? `${v}` : "") }} />
               <Plot.OfX y={(x) => Math.sin((x * Math.PI) / 180)} color={colors.sin} />

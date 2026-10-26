@@ -33,7 +33,7 @@ export default function ProbabilityFormulaDiagram() {
 
   const chip = (term: Term, key: string) => (
     <div key={key} className={`flex min-w-[72px] flex-col items-center rounded-xl border-2 px-2.5 py-2 ${TONE[term.tone]}`}>
-      <span className="text-[11px] font-semibold opacity-80">{term.sym}</span>
+      <span className="text-[11px] font-semibold opacity-80 max-md:opacity-100">{term.sym}</span>
       <span className="font-mono text-base font-bold">{term.value}</span>
     </div>
   );

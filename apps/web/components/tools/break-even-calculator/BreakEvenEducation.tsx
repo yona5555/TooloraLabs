@@ -103,7 +103,7 @@ export default async function BreakEvenEducation() {
               ]}
             />
           </GapFreeRow>
-          <p className="mt-3 text-xs opacity-60">{t("intro.marginBar.caption")}</p>
+          <p className="mt-3 text-xs opacity-60 max-md:text-zinc-500 max-md:dark:text-zinc-400 max-md:opacity-100">{t("intro.marginBar.caption")}</p>
         </SectionCard>
       </InfoSection>
 
@@ -273,7 +273,7 @@ export default async function BreakEvenEducation() {
               ]}
             />
           </GapFreeRow>
-          <p className="mt-3 text-xs opacity-60">{t("applications.priceImpactBar.caption")}</p>
+          <p className="mt-3 text-xs opacity-60 max-md:text-zinc-500 max-md:dark:text-zinc-400 max-md:opacity-100">{t("applications.priceImpactBar.caption")}</p>
         </SectionCard>
         <SectionCard title={t("applications.monthlyPaceChart.cardTitle")}>
           <BreakEvenMonthlyPaceLineChart

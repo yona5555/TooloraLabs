@@ -96,7 +96,7 @@ export default function RootsVsParameterCurve() {
       <GapFreeRow className="mt-4">
         <div dir="ltr" className="w-full lg:flex-1">
           <PhoneMini slot={0} title={t("title")}>
-            <div
+            <div role="group"
               aria-label={t("ariaLabel")}
               className="mafs-canvas mx-auto w-full max-w-[400px] overflow-hidden rounded-xl"
               onMouseUp={handleRelease}

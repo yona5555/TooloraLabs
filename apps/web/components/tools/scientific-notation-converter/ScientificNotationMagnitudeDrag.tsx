@@ -116,7 +116,7 @@ export default function ScientificNotationMagnitudeDrag() {
 
       {/* axis title above the plot, not inside it: drawn at the top of the y axis it ran into the "9" tick (§39) */}
       <p dir="ltr" className="mb-1 text-center text-xs text-zinc-500 dark:text-zinc-400">{t("axisHint")}</p>
-      <div dir="ltr" aria-label={t("ariaLabel")} className="mafs-canvas w-full overflow-hidden rounded-xl">
+      <div role="group" dir="ltr" aria-label={t("ariaLabel")} className="mafs-canvas w-full overflow-hidden rounded-xl">
         <Mafs viewBox={{ x: [EXP_MIN, EXP_MAX], y: [COEF_MIN, COEF_MAX] }} height={260} pan={false} zoom={false} preserveAspectRatio={false}>
           <Coordinates.Cartesian xAxis={{ lines: 3 }} yAxis={{ lines: 1 }} />
           {pointA.element}

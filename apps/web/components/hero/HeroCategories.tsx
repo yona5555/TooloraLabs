@@ -47,7 +47,7 @@ export default function HeroCategories() {
 
         const hoverOverlay = (
           <div className={`flex h-full min-h-0 flex-col items-center gap-1 p-2.5 text-center ${textColorClass}`}>
-            <h3 className="shrink-0 text-[11px] leading-tight font-bold sm:text-xs">{tc(`${category.slug}.title`)}</h3>
+            <h2 className="shrink-0 text-[11px] leading-tight font-bold sm:text-xs">{tc(`${category.slug}.title`)}</h2>
 
             <p className="line-clamp-5 min-h-0 flex-1 overflow-hidden text-[9px] leading-snug opacity-90 sm:text-[10px]">{overviewText}</p>
 

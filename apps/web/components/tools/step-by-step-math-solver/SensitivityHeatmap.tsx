@@ -57,7 +57,7 @@ export default function SensitivityHeatmap() {
       <GapFreeRow className="mt-4">
         <div dir="ltr" className="w-full lg:flex-1">
           {isQuadratic ? (
-            <div aria-label={t("ariaLabel")} className="mafs-canvas mx-auto w-full max-w-[340px] overflow-hidden rounded-xl" onMouseUp={handleRelease} onTouchEnd={handleRelease}>
+            <div role="group" aria-label={t("ariaLabel")} className="mafs-canvas mx-auto w-full max-w-[340px] overflow-hidden rounded-xl" onMouseUp={handleRelease} onTouchEnd={handleRelease}>
               <Mafs viewBox={{ x: [-RANGE, RANGE], y: [-RANGE, RANGE] }} height={240} pan={false} zoom={false} preserveAspectRatio={false}>
                 <Coordinates.Cartesian xAxis={{ lines: 5 }} yAxis={{ lines: 5 }} />
                 {cells.map((cell, i) => (

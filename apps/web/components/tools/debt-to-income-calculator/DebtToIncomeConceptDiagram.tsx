@@ -40,7 +40,7 @@ export default function DebtToIncomeConceptDiagram() {
   return (
     <SectionCard title={d("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{d("intro")}</p>
-      <div dir="ltr" className="mt-4 overflow-x-auto">
+      <div dir="ltr" tabIndex={0} className="mt-4 overflow-x-auto">
         <svg viewBox={`0 0 ${VIEW_W} ${VIEW_H}`} role="img" aria-label={d("ariaLabel")} data-annotation="" className="mx-auto block w-full max-w-3xl text-current">
           <text x={BAR_X + BAR_W / 2} y={30} fontSize={14} fontWeight={700} textAnchor="middle" className="fill-zinc-900 dark:fill-zinc-50">
             {d("incomeLabel")}

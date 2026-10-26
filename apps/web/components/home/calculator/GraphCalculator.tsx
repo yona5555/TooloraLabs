@@ -1,5 +1,5 @@
 "use client";
-import { useCallback, useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useDeferredValue, useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import { useTranslations } from "next-intl";
 import { compileGraphExpression, findIntersections, findKeyPoints, niceStep, valueTable, type GraphCompileResult } from "@tooloralabs/tools";
 import Graph2D, { zoomView } from "./graph/Graph2D";
@@ -33,6 +33,14 @@ const iconBtn =
  * (surface for z = f(x, y), ribbon for curves), and a live table of values
  * that follows the visible range. All math lives in @tooloralabs/tools.
  */
+const PHONE_QUERY = "(max-width: 767px)";
+const isPhone = () => window.matchMedia(PHONE_QUERY).matches;
+const subscribePhone = (cb: () => void) => {
+  const mq = window.matchMedia(PHONE_QUERY);
+  mq.addEventListener("change", cb);
+  return () => mq.removeEventListener("change", cb);
+};
+
 export default function GraphCalculator({ calcDark = false }: { calcDark?: boolean }) {
   const t = useTranslations("homeCalculator.graph");
   const [fns, setFns] = useState<FnEntry[]>([
@@ -60,7 +68,8 @@ export default function GraphCalculator({ calcDark = false }: { calcDark?: boole
     return m;
   }, [fns]);
 
-  const palette = calcDark ? FUNCTION_COLORS.dark : FUNCTION_COLORS.light;
+  const phone = useSyncExternalStore(subscribePhone, isPhone, () => false);
+  const palette = calcDark ? FUNCTION_COLORS.dark : phone ? FUNCTION_COLORS.lightPhone : FUNCTION_COLORS.light;
   const plot: PlotFunction[] = useMemo(
     () =>
       fns.flatMap((f) => {

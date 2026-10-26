@@ -52,7 +52,7 @@ export default function FuelUnitConversionDiagram() {
           ]}
         />
       </GapFreeRow>
-      <p className="mt-3 text-center text-xs opacity-60">{t("formula")}</p>
+      <p className="mt-3 text-center text-xs opacity-60 max-md:text-zinc-500 max-md:dark:text-zinc-400 max-md:opacity-100">{t("formula")}</p>
     </SectionCard>
   );
 }

@@ -22,7 +22,7 @@ function PlanMap({ d }: { d: Derived }) {
   const maxCap = Math.max(60, ...plan.days.map((day) => day.capacityMinutes));
   const step = Math.ceil(n / 10);
   return (
-    <svg width="100%" height="100%" viewBox={`0 0 ${W} ${H}`} role="img" style={{ direction: "ltr" }} className="mx-auto block max-h-[300px]">
+    <svg width="100%" height="100%" viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} className="mx-auto block max-h-[300px]">
       {/* capacity strip */}
       {plan.days.map((day) => {
         const x = LW + day.index * cw;

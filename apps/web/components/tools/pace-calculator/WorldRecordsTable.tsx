@@ -14,7 +14,7 @@ export default function WorldRecordsTable({ rows, menLabel, womenLabel }: { rows
       <table className="w-full min-w-[560px] border-collapse text-sm">
         <thead>
           <tr className="border-b border-current/30 text-start">
-            <th className="px-3 py-2 text-start font-semibold" />
+            <td className="px-3 py-2 text-start font-semibold" />
             <th className="px-3 py-2 text-start font-semibold">{menLabel}</th>
             <th className="px-3 py-2 text-start font-semibold">{womenLabel}</th>
           </tr>

@@ -39,7 +39,7 @@ export default function GraphTangentLab() {
         workedExampleTitle={tv("workedExample")}
         indicator={
           <div dir="ltr" className="w-[min(100%,460px)] lg:w-[460px]">
-            <div aria-label={t("title")} className="mafs-canvas w-full overflow-hidden rounded-xl">
+            <div role="group" aria-label={t("title")} className="mafs-canvas w-full overflow-hidden rounded-xl">
               <Mafs viewBox={{ x: [xMin, xMax], y: [yLo, yHi], padding: 0 }} height={300} pan={false} zoom={false} preserveAspectRatio={false}>
                 <Coordinates.Cartesian xAxis={{ lines: niceStep(xMax - xMin) }} yAxis={{ lines: niceStep(yHi - yLo) }} />
                 <MafsCurve f={f} xMin={xMin} xMax={xMax} yLo={yLo} yHi={yHi} color={c.curve} />

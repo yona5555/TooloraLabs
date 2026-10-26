@@ -36,7 +36,7 @@ export default function WeatherDisasters({ intro, items }: WeatherDisastersProps
             <div key={item.name} className="rounded-lg border border-current/15 p-4">
               <div className="flex items-center gap-2.5">
                 <Icon size={18} className="shrink-0 text-blue-600 dark:text-blue-400" aria-hidden="true" />
-                <h4 className="font-semibold">{item.name}</h4>
+                <h3 className="font-semibold">{item.name}</h3>
               </div>
               <p className="mt-2 text-sm leading-6 opacity-90">{item.definition}</p>
               <p className="mt-2 text-sm leading-6 opacity-80">{item.connection}</p>

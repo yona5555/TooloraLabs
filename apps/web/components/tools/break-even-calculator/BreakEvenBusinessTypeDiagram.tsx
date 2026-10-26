@@ -13,8 +13,9 @@ type BreakEvenBusinessTypeDiagramProps = {
 
 function StatBlock({ title, stats }: { title: string; stats: Stat[] }) {
   return (
-    <dl className="mt-3 space-y-1.5 border-t border-current/15 pt-3 text-sm">
+    <div className="mt-3 space-y-1.5 border-t border-current/15 pt-3 text-sm">
       <p className="text-[10px] font-semibold uppercase tracking-wide opacity-60">{title}</p>
+      <dl className="space-y-1.5">
       {stats.map((stat, i) => (
         <div key={i} className={`flex items-baseline justify-between gap-3 ${stat.emphasize ? "font-bold" : ""}`}>
           <dt>{stat.label}</dt>
@@ -23,7 +24,8 @@ function StatBlock({ title, stats }: { title: string; stats: Stat[] }) {
           </dd>
         </div>
       ))}
-    </dl>
+      </dl>
+    </div>
   );
 }
 

@@ -25,7 +25,7 @@ export default function GcfLcmCommonDivisors() {
           <span dir="ltr" className={`text-end font-mono text-sm font-bold ${i === 0 ? "text-emerald-700 dark:text-emerald-300" : "text-zinc-700 dark:text-zinc-200"}`}>{f(d)}</span>
           <div className="h-5 rounded-md bg-zinc-100 dark:bg-zinc-800">
             <div
-              className={`flex h-5 items-center rounded-md px-1.5 text-[10px] font-semibold whitespace-nowrap ${i === 0 ? "bg-emerald-500 text-white dark:bg-emerald-400 dark:text-zinc-900" : "bg-blue-400/80 text-white dark:bg-blue-500/80"}`}
+              className={`flex h-5 items-center rounded-md px-1.5 text-[10px] font-semibold whitespace-nowrap ${i === 0 ? "bg-emerald-500 max-md:bg-emerald-600 text-white dark:bg-emerald-400 dark:text-zinc-900" : "bg-blue-400/80 max-md:bg-blue-200 text-white max-md:text-blue-900 dark:bg-blue-500/80 max-md:dark:bg-blue-500/40 max-md:dark:text-blue-50"}`}
               style={{ width: `${Math.max(14, (d / g) * 100)}%` }}
             >
               {i === 0 ? "GCF" : `${f(g)} ÷ ${f(g / d)}`}

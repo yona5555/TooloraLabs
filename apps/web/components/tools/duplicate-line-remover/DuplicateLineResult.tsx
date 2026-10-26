@@ -74,6 +74,7 @@ export default function DuplicateLineResult() {
 
       <textarea
         readOnly
+        aria-label={t("aboveFold.resultTitle")}
         value={out.result}
         rows={5}
         dir="auto"

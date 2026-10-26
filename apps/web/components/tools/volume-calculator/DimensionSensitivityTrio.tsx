@@ -35,7 +35,7 @@ export default function DimensionSensitivityTrio() {
         <div dir="ltr" className="flex shrink-0 flex-wrap items-end justify-center gap-3">
           {bars.map((b) => (
             <div key={b.key} className={`flex w-24 flex-col items-center justify-end rounded-xl border p-3 text-center ${toneClasses[b.tone]}`} style={{ height: `${60 + (b.value / maxVal) * 80}px` }}>
-              <span className="text-[10px] font-semibold uppercase tracking-wide opacity-80">{b.label}</span>
+              <span className="text-[10px] font-semibold uppercase tracking-wide opacity-80 max-md:opacity-100">{b.label}</span>
               <span className="mt-1 font-mono text-sm font-bold">{round(b.value)}</span>
             </div>
           ))}

@@ -64,7 +64,7 @@ export default function LoremResult() {
       <div
         ref={textBoxRef}
         dir="auto"
-        className="relative max-h-64 space-y-3 overflow-y-auto rounded-xl border border-zinc-100 bg-zinc-50 p-3 text-sm leading-7 text-zinc-800 dark:border-zinc-800 dark:bg-zinc-800/50 dark:text-zinc-100"
+        tabIndex={0} className="relative max-h-64 space-y-3 overflow-y-auto rounded-xl border border-zinc-100 bg-zinc-50 p-3 text-sm leading-7 text-zinc-800 dark:border-zinc-800 dark:bg-zinc-800/50 dark:text-zinc-100"
       >
         {a.paragraphs.map((p) => {
           const on = activeParagraph === p.index;

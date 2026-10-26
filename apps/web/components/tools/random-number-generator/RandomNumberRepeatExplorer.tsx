@@ -113,7 +113,7 @@ export default function RandomNumberRepeatExplorer({ n, k, allowDuplicates, onCo
           50% @ k = {k50 > n ? "—" : f.int(k50)}
         </span>
       </div>
-      <div dir="ltr" data-preview="visual" data-preview-hero className="mafs-canvas w-full overflow-hidden rounded-xl" aria-label={t("dup.hint")} data-testid="dup-mafs">
+      <div role="group" dir="ltr" data-preview="visual" data-preview-hero className="mafs-canvas w-full overflow-hidden rounded-xl" aria-label={t("dup.hint")} data-testid="dup-mafs">
         <Mafs viewBox={{ x: [-xMax * 0.06, xMax * 1.03], y: [-0.14, 1.08] }} height={260} pan={false} zoom={false} preserveAspectRatio={false}>
           <Coordinates.Cartesian
             xAxis={{ lines: xStep, labels: (x) => (x > 0 ? f.int(x) : "") }}

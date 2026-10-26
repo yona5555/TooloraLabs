@@ -47,11 +47,11 @@ export default function DimensionComparisonCards() {
       <GapFreeRow className="mt-4">
         <div dir="ltr" className="grid shrink-0 grid-cols-2 gap-2.5">
           <div className="rounded-xl border border-blue-200 bg-blue-50 p-3 text-center dark:border-blue-500/30 dark:bg-blue-500/10">
-            <p className="text-xs font-semibold uppercase tracking-wide text-blue-500 dark:text-blue-400">{a ? t(`labels.${a.labelKey}`) : t("labels.none")}</p>
+            <p className="text-xs font-semibold uppercase tracking-wide text-blue-500 max-md:text-blue-600 dark:text-blue-400">{a ? t(`labels.${a.labelKey}`) : t("labels.none")}</p>
             <p className="mt-1 font-mono text-lg font-bold text-blue-700 dark:text-blue-300">{a ? round(a.value) : "—"}</p>
           </div>
           <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-3 text-center dark:border-emerald-500/30 dark:bg-emerald-500/10">
-            <p className="text-xs font-semibold uppercase tracking-wide text-emerald-500 dark:text-emerald-400">{b ? t(`labels.${b.labelKey}`) : t("labels.none")}</p>
+            <p className="text-xs font-semibold uppercase tracking-wide text-emerald-500 max-md:text-emerald-600 dark:text-emerald-400">{b ? t(`labels.${b.labelKey}`) : t("labels.none")}</p>
             <p className="mt-1 font-mono text-lg font-bold text-emerald-700 dark:text-emerald-300">{b ? round(b.value) : t("singleDimension")}</p>
           </div>
         </div>

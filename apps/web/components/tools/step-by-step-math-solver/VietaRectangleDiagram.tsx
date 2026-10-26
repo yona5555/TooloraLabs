@@ -41,7 +41,7 @@ export default function VietaRectangleDiagram() {
       <GapFreeRow className="mt-4">
         <div dir="ltr" className="w-full lg:flex-1">
           {isQuadratic ? (
-            <div aria-label={t("ariaLabel")} className="mafs-canvas mx-auto w-full max-w-[320px] overflow-hidden rounded-xl">
+            <div role="group" aria-label={t("ariaLabel")} className="mafs-canvas mx-auto w-full max-w-[320px] overflow-hidden rounded-xl">
               <Mafs viewBox={{ x: [-1, 11], y: [-1, 11] }} height={220} pan={false} zoom={false} preserveAspectRatio={false}>
                 <Coordinates.Cartesian xAxis={{ lines: 2 }} yAxis={{ lines: 2 }} />
                 <Polygon

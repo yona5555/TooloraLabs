@@ -37,22 +37,38 @@ function FormulaPieces({ text }: { text: string }) {
   ));
 }
 
-function RowView({ row }: { row: Row }) {
+/** A dl when no row carries a note; a note line under a row cannot sit in a dl group (div > dt + dd),
+ *  so a list with notes is plain divs, laid out exactly the same. */
+const hasNotes = (rows: Row[]) => rows.some((r) => r.note);
+
+function RowList({ rows, className, children }: { rows: Row[]; className: string; children: ReactNode }) {
+  return hasNotes(rows) ? <div className={className}>{children}</div> : <dl className={className}>{children}</dl>;
+}
+
+function RowView({ row, className = "", asDivs = false }: { row: Row; className?: string; asDivs?: boolean }) {
+  const Label = asDivs ? "div" : "dt";
+  const Value = asDivs ? "div" : "dd";
+  const pair = (
+    <>
+      <Label className="text-zinc-500 dark:text-zinc-400">
+        <Subs text={row.label} />
+      </Label>
+      {/* Words (e.g. Arabic "not reached") keep the sans font: monospace breaks Arabic letter joining. */}
+      <Value
+        dir={hasWords(row.value) ? "auto" : "ltr"}
+        className={`ms-auto max-w-full text-end font-semibold lg:ms-0 ${row.emphasize ? "text-base text-blue-700 dark:text-blue-300" : "text-zinc-800 dark:text-zinc-100"}`}
+      >
+        <FormulaPieces text={row.value} />
+      </Value>
+    </>
+  );
+  // a value too long to sit beside its label drops under it (label above value)
+  const line = "flex flex-wrap items-baseline justify-between gap-x-3 lg:flex-nowrap lg:gap-3";
+  // In a dl the row itself is the div group (div > dt + dd, the only nesting HTML allows).
+  if (!asDivs) return <div className={`${line} ${className}`}>{pair}</div>;
   return (
-    <div>
-      {/* a value too long to sit beside its label drops under it (label above value) */}
-      <div className="flex flex-wrap items-baseline justify-between gap-x-3 lg:flex-nowrap lg:gap-3">
-        <dt className="text-zinc-500 dark:text-zinc-400">
-          <Subs text={row.label} />
-        </dt>
-        {/* Words (e.g. Arabic "not reached") keep the sans font: monospace breaks Arabic letter joining. */}
-        <dd
-          dir={hasWords(row.value) ? "auto" : "ltr"}
-          className={`ms-auto max-w-full text-end font-semibold lg:ms-0 ${row.emphasize ? "text-base text-blue-700 dark:text-blue-300" : "text-zinc-800 dark:text-zinc-100"}`}
-        >
-          <FormulaPieces text={row.value} />
-        </dd>
-      </div>
+    <div className={className}>
+      <div className={line}>{pair}</div>
       {row.note && <p className="text-end text-xs text-zinc-400 dark:text-zinc-500"><Subs text={row.note} /></p>}
     </div>
   );
@@ -84,17 +100,17 @@ export default function IndicatorWithTable({ indicator, workedExampleTitle, rows
         </div>
         <div ref={tableRef} data-part="table" className="rounded-xl bg-zinc-50 p-4 dark:bg-zinc-800/40">
           {title}
-          <dl className="mt-3 grid grid-cols-1 gap-x-6 gap-y-2 text-sm sm:grid-cols-2 lg:grid-cols-3">
+          <RowList rows={plain} className="mt-3 grid grid-cols-1 gap-x-6 gap-y-2 text-sm sm:grid-cols-2 lg:grid-cols-3">
             {plain.map((row, i) => (
-              <RowView key={i} row={row} />
+              <RowView key={i} row={row} asDivs={hasNotes(plain)} />
             ))}
-          </dl>
+          </RowList>
           {result.length > 0 && (
-            <dl className="mt-3 space-y-2 border-t border-zinc-200 pt-2 text-sm dark:border-zinc-700">
+            <RowList rows={result} className="mt-3 space-y-2 border-t border-zinc-200 pt-2 text-sm dark:border-zinc-700">
               {result.map((row, i) => (
-                <RowView key={i} row={row} />
+                <RowView key={i} row={row} asDivs={hasNotes(result)} />
               ))}
-            </dl>
+            </RowList>
           )}
         </div>
       </div>
@@ -111,13 +127,11 @@ export default function IndicatorWithTable({ indicator, workedExampleTitle, rows
       </div>
       <div ref={tableRef} data-part="table" className={`min-w-[200px] flex-1 rounded-xl bg-zinc-50 p-4 dark:bg-zinc-800/40 ${stretch ? "lg:flex lg:flex-col" : ""}`}>
         {title}
-        <dl className={`mt-3 text-sm ${twoCol ? "grid grid-cols-1 gap-x-6 gap-y-2 sm:grid-cols-2 lg:flex-1 lg:content-between" : stretch ? "space-y-2 lg:flex lg:flex-1 lg:flex-col lg:justify-between lg:space-y-0 lg:gap-2" : "space-y-2"}`}>
+        <RowList rows={rows} className={`mt-3 text-sm ${twoCol ? "grid grid-cols-1 gap-x-6 gap-y-2 sm:grid-cols-2 lg:flex-1 lg:content-between" : stretch ? "space-y-2 lg:flex lg:flex-1 lg:flex-col lg:justify-between lg:space-y-0 lg:gap-2" : "space-y-2"}`}>
           {rows.map((row, i) => (
-            <div key={i} className={row.emphasize ? `border-t border-zinc-200 pt-2 dark:border-zinc-700 ${twoCol ? "sm:col-span-2" : ""}` : ""}>
-              <RowView row={row} />
-            </div>
+            <RowView key={i} row={row} asDivs={hasNotes(rows)} className={row.emphasize ? `border-t border-zinc-200 pt-2 dark:border-zinc-700 ${twoCol ? "sm:col-span-2" : ""}` : ""} />
           ))}
-        </dl>
+        </RowList>
       </div>
     </div>
   );

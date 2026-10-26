@@ -6,8 +6,11 @@ export const DEFAULT_VIEW: GraphView = { xMin: -6, xMax: 6, yMin: -4, yMax: 4 };
 
 export const MAX_FUNCTIONS = 4;
 
+/** Curve and label colors. On phones (below 768px) the light set is blue/red/emerald/violet 700–800
+ * (lightPhone) so the "y =" labels pass AA on the light surfaces. */
 export const FUNCTION_COLORS = {
   light: ["#2563eb", "#dc2626", "#059669", "#7c3aed"],
+  lightPhone: ["#1d4ed8", "#b91c1c", "#065f46", "#6d28d9"],
   dark: ["#60a5fa", "#f87171", "#34d399", "#a78bfa"],
 };
 

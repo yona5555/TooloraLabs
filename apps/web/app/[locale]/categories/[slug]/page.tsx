@@ -159,6 +159,7 @@ export default async function CategoryPage({
               titleText={tTools(`${tool.slug}.title`)}
               descriptionText={tTools(`${tool.slug}.description`)}
               featuredLabel={tToolsPage("featuredBadge")}
+              headingLevel={2}
             />
           ))}
         </div>

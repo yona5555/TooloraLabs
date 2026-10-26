@@ -34,7 +34,7 @@ function CompareBars({
   const H = rows.length * RH + 6;
   const x = (v: number) => L + ((Math.min(hi, Math.max(lo, v)) - lo) / (hi - lo)) * (W - L - R);
   return (
-    <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" className="max-w-full">
+    <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} className="max-w-full">
       {rows.map((r, i) => {
         const yy = i * RH;
         const delta = r.after - r.before;
@@ -231,7 +231,7 @@ export function GpaConverterCard({ state, d, f }: IndicatorProps) {
       <IndicatorWithTable
         workedExampleTitle={t("worked")}
         indicator={
-          <div className="w-[420px] max-w-full overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-700">
+          <div tabIndex={0} className="w-[420px] max-w-full overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-700">
             <table dir="ltr" className="w-full text-xs">
               <thead className="bg-blue-50 text-blue-800 dark:bg-blue-500/10 dark:text-blue-200">
                 <tr>

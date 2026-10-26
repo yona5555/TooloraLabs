@@ -68,7 +68,7 @@ export default function ProjectileMotionResult({ result, speed, angle, height, g
       </div>
       <div className="p-4 lg:flex lg:flex-1 lg:flex-col lg:p-6">
         <p dir="ltr" className="text-center font-mono text-4xl font-bold text-blue-700 dark:text-blue-400">
-          {`R = ${fmt(result.range)}`} <span className="text-xl font-semibold text-blue-500 dark:text-blue-300">m</span>
+          {`R = ${fmt(result.range)}`} <span className="text-xl font-semibold text-blue-500 max-md:text-blue-600 dark:text-blue-300">m</span>
         </p>
         <p className="mt-1 text-center text-sm text-zinc-500 dark:text-zinc-400">
           {t("heroCaption", { t: fmt(result.timeOfFlight), h: fmt(result.maxHeight), v: fmt(result.impactSpeed) })}

@@ -77,7 +77,7 @@ export default function EquationBalanceDiagram() {
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro", { mode: tMode(`mode.${dims.mode}`) })}</p>
       <GapFreeRow className="mt-4">
         <div dir="ltr" className="w-full lg:flex-1">
-          <div aria-label={t("ariaLabel")} className="mafs-canvas mx-auto w-full max-w-[380px] overflow-hidden rounded-xl">
+          <div role="group" aria-label={t("ariaLabel")} className="mafs-canvas mx-auto w-full max-w-[380px] overflow-hidden rounded-xl">
             <Mafs viewBox={{ x: [-5, 5], y: [-6, 4] }} height={220} pan={false} zoom={false} preserveAspectRatio={false}>
               <Coordinates.Cartesian xAxis={{ lines: 100 }} yAxis={{ lines: 100 }} />
               <Line.Segment point1={[0, -1]} point2={[0, 1]} color={colors.beam} weight={3} />

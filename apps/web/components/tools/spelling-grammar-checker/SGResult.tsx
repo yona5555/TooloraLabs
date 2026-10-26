@@ -124,7 +124,7 @@ export default function SGResult({ text, result, isExample, sourceLen, words, to
 
           {/* Desktop: the suggestion list fills the card's spare height and scrolls inside it (the row stays as tall as the sidebar, §41). */}
           {result.issues.length > 0 && (
-            <ul data-testid="sg-issue-list" className="space-y-1.5 text-sm lg:min-h-[6rem] lg:flex-1 lg:basis-0 lg:overflow-y-auto">
+            <ul data-testid="sg-issue-list" tabIndex={0} className="space-y-1.5 text-sm lg:min-h-[6rem] lg:flex-1 lg:basis-0 lg:overflow-y-auto">
               {result.issues.map((issue, i) => (
                 <li key={i} className="flex items-start gap-2">
                   <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full" style={{ background: TYPE_COLOR[issue.type] }} />

@@ -61,7 +61,7 @@ export default function OhmsLawResult() {
             <div key={q}>
               <dt className="text-xs font-semibold tracking-wide text-zinc-500 uppercase dark:text-zinc-400">{t(q)}</dt>
               <dd className="font-mono text-3xl font-bold text-blue-700 dark:text-blue-400">
-                {fmt(result[q])} <span className="text-lg font-semibold text-blue-500 dark:text-blue-300">{UNIT[q]}</span>
+                {fmt(result[q])} <span className="text-lg font-semibold text-blue-500 max-md:text-blue-600 dark:text-blue-300">{UNIT[q]}</span>
               </dd>
             </div>
           ))}

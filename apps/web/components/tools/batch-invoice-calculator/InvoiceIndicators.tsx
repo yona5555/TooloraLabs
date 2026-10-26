@@ -550,7 +550,7 @@ export function TaxSensitivityTrio({ invoices, overview, f }: IndicatorProps) {
 function FormulaBox({ k, v, tone }: { k: string; v: string; tone: string }) {
   return (
     <div className={`min-w-0 rounded-xl border-2 px-3 py-2 text-center ${tone}`}>
-      <p className="truncate text-[11px] font-semibold uppercase tracking-wide opacity-80">{k}</p>
+      <p className="truncate text-[11px] font-semibold uppercase tracking-wide opacity-80 max-md:opacity-100">{k}</p>
       <p dir="ltr" className="truncate font-mono text-base font-bold">{v}</p>
     </div>
   );
@@ -699,7 +699,7 @@ export function VatReferenceTable({ overview, f, onUseRate }: IndicatorProps & {
               <th className="px-2 py-2 text-end">{t("vat.rate")}</th>
               <th className="px-2 py-2 text-end">{t("vat.yourBatch")}</th>
               <th className="px-2 py-2 text-start">{t("vat.source")}</th>
-              <th className="px-2 py-2" />
+              <td className="px-2 py-2 font-bold" />
             </tr>
           </thead>
           <tbody className="divide-y divide-zinc-100 dark:divide-zinc-800">

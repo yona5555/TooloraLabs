@@ -14,7 +14,7 @@ const TOTAL = PRICE * (1 + RATE);
 function MiniBox({ label, value, colorClass }: { label: string; value: string; colorClass: string }) {
   return (
     <div className={`flex min-w-0 flex-1 flex-col items-center gap-0.5 rounded-xl px-3 py-3 text-center ${colorClass}`}>
-      <span className="text-[10px] font-medium opacity-80">{label}</span>
+      <span className="text-[10px] font-medium opacity-80 max-md:opacity-100">{label}</span>
       <span dir="ltr" className="font-mono text-sm font-bold">
         {value}
       </span>

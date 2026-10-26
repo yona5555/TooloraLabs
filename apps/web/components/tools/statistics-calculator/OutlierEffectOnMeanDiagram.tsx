@@ -39,7 +39,7 @@ export default function OutlierEffectOnMeanDiagram() {
             <p className="mt-1 font-mono text-lg font-bold text-zinc-700 dark:text-zinc-200">{round2(mean)}</p>
           </div>
           <div className="rounded-xl border border-blue-200 bg-blue-50 px-5 py-3 text-center dark:border-blue-500/30 dark:bg-blue-500/10">
-            <p className="text-xs font-semibold uppercase tracking-wide text-blue-500 dark:text-blue-400">{t("withoutLabel")}</p>
+            <p className="text-xs font-semibold uppercase tracking-wide text-blue-500 max-md:text-blue-600 dark:text-blue-400">{t("withoutLabel")}</p>
             <p className="mt-1 font-mono text-lg font-bold text-blue-700 dark:text-blue-300">{round2(withoutOutlier.data.mean)}</p>
           </div>
         </div>

@@ -29,14 +29,14 @@ export default function PopulationVsSampleVarianceEquivalence() {
       <GapFreeRow className="mt-4">
         <div dir="ltr" className="flex shrink-0 flex-wrap items-center justify-center gap-3">
           <div className="rounded-xl border border-blue-200 bg-blue-50 px-5 py-3 text-center dark:border-blue-500/30 dark:bg-blue-500/10">
-            <p className="text-xs font-semibold uppercase tracking-wide text-blue-500 dark:text-blue-400">{t("populationLabel")}</p>
+            <p className="text-xs font-semibold uppercase tracking-wide text-blue-500 max-md:text-blue-600 dark:text-blue-400">{t("populationLabel")}</p>
             <p className="mt-1 font-mono text-lg font-bold text-blue-700 dark:text-blue-300">{round3(populationVariance)}</p>
-            <p className="mt-1 text-xs text-blue-600/80 dark:text-blue-400/80">{t("divideBy", { n: count })}</p>
+            <p className="mt-1 text-xs text-blue-600/80 max-md:text-blue-600 dark:text-blue-400/80">{t("divideBy", { n: count })}</p>
           </div>
           <div className="rounded-xl border border-emerald-200 bg-emerald-50 px-5 py-3 text-center dark:border-emerald-500/30 dark:bg-emerald-500/10">
-            <p className="text-xs font-semibold uppercase tracking-wide text-emerald-500 dark:text-emerald-400">{t("sampleLabel")}</p>
+            <p className="text-xs font-semibold uppercase tracking-wide text-emerald-500 max-md:text-emerald-600 dark:text-emerald-400">{t("sampleLabel")}</p>
             <p className="mt-1 font-mono text-lg font-bold text-emerald-700 dark:text-emerald-300">{round3(sampleVariance)}</p>
-            <p className="mt-1 text-xs text-emerald-600/80 dark:text-emerald-400/80">{t("divideBy", { n: count - 1 })}</p>
+            <p className="mt-1 text-xs text-emerald-600/80 max-md:text-emerald-600 dark:text-emerald-400/80">{t("divideBy", { n: count - 1 })}</p>
           </div>
         </div>
         <WorkedExampleNote title={t("worked.title")} rows={[{ label: t("worked.difference"), value: `${round3(sampleVariance - populationVariance)}`, emphasize: true, note: t("worked.note") }]} />

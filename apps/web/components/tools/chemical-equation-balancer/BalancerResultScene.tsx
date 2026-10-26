@@ -116,9 +116,9 @@ export default function BalancerResultScene({ terms, index, onSetReaction }: { t
           <div className="absolute inset-0" dir="ltr" data-testid="bal-hero-3d">
             <Scene3D terms={terms} index={index} dragging={dragging} onProject={setProj} />
             {proj && (
-              <div data-testid="bal-hero-handle" aria-valuetext={valueText} className="absolute inset-0" style={{ pointerEvents: "none" }}>
+              <div data-testid="bal-hero-handle" className="absolute inset-0" style={{ pointerEvents: "none" }}>
                 <div className="absolute h-11 w-11 touch-none" style={{ left: proj.knob[0], top: proj.knob[1], transform: "translate(-50%, -50%)", pointerEvents: "auto" }} {...drag3d}>
-                  <GlassHandle direction="horizontal" ariaLabel={label} onStep={(d) => (d > 0 ? s.inc() : s.dec())} valueNow={value} valueMin={0} valueMax={LAST} style={{ left: 0, top: 0 }} />
+                  <GlassHandle direction="horizontal" valueText={valueText} ariaLabel={label} onStep={(d) => (d > 0 ? s.inc() : s.dec())} valueNow={value} valueMin={0} valueMax={LAST} style={{ left: 0, top: 0 }} />
                 </div>
               </div>
             )}
