@@ -3,6 +3,7 @@ import { FileText, ArrowRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import AdSpace from "./AdSpace";
+import { ADS_ENABLED } from "@/lib/ads";
 
 export default function ViewDocsLink({ slug }: { slug: string }) {
   const t = useTranslations("common");
@@ -25,8 +26,9 @@ export default function ViewDocsLink({ slug }: { slug: string }) {
           className="shrink-0 text-zinc-400 rtl:rotate-180"
         />
       </Link>
-      {/* APPROVED PHONE STANDARD ad 1: after the docs row, above the collapsed cards (display:none from 768px up). */}
-      <AdSpace variant="leaderboard" phone className="my-3" />
+      {/* APPROVED PHONE STANDARD ad 1: after the docs row, above the collapsed cards (display:none from 768px up;
+          not rendered while ads are off). */}
+      {ADS_ENABLED && <AdSpace variant="leaderboard" phone className="my-3" />}
     </>
   );
 }

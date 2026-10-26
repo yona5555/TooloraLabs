@@ -26,19 +26,6 @@ export function SiteLabel3D(props: ComponentProps<typeof Label3D>) {
   return <Label3D font={font} {...props} />;
 }
 
-/** Frees the GPU context right away on unmount (fiber's own dispose runs later on a timer). */
-function ContextReleaser() {
-  const gl = useThree((s) => s.gl);
-  useEffect(
-    () => () => {
-      gl.dispose();
-      gl.forceContextLoss();
-    },
-    [gl],
-  );
-  return null;
-}
-
 /** Narrow canvases would crop the sides: zoom out until `fitAspect` (scene width / height) fits. */
 function FitAspect({ fitAspect }: { fitAspect: number }) {
   const get = useThree((s) => s.get);
@@ -95,7 +82,6 @@ export default function DemandCanvas3D({
         gl.domElement.dataset.phLive = "1";
       }}
     >
-      <ContextReleaser />
       <FitContent />
       <PreviewReady />
       <FitAspect fitAspect={fitAspect} />

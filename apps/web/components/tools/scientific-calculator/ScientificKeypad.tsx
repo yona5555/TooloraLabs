@@ -149,7 +149,7 @@ export default function ScientificKeypad({ state, dispatch, compact = false }: S
           <span className="min-h-[1.25rem] truncate">{state.lastOperationText}</span>
         </div>
         <div
-          className={`overflow-x-auto whitespace-nowrap font-bold text-zinc-900 dark:text-zinc-50 ${compact ? "mt-0.5 text-xl" : "mt-1 text-3xl"}`}
+          className={`overflow-x-auto overflow-y-hidden whitespace-nowrap font-bold text-zinc-900 dark:text-zinc-50 ${compact ? "mt-0.5 text-xl" : "mt-1 text-3xl"}`}
           dir="ltr"
         >
           {state.errorCode ? t(`errors.${state.errorCode}`) : state.display}
