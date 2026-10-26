@@ -77,6 +77,18 @@ page-size label (text split into separate spans, same right edge).
   (components/tool-ui/three/webgl.ts) now gates them; they show `common.live3d.unavailable` (6 locales) instead.
 - Not ours: headless Chromium prints "GL Driver Message ... GPU stall due to ReadPixels" with WebGL on, also on main.
 
+## 7. Desktop lock CI fix (2026-10-26)
+- Run 40353149701 hung 50 min with no output and was cancelled (APPROVE_BASELINE was false: the label was added
+  after the push). Local cost is ~2.5s/page, so the cause was unbounded waits (evaluate without timeout,
+  uncapped scroll loop and fonts.ready, networkidle up to 180s) plus live upstream APIs. Findings:
+  scripts/output/desktop-lock-timing.txt.
+- CI set: home + 12 tools, en+ar (26 pages, ~15s locally); full 204 pages = npm run test:desktop-lock:full (108s).
+- Live data: tests/fixtures/offline-fetch.mjs preloaded into the build (npm run build:desktop-lock, .next-lock) and
+  the server the test starts itself; fixtures in tests/fixtures/live (no key values). Browser requests outside
+  the server are aborted. Every wait bounded; 30s hard cap per page. Live pages now locked in full (heights too).
+- Mac baseline: only crypto (en) and forex (en, ar) lines changed (fixture values). CI: timeout-minutes 30/20/15,
+  `labeled` trigger, per-page timing artifact.
+
 ## Next steps
 1. PR with label approve-desktop-baseline -> download the desktop-linux-baseline artifact -> commit it -> remove
    the label -> CI green.
