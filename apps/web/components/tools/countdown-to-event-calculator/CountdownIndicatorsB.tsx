@@ -129,7 +129,7 @@ export function CdZoneEquivalenceCard({ state, d }: IndicatorProps) {
             </svg>
             <div className="grid grid-cols-3 text-center text-[11px] font-semibold text-zinc-600 dark:text-zinc-300" dir="ltr">
               {parts.map((z, i) => (
-                <span key={i} className={`truncate px-1 ${paletteTextClass(z.color)}`}>{z.name}</span>
+                <span key={i} style={{ color: z.color }} className={`truncate px-1 ${paletteTextClass(z.color)}`}>{z.name}</span>
               ))}
             </div>
           </div>

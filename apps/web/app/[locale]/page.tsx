@@ -19,7 +19,7 @@ export default async function Home({ params }: HomeProps) {
   setRequestLocale(locale);
 
   return (
-    <main data-home-page data-bg="unified">
+    <main data-home-page>
       <Hero />
     </main>
   );

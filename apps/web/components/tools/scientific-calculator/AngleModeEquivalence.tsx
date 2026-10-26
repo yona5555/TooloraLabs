@@ -23,7 +23,7 @@ export default function AngleModeEquivalence() {
       <GapFreeRow className="mt-4">
         <div dir="ltr" className="grid shrink-0 grid-cols-3 gap-3">
           <div className="rounded-xl border border-blue-200 bg-blue-50 p-2 text-center sm:p-4 dark:border-blue-500/30 dark:bg-blue-500/10">
-            <p className="text-xs font-semibold uppercase hyphens-auto tracking-normal sm:tracking-wide text-blue-600 dark:text-blue-400">{t("degreesLabel")}</p>
+            <p className="text-xs font-semibold uppercase hyphens-auto tracking-normal sm:tracking-wide text-blue-500 max-md:text-blue-600 dark:text-blue-400">{t("degreesLabel")}</p>
             <p className="mt-2 font-mono text-base font-bold sm:text-lg text-blue-700 dark:text-blue-300">{`${round3(dims.angleDeg)}°`}</p>
           </div>
           <div className="rounded-xl border border-zinc-200 bg-zinc-50 p-2 text-center sm:p-4 dark:border-zinc-700 dark:bg-zinc-800/40">

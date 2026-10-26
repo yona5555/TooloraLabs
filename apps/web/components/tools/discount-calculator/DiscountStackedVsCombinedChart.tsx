@@ -32,7 +32,7 @@ export default async function DiscountStackedVsCombinedChart() {
       <p dir="ltr" className="mt-3 text-center text-sm font-semibold text-indigo-700 dark:text-indigo-300">
         {t("differenceLabel")}: ${DIFFERENCE.toFixed(2)}
       </p>
-      <p className="mt-1 text-center text-xs text-zinc-500 dark:text-zinc-400">{t("note")}</p>
+      <p className="mt-1 text-center text-xs opacity-60 max-md:text-zinc-500 max-md:dark:text-zinc-400 max-md:opacity-100">{t("note")}</p>
     </SectionCard>
   );
 }

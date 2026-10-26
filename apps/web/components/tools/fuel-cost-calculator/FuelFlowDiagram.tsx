@@ -46,8 +46,8 @@ export default function FuelFlowDiagram({ distanceLabel, fuelLabel, costLabel }:
   return (
     <div role="img" aria-label={t("ariaLabel")} className="flex w-full max-w-full flex-col items-stretch gap-2">
       <div className="flex items-stretch gap-2">
-        <InputBox icon={Route} label={t("distance")} value={distanceLabel} iconClass="text-blue-600 dark:text-blue-300" />
-        <InputBox icon={FuelIcon} label={t("fuelUsed")} value={fuelLabel} iconClass="text-indigo-600 dark:text-indigo-300" />
+        <InputBox icon={Route} label={t("distance")} value={distanceLabel} iconClass="text-blue-500 max-md:text-blue-600 dark:text-blue-300" />
+        <InputBox icon={FuelIcon} label={t("fuelUsed")} value={fuelLabel} iconClass="text-indigo-500 max-md:text-indigo-600 dark:text-indigo-300" />
       </div>
 
       <ChevronDown size={16} className="mx-auto shrink-0 text-purple-400 dark:text-purple-300" aria-hidden="true" />

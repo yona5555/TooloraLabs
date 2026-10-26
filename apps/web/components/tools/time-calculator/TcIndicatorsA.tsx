@@ -55,7 +55,7 @@ export function TcShiftDialCard({ s, set, d, f }: CardProps) {
               {(["start", "end"] as const).map((w) => (
                 <div key={w} className="flex items-center justify-center gap-1">
                   <button type="button" className={btn} onClick={() => nudge(w, -900)} aria-label="−15">−</button>
-                  <span className={`min-w-[4.5rem] font-mono font-semibold ${paletteTextClass(w === "start" ? C.add : C.main)}`}>{f.clock(w === "start" ? d.spanStart : d.spanEnd)}</span>
+                  <span className={`min-w-[4.5rem] font-mono font-semibold ${paletteTextClass(w === "start" ? C.add : C.main)}`} style={{ color: w === "start" ? C.add : C.main }}>{f.clock(w === "start" ? d.spanStart : d.spanEnd)}</span>
                   <button type="button" className={btn} onClick={() => nudge(w, 900)} aria-label="+15">+</button>
                 </div>
               ))}

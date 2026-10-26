@@ -25,9 +25,9 @@ export default function MatrixTransposeCards() {
         ))}
       </div>
       <dl className="mt-3 space-y-1 text-xs">
-        <div className="flex justify-between gap-2"><dt>det</dt><dd className="font-mono font-semibold">{f(det2(m))}</dd></div>
-        <div className="flex justify-between gap-2"><dt>tr</dt><dd className="font-mono font-semibold">{f(trace2(m))}</dd></div>
-        <div className="flex justify-between gap-2"><dt>‖·‖F</dt><dd className="font-mono font-semibold">{f(frobenius2(m))}</dd></div>
+        <div className="flex justify-between gap-2"><dt className="opacity-70 max-md:opacity-100">det</dt><dd className="font-mono font-semibold">{f(det2(m))}</dd></div>
+        <div className="flex justify-between gap-2"><dt className="opacity-70 max-md:opacity-100">tr</dt><dd className="font-mono font-semibold">{f(trace2(m))}</dd></div>
+        <div className="flex justify-between gap-2"><dt className="opacity-70 max-md:opacity-100">‖·‖F</dt><dd className="font-mono font-semibold">{f(frobenius2(m))}</dd></div>
       </dl>
     </div>
   );

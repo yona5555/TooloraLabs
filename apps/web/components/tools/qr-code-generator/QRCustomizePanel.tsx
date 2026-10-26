@@ -53,7 +53,7 @@ export default function QRCustomizePanel({
                 }`}
               >
                 <span>{level}</span>
-                <span className="mt-0.5 font-normal">{recovery}</span>
+                <span className="mt-0.5 font-normal opacity-70 max-md:opacity-100">{recovery}</span>
               </button>
             );
           })}

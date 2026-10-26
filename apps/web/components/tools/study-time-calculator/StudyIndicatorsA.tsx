@@ -78,7 +78,7 @@ export function PomodoroCycleCard({ state, setState, d }: StudyIndicatorProps) {
                 <label key={sl.k} className="block text-xs">
                   <span className="flex justify-between font-semibold text-zinc-600 dark:text-zinc-300">
                     <span>{t(`input.${sl.key}`)}</span>
-                    <span dir="ltr" className={`font-mono ${paletteTextClass(sl.color)}`}>
+                    <span dir="ltr" className={`font-mono ${paletteTextClass(sl.color)}`} style={{ color: sl.color }}>
                       {f.n(p[sl.k])}
                     </span>
                   </span>
@@ -296,7 +296,7 @@ export function ForgettingCurveCard({ d }: StudyIndicatorProps) {
               </text>
             </svg>
             <div className="mt-1 flex flex-wrap gap-x-3 text-xs text-zinc-600 dark:text-zinc-300">
-              <span className={paletteTextClass(c)}>━ {t("ind.curve.with")}</span>
+              <span style={{ color: c }} className={paletteTextClass(c)}>━ {t("ind.curve.with")}</span>
               <span className="text-zinc-400">┅ {t("ind.curve.without")}</span>
             </div>
           </div>

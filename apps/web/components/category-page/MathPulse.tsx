@@ -53,7 +53,7 @@ function factorize(n: number): [number, number][] {
 const SUP: Record<string, string> = { "0": "⁰", "1": "¹", "2": "²", "3": "³", "4": "⁴", "5": "⁵", "6": "⁶", "7": "⁷", "8": "⁸", "9": "⁹" };
 const sup = (k: number) => (k === 1 ? "" : String(k).replace(/\d/g, (c) => SUP[c]));
 
-const svg = "shrink-0 text-blue-600 dark:text-blue-400";
+const svg = "shrink-0 text-blue-500 max-md:text-blue-600 dark:text-blue-400";
 
 /** A circle of diameter d and, beside it, its circumference unrolled: a line π·d long. */
 function PiDrawing() {

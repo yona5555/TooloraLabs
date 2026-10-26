@@ -11,9 +11,6 @@ import { ToolMessagesProvider } from "@/lib/client-messages";
 import type { ToolEntryProps } from "@/components/tools/entries/types";
 import { tools } from "@/data/tools";
 import { hasCategoryPage } from "@/data/categories";
-
-/** Tools in the unified-background pilot (Yousef reviews it before it goes site-wide). */
-const UNIFIED_BG_PILOT = new Set(["mortgage-calculator"]);
 import { SITE_URL } from "@/lib/site";
 
 export async function toolPageMetadata(locale: string, slug: string): Promise<Metadata> {
@@ -247,7 +244,6 @@ export async function ToolPageView({
         contentWidth={isAboveFoldLayout ? "wide" : "default"}
         compact={isAboveFoldLayout}
         backText={tcommon("back")}
-        unifiedBg={UNIFIED_BG_PILOT.has(slug)}
       >
         {component}
       </ToolPageLayout>

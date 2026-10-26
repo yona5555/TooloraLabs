@@ -18,11 +18,11 @@ export default function DecimalPlacesVsSigFigsComparison() {
       <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
         <div dir="ltr" className="grid shrink-0 grid-cols-2 gap-3">
           <div className="rounded-xl border border-blue-200 bg-blue-50 p-4 text-center dark:border-blue-500/30 dark:bg-blue-500/10">
-            <p className="text-xs font-semibold uppercase tracking-wide text-blue-600 dark:text-blue-400">{t("decimalPlacesLabel")}</p>
+            <p className="text-xs font-semibold uppercase tracking-wide text-blue-500 max-md:text-blue-600 dark:text-blue-400">{t("decimalPlacesLabel")}</p>
             <p className="mt-2 font-mono text-2xl font-bold text-blue-700 dark:text-blue-300">{decimalPlaces}</p>
           </div>
           <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-center dark:border-emerald-500/30 dark:bg-emerald-500/10">
-            <p className="text-xs font-semibold uppercase tracking-wide text-emerald-600 dark:text-emerald-400">{t("sigFigsLabel")}</p>
+            <p className="text-xs font-semibold uppercase tracking-wide text-emerald-500 max-md:text-emerald-600 dark:text-emerald-400">{t("sigFigsLabel")}</p>
             <p className="mt-2 font-mono text-2xl font-bold text-emerald-700 dark:text-emerald-300">{sigFigs}</p>
           </div>
         </div>

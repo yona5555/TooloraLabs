@@ -189,7 +189,7 @@ export default function ProgrammerCalculator() {
             </button>
           );
         })}
-        <button type="button" onClick={pressClear} className="col-span-4 mt-0.5 rounded-lg bg-amber-500 py-2 text-xs font-semibold text-zinc-950 shadow-[0_3px_0_rgba(180,83,9,0.9)] transition hover:bg-amber-400 active:translate-y-px active:shadow-none">
+        <button type="button" onClick={pressClear} className="col-span-4 mt-0.5 rounded-lg bg-amber-500 py-2 text-xs font-semibold text-white max-md:text-zinc-950 shadow-[0_3px_0_rgba(180,83,9,0.9)] transition hover:bg-amber-400 active:translate-y-px active:shadow-none">
           {tHome("buttons.clearAll")}
         </button>
       </div>

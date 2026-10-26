@@ -24,7 +24,7 @@ export default function MatrixCompositionFlow() {
     <div className={`min-w-[96px] rounded-xl border px-3 py-2 text-center ${tone}`}>
       <p className="text-xs font-semibold">{label}</p>
       <p className="font-mono text-sm font-bold">{point}</p>
-      <p className="font-mono text-[11px]">{area}</p>
+      <p className="font-mono text-[11px] opacity-80 max-md:opacity-100">{area}</p>
     </div>
   );
   const arrow = (m: string) => (

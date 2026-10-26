@@ -252,7 +252,7 @@ export function TcRoundingTrioCard({ s, set, d, f }: CardProps) {
                       <line x1={50} x2={50} y1={2} y2={34} stroke="currentColor" strokeOpacity={0.35} />
                       <rect x={diff < 0 ? 50 - (Math.abs(diff) / maxDiff) * 46 : 50} y={10} width={Math.max(1, (Math.abs(diff) / maxDiff) * 46)} height={16} rx={3} fill={colors[m]} style={{ transition: "all 300ms ease" }} />
                     </svg>
-                    <p dir="ltr" className={`text-xs font-bold ${paletteTextClass(colors[m])}`}>{f.signedDur(diff).replace(/:00$/, "")}</p>
+                    <p dir="ltr" className={`text-xs font-bold ${paletteTextClass(colors[m])}`} style={{ color: colors[m] }}>{f.signedDur(diff).replace(/:00$/, "")}</p>
                   </button>
                 );
               })}

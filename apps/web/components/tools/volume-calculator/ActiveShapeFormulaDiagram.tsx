@@ -44,7 +44,7 @@ export default function ActiveShapeFormulaDiagram() {
             <span key={i} className="flex items-center gap-2">
               {i > 0 && <span className="text-lg font-bold text-zinc-400">{spec.joiner}</span>}
               <span className="rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 text-center dark:border-blue-500/30 dark:bg-blue-500/10">
-                <span className="block text-xs font-semibold uppercase tracking-wide text-blue-600 dark:text-blue-400">{c.label}</span>
+                <span className="block text-xs font-semibold uppercase tracking-wide text-blue-500 max-md:text-blue-600 dark:text-blue-400">{c.label}</span>
                 <span className="block font-mono text-lg font-bold text-blue-700 dark:text-blue-300">{c.value}</span>
               </span>
             </span>

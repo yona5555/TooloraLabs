@@ -26,7 +26,7 @@ export default function VectorDotFormulaDiagram() {
           {axes.map((ax, i) => (
             <Fragment key={ax}>
               <div className={`min-w-[78px] rounded-xl border px-2 py-2 text-center ${TERM_STYLES[i]}`}>
-                <p className="font-mono text-[11px]">a{ax}·b{ax}</p>
+                <p className="font-mono text-[11px] opacity-80 max-md:opacity-100">a{ax}·b{ax}</p>
                 <p className="font-mono text-xs">{n(r.a[i])} × {n(r.b[i])}</p>
                 <p className="mt-0.5 font-mono text-base font-bold">{f(r.dotTerms[i])}</p>
               </div>
