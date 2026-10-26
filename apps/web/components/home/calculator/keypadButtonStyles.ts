@@ -27,7 +27,7 @@ export const KEYPAD_VARIANT_CLASSES: Record<KeypadVariant, string> = {
   function:
     "border border-zinc-200 bg-zinc-100 text-zinc-700 shadow-[0_2px_0_rgba(0,0,0,0.06)] hover:bg-zinc-200 active:translate-y-px active:shadow-none calcdark:border-zinc-700 calcdark:bg-zinc-800 calcdark:text-zinc-300 calcdark:shadow-[0_2px_0_rgba(0,0,0,0.35)] calcdark:hover:bg-zinc-700",
   clear:
-    "bg-amber-500 text-white shadow-[0_3px_0_rgba(180,83,9,0.9)] hover:bg-amber-400 active:translate-y-px active:shadow-[0_1px_0_rgba(180,83,9,0.9)] calcdark:bg-amber-500 calcdark:shadow-[0_3px_0_rgba(120,53,15,1)] calcdark:hover:bg-amber-400",
+    "bg-amber-500 text-zinc-950 shadow-[0_3px_0_rgba(180,83,9,0.9)] hover:bg-amber-400 active:translate-y-px active:shadow-[0_1px_0_rgba(180,83,9,0.9)] calcdark:bg-amber-500 calcdark:shadow-[0_3px_0_rgba(120,53,15,1)] calcdark:hover:bg-amber-400",
   delete:
     "bg-red-500 text-white shadow-[0_3px_0_rgba(185,28,28,0.9)] hover:bg-red-400 active:translate-y-px active:shadow-[0_1px_0_rgba(185,28,28,0.9)] calcdark:bg-red-500 calcdark:shadow-[0_3px_0_rgba(127,29,29,1)] calcdark:hover:bg-red-400",
   equals:

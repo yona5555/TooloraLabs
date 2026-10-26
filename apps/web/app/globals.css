@@ -126,134 +126,97 @@ body:has([data-coming-soon-page]),
   --bp-glow: rgba(255, 255, 255, 0.5);
 }
 
-/* ---- text color tokens: WCAG AA ----
- * The light surfaces above are tinted, so Tailwind's gray text and 600/700 text hues (made for white)
- * fall under 4.5:1. Each variant darkens only the tokens that fail on its own surfaces (--bp-base/
- * panel/inner/key and the blue-50/100 tints), by the smallest oklch lightness step that reaches 4.5:1;
- * chroma and hue are kept. Dark mode lifts zinc-500 the same way. The home calculator keeps its own
- * theme: .calc-light (site dark, calculator light) takes the light set, .calc-dark (site light,
- * calculator dark) takes the dark set. Yousef approved the contrast color fix (2026-10-26). */
-:where(html:not(.dark)) body,
-.dark .calc-light {
-  --color-zinc-400: oklch(51.5% 0.015 286.067); /* #9f9fa9 -> #666670 */
-  --color-zinc-500: oklch(51.5% 0.016 285.938); /* #71717b -> #666671 */
-  --color-red-600: oklch(52.1% 0.245 27.325); /* #e7000b -> #d20000 */
-  --color-orange-600: oklch(53.7% 0.222 41.116); /* #f54900 -> #cd1800 */
-  --color-orange-700: oklch(53.6% 0.195 38.402); /* #ca3500 -> #c42e00 */
-  --color-amber-600: oklch(52.6% 0.179 58.318); /* #e17100 -> #b14500 */
-  --color-amber-700: oklch(52.8% 0.163 48.998); /* #bb4d00 -> #b14400 */
-  --color-yellow-600: oklch(51.8% 0.162 75.834); /* #d08700 -> #9b5500 */
-  --color-yellow-700: oklch(52.1% 0.135 66.442); /* #a65f00 -> #9b5500 */
-  --color-lime-600: oklch(49.8% 0.2 131.684); /* #5ea500 -> #327600 */
-  --color-lime-700: oklch(50.2% 0.157 131.589); /* #497d00 -> #407400 */
-  --color-green-600: oklch(48.4% 0.194 149.214); /* #00a63e -> #007904 */
-  --color-green-700: oklch(49.5% 0.154 150.069); /* #008236 -> #00782c */
-  --color-emerald-600: oklch(48.7% 0.145 163.225); /* #009966 -> #007747 */
-  --color-emerald-700: oklch(49.6% 0.118 165.612); /* #007a55 -> #007652 */
-  --color-teal-600: oklch(48.9% 0.118 184.704); /* #009689 -> #007469 */
-  --color-teal-700: oklch(50% 0.096 186.391); /* #00786f -> #00746c */
-  --color-cyan-600: oklch(49.4% 0.126 221.723); /* #0092b8 -> #006f94 */
-  --color-cyan-700: oklch(50.4% 0.105 223.128); /* #007595 -> #007090 */
-  --color-sky-600: oklch(50.5% 0.158 241.966); /* #0084d1 -> #006ab6 */
-  --color-blue-600: oklch(53% 0.245 262.881); /* #155dfc -> #0f57f6 */
-  --color-purple-600: oklch(55.5% 0.288 302.321); /* #9810fa -> #970cf9 */
-  --color-fuchsia-600: oklch(52.8% 0.293 322.896); /* #c800de -> #b200c9 */
-  --color-pink-600: oklch(52.3% 0.249 0.584); /* #e60076 -> #cc0062 */
-  --color-rose-600: oklch(51.1% 0.253 17.585); /* #ec003f -> #d0002a */
+/* ---- unified background pilot ----
+ * Pages whose <main> carries data-bg="unified" (home, mortgage-calculator) drop the tinted variants and the
+ * grid: one neutral light page (#f7f8fa) with white cards, one dark page (#101827) with slightly lighter
+ * cards, neutral borders. The category color (--cat, from data-bg-cat) shows only in details: the card
+ * header strip, filled action buttons and active borders. Text stays neutral. Colors only: no size changes. */
+body:has([data-bg="unified"]),
+body:has([data-bg="unified"]) [data-bp-nav] {
+  --bp-base: #f7f8fa;
+  --bp-minor: transparent;
+  --bp-major: transparent;
+  --bp-edge: #d0d5dd;
+  --bp-glow: #667085;
+  --bp-heading: #a36a12;
+  --bp-link: #27272a;
+  --bp-strong: #09090b;
+  --bp-accent: #1d4ed8;
+  --bp-panel: #ffffff;
+  --bp-inner: #f2f4f7;
+  --bp-key: #ffffff;
+  --bp-frame: #d0d5dd;
+  --bp-divider: #e4e7ec;
+  --bp-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
 }
-:where(html:not(.dark)) body:has([data-categories-page]) {
-  --color-zinc-400: oklch(50.8% 0.015 286.067); /* #9f9fa9 -> #64646e */
-  --color-zinc-500: oklch(50.8% 0.016 285.938); /* #71717b -> #64646f */
-  --color-red-600: oklch(50.8% 0.245 27.325); /* #e7000b -> #cd0000 */
-  --color-orange-600: oklch(52.9% 0.222 41.116); /* #f54900 -> #ca1200 */
-  --color-orange-700: oklch(52.9% 0.195 38.402); /* #ca3500 -> #c12b00 */
-  --color-amber-600: oklch(51.9% 0.179 58.318); /* #e17100 -> #af4200 */
-  --color-amber-700: oklch(52.2% 0.163 48.998); /* #bb4d00 -> #af4200 */
-  --color-yellow-600: oklch(51.2% 0.162 75.834); /* #d08700 -> #995300 */
-  --color-yellow-700: oklch(51.5% 0.135 66.442); /* #a65f00 -> #995400 */
-  --color-lime-600: oklch(49% 0.2 131.684); /* #5ea500 -> #2f7400 */
-  --color-lime-700: oklch(49.6% 0.157 131.589); /* #497d00 -> #3f7200 */
-  --color-green-600: oklch(47.5% 0.194 149.214); /* #00a63e -> #007600 */
-  --color-green-700: oklch(48.5% 0.154 150.069); /* #008236 -> #007529 */
-  --color-emerald-600: oklch(47.7% 0.145 163.225); /* #009966 -> #007444 */
-  --color-emerald-700: oklch(48.9% 0.118 165.612); /* #007a55 -> #007450 */
-  --color-teal-600: oklch(48.2% 0.118 184.704); /* #009689 -> #007267 */
-  --color-teal-700: oklch(49.3% 0.096 186.391); /* #00786f -> #00726a */
-  --color-cyan-600: oklch(48.7% 0.126 221.723); /* #0092b8 -> #006d92 */
-  --color-cyan-700: oklch(49.7% 0.105 223.128); /* #007595 -> #006e8e */
-  --color-sky-600: oklch(49.5% 0.158 241.966); /* #0084d1 -> #0067b2 */
-  --color-blue-600: oklch(52.4% 0.245 262.881); /* #155dfc -> #0d55f4 */
-  --color-purple-600: oklch(54.7% 0.288 302.321); /* #9810fa -> #9501f6 */
-  --color-fuchsia-600: oklch(51.6% 0.293 322.896); /* #c800de -> #ae00c5 */
-  --color-pink-600: oklch(51.2% 0.249 0.584); /* #e60076 -> #c8005f */
-  --color-rose-600: oklch(50% 0.253 17.585); /* #ec003f -> #cc0026 */
+.dark body:has([data-bg="unified"]),
+.dark body:has([data-bg="unified"]) [data-bp-nav] {
+  --bp-base: #101827;
+  --bp-minor: transparent;
+  --bp-major: transparent;
+  --bp-edge: #2f3b50;
+  --bp-glow: #8a9ab5;
+  --bp-heading: #f2c46d;
+  --bp-link: #e4e4e7;
+  --bp-strong: #ffffff;
+  --bp-accent: #60a5fa;
+  --bp-panel: #172133;
+  --bp-inner: #1e2a3f;
+  --bp-frame: #2f3b50;
+  --bp-divider: #253147;
 }
-:where(html:not(.dark)) body:has([data-coming-soon-page]) {
-  --color-zinc-400: oklch(48.6% 0.015 286.067); /* #9f9fa9 -> #5e5e68 */
-  --color-zinc-500: oklch(48.7% 0.016 285.938); /* #71717b -> #5e5e69 */
-  --color-red-600: oklch(47.5% 0.245 27.325); /* #e7000b -> #c10000 */
-  --color-orange-600: oklch(50.4% 0.222 41.116); /* #f54900 -> #c10000 */
-  --color-orange-700: oklch(50.6% 0.195 38.402); /* #ca3500 -> #b92100 */
-  --color-amber-600: oklch(49.6% 0.179 58.318); /* #e17100 -> #a73b00 */
-  --color-amber-700: oklch(49.8% 0.163 48.998); /* #bb4d00 -> #a73b00 */
-  --color-yellow-600: oklch(49% 0.162 75.834); /* #d08700 -> #924d00 */
-  --color-yellow-700: oklch(49.3% 0.135 66.442); /* #a65f00 -> #924d00 */
-  --color-lime-600: oklch(46.8% 0.2 131.684); /* #5ea500 -> #296d00 */
-  --color-lime-700: oklch(47.2% 0.157 131.589); /* #497d00 -> #386b00 */
-  --color-green-600: oklch(45.2% 0.194 149.214); /* #00a63e -> #006f00 */
-  --color-green-700: oklch(46.2% 0.154 150.069); /* #008236 -> #006e22 */
-  --color-emerald-600: oklch(45.4% 0.145 163.225); /* #009966 -> #006d3e */
-  --color-emerald-700: oklch(46.5% 0.118 165.612); /* #007a55 -> #006d49 */
-  --color-teal-600: oklch(45.8% 0.118 184.704); /* #009689 -> #006b60 */
-  --color-teal-700: oklch(47% 0.096 186.391); /* #00786f -> #006b63 */
-  --color-cyan-600: oklch(46.4% 0.126 221.723); /* #0092b8 -> #00668b */
-  --color-cyan-700: oklch(47.3% 0.105 223.128); /* #007595 -> #006786 */
-  --color-sky-600: oklch(47.2% 0.158 241.966); /* #0084d1 -> #0060ab */
-  --color-sky-700: oklch(47.8% 0.134 242.749); /* #0069a8 -> #0062a1 */
-  --color-blue-600: oklch(50.2% 0.245 262.881); /* #155dfc -> #044dec */
-  --color-violet-600: oklch(52.2% 0.281 293.009); /* #7f22fe -> #7a14f7 */
-  --color-purple-600: oklch(51.1% 0.288 302.321); /* #9810fa -> #8a00e9 */
-  --color-fuchsia-600: oklch(48.4% 0.293 322.896); /* #c800de -> #a300ba */
-  --color-fuchsia-700: oklch(51% 0.253 323.949); /* #a800b7 -> #a500b4 */
-  --color-pink-600: oklch(48% 0.249 0.584); /* #e60076 -> #bc0056 */
-  --color-pink-700: oklch(49.7% 0.223 3.958); /* #c6005c -> #bc0054 */
-  --color-rose-600: oklch(47% 0.253 17.585); /* #ec003f -> #c1001d */
-  --color-rose-700: oklch(49.7% 0.222 16.935); /* #c70036 -> #c00031 */
+body:has([data-bg="unified"]) {
+  background-image: none;
+  background-attachment: scroll;
 }
-.dark body,
-:where(html:not(.dark)) .calc-dark {
-  --color-zinc-500: oklch(64.6% 0.016 285.938); /* #71717b -> #8d8d98 */
+[data-bg="unified"] {
+  --cat: var(--color-blue-600);
 }
-:where(html:not(.dark)) .calc-dark {
-  --color-zinc-400: oklch(70.5% 0.015 286.067);
-  --color-red-600: oklch(57.7% 0.245 27.325);
-  --color-orange-600: oklch(64.6% 0.222 41.116);
-  --color-orange-700: oklch(55.3% 0.195 38.402);
-  --color-amber-600: oklch(66.6% 0.179 58.318);
-  --color-amber-700: oklch(55.5% 0.163 48.998);
-  --color-yellow-600: oklch(68.1% 0.162 75.834);
-  --color-yellow-700: oklch(55.4% 0.135 66.442);
-  --color-lime-600: oklch(64.8% 0.2 131.684);
-  --color-lime-700: oklch(53.2% 0.157 131.589);
-  --color-green-600: oklch(62.7% 0.194 149.214);
-  --color-green-700: oklch(52.7% 0.154 150.069);
-  --color-emerald-600: oklch(59.6% 0.145 163.225);
-  --color-emerald-700: oklch(50.8% 0.118 165.612);
-  --color-teal-600: oklch(60% 0.118 184.704);
-  --color-teal-700: oklch(51.1% 0.096 186.391);
-  --color-cyan-600: oklch(60.9% 0.126 221.723);
-  --color-cyan-700: oklch(52% 0.105 223.128);
-  --color-sky-600: oklch(58.8% 0.158 241.966);
-  --color-blue-600: oklch(54.6% 0.245 262.881);
-  --color-purple-600: oklch(55.8% 0.288 302.321);
-  --color-fuchsia-600: oklch(59.1% 0.293 322.896);
-  --color-pink-600: oklch(59.2% 0.249 0.584);
-  --color-rose-600: oklch(58.6% 0.253 17.585);
-  --color-sky-700: oklch(50% 0.134 242.749);
-  --color-violet-600: oklch(54.1% 0.281 293.009);
-  --color-fuchsia-700: oklch(51.8% 0.253 323.949);
-  --color-pink-700: oklch(52.5% 0.223 3.958);
-  --color-rose-700: oklch(51.4% 0.222 16.935);
+[data-bg="unified"][data-bg-cat="financial-calculators"] {
+  --cat: var(--color-emerald-700);
+}
+[data-bg="unified"] [data-card-header],
+[data-bg="unified"] :is(button, a, [role="tab"]).bg-blue-600 {
+  background-color: var(--cat);
+}
+[data-bg="unified"] :is(button, a, [role="tab"]).bg-blue-600:hover {
+  background-color: color-mix(in oklab, var(--cat) 85%, black);
+}
+[data-bg="unified"] :is(button, a, [role="tab"], input, select):is(.border-blue-500, .border-blue-600, :focus-visible) {
+  border-color: var(--cat);
+}
+/* AA text on the neutral surfaces: the grays (#71717b / #9f9fa9 fall under 4.5:1 on #f2f4f7 / white and
+   #71717b on #172133) and the wordmark blue; the site header and footer bars turn neutral too. */
+:where(html:not(.dark)) body:has([data-bg="unified"]) {
+  --color-zinc-400: #6d6d77;
+  --color-zinc-500: #6d6d77;
+}
+.dark body:has([data-bg="unified"]) {
+  --color-zinc-500: #9494a0;
+}
+/* the home calculator keeps its own theme: light grays in .calc-light, dark grays in .calc-dark */
+.dark body:has([data-bg="unified"]) .calc-light {
+  --color-zinc-400: #6d6d77;
+  --color-zinc-500: #6d6d77;
+}
+:where(html:not(.dark)) body:has([data-bg="unified"]) .calc-dark {
+  --color-zinc-400: #9f9fa9;
+  --color-zinc-500: #9494a0;
+}
+body:has([data-bg="unified"]) .text-\[\#5170ff\]:not(:where(.dark *)) {
+  color: #4560f2;
+}
+body:has([data-bg="unified"]) [data-site-bar] {
+  border-color: var(--bp-frame);
+  background-color: color-mix(in srgb, var(--bp-base) 85%, transparent);
+}
+/* dark cards, inner boxes and frames take the dark surfaces (light ones map through the rules below) */
+.dark [data-bg="unified"] :is([data-bp-panel], .dark\:bg-zinc-900):not(:where(.calc-light, .calc-light *, .calc-dark, .calc-dark *)) {
+  background-color: var(--bp-panel);
+  border-color: var(--bp-frame);
+}
+.dark [data-bg="unified"] :is(.dark\:bg-zinc-800, .dark\:bg-zinc-800\/50, [data-bp-inner]):not(:where(.calc-light, .calc-light *, .calc-dark, .calc-dark *)) {
+  background-color: var(--bp-inner);
 }
 
 /* ---- page background (fixed) and Browse dropdown (same palette, grid scrolls with the panel) ---- */
@@ -740,6 +703,10 @@ body:has([data-coming-soon-page]) [data-bp-link="coming-soon"] {
   .dark main[data-phone-cards] {
     --phone-column: var(--color-zinc-950);
     border-color: rgb(59 130 246 / 0.3);
+  }
+  .dark main[data-phone-cards][data-bg="unified"] {
+    --phone-column: var(--bp-base);
+    border-color: var(--bp-frame);
   }
   [data-phone-cards] [data-section-nav] {
     inset-inline: 10px;

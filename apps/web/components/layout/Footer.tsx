@@ -16,7 +16,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="border-t border-blue-200/70 bg-blue-100/80 backdrop-blur-xl dark:border-blue-500/30 dark:bg-blue-950/60">
+    <footer data-site-bar="" className="border-t border-blue-200/70 bg-blue-100/80 backdrop-blur-xl dark:border-blue-500/30 dark:bg-blue-950/60">
       <div className="mx-auto flex max-w-7xl flex-col items-stretch justify-between gap-6 px-6 py-10 max-md:gap-3 md:flex-row md:items-center">
         {/* Phone: rows sit 24px apart text-to-text (gap-6 here; gap-3 + the 44px links' own 12px
             padding below). The wordmark is English, so it stays at the left edge on every locale

@@ -11,7 +11,7 @@ export default function Navbar() {
   const t = useTranslations("navbar");
 
   return (
-    <header className="sticky top-0 z-50 border-b border-blue-200/70 bg-blue-100/80 backdrop-blur-xl dark:border-blue-500/30 dark:bg-blue-950/60">
+    <header data-site-bar="" className="sticky top-0 z-50 border-b border-blue-200/70 bg-blue-100/80 backdrop-blur-xl dark:border-blue-500/30 dark:bg-blue-950/60">
       <div className="relative mx-auto flex h-18 max-w-7xl items-center justify-between gap-2 px-3 md:px-6">
         <Link href="/" aria-label={t("logoLabel")} className="flex min-w-0 items-center">
           {/* eslint-disable-next-line @next/next/no-img-element */}

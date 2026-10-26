@@ -17,6 +17,8 @@ type ToolPageLayoutProps = {
   compact?: boolean;
   /** APPROVED PHONE STANDARD: the labeled back button's text below 768px ("Back"). */
   backText: string;
+  /** Unified-background pilot (globals.css `[data-bg="unified"]`): neutral page, category color in details. */
+  unifiedBg?: boolean;
 };
 
 export default function ToolPageLayout({
@@ -29,12 +31,13 @@ export default function ToolPageLayout({
   contentWidth = "default",
   compact = false,
   backText,
+  unifiedBg = false,
 }: ToolPageLayoutProps) {
   const maxWidthClass = contentWidth === "wide" ? "max-w-6xl" : "max-w-5xl";
 
   if (compact) {
     return (
-      <main data-phone-cards="" data-phone-markets={categorySlug === "financial-markets" ? "" : undefined} suppressHydrationWarning className={`mx-auto ${maxWidthClass} px-4 py-6 lg:px-6`}>
+      <main data-phone-cards="" data-phone-markets={categorySlug === "financial-markets" ? "" : undefined} data-bg={unifiedBg ? "unified" : undefined} data-bg-cat={unifiedBg ? categorySlug : undefined} suppressHydrationWarning className={`mx-auto ${maxWidthClass} px-4 py-6 lg:px-6`}>
         <div className="flex items-center gap-3">
           <BackButton href={categoryHref(categorySlug)} label={backLabel} size={20} className="h-11 w-11" phoneText={backText} />
 
@@ -57,7 +60,7 @@ export default function ToolPageLayout({
   }
 
   return (
-    <main data-phone-cards="" data-phone-markets={categorySlug === "financial-markets" ? "" : undefined} suppressHydrationWarning className={`mx-auto ${maxWidthClass} px-4 py-10 sm:px-6 lg:py-20`}>
+    <main data-phone-cards="" data-phone-markets={categorySlug === "financial-markets" ? "" : undefined} data-bg={unifiedBg ? "unified" : undefined} data-bg-cat={unifiedBg ? categorySlug : undefined} suppressHydrationWarning className={`mx-auto ${maxWidthClass} px-4 py-10 sm:px-6 lg:py-20`}>
       <span className="block w-fit rounded-full bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-600 dark:bg-blue-500/10 dark:text-blue-400">
         {category}
       </span>
