@@ -8,21 +8,33 @@ on:
     # labeled: adding an approve-*-baseline label starts a run that sees it (labels are read from the
     # event, so a label added after the last push is otherwise ignored until the next push).
     types: [opened, synchronize, reopened, labeled]
+  # commit-baselines starts this after it pushes an approved baseline: a push made with GITHUB_TOKEN starts no
+  # workflow, so the dispatch is what runs the required checks on the new head commit.
+  workflow_dispatch:
+
+# Read-only by default; only commit-baselines is elevated, and it runs no code from the PR.
+permissions:
+  contents: read
 
 jobs:
   build:
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
-      - uses: actions/setup-node@v7
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: .nvmrc
           cache: npm
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Audit dependencies (any severity fails)
+        run: npm audit --audit-level=low
 
       - name: Lint
         run: npm run lint --workspace=apps/web
@@ -58,7 +70,7 @@ jobs:
         working-directory: apps/web
         run: |
           npx next start -p 3001 > /tmp/next.log 2>&1 &
-          for i in $(seq 1 60); do curl -sf -o /dev/null http://localhost:3001/en/tools && break; sleep 2; done
+          for _ in $(seq 1 60); do curl -sf -o /dev/null http://localhost:3001/en/tools && break; sleep 2; done
           npm run test:cards
           node ../../tests/phone-card-order.mjs --ids http://localhost:3001 en
 
@@ -67,14 +79,16 @@ jobs:
   # its own baseline: tests/baselines/home-phone.json (macOS, local) and home-phone.linux.json (this runner).
   # Runner moved from macOS to Ubuntu with Yousef's approval (2026-10-25).
   # The PR label "approve-home-phone-baseline" is the CI form of --approve: it rewrites the Linux
-  # baseline and uploads it as an artifact to be reviewed and committed.
+  # baseline and uploads it; commit-baselines commits it to the PR branch.
   home-phone-lock:
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
-      - uses: actions/setup-node@v7
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: .nvmrc
           cache: npm
@@ -92,7 +106,7 @@ jobs:
         working-directory: apps/web
         run: |
           npx next start -p 3001 > /tmp/next.log 2>&1 &
-          for i in $(seq 1 60); do curl -sf -o /dev/null http://localhost:3001/en && break; sleep 2; done
+          for _ in $(seq 1 60); do curl -sf -o /dev/null http://localhost:3001/en && break; sleep 2; done
           cd ../..
           if [ "$APPROVE_BASELINE" = "true" ]; then npm run baseline:home-phone -- --approve; fi
           npm run test:home-phone
@@ -101,7 +115,7 @@ jobs:
 
       - name: Upload the rewritten Linux baseline
         if: contains(github.event.pull_request.labels.*.name, 'approve-home-phone-baseline')
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: home-phone-linux-baseline
           path: tests/baselines/home-phone.linux.json
@@ -112,14 +126,16 @@ jobs:
   # tests/fixtures/live (tests/fixtures/offline-fetch.mjs), so no page waits on the network and every wait is
   # bounded. Same OS split as the phone lock: tests/baselines/desktop.json (macOS, local) and
   # desktop.linux.json (this runner). The PR label "approve-desktop-baseline" is the CI form of --approve: it
-  # rewrites the Linux baseline and uploads it as an artifact to be reviewed and committed.
+  # rewrites the Linux baseline and uploads it; commit-baselines commits it to the PR branch.
   desktop-lock:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
-      - uses: actions/setup-node@v7
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: .nvmrc
           cache: npm
@@ -142,7 +158,7 @@ jobs:
 
       - name: Upload the per-page timing
         if: always()
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: desktop-lock-timing
           path: desktop-lock-timing.txt
@@ -150,7 +166,64 @@ jobs:
 
       - name: Upload the rewritten Linux baseline
         if: contains(github.event.pull_request.labels.*.name, 'approve-desktop-baseline')
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: desktop-linux-baseline
           path: tests/baselines/desktop.linux.json
+
+  # The approve-*-baseline labels: commit the rewritten Linux baselines to the PR branch, remove the labels and
+  # rerun CI on the new head. Same-repository PRs only (a fork's token is read-only anyway). This job never runs
+  # code from the PR: it checks out the head commit only to add the two JSON files that the lock jobs uploaded.
+  commit-baselines:
+    needs: [home-phone-lock, desktop-lock]
+    if: >-
+      github.event_name == 'pull_request' &&
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      (contains(github.event.pull_request.labels.*.name, 'approve-desktop-baseline') ||
+      contains(github.event.pull_request.labels.*.name, 'approve-home-phone-baseline'))
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      pull-requests: write
+      actions: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          pattern: "*-linux-baseline"
+          path: ${{ runner.temp }}/baselines
+
+      - name: Commit the approved baselines, remove the labels, rerun CI
+        env:
+          GH_TOKEN: ${{ github.token }}
+          HEAD_REF: ${{ github.event.pull_request.head.ref }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          APPROVE_DESKTOP: ${{ contains(github.event.pull_request.labels.*.name, 'approve-desktop-baseline') }}
+          APPROVE_PHONE: ${{ contains(github.event.pull_request.labels.*.name, 'approve-home-phone-baseline') }}
+        run: |
+          cp "$RUNNER_TEMP"/baselines/*/*.linux.json tests/baselines/
+          git add tests/baselines/*.linux.json
+          if git diff --cached --quiet; then
+            echo "The Linux baselines are unchanged; nothing to commit."
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "test: commit the approved Linux baseline from CI" -m "Rewritten by the approve-*-baseline label on PR #$PR_NUMBER."
+            # Pushes the head commit it was measured on: if the branch moved meanwhile, the push is rejected.
+            AUTH=$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 -w0)
+            echo "::add-mask::$AUTH"
+            git -c "http.https://github.com/.extraheader=AUTHORIZATION: basic $AUTH" \
+              push "https://github.com/$GITHUB_REPOSITORY.git" "HEAD:refs/heads/$HEAD_REF"
+            gh workflow run ci.yml --repo "$GITHUB_REPOSITORY" --ref "$HEAD_REF"
+          fi
+          if [ "$APPROVE_DESKTOP" = "true" ]; then
+            gh api -X DELETE "repos/$GITHUB_REPOSITORY/issues/$PR_NUMBER/labels/approve-desktop-baseline" > /dev/null
+          fi
+          if [ "$APPROVE_PHONE" = "true" ]; then
+            gh api -X DELETE "repos/$GITHUB_REPOSITORY/issues/$PR_NUMBER/labels/approve-home-phone-baseline" > /dev/null
+          fi
