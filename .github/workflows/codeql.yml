@@ -39,3 +39,27 @@ jobs:
       - uses: github/codeql-action/analyze@9b3254085494b55a0f7c4c2b3d2d52cc712ce370 # v4.39.1
         with:
           category: /language:${{ matrix.language }}
+
+  # Required check: both Analyze jobs left no warning or failure annotation; the same fail-on-warning gate as ci.yml's zero-warnings (scripts/zero-warnings.sh).
+  codeql-zero-warnings:
+    needs: [analyze]
+    if: always()
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      checks: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          sparse-checkout: scripts/zero-warnings.sh
+          sparse-checkout-cone-mode: false
+
+      - name: No warning or failure annotation in this run
+        env:
+          GH_TOKEN: ${{ github.token }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          NEEDS_JSON: ${{ toJSON(needs) }}
+          SELF: codeql-zero-warnings
+        run: scripts/zero-warnings.sh

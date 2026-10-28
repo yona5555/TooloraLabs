@@ -36,7 +36,8 @@ TooloraLabs-Claude-Instructions.md is a historical archive; the binding rules ar
 - Never print secrets in any output, report, command or log: API keys, tokens, passwords, webhook/IPN secrets, private keys, connection strings, or values from .env* files. Refer to them by variable NAME only and mask the value (e.g. METALPRICE_API_KEY=****). Never cat or echo .env* files. Never commit secrets.
 
 ## Supply chain
-- Required checks on main (strict): build, home-phone-lock, desktop-lock, audit, Analyze (javascript-typescript), Analyze (actions).
+- Required checks on main (strict): build, home-phone-lock, desktop-lock, audit, Analyze (javascript-typescript), Analyze (actions),
+  zero-warnings, audit-zero-warnings, codeql-zero-warnings (the last three run scripts/zero-warnings.sh).
 - Dependabot (weekly, Mon 06:00 Riyadh, 7-day cooldown; security updates immediate): minor/patch and security
   minor/patch get auto-merge (dependabot-automerge.yml, App token) and merge only after every required check
   passes. Majors are never auto-merged: labelled major-update, reviewed one at a time.

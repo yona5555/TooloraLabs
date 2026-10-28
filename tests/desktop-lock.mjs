@@ -15,6 +15,8 @@
 // preloaded: every external fetch (prices, rates, weather, hazards) is answered from tests/fixtures/live,
 // so no page waits on the network and live values never move the layout. Every wait is bounded (10s load,
 // 10s network idle, ~5s settling, 30s hard cap per page): a stuck page fails by name instead of hanging.
+// Before the first page the server is confirmed up and warmed (every page under test, the routes they
+// prefetch, their static files), and pages run on half the cores (at most 4) so the one server is never starved.
 // The clock is fixed (2026-10-20 12:00 UTC, timezone UTC, server TZ=UTC and LANG=C.UTF-8) so the date tools
 // render the same every day; Math.random is seeded and WebSockets get no frames, so nothing else moves.
 // Approve mode (--write --approve) writes the baseline from that one measurement and exits; it never
@@ -26,6 +28,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { createRequire } from "node:module";
+import { availableParallelism } from "node:os";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const WEB = join(ROOT, "apps/web");
@@ -52,7 +55,9 @@ const PAGES = ["", "/tools", "/categories", "/docs"];
 const CI_SET = ["", ...["mortgage-calculator", "loan-calculator", "compound-interest-calculator", "retirement-calculator",
   "affordable-loan-calculator", "crypto-converter", "forex-converter", "scientific-calculator", "bmi-calculator",
   "mean-median-mode-range-calculator", "json-formatter", "surface-area-calculator"].map((s) => `/tools/${s}`)];
-const WORKERS = 4;
+// One `next start` process and Chromium share the machine with the pages: half the cores, at most 4 (the
+// 4-vCPU ubuntu-24.04 runner gets 2 pages at a time, so the server is never starved while pages load).
+const WORKERS = Math.max(1, Math.min(4, Math.floor(availableParallelism() / 2)));
 const PAGE_CAP_MS = 30000;
 
 if (WRITE && !APPROVE) {
@@ -147,6 +152,44 @@ const jobs = ["en", "ar"].flatMap((locale) => paths.map((p) => `/${locale}${p}`)
 const SET = `${jobs.length} pages (${FULL ? "full" : ONLY ? "--only" : "CI set"})`;
 const begun = Date.now();
 
+// Warm the server before the first page: every page under test, every route those pages link to (Next.js
+// prefetches each visible <Link> as RSC while measure() scrolls) and every static chunk they load. A cold
+// route renders and loads its server modules on first request; done here, no page waits on a cold server.
+async function warm() {
+  const get = async (url, headers) => {
+    const res = await fetch(`${BASE}${url}`, { headers });
+    await res.arrayBuffer();
+    if (!res.ok) throw new Error(`warm-up: ${url} answered ${res.status}`);
+  };
+  const html = new Map();
+  await pool(jobs, async (job) => {
+    const res = await fetch(`${BASE}${job}`);
+    if (!res.ok) throw new Error(`warm-up: ${job} answered ${res.status}`);
+    html.set(job, await res.text());
+  });
+  const routes = new Set(), chunks = new Set();
+  for (const text of html.values()) {
+    for (const [, href] of text.matchAll(/href="(\/(?:en|ar)(?:\/[^"#?]*)?)"/g)) routes.add(href);
+    for (const [, src] of text.matchAll(/(?:src|href)="(\/_next\/static\/[^"]+)"/g)) chunks.add(src);
+  }
+  await pool([...routes], (r) => get(r, { RSC: "1", "Next-Router-Prefetch": "1" }));
+  await pool([...chunks], (c) => get(c));
+  return { pages: html.size, routes: routes.size, chunks: chunks.size };
+}
+async function pool(items, fn) {
+  const queue = [...items];
+  await Promise.all(Array.from({ length: WORKERS }, async () => {
+    for (let item; (item = queue.shift()) !== undefined; ) await fn(item);
+  }));
+}
+const warmed = await warm().catch((e) => {
+  stop();
+  console.error(e.message);
+  process.exit(3);
+});
+console.log(`Server warm: ${warmed.pages} pages, ${warmed.routes} linked routes (RSC prefetch), ${warmed.chunks} static files in ${((Date.now() - begun) / 1000).toFixed(1)}s; ${WORKERS} workers on ${availableParallelism()} cores.`);
+const measuredFrom = Date.now();
+
 const browser = await chromium.launch({ args: ["--disable-3d-apis"] });
 // Nothing outside the server under test is ever waited on (analytics, ads, third-party images).
 const sameOrigin = (url) => url.startsWith(BASE) || url.startsWith("data:") || url.startsWith("blob:");
@@ -179,21 +222,26 @@ async function worker() {
     // prices. Every socket is answered locally and never sends a frame, so the snapshot (fixture) prices stay.
     await page.routeWebSocket(/.*/, () => {});
     const started = new Map(), slow = [];
+    // Per-page server timings: the slowest /_next/static chunk and the slowest RSC (route prefetch) answer.
+    const served = { chunk: 0, rsc: 0, rscCount: 0 };
     page.on("request", (r) => started.set(r, Date.now()));
     await page.exposeFunction("__lockInflight", () => [...started.keys()].filter((r) => sameOrigin(r.url())).length);
     const done = (r) => {
       const ms = Date.now() - started.get(r);
       started.delete(r);
       if (ms > 1500) slow.push(`${ms}ms ${r.url().replace(BASE, "")}`);
+      if (r.url().includes("/_next/static/")) served.chunk = Math.max(served.chunk, ms);
+      else if (r.url().includes("_rsc=")) (served.rsc = Math.max(served.rsc, ms)), served.rscCount++;
     };
     page.on("requestfinished", done);
     page.on("requestfailed", done);
     await page.clock.setFixedTime(new Date("2026-10-20T12:00:00Z"));
     const t0 = Date.now();
-    let t1 = t0, reads = 0;
+    let t1 = t0, tNav = 0, reads = 0;
     const visit = async () => {
       const res = await page.goto(`${BASE}${job}`, { waitUntil: "load", timeout: 10000 });
       if (!res || res.status() !== 200) throw new Error(`answered ${res?.status()}`);
+      tNav = Date.now() - t0;
       // Ready signal: no request in flight for 500ms (lazy chunks, the market /api calls), then fonts and
       // two equal reads with no request in flight inside measure(). Live data comes from fixtures, so this is quick on every page.
       await page.waitForLoadState("networkidle", { timeout: 10000 }).catch(() => slow.push("network not idle after 10s"));
@@ -205,7 +253,7 @@ async function worker() {
       .catch((e) => failedLoads.push(`${job}: ${e.message.split("\n")[0]}`))
       .finally(() => clearTimeout(cap));
     const pending = [...started].map(([r, t]) => `pending ${Date.now() - t}ms ${r.url().replace(BASE, "")}`);
-    timing.push({ job, load: t1 - t0, measure: Date.now() - t1, reads, requests: [...slow, ...pending] });
+    timing.push({ job, nav: tNav, load: t1 - t0, measure: Date.now() - t1, reads, ...served, requests: [...slow, ...pending] });
     await ctx.close();
   }
 }
@@ -213,12 +261,12 @@ await Promise.all(Array.from({ length: WORKERS }, worker));
 await browser.close();
 stop();
 const slowest = timing.reduce((a, t) => (t.load + t.measure > a.load + a.measure ? t : a), timing[0]);
-console.log(`${SET} in ${((Date.now() - begun) / 1000).toFixed(1)}s; slowest ${slowest.job} ${slowest.load + slowest.measure}ms.`);
+console.log(`${SET} in ${((Date.now() - measuredFrom) / 1000).toFixed(1)}s; slowest ${slowest.job} ${slowest.load + slowest.measure}ms.`);
 if (TIMING) {
   timing.sort((a, b) => b.load + b.measure - (a.load + a.measure));
   const total = timing.reduce((n, t) => n + t.load + t.measure, 0);
-  writeFileSync(TIMING, [`${timing.length} pages, ${WORKERS} workers, page-time sum ${(total / 1000).toFixed(1)}s`, "page | load ms | measure ms | reads | slow (>1.5s) or pending requests",
-    ...timing.map((t) => `${t.job} | ${t.load} | ${t.measure} | ${t.reads} | ${t.requests.join(", ")}`)].join("\n") + "\n");
+  writeFileSync(TIMING, [`${timing.length} pages, ${WORKERS} workers, page-time sum ${(total / 1000).toFixed(1)}s`, "page | nav ms | load ms | measure ms | reads | max chunk ms | max rsc ms (count) | slow (>1.5s) or pending requests",
+    ...timing.map((t) => `${t.job} | ${t.nav} | ${t.load} | ${t.measure} | ${t.reads} | ${t.chunk} | ${t.rsc} (${t.rscCount}) | ${t.requests.join(", ")}`)].join("\n") + "\n");
 }
 if (failedLoads.length) {
   console.error(failedLoads.join("\n"));

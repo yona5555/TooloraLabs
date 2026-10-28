@@ -54,8 +54,32 @@ jobs:
       - name: Validate JSON (locale messages, data, approved previews)
         run: npm run check:json
 
-      - name: Build web app
-        run: npm run build --workspace=apps/web
+      - name: Test (main-health script, mocked GitHub API)
+        run: npm run test:main-health
+
+      # Any warning line in the build output (Next.js ⚠, webpack, React, Node, npm) fails the step.
+      # Next.js build cache (https://nextjs.org/docs/messages/no-cache): restored from the last build of this
+      # job on this branch or main, saved after the build even when a later gate fails, so the next run starts warm.
+      - name: Restore the Next.js build cache
+        id: next-cache
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: apps/web/.next/cache
+          key: next-build-${{ runner.os }}-${{ hashFiles('package-lock.json', 'apps/web/next.config.ts', 'apps/web/package.json') }}-${{ hashFiles('apps/web/app/**', 'apps/web/components/**', 'apps/web/lib/**', 'apps/web/data/**', 'apps/web/messages/**', 'packages/*/src/**') }}
+          restore-keys: |
+            next-build-${{ runner.os }}-${{ hashFiles('package-lock.json', 'apps/web/next.config.ts', 'apps/web/package.json') }}-
+            next-build-${{ runner.os }}-
+
+      - name: Build web app (zero warnings)
+        id: build
+        run: node scripts/run-no-warnings.mjs npm run build --workspace=apps/web
+
+      - name: Save the Next.js build cache
+        if: always() && steps.build.outcome != 'skipped' && steps.next-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: apps/web/.next/cache
+          key: ${{ steps.next-cache.outputs.cache-primary-key }}
 
       - name: Install Playwright Chromium
         run: npx playwright install --with-deps chromium
@@ -96,8 +120,28 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # Next.js build cache (https://nextjs.org/docs/messages/no-cache): restored from the last build of this
+      # job on this branch or main, saved after the build even when a later gate fails, so the next run starts warm.
+      - name: Restore the Next.js build cache
+        id: next-cache
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: apps/web/.next/cache
+          key: next-phone-${{ runner.os }}-${{ hashFiles('package-lock.json', 'apps/web/next.config.ts', 'apps/web/package.json') }}-${{ hashFiles('apps/web/app/**', 'apps/web/components/**', 'apps/web/lib/**', 'apps/web/data/**', 'apps/web/messages/**', 'packages/*/src/**') }}
+          restore-keys: |
+            next-phone-${{ runner.os }}-${{ hashFiles('package-lock.json', 'apps/web/next.config.ts', 'apps/web/package.json') }}-
+            next-phone-${{ runner.os }}-
+
       - name: Build web app
+        id: build
         run: npm run build --workspace=apps/web
+
+      - name: Save the Next.js build cache
+        if: always() && steps.build.outcome != 'skipped' && steps.next-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: apps/web/.next/cache
+          key: ${{ steps.next-cache.outputs.cache-primary-key }}
 
       - name: Install Playwright Chromium
         run: npx playwright install --with-deps chromium
@@ -107,6 +151,8 @@ jobs:
         run: |
           npx next start -p 3001 > /tmp/next.log 2>&1 &
           for _ in $(seq 1 60); do curl -sf -o /dev/null http://localhost:3001/en && break; sleep 2; done
+          # Ready check and warm-up of both pages under test: the step fails here if the server is not serving them.
+          for page in en ar; do curl -sf -o /dev/null "http://localhost:3001/$page"; done
           cd ../..
           npm run test:home-phone
 
@@ -139,8 +185,28 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # Next.js build cache (https://nextjs.org/docs/messages/no-cache): restored from the last build of this
+      # job on this branch or main, saved after the build even when a later gate fails, so the next run starts warm.
+      - name: Restore the Next.js build cache
+        id: next-cache
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: apps/web/.next-lock/cache
+          key: next-lock-${{ runner.os }}-${{ hashFiles('package-lock.json', 'apps/web/next.config.ts', 'apps/web/package.json') }}-${{ hashFiles('apps/web/app/**', 'apps/web/components/**', 'apps/web/lib/**', 'apps/web/data/**', 'apps/web/messages/**', 'packages/*/src/**') }}
+          restore-keys: |
+            next-lock-${{ runner.os }}-${{ hashFiles('package-lock.json', 'apps/web/next.config.ts', 'apps/web/package.json') }}-
+            next-lock-${{ runner.os }}-
+
       - name: Build web app (live data from fixtures)
+        id: build
         run: npm run build:desktop-lock
+
+      - name: Save the Next.js build cache
+        if: always() && steps.build.outcome != 'skipped' && steps.next-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: apps/web/.next-lock/cache
+          key: ${{ steps.next-cache.outputs.cache-primary-key }}
 
       - name: Install Playwright Chromium
         run: npx playwright install --with-deps chromium
@@ -274,3 +340,29 @@ jobs:
           echo "::add-mask::$AUTH"
           git -c "http.https://github.com/.extraheader=AUTHORIZATION: basic $AUTH" \
             push "https://github.com/$GITHUB_REPOSITORY.git" "HEAD:refs/heads/$HEAD_REF"
+
+  # Required check. Fails if any job of this run left a warning or failure annotation (GitHub deprecations
+  # included), so a warning can never merge unnoticed. always(): it still reports when a job failed or was
+  # skipped. Check runs are found by their details URL (this run's id), so only checks: read is needed.
+  zero-warnings:
+    needs: [build, home-phone-lock, desktop-lock, regenerate-baselines]
+    if: always()
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      checks: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          sparse-checkout: scripts/zero-warnings.sh
+          sparse-checkout-cone-mode: false
+
+      - name: No warning or failure annotation in this run
+        env:
+          GH_TOKEN: ${{ github.token }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          NEEDS_JSON: ${{ toJSON(needs) }}
+          SELF: zero-warnings
+        run: scripts/zero-warnings.sh
