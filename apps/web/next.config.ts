@@ -1,5 +1,7 @@
 import type { NextConfig } from "next";
+import { PHASE_PRODUCTION_BUILD } from "next/constants";
 import createNextIntlPlugin from "next-intl/plugin";
+import { assertMarketApiKeysForProduction } from "./lib/api-key";
 
 const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
 
@@ -32,4 +34,8 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default withNextIntl(nextConfig);
+export default function config(phase: string): NextConfig {
+  // A Vercel Production build without a market API key fails here instead of shipping empty market pages.
+  if (phase === PHASE_PRODUCTION_BUILD) assertMarketApiKeysForProduction(process.env);
+  return withNextIntl(nextConfig);
+}
