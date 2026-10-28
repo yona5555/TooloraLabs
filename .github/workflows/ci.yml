@@ -65,6 +65,9 @@ jobs:
       - name: Test (main-health script, mocked GitHub API)
         run: node scripts/run-no-warnings.mjs npm run test:main-health
 
+      - name: Test (color lock comparison, desktop + phone home locks)
+        run: node scripts/run-no-warnings.mjs npm run test:color-lock
+
       # Any warning line in the build output (Next.js ⚠, webpack, React, Node, npm) fails the step.
       # Next.js build cache (https://nextjs.org/docs/messages/no-cache): restored from the last build of this
       # job on this branch or main, saved after the build even when a later gate fails, so the next run starts warm.
