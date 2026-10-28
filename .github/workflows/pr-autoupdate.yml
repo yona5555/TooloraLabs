@@ -1,0 +1,70 @@
+name: PR auto-update
+
+# main is protected with strict up-to-date checks, so an auto-merge PR that falls behind main stalls.
+# After every push to main this brings each auto-merge PR up to date; the App token (not GITHUB_TOKEN)
+# makes that update start the PR's checks.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: pr-autoupdate
+  cancel-in-progress: true
+
+jobs:
+  update:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Mint the bot token
+        id: app-token
+        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
+        with:
+          client-id: ${{ vars.TOOLORA_BOT_CLIENT_ID }}
+          private-key: ${{ secrets.TOOLORA_BOT_PRIVATE_KEY }}
+          permission-contents: write
+          permission-pull-requests: write
+          # A branch whose update brings in .github/workflows changes needs it.
+          permission-workflows: write
+
+      # "Behind" comes from the compare API (mergeStateStatus is often UNKNOWN right after a push).
+      # One PR's conflict or error goes to the summary and never fails the job or stops the others.
+      - name: Update every auto-merge PR that is behind main
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: |
+          {
+            echo "## PR auto-update"
+            echo
+          } >> "$GITHUB_STEP_SUMMARY"
+          prs=$(gh pr list --repo "$GITHUB_REPOSITORY" --base main --state open --limit 100 \
+            --json number,headRefOid,author,autoMergeRequest \
+            --jq '.[] | select(.autoMergeRequest != null) | "\(.number) \(.headRefOid) \(.author.login)"')
+          if [ -z "$prs" ]; then
+            echo "No open auto-merge PRs into main." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          while read -r number sha author; do
+            if ! behind=$(gh api "repos/$GITHUB_REPOSITORY/compare/main...$sha" --jq .behind_by 2>/dev/null); then
+              echo "- #$number: compare failed, skipped" >> "$GITHUB_STEP_SUMMARY"
+              continue
+            fi
+            if [ "$behind" -eq 0 ]; then
+              echo "- #$number: up to date" >> "$GITHUB_STEP_SUMMARY"
+              continue
+            fi
+            # Dependabot rebases its own PRs only on conflicts and expects a linear branch.
+            if [ "$author" = "app/dependabot" ] || [ "$author" = "dependabot[bot]" ]; then
+              method=(--rebase); label=rebase
+            else
+              method=(); label=merge
+            fi
+            if out=$(gh pr update-branch "$number" --repo "$GITHUB_REPOSITORY" "${method[@]}" 2>&1); then
+              echo "- #$number: $behind behind, updated ($label)" >> "$GITHUB_STEP_SUMMARY"
+            else
+              echo "- #$number: $behind behind, update failed ($label), skipped: ${out//$'\n'/ }" >> "$GITHUB_STEP_SUMMARY"
+            fi
+          done <<< "$prs"

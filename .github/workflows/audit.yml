@@ -1,0 +1,37 @@
+name: Audit
+
+# Required check. No paths filters: a required check that never reports blocks the merge.
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  schedule:
+    - cron: "17 3 * * 1" # weekly, Monday 03:17 UTC
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      # No install scripts: the audit needs the tree, not built packages.
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+
+      - name: Known vulnerabilities (any severity fails)
+        run: npm audit --audit-level=low
+
+      - name: Registry signatures and provenance attestations
+        run: npm audit signatures
