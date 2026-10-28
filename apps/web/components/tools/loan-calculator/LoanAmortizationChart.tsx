@@ -4,12 +4,13 @@ import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import type { LoanPaymentRow } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
-import { useBelowLg } from "@/components/tool-ui/useBelowLg";
 import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { computeNiceTicks } from "./niceTicks";
 import type { CurrencyCode } from "@/lib/currency";
 import { svgPx } from "@/components/tool-ui/svgPx";
 import { wrapLabel } from "@/components/tool-ui/labelLayout";
+import { fitStep, thinEvery } from "@/components/tool-ui/chartLabels";
+import { useLabelMeasure } from "@/components/tool-ui/useChartLabels";
 
 type LoanAmortizationChartProps = {
   schedule: LoanPaymentRow[];
@@ -26,14 +27,11 @@ const VOLUME_HEIGHT = 40;
 const XAXIS_HEIGHT = 20;
 const CHART_HEIGHT = MARGIN.top + MAIN_HEIGHT + VOLUME_GAP + VOLUME_HEIGHT + XAXIS_HEIGHT;
 
+/** Bar step before the container is measured (server render). */
 const MIN_STEP = 14;
-/** Year labels sit at least this many px apart: 12px labels never touch (§39). */
-const X_LABEL_GAP = 30;
 const BAR_WIDTH_RATIO = 9 / 14;
 const TOOLTIP_WIDTH = 168;
 const TOOLTIP_HEIGHT = 78;
-/** Beyond this many periods, only every Nth x-axis label is drawn so they don't overlap. */
-const MAX_DENSE_LABELS = 60;
 
 /** Compact currency above 100k, whole units below. */
 function moneyFormatter(digitStyle: DigitStyle, currency: CurrencyCode) {
@@ -55,7 +53,7 @@ function AmortizationPlot({ schedule, digitStyle, currency }: Pick<LoanAmortizat
   const containerRef = useRef<HTMLDivElement>(null);
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
   const [containerWidth, setContainerWidth] = useState(0);
-  const belowLg = useBelowLg();
+  const [measureRef, measure] = useLabelMeasure();
 
   useLayoutEffect(() => {
     const el = containerRef.current;
@@ -67,7 +65,8 @@ function AmortizationPlot({ schedule, digitStyle, currency }: Pick<LoanAmortizat
 
   if (schedule.length === 0) return null;
 
-  const step = Math.max(belowLg && containerWidth > 0 ? 0 : MIN_STEP, (containerWidth - MARGIN.left - MARGIN.right) / schedule.length);
+  // shared label layout: the plot fills its container (no scroll box cutting off the last periods)
+  const step = fitStep(containerWidth, MARGIN.left + MARGIN.right, schedule.length, MIN_STEP);
   const barWidth = step * BAR_WIDTH_RATIO;
   const plotWidth = schedule.length * step;
   const chartWidth = MARGIN.left + plotWidth + MARGIN.right;
@@ -110,12 +109,16 @@ function AmortizationPlot({ schedule, digitStyle, currency }: Pick<LoanAmortizat
     : 0;
   const tooltipY = MARGIN.top + 4;
 
-  const labelEvery = Math.max(1, Math.ceil(schedule.length / MAX_DENSE_LABELS), Math.ceil(X_LABEL_GAP / step));
+  const periodLabel = (period: number) => formatLocalizedNumber(period, digitStyle, { maximumFractionDigits: 0 });
+  const labelEvery = thinEvery(step, Math.max(...schedule.map((row) => measure(periodLabel(row.period), 12).width)));
 
   return (
     <div ref={containerRef} dir="ltr" tabIndex={0} className="mt-4 overflow-x-auto">
       <svg
-        ref={svgRef}
+        ref={(node) => {
+          svgRef.current = node;
+          measureRef(node);
+        }}
         width={chartWidth}
         height={CHART_HEIGHT}
         viewBox={`0 0 ${chartWidth} ${CHART_HEIGHT}`}
@@ -172,7 +175,7 @@ function AmortizationPlot({ schedule, digitStyle, currency }: Pick<LoanAmortizat
         {schedule.map((row, i) =>
           i % labelEvery === 0 ? (
             <text style={{ fontSize: svgPx(12) }} key={`period-${row.period}`} x={barCenterX(i)} y={volumeBottom + XAXIS_HEIGHT - 6} textAnchor="middle" fill="currentColor" opacity={0.6}>
-              {formatLocalizedNumber(row.period, digitStyle, { maximumFractionDigits: 0 })}
+              {periodLabel(row.period)}
             </text>
           ) : null
         )}
