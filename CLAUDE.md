@@ -30,7 +30,7 @@ TooloraLabs-Claude-Instructions.md is a historical archive; the binding rules ar
 - git pull before work; work on a task branch and commit + push it after each finished part (main is protected: PR + green build, home-phone-lock, desktop-lock; GitHub auto-merges). No force push, no reset --hard.
 - Before each commit, once: lint, tsc, tests, build.
 - packages/core|sdk|tools are pure logic: no window/document/DOM.
-- Desktop layout is LOCKED (approved 2026-10-26): `npm run test:desktop-lock` (1440px, every tool + /, /tools, /categories, /docs, en+ar) must pass; rewrite its baseline (`baseline:desktop-lock -- --approve`, CI label `approve-desktop-baseline`) only with Yousef's approval.
+- Desktop layout is LOCKED (approved 2026-10-26): `npm run test:desktop-lock` (1440px, every tool + /, /tools, /categories, /docs, en+ar) must pass; rewrite its baseline (`baseline:desktop-lock -- --approve`, CI label `approve-desktop-baseline`) only with Yousef's approval. The label makes CI's regenerate-baselines job write the Linux baseline, remove the label and push it as the GitHub App (normal PR run, auto-merge proceeds); no manual commit.
 - Any new UI text goes into all 6 locales (en, ar, es, fr, de, hi) with 1:1 keys.
 - Tool route: /{locale}/tools/{slug}.
 - Never print secrets in any output, report, command or log: API keys, tokens, passwords, webhook/IPN secrets, private keys, connection strings, or values from .env* files. Refer to them by variable NAME only and mask the value (e.g. METALPRICE_API_KEY=****). Never cat or echo .env* files. Never commit secrets.

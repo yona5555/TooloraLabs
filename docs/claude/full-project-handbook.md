@@ -14,6 +14,7 @@
 - Monorepo (npm workspaces): `apps/web` — Next.js 16 (App Router + Turbopack)، React 19، TypeScript 5، Tailwind 4، next-intl. أهم المجلدات: `app/[locale]/`، `components/tools/<slug>/`، `components/tool-ui/` (SectionCard, AdSpace, ToolPageLayout, ToolAboveFold, RelatedToolsSidebar, EncyclopediaPaper)، `data/`، `messages/<locale>.json`، `lib/`.
 - `packages/core` (محرك التنفيذ)، `packages/sdk` (أدوات البناء)، `packages/tools` (منطق كل حاسبة).
 - CI (`.github/workflows/ci.yml`) على push/PR إلى main: lint + typecheck + اختبارات الحزم الثلاث + build.
+- اعتماد baselines القفل (2026-10-26): label `approve-desktop-baseline` / `approve-home-phone-baseline` على PR من المستودع نفسه يجعل مهمة `regenerate-baselines` تكتب baseline لينكس، وتحذف الـ label، ثم تعمل commit وpush بتوكن تطبيق GitHub **toolora-baseline-bot-4jty** (App ID 5485467، صلاحياته contents + pull-requests write، مثبَّت على TooloraLabs وحده). الأسماء فقط: secret `TOOLORA_BOT_PRIVATE_KEY`، ومتغيّر المستودع `TOOLORA_BOT_CLIENT_ID`، وsecret `TOOLORA_BOT_APP_ID` (غير مستعمل؛ `app-id` مهمل في create-github-app-token v3). الـ push بالتطبيق يبدأ تشغيل pull_request عادياً (لا action_required)، فلا حاجة لـ commit يدوي.
 
 ## 3. نموذج العمل بين الأجهزة
 - الماك ميني = المنسِّق والجهاز الرئيسي. اللينكس = عامل ينفّذ ولا يقرر هيكلياً. يوسف = السلطة العليا.
