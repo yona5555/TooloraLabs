@@ -197,6 +197,11 @@ export function useViewerZone(): string {
   return useSyncExternalStore(noopSubscribe, readViewerZone, () => "UTC");
 }
 
+/** false on the server and while hydrating, true after: gates text built from the browser's own time-zone data. */
+export function useHydrated(): boolean {
+  return useSyncExternalStore(noopSubscribe, () => true, () => false);
+}
+
 /** State: sample first, then the share link (or a fresh sample at the real clock) once on mount; mirrored to the URL. */
 export function useCountdownState(locale: string, titleFor: (k: CountdownPresetKey) => string) {
   const [state, setState] = useState<CdState>(() => sampleState(locale, FALLBACK_NOW, "UTC", titleFor));
@@ -335,18 +340,24 @@ export function hijriMonthName(locale: string, hy: number, hm: number): string {
 
 export type ZoneOption = { zone: string; label: string };
 
-export function zoneOptions(locale: string, nowMs: number, extra: string[]): ZoneOption[] {
+/**
+ * The zone list, ordered by UTC offset at nowMs and labelled with it. nowMs null = names only, by name: the
+ * offsets come from the runtime's time-zone database, and the server's (Node) and the browser's differ
+ * (tzdata 2026a gives Africa/Casablanca +01:00 in October where Chromium 156 gives +00:00), so the server
+ * renders the names and the browser adds offsets and their order after hydration.
+ */
+export function zoneOptions(locale: string, nowMs: number | null, extra: string[]): ZoneOption[] {
   const ar = locale.startsWith("ar");
   const rows = WT_CITIES.map((c) => ({ zone: c.zone, name: ar ? c.name.ar : c.name.en }));
   for (const z of ["UTC", ...extra]) {
     if (z && isValidIanaZone(z) && !rows.some((r) => r.zone === z)) rows.push({ zone: z, name: z.split("/").pop()!.replace(/_/g, " ") });
   }
   return rows
-    .map((r) => ({ zone: r.zone, off: zoneOffsetMinutes(nowMs, r.zone), name: r.name }))
+    .map((r) => ({ zone: r.zone, off: nowMs === null ? 0 : zoneOffsetMinutes(nowMs, r.zone), name: r.name }))
     // Explicit locale: the runtime default differs between server and browser, which ordered Arabic and Latin
     // names differently and broke hydration (React #418 on ar).
     .sort((a, b) => a.off - b.off || a.name.localeCompare(b.name, locale))
-    .map((r) => ({ zone: r.zone, label: `${r.name} (${formatOffset(r.off)})` }));
+    .map((r) => ({ zone: r.zone, label: nowMs === null ? r.name : `${r.name} (${formatOffset(r.off)})` }));
 }
 
 export function zoneName(locale: string, zone: string): string {

@@ -6,7 +6,7 @@ import { Bookmark, CalendarPlus, Check, Copy, Link2, Moon, RotateCcw } from "luc
 import { buildCountdownIcs, countdownIcsFileName, type CountdownPreset } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import { downloadTextFile } from "@/lib/export";
-import { hijriMonthName, withHijriFields, withHijriFromIso, zoneOptions, type CdCalendar, type CdState, type Derived } from "./model";
+import { hijriMonthName, useHydrated, withHijriFields, withHijriFromIso, zoneOptions, type CdCalendar, type CdState, type Derived } from "./model";
 
 type Props = {
   state: CdState;
@@ -61,8 +61,13 @@ export default function CountdownInput({ state, onChange, d, presets, onPreset, 
   const [flash, setFlash] = useState<"" | "copy" | "link" | "save">("");
   const set = (patch: Partial<CdState>) => onChange({ ...state, ...patch });
   const nowMinute = Math.floor(nowMs / 60_000);
-  // Offsets only change at DST transitions; recompute the option labels once a minute at most.
-  const zones = useMemo(() => zoneOptions(locale, nowMinute * 60_000, [viewerZone, state.zone]), [locale, nowMinute, viewerZone, state.zone]);
+  // Offsets only change at DST transitions; recompute the option labels once a minute at most. Server and
+  // hydration render names only: the offsets come from the browser's own time-zone data (zoneOptions).
+  const hydrated = useHydrated();
+  const zones = useMemo(
+    () => zoneOptions(locale, hydrated ? nowMinute * 60_000 : null, [viewerZone, state.zone]),
+    [locale, hydrated, nowMinute, viewerZone, state.zone],
+  );
   const hy = Number(state.hy) || 1448;
   const hijriMonths = useMemo(() => Array.from({ length: 12 }, (_, i) => hijriMonthName(locale, hy, i + 1)), [locale, hy]);
   const pulse = (k: typeof flash) => {
