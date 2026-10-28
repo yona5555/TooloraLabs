@@ -1,6 +1,7 @@
 "use client";
 import { useTranslations } from "next-intl";
-import { Mafs, Coordinates, Plot, Line, Point, Text, Theme } from "mafs";
+import { Coordinates, Plot, Line, Point, Theme } from "mafs";
+import FitMafs, { FitText } from "@/components/tool-ui/FitMafs";
 import "mafs/core.css";
 import "./triangleMafsTheme.css";
 import { round, sinCosMarker } from "./triangleEducationMath";
@@ -21,7 +22,7 @@ export default function TriangleSinCosLiveCurve({ angles }: Props) {
   return (
     <div className="mt-4 border-t border-zinc-100 pt-3 dark:border-zinc-800" data-sincos-curve>
       <div dir="ltr" className="triangle-mafs w-full overflow-hidden rounded-xl" role="img" aria-label={t("aria")}>
-        <Mafs viewBox={{ x: [-10, 190], y: [-1.25, 1.25] }} height={150} pan={false} zoom={false} preserveAspectRatio={false}>
+        <FitMafs viewBox={{ x: [-10, 190], y: [-1.25, 1.25] }} height={150} pan={false} zoom={false} preserveAspectRatio={false}>
           <Coordinates.Cartesian xAxis={{ lines: 30, labels: (deg) => `${deg}°` }} yAxis={{ lines: 0.5, labels: false }} />
           <Plot.OfX y={(deg) => Math.sin(toRad(deg))} domain={[0, 180]} color={Theme.red} weight={2.5} />
           <Plot.OfX y={(deg) => Math.cos(toRad(deg))} domain={[0, 180]} color={Theme.green} weight={2.5} />
@@ -30,12 +31,12 @@ export default function TriangleSinCosLiveCurve({ angles }: Props) {
               <Line.Segment point1={[m.deg, -1.2]} point2={[m.deg, 1.02]} color={Theme.foreground} weight={1} style="dashed" opacity={0.35} />
               <Point x={m.deg} y={m.sin} color={Theme.red} />
               <Point x={m.deg} y={m.cos} color={Theme.green} />
-              <Text x={m.deg} y={1.13} size={12} color={Theme.foreground}>
+              <FitText x={m.deg} y={1.13} size={12} color={Theme.foreground}>
                 {m.label}
-              </Text>
+              </FitText>
             </g>
           ))}
-        </Mafs>
+        </FitMafs>
       </div>
       <div dir="ltr" className="mt-2 flex flex-wrap justify-center gap-x-4 gap-y-1 font-mono text-xs">
         {markers.map((m) => (

@@ -1,7 +1,8 @@
 "use client";
 import { useTranslations } from "next-intl";
 import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
-import { Mafs, Coordinates, Plot, Point, Text } from "mafs";
+import { Coordinates, Plot, Point } from "mafs";
+import FitMafs, { FitText } from "@/components/tool-ui/FitMafs";
 import "mafs/core.css";
 import "@/components/tool-ui/mafsTheme.css";
 import { ScientificCalculator } from "@tooloralabs/tools";
@@ -38,19 +39,19 @@ export default function TrigWaveCurve() {
       <GapFreeRow className="mt-4">
         <div dir="ltr" className="mafs-canvas w-full overflow-hidden rounded-xl lg:flex-1">
           <PhoneMini slot={1} title={t("title")}>
-            <Mafs viewBox={{ x: [0, 360], y: [-1.3, 1.3] }} height={200} pan={false} zoom={false} preserveAspectRatio={false}>
+            <FitMafs viewBox={{ x: [0, 360], y: [-1.3, 1.3] }} height={200} pan={false} zoom={false} preserveAspectRatio={false}>
               <Coordinates.Cartesian xAxis={{ lines: 90 }} yAxis={{ lines: 0.5, labels: (v) => (Math.abs(v) <= 1 ? `${v}` : "") }} />
               <Plot.OfX y={(x) => Math.sin((x * Math.PI) / 180)} color={colors.rose} />
               <Plot.OfX y={(x) => Math.cos((x * Math.PI) / 180)} color={colors.emerald} />
               <Point x={dims.angleDeg} y={sin} color={colors.rose} />
               <Point x={dims.angleDeg} y={cos} color={colors.emerald} />
-              <Text x={45} y={1.15} size={12} color={colors.rose}>
+              <FitText x={45} y={1.15} size={12} color={colors.rose}>
                 sin(x)
-              </Text>
-              <Text x={45} y={-1.15} size={12} color={colors.emerald}>
+              </FitText>
+              <FitText x={45} y={-1.15} size={12} color={colors.emerald}>
                 cos(x)
-              </Text>
-            </Mafs>
+              </FitText>
+            </FitMafs>
           </PhoneMini>
         </div>
         <WorkedExampleNote

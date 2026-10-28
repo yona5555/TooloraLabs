@@ -1,6 +1,7 @@
 "use client";
 import { useTranslations } from "next-intl";
-import { Mafs, Coordinates, Plot, Polygon, useMovablePoint } from "mafs";
+import { Coordinates, Plot, Polygon, useMovablePoint } from "mafs";
+import FitMafs from "@/components/tool-ui/FitMafs";
 import "mafs/core.css";
 import "@/components/tool-ui/mafsTheme.css";
 import { useIsDarkMode } from "@/lib/use-dark-mode";
@@ -60,13 +61,13 @@ export default function IntersectionAreaDiagram() {
       <GapFreeRow className="mt-4">
         <div dir="ltr" className="w-full lg:flex-1">
           <div role="group" aria-label={t("ariaLabel")} className="mafs-canvas mx-auto w-full max-w-[420px] overflow-hidden rounded-xl">
-            <Mafs viewBox={{ x: domain, y: [-14, 14] }} height={230} pan={false} zoom={false} preserveAspectRatio={false}>
+            <FitMafs viewBox={{ x: domain, y: [-14, 14] }} height={230} pan={false} zoom={false} preserveAspectRatio={false}>
               <Coordinates.Cartesian xAxis={{ lines: 2 }} yAxis={{ lines: 4 }} />
               <Polygon points={points} color={colors.fill} fillOpacity={0.15} strokeOpacity={0} />
               <Plot.OfX y={lhsFn} color={colors.lhs} weight={2.5} />
               <Plot.OfX y={rhsFn} color={colors.rhs} weight={2.5} />
               {explorer.element}
-            </Mafs>
+            </FitMafs>
           </div>
         </div>
         <WorkedExampleNote
