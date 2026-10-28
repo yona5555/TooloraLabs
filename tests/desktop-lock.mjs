@@ -4,6 +4,9 @@
 // (top-level <svg> rects), the layout each drawing + table row picked (GapFreeRow `data-gap-layout`,
 // IndicatorWithTable `data-split`), the main headings (h1/h2 rect + font size) and the page height. Fails
 // when any rect moves or resizes by more than 1px, or any order, title, layout or font size changes.
+// Colors are locked too (tests/color-lock.mjs): each card, its header strip, each chart and each heading
+// records its computed background-color, color and border-color in the light theme and, after a reload
+// with localStorage theme=dark (the site's own mechanism), in the dark theme; any difference fails.
 //   npm run build:desktop-lock                     -> the build it runs against (.next-lock, live fixtures)
 //   npm run test:desktop-lock                      -> CI set: home + 12 representative tools (26 pages)
 //   npm run test:desktop-lock:full                 -> every tool page plus /, /tools, /categories, /docs
@@ -30,6 +33,7 @@ import { fileURLToPath } from "node:url";
 import { createRequire } from "node:module";
 import { createConnection } from "node:net";
 import { availableParallelism } from "node:os";
+import { compareColors, THEMES } from "./color-lock.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const WEB = join(ROOT, "apps/web");
@@ -96,24 +100,38 @@ async function measure() {
   function read() {
     const main = document.querySelector("main");
     const shown = (e) => e.getClientRects().length > 0 && !e.closest('dialog, [role="dialog"]');
+    const colors = (e) => {
+      const s = getComputedStyle(e);
+      return [s.backgroundColor, s.color, s.borderColor];
+    };
     const row = (label, e, font = "") => {
       const r = e.getBoundingClientRect();
       return [label, +r.x.toFixed(1), +(r.y + scrollY).toFixed(1), +r.width.toFixed(1), +r.height.toFixed(1), font];
     };
-    const cards = [...main.querySelectorAll("[data-card]")]
+    // Rows and colors come from the same elements, in the same order: [row, {element, header?}].
+    const cardPairs = [...main.querySelectorAll("[data-card]")]
       .filter((c) => shown(c) && !c.parentElement.closest("[data-card]"))
       .map((c) => {
         const h = c.querySelector("[data-card-header] :is(h2,h3)") ?? c.querySelector("h2,h3");
-        return row((h?.textContent ?? "?").trim().slice(0, 40), c, h ? getComputedStyle(h).fontSize : "");
+        const header = c.querySelector(":scope > [data-card-header]");
+        return [row((h?.textContent ?? "?").trim().slice(0, 40), c, h ? getComputedStyle(h).fontSize : ""), header ? { element: colors(c), header: colors(header) } : { element: colors(c) }];
       })
-      .sort((a, b) => a[2] - b[2] || a[1] - b[1]);
-    const charts = [...main.querySelectorAll("svg")]
+      .sort((a, b) => a[0][2] - b[0][2] || a[0][1] - b[0][1]);
+    const chartPairs = [...main.querySelectorAll("svg")]
       .filter((s) => shown(s) && !s.parentElement.closest("svg") && !s.closest("[data-card-header], button, a") && s.getBoundingClientRect().width >= 100)
-      .map((s) => row("svg", s));
+      .map((s) => [row("svg", s), { element: colors(s) }]);
     const layouts = [...main.querySelectorAll("[data-gap-layout], [data-split]")].filter(shown).map((e) => e.dataset.gapLayout ?? e.dataset.split);
-    const headings = [...main.querySelectorAll("h1, h2")].filter((h) => shown(h) && !h.closest("[data-card]")).map((h) => row(h.textContent.trim().slice(0, 40), h, getComputedStyle(h).fontSize));
-    return { height: document.documentElement.scrollHeight, cards, charts, layouts, headings };
+    const headingPairs = [...main.querySelectorAll("h1, h2")].filter((h) => shown(h) && !h.closest("[data-card]")).map((h) => [row(h.textContent.trim().slice(0, 40), h, getComputedStyle(h).fontSize), { element: colors(h) }]);
+    const split = (pairs) => [pairs.map((p) => p[0]), pairs.map((p) => p[1])];
+    const [cards, cardColors] = split(cardPairs), [charts, chartColors] = split(chartPairs), [headings, headingColors] = split(headingPairs);
+    return { height: document.documentElement.scrollHeight, cards, charts, layouts, headings, colors: { cards: cardColors, charts: chartColors, headings: headingColors } };
   }
+}
+
+// { part: [{ element: [bg, color, border], header? }] } per theme -> { part: [{ element: { light, dark }, header? }] }.
+function themed(light, dark) {
+  return Object.fromEntries(Object.entries(light).map(([part, items]) => [part, items.map((item, i) =>
+    Object.fromEntries(Object.entries(item).map(([name, value]) => [name, { light: value, dark: dark[part]?.[i]?.[name] }])))]));
 }
 
 let server;
@@ -257,7 +275,16 @@ async function worker() {
       // two equal reads with no request in flight inside measure(). Live data comes from fixtures, so this is quick on every page.
       await page.waitForLoadState("networkidle", { timeout: 10000 }).catch(() => slow.push("network not idle after 10s"));
       t1 = Date.now();
-      ({ reads, data: current[job] } = await page.evaluate(measure));
+      let light;
+      ({ reads, data: light } = await page.evaluate(measure));
+      // The dark theme the way the site applies it (ThemeInitScript reads localStorage before paint): the
+      // same page reloaded, measured again, and only its colors kept.
+      await page.evaluate(() => localStorage.setItem("theme", "dark"));
+      const again = await page.reload({ waitUntil: "load", timeout: 10000 });
+      if (!again || again.status() !== 200) throw new Error(`dark reload answered ${again?.status()}`);
+      await page.waitForLoadState("networkidle", { timeout: 10000 }).catch(() => slow.push("dark: network not idle after 10s"));
+      const { data: dark } = await page.evaluate(measure);
+      current[job] = { ...light, colors: themed(light.colors, dark.colors) };
     };
     let cap;
     await Promise.race([visit(), new Promise((_, no) => (cap = setTimeout(() => no(new Error(`not measured within ${PAGE_CAP_MS / 1000}s`)), PAGE_CAP_MS)))])
@@ -315,13 +342,15 @@ for (const [view, cur] of Object.entries(sorted)) {
       if (a[i][0] !== b[i][0]) { problems.push(`${where}: order changed (now "${b[i][0]}")`); break; }
       if (a[i][5] !== b[i][5]) problems.push(`${where}: font-size ${b[i][5]} (approved ${a[i][5]})`);
       for (const k of keys) if (Math.abs(a[i][k] - b[i][k]) > TOLERANCE) problems.push(`${where}: ${"_xywh"[k]} ${b[i][k]} (approved ${a[i][k]})`);
+      const was = base.colors?.[part]?.[i] ?? {}, now = cur.colors[part][i];
+      for (const name of new Set([...Object.keys(was), ...Object.keys(now)])) problems.push(...compareColors(`${where} ${name}`, was[name], now[name]));
     }
   }
 }
 if (FULL && !ONLY) for (const view of Object.keys(baseline)) if (!sorted[view]) problems.push(`${view}: not measured`);
 if (problems.length) {
   console.error(problems.slice(0, Number(process.env.LOCK_SHOW ?? 80)).join("\n"));
-  console.error(`FAIL: ${problems.length} change(s) to the approved desktop layout (${Object.keys(sorted).length} pages, ${checked} items checked).`);
+  console.error(`FAIL: ${problems.length} change(s) to the approved desktop layout or colors (${Object.keys(sorted).length} pages, ${checked} items checked).`);
   process.exit(1);
 }
-console.log(`PASS: approved desktop layout unchanged (${Object.keys(sorted).length} pages at ${WIDTH}px, ${checked} items, tolerance ${TOLERANCE}px).`);
+console.log(`PASS: approved desktop layout and colors unchanged (${Object.keys(sorted).length} pages at ${WIDTH}px, ${checked} items, tolerance ${TOLERANCE}px, ${THEMES.join(" + ")} colors).`);

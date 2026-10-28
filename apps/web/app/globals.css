@@ -128,9 +128,9 @@ body:has([data-coming-soon-page]),
 
 /* ---- unified background (every width: phones approved 2026-10-26, desktop in the desktop phase) ----
  * Every page drops the tinted variants and the grid: one neutral light page (#f7f8fa) with white cards,
- * one dark page (#101827) with slightly lighter cards, neutral borders. The category color (--cat, from the
- * tool page's data-bg-cat) shows only in details: the card header strip, filled action buttons and active
- * borders. Text stays neutral; the AA text tokens below live here too. Colors only: no size changes.
+ * one dark page (#101827) with slightly lighter cards, neutral borders. The card header strip, filled action
+ * buttons and active borders are blue-600 in every category (no per-category color: Yousef, 2026-10-28).
+ * Text stays neutral; the AA text tokens below live here too. Colors only: no size changes.
  * Same on phone, tablet and desktop. */
 :root body,
 :root body [data-bp-nav] {
@@ -170,21 +170,15 @@ body:has([data-coming-soon-page]),
   background-image: none;
   background-attachment: scroll;
 }
-main {
-  --cat: var(--color-blue-600);
-}
-[data-bg-cat="financial-calculators"] {
-  --cat: var(--color-emerald-700);
-}
 main [data-card-header],
 main :is(button, a, [role="tab"]).bg-blue-600 {
-  background-color: var(--cat);
+  background-color: var(--color-blue-600);
 }
 main :is(button, a, [role="tab"]).bg-blue-600:hover {
-  background-color: color-mix(in oklab, var(--cat) 85%, black);
+  background-color: color-mix(in oklab, var(--color-blue-600) 85%, black);
 }
 main :is(button, a, [role="tab"], input, select):is(.border-blue-500, .border-blue-600, :focus-visible) {
-  border-color: var(--cat);
+  border-color: var(--color-blue-600);
 }
 /* AA text on the neutral surfaces: the grays (#71717b / #9f9fa9 fall under 4.5:1 on #f2f4f7 / white and
    #71717b on #172133) and the wordmark blue; the site header and footer bars turn neutral too. */
