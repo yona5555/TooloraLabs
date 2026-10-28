@@ -54,8 +54,12 @@ jobs:
       - name: Validate JSON (locale messages, data, approved previews)
         run: npm run check:json
 
-      - name: Build web app
-        run: npm run build --workspace=apps/web
+      - name: Test (main-health script, mocked GitHub API)
+        run: npm run test:main-health
+
+      # Any warning line in the build output (Next.js ⚠, webpack, React, Node, npm) fails the step.
+      - name: Build web app (zero warnings)
+        run: node scripts/run-no-warnings.mjs npm run build --workspace=apps/web
 
       - name: Install Playwright Chromium
         run: npx playwright install --with-deps chromium
@@ -274,3 +278,37 @@ jobs:
           echo "::add-mask::$AUTH"
           git -c "http.https://github.com/.extraheader=AUTHORIZATION: basic $AUTH" \
             push "https://github.com/$GITHUB_REPOSITORY.git" "HEAD:refs/heads/$HEAD_REF"
+
+  # Required check. Fails if any job of this run left a warning or failure annotation (GitHub deprecations
+  # included), so a warning can never merge unnoticed. always(): it still reports when a job failed or was
+  # skipped. Check runs are found by their details URL (this run's id), so only checks: read is needed.
+  zero-warnings:
+    needs: [build, home-phone-lock, desktop-lock, regenerate-baselines]
+    if: always()
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      checks: read
+    steps:
+      - name: No warning or failure annotation in this run
+        env:
+          GH_TOKEN: ${{ github.token }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          NEEDS_JSON: ${{ toJSON(needs) }}
+        run: |
+          bad_needs=$(jq -r 'to_entries[] | select(.value.result == "failure" or .value.result == "cancelled") | "\(.key): \(.value.result)"' <<<"$NEEDS_JSON")
+          ids=$(gh api --paginate "repos/$GITHUB_REPOSITORY/commits/$HEAD_SHA/check-runs?per_page=100" \
+            --jq ".check_runs[] | select(.details_url | test(\"/actions/runs/$GITHUB_RUN_ID/\")) | select(.name != \"zero-warnings\") | .id")
+          found=0
+          for id in $ids; do
+            lines=$(gh api --paginate "repos/$GITHUB_REPOSITORY/check-runs/$id/annotations?per_page=100" \
+              --jq '.[] | select(.annotation_level == "warning" or .annotation_level == "failure") | "[\(.annotation_level)] \(.path):\(.start_line) \(.message | gsub("\n"; " "))"')
+            if [ -n "$lines" ]; then
+              name=$(gh api "repos/$GITHUB_REPOSITORY/check-runs/$id" --jq .name)
+              while IFS= read -r line; do echo "::error title=$name::$line"; done <<<"$lines"
+              found=1
+            fi
+          done
+          if [ -n "$bad_needs" ]; then echo "::error::Jobs not successful: $bad_needs"; found=1; fi
+          if [ "$found" -ne 0 ]; then exit 1; fi
+          echo "No warning or failure annotations in run $GITHUB_RUN_ID."
