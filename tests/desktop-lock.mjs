@@ -28,6 +28,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { createRequire } from "node:module";
+import { createConnection } from "node:net";
 import { availableParallelism } from "node:os";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -119,6 +120,16 @@ let server;
 if (OWN_SERVER) {
   if (!existsSync(join(WEB, ".next-lock/BUILD_ID"))) {
     console.error("No .next-lock build: run npm run build:desktop-lock first.");
+    process.exit(2);
+  }
+  // The dedicated port must be free: a server already there would be measured instead of the fixture build,
+  // and it is never stopped from here (only the server this test starts is, by its own handle).
+  const taken = await new Promise((done) => {
+    const probe = createConnection({ port: PORT, host: "127.0.0.1" }, () => (probe.destroy(), done(true)));
+    probe.on("error", () => done(false));
+  });
+  if (taken) {
+    console.error(`Port ${PORT} is already in use by another process; the desktop lock needs it free. Nothing was stopped.`);
     process.exit(2);
   }
   server = spawn(process.execPath, [webRequire.resolve("next/dist/bin/next"), "start", "-p", String(PORT)], {
