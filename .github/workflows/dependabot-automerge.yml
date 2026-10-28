@@ -1,0 +1,54 @@
+name: Dependabot auto-merge
+
+# pull_request_target: Dependabot's own pull_request runs get no Actions secrets, so the App token could not
+# be minted there. This workflow runs main's copy of itself and never checks out or executes PR code.
+on:
+  pull_request_target:
+    types: [opened, reopened, synchronize]
+    branches: [main]
+
+permissions: {}
+
+jobs:
+  automerge:
+    # Both checks: the PR is Dependabot's, and so is the event (a human push to its branch does not qualify).
+    if: github.event.pull_request.user.login == 'dependabot[bot]' && github.actor == 'dependabot[bot]'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    # Only what fetch-metadata reads (the PR's commits); the App token does every write.
+    permissions:
+      contents: read
+      pull-requests: read
+    steps:
+      - name: Read the Dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@25dd0e34f4fe68f24cc83900b1fe3fe149efef98 # v3.1.0
+
+      - name: Mint the bot token
+        id: app-token
+        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
+        with:
+          client-id: ${{ vars.TOOLORA_BOT_CLIENT_ID }}
+          private-key: ${{ secrets.TOOLORA_BOT_PRIVATE_KEY }}
+          permission-contents: write
+          permission-pull-requests: write
+          # github-actions updates change .github/workflows.
+          permission-workflows: write
+
+      # GitHub merges only once every required check passes; an App merge (unlike GITHUB_TOKEN) starts the
+      # push workflows on main.
+      - name: Minor/patch → enable auto-merge; major → label for review
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          UPDATE_TYPE: ${{ steps.metadata.outputs.update-type }}
+        run: |
+          case "$UPDATE_TYPE" in
+            version-update:semver-minor|version-update:semver-patch)
+              gh pr merge --auto --merge "$PR_URL"
+              ;;
+            *)
+              echo "update-type '$UPDATE_TYPE' is not minor/patch: labelling major-update, no auto-merge."
+              gh pr edit --add-label major-update "$PR_URL"
+              ;;
+          esac
