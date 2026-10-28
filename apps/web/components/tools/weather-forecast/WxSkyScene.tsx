@@ -4,6 +4,7 @@ import { precipitationKind } from "@tooloralabs/tools";
 import type { WxDerived, WxFmt } from "./wx";
 import { svgPx } from "@/components/tool-ui/svgPx";
 
+import FitSvg from "@/components/tool-ui/FitSvg";
 const W = 360;
 const H = 230;
 const HORIZON = 168;
@@ -74,7 +75,7 @@ export default function WxSkyScene({ d, f }: { d: WxDerived; f: WxFmt }) {
   const southern = d.place.lat < 0;
 
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} width="100%" height="100%" style={{ direction: "ltr" }} className="block h-auto w-full rounded-lg" role="img" aria-label="sky">
+    <FitSvg viewBox={`0 0 ${W} ${H}`} width="100%" height="100%" style={{ direction: "ltr" }} className="block h-auto w-full rounded-lg" role="img" aria-label="sky">
       <defs>
         <linearGradient id={`${svgId}wx-sky`} x1="0" x2="0" y1="0" y2="1">
           <stop offset="0" stopColor={top} />
@@ -167,6 +168,6 @@ export default function WxSkyScene({ d, f }: { d: WxDerived; f: WxFmt }) {
       <text x={W - 8} y={24} textAnchor="end" fontWeight={800} fill="#fff" style={{ fontSize: svgPx(22), paintOrder: "stroke" }} stroke="#0f172a" strokeOpacity={0.35} strokeWidth={3}>
         {f.deg(cur.tempC)}
       </text>
-    </svg>
+    </FitSvg>
   );
 }

@@ -4,6 +4,7 @@ import BarcodeIndicatorCard, { BarcodeIndicatorUnavailable } from "./BarcodeIndi
 import { useBarcodeModel } from "./BarcodeLiveContext";
 import { svgPx } from "@/components/tool-ui/svgPx";
 
+import FitSvg from "@/components/tool-ui/FitSvg";
 const W = 340;
 const MAX_COLS = 13;
 
@@ -33,7 +34,7 @@ export default function BarcodeCheckDigitFlow() {
   );
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {[t("rowChar"), t("rowWeight"), t("rowProduct")].map((label, i) => (
         <text style={{ fontSize: svgPx(12) }} key={label} x={0} y={rowY[i]} className="fill-zinc-500 dark:fill-zinc-400">
           {label}
@@ -73,7 +74,7 @@ export default function BarcodeCheckDigitFlow() {
       <text style={{ fontSize: svgPx(15) }} x={(x0 + W) / 2} y={rowY[2] + 68} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-amber-600 dark:fill-amber-300">
         {isCode128 ? t("resultCode128", { n: c.check }) : t("resultEan", { r: c.remainder, n: c.check })}
       </text>
-    </svg>
+    </FitSvg>
   );
 
   return (

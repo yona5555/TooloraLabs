@@ -26,6 +26,7 @@ import { dateKeyMs, tempColor, useChartWidth, useIsRtl, useWxT, type WxCardProps
 import { svgPx } from "@/components/tool-ui/svgPx";
 import { inkOn, paletteTextClass } from "@/lib/palette-text";
 
+import FitSvg from "@/components/tool-ui/FitSvg";
 const axis = "fill-zinc-500 dark:fill-zinc-400";
 const strong = "fill-zinc-800 dark:fill-zinc-100";
 const grid = "stroke-zinc-200 dark:stroke-zinc-700";
@@ -351,7 +352,7 @@ export function WxPressureCard({ d, f }: WxCardProps) {
         layout="side"
         title={t("ind.worked")}
         chart={
-          <div ref={wrap} className="w-full"><svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} style={{ direction: "ltr" }} className="block h-auto w-full" role="img" aria-label={t("ind.pressure.title")}>
+          <div ref={wrap} className="w-full"><FitSvg viewBox={`0 0 ${W} ${H}`} width={W} height={H} style={{ direction: "ltr" }} className="block h-auto w-full" role="img" aria-label={t("ind.pressure.title")}>
             {[0, 0.25, 0.5, 0.75, 1].map((k) => {
               const v = lo + (hi - lo) * k;
               return (
@@ -369,7 +370,7 @@ export function WxPressureCard({ d, f }: WxCardProps) {
             <text style={{ fontSize: svgPx(12) }} x={X(maxI)} y={Y(vals[maxI]) - 6} textAnchor="middle" fontWeight={700} className={strong}>{f.num(weatherPressure(vals[maxI], f.units), f.units === "us" ? 2 : 0)}</text>
             {hours.map((x, k) => (k % 12 === 0 ? <text style={{ fontSize: svgPx(12) }} key={k} x={X(k)} y={H - 6} textAnchor="middle" className={axis}>{f.weekday(x.t, d.place.zone)} {f.hour(x.t, d.place.zone)}</text> : null))}
             <text style={{ fontSize: svgPx(12) }} x={rtl ? R : W - R} y={T + 2} textAnchor={rtl ? "start" : "end"} className={axis}>{f.pressureUnit}</text>
-          </svg></div>
+          </FitSvg></div>
         }
         rows={[
           { label: t("ind.pressure.now"), value: f.pressure(p0) },

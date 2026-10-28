@@ -20,6 +20,7 @@ import { VAT_CHECKED, VAT_TABLE } from "./types";
 import { svgPx } from "@/components/tool-ui/svgPx";
 import { useMeasuredWidth } from "@/components/tool-ui/useMeasuredWidth";
 
+import FitSvg from "@/components/tool-ui/FitSvg";
 export type IndicatorProps = { invoices: BatchInvoice[]; overview: BatchOverview; f: InvoiceFormatters };
 
 /** One colour per invoice, reused by every indicator so an invoice reads the same everywhere. */
@@ -486,7 +487,7 @@ export function NetTaxBalance({ overview, f }: IndicatorProps) {
       }}
     >
       <div dir="ltr" className="flex justify-center overflow-x-auto" data-testid="ind-balance">
-        <svg width={420} height={250} viewBox="0 0 420 250" role="img" aria-label={t("balance.title")}>
+        <FitSvg width={420} height={250} viewBox="0 0 420 250" role="img" aria-label={t("balance.title")}>
           <polygon points="195,235 225,235 210,118" className="fill-zinc-300 dark:fill-zinc-600" />
           {(() => {
             const dy = Math.sin((tilt * Math.PI) / 180) * 160;
@@ -508,7 +509,7 @@ export function NetTaxBalance({ overview, f }: IndicatorProps) {
           })()}
           <text style={{ fontSize: svgPx(12) }} x={210} y={24} textAnchor="middle" className="fill-zinc-500">{t("balance.per100", { amount: f.money(100) })}</text>
           <text style={{ fontSize: svgPx(22) }} x={210} y={50} textAnchor="middle" className="fill-zinc-900 font-mono font-bold dark:fill-zinc-100">{f.money(per100)}</text>
-        </svg>
+        </FitSvg>
       </div>
     </IndicatorCard>
   );
