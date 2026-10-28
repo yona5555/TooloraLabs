@@ -60,3 +60,11 @@
 - **حماية main:** classic branch protection، `strict: true` (الفرع يجب أن يكون محدَّثاً قبل الدمج)، والفحوص الإلزامية التسعة: build وhome-phone-lock وdesktop-lock وaudit وAnalyze (javascript-typescript) وAnalyze (actions) وzero-warnings وaudit-zero-warnings وcodeql-zero-warnings (الثلاثة الأخيرة تشغّل `scripts/zero-warnings.sh`).
 - **main-health:** بعد كل تشغيل على main لـ CI وCodeQL وAudit وSBOM وScorecard وPR auto-update، يفتح `scripts/main-health.mjs` (من `main-health.yml`) issue واحداً لكل workflow بعنوان `main-health: <workflow>` ووسم `main-health`، مسنَداً إلى yona5555 (فيصله إشعار)، أو يعلّق عليه إن كان مفتوحاً، عند أي نتيجة غير success أو أي annotation تحذير؛ وعند أول تشغيل نظيف يغلق issue ذلك الـworkflow وحده بتعليق فيه رابط التشغيل. التشغيل الملغى لأن تشغيلاً أحدث حلّ محله لا يُحكم عليه.
 - **التحقق من الآن فصاعداً = قراءة واحدة:** `gh issue list --label main-health --state open`. لا issues مفتوحة = main سليم. لا قراءة لتشغيلات جارية ولا انتظار.
+
+## 10. الإطلاق: متغيرات Vercel Production الإلزامية (2026-10-28)
+- يجب ضبط هذه المتغيرات الثلاثة في Vercel → Project → Settings → Environment Variables، بيئة **Production**:
+  - `METALPRICE_API_KEY` (أسعار الذهب والفضة، `lib/commodities/metalprice.ts`)
+  - `OILPRICE_API_KEY` (أسعار WTI وBrent، `lib/commodities/oilprice.ts`)
+  - `EXCHANGE_RATE_API_KEY` (أسعار العملات، `lib/forex/exchangerate.ts`)
+- غياب أيٍّ منها في بناء Production (`VERCEL_ENV=production`) يوقف البناء فوراً برسالة تذكر اسم المتغير الناقص فقط: `assertMarketApiKeysForProduction` في `apps/web/lib/api-key.ts`، يُستدعى مرة واحدة من `apps/web/next.config.ts` في مرحلة `next build`. القائمة المصدر الوحيد: `MARKET_API_KEYS` في الملف نفسه؛ أي مفتاح سوق جديد يُضاف إليها.
+- بناء CI وPreview والجهاز المحلي لا يحتاجها: كل أداة تسلك مسار «لا مفتاح» الصريح (لا طلب، لا سجل، حالة «البيانات غير متاحة»).

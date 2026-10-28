@@ -1,4 +1,5 @@
 import type { CurrencyRate } from "@tooloralabs/tools";
+import { apiKey } from "@/lib/api-key";
 
 const EXCHANGE_RATE_API_BASE = "https://v6.exchangerate-api.com/v6";
 
@@ -6,14 +7,6 @@ const EXCHANGE_RATE_API_BASE = "https://v6.exchangerate-api.com/v6";
 const RATES_REVALIDATE_SECONDS = 86400;
 /** The ISO 4217 code/name list changes only when a currency is retired or introduced — a rare event. */
 const CODES_REVALIDATE_SECONDS = 604800;
-
-function requireApiKey(): string {
-  const key = process.env.EXCHANGE_RATE_API_KEY;
-  if (!key) {
-    throw new Error("Missing EXCHANGE_RATE_API_KEY environment variable");
-  }
-  return key;
-}
 
 type LatestRatesResponse = {
   time_last_update_unix: number;
@@ -25,8 +18,8 @@ type SupportedCodesResponse = {
   supported_codes: [code: string, name: string][];
 };
 
-async function getCurrencyNames(): Promise<Map<string, string>> {
-  const res = await fetch(`${EXCHANGE_RATE_API_BASE}/${requireApiKey()}/codes`, {
+async function getCurrencyNames(key: string): Promise<Map<string, string>> {
+  const res = await fetch(`${EXCHANGE_RATE_API_BASE}/${key}/codes`, {
     next: { revalidate: CODES_REVALIDATE_SECONDS },
   });
   if (!res.ok) {
@@ -47,15 +40,17 @@ export type ForexSnapshot = {
 /**
  * Every ExchangeRate-API rate is already USD-per-unit-of-base, i.e. `conversion_rates[code]` is units of `code` per 1 USD — the pivot every conversion in this tool goes through, the same way crypto-converter pivots through each coin's USD price.
  *
- * Returns `null` instead of throwing on any failure (missing API key, network error, non-ok response, malformed payload) — this is awaited directly in a page component with no error boundary of its own, so an uncaught throw here previously crashed the whole page with a 500. The caller renders a clear "data unavailable" state instead.
+ * Returns `null` instead of throwing on any failure (network error, non-ok response, malformed payload) — this is awaited directly in a page component with no error boundary of its own, so an uncaught throw here previously crashed the whole page with a 500. The caller renders a clear "data unavailable" state instead. With no key configured it returns `null` at once (no request, no log; see apiKey).
  */
 export async function getForexSnapshot(): Promise<ForexSnapshot | null> {
+  const key = apiKey("EXCHANGE_RATE_API_KEY");
+  if (!key) return null;
   try {
     const [ratesRes, names] = await Promise.all([
-      fetch(`${EXCHANGE_RATE_API_BASE}/${requireApiKey()}/latest/USD`, {
+      fetch(`${EXCHANGE_RATE_API_BASE}/${key}/latest/USD`, {
         next: { revalidate: RATES_REVALIDATE_SECONDS },
       }),
-      getCurrencyNames(),
+      getCurrencyNames(key),
     ]);
     if (!ratesRes.ok) {
       throw new Error(`ExchangeRate-API latest request failed: ${ratesRes.status}`);
