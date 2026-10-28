@@ -10,6 +10,8 @@ import { useGraphLive } from "./GraphLiveContext";
 import { fmtNum } from "./types";
 import { svgPx } from "@/components/tool-ui/svgPx";
 import { useFitWidth } from "@/components/tool-ui/useFitWidth";
+import { LABEL_GAP, labelUnits, stackBands } from "@/components/tool-ui/chartLabels";
+import { useLabelMeasure } from "@/components/tool-ui/useChartLabels";
 
 type Row = { label: string; value: string; emphasize?: boolean; note?: string };
 
@@ -243,6 +245,8 @@ export function GraphAreaBalance() {
 }
 
 /* ------------------------------------------------------------------ */
+const TRIO_H = 200;
+
 /** Type #12 (Sensitivity Trio): f just left of, at, and just right of the traced point, and how well the tangent predicts it. */
 export function GraphSensitivityTrio() {
   const t = useTranslations("tools.graphing-calculator.viz.trio");
@@ -257,25 +261,43 @@ export function GraphSensitivityTrio() {
   const maxAbs = Math.max(1e-9, ...ys.map((y) => Math.abs(y ?? 0)));
   const labels = [t("low"), t("current"), t("high")];
   const cls = ["fill-sky-500 dark:fill-sky-400", "fill-blue-600 dark:fill-blue-400", "fill-violet-500 dark:fill-violet-400"];
+  const values = ys.map((y) => (y === null ? tv("undefined") : fmtNum(y, 3)));
+  const xLabels = xs.map((x) => `x = ${fmtNum(x, 3)}`);
+  // Shared label layout: label rows sized from the measured ink of their own text at the size it renders
+  // (svgPx grows it on a scaled-down chart); the bars get what is left after a value label above or below.
+  const [svgRef, measure, k] = useLabelMeasure();
+  const fs = labelUnits(12, k);
+  const gap = LABEL_GAP * k;
+  const band = (texts: string[], weight?: number) => {
+    const m = texts.map((s) => measure(s, fs, weight));
+    return { ascent: Math.max(...m.map((x) => x.ascent)), descent: Math.max(...m.map((x) => x.descent)) };
+  };
+  const head = band(labels, 600);
+  const foot = band(xLabels);
+  const val = band(values, 700);
+  const { headerBase, footerBase, plotTop, plotBottom } = stackBands(TRIO_H, head, foot, gap);
+  const axisY = (plotTop + plotBottom) / 2;
+  const maxBar = Math.max(2, (plotBottom - plotTop) / 2 - val.ascent - val.descent - gap);
   return (
     <IndicatorCard
       ns="trio"
       indicator={
         <div dir="ltr">
-          <svg width={360} height={200} viewBox="0 0 360 200" style={svgStyle} role="img" aria-label={t("title")}>
-            <line x1={10} x2={350} y1={110} y2={110} className="stroke-zinc-300 dark:stroke-zinc-600" />
+          <svg ref={svgRef} width={360} height={TRIO_H} viewBox={`0 0 360 ${TRIO_H}`} style={svgStyle} role="img" aria-label={t("title")}>
+            <line x1={10} x2={350} y1={axisY} y2={axisY} className="stroke-zinc-300 dark:stroke-zinc-600" />
             {xs.map((x, i) => {
               const y = ys[i];
-              const h = y === null ? 0 : (Math.abs(y) / maxAbs) * 72;
+              const h = y === null ? 0 : (Math.abs(y) / maxAbs) * maxBar;
+              const down = y !== null && y < 0;
               const cx = 60 + i * 120;
               return (
                 <g key={i}>
-                  <rect x={cx - 30} y={y !== null && y < 0 ? 110 : 110 - h} width={60} height={Math.max(2, h)} rx={5} className={cls[i]} />
-                  <text style={{ fontSize: svgPx(12) }} x={cx} y={y !== null && y < 0 ? 110 + h + 14 : 110 - h - 6} fontWeight={700} textAnchor="middle" className="fill-zinc-800 dark:fill-zinc-100">
-                    {y === null ? tv("undefined") : fmtNum(y, 3)}
+                  <rect x={cx - 30} y={down ? axisY : axisY - h} width={60} height={Math.max(2, h)} rx={5} className={cls[i]} />
+                  <text style={{ fontSize: svgPx(12) }} x={cx} y={down ? axisY + h + gap + val.ascent : axisY - h - gap - val.descent} fontWeight={700} textAnchor="middle" className="fill-zinc-800 dark:fill-zinc-100">
+                    {values[i]}
                   </text>
-                  <text style={{ fontSize: svgPx(12) }} x={cx} y={14} fontWeight={600} textAnchor="middle" className="fill-zinc-600 dark:fill-zinc-300">{labels[i]}</text>
-                  <text style={{ fontSize: svgPx(12) }} x={cx} y={196} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">{`x = ${fmtNum(x, 3)}`}</text>
+                  <text style={{ fontSize: svgPx(12) }} x={cx} y={headerBase} fontWeight={600} textAnchor="middle" className="fill-zinc-600 dark:fill-zinc-300">{labels[i]}</text>
+                  <text style={{ fontSize: svgPx(12) }} x={cx} y={footerBase} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">{xLabels[i]}</text>
                 </g>
               );
             })}

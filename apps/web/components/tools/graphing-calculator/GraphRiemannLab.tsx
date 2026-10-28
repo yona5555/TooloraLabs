@@ -8,6 +8,8 @@ import { riemannSum, type RiemannMethod } from "@tooloralabs/tools";
 import { useIsDarkMode } from "@/lib/use-dark-mode";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import IndicatorWithTable from "@/components/tool-ui/IndicatorWithTable";
+import { padRange } from "@/components/tool-ui/chartLabels";
+import { useLabelFit } from "@/components/tool-ui/useChartLabels";
 import { useGraphLive } from "./GraphLiveContext";
 import { MafsCurve, MAFS_COLORS, niceStep } from "./graphMafs";
 import { fmtNum } from "./types";
@@ -34,6 +36,10 @@ export default function GraphRiemannLab() {
   const approx = tidy(riemannSum(f, xMin, xMax, n, method));
   const exact = tidy(riemannSum(f, xMin, xMax, 1000, "simpson"));
   const err = tidy(Math.abs(approx - exact));
+  // Shared label layout: the view widens by the measured overflow of its tick labels, so none is cut at an edge.
+  const [fitRef, fit] = useLabelFit(`${xMin}:${xMax}:${yLo}:${yHi}`);
+  const [vx0, vx1] = padRange([xMin, xMax], fit.width, fit.margins.left, fit.margins.right);
+  const [vy0, vy1] = padRange([yLo, yHi], fit.height, fit.margins.bottom, fit.margins.top);
   const clampY = (y: number) => Math.min(yHi, Math.max(yLo, y));
 
   const strips = Array.from({ length: n }, (_, i) => {
@@ -69,8 +75,8 @@ export default function GraphRiemannLab() {
                 </button>
               ))}
             </div>
-            <div dir="ltr" className="mafs-canvas w-full overflow-hidden rounded-xl">
-              <Mafs viewBox={{ x: [xMin, xMax], y: [yLo, yHi], padding: 0 }} height={260} pan={false} zoom={false} preserveAspectRatio={false}>
+            <div ref={fitRef} dir="ltr" className="mafs-canvas w-full overflow-hidden rounded-xl">
+              <Mafs viewBox={{ x: [vx0, vx1], y: [vy0, vy1], padding: 0 }} height={260} pan={false} zoom={false} preserveAspectRatio={false}>
                 <Coordinates.Cartesian xAxis={{ lines: niceStep(xMax - xMin) }} yAxis={{ lines: niceStep(yHi - yLo) }} />
                 {strips.map((s, i) => (
                   <Polygon key={i} points={s.pts} color={s.h >= 0 ? c.fill : c.neg} fillOpacity={0.25} weight={1} />
