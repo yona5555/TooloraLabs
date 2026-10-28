@@ -6,6 +6,7 @@ import { OrbitControls } from "@react-three/drei";
 import { usePalette3D } from "./theme3d";
 import PreviewReady from "./PreviewReady";
 import FitContent from "./FitContent";
+import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 
 export type Scene3DCanvasProps = {
   children: ReactNode;
@@ -40,6 +41,9 @@ export default function Scene3DCanvas({
   orbit,
 }: Scene3DCanvasProps) {
   const p = usePalette3D();
+  // prefers-reduced-motion: no automatic rotation (WCAG 2.3.3); the scene still turns by hand. It also
+  // keeps the demand frame loop idle, so the preview generator's frames settle.
+  const reducedMotion = usePrefersReducedMotion();
   return (
     <Canvas
       dpr={[1, 2]}
@@ -58,7 +62,7 @@ export default function Scene3DCanvas({
       <OrbitControls
         makeDefault
         enablePan={false}
-        autoRotate={autoRotate}
+        autoRotate={autoRotate && !reducedMotion}
         autoRotateSpeed={0.8}
         minAzimuthAngle={orbit?.minAzimuth ?? -Infinity}
         maxAzimuthAngle={orbit?.maxAzimuth ?? Infinity}

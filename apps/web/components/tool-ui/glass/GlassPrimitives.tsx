@@ -1,8 +1,11 @@
 "use client";
-import { useEffect, useRef, useState, useSyncExternalStore, type CSSProperties, type ReactNode } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import SectionCard, { type PhoneRole } from "@/components/tool-ui/SectionCard";
 import "./glass-tokens.css";
 import { glassInter } from "./glass-font";
+import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
+
+export { usePrefersReducedMotion };
 
 /**
  * Shared "glass" visual language for the fraction-calculator hero/indicator cards. Every color
@@ -59,19 +62,6 @@ function sideFor(n: number): "visual-left" | "table-left" {
   return n % 2 === 1 ? "visual-left" : "table-left";
 }
 
-const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
-function subscribeReducedMotion(callback: () => void) {
-  const mq = window.matchMedia(REDUCED_MOTION_QUERY);
-  mq.addEventListener("change", callback);
-  return () => mq.removeEventListener("change", callback);
-}
-/** useSyncExternalStore -- not useState+useEffect -- is the hydration-safe, lint-clean way to
- * read a browser media query: the server snapshot is always false, so SSR and first client
- * render always agree (no mismatch), and React itself (not an effect body) handles reconciling
- * the real value right after. */
-export function usePrefersReducedMotion(): boolean {
-  return useSyncExternalStore(subscribeReducedMotion, () => window.matchMedia(REDUCED_MOTION_QUERY).matches, () => false);
-}
 
 /** §42.3: flashes `true` for ~600ms every time `trigger()` is called, then auto-clears -- the
  * hook a card's own control uses to tint its changed table cells once per interaction. Reduced
