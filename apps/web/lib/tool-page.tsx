@@ -14,6 +14,7 @@ import { hasCategoryPage } from "@/data/categories";
 import { SITE_URL } from "@/lib/site";
 import { RenderClockProvider } from "@/components/tools/markets/RenderClock";
 import { renderTime } from "@/lib/render-time";
+import { shareImageMetadata } from "@/lib/share-image/meta";
 
 export async function toolPageMetadata(locale: string, slug: string): Promise<Metadata> {
   const tool = tools.find((item) => item.slug === slug);
@@ -27,12 +28,15 @@ export async function toolPageMetadata(locale: string, slug: string): Promise<Me
   const pageTitle = `${t(`${slug}.title`)} | TooloraLabs`;
   const description = t(`${slug}.description`);
   const path = `/tools/${slug}`;
+  const { images, twitter } = shareImageMetadata(locale, slug, t(`${slug}.title`));
 
   return {
     title: pageTitle,
     description,
     alternates: localeAlternates(locale, path),
+    twitter,
     openGraph: {
+      images,
       title: pageTitle,
       description,
       url: `/${locale}${path}`,
