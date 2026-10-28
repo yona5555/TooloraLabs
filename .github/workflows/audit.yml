@@ -35,3 +35,27 @@ jobs:
 
       - name: Registry signatures and provenance attestations
         run: npm audit signatures
+
+  # Required check: the audit job left no warning or failure annotation; the same fail-on-warning gate as ci.yml's zero-warnings (scripts/zero-warnings.sh).
+  audit-zero-warnings:
+    needs: [audit]
+    if: always()
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      checks: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          sparse-checkout: scripts/zero-warnings.sh
+          sparse-checkout-cone-mode: false
+
+      - name: No warning or failure annotation in this run
+        env:
+          GH_TOKEN: ${{ github.token }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          NEEDS_JSON: ${{ toJSON(needs) }}
+          SELF: audit-zero-warnings
+        run: scripts/zero-warnings.sh

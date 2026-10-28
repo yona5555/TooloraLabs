@@ -8,7 +8,7 @@
     "prebuild": "node scripts/gen-client-message-deps.mjs",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
+    "lint": "eslint --max-warnings 0",
     "test:indicators": "node scripts/fraction-calculator-final-test.mjs",
     "test:sci-sidebar": "node scripts/scientific-calculator-sidebar-test.mjs",
     "previews": "node scripts/generate-tool-previews.mts",

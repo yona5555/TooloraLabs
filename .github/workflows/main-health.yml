@@ -1,0 +1,44 @@
+name: main health
+
+# After every run on main of the workflows below, scripts/main-health.mjs opens (or comments on) the issue
+# "main-health: <workflow>" when the run failed or left a warning, and closes it on the next clean run.
+# Open issues labelled main-health = main is not healthy. dependabot-automerge is not listed: it runs only
+# on pull_request_target for Dependabot branches, never on main.
+# workflow_run always uses main's copy of this file and script; no PR code is checked out.
+on:
+  workflow_run:
+    workflows: [CI, CodeQL, Audit, SBOM, Scorecard, PR auto-update]
+    types: [completed]
+    branches: [main]
+
+permissions: {}
+
+jobs:
+  report:
+    if: github.event.workflow_run.head_branch == 'main' && github.event.workflow_run.head_repository.full_name == github.repository
+    # One report per workflow at a time, so two runs never open duplicate issues.
+    concurrency:
+      group: main-health-${{ github.event.workflow_run.workflow_id }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      # contents: read only to check out main's copy of scripts/main-health.mjs.
+      contents: read
+      issues: write
+      actions: read
+      checks: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          sparse-checkout: scripts/main-health.mjs
+          sparse-checkout-cone-mode: false
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+
+      - name: Open, update or close this workflow's main-health issue
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/main-health.mjs

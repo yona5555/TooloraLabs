@@ -17,7 +17,8 @@
     "build:desktop-lock": "NEXT_TELEMETRY_DISABLED=1 NEXT_DIST_DIR=.next-lock NODE_OPTIONS=--import=$PWD/tests/fixtures/offline-fetch.mjs npm run build --workspace=apps/web",
     "test:desktop-lock": "node tests/desktop-lock.mjs",
     "test:desktop-lock:full": "node tests/desktop-lock.mjs --full",
-    "baseline:desktop-lock": "node tests/desktop-lock.mjs --write"
+    "baseline:desktop-lock": "node tests/desktop-lock.mjs --write",
+    "test:main-health": "node --test scripts/main-health.test.mjs"
   },
   "devDependencies": {
     "patch-package": "^8.0.1",
