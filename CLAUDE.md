@@ -19,6 +19,10 @@ TooloraLabs-Claude-Instructions.md is a historical archive; the binding rules ar
 - Every final report MUST end with: 'Context: <percent>% — <advice>'. Above 50% the advice is 'run /clear now'.
 - Details matter: clipping, cropping, stale cache and wrong elements are bugs. Check them before saying done.
 - Performance numbers: the only official metric is Lighthouse mobile (CLI, default throttling), 3 runs per page, median, on a production build. Any other timing method may be used only to compare two builds and must be labelled as such in the report.
+- Never kill a process you did not start, and never kill by port (no lsof/fuser/pkill/kill on a port's PIDs):
+  stop only what you started, by its own PID. Test servers use a dedicated port (3109 desktop-lock, 3110 CI
+  via scripts/test-server.sh), checked free first; if it is taken, fail with a clear message. Port 3001 is
+  Yousef's dev server: never stop or restart it unless asked.
 - Zero warnings: any CI annotation, deprecation, build, lint or console warning is fixed immediately at the root. A report that mentions a warning without fixing it is not accepted.
 
 ## Hard rules

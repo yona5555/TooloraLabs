@@ -1,3 +1,5 @@
+import { apiKey } from "@/lib/api-key";
+
 const OILPRICE_API_BASE = "https://api.oilpriceapi.com/v1";
 
 /**
@@ -8,14 +10,6 @@ const OILPRICE_API_BASE = "https://api.oilpriceapi.com/v1";
  * usage far under budget.
  */
 const REVALIDATE_SECONDS = 86400;
-
-function requireApiKey(): string {
-  const key = process.env.OILPRICE_API_KEY;
-  if (!key) {
-    throw new Error("Missing OILPRICE_API_KEY environment variable");
-  }
-  return key;
-}
 
 type LatestPriceResponse = {
   status: string;
@@ -28,9 +22,9 @@ type LatestPriceResponse = {
   };
 };
 
-async function getLatestPrice(code: "WTI_USD" | "BRENT_CRUDE_USD"): Promise<{ priceUsdPerBarrel: number; asOf: string }> {
+async function getLatestPrice(key: string, code: "WTI_USD" | "BRENT_CRUDE_USD"): Promise<{ priceUsdPerBarrel: number; asOf: string }> {
   const res = await fetch(`${OILPRICE_API_BASE}/prices/latest?by_code=${code}`, {
-    headers: { Authorization: `Token ${requireApiKey()}` },
+    headers: { Authorization: `Token ${key}` },
     next: { revalidate: REVALIDATE_SECONDS },
   });
   if (!res.ok) {
@@ -51,11 +45,13 @@ export type OilSnapshot = {
 };
 
 /**
- * Returns `null` instead of throwing on any failure (missing API key, network error, non-ok response) — this is awaited directly in a page component with no error boundary of its own, so an uncaught throw here previously crashed the whole page with a 500. The caller renders a clear "data unavailable" state instead.
+ * Returns `null` instead of throwing on any failure (network error, non-ok response) — this is awaited directly in a page component with no error boundary of its own, so an uncaught throw here previously crashed the whole page with a 500. The caller renders a clear "data unavailable" state instead. With no key configured it returns `null` at once (no request, no log; see apiKey).
  */
 export async function getOilSnapshot(): Promise<OilSnapshot | null> {
+  const key = apiKey("OILPRICE_API_KEY");
+  if (!key) return null;
   try {
-    const [wti, brent] = await Promise.all([getLatestPrice("WTI_USD"), getLatestPrice("BRENT_CRUDE_USD")]);
+    const [wti, brent] = await Promise.all([getLatestPrice(key, "WTI_USD"), getLatestPrice(key, "BRENT_CRUDE_USD")]);
     return {
       wtiUsdPerBarrel: wti.priceUsdPerBarrel,
       brentUsdPerBarrel: brent.priceUsdPerBarrel,

@@ -30,8 +30,10 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Lint
-        run: npm run lint --workspace=apps/web
+      # Lint, tests and the build run through the warnings gate (scripts/run-no-warnings.mjs): any warning or
+      # error line from a tool fails the step, not only a non-zero exit.
+      - name: Lint (zero warnings)
+        run: node scripts/run-no-warnings.mjs npm run lint --workspace=apps/web
 
       - name: Typecheck (core)
         run: npx tsc --noEmit --project packages/core/tsconfig.json
@@ -43,19 +45,25 @@ jobs:
         run: npx tsc --noEmit --project packages/tools/tsconfig.json
 
       - name: Test (core)
-        run: npm run test --workspace=packages/core
+        run: node scripts/run-no-warnings.mjs npm run test --workspace=packages/core
 
       - name: Test (sdk)
-        run: npm run test --workspace=packages/sdk
+        run: node scripts/run-no-warnings.mjs npm run test --workspace=packages/sdk
 
       - name: Test (tools)
-        run: npm run test --workspace=packages/tools
+        run: node scripts/run-no-warnings.mjs npm run test --workspace=packages/tools
+
+      - name: Test (web lib, market API keys)
+        run: node scripts/run-no-warnings.mjs npm run test --workspace=apps/web
+
+      - name: Test (warnings gate patterns)
+        run: node scripts/run-no-warnings.mjs npm run test:gate
 
       - name: Validate JSON (locale messages, data, approved previews)
         run: npm run check:json
 
       - name: Test (main-health script, mocked GitHub API)
-        run: npm run test:main-health
+        run: node scripts/run-no-warnings.mjs npm run test:main-health
 
       # Any warning line in the build output (Next.js ⚠, webpack, React, Node, npm) fails the step.
       # Next.js build cache (https://nextjs.org/docs/messages/no-cache): restored from the last build of this
@@ -85,12 +93,13 @@ jobs:
         run: npx playwright install --with-deps chromium
 
       - name: Served tool-card previews + LOCKED phone card order and zero duplicate ids (every tool at 390px)
-        working-directory: apps/web
+        # Test servers use the dedicated port 3110 (never 3001, the dev server's) through scripts/test-server.sh:
+        # it fails if the port is taken and stops only the server it started.
         run: |
-          npx next start -p 3001 > /tmp/next.log 2>&1 &
-          for _ in $(seq 1 60); do curl -sf -o /dev/null http://localhost:3001/en/tools && break; sleep 2; done
-          npm run test:cards
-          node ../../tests/phone-card-order.mjs --ids http://localhost:3001 en
+          scripts/test-server.sh start 3110 apps/web /en/tools
+          BASE=http://localhost:3110 npm run test:cards --workspace=apps/web
+          node tests/phone-card-order.mjs --ids http://localhost:3110 en
+          scripts/test-server.sh stop 3110
 
   # The approved phone home page is locked (.claude/rules/visuals.md, "APPROVED — LOCKED").
   # Chromium only, so no macOS runner is needed. The page uses system fonts (Arial), so each OS has
@@ -147,14 +156,11 @@ jobs:
         run: npx playwright install --with-deps chromium
 
       - name: Approved phone home page unchanged (rects, fonts, texts, order)
-        working-directory: apps/web
+        # Ready check and warm-up of both pages under test (/en, /ar) before the test; dedicated port 3110.
         run: |
-          npx next start -p 3001 > /tmp/next.log 2>&1 &
-          for _ in $(seq 1 60); do curl -sf -o /dev/null http://localhost:3001/en && break; sleep 2; done
-          # Ready check and warm-up of both pages under test: the step fails here if the server is not serving them.
-          for page in en ar; do curl -sf -o /dev/null "http://localhost:3001/$page"; done
-          cd ../..
-          npm run test:home-phone
+          scripts/test-server.sh start 3110 apps/web /ar
+          npm run test:home-phone -- --base http://localhost:3110
+          scripts/test-server.sh stop 3110
 
   # The approved desktop layout is locked (DESKTOP phase, 2026-10-26), tests/desktop-lock.mjs. CI checks the
   # home page plus 12 representative tools at 1440px, en + ar; the full 204-page check is the local
@@ -301,9 +307,9 @@ jobs:
         if: steps.pending.outputs.phone == 'true'
         run: |
           npm run build --workspace=apps/web
-          (cd apps/web && npx next start -p 3001 > /tmp/next.log 2>&1 &)
-          for _ in $(seq 1 60); do curl -sf -o /dev/null http://localhost:3001/en && break; sleep 2; done
-          npm run baseline:home-phone -- --approve
+          scripts/test-server.sh start 3110 apps/web /ar
+          npm run baseline:home-phone -- --approve --base http://localhost:3110
+          scripts/test-server.sh stop 3110
 
       - name: Write the Linux desktop baseline (one measurement)
         if: steps.pending.outputs.desktop == 'true'
