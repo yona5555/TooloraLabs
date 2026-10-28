@@ -13,14 +13,9 @@ import OvulationKeyDates from "./OvulationKeyDates";
 import { OvulationLiveContext, type OvLive } from "./OvulationLiveContext";
 import { snapOf, type OvSnap } from "./ovulation";
 import type { OvulationScenario } from "./types";
+import { shiftISO, useTodayISO } from "@/lib/use-today";
 
 const tool = new OvulationTool();
-
-function isoDaysAgo(daysAgo: number): string {
-  const d = new Date();
-  d.setDate(d.getDate() - daysAgo);
-  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
-}
 
 /**
  * Instant result on load: the "Typical 28-Day Cycle" example (last period 5 days ago, 28-day
@@ -28,39 +23,43 @@ function isoDaysAgo(daysAgo: number): string {
  */
 const DEFAULTS = { daysAgo: 5, cycleLengthDays: "28", lutealPhaseDays: "14" };
 
-function compute(lastPeriodDate: string, cycleLengthDays: string, lutealPhaseDays: string) {
+function compute(lastPeriodDate: string, cycleLengthDays: string, lutealPhaseDays: string, today: string) {
   const cycleNum = parseInt(cycleLengthDays, 10);
   const lutealNum = parseInt(lutealPhaseDays, 10);
   const cycle = Number.isFinite(cycleNum) ? cycleNum : -1;
   const luteal = Number.isFinite(lutealNum) ? lutealNum : -1;
   const data = tool.execute({ lastPeriodDate, cycleLengthDays: cycle, lutealPhaseDays: luteal }, { locale: "en-US" }).data;
-  const snap: OvSnap | null = data && !data.error && data.cycles.length ? snapOf(lastPeriodDate, cycle, luteal, data) : null;
+  const snap: OvSnap | null = data && !data.error && data.cycles.length ? snapOf(lastPeriodDate, cycle, luteal, data, today) : null;
   return { data, snap };
 }
 
 export default function OvulationCalculator({ education }: { education: ReactNode }) {
   const tNav = useTranslations("tools.ovulation-calculator.nav");
   const tv = useTranslations("tools.ovulation-calculator.visuals");
-  const [lastPeriodDate, setLastPeriodDate] = useState(() => isoDaysAgo(DEFAULTS.daysAgo));
+  // Today comes from useTodayISO (the render day while hydrating, then the browser's day); an untouched
+  // date stays relative to it (null = the default), so the first client render matches the HTML.
+  const today = useTodayISO();
+  const [pickedDate, setLastPeriodDate] = useState<string | null>(null);
+  const lastPeriodDate = pickedDate ?? shiftISO(today, -DEFAULTS.daysAgo);
   const [cycleLengthDays, setCycleLengthDays] = useState(DEFAULTS.cycleLengthDays);
   const [lutealPhaseDays, setLutealPhaseDays] = useState(DEFAULTS.lutealPhaseDays);
 
   function handleScenarioPreset(scenario: OvulationScenario) {
-    setLastPeriodDate(isoDaysAgo(scenario.daysAgo));
+    setLastPeriodDate(shiftISO(today, -scenario.daysAgo));
     setCycleLengthDays(scenario.cycleLengthDays);
     setLutealPhaseDays(scenario.lutealPhaseDays);
   }
 
   function handleClear() {
-    setLastPeriodDate(isoDaysAgo(DEFAULTS.daysAgo));
+    setLastPeriodDate(null);
     setCycleLengthDays(DEFAULTS.cycleLengthDays);
     setLutealPhaseDays(DEFAULTS.lutealPhaseDays);
   }
 
   // Live: every valid edit updates the result at once; an invalid or half-typed field keeps the
   // last good result on screen, with the calculator's own error note in the Result card.
-  const live = useMemo(() => compute(lastPeriodDate, cycleLengthDays, lutealPhaseDays), [lastPeriodDate, cycleLengthDays, lutealPhaseDays]);
-  const [good, setGood] = useState<OvSnap>(() => compute(isoDaysAgo(DEFAULTS.daysAgo), DEFAULTS.cycleLengthDays, DEFAULTS.lutealPhaseDays).snap!);
+  const live = useMemo(() => compute(lastPeriodDate, cycleLengthDays, lutealPhaseDays, today), [lastPeriodDate, cycleLengthDays, lutealPhaseDays, today]);
+  const [good, setGood] = useState<OvSnap>(() => compute(shiftISO(today, -DEFAULTS.daysAgo), DEFAULTS.cycleLengthDays, DEFAULTS.lutealPhaseDays, today).snap!);
   if (live.snap && good !== live.snap) setGood(live.snap);
   const shown = live.snap ?? good;
 

@@ -20,10 +20,12 @@
 // preloaded: every external fetch (prices, rates, weather, hazards) is answered from tests/fixtures/live,
 // so no page waits on the network and live values never move the layout. Every wait is bounded (10s load,
 // 10s network idle, ~5s settling, 30s hard cap per page): a stuck page fails by name instead of hanging.
+// A React hydration error on any load (tests/hydration-guard.mjs) fails that page by name.
 // Before the first page the server is confirmed up and warmed (every page under test, the routes they
 // prefetch, their static files), and pages run on half the cores (at most 4) so the one server is never starved.
 // The clock is fixed (2026-10-20 12:00 UTC, timezone UTC, server TZ=UTC and LANG=C.UTF-8) so the date tools
-// render the same every day; Math.random is seeded and WebSockets get no frames, so nothing else moves.
+// render the same every day; Math.random and crypto.getRandomValues are seeded and WebSockets get no frames, so
+// nothing else moves.
 // Approve mode (--write --approve) writes the baseline from that one measurement and exits; it never
 // re-measures (CI compares in a later run, against the committed baseline). The
 // pages use system fonts in places, so each OS has its own baseline: desktop.json on macOS (local),
@@ -36,6 +38,7 @@ import { createRequire } from "node:module";
 import { createConnection } from "node:net";
 import { availableParallelism } from "node:os";
 import { compareColors, compareControls, THEMES } from "./color-lock.mjs";
+import { watchHydration } from "./hydration-guard.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const WEB = join(ROOT, "apps/web");
@@ -247,6 +250,13 @@ async function worker() {
         t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
         return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
       };
+      // crypto.getRandomValues from the same seed (a generated password, a random draw): the page renders
+      // the same values on every run, so its control labels and chart widths never move.
+      crypto.getRandomValues = (arr) => {
+        const bytes = new Uint8Array(arr.buffer, arr.byteOffset, arr.byteLength);
+        for (let i = 0; i < bytes.length; i++) bytes[i] = Math.floor(Math.random() * 256);
+        return arr;
+      };
       document.addEventListener("DOMContentLoaded", () => {
         const st = document.createElement("style");
         st.textContent = "*,*::before,*::after{transition:none!important;animation:none!important;caret-color:transparent!important}";
@@ -254,6 +264,8 @@ async function worker() {
       });
     });
     const page = await ctx.newPage();
+    // Any React hydration error (tests/hydration-guard.mjs) on the light or the dark load fails the page.
+    const hydration = watchHydration(page);
     await page.route((url) => !sameOrigin(url.href), (route) => route.abort());
     // page.route does not see WebSockets: the live Coinbase ticker would reach the real feed and move live
     // prices. Every socket is answered locally and never sends a frame, so the snapshot (fixture) prices stay.
@@ -295,6 +307,8 @@ async function worker() {
       // A hydration error makes React re-render the whole document, which drops the `dark` class from
       // <html>: the "dark" colors would then be the light ones. Fail by name instead of recording them.
       if (!(await page.evaluate(() => document.documentElement.classList.contains("dark")))) throw new Error("dark theme not applied after reload (no .dark on <html>: a hydration error re-rendered the document)");
+      const hydrationErrors = hydration();
+      if (hydrationErrors.length) throw new Error(`hydration error (${hydrationErrors[0]})${hydrationErrors.length > 1 ? ` and ${hydrationErrors.length - 1} more` : ""}`);
       current[job] = { ...light, colors: themed(light.colors, dark.colors) };
     };
     let cap;
