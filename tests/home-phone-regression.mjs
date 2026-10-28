@@ -16,6 +16,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { createRequire } from "node:module";
 import { compareColors, THEMES } from "./color-lock.mjs";
+import { hydrationProblems, watchHydration } from "./hydration-guard.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const { chromium } = createRequire(join(ROOT, "apps/web/package.json"))("playwright");
@@ -65,9 +66,12 @@ async function measure() {
 
 const browser = await chromium.launch();
 const current = {};
+// Any React hydration error (tests/hydration-guard.mjs) on the light or the dark load fails the lock.
+const hydrationFailures = [];
 for (const locale of ["ar", "en"]) for (const width of [360, 390]) {
   const ctx = await browser.newContext({ viewport: { width, height: 844 }, isMobile: true, hasTouch: true, deviceScaleFactor: 3, colorScheme: "light", reducedMotion: "reduce" });
   const page = await ctx.newPage();
+  const hydration = watchHydration(page);
   await page.addInitScript(() => document.addEventListener("DOMContentLoaded", () => {
     const st = document.createElement("style");
     st.textContent = "*,*::before,*::after{transition:none!important;animation:none!important}";
@@ -92,9 +96,14 @@ for (const locale of ["ar", "en"]) for (const width of [360, 390]) {
     items?.forEach((item, i) => (item.colors = { light: item.colors, dark: dark.regions[name]?.[i]?.colors }));
   }
   current[`${locale}@${width}`] = light;
+  hydrationFailures.push(...hydrationProblems(`/${locale} @${width}px`, hydration()));
   await ctx.close();
 }
 await browser.close();
+if (hydrationFailures.length) {
+  console.error(`${hydrationFailures.join("\n")}\nFAIL: ${hydrationFailures.length} hydration error(s) on the phone home page; not measuring.`);
+  process.exit(1);
+}
 
 if (WRITE) {
   mkdirSync(dirname(BASELINE), { recursive: true });

@@ -7,7 +7,10 @@
 // ancestor that clips its overflow ("container", e.g. an overflow-hidden card or scroll strip).
 // Every overlap/clip is tagged with the label's role in the chart (axis, legend, value, annotation) so the
 // findings group by the pattern that produces them.
-// Regression guard (CI job chart-text-audit): exits 1 on any overlap, clip or page error.
+// Hydration guard (tests/hydration-guard.mjs): the browser clock is fixed to the build day + 3 days (the build
+// time comes from the first tool page's render clock), so a "today" rendered on the server no longer matches
+// the visit day, and every React hydration error (#418/#423/#425) on any page fails by page, locale and width.
+// Regression guard (CI job chart-text-audit): exits 1 on any overlap, clip, page error or hydration error.
 // Usage: node scripts/axis-label-check.mjs [slug ...]
 //   default: every tool in the registry (apps/web/data/tools.ts `tools`), so a new tool is covered at once
 //   env BASE (default http://localhost:3001), LOCALES=en, WIDTHS=1440,390, MIN=12, JOBS=3,
@@ -18,6 +21,7 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import { chromium } from "playwright";
 import ts from "typescript";
+import { clockAfterBuild, hydrationProblems, renderedAtOf, watchHydration } from "../../../tests/hydration-guard.mjs";
 
 const base = process.env.BASE ?? "http://localhost:3001";
 const locales = (process.env.LOCALES ?? "en").split(",");
@@ -183,6 +187,7 @@ function measure(MIN) {
 
 async function scan(ctx, slug, locale) {
   const p = await ctx.newPage();
+  const hydration = watchHydration(p);
   try {
     await p.goto(`${base}/${locale}/tools/${slug}`, { waitUntil: "load", timeout: 120000 });
     await p.waitForTimeout(1500);
@@ -204,9 +209,9 @@ async function scan(ctx, slug, locale) {
       window.scrollTo(0, 0);
     });
     await p.waitForTimeout(1500);
-    return await p.evaluate(measure, MIN);
+    return { ...(await p.evaluate(measure, MIN)), hydration: hydration() };
   } catch (e) {
-    return { error: e.message.slice(0, 160) };
+    return { error: e.message.slice(0, 160), hydration: hydration() };
   } finally {
     await p.close();
   }
@@ -214,10 +219,16 @@ async function scan(ctx, slug, locale) {
 
 // Metal GPU backend on macOS only (the CI runner is Linux)
 const b = await chromium.launch({ args: process.platform === "darwin" ? ["--use-angle=metal"] : [] });
+const builtAt = renderedAtOf(await (await fetch(`${base}/en/tools/${slugs[0]}`)).text());
+if (builtAt === null) throw new Error(`no render clock (renderedAt) in ${base}/en/tools/${slugs[0]}: the hydration guard needs it`);
+const visitClock = clockAfterBuild(builtAt);
+console.log(`hydration guard: built ${new Date(builtAt).toISOString()}, browser clock ${visitClock.toISOString()}`);
 let nAnn = 0, nSmall = 0, nOver = 0, nClip = 0, nChecked = 0, nVisible = 0, nErr = 0;
+const hydrationFailures = [];
 const results = [];
 for (const w of widths) {
   const ctx = await b.newContext(w < 800 ? { viewport: { width: w, height: 844 }, isMobile: true, hasTouch: true } : { viewport: { width: w, height: 900 } });
+  await ctx.clock.setFixedTime(visitClock);
   for (const locale of locales) {
     const queue = [...slugs];
     await Promise.all(
@@ -226,6 +237,7 @@ for (const w of widths) {
           const slug = queue.shift();
           const r = await scan(ctx, slug, locale);
           if (r.error) nErr++;
+          hydrationFailures.push(...hydrationProblems(`/${locale}/tools/${slug} @${w}px`, r.hydration ?? []));
           nSmall += r.small?.length ?? 0;
           nOver += r.overlaps?.length ?? 0;
           nClip += r.clipped?.length ?? 0;
@@ -240,7 +252,7 @@ for (const w of widths) {
   }
   await ctx.close();
 }
-console.log(`TOTAL labels=${nChecked} visible=${nVisible} annotation=${nAnn} small(<${MIN}px)=${nSmall} overlaps=${nOver} clipped=${nClip} errors=${nErr} tools=${slugs.length} widths=${widths} locales=${locales}`);
+console.log(`TOTAL labels=${nChecked} visible=${nVisible} annotation=${nAnn} small(<${MIN}px)=${nSmall} overlaps=${nOver} clipped=${nClip} errors=${nErr} hydration=${hydrationFailures.length} tools=${slugs.length} widths=${widths} locales=${locales}`);
 await b.close();
 
 // Grouped view: findings (overlaps + clips) per tool and per chart (tool / card title), with the split by
@@ -262,7 +274,7 @@ const byTool = group((r) => r.slug);
 const byChart = group((r, f) => `${r.slug} / ${f.card}`);
 const byRole = group((r, f) => (f.kind ? `clip:${f.kind}:${f.role}` : `overlap:${f.role}`));
 const byPattern = group((r, f) => f.pattern);
-const totals = { labels: nChecked, visible: nVisible, annotation: nAnn, small: nSmall, overlaps: nOver, clipped: nClip, errors: nErr, tools: slugs.length, widths, locales };
+const totals = { labels: nChecked, visible: nVisible, annotation: nAnn, small: nSmall, overlaps: nOver, clipped: nClip, errors: nErr, hydration: hydrationFailures.length, tools: slugs.length, widths, locales };
 if (process.env.OUT) writeFileSync(process.env.OUT, JSON.stringify({ totals, byTool, byChart, byRole, byPattern, results }, null, 1));
 const table = (title, rows, n) => {
   console.log(`\n${title}\n${"overlaps".padStart(8)} ${"clips".padStart(6)}  name  [split]`);
@@ -272,7 +284,8 @@ table("BY TOOL", byTool, 40);
 table("BY CHART", byChart, 40);
 table("BY ROLE", byRole, 20);
 table("BY PATTERN", byPattern, 30);
-if (nOver + nClip + nErr > 0) {
-  console.error(`::error title=chart-text-audit::${nOver} overlapping and ${nClip} clipped chart labels, ${nErr} page errors (tables above)`);
+if (hydrationFailures.length) console.log(`\nHYDRATION ERRORS\n${hydrationFailures.join("\n")}`);
+if (nOver + nClip + nErr + hydrationFailures.length > 0) {
+  console.error(`::error title=chart-text-audit::${nOver} overlapping and ${nClip} clipped chart labels, ${nErr} page errors, ${hydrationFailures.length} hydration errors (tables above)`);
   process.exitCode = 1;
 }
