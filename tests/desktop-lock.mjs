@@ -6,7 +6,9 @@
 // when any rect moves or resizes by more than 1px, or any order, title, layout or font size changes.
 // Colors are locked too (tests/color-lock.mjs): each card, its header strip, each chart and each heading
 // records its computed background-color, color and border-color in the light theme and, after a reload
-// with localStorage theme=dark (the site's own mechanism), in the dark theme; any difference fails.
+// with localStorage theme=dark (the site's own mechanism), in the dark theme; any difference fails. Every
+// shown control inside main (button, [role=tab], input, select, a) is locked for its colors the same way,
+// in document order under a short label (tag or role + text), so a restyled control fails by name.
 //   npm run build:desktop-lock                     -> the build it runs against (.next-lock, live fixtures)
 //   npm run test:desktop-lock                      -> CI set: home + 12 representative tools (26 pages)
 //   npm run test:desktop-lock:full                 -> every tool page plus /, /tools, /categories, /docs
@@ -33,7 +35,7 @@ import { fileURLToPath } from "node:url";
 import { createRequire } from "node:module";
 import { createConnection } from "node:net";
 import { availableParallelism } from "node:os";
-import { compareColors, THEMES } from "./color-lock.mjs";
+import { compareColors, compareControls, THEMES } from "./color-lock.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const WEB = join(ROOT, "apps/web");
@@ -122,9 +124,15 @@ async function measure() {
       .map((s) => [row("svg", s), { element: colors(s) }]);
     const layouts = [...main.querySelectorAll("[data-gap-layout], [data-split]")].filter(shown).map((e) => e.dataset.gapLayout ?? e.dataset.split);
     const headingPairs = [...main.querySelectorAll("h1, h2")].filter((h) => shown(h) && !h.closest("[data-card]")).map((h) => [row(h.textContent.trim().slice(0, 40), h, getComputedStyle(h).fontSize), { element: colors(h) }]);
+    const controlLabel = (e) => {
+      const kind = e.getAttribute("role") === "tab" ? "tab" : e.tagName.toLowerCase() + (e.type && e.tagName === "INPUT" ? `[${e.type}]` : "");
+      const name = e.getAttribute("aria-label") || (e.tagName === "INPUT" || e.tagName === "SELECT" ? e.name || e.id : e.textContent);
+      return `${kind} ${(name ?? "").replace(/\s+/g, " ").trim().slice(0, 40)}`.trim();
+    };
+    const controlPairs = [...main.querySelectorAll('button, [role="tab"], input, select, a')].filter(shown).map((e) => [controlLabel(e), { element: colors(e) }]);
     const split = (pairs) => [pairs.map((p) => p[0]), pairs.map((p) => p[1])];
-    const [cards, cardColors] = split(cardPairs), [charts, chartColors] = split(chartPairs), [headings, headingColors] = split(headingPairs);
-    return { height: document.documentElement.scrollHeight, cards, charts, layouts, headings, colors: { cards: cardColors, charts: chartColors, headings: headingColors } };
+    const [cards, cardColors] = split(cardPairs), [charts, chartColors] = split(chartPairs), [headings, headingColors] = split(headingPairs), [controls, controlColors] = split(controlPairs);
+    return { height: document.documentElement.scrollHeight, cards, charts, layouts, headings, controls, colors: { cards: cardColors, charts: chartColors, headings: headingColors, controls: controlColors } };
   }
 }
 
@@ -284,6 +292,9 @@ async function worker() {
       if (!again || again.status() !== 200) throw new Error(`dark reload answered ${again?.status()}`);
       await page.waitForLoadState("networkidle", { timeout: 10000 }).catch(() => slow.push("dark: network not idle after 10s"));
       const { data: dark } = await page.evaluate(measure);
+      // A hydration error makes React re-render the whole document, which drops the `dark` class from
+      // <html>: the "dark" colors would then be the light ones. Fail by name instead of recording them.
+      if (!(await page.evaluate(() => document.documentElement.classList.contains("dark")))) throw new Error("dark theme not applied after reload (no .dark on <html>: a hydration error re-rendered the document)");
       current[job] = { ...light, colors: themed(light.colors, dark.colors) };
     };
     let cap;
@@ -346,6 +357,8 @@ for (const [view, cur] of Object.entries(sorted)) {
       for (const name of new Set([...Object.keys(was), ...Object.keys(now)])) problems.push(...compareColors(`${where} ${name}`, was[name], now[name]));
     }
   }
+  checked += cur.controls.length;
+  problems.push(...compareControls(view, base.controls, base.colors?.controls, cur.controls, cur.colors.controls));
 }
 if (FULL && !ONLY) for (const view of Object.keys(baseline)) if (!sorted[view]) problems.push(`${view}: not measured`);
 if (problems.length) {

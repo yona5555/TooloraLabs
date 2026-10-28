@@ -25,3 +25,21 @@ export function compareColors(where, base, cur) {
   }
   return problems;
 }
+
+/**
+ * Compares the controls inside main (buttons, tabs, inputs, selects, links), which the desktop lock records
+ * for their colors only. `labels` are the controls in document order; `colors` are the matching
+ * { element: { light, dark } } items. A changed count or label fails by name, then each control's colors
+ * are compared like any other locked element.
+ */
+export function compareControls(view, baseLabels, baseColors, curLabels, curColors) {
+  if (!baseLabels || !baseColors) return [`${view} controls: no approved colors in the baseline`];
+  const problems = [];
+  if (baseLabels.length !== curLabels.length) problems.push(`${view} controls: ${curLabels.length} (approved ${baseLabels.length})`);
+  for (let i = 0; i < Math.min(baseLabels.length, curLabels.length); i++) {
+    const where = `${view} controls #${i} "${baseLabels[i]}"`;
+    if (baseLabels[i] !== curLabels[i]) { problems.push(`${where}: order changed (now "${curLabels[i]}")`); break; }
+    problems.push(...compareColors(`${where} element`, baseColors[i]?.element, curColors[i]?.element));
+  }
+  return problems;
+}
