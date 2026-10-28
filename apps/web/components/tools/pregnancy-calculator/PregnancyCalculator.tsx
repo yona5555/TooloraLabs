@@ -12,19 +12,19 @@ import PregnancyInputPanel from "./PregnancyInputPanel";
 import PregnancyResult from "./PregnancyResult";
 import PregnancyWeekLadder from "./PregnancyWeekLadder";
 import { PregnancyLiveContext, type PregnancyLive } from "./PregnancyLiveContext";
-import { addDaysISO, clampGa, snapshotOf, todayISO, type PregSnapshot } from "./preg";
+import { addDaysISO, clampGa, snapshotOf, type PregSnapshot } from "./preg";
+import { useTodayISO } from "@/lib/use-today";
 import type { PregnancyScenario } from "./types";
 
 const tool = new PregnancyTool();
 
-function lastPeriodDateForWeeksAlong(weeksAlong: number): string {
-  return addDaysISO(todayISO(), -7 * weeksAlong);
+function lastPeriodDateForWeeksAlong(today: string, weeksAlong: number): string {
+  return addDaysISO(today, -7 * weeksAlong);
 }
 
 const DEFAULT_WEEKS_ALONG = 10;
 
-function compute(lastPeriodDate: string) {
-  const today = todayISO();
+function compute(lastPeriodDate: string, today: string) {
   const data = tool.execute({ lastPeriodDate, referenceDate: today }, { locale: "en-US" }).data;
   const snap: PregSnapshot | null = data && !data.error ? snapshotOf(lastPeriodDate, today, data) : null;
   return { data, snap };
@@ -33,22 +33,26 @@ function compute(lastPeriodDate: string) {
 export default function PregnancyCalculator({ education }: { education: ReactNode }) {
   const tNav = useTranslations("tools.pregnancy-calculator.nav");
   const tv = useTranslations("tools.pregnancy-calculator.visuals");
-  const [lastPeriodDate, setLastPeriodDate] = useState(lastPeriodDateForWeeksAlong(DEFAULT_WEEKS_ALONG));
+  // Today comes from useTodayISO (the render day while hydrating, then the browser's day); an untouched
+  // date stays relative to it (null = the default), so the first client render matches the HTML.
+  const today = useTodayISO();
+  const [pickedDate, setLastPeriodDate] = useState<string | null>(null);
+  const lastPeriodDate = pickedDate ?? lastPeriodDateForWeeksAlong(today, DEFAULT_WEEKS_ALONG);
 
   function handleScenarioPreset(scenario: PregnancyScenario) {
-    setLastPeriodDate(lastPeriodDateForWeeksAlong(scenario.weeksAlong));
+    setLastPeriodDate(lastPeriodDateForWeeksAlong(today, scenario.weeksAlong));
   }
 
   function handleClear() {
-    setLastPeriodDate(lastPeriodDateForWeeksAlong(DEFAULT_WEEKS_ALONG));
+    setLastPeriodDate(null);
   }
 
   const digitStyle = resolveDigitStyle();
 
   // Live: every valid date updates the result at once; an invalid, future or half-typed date keeps
   // the last good result on screen, with the calculator's own error note in the Result card.
-  const live = useMemo(() => compute(lastPeriodDate), [lastPeriodDate]);
-  const [good, setGood] = useState<PregSnapshot>(() => compute(lastPeriodDateForWeeksAlong(DEFAULT_WEEKS_ALONG)).snap!);
+  const live = useMemo(() => compute(lastPeriodDate, today), [lastPeriodDate, today]);
+  const [good, setGood] = useState<PregSnapshot>(() => compute(lastPeriodDateForWeeksAlong(today, DEFAULT_WEEKS_ALONG), today).snap!);
   if (live.snap && good !== live.snap) setGood(live.snap);
   const shown = live.snap ?? good;
 
