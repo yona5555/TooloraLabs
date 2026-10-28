@@ -228,6 +228,85 @@ jobs:
           path: desktop-lock-timing.txt
           if-no-files-found: ignore
 
+  # Chart text guard (§39, apps/web/scripts/axis-label-check.mjs): every tool in the registry, en + ar, at
+  # 1440 and 390 px, on the fixture build. Fails on any overlapping or clipped chart label. Six shards run in
+  # parallel so the guard finishes with desktop-lock; `chart-text-audit` is the single required check over them.
+  chart-text-shard:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3, 4, 5, 6]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Same build and cache as desktop-lock (that job saves it; the shards only restore).
+      - name: Restore the Next.js build cache
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: apps/web/.next-lock/cache
+          key: next-lock-${{ runner.os }}-${{ hashFiles('package-lock.json', 'apps/web/next.config.ts', 'apps/web/package.json') }}-${{ hashFiles('apps/web/app/**', 'apps/web/components/**', 'apps/web/lib/**', 'apps/web/data/**', 'apps/web/messages/**', 'packages/*/src/**') }}
+          restore-keys: |
+            next-lock-${{ runner.os }}-${{ hashFiles('package-lock.json', 'apps/web/next.config.ts', 'apps/web/package.json') }}-
+            next-lock-${{ runner.os }}-
+
+      - name: Build web app (live data from fixtures)
+        run: npm run build:desktop-lock
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Start the fixture server
+        run: NEXT_DIST_DIR=.next-lock NODE_OPTIONS="--import=$PWD/tests/fixtures/offline-fetch.mjs" TZ=UTC NEXT_TELEMETRY_DISABLED=1 scripts/test-server.sh start 3107 apps/web
+
+      - name: No overlapping or clipped chart labels (shard ${{ matrix.shard }}/6)
+        working-directory: apps/web
+        env:
+          BASE: http://localhost:3107
+          LOCALES: en,ar
+          WIDTHS: 1440,390
+          SHARD: ${{ matrix.shard }}/6
+          OUT: chart-text-audit-${{ matrix.shard }}.json
+        run: node scripts/axis-label-check.mjs | grep -v '^{'
+
+      - name: Stop the fixture server
+        if: always()
+        run: scripts/test-server.sh stop 3107
+
+      - name: Upload the findings
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: chart-text-audit-${{ matrix.shard }}
+          path: apps/web/chart-text-audit-${{ matrix.shard }}.json
+          if-no-files-found: ignore
+
+  chart-text-audit:
+    if: always()
+    needs: chart-text-shard
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Every chart text shard passed
+        env:
+          RESULT: ${{ needs.chart-text-shard.result }}
+        run: |
+          if [ "$RESULT" != "success" ]; then
+            echo "::error::chart-text-shard result: $RESULT (see the shard logs and the chart-text-audit-* artifacts)"
+            exit 1
+          fi
+
   # Baseline approval, in this order: (1) a label approve-desktop-baseline / approve-home-phone-baseline on a
   # same-repository PR starts this job, and the matching required lock check fails at once; (2) this job
   # measures the head commit ONCE on the CI runner (Linux) and writes the baseline (no compare here);
@@ -351,7 +430,7 @@ jobs:
   # included), so a warning can never merge unnoticed. always(): it still reports when a job failed or was
   # skipped. Check runs are found by their details URL (this run's id), so only checks: read is needed.
   zero-warnings:
-    needs: [build, home-phone-lock, desktop-lock, regenerate-baselines]
+    needs: [build, home-phone-lock, desktop-lock, chart-text-shard, chart-text-audit, regenerate-baselines]
     if: always()
     runs-on: ubuntu-24.04
     timeout-minutes: 5

@@ -7,24 +7,34 @@
 // ancestor that clips its overflow ("container", e.g. an overflow-hidden card or scroll strip).
 // Every overlap/clip is tagged with the label's role in the chart (axis, legend, value, annotation) so the
 // findings group by the pattern that produces them.
+// Regression guard (CI job chart-text-audit): exits 1 on any overlap, clip or page error.
 // Usage: node scripts/axis-label-check.mjs [slug ...]
+//   default: every tool in the registry (apps/web/data/tools.ts `tools`), so a new tool is covered at once
 //   env BASE (default http://localhost:3001), LOCALES=en, WIDTHS=1440,390, MIN=12, JOBS=3,
+//   SHARD=i/n (this run checks tools i, i+n, i+2n, … of the registry order; i from 1),
 //   OUT=<file.json> (all results + totals, grouped by tool and by chart)
 // Prints one JSON line per tool/width/locale: {slug, w, locale, small:[...], overlaps:[...]}, then a TOTAL line
 // and a table of the tools and charts with the most findings.
 import { readFileSync, writeFileSync } from "node:fs";
 import { chromium } from "playwright";
+import ts from "typescript";
 
 const base = process.env.BASE ?? "http://localhost:3001";
 const locales = (process.env.LOCALES ?? "en").split(",");
 const widths = (process.env.WIDTHS ?? "1440,390").split(",").map(Number);
 const MIN = Number(process.env.MIN ?? 12);
 const jobs = Number(process.env.JOBS ?? 3);
-const slugs = process.argv.slice(2).length
-  ? process.argv.slice(2)
-  : process.env.SLUGS
-    ? readFileSync(process.env.SLUGS, "utf8").trim().split("\n")
-    : [...new Set([...readFileSync(new URL("../data/tools.ts", import.meta.url), "utf8").matchAll(/slug: "([^"]+)"/g)].map((m) => m[1]))];
+// The tool registry itself (data/tools.ts), compiled in memory: no regex over its source.
+async function registrySlugs() {
+  const src = readFileSync(new URL("../data/tools.ts", import.meta.url), "utf8");
+  const js = ts.transpileModule(src, { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText;
+  const { tools } = await import(`data:text/javascript;base64,${Buffer.from(js).toString("base64")}`);
+  return tools.map((t) => t.slug);
+}
+const [shardI, shardN] = (process.env.SHARD ?? "1/1").split("/").map(Number);
+const slugs = (
+  process.argv.slice(2).length ? process.argv.slice(2) : process.env.SLUGS ? readFileSync(process.env.SLUGS, "utf8").trim().split("\n") : await registrySlugs()
+).filter((_, i) => i % shardN === shardI - 1);
 
 function measure(MIN) {
   const visible = (el) => {
@@ -76,6 +86,7 @@ function measure(MIN) {
   const overlaps = [];
   const clipped = [];
   let checked = 0;
+  let visibleCount = 0; // labels with glyphs inside the drawing (`checked` also counts font boxes that only touch it)
   let lineHits = 0;
   let annotation = 0;
   for (const svg of document.querySelectorAll("svg")) {
@@ -110,6 +121,10 @@ function measure(MIN) {
       const oneLine = ![...t.querySelectorAll("tspan")].some((s) => s.hasAttribute("x") || s.hasAttribute("y") || s.hasAttribute("dy"));
       const b = upright && oneLine ? ink(t, e, scale) : e;
       checked++;
+      // Counted (its font box reaches into the drawing), but its glyphs are entirely outside: nothing of it
+      // is drawn (e.g. a Mafs tick label just past the view), so it cannot be clipped or overlap anything.
+      if (b.right <= r.left || b.left >= r.right || b.bottom <= r.top || b.top >= r.bottom) continue;
+      visibleCount++;
       // [data-annotation]: a diagram that is not a chart (flow/formula diagram, no axis or scale): its text
       // keeps its authored size; it is still checked for overlaps and clipping, and counted apart.
       const exempt = !!t.closest("[data-annotation]");
@@ -153,6 +168,7 @@ function measure(MIN) {
       if (!txt || !visible(el)) continue;
       const px = parseFloat(getComputedStyle(el).fontSize);
       checked++;
+      visibleCount++;
       if (px < MIN - 0.05) small.push({ card: where(row), text: txt.slice(0, 24), px, html: 1 });
       boxes.push({ b: el.getBoundingClientRect(), txt });
     }
@@ -162,7 +178,7 @@ function measure(MIN) {
       if (ox > 1) overlaps.push({ card: where(row), a: boxes[i].txt, b: boxes[i + 1].txt, role: "axis+axis", pattern: "overlap · html track · axis+axis", ox: Math.round(ox), oy: 0 });
     }
   }
-  return { checked, annotation, lineHits, small, overlaps, clipped };
+  return { checked, visible: visibleCount, annotation, lineHits, small, overlaps, clipped };
 }
 
 async function scan(ctx, slug, locale) {
@@ -196,8 +212,9 @@ async function scan(ctx, slug, locale) {
   }
 }
 
-const b = await chromium.launch({ args: ["--use-angle=metal"] });
-let nAnn = 0, nSmall = 0, nOver = 0, nClip = 0, nChecked = 0, nErr = 0;
+// Metal GPU backend on macOS only (the CI runner is Linux)
+const b = await chromium.launch({ args: process.platform === "darwin" ? ["--use-angle=metal"] : [] });
+let nAnn = 0, nSmall = 0, nOver = 0, nClip = 0, nChecked = 0, nVisible = 0, nErr = 0;
 const results = [];
 for (const w of widths) {
   const ctx = await b.newContext(w < 800 ? { viewport: { width: w, height: 844 }, isMobile: true, hasTouch: true } : { viewport: { width: w, height: 900 } });
@@ -213,6 +230,7 @@ for (const w of widths) {
           nOver += r.overlaps?.length ?? 0;
           nClip += r.clipped?.length ?? 0;
           nChecked += r.checked ?? 0;
+          nVisible += r.visible ?? 0;
           nAnn += r.annotation ?? 0;
           results.push({ slug, w, locale, ...r });
           console.log(JSON.stringify({ slug, w, locale, ...r }));
@@ -222,7 +240,7 @@ for (const w of widths) {
   }
   await ctx.close();
 }
-console.log(`TOTAL labels=${nChecked} annotation=${nAnn} small(<${MIN}px)=${nSmall} overlaps=${nOver} clipped=${nClip} errors=${nErr} tools=${slugs.length} widths=${widths} locales=${locales}`);
+console.log(`TOTAL labels=${nChecked} visible=${nVisible} annotation=${nAnn} small(<${MIN}px)=${nSmall} overlaps=${nOver} clipped=${nClip} errors=${nErr} tools=${slugs.length} widths=${widths} locales=${locales}`);
 await b.close();
 
 // Grouped view: findings (overlaps + clips) per tool and per chart (tool / card title), with the split by
@@ -244,7 +262,7 @@ const byTool = group((r) => r.slug);
 const byChart = group((r, f) => `${r.slug} / ${f.card}`);
 const byRole = group((r, f) => (f.kind ? `clip:${f.kind}:${f.role}` : `overlap:${f.role}`));
 const byPattern = group((r, f) => f.pattern);
-const totals = { labels: nChecked, annotation: nAnn, small: nSmall, overlaps: nOver, clipped: nClip, errors: nErr, tools: slugs.length, widths, locales };
+const totals = { labels: nChecked, visible: nVisible, annotation: nAnn, small: nSmall, overlaps: nOver, clipped: nClip, errors: nErr, tools: slugs.length, widths, locales };
 if (process.env.OUT) writeFileSync(process.env.OUT, JSON.stringify({ totals, byTool, byChart, byRole, byPattern, results }, null, 1));
 const table = (title, rows, n) => {
   console.log(`\n${title}\n${"overlaps".padStart(8)} ${"clips".padStart(6)}  name  [split]`);
@@ -254,3 +272,7 @@ table("BY TOOL", byTool, 40);
 table("BY CHART", byChart, 40);
 table("BY ROLE", byRole, 20);
 table("BY PATTERN", byPattern, 30);
+if (nOver + nClip + nErr > 0) {
+  console.error(`::error title=chart-text-audit::${nOver} overlapping and ${nClip} clipped chart labels, ${nErr} page errors (tables above)`);
+  process.exitCode = 1;
+}
