@@ -23,6 +23,10 @@ TooloraLabs-Claude-Instructions.md is a historical archive; the binding rules ar
   stop only what you started, by its own PID. Test servers use a dedicated port (3109 desktop-lock, 3110 CI
   via scripts/test-server.sh), checked free first; if it is taken, fail with a clear message. Port 3001 is
   Yousef's dev server: never stop or restart it unless asked.
+  No script defaults to a port: every audit/lock/preview script takes an explicit BASE/--base/--port
+  (scripts/lib/require-base.mjs) or starts its own server on its dedicated free port.
+- Never use /loop, ScheduleWakeup, scheduled wakeups, sleep/until/polling loops or any other waiting mechanism.
+  Run each command once, write its output to a file, and read that file once.
 - Zero warnings: any CI annotation, deprecation, build, lint or console warning is fixed immediately at the root. A report that mentions a warning without fixing it is not accepted.
 
 ## Hard rules

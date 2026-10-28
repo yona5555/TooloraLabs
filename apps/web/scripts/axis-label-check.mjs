@@ -13,17 +13,18 @@
 // Regression guard (CI job chart-text-audit): exits 1 on any overlap, clip, page error or hydration error.
 // Usage: node scripts/axis-label-check.mjs [slug ...]
 //   default: every tool in the registry (apps/web/data/tools.ts `tools`), so a new tool is covered at once
-//   env BASE (default http://localhost:3001), LOCALES=en, WIDTHS=1440,390, MIN=12, JOBS=3,
+//   env BASE (required, e.g. http://localhost:3110), LOCALES=en, WIDTHS=1440,390, MIN=12, JOBS=3,
 //   SHARD=i/n (this run checks tools i, i+n, i+2n, … of the registry order; i from 1),
 //   OUT=<file.json> (all results + totals, grouped by tool and by chart)
 // Prints one JSON line per tool/width/locale: {slug, w, locale, small:[...], overlaps:[...]}, then a TOTAL line
 // and a table of the tools and charts with the most findings.
 import { readFileSync, writeFileSync } from "node:fs";
+import { requireBase } from "../../../scripts/lib/require-base.mjs";
 import { chromium } from "playwright";
 import ts from "typescript";
 import { clockAfterBuild, hydrationProblems, renderedAtOf, watchHydration } from "../../../tests/hydration-guard.mjs";
 
-const base = process.env.BASE ?? "http://localhost:3001";
+const base = requireBase(process.env.BASE);
 const locales = (process.env.LOCALES ?? "en").split(",");
 const widths = (process.env.WIDTHS ?? "1440,390").split(",").map(Number);
 const MIN = Number(process.env.MIN ?? 12);

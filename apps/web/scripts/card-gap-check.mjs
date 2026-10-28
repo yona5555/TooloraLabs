@@ -8,9 +8,10 @@
 // Usage: node scripts/card-gap-check.mjs [slug ...]  (env BASE, LOCALES=ar,en, WIDTH=1440, ONLY_GAPS=1)
 // Prints JSON lines: {slug, locale, title, layout, ratio|fill, gap}.
 import { readFileSync } from "node:fs";
+import { requireBase } from "../../../scripts/lib/require-base.mjs";
 import { chromium } from "playwright";
 
-const base = process.env.BASE ?? "http://localhost:3001";
+const base = requireBase(process.env.BASE);
 const locales = (process.env.LOCALES ?? "ar,en").split(",");
 const width = Number(process.env.WIDTH ?? 1440);
 const onlyGaps = process.env.ONLY_GAPS === "1";

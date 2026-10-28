@@ -1,10 +1,11 @@
 // Notepad Calculator check: sample on load, live edits, snippet switch, what-if drag + apply,
 // every indicator's worked-example values, top-area column heights, console errors, optional screenshots.
-// Usage: BASE_URL=http://localhost:3103 node apps/web/scripts/notepad-check.mjs [outDir]
+// Usage: BASE=http://localhost:3103 node apps/web/scripts/notepad-check.mjs [outDir]
 import { chromium } from "playwright";
+import { requireBase } from "../../../scripts/lib/require-base.mjs";
 import fs from "node:fs";
 
-const BASE = process.env.BASE_URL ?? "http://localhost:3000";
+const BASE = requireBase(process.env.BASE);
 const outDir = process.argv[2];
 const browser = await chromium.launch(process.env.BROWSER_PATH ? { executablePath: process.env.BROWSER_PATH } : {});
 const IND = ["line-values", "composition", "variables", "steps", "formula", "dependencies", "what-if", "sensitivity", "impact", "timeline", "magnitude", "rounding"];

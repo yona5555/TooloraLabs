@@ -2,8 +2,9 @@
 // final mode (data-split), and check LiveTable3DLayout cards for a drawing
 // much taller than its table. Usage: node scripts/layout-balance-scan.mjs [slug ...] > out.json
 import { readFileSync } from "node:fs";
+import { requireBase } from "../../../scripts/lib/require-base.mjs";
 import { chromium } from "playwright";
-const base = process.env.BASE ?? "http://localhost:3001";
+const base = requireBase(process.env.BASE);
 const locale = process.env.LOCALE ?? "en";
 const slugs = process.argv.slice(2).length ? process.argv.slice(2) : [...readFileSync(new URL("../data/tools.ts", import.meta.url), "utf8").matchAll(/slug: "([^"]+)"/g)].map((m) => m[1]);
 const browser = await chromium.launch();

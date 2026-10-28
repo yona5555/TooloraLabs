@@ -4,6 +4,7 @@
 // the visual rebuild never changed a word of the explanation.
 // Usage: node scripts/ph-calculator-content.mjs record | check
 import { chromium } from "playwright";
+import { requireBase } from "../../../scripts/lib/require-base.mjs";
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -48,7 +49,7 @@ if (isMain) {
 const out = {};
 for (const locale of ["en", "ar"]) {
   const page = await browser.newPage();
-  await page.goto(`http://localhost:3000/${locale}/tools/ph-calculator`, { waitUntil: "load", timeout: 120000 });
+  await page.goto(`${requireBase(process.env.BASE)}/${locale}/tools/ph-calculator`, { waitUntil: "load", timeout: 120000 });
   await page.waitForSelector("[data-encyclopedia-paper]");
   out[locale] = await readContent(page);
   await page.close();

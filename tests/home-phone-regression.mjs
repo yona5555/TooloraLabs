@@ -8,7 +8,7 @@
 // reload with localStorage theme=dark (the site's own mechanism), in the dark theme; any difference fails.
 //   npm run test:home-phone                        -> compare (exit 1 on any change)
 //   npm run baseline:home-phone -- --approve       -> rewrite the baseline (only with --approve)
-// Options: --base http://localhost:3001
+// Options: --base <url> (required: a server on a dedicated free port, e.g. scripts/test-server.sh start 3110 apps/web)
 // The page uses system fonts (Arial), so each OS has its own baseline: home-phone.json on macOS
 // (local), home-phone.linux.json on Linux (CI runner ubuntu-24.04).
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
@@ -17,6 +17,7 @@ import { fileURLToPath } from "node:url";
 import { createRequire } from "node:module";
 import { compareColors, THEMES } from "./color-lock.mjs";
 import { hydrationProblems, watchHydration } from "./hydration-guard.mjs";
+import { requireBase } from "../scripts/lib/require-base.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const { chromium } = createRequire(join(ROOT, "apps/web/package.json"))("playwright");
@@ -25,7 +26,7 @@ const arg = (name, def) => {
   const i = process.argv.indexOf(`--${name}`);
   return i > -1 ? process.argv[i + 1] : def;
 };
-const BASE = arg("base", "http://localhost:3001");
+const BASE = requireBase(arg("base"));
 const WRITE = process.argv.includes("--write");
 const APPROVE = process.argv.includes("--approve");
 const TOLERANCE = 1;

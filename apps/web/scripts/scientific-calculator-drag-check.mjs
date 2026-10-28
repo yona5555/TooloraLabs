@@ -1,9 +1,10 @@
 import { chromium } from "playwright";
+import { requireBase } from "../../../scripts/lib/require-base.mjs";
 const S = process.argv[2];
 const b = await chromium.launch();
 const p = await (await b.newContext({ viewport: { width: 1440, height: 900 } })).newPage();
 const errs = []; p.on("pageerror", (e) => errs.push(String(e)));
-await p.goto("http://localhost:3000/en/tools/scientific-calculator", { waitUntil: "load" });
+await p.goto(`${requireBase(process.env.BASE)}/en/tools/scientific-calculator`, { waitUntil: "load" });
 await p.waitForTimeout(2500);
 await p.screenshot({ path: `${S}/sc-top.png`, clip: { x: 160, y: 140, width: 780, height: 680 } });
 const ex = p.locator('[data-testid="explorer-table"]');

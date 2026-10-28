@@ -1,6 +1,7 @@
 // DOM-text check for the weather tool (no screenshots): result, 8 indicator cards, map layers, credits, errors.
 import { chromium } from "playwright";
-const base = process.env.BASE ?? "http://localhost:3001";
+import { requireBase } from "../../../scripts/lib/require-base.mjs";
+const base = requireBase(process.env.BASE);
 let browser;
 try {
   browser = await chromium.launch();

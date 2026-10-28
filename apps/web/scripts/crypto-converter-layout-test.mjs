@@ -1,8 +1,9 @@
 // Crypto converter layout check: fiat switching, chart coin switching, gap metrics, optional screenshots.
 // Usage: node apps/web/scripts/crypto-converter-layout-test.mjs [outDir]  (screenshots only when outDir is given)
 import { chromium } from "playwright";
+import { requireBase } from "../../../scripts/lib/require-base.mjs";
 
-const BASE = process.env.BASE_URL ?? "http://localhost:3000";
+const BASE = requireBase(process.env.BASE);
 const outDir = process.argv[2];
 const browser = await chromium.launch();
 

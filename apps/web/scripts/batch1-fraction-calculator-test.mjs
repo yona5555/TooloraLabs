@@ -12,6 +12,7 @@
 //   (g) screenshot artifacts: fraction-calculator-1440.png, fraction-calculator-390.png, and one
 //       mid-drag screenshot
 import { chromium } from "playwright";
+import { requireBase } from "../../../scripts/lib/require-base.mjs";
 import { mkdirSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -20,7 +21,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ARTIFACTS_DIR = path.resolve(__dirname, "../../../artifacts/batch1");
 mkdirSync(ARTIFACTS_DIR, { recursive: true });
 
-const BASE = "http://localhost:3000";
+const BASE = requireBase(process.env.BASE);
 const URL = `${BASE}/en/tools/fraction-calculator`;
 const RAW_FLOAT_RE = /\d\.\d{6,}/;
 const BAD_WORD_RE = /\bNaN\b|\bInfinity\b|\bundefined\b/;

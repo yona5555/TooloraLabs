@@ -14,7 +14,7 @@
 //   npm run test:desktop-lock:full                 -> every tool page plus /, /tools, /categories, /docs
 //   npm run baseline:desktop-lock -- --approve     -> rewrite the measured pages in the baseline (add --full
 //                                                     or --only for other sets; other pages are kept)
-// Options: --only slug,slug (a subset), --base http://localhost:3001 (an already running server; its live
+// Options: --only slug,slug (a subset), --base <url> (an already running server; its live
 // data is NOT fixed), --timing file (per-page load/measure times and slow requests).
 // Without --base it starts `next start` on the .next-lock build with tests/fixtures/offline-fetch.mjs
 // preloaded: every external fetch (prices, rates, weather, hazards) is answered from tests/fixtures/live,
