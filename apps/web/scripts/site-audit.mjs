@@ -12,6 +12,8 @@
 //   console    console errors, uncaught page errors, failed same-origin requests, a page that is not 200
 //   a11y       axe-core: WCAG 2.x AA color contrast and every violation of critical impact
 //   link       every same-origin <a href> on the audited pages answers 200 (after redirects)
+//   idle       the settled page keeps animating: more than IDLE_MAX (5) animation frames or short timers (<= 100 ms)
+//              fire in one idle second (a requestAnimationFrame / three.js / interval loop; tool-ui/motion)
 // Each finding carries a `pattern`: the root cause key the inventory is grouped by (criterion, kind, component).
 // Exits 1 when any criterion is above 0 (CI job site-audit, sharded; no pipe after it in the workflow).
 // Usage: BASE=http://localhost:<port> node scripts/site-audit.mjs [path-filter ...]
@@ -47,6 +49,7 @@ const locales = (process.env.LOCALES ?? "en,ar").split(",");
 const widths = (process.env.WIDTHS ?? "1440,390").split(",").map(Number);
 const themes = (process.env.THEMES ?? "light,dark").split(",");
 const MIN = Number(process.env.MIN ?? 12);
+const IDLE_MAX = 5; // animation frames + short timers allowed in one idle second (a stray deferred callback)
 const jobs = Number(process.env.JOBS ?? 3);
 const AXE = readFileSync(createRequire(import.meta.url).resolve("axe-core/axe.min.js"), "utf8");
 const [shardI, shardN] = (process.env.SHARD ?? "1/1").split("/").map(Number);
@@ -366,10 +369,13 @@ async function view(ctx, path, locale, w) {
       window.scrollTo(0, 0);
     });
     await p.waitForTimeout(1200);
-    // The page has settled: pause its clock, so requestAnimationFrame loops (three.js scenes, canvas and CSS-in-JS
-    // animations) and timers stop burning CPU while it is measured. A running scene kept the CPU busy for the
-    // whole visit and made axe and every wait several times slower (site-audit timing, 2026-10-29).
-    await p.clock.pauseAt((await p.evaluate(() => Date.now())) + 1);
+    // Idle: nothing may keep animating once the page has settled (tool-ui/motion). Count the animation frames
+    // and short timers (<= 100 ms) the page requests during one idle second, with where each was requested.
+    const idle0 = await p.evaluate(() => window.__idleProbe.reset());
+    await p.waitForTimeout(1000);
+    out.idle = await p.evaluate(() => window.__idleProbe.read());
+    out.idle.since = idle0;
+    lap("idle");
     for (const href of await p.evaluate(() => [...document.querySelectorAll("a[href]")].map((a) => a.href))) {
       if (!sameOrigin(href) || !/^https?:/.test(href)) continue;
       const u = new URL(href);
@@ -383,8 +389,7 @@ async function view(ctx, path, locale, w) {
           localStorage.setItem("theme", "dark");
           document.documentElement.classList.add("dark");
         });
-        await p.waitForTimeout(400); // React re-renders on the class change (MessageChannel, not a paused timer)
-        await p.clock.runFor(400); // then the theme's timers and frames run once, and the clock is paused again
+        await p.waitForTimeout(400);
       }
       lap("settle");
       const chart = await p.evaluate(measure, MIN);
@@ -425,7 +430,8 @@ if (process.env.RESUME) {
     for (const line of readFileSync(join(process.env.RESUME, f), "utf8").split("\n")) {
       if (!line) continue;
       const r = JSON.parse(line);
-      if (!wanted.has(viewKey(r)) || !themes.every((t) => r.themes[t])) continue;
+      // a record without the idle check predates that criterion: the view is measured again
+      if (!wanted.has(viewKey(r)) || !themes.every((t) => r.themes[t]) || !r.idle) continue;
       // a view recorded before axe ran contrast-only after the first theme: the same rule applied to its record
       for (const t of themes.slice(1)) r.themes[t].a11y = r.themes[t].a11y.filter((f) => f.id === "color-contrast");
       recorded.set(viewKey(r), r);
@@ -436,11 +442,39 @@ if (process.env.RESUME) {
 const done = new Set(results.map(viewKey));
 const b = await chromium.launch();
 const totalViews = wanted.size;
+// The idle probe (init script): counts every animation frame and every timer of <= 100 ms that FIRES, each with
+// the call site that scheduled it (first stack frame outside the probe), so a loop is named by its source.
+function idleProbe() {
+  const probe = { raf: 0, timers: 0, sites: {} };
+  const site = () => (new Error().stack ?? "").split("\n").slice(3, 4).join("").trim().replace(/^at /, "").replace(/\?[^:)]*/, "").slice(0, 160);
+  const note = (kind, s) => {
+    probe[kind]++;
+    probe.sites[s] = (probe.sites[s] ?? 0) + 1;
+  };
+  const raf = window.requestAnimationFrame.bind(window);
+  window.requestAnimationFrame = (cb) => {
+    const s = site();
+    return raf((t) => (note("raf", s), cb(t)));
+  };
+  for (const name of ["setTimeout", "setInterval"]) {
+    const orig = window[name].bind(window);
+    window[name] = (cb, ms, ...rest) => {
+      if ((Number(ms) || 0) > 100 || typeof cb !== "function") return orig(cb, ms, ...rest);
+      const s = site();
+      return orig((...a) => (note("timers", s), cb(...a)), ms, ...rest);
+    };
+  }
+  window.__idleProbe = {
+    reset: () => Object.assign(probe, { raf: 0, timers: 0, sites: {} }) && Date.now(),
+    read: () => ({ raf: probe.raf, timers: probe.timers, sites: Object.entries(probe.sites).sort((a, b) => b[1] - a[1]).slice(0, 5) }),
+  };
+}
+
 for (const w of widths) {
   const ctx = await b.newContext(w < 800 ? { viewport: { width: w, height: 844 }, isMobile: true, hasTouch: true } : { viewport: { width: w, height: 900 } });
-  // The page clock starts at build + 3 days and runs normally until the page has settled (view() pauses it).
-  await ctx.clock.install({ time: visitClock });
+  await ctx.clock.setFixedTime(visitClock);
   await ctx.addInitScript(() => localStorage.setItem("theme", "light"));
+  await ctx.addInitScript(idleProbe);
   for (const locale of locales) {
     const queue = paths.filter((path) => inPages(locale, path) && !done.has(viewKey({ path, locale, w })));
     await Promise.all(
@@ -484,6 +518,8 @@ const findings = [];
 for (const r of results) {
   const at = { page: `/${r.locale}${r.path}`, w: r.w, locale: r.locale };
   for (const h of hydrationProblems(at.page, r.hydration)) findings.push({ criterion: "hydration", ...at, theme: "-", detail: h, pattern: `hydration · ${r.path.startsWith("/tools/") ? r.path : "page " + r.path}` });
+  if (r.idle && r.idle.raf + r.idle.timers > IDLE_MAX)
+    findings.push({ criterion: "idle", ...at, theme: "-", detail: r.idle, pattern: `idle · ${r.idle.sites[0]?.[0].replace(/\/_next\/static\/chunks\/[\w.-]+/, "chunk") ?? "?"} · ${r.path.startsWith("/tools/") ? r.path : "page " + r.path}` });
   for (const c of r.console) findings.push({ criterion: "console", ...at, theme: "-", detail: c, pattern: `console · ${c.replace(/\/(en|ar)(\/[^\s]*)?/g, "/{locale}…").replace(/\d+/g, "N").slice(0, 120)}` });
   for (const [theme, t] of Object.entries(r.themes)) {
     for (const f of t.overlaps) findings.push({ criterion: "overlap", ...at, theme, detail: f, pattern: f.pattern });
@@ -498,7 +534,7 @@ report(findings, { views: results.length * themes.length, pages: paths.length, l
 
 /** Totals per criterion, the inventory grouped by root cause (OUT file + table), exit code 1 on any finding. */
 function report(findings, meta) {
-  const CRITERIA = ["overlap", "clip", "small", "hydration", "console", "a11y", "link"];
+  const CRITERIA = ["overlap", "clip", "small", "hydration", "console", "a11y", "link", "idle"];
   const totals = Object.fromEntries(CRITERIA.map((c) => [c, findings.filter((f) => f.criterion === c).length]));
   const groups = new Map();
   for (const f of findings) {

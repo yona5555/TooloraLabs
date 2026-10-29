@@ -59,6 +59,7 @@ export const BROKEN = {
   "/console-error": ["console", `<p style="font-size:16px">Page with an error</p><script>console.error("canary: a console error")</script>`],
   "/contrast": ["a11y", `<p style="font-size:16px;color:#c8c8c8;background:#ffffff">Pale grey text on white</p>`],
   "/broken-link": ["link", `<p style="font-size:16px"><a href="/en/no-such-page">A link to nowhere</a></p>`],
+  "/idle-loop": ["idle", `<p style="font-size:16px">A spinner that never rests</p><canvas id="c" width="40" height="40"></canvas><script>(function spin(t) { document.getElementById("c").getContext("2d").fillRect(0, 0, (t / 10) % 40, 40); requestAnimationFrame(spin); })(0)</script>`],
 };
 export const CLEAN = "/clean";
 

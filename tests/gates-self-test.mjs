@@ -76,7 +76,7 @@ test("workflow shell rule fails on a workflow without pipefail that pipes a gate
   assert.match(r.out, /a gate's output is piped/);
 });
 
-test("site audit fails on every broken page (overlap, SVG clip, HTML clip, <12px, hydration, console, contrast, link) and passes the clean one", async () => {
+test("site audit fails on every broken page (overlap, SVG clip, HTML clip, <12px, hydration, console, contrast, link, idle animation loop) and passes the clean one", async () => {
   const out = join(TMP, "site-audit.json");
   const r = await gateAsync("node", ["scripts/site-audit.mjs"], { cwd: WEB, env: { BASE: `http://127.0.0.1:${SITE_PORT}`, LOCALES: "en", WIDTHS: "1440", THEMES: "light", JOBS: "2", OUT: out } });
   failsWith(r, /::error title=site-audit|error title=site-audit/, "site audit");
