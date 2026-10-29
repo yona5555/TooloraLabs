@@ -22,11 +22,15 @@
     "test:color-lock": "node --test tests/color-lock.test.mjs",
     "test:hydration-guard": "node --test tests/hydration-guard.test.mjs",
     "test:gate": "node --test scripts/run-no-warnings.test.mjs",
-    "test:share-images": "node --test tests/share-images.test.mjs"
+    "test:share-images": "node --test tests/share-images.test.mjs",
+    "test:gates-self-test": "node --test --test-concurrency=1 tests/gates-self-test.mjs",
+    "test:system-fonts": "node scripts/system-fonts.mjs",
+    "site-audit": "scripts/site-audit.sh"
   },
   "devDependencies": {
     "patch-package": "^8.0.1",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "yaml": "^2.9.1"
   },
   "allowScripts": {
     "@swc/core": true,

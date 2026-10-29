@@ -57,7 +57,7 @@
 
 ## 9. خط أنابيب يتحقق من نفسه (2026-10-28)
 - **صفر تحذيرات يُفشل الفحص:** `eslint --max-warnings 0`؛ البناء في CI يمر عبر `scripts/run-no-warnings.mjs` فيفشل عند أي سطر تحذير (Next.js ⚠، webpack، React، Node، npm، deprecated)؛ اختبارات Vitest تفشل عند أي `console.warn`/`console.error` أو تحذير Node (`tests/vitest-no-console.ts` عبر `packages/*/vitest.config.mts`)؛ ومهمة `zero-warnings` في `ci.yml` تفشل إن ترك أي job في التشغيل نفسه annotation بمستوى warning أو failure. الإصلاح جذري دائماً، لا تجاهل ولا قاعدة ignore.
-- **حماية main:** classic branch protection، `strict: true` (الفرع يجب أن يكون محدَّثاً قبل الدمج)، والفحوص الإلزامية العشرة: build وhome-phone-lock وdesktop-lock وchart-text-audit وaudit وAnalyze (javascript-typescript) وAnalyze (actions) وzero-warnings وaudit-zero-warnings وcodeql-zero-warnings (الثلاثة الأخيرة تشغّل `scripts/zero-warnings.sh`).
+- **حماية main:** classic branch protection، `strict: true` (الفرع يجب أن يكون محدَّثاً قبل الدمج)، والفحوص الإلزامية الأحد عشر: build وhome-phone-lock وdesktop-lock وsite-audit وgates-self-test وaudit وAnalyze (javascript-typescript) وAnalyze (actions) وzero-warnings وaudit-zero-warnings وcodeql-zero-warnings (الثلاثة الأخيرة تشغّل `scripts/zero-warnings.sh`).
 - **main-health:** بعد كل تشغيل على main لـ CI وCodeQL وAudit وSBOM وScorecard وPR auto-update، يفتح `scripts/main-health.mjs` (من `main-health.yml`) issue واحداً لكل workflow بعنوان `main-health: <workflow>` ووسم `main-health`، مسنَداً إلى yona5555 (فيصله إشعار)، أو يعلّق عليه إن كان مفتوحاً، عند أي نتيجة غير success أو أي annotation تحذير؛ وعند أول تشغيل نظيف يغلق issue ذلك الـworkflow وحده بتعليق فيه رابط التشغيل. التشغيل الملغى لأن تشغيلاً أحدث حلّ محله لا يُحكم عليه.
 - **التحقق من الآن فصاعداً = قراءة واحدة:** `gh issue list --label main-health --state open`. لا issues مفتوحة = main سليم. لا قراءة لتشغيلات جارية ولا انتظار.
 
@@ -71,5 +71,5 @@
 
 ## 11. تسميات الرسوم: طبقة موحّدة وحارس دائم (2026-10-28)
 - **الطبقة:** `components/tool-ui/chartLabels.ts` (هندسة بحتة: `marginDelta`/`nextMargins`، `padRange`، `placeBeside`/`placeClear`/`clampInto`، `fitStep`/`thinEvery`، `physicalSide`، `stackBands`) و`useChartLabels.ts` (قياس الحبر الفعلي بـ`measureText`). كل رسم Mafs يُكتب `<FitMafs>` (`tool-ui/FitMafs.tsx`) و`<FitText>` للنص المؤلَّف؛ كل رسم SVG يدوي يُكتب `<FitSvg>` (`tool-ui/FitSvg.tsx`)، ورسوم الطقم `indicator-kit/SvgBits` `Drawing` تمر عبره (`grow={false}`). لا هوامش ثابتة ولا إخفاء نص.
-- **الحارس:** `apps/web/scripts/axis-label-check.mjs` يقرأ قائمة الأدوات من `data/tools.ts`، ويفحص en وar على 1440 و390، ويفشل عند أي تراكب أو قص. في CI: `chart-text-shard` (6 أجزاء متوازية) و`chart-text-audit` الفحص الإلزامي فوقها.
+- **الحارس:** `apps/web/scripts/site-audit.mjs` يقرأ الصفحات من `sitemap.xml` (المولَّد من `lib/indexable-pages.ts`)، ويفحص en وar على 1440 و390 بالوضعين الفاتح والداكن، ويفشل عند أي تراكب أو قص (SVG وHTML) أو نص أصغر من 12px أو خطأ hydration أو console أو تباين/axe حرج أو رابط مكسور. في CI: `site-audit-shard` (12 جزءاً متوازياً) و`site-audit` الفحص الإلزامي فوقها، و`gates-self-test` يثبت أن كل بوابة تفشل على نموذجها المعطوب.
 

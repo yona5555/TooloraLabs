@@ -30,7 +30,7 @@ TooloraLabs-Claude-Instructions.md is a historical archive; the binding rules ar
 - Zero warnings: any CI annotation, deprecation, build, lint or console warning is fixed immediately at the root. A report that mentions a warning without fixing it is not accepted.
 
 ## Hard rules
-- Always reply to Yousef in Modern Standard Arabic, even when the command or task is written in English. Code, commands and identifiers stay in English.
+- All user-facing text (progress notes, questions, reports) is in Modern Standard Arabic only, even when the command or task is written in English. Code, commands, file names and identifiers stay in English. Never write in any other language.
 - If a request is ambiguous, state your understanding in one line and wait. Never re-ask something already answered.
 - Explain every terminal command in one sentence; translate terminal options to Arabic and give the option number.
 - Never take or review screenshots (no Playwright screenshots, no image review), to save quota. Yousef reviews pages himself in the browser. At the end of any visual task, give him the list of page URLs to review (e.g. http://localhost:3001/ar/tools/<slug>). Reading values from the DOM via Playwright is still allowed when needed.
@@ -43,8 +43,17 @@ TooloraLabs-Claude-Instructions.md is a historical archive; the binding rules ar
 - Tool route: /{locale}/tools/{slug}.
 - Never print secrets in any output, report, command or log: API keys, tokens, passwords, webhook/IPN secrets, private keys, connection strings, or values from .env* files. Refer to them by variable NAME only and mask the value (e.g. METALPRICE_API_KEY=****). Never cat or echo .env* files. Never commit secrets.
 
+## Gates and platform parity
+- Every gate proves itself: `npm run test:gates-self-test` (CI `gates-self-test`, required) runs each gate on a broken
+  fixture in tests/gates/ and fails if any gate passes it. A new gate gets a canary in the same PR.
+- Every workflow runs bash with pipefail; never pipe a gate's output (`node scripts/workflow-shell.mjs`).
+- Fonts are self-hosted only (apps/web/lib/fonts.ts); no system family in source (`npm run test:system-fonts`).
+- Audits, locks and previews run in the Linux container (`scripts/in-container.sh <cmd>`, colima on the Mac);
+  never report macOS results for them. Local audit runs use `scripts/site-audit-sharded.sh`; `site-audit` (CI, required)
+  must stay at 0 on every criterion.
+
 ## Supply chain
-- Required checks on main (strict): build, home-phone-lock, desktop-lock, chart-text-audit, audit, Analyze (javascript-typescript),
+- Required checks on main (strict): build, home-phone-lock, desktop-lock, site-audit, gates-self-test, audit, Analyze (javascript-typescript),
   Analyze (actions), zero-warnings, audit-zero-warnings, codeql-zero-warnings (the last three run scripts/zero-warnings.sh).
 - Dependabot (weekly, Mon 06:00 Riyadh, 7-day cooldown; security updates immediate): minor/patch and security
   minor/patch get auto-merge (dependabot-automerge.yml, App token) and merge only after every required check
