@@ -99,7 +99,7 @@ export function ForexRangeStrip({ fromCurrency, toCurrency, history, digitStyle 
                   </span>
                   <span>{f.rate(band.high.rate)}</span>
                 </div>
-                <div className="flex justify-between text-[11px] text-zinc-400 dark:text-zinc-500">
+                <div className="flex justify-between text-xs text-zinc-400 dark:text-zinc-500">
                   {/* The bar is LTR; each date keeps the page's own direction so Arabic dates aren't scrambled. */}
                   <span dir={pageDir}>{date(band.low.date)}</span>
                   <span dir={pageDir}>{date(band.high.date)}</span>
@@ -107,7 +107,7 @@ export function ForexRangeStrip({ fromCurrency, toCurrency, history, digitStyle 
               </div>
             );
           })}
-          <div className="flex justify-between border-t border-zinc-100 pt-2 text-[11px] text-zinc-500 dark:border-zinc-800 dark:text-zinc-400">
+          <div className="flex justify-between border-t border-zinc-100 pt-2 text-xs text-zinc-500 dark:border-zinc-800 dark:text-zinc-400">
             <span>◀ {t("zones.low")}</span>
             <span>{t("zones.mid")}</span>
             <span>{t("zones.high")} ▶</span>
@@ -382,12 +382,12 @@ export function ForexYearlySteps({ fromCurrency, toCurrency, amount, history, di
       <div className="flex h-56 items-end gap-1.5" dir="ltr" data-testid="yearly-steps">
         {steps.map((s, i) => (
           <div key={s.year} className="flex min-w-0 flex-1 flex-col items-center justify-end gap-1 self-stretch">
-            <span className="w-full truncate text-center font-mono text-[10px] font-semibold text-zinc-700 dark:text-zinc-200">{f.num(s.value, s.value < 10 ? 3 : 1)}</span>
+            <span className="w-full truncate text-center font-mono text-xs font-semibold text-zinc-700 dark:text-zinc-200">{f.num(s.value, s.value < 10 ? 3 : 1)}</span>
             <div
               className={`w-full rounded-t ${i === steps.length - 1 ? "bg-blue-600" : s.value >= (steps[i - 1]?.value ?? s.value) ? "bg-emerald-500/80" : "bg-red-500/80"}`}
               style={{ height: `${Math.max(4, (s.value / max) * 85)}%` }}
             />
-            <span className="font-mono text-[10px] text-zinc-500 dark:text-zinc-400">{s.year}</span>
+            <span className="font-mono text-xs text-zinc-500 dark:text-zinc-400">{s.year}</span>
           </div>
         ))}
       </div>
@@ -444,7 +444,7 @@ export function ForexComparisonCards({ fromCurrency, toCurrency, recent, history
           </div>
         ))}
       </dl>
-      {!s.covered && <p className="mt-2 text-[11px] text-zinc-400">{t("noHistory")}</p>}
+      {!s.covered && <p className="mt-2 text-xs text-zinc-400">{t("noHistory")}</p>}
     </div>
   );
 

@@ -61,7 +61,7 @@ export default function CryptoNetworkFees({ btcPriceUsd, digitStyle }: CryptoNet
               </>
             )}
           </div>
-          <div className="mt-1 flex justify-between font-mono text-[10px] text-zinc-400">
+          <div className="mt-1 flex justify-between font-mono text-xs text-zinc-400">
             <span>0</span>
             {r && <span>{t("medianShort", { rate: num(r[3]) })}</span>}
             <span>{num(axisMax)} sat/vB</span>

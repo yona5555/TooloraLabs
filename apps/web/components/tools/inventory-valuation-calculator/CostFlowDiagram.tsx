@@ -41,7 +41,7 @@ function Stack({ title, consumeTop, oldestLabel, newestLabel, outLabel, accentCl
             }`}
           >
             <span>{layer.label}</span>
-            {layer.consumed && <span className="text-[10px] font-bold tracking-wide uppercase opacity-90">{outLabel}</span>}
+            {layer.consumed && <span className="text-xs font-bold tracking-wide uppercase opacity-90">{outLabel}</span>}
           </div>
         ))}
       </div>

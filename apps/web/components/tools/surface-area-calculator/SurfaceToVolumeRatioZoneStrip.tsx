@@ -31,7 +31,7 @@ export default function SurfaceToVolumeRatioZoneStrip() {
           <div className="relative h-3 w-full overflow-hidden rounded-full bg-gradient-to-r from-blue-400 to-amber-400 dark:from-blue-500 dark:to-amber-500">
             <div className="absolute top-1/2 h-5 w-5 -translate-y-1/2 -translate-x-1/2 rounded-full border-2 border-white bg-zinc-900 transition-all duration-300 dark:border-zinc-900 dark:bg-white" style={{ left: `${pct}%` }} />
           </div>
-          <div className="mt-1 flex justify-between text-[10px] font-semibold uppercase tracking-wide text-zinc-400 dark:text-zinc-500">
+          <div className="mt-1 flex justify-between text-xs font-semibold uppercase tracking-wide text-zinc-400 dark:text-zinc-500">
             <span>{t("zones.volumeDominated")}</span>
             <span>{t("zones.surfaceDominated")}</span>
           </div>

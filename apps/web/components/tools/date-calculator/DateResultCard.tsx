@@ -137,7 +137,7 @@ export default function DateResultCard({ d, f, amountText, summary }: Props) {
       <div className="mb-3 grid grid-cols-3 gap-2 text-center" data-bp-inner>
         {tiles.map((x) => (
           <div key={x.k} className="rounded-lg bg-blue-50 px-1 py-1.5 dark:bg-blue-500/10">
-            <p className="text-[10px] leading-3 font-semibold text-zinc-500 dark:text-zinc-400">{x.k}</p>
+            <p className="text-xs leading-3 font-semibold text-zinc-500 dark:text-zinc-400">{x.k}</p>
             <p dir="auto" className={`mt-0.5 text-sm font-bold ${x.c}`}>{x.v}</p>
           </div>
         ))}

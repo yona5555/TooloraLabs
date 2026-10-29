@@ -144,7 +144,7 @@ export default function ScheduleStudioResult({ state, onChange, d, timeZone }: P
           { k: t("result.campusDays"), v: `${fmt(stats.campusDays)}/7` },
         ].map((x) => (
           <div key={x.k} className="rounded-lg bg-blue-50 px-1 py-1.5 dark:bg-blue-500/10" data-bp-inner>
-            <p className="truncate text-[10px] font-semibold text-zinc-500 dark:text-zinc-400">{x.k}</p>
+            <p className="truncate text-xs font-semibold text-zinc-500 dark:text-zinc-400">{x.k}</p>
             <p dir="ltr" className="font-mono text-base font-extrabold text-blue-700 dark:text-blue-300">
               {x.v}
             </p>
@@ -161,7 +161,7 @@ export default function ScheduleStudioResult({ state, onChange, d, timeZone }: P
         <CalendarPlus size={16} />
         {t("result.downloadIcs")}
       </ResultActionButton>
-      <p className="mt-1 text-center text-[11px] text-zinc-500 dark:text-zinc-400">{t("result.icsNote")}</p>
+      <p className="mt-1 text-center text-xs text-zinc-500 dark:text-zinc-400">{t("result.icsNote")}</p>
 
       <div className="mt-3 lg:flex lg:flex-1 lg:flex-col">
         <LiveTableFill>

@@ -70,7 +70,7 @@ export default function LiPageMockup() {
         )}
         <style>{`@keyframes li-bar-in { from { opacity: 0; transform: translateX(-4px); } to { opacity: 1; transform: none; } }`}</style>
       </svg>
-      <p className="text-center text-[11px] text-zinc-500 dark:text-zinc-400">{t("caption", { lines: f(total), paragraphs: f(analysis.paragraphs.length) })}</p>
+      <p className="text-center text-xs text-zinc-500 dark:text-zinc-400">{t("caption", { lines: f(total), paragraphs: f(analysis.paragraphs.length) })}</p>
     </div>
   );
 }

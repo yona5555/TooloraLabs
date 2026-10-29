@@ -82,7 +82,7 @@ function CoinNode({
       </div>
       <div dir="ltr" className="mt-1 flex items-end justify-between gap-1">
         <Sparkline values={points ? [...points.map((p) => p.price), price] : null} up={change >= 0} />
-        <span className="text-[10px] text-zinc-400">{t("spark24h")}</span>
+        <span className="text-xs text-zinc-400">{t("spark24h")}</span>
       </div>
       <p dir="ltr" className="mt-1 truncate text-end font-mono text-sm font-semibold text-blue-700 dark:text-blue-300">
         {amountLabel}
@@ -165,13 +165,13 @@ export default function CryptoLiveFlow({ fromCoin, toCoin, amountText, amount, t
             />
             </div>
           </div>
-          {f.currency !== "USD" && <p className="mt-1 text-[11px] text-zinc-500 dark:text-zinc-400">{tAbove("fxNote", { currency: f.currency })}</p>}
+          {f.currency !== "USD" && <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">{tAbove("fxNote", { currency: f.currency })}</p>}
         </div>
         <div className="grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-1.5">
           <CoinNode coin={fromCoin} tick={fromTick} amountLabel={`${n(amt)} ${sym(fromCoin)}`} digitStyle={digitStyle} />
           {/* Flow arrow with the live rate embedded on its shaft; the logical border points it the reading way in RTL too */}
           <div className="flex flex-col items-center gap-1" aria-hidden>
-            <div dir="ltr" className="rounded-full bg-blue-600 px-2 py-0.5 font-mono text-[10px] font-semibold text-white shadow-sm" data-testid="flow-rate">
+            <div dir="ltr" className="rounded-full bg-blue-600 px-2 py-0.5 font-mono text-xs font-semibold text-white shadow-sm" data-testid="flow-rate">
               × {n(rate)}
             </div>
             <div className="flex items-center">

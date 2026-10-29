@@ -209,7 +209,7 @@ export function GlassIndicatorCard({
     <Reveal data-testid={`reveal-${n}`}>
       <SectionCard title={<CardTitle n={n} title={title} />} id={`card-${n}`} bodyClassName="p-4 lg:p-6">
         <div data-indicator-card={n} data-card-weight={weight} data-card-side={side}>
-          <p className="text-[11px] leading-snug sm:text-xs" style={{ color: "var(--glass-subtitle)" }}>
+          <p className="text-xs leading-snug" style={{ color: "var(--glass-subtitle)" }}>
             {subtitle}
           </p>
           <div className={`mt-3 flex flex-col gap-4 lg:items-start ${rowDirection}`}>
@@ -218,7 +218,7 @@ export function GlassIndicatorCard({
             </div>
             <div className={`flex w-full min-w-0 flex-col ${layout.table}`}>
               <div className="h-full rounded-xl p-3" style={{ background: "var(--glass-table-wrap-bg)" }}>
-                <p className="text-[10px] font-bold uppercase tracking-wide" style={{ color: "var(--glass-muted)" }}>
+                <p className="text-xs font-bold uppercase tracking-wide" style={{ color: "var(--glass-muted)" }}>
                   {tableTitle}
                 </p>
                 <div data-indicator-table className="mt-1.5">
@@ -227,7 +227,7 @@ export function GlassIndicatorCard({
               </div>
             </div>
           </div>
-          <div className="mt-3 rounded-lg px-2.5 py-1.5 text-center text-[10px] font-semibold" style={{ background: accentVar(accent, "-soft"), color: accentVar(accent, "-strong") }}>
+          <div className="mt-3 rounded-lg px-2.5 py-1.5 text-center text-xs font-semibold" style={{ background: accentVar(accent, "-soft"), color: accentVar(accent, "-strong") }}>
             LIVE · recomputes while you drag
           </div>
         </div>

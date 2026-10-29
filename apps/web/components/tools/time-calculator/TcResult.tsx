@@ -280,7 +280,7 @@ export default function TcResult({ s, set, d, f }: Props) {
       <div className="mb-3 grid grid-cols-3 gap-2 text-center" data-bp-inner>
         {stats.map((st) => (
           <div key={st.k} className="rounded-lg bg-blue-50 px-1 py-1.5 dark:bg-blue-500/10">
-            <p className="text-[10px] leading-3 font-semibold text-zinc-500 dark:text-zinc-400">{st.k}</p>
+            <p className="text-xs leading-3 font-semibold text-zinc-500 dark:text-zinc-400">{st.k}</p>
             <p dir="auto" className="truncate font-mono text-lg font-bold text-blue-700 dark:text-blue-300">{st.v}</p>
           </div>
         ))}

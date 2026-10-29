@@ -1,5 +1,5 @@
 "use client";
-import { useContext, useEffect, useState, type ComponentProps, type ReactNode } from "react";
+import { useContext, useEffect, type ComponentProps, type ReactNode } from "react";
 import { Canvas, useThree } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import Label3D from "@/components/tool-ui/three/Label3D";
@@ -7,23 +7,9 @@ import { SceneReadyContext } from "./ViewportScene";
 import PreviewReady from "./PreviewReady";
 import FitContent from "./FitContent";
 
-/** The page font (Inter via --glass-font) resolved to a real family list the canvas can draw with. */
-let pageFont: string | null = null;
-function resolvePageFont(): string {
-  if (pageFont) return pageFont;
-  const el = document.createElement("span");
-  el.style.fontFamily = "var(--glass-font)";
-  el.style.display = "none";
-  document.body.appendChild(el);
-  pageFont = getComputedStyle(el).fontFamily || "Inter, ui-sans-serif, system-ui, sans-serif";
-  el.remove();
-  return pageFont;
-}
-
-/** Label3D in the site font (Inter), not the shared default monospace. */
+/** Label3D in the page font (Inter via --glass-font), not the shared default mono stack. */
 export function SiteLabel3D(props: ComponentProps<typeof Label3D>) {
-  const [font] = useState(resolvePageFont);
-  return <Label3D font={font} {...props} />;
+  return <Label3D font="var(--glass-font)" {...props} />;
 }
 
 /** Narrow canvases would crop the sides: zoom out until `fitAspect` (scene width / height) fits. */

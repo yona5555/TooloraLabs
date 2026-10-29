@@ -21,7 +21,7 @@ export default function NewYorkClock({ locale, zone }: { locale: string; zone: s
   return (
     <span className="flex items-baseline gap-1.5 whitespace-nowrap">
       <span dir="ltr" className="text-xs font-semibold tabular-nums text-zinc-900 dark:text-zinc-50">{time}</span>
-      {tz && <span className="text-[11px] font-medium text-zinc-500 dark:text-zinc-400">{tz}</span>}
+      {tz && <span className="text-xs font-medium text-zinc-500 dark:text-zinc-400">{tz}</span>}
     </span>
   );
 }

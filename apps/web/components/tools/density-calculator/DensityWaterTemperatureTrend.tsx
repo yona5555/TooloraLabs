@@ -48,7 +48,7 @@ export default function DensityWaterTemperatureTrend() {
         {Y_TICKS.map((v) => (
           <g key={v}>
             <line x1={L} y1={y(v)} x2={W - R} y2={y(v)} className="stroke-zinc-200 dark:stroke-zinc-700" />
-            <text style={{ fontSize: svgPx(12) }} x={L - 6} y={y(v) + 3} textAnchor="end" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+            <text style={{ fontSize: svgPx(12) }} x={L - 6} y={y(v) + 3} textAnchor="end" fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
               {f(v, 2)}
             </text>
           </g>
@@ -67,7 +67,7 @@ export default function DensityWaterTemperatureTrend() {
         {/* the chosen temperature */}
         <line x1={px} y1={T} x2={px} y2={T + PH} strokeDasharray="3 3" className="stroke-blue-400 dark:stroke-blue-500" />
         <circle cx={px} cy={py} r={6} className="fill-blue-600 dark:fill-blue-400" />
-        <text style={{ fontSize: svgPx(12) }} x={px} y={Math.max(T + 10, py - 10)} textAnchor={anchor} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-blue-700 dark:fill-blue-300">
+        <text style={{ fontSize: svgPx(12) }} x={px} y={Math.max(T + 10, py - 10)} textAnchor={anchor} fontWeight={700} fontFamily="var(--font-mono)" className="fill-blue-700 dark:fill-blue-300">
           {`${f(rho, 4)} · ${temp} °C`}
         </text>
       </FitSvg>

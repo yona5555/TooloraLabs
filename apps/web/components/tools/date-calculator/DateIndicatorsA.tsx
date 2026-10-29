@@ -176,7 +176,7 @@ export function DateTimelineDragCard({ state, setState, d, f }: IndicatorProps) 
                 {f.int(s.totalDays)}
               </text>
             </svg>
-            <p className="mt-1 text-center text-[11px] text-zinc-500 dark:text-zinc-400">{t("timeline.hint")}</p>
+            <p className="mt-1 text-center text-xs text-zinc-500 dark:text-zinc-400">{t("timeline.hint")}</p>
           </div>
         }
         rows={[
@@ -262,7 +262,7 @@ export function DateBusinessSplitCard({ state, setState, d, f }: IndicatorProps)
           { label: tp("result.calendarDays"), value: f.int(s.totalDays), emphasize: true },
         ]}
       />
-      <p className="mt-2 text-[11px] text-zinc-500 dark:text-zinc-400">{t("split.hint")}</p>
+      <p className="mt-2 text-xs text-zinc-500 dark:text-zinc-400">{t("split.hint")}</p>
     </SectionCard>
   );
 }

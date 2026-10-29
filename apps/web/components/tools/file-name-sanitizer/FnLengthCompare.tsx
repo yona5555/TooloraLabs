@@ -46,10 +46,10 @@ export default function FnLengthCompare() {
             </text>
             <rect x={BAR_X} y={y + 2} width={wo} height={14} rx={3} className="fill-zinc-400 dark:fill-zinc-500" />
             <rect x={BAR_X} y={y + 19} width={wr} height={14} rx={3} className="fill-emerald-500 dark:fill-emerald-400" />
-            <text style={{ fontSize: svgPx(12) }} x={BAR_X + wo + 4} y={y + 13} fontFamily="ui-monospace, monospace" className="fill-zinc-600 dark:fill-zinc-300">
+            <text style={{ fontSize: svgPx(12) }} x={BAR_X + wo + 4} y={y + 13} fontFamily="var(--font-mono)" className="fill-zinc-600 dark:fill-zinc-300">
               {f(o[k], 0)}
             </text>
-            <text style={{ fontSize: svgPx(12) }} x={BAR_X + wr + 4} y={y + 30} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={BAR_X + wr + 4} y={y + 30} fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
               {f(r[k], 0)}
             </text>
           </g>

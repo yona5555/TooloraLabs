@@ -62,7 +62,7 @@ export function PercentageFormulaDiagram() {
               <div key={i} className="flex w-5 items-center justify-center text-xl font-bold text-zinc-400">{tk.sym}</div>
             ) : (
               <div key={i} className={`flex min-w-[60px] flex-col items-center justify-center rounded-xl border-2 px-2 py-2 ${tk.out ? "border-emerald-400 bg-emerald-50 dark:border-emerald-500/50 dark:bg-emerald-500/10" : "border-blue-300 bg-blue-50 dark:border-blue-500/40 dark:bg-blue-500/10"}`}>
-                <span className="text-[11px] font-semibold text-zinc-500 dark:text-zinc-400">{tk.sym}</span>
+                <span className="text-xs font-semibold text-zinc-500 dark:text-zinc-400">{tk.sym}</span>
                 <span className={`font-mono text-sm font-bold ${tk.out ? "text-emerald-700 dark:text-emerald-300" : "text-blue-700 dark:text-blue-300"}`}>{tk.val}</span>
               </div>
             ),
@@ -112,10 +112,10 @@ export function PercentageMentalSteps() {
       <div dir="ltr" className="flex h-[200px] items-end gap-2">
         {steps.map((s, i) => (
           <div key={i} className="flex h-full min-w-0 flex-1 flex-col justify-end">
-            <span className="truncate text-center font-mono text-[11px] font-bold text-zinc-800 dark:text-zinc-100">{f(s.v, 2)}</span>
+            <span className="truncate text-center font-mono text-xs font-bold text-zinc-800 dark:text-zinc-100">{f(s.v, 2)}</span>
             <div className={`mt-1 rounded-t-md ${colors[i]}`} style={{ height: `${Math.max(4, (Math.abs(s.v) / top) * 130)}px` }} />
-            <span className="mt-1 truncate text-center text-[11px] font-semibold text-zinc-600 dark:text-zinc-300">{s.label}</span>
-            <span className="truncate text-center font-mono text-[9px] text-zinc-400">{s.formula}</span>
+            <span className="mt-1 truncate text-center text-xs font-semibold text-zinc-600 dark:text-zinc-300">{s.label}</span>
+            <span className="truncate text-center font-mono text-xs text-zinc-400">{s.formula}</span>
           </div>
         ))}
       </div>
@@ -162,7 +162,7 @@ export function PercentageEquivalentForms() {
       <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
         {tiles.map((tile) => (
           <div key={tile.k} className="flex flex-col items-center rounded-xl border border-blue-200 bg-blue-50/60 px-2 py-2.5 dark:border-blue-500/30 dark:bg-blue-500/10">
-            <span className="text-[11px] font-semibold text-zinc-500 dark:text-zinc-400">{t(`forms.${tile.k}`)}</span>
+            <span className="text-xs font-semibold text-zinc-500 dark:text-zinc-400">{t(`forms.${tile.k}`)}</span>
             <span dir="ltr" className="max-w-full truncate font-mono text-base font-bold text-blue-700 dark:text-blue-300">{tile.v}</span>
           </div>
         ))}
@@ -278,7 +278,7 @@ export function PercentageBaseBars() {
           <div key={bar.k} className="flex h-full min-w-0 flex-1 flex-col justify-end">
             <span dir="ltr" className="truncate text-center font-mono text-xs font-bold text-zinc-800 dark:text-zinc-100">{f(bar.v, 2)}</span>
             <div className={`mt-1 rounded-t-lg bg-gradient-to-t ${bar.cls}`} style={{ height: `${Math.max(3, (Math.max(bar.v, 0) / top) * 160)}px` }} />
-            <span className="mt-1 truncate text-center text-[11px] font-semibold text-zinc-600 dark:text-zinc-300">{t(`bars.${bar.k}`)}</span>
+            <span className="mt-1 truncate text-center text-xs font-semibold text-zinc-600 dark:text-zinc-300">{t(`bars.${bar.k}`)}</span>
           </div>
         ))}
       </div>
@@ -557,9 +557,9 @@ export function PercentageComparisonCards() {
       <div className="grid grid-cols-2 gap-2">
         {cards.map((card) => (
           <div key={card.k} className={`flex flex-col rounded-xl border-2 p-2.5 ${card.cls}`}>
-            <span className="text-[11px] font-semibold text-zinc-600 dark:text-zinc-300">{t(`compare.${card.k}`)}</span>
+            <span className="text-xs font-semibold text-zinc-600 dark:text-zinc-300">{t(`compare.${card.k}`)}</span>
             <span dir="ltr" className="truncate font-mono text-lg font-bold text-zinc-900 dark:text-zinc-50">{card.v}</span>
-            <span className="text-[10px] text-zinc-500 dark:text-zinc-400">
+            <span className="text-xs text-zinc-500 dark:text-zinc-400">
               {t("compare.baseUsed")} <span dir="ltr" className="font-mono">{card.base}</span>
             </span>
           </div>

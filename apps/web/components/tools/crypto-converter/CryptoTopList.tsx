@@ -87,7 +87,7 @@ export default function CryptoTopList({ coins, digitStyle, fromCoinId, toCoinId,
                     <td className="px-2 py-2">
                       <span className="flex flex-col items-start gap-0.5">
                         {tags.map((tag) => (
-                          <span key={tag} className={`whitespace-nowrap rounded-full px-1.5 py-0.5 text-[10px] font-semibold ${TAG_STYLE[tag]}`}>{t(`tags.${tag}`)}</span>
+                          <span key={tag} className={`whitespace-nowrap rounded-full px-1.5 py-0.5 text-xs font-semibold ${TAG_STYLE[tag]}`}>{t(`tags.${tag}`)}</span>
                         ))}
                       </span>
                     </td>

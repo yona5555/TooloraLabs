@@ -92,10 +92,10 @@ export default async function ToolCard({ tool, titleText, descriptionText, featu
         {(showFeatured || tags.length > 0) && (
           <div className="flex h-5 flex-wrap gap-1 overflow-hidden">
             {showFeatured && (
-              <span className="rounded-full bg-blue-100 px-2 py-0.5 text-[10px] font-semibold leading-4 text-blue-700 dark:bg-blue-500/15 dark:text-blue-300">{featuredLabel}</span>
+              <span className="rounded-full bg-blue-100 px-2 py-0.5 text-xs font-semibold leading-4 text-blue-700 dark:bg-blue-500/15 dark:text-blue-300">{featuredLabel}</span>
             )}
             {tags.map((tag) => (
-              <span key={tag} className="truncate rounded-full bg-zinc-100 px-2 py-0.5 text-[10px] font-medium leading-4 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300">
+              <span key={tag} className="truncate rounded-full bg-zinc-100 px-2 py-0.5 text-xs font-medium leading-4 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300">
                 {tag}
               </span>
             ))}

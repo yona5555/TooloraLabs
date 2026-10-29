@@ -178,7 +178,7 @@ export default function RetirementResult({
                 <div dir="ltr" className="relative mt-2 h-2.5 w-full overflow-hidden rounded-full bg-zinc-100 dark:bg-zinc-800">
                   <div className="h-full rounded-full bg-blue-600 transition-all duration-700 ease-out dark:bg-blue-400" style={{ width: `${fillPct}%` }} />
                 </div>
-                <div dir="ltr" className="mt-1.5 flex justify-between text-[11px] text-zinc-400 dark:text-zinc-500">
+                <div dir="ltr" className="mt-1.5 flex justify-between text-xs text-zinc-400 dark:text-zinc-500">
                   <span>{t("aboveFold.ageProgressCurrent", { age: ageLabel(currentAge) })}</span>
                   <span className="font-semibold text-blue-700 dark:text-blue-400">{t("aboveFold.ageProgressTarget", { age: ageLabel(reached) })}</span>
                 </div>

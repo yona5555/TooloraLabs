@@ -20,7 +20,7 @@ export default function IdealWeightHeightLadder() {
   return (
     <SectionCard title={t("title")} className="lg:flex lg:flex-1 lg:flex-col" bodyClassName="flex flex-col p-4 lg:flex-1 lg:p-6">
       <p className="text-sm text-zinc-600 dark:text-zinc-300">{t("intro")}</p>
-      <div className="mt-3 grid grid-cols-[auto_1fr_auto] gap-x-3 px-3 text-[11px] font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+      <div className="mt-3 grid grid-cols-[auto_1fr_auto] gap-x-3 px-3 text-xs font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
         <span>{t("colHeight")}</span>
         <span className="text-end">{t("colAverage")}</span>
         <span className="w-24 text-end">{t("colWho")}</span>
@@ -41,7 +41,7 @@ export default function IdealWeightHeightLadder() {
                   <span dir="ltr" className="font-medium tabular-nums text-zinc-900 dark:text-zinc-100">
                     {cmText(cm)}
                   </span>
-                  {on && <span className="shrink-0 rounded-full bg-blue-600 px-2 py-0.5 text-[10px] font-bold text-white">{t("you")}</span>}
+                  {on && <span className="shrink-0 rounded-full bg-blue-600 px-2 py-0.5 text-xs font-bold text-white">{t("you")}</span>}
                 </span>
                 <span dir="ltr" className="text-end font-semibold tabular-nums text-zinc-800 dark:text-zinc-200">
                   {f1(ideal(gender, cm).average)}

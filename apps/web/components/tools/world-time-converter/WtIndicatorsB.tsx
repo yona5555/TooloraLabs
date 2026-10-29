@@ -320,7 +320,7 @@ export function WtWeekCard({ d, f }: CardProps) {
                 </tr>
               </tbody>
             </table>
-            <p className="mt-1 text-[11px] text-zinc-500 dark:text-zinc-400">{t("week.legend")}</p>
+            <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">{t("week.legend")}</p>
           </div>
         }
         rows={[

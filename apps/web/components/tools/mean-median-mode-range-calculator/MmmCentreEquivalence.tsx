@@ -35,7 +35,7 @@ export default function MmmCentreEquivalence() {
             const win = m.winner === side;
             return (
               <div key={m.label} className="mt-2">
-                <div dir="ltr" className="flex justify-between font-mono text-[11px]">
+                <div dir="ltr" className="flex justify-between font-mono text-xs">
                   <span className="text-zinc-500 dark:text-zinc-400">{m.label}</span>
                   <span className={`font-bold ${win ? "text-emerald-700 dark:text-emerald-300" : "text-zinc-700 dark:text-zinc-200"}`}>{f(v)}</span>
                 </div>

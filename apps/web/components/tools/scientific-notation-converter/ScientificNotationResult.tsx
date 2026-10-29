@@ -119,7 +119,7 @@ export default function ScientificNotationResult({ result, computed, sigSources,
                 <th scope="row" className="w-[38%] bg-blue-50/60 px-3 py-2 text-start align-top font-semibold text-zinc-700 dark:bg-blue-500/5 dark:text-zinc-300">{f.label}</th>
                 <td className="px-3 py-2 text-end">
                   <div dir={f.key === "words" ? undefined : "ltr"} className={`font-semibold ${f.key === "words" ? "break-words" : "break-all font-mono"} text-zinc-900 dark:text-zinc-100`}>{f.value}</div>
-                  {f.note && <div className="text-[11px] text-zinc-500 dark:text-zinc-400">{f.note}</div>}
+                  {f.note && <div className="text-xs text-zinc-500 dark:text-zinc-400">{f.note}</div>}
                 </td>
               </tr>
             ))}

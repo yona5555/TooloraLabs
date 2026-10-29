@@ -36,7 +36,7 @@ export default function EquipmentSection({ title, intro, items }: EquipmentSecti
                   {t("shopNowCta")}
                   <ExternalLink size={14} aria-hidden="true" />
                 </a>
-                <span className="rounded-full border border-current/30 px-2.5 py-1 text-[11px] font-medium uppercase tracking-wide opacity-70">
+                <span className="rounded-full border border-current/30 px-2.5 py-1 text-xs font-medium uppercase tracking-wide opacity-70">
                   {t("affiliateLabel")}
                 </span>
               </div>

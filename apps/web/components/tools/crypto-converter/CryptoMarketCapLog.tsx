@@ -48,7 +48,7 @@ export default function CryptoMarketCapLog({ coins, coin, digitStyle }: Props) {
           </ul>
           <div className="mt-1 grid grid-cols-[3.2rem_minmax(0,1fr)_4.2rem] gap-2">
             <span />
-            <div className="relative h-4 font-mono text-[9px] text-zinc-400">
+            <div className="relative h-4 font-mono text-xs text-zinc-400">
               {decades.map((d) => (
                 <span key={d} className="absolute -translate-x-1/2" style={{ left: `${logScalePosition(d, min, max) * 100}%` }}>
                   {f.compactMoney(d)}

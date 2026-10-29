@@ -34,15 +34,15 @@ export default function MmmOutlierTrio() {
               { v: col.c.median, cls: "bg-emerald-600 dark:bg-emerald-400" },
             ].map((b, i) => (
               <div key={i} className="flex flex-col items-center">
-                <span className="font-mono text-[10px] font-bold text-zinc-700 dark:text-zinc-200">{f(b.v, 2)}</span>
+                <span className="font-mono text-xs font-bold text-zinc-700 dark:text-zinc-200">{f(b.v, 2)}</span>
                 <div className={`w-6 rounded-t ${b.cls}`} style={{ height: `${h(b.v)}px` }} />
               </div>
             ))}
           </div>
-          <span className="mt-1.5 text-center text-[11px] leading-4 font-semibold text-zinc-600 dark:text-zinc-300">{col.label}</span>
+          <span className="mt-1.5 text-center text-xs leading-4 font-semibold text-zinc-600 dark:text-zinc-300">{col.label}</span>
         </div>
       ))}
-      <div className="col-span-3 flex justify-center gap-4 text-[11px] text-zinc-500 dark:text-zinc-400">
+      <div className="col-span-3 flex justify-center gap-4 text-xs text-zinc-500 dark:text-zinc-400">
         <span className="flex items-center gap-1"><span className="inline-block h-2 w-2 rounded-sm bg-blue-600 dark:bg-blue-400" />{tr("mean")}</span>
         <span className="flex items-center gap-1"><span className="inline-block h-2 w-2 rounded-sm bg-emerald-600 dark:bg-emerald-400" />{tr("median")}</span>
       </div>

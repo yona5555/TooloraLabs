@@ -31,7 +31,7 @@ export default function VolumeToSurfaceAreaRatioZone() {
           <div className="relative h-3 w-full overflow-hidden rounded-full bg-gradient-to-r from-amber-400 to-blue-400 dark:from-amber-500 dark:to-blue-500">
             <div className="absolute top-1/2 h-5 w-5 -translate-y-1/2 -translate-x-1/2 rounded-full border-2 border-white bg-zinc-900 transition-all duration-300 dark:border-zinc-900 dark:bg-white" style={{ left: `${pct}%` }} />
           </div>
-          <div className="mt-1 flex justify-between text-[10px] font-semibold uppercase tracking-wide text-zinc-400 dark:text-zinc-500">
+          <div className="mt-1 flex justify-between text-xs font-semibold uppercase tracking-wide text-zinc-400 dark:text-zinc-500">
             <span>{t("zones.thin")}</span>
             <span>{t("zones.chunky")}</span>
           </div>

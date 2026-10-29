@@ -30,11 +30,11 @@ export default function ProbabilityRankedEvents() {
         const hit = it.sym === symbol;
         return (
           <li key={it.sym} className="flex items-center gap-2">
-            <span dir="ltr" className={`w-[86px] shrink-0 truncate font-mono text-[11px] font-semibold ${hit ? "text-blue-700 dark:text-blue-300" : "text-zinc-600 dark:text-zinc-300"}`}>{it.sym}</span>
+            <span dir="ltr" className={`w-[86px] shrink-0 truncate font-mono text-xs font-semibold ${hit ? "text-blue-700 dark:text-blue-300" : "text-zinc-600 dark:text-zinc-300"}`}>{it.sym}</span>
             <div className="h-4 flex-1 overflow-hidden rounded bg-zinc-100 dark:bg-zinc-800">
               <div style={{ width: `${Math.max(0.5, it.v * 100)}%` }} className={`h-full rounded ${hit ? "bg-blue-600 dark:bg-blue-400" : "bg-blue-300 dark:bg-blue-500/50"}`} />
             </div>
-            <span dir="ltr" className="w-[54px] shrink-0 text-end font-mono text-[11px] font-bold text-zinc-800 dark:text-zinc-100">{pct(it.v, 1)}</span>
+            <span dir="ltr" className="w-[54px] shrink-0 text-end font-mono text-xs font-bold text-zinc-800 dark:text-zinc-100">{pct(it.v, 1)}</span>
           </li>
         );
       })}

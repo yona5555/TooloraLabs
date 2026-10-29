@@ -174,11 +174,11 @@ export default function RtReaderPlayback() {
           {clock(at)} / {clock(total)}
         </span>
       </div>
-      <label className="mt-2 flex items-center gap-2 text-[11px] text-zinc-500 dark:text-zinc-400">
+      <label className="mt-2 flex items-center gap-2 text-xs text-zinc-500 dark:text-zinc-400">
         <span className="shrink-0">{t("pace", { wpm: f(speed) })}</span>
         <input type="range" min={100} max={600} step={10} value={speed} onChange={(e) => changeSpeed(Number(e.target.value))} className="w-full accent-blue-600" aria-label={t("paceLabel")} />
       </label>
-      <p className="mt-1 text-[11px] text-amber-700 dark:text-amber-300">{t("hint", { x: f(total / playbackSeconds(total), 0) })}</p>
+      <p className="mt-1 text-xs text-amber-700 dark:text-amber-300">{t("hint", { x: f(total / playbackSeconds(total), 0) })}</p>
     </div>
   );
 

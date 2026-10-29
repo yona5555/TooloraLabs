@@ -39,7 +39,7 @@ export default function PerimeterToAreaCompactnessZone() {
           <div className="relative h-3 w-full rounded-full bg-gradient-to-r from-zinc-200 via-blue-300 to-emerald-400 dark:from-zinc-700 dark:via-blue-500/60 dark:to-emerald-500">
             <div className="absolute top-1/2 h-5 w-5 -translate-y-1/2 -translate-x-1/2 rounded-full border-2 border-white bg-blue-600 transition-all duration-300 dark:border-zinc-900" style={{ left: `clamp(10px, ${pct}%, calc(100% - 10px))` }} />
           </div>
-          <div className="mt-1 flex justify-between text-[10px] font-semibold uppercase tracking-wide text-zinc-400 dark:text-zinc-500">
+          <div className="mt-1 flex justify-between text-xs font-semibold uppercase tracking-wide text-zinc-400 dark:text-zinc-500">
             <span>{t("zones.elongated")}</span>
             <span>{t("zones.circleLike")}</span>
           </div>

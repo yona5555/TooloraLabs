@@ -47,7 +47,7 @@ export default function RetirementMilestonesCard({ currentAge }: RetirementMiles
           );
         })}
       </ul>
-      <p className="mt-3 text-[11px] text-zinc-400 dark:text-zinc-500">{t("milestonesCardNote")}</p>
+      <p className="mt-3 text-xs text-zinc-400 dark:text-zinc-500">{t("milestonesCardNote")}</p>
     </SectionCard>
   );
 }

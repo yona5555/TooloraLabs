@@ -34,7 +34,7 @@ export default function StudyStudioInput({ state, onChange, onReset }: Props) {
         <div className="grid grid-cols-7 gap-1">
           {state.weekly.map((h, i) => (
             <label key={i} className="block text-center">
-              <span className="block truncate text-[10px] font-semibold text-zinc-500 dark:text-zinc-400">{f.weekday(i)}</span>
+              <span className="block truncate text-xs font-semibold text-zinc-500 dark:text-zinc-400">{f.weekday(i)}</span>
               <input
                 type="number"
                 min={0}
@@ -48,7 +48,7 @@ export default function StudyStudioInput({ state, onChange, onReset }: Props) {
             </label>
           ))}
         </div>
-        <p className="mt-1 text-[11px] leading-4 text-zinc-500 dark:text-zinc-400">{t("input.weeklyHint")}</p>
+        <p className="mt-1 text-xs leading-4 text-zinc-500 dark:text-zinc-400">{t("input.weeklyHint")}</p>
       </fieldset>
 
       <div className="space-y-2.5 border-t border-zinc-200 pt-3 dark:border-zinc-700">
@@ -158,7 +158,7 @@ export default function StudyStudioInput({ state, onChange, onReset }: Props) {
         <RotateCcw size={15} />
         {t("input.reset")}
       </button>
-      <p className="text-[11px] leading-4 text-zinc-500 dark:text-zinc-400">{t("input.savedNote")}</p>
+      <p className="text-xs leading-4 text-zinc-500 dark:text-zinc-400">{t("input.savedNote")}</p>
     </SectionCard>
   );
 }

@@ -28,7 +28,7 @@ export default function VectorCrossStepsDiagram() {
               <span className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-bold text-white ${i === 3 ? "bg-rose-600" : "bg-blue-600"}`}>{i + 1}</span>
               <div className="min-w-0 flex-1">
                 <p className="text-xs font-semibold text-zinc-700 dark:text-zinc-200">{s.label}</p>
-                <p dir="ltr" className="truncate text-start font-mono text-[11px] text-zinc-500 dark:text-zinc-400">{s.sym} = {s.sub}</p>
+                <p dir="ltr" className="truncate text-start font-mono text-xs text-zinc-500 dark:text-zinc-400">{s.sym} = {s.sub}</p>
               </div>
               <span dir="ltr" className="font-mono text-sm font-bold text-zinc-900 dark:text-zinc-50">{s.value}</span>
             </li>

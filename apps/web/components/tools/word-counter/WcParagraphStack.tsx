@@ -29,7 +29,7 @@ export default function WcParagraphStack() {
         {head.map((p, i) => (
           <div
             key={p.index}
-            className={`flex min-w-0 items-center justify-center border-e border-white/60 text-[10px] font-bold text-white last:border-0 dark:border-zinc-900/60 ${COLORS[i % COLORS.length]}`}
+            className={`flex min-w-0 items-center justify-center border-e border-white/60 text-xs font-bold text-white last:border-0 dark:border-zinc-900/60 ${COLORS[i % COLORS.length]}`}
             style={{ width: `${(p.words / total) * 100}%`, transition: "width 250ms ease" }}
             title={t("segment", { n: f(i + 1), words: f(p.words) })}
           >

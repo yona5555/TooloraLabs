@@ -93,8 +93,8 @@ export function FrequencyHistogram({ d, f }: IndicatorProps) {
               <div className="rounded-t-md bg-gradient-to-t from-blue-700 to-blue-500 transition-all duration-500" style={{ height: pc((b.count / scale) * 100) }} />
               <div className="absolute inset-x-0 border-t-2 border-dashed border-amber-500" style={{ bottom: pc((b.expected / scale) * 100) }} />
             </div>
-            <span className="mt-1 truncate text-center font-mono text-[10px] leading-tight text-zinc-500 dark:text-zinc-400">{f.int(b.from)}</span>
-            {b.to !== b.from && <span className="truncate text-center font-mono text-[10px] leading-tight text-zinc-400">{f.int(b.to)}</span>}
+            <span className="mt-1 truncate text-center font-mono text-xs leading-tight text-zinc-500 dark:text-zinc-400">{f.int(b.from)}</span>
+            {b.to !== b.from && <span className="truncate text-center font-mono text-xs leading-tight text-zinc-400">{f.int(b.to)}</span>}
           </div>
         ))}
       </div>
@@ -305,7 +305,7 @@ function Box({ v, label, tone }: { v: string; label: string; tone: string }) {
   return (
     <div className={`flex min-w-[5.5rem] flex-col items-center rounded-xl border px-3 py-2 ${tone}`}>
       <span dir="ltr" className="font-mono text-base font-bold text-zinc-900 dark:text-zinc-100">{v}</span>
-      <span className="text-[11px] text-zinc-500 dark:text-zinc-400">{label}</span>
+      <span className="text-xs text-zinc-500 dark:text-zinc-400">{label}</span>
     </div>
   );
 }
@@ -410,7 +410,7 @@ export function DistinctStacked({ d, f }: IndicatorProps) {
             </div>
             <div dir="ltr" className="flex h-7 overflow-hidden rounded-lg">
               {r.segs.map((s) => (
-                <div key={s.name} className={`flex items-center justify-center overflow-hidden text-[11px] font-semibold text-white transition-all duration-500 ${s.cls}`} style={{ width: pc((Math.max(0, s.v) / r.total) * 100) }}>
+                <div key={s.name} className={`flex items-center justify-center overflow-hidden text-xs font-semibold text-white transition-all duration-500 ${s.cls}`} style={{ width: pc((Math.max(0, s.v) / r.total) * 100) }}>
                   {s.v / r.total > 0.12 ? s.name : ""}
                 </div>
               ))}
@@ -505,7 +505,7 @@ export function OutcomeSpaceLog({ d, f }: IndicatorProps) {
             <div className="mb-1 flex items-baseline justify-between gap-2 text-xs">
               <span className={`font-semibold ${r.mine ? "text-blue-700 dark:text-blue-300" : "text-zinc-600 dark:text-zinc-300"}`}>
                 {t(`space.${r.key}`)}
-                {r.mine && <span className="ms-1.5 rounded-full bg-blue-600 px-1.5 py-0.5 text-[10px] text-white">{t("space.current")}</span>}
+                {r.mine && <span className="ms-1.5 rounded-full bg-blue-600 px-1.5 py-0.5 text-xs text-white">{t("space.current")}</span>}
               </span>
               <span dir="ltr" className="shrink-0 font-mono font-bold text-zinc-900 dark:text-zinc-100">{Number.isFinite(r.v) ? f.big(r.v) : t("space.impossible")}</span>
             </div>
@@ -514,7 +514,7 @@ export function OutcomeSpaceLog({ d, f }: IndicatorProps) {
             </div>
           </div>
         ))}
-        <div dir="ltr" className="flex justify-between font-mono text-[10px] text-zinc-400">
+        <div dir="ltr" className="flex justify-between font-mono text-xs text-zinc-400">
           {Array.from({ length: 6 }, (_, i) => (
             <span key={i}>10^{f.int((scaleMax * i) / 5)}</span>
           ))}
@@ -615,7 +615,7 @@ export function EntropyZoneStrip({ d, f }: IndicatorProps) {
             <div key={m.label} className="absolute top-0 h-6" style={{ left: pos(m.b) }}>
               <div className={`absolute -top-2 h-10 w-1 -translate-x-1/2 rounded ${m.cls}`} />
               <span
-                className={`absolute whitespace-nowrap text-[11px] font-bold ${m.tcls} ${m.top ? "-top-8" : "top-9"}`}
+                className={`absolute whitespace-nowrap text-xs font-bold ${m.tcls} ${m.top ? "-top-8" : "top-9"}`}
                 style={{ transform: `translateX(${Math.min(bits, MAX) / MAX > 0.75 && m.top ? "-100%" : m.b / MAX < 0.1 ? "0" : "-50%"})` }}
               >
                 {m.label}
@@ -623,12 +623,12 @@ export function EntropyZoneStrip({ d, f }: IndicatorProps) {
             </div>
           ))}
         </div>
-        <div className="mt-12 grid grid-cols-5 gap-1 text-center text-[10px] sm:text-xs">
+        <div className="mt-12 grid grid-cols-5 gap-1 text-center text-xs">
           {ENTROPY_ZONES.map((z, i) => (
             <div key={z.zone} className={`rounded-md px-1 py-1 ${z.zone === zone ? "bg-zinc-100 font-bold text-zinc-900 dark:bg-zinc-800 dark:text-zinc-50" : "text-zinc-500 dark:text-zinc-400"}`}>
               <span className={`mx-auto mb-1 block h-1.5 w-6 rounded ${colors[i]}`} />
               {t(`entropy.zones.${z.zone}`)}
-              <span dir="ltr" className="block font-mono text-[10px] opacity-70 max-md:text-zinc-500 max-md:dark:text-zinc-400 max-md:opacity-100">{`${i === 0 ? 0 : ENTROPY_ZONES[i - 1].to}${Number.isFinite(z.to) ? `–${z.to}` : "+"}`}</span>
+              <span dir="ltr" className="block font-mono text-xs opacity-70 max-md:text-zinc-500 max-md:dark:text-zinc-400 max-md:opacity-100">{`${i === 0 ? 0 : ENTROPY_ZONES[i - 1].to}${Number.isFinite(z.to) ? `–${z.to}` : "+"}`}</span>
             </div>
           ))}
         </div>
@@ -683,10 +683,10 @@ export function PresetOddsTable({ d, f, active, onApply }: IndicatorProps & { ac
               <tr key={r.key} className={`border-b border-zinc-100 dark:border-zinc-800 ${r.key === focus.key ? "bg-blue-50/70 dark:bg-blue-500/10" : ""}`}>
                 <td className="py-2">
                   <span className="block font-medium text-zinc-900 dark:text-zinc-100">{tForm(`presets.${r.key}`)}</span>
-                  <span dir="ltr" className="block font-mono text-[10px] text-zinc-500">{`${r.settings.min}–${r.settings.max} · ×${r.settings.count}`}</span>
+                  <span dir="ltr" className="block font-mono text-xs text-zinc-500">{`${r.settings.min}–${r.settings.max} · ×${r.settings.count}`}</span>
                 </td>
                 <td className="py-2">
-                  <span className={`rounded-full px-2 py-0.5 text-[11px] font-semibold ${r.settings.allowDuplicates ? "bg-sky-100 text-sky-800 dark:bg-sky-500/15 dark:text-sky-300" : "bg-violet-100 text-violet-800 dark:bg-violet-500/15 dark:text-violet-300"}`}>
+                  <span className={`rounded-full px-2 py-0.5 text-xs font-semibold ${r.settings.allowDuplicates ? "bg-sky-100 text-sky-800 dark:bg-sky-500/15 dark:text-sky-300" : "bg-violet-100 text-violet-800 dark:bg-violet-500/15 dark:text-violet-300"}`}>
                     {r.settings.allowDuplicates ? t("table.tagRepeats") : t("table.tagNoRepeats")}
                   </span>
                 </td>

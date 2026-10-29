@@ -28,7 +28,7 @@ export default function AmbiguousTrailingZerosZone() {
             <div className="absolute inset-y-0 left-1/2 w-1/2 bg-amber-300/70 dark:bg-amber-500/50" />
             <div className="absolute top-1/2 h-4 w-1.5 -translate-y-1/2 rounded-full bg-blue-700 transition-all duration-300 dark:bg-blue-300" style={{ left: ambiguous ? "calc(75% - 3px)" : "calc(25% - 3px)" }} />
           </div>
-          <div className="mt-1 flex justify-between text-[10px] font-semibold uppercase tracking-wide text-zinc-400 dark:text-zinc-500">
+          <div className="mt-1 flex justify-between text-xs font-semibold uppercase tracking-wide text-zinc-400 dark:text-zinc-500">
             <span>{t("zones.resolved")}</span>
             <span>{t("zones.ambiguous")}</span>
           </div>

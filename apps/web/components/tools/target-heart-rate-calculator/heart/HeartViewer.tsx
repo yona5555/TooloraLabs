@@ -62,7 +62,7 @@ export default function HeartViewer({ bpm, color, labels }: { bpm: number; color
     return () => io.disconnect();
   }, []);
 
-  const pill = "pointer-events-none absolute z-10 rounded-md border px-2 py-0.5 font-mono text-[11px] font-semibold whitespace-nowrap shadow-sm backdrop-blur-sm";
+  const pill = "pointer-events-none absolute z-10 rounded-md border px-2 py-0.5 font-mono text-xs font-semibold whitespace-nowrap shadow-sm backdrop-blur-sm";
   const surface = "border-zinc-300/70 bg-white/85 dark:border-zinc-600/70 dark:bg-zinc-900/80";
 
   return (

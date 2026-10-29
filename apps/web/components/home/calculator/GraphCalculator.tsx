@@ -213,7 +213,7 @@ export default function GraphCalculator({ calcDark = false }: { calcDark?: boole
                   className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2"
                   style={{ borderColor: color, background: isActive ? color : "transparent" }}
                 >
-                  <span className={`text-[10px] font-bold ${isActive ? "text-white" : ""}`} style={isActive ? undefined : { color }}>
+                  <span className={`text-xs font-bold ${isActive ? "text-white" : ""}`} style={isActive ? undefined : { color }}>
                     {i + 1}
                   </span>
                 </button>
@@ -327,7 +327,7 @@ export default function GraphCalculator({ calcDark = false }: { calcDark?: boole
           )}
 
           {dim === "3d" && hasSurface && (
-            <div className="pointer-events-none absolute bottom-2 left-2 w-40 rounded-lg border border-zinc-300 bg-white/95 px-2 py-1 text-[10px] text-zinc-600 calcdark:border-zinc-600 calcdark:bg-zinc-800/95 calcdark:text-zinc-300">
+            <div className="pointer-events-none absolute bottom-2 left-2 w-40 rounded-lg border border-zinc-300 bg-white/95 px-2 py-1 text-xs text-zinc-600 calcdark:border-zinc-600 calcdark:bg-zinc-800/95 calcdark:text-zinc-300">
               <div className="mb-0.5 font-semibold">{t("heightLegend")}</div>
               <div className="h-2 rounded" style={{ background: HEIGHT_GRADIENT_CSS }} />
               <div className="flex justify-between font-mono" dir="ltr">

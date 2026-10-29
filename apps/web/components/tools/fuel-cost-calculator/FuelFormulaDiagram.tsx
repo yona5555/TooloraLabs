@@ -83,7 +83,7 @@ export default function FuelFormulaDiagram() {
             {stops.map((stop) => (
               <foreignObject key={stop.label} x={stop.zoneStart + 2} y={RIBBON_TOP - 2} width={STOP_ZONE_W - 4} height={RIBBON_BOTTOM - RIBBON_TOP + 4}>
                 <div dir="ltr" className="flex h-full w-full flex-col items-center justify-center text-center">
-                  <span className="text-[9px] font-medium text-white/85">{stop.label}</span>
+                  <span className="text-xs font-medium text-white/85">{stop.label}</span>
                   <AutoFitText text={stop.value} steps={STOP_STEPS} allowWrap={false} className="font-mono font-bold text-white" />
                 </div>
               </foreignObject>
@@ -91,7 +91,7 @@ export default function FuelFormulaDiagram() {
 
             <foreignObject x={resultZoneStart} y={RIBBON_TOP - 8} width={RESULT_ZONE_W} height={RIBBON_BOTTOM - RIBBON_TOP + 16}>
               <div dir="ltr" className="flex h-full w-full flex-col items-center justify-center text-center">
-                <span className="text-[9px] font-medium text-white/85">{td("totalCost")}</span>
+                <span className="text-xs font-medium text-white/85">{td("totalCost")}</span>
                 <AutoFitText text={money(TOTAL_COST)} steps={RESULT_STEPS} allowWrap={false} className="font-mono font-bold text-white" />
               </div>
             </foreignObject>

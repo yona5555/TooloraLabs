@@ -108,7 +108,7 @@ export default function KinMotionLab() {
   const lab = (
     <div className="w-full max-w-[400px]">
       <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
-        <text style={{ fontSize: svgPx(13) }} x={W / 2} y={16} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+        <text style={{ fontSize: svgPx(13) }} x={W / 2} y={16} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
           {`t = ${f(now.t, 2)} s · v = ${f(now.v, 1)} m/s · x = ${f(now.x, 1)} m`}
         </text>
         {/* track with the eight equal-time stations */}

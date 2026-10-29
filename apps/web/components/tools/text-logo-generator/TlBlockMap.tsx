@@ -51,7 +51,7 @@ export default function TlBlockMap() {
       {ZONES.map((z, zi) => (
         <g key={z.block}>
           <rect x={sx(z.from)} y={TOP - 4} width={Math.max(3, sx(z.to) - sx(z.from))} height={styles.length * ROW} rx={2} className={z.fill} />
-          <text style={{ fontSize: svgPx(12) }} x={zoneLabels[zi].x} y={TOP - 8 - zoneRow[zi] * 14} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+          <text style={{ fontSize: svgPx(12) }} x={zoneLabels[zi].x} y={TOP - 8 - zoneRow[zi] * 14} fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
             {hex(z.from)}
           </text>
         </g>

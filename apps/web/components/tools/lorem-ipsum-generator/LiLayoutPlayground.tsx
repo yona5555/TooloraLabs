@@ -39,7 +39,7 @@ export default function LiLayoutPlayground() {
   const count = Math.min(LOREM_COUNT_RANGE.max, Math.max(LOREM_COUNT_RANGE.min, Math.round(countValue) || 1));
 
   const slider = (label: string, value: string, input: ReactNode) => (
-    <label className="block text-[11px] text-zinc-500 dark:text-zinc-400">
+    <label className="block text-xs text-zinc-500 dark:text-zinc-400">
       <span className="flex justify-between gap-2">
         <span>{label}</span>
         <span dir="ltr" className="font-mono font-semibold text-zinc-800 dark:text-zinc-100">{value}</span>
@@ -77,7 +77,7 @@ export default function LiLayoutPlayground() {
           </div>
         </div>
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-white dark:from-zinc-900" />
-        <span dir="auto" className={`absolute end-2 top-2 rounded-full px-2 py-0.5 text-[10px] font-semibold ${tone}`}>
+        <span dir="auto" className={`absolute end-2 top-2 rounded-full px-2 py-0.5 text-xs font-semibold ${tone}`}>
           {t(`verdicts.${verdict}`)}
         </span>
       </div>
@@ -105,7 +105,7 @@ export default function LiLayoutPlayground() {
         )}
       </div>
       <div className="mt-2 flex items-center justify-between gap-2">
-        <p className="text-[11px] text-amber-700 dark:text-amber-300">{t("hint")}</p>
+        <p className="text-xs text-amber-700 dark:text-amber-300">{t("hint")}</p>
         <button
           type="button"
           onClick={regenerate}

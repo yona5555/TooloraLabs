@@ -41,7 +41,7 @@ export default function ZipRecordFlow() {
             <text style={{ fontSize: svgPx(12) }} x={x0 + 14} y={y + 20} fontWeight={600} className="fill-white">
               {s.label.length > 24 ? `${s.label.slice(0, 23)}…` : s.label}
             </text>
-            <text style={{ fontSize: svgPx(12) }} x={x0 + PILL_W - 14} y={y + 20} textAnchor="end" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-white">
+            <text style={{ fontSize: svgPx(12) }} x={x0 + PILL_W - 14} y={y + 20} textAnchor="end" fontWeight={700} fontFamily="var(--font-mono)" className="fill-white">
               {s.value}
             </text>
           </g>

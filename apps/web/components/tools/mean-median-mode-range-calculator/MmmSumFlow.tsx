@@ -31,11 +31,11 @@ export default function MmmSumFlow() {
           <div key={s.label} className="flex min-w-0 flex-1 items-center gap-1">
             <div className={`flex min-w-0 flex-1 flex-col items-center rounded-xl border-2 px-2 py-3 ${s.cls}`}>
               <span className="font-mono text-lg font-bold">{s.value}</span>
-              <span className="text-[11px] font-semibold text-zinc-500 dark:text-zinc-400">{s.label}</span>
+              <span className="text-xs font-semibold text-zinc-500 dark:text-zinc-400">{s.label}</span>
             </div>
             {i < ops.length && (
               <div className="flex shrink-0 flex-col items-center text-zinc-500 dark:text-zinc-400">
-                <span className="font-mono text-[11px] font-bold">{ops[i]}</span>
+                <span className="font-mono text-xs font-bold">{ops[i]}</span>
                 <span className="text-lg leading-none">→</span>
               </div>
             )}

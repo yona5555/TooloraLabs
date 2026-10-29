@@ -71,7 +71,7 @@ export default function ScoreDial() {
           <circle cx={C + OUTER_R} cy={C} r={8} stroke={band.color} strokeWidth={3} className="fill-white dark:fill-zinc-900" />
         </g>
         <MixRing counts={counts} />
-        <text style={{ fontSize: svgPx(26) }} x={C} y={C + 2} textAnchor="middle" fontWeight={800} fontFamily="ui-monospace, monospace" className="fill-zinc-900 dark:fill-zinc-50">
+        <text style={{ fontSize: svgPx(26) }} x={C} y={C + 2} textAnchor="middle" fontWeight={800} fontFamily="var(--font-mono)" className="fill-zinc-900 dark:fill-zinc-50">
           {f(score)}
         </text>
         <text style={{ fontSize: svgPx(12) }} x={C} y={C + 18} textAnchor="middle" fontWeight={700} fill={band.color}>

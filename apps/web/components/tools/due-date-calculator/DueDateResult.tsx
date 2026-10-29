@@ -159,13 +159,13 @@ export default function DueDateResult({ snap, error, fill = false }: Props) {
             <p dir="ltr" className="text-sm font-bold tabular-nums text-blue-700 dark:text-blue-300">
               {wd(ga)}
             </p>
-            <p className="text-[10px] font-semibold uppercase text-zinc-500 dark:text-zinc-400">{t("gestationalAge")}</p>
+            <p className="text-xs font-semibold uppercase text-zinc-500 dark:text-zinc-400">{t("gestationalAge")}</p>
           </div>
           <div className="rounded-lg bg-zinc-100 px-2.5 py-1 dark:bg-zinc-800">
             <p dir="ltr" className="text-sm font-bold tabular-nums text-zinc-800 dark:text-zinc-100">
               {daysLeft}
             </p>
-            <p className="text-[10px] font-semibold uppercase text-zinc-500 dark:text-zinc-400">{t("daysUntilDue")}</p>
+            <p className="text-xs font-semibold uppercase text-zinc-500 dark:text-zinc-400">{t("daysUntilDue")}</p>
           </div>
         </div>
       </div>

@@ -57,7 +57,7 @@ export default function LiWordLengths() {
           <text style={{ fontSize: svgPx(12) }} x={3} y={10} fontWeight={600} className="fill-emerald-700 dark:fill-emerald-300">{t("mean", { n: f(avg, 2) })}</text>
         </g>
       </svg>
-      <p className="mt-1 text-[11px] text-zinc-500 dark:text-zinc-400">{t("legend")}</p>
+      <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">{t("legend")}</p>
     </div>
   );
 

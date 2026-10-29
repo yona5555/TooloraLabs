@@ -12,7 +12,7 @@ import bidiFactory from "bidi-js";
 
 const FONT_DIR = join(process.cwd(), "assets/fonts");
 /** The site's own faces: IBM Plex Sans Arabic (ar), Noto Sans Devanagari (hi); the Latin locales use the
- *  Arial stack on the site, here Arimo, its metric-compatible open counterpart (Arial cannot be shipped). */
+ *  Arimo (lib/fonts.ts), the same faces the pages draw with. */
 export const SHARE_FONT_FILES = {
   ar: "IBMPlexSansArabic-Bold.ttf",
   hi: "NotoSansDevanagari-Bold.ttf",

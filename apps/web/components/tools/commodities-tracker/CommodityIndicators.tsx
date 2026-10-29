@@ -87,11 +87,11 @@ export function CommodityUnitEquivalence({ commodity, amount, metalUnit, oilUnit
       <div className="grid grid-cols-2 gap-2" data-testid="equivalence-grid">
         {tiles.map((x) => (
           <div key={x.u} className={`min-w-0 rounded-xl border p-2.5 ${x.u === unit ? "border-blue-500 bg-blue-50/60 dark:bg-blue-500/10" : "border-zinc-200 dark:border-zinc-700"}`}>
-            <p className="truncate text-[11px] text-zinc-500 dark:text-zinc-400">{tA(`units.${x.u}`)}</p>
+            <p className="truncate text-xs text-zinc-500 dark:text-zinc-400">{tA(`units.${x.u}`)}</p>
             <p dir="ltr" className="truncate font-mono text-sm font-bold text-zinc-900 dark:text-zinc-100">
               {f.num(x.qty, x.qty < 1 ? 5 : 3)} {short(x.u)}
             </p>
-            <p dir="ltr" className="truncate font-mono text-[11px] text-blue-700 dark:text-blue-300">
+            <p dir="ltr" className="truncate font-mono text-xs text-blue-700 dark:text-blue-300">
               {f.money(x.per)} / {short(x.u)}
             </p>
           </div>
@@ -283,7 +283,7 @@ export function CommodityPurityTable({ commodity, amount, metalUnit, spot, digit
                   {r.label}
                 </td>
                 <td className="px-3 py-2">
-                  <span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${tagTone[r.tag]}`}>{t(`tags.${r.tag}`)}</span>
+                  <span className={`rounded-full px-2 py-0.5 text-xs font-semibold ${tagTone[r.tag]}`}>{t(`tags.${r.tag}`)}</span>
                 </td>
                 <td dir="ltr" className="px-3 py-2 text-end font-mono text-zinc-700 dark:text-zinc-300">
                   {f.num(r.purity * 100, 2)}%
@@ -514,7 +514,7 @@ export function CommodityComparisonCards({ spot, commodity, onPick, digitStyle }
             <p dir="ltr" className="truncate font-mono text-base font-bold text-blue-700 dark:text-blue-300">
               {s.price === null ? "—" : f.money(s.price)}
             </p>
-            <p className="text-[10px] text-zinc-400">{isMetal(s.id) ? t("perOunce") : t("perBarrel")}</p>
+            <p className="text-xs text-zinc-400">{isMetal(s.id) ? t("perOunce") : t("perBarrel")}</p>
             <dl className="mt-2 space-y-1 text-xs">
               <div className="flex justify-between gap-1">
                 <dt className="text-zinc-500 dark:text-zinc-400">{t("y1")}</dt>

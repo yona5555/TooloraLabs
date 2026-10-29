@@ -1,7 +1,7 @@
 /**
  * Shared chart label layout (§39: labels never overlap, never clipped). Pure geometry, no DOM: it works on
  * boxes measured by `useChartLabels` (the glyph ink of real rendered text, never estimated widths), so the
- * same rules hold for every font (Arial, IBM Plex Sans Arabic, Devanagari) and every rendered size.
+ * same rules hold for every font (Arimo, IBM Plex Mono, IBM Plex Sans Arabic, Noto Sans Devanagari) and every rendered size.
  *
  * - `marginDelta` / `nextMargins`: margins grown (or shrunk) from how far measured labels stick out of the
  *   drawing, so a chart's plot area always leaves room for its own labels (no hand-tuned paddings).

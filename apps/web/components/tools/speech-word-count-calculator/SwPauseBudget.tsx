@@ -32,7 +32,7 @@ export default function SwPauseBudget() {
           <div key={p.key} className={p.bar} style={{ width: `${total > 0 ? (p.sec / total) * 100 : 0}%`, transition: "width 300ms ease" }} title={`${t(p.key)} · ${clock(p.sec)}`} />
         ))}
       </div>
-      <ul className="space-y-0.5 text-[11px]">
+      <ul className="space-y-0.5 text-xs">
         {parts.map((p) => (
           <li key={p.key} className="flex items-center justify-between gap-2 text-zinc-600 dark:text-zinc-300">
             <span className="flex items-center gap-1.5">
@@ -43,11 +43,11 @@ export default function SwPauseBudget() {
           </li>
         ))}
       </ul>
-      <label className="flex items-center gap-2 text-[11px] text-zinc-500 dark:text-zinc-400">
+      <label className="flex items-center gap-2 text-xs text-zinc-500 dark:text-zinc-400">
         <span className="w-36 shrink-0">{t("sentencePause", { s: f(sentencePause, 2) })}</span>
         <input type="range" min={0} max={3} step={0.25} value={sentencePause} onChange={(e) => setSentencePause(Number(e.target.value))} className="w-full accent-amber-500" aria-label={t("sentencePauseLabel")} />
       </label>
-      <label className="flex items-center gap-2 text-[11px] text-zinc-500 dark:text-zinc-400">
+      <label className="flex items-center gap-2 text-xs text-zinc-500 dark:text-zinc-400">
         <span className="w-36 shrink-0">{t("paragraphPause", { s: f(paragraphPause, 2) })}</span>
         <input type="range" min={0} max={6} step={0.5} value={paragraphPause} onChange={(e) => setParagraphPause(Number(e.target.value))} className="w-full accent-violet-600" aria-label={t("paragraphPauseLabel")} />
       </label>

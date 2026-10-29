@@ -51,7 +51,7 @@ export default function FileSizeResult() {
         {fmt(a.decimalValue)} {out.decimal[a.decimalLevel].unit} = {fmt(a.binaryValue)} {out.binary[a.binaryLevel].unit}
       </p>
 
-      <div className="mt-4 grid grid-cols-[auto_1fr_1fr] gap-x-3 text-[11px] font-semibold tracking-wide text-zinc-500 uppercase dark:text-zinc-400">
+      <div className="mt-4 grid grid-cols-[auto_1fr_1fr] gap-x-3 text-xs font-semibold tracking-wide text-zinc-500 uppercase dark:text-zinc-400">
         <span />
         <span>{t("aboveFold.decimalTitle")}</span>
         <span>{t("aboveFold.binaryTitle")}</span>
@@ -76,7 +76,7 @@ export default function FileSizeResult() {
                   <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-700">
                     <div className="h-full rounded-full bg-amber-500" style={{ width: `${Math.min(100, (gap / prefixGap(5)) * 100)}%` }} />
                   </div>
-                  <span dir="ltr" className="w-24 shrink-0 text-end font-mono text-[11px] text-amber-700 dark:text-amber-300">
+                  <span dir="ltr" className="w-24 shrink-0 text-end font-mono text-xs text-amber-700 dark:text-amber-300">
                     {tr("gap", { p: f(gap, 2) })}
                   </span>
                 </div>

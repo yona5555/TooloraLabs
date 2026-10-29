@@ -68,7 +68,7 @@ export default function CountdownDial({ d }: { d: Derived }) {
       <text x={C} y={C - 12} textAnchor="middle" fontWeight={800} className="fill-zinc-900 dark:fill-zinc-50" style={{ fontSize: svgPx(44), fontVariantNumeric: "tabular-nums" }}>
         {num(d.b.days)}
       </text>
-      <text x={C} y={C + 16} textAnchor="middle" fontWeight={700} fill={elapsedColor} style={{ fontSize: svgPx(20), fontVariantNumeric: "tabular-nums", fontFamily: "ui-monospace, monospace" }}>
+      <text x={C} y={C + 16} textAnchor="middle" fontWeight={700} fill={elapsedColor} style={{ fontSize: svgPx(20), fontVariantNumeric: "tabular-nums", fontFamily: "var(--font-mono)" }}>
         {`${two(d.b.hours)}:${two(d.b.minutes)}:${two(d.b.seconds)}`}
       </text>
       <text style={{ fontSize: svgPx(12) }} x={C} y={C + 38} textAnchor="middle" fontWeight={700} className="fill-zinc-500 dark:fill-zinc-400">

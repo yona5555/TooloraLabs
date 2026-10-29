@@ -39,7 +39,7 @@ export default function SwFormula() {
           <span className="flex-1 rounded-lg bg-blue-600 px-3 py-2 text-center text-lg font-bold text-white">{timeLabel(result.totalSeconds)}</span>
         </li>
       </ol>
-      <p dir="ltr" className="mt-2 text-center font-mono text-[11px] text-zinc-500 dark:text-zinc-400">Speaking time = word count ÷ words per minute</p>
+      <p dir="ltr" className="mt-2 text-center font-mono text-xs text-zinc-500 dark:text-zinc-400">Speaking time = word count ÷ words per minute</p>
     </div>
   );
 

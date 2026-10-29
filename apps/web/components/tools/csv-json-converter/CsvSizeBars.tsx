@@ -38,7 +38,7 @@ export default function CsvSizeBars() {
               {t(r.key)}
             </text>
             <rect x={BAR_X} y={y + 8} width={w} height={ROW - 16} rx={4} className={r.cls} />
-            <text style={{ fontSize: svgPx(12) }} x={BAR_X + w + 5} y={y + 22} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
+            <text style={{ fontSize: svgPx(12) }} x={BAR_X + w + 5} y={y + 22} fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-700 dark:fill-zinc-200">
               {f(r.v)} B
             </text>
           </g>

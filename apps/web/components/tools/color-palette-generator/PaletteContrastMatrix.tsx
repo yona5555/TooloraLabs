@@ -56,7 +56,7 @@ export default function PaletteContrastMatrix() {
                 return (
                   <td key={j} className={`rounded-md py-1 font-mono ${LEVEL_CLS[l]}`}>
                     <span className="block font-bold">{f(r, 1)}</span>
-                    <span className="block text-[11px]">{levelLabel(l)}</span>
+                    <span className="block text-xs">{levelLabel(l)}</span>
                   </td>
                 );
               })}

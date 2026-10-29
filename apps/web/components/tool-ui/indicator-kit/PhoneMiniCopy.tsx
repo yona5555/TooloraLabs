@@ -53,7 +53,7 @@ export default function PhoneMiniCopy({ slot, title, label, source, children }: 
   if (!target) return null;
   return createPortal(
     <div className="relative flex h-full w-full min-w-0 flex-col gap-0.5 overflow-hidden rounded-xl border border-blue-200 bg-white px-2 pt-1.5 pb-1 text-start dark:border-blue-500/30 dark:bg-zinc-900">
-      <span className="w-full truncate text-[11px] leading-4 font-semibold text-zinc-600 dark:text-zinc-300">{title}</span>
+      <span className="w-full truncate text-xs leading-4 font-semibold text-zinc-600 dark:text-zinc-300">{title}</span>
       <div ref={boxRef} aria-hidden="true" inert className="relative min-h-0 w-full flex-1 overflow-hidden">
         <div
           ref={innerRef}

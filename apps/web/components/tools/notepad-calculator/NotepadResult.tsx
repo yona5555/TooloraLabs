@@ -82,7 +82,7 @@ export default function NotepadResult({ result, a, onPickLine }: Props) {
                   onClick={() => onPickLine(l.index)}
                   className={`flex w-full items-center gap-2 rounded-md px-1.5 py-1.5 text-start transition enabled:hover:bg-blue-50 dark:enabled:hover:bg-blue-500/10 ${isFinal ? "bg-emerald-50 dark:bg-emerald-500/10" : ""}`}
                 >
-                  <span className="w-7 shrink-0 text-[10px] text-zinc-400">{lineNo(l.index)}</span>
+                  <span className="w-7 shrink-0 text-xs text-zinc-400">{lineNo(l.index)}</span>
                   <span className="h-2 w-2 shrink-0 rounded-full" style={{ background: KIND_COLORS[l.kind] }} />
                   <span dir="auto" className={`min-w-0 flex-1 truncate ${l.kind === "note" ? "font-sans italic text-zinc-500 dark:text-zinc-400" : "text-zinc-700 dark:text-zinc-200"}`}>
                     {l.text || " "}
@@ -120,7 +120,7 @@ export function NotepadNudge({ a, text, onSetInput }: { a: NotepadAnalysis; text
               <li key={v.name} className="flex items-center gap-2 py-2">
                 <span className="min-w-0 flex-1">
                   <span dir="ltr" className="block truncate font-mono text-sm font-semibold text-zinc-800 dark:text-zinc-100">{`${v.name} = ${num(v.value)}`}</span>
-                  <span dir="ltr" className="block truncate font-mono text-[11px] text-zinc-500 dark:text-zinc-400">
+                  <span dir="ltr" className="block truncate font-mono text-xs text-zinc-500 dark:text-zinc-400">
                     {ifUp !== null && a.finalValue !== null ? `+10% → ${num(ifUp)} (${signed(ifUp - a.finalValue)})` : "—"}
                   </span>
                 </span>
@@ -167,7 +167,7 @@ export function NotepadSyntaxTable({ onInsert }: { onInsert: (line: string) => v
               <span dir="ltr" className="shrink-0 font-mono text-sm font-semibold text-blue-600 dark:text-blue-400">
                 {num(analyzeNotepad(f.expr).finalValue ?? 0)}
               </span>
-              <span className="shrink-0 rounded bg-zinc-100 px-1.5 text-[10px] font-semibold text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400">+</span>
+              <span className="shrink-0 rounded bg-zinc-100 px-1.5 text-xs font-semibold text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400">+</span>
             </button>
           </li>
         ))}

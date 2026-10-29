@@ -41,7 +41,7 @@ export default function FractionDecimalExpansionCard() {
             <button type="button" onClick={() => adjustDen(-1)} className="h-9 w-9 rounded-full text-base font-bold" style={{ background: "var(--glass-track)", color: "var(--glass-title)" }} aria-label={t("decrease")}>
               −
             </button>
-            <span className="text-[11px]" style={{ color: "var(--glass-muted)" }}>
+            <span className="text-xs" style={{ color: "var(--glass-muted)" }}>
               {t("denominatorLabel", { den: formatMathValue(denominatorA) })}
             </span>
             <button type="button" onClick={() => adjustDen(1)} className="h-9 w-9 rounded-full text-base font-bold" style={{ background: "var(--glass-track)", color: "var(--glass-title)" }} aria-label={t("increase")}>

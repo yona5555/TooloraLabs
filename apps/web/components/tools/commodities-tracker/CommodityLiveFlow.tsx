@@ -108,14 +108,14 @@ export default function CommodityLiveFlow({ commodity, amountText, amount, metal
                 </div>
                 <div dir="ltr" className="mt-1 flex items-end justify-between gap-1">
                   <Sparkline values={history.status === "loading" ? null : values} up={(change ?? 0) >= 0} width={96} />
-                  <span className="text-[10px] text-zinc-400">{t(history.status === "ready" && history.data.frequency === "monthly" ? "spark24m" : "spark30d")}</span>
+                  <span className="text-xs text-zinc-400">{t(history.status === "ready" && history.data.frequency === "monthly" ? "spark24m" : "spark30d")}</span>
                 </div>
                 <p dir="ltr" className="mt-1 truncate text-end font-mono text-xs text-zinc-500 dark:text-zinc-400">
                   / {base}
                 </p>
               </div>
               <div className="flex flex-col items-center gap-1" aria-hidden>
-                <div dir="ltr" className="rounded-full bg-blue-600 px-2 py-0.5 font-mono text-[10px] font-semibold text-white shadow-sm" data-testid="flow-rate">
+                <div dir="ltr" className="rounded-full bg-blue-600 px-2 py-0.5 font-mono text-xs font-semibold text-white shadow-sm" data-testid="flow-rate">
                   × {f.num(qty, 4)}
                 </div>
                 <div className="flex items-center">
@@ -128,7 +128,7 @@ export default function CommodityLiveFlow({ commodity, amountText, amount, metal
                 <p dir="ltr" className="mt-1 font-mono text-sm font-bold text-zinc-900 dark:text-zinc-100">
                   {f.money(perUnitUsd)}
                 </p>
-                <p className="mt-2 text-[10px] text-zinc-400">{t("valueOf", { amount: amountText, unit: unitLabel })}</p>
+                <p className="mt-2 text-xs text-zinc-400">{t("valueOf", { amount: amountText, unit: unitLabel })}</p>
                 <p dir="ltr" className="truncate text-end font-mono text-sm font-semibold text-blue-700 dark:text-blue-300">
                   {resultText}
                 </p>

@@ -43,7 +43,7 @@ export default function InverseTrigRangeZone() {
             ))}
             <div className="absolute top-1/2 h-4 w-1.5 -translate-y-1/2 rounded-full bg-zinc-900 dark:bg-white" style={{ left: `calc(${pct}% - 3px)` }} />
           </div>
-          <div className="mt-1 flex justify-between text-[10px] font-semibold uppercase tracking-wide text-zinc-400 dark:text-zinc-500">
+          <div className="mt-1 flex justify-between text-xs font-semibold uppercase tracking-wide text-zinc-400 dark:text-zinc-500">
             <span>0°</span>
             <span>90°</span>
             <span>180°</span>

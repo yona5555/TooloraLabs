@@ -209,7 +209,7 @@ export default function CategorySidebar({
                       <Icon size={15} strokeWidth={2} />
                     </span>
                     <span className="flex-1 truncate text-start">{t(`${category.slug}.title`)}</span>
-                    <span className="shrink-0 rounded-full bg-zinc-100 px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-zinc-400 dark:bg-zinc-800 dark:text-zinc-500">
+                    <span className="shrink-0 rounded-full bg-zinc-100 px-1.5 py-0.5 text-xs font-semibold uppercase tracking-wide text-zinc-400 dark:bg-zinc-800 dark:text-zinc-500">
                       {tNavbar("comingSoon")}
                     </span>
                   </div>
@@ -228,7 +228,7 @@ export default function CategorySidebar({
                   <Icon size={15} strokeWidth={2} />
                 </span>
                 <span className="flex-1 truncate text-start">{t(`${category.slug}.title`)}</span>
-                <span className="shrink-0 rounded-full bg-zinc-100 px-1.5 py-0.5 text-[10px] font-medium text-[#5e5e67] dark:bg-zinc-800 dark:text-zinc-400">
+                <span className="shrink-0 rounded-full bg-zinc-100 px-1.5 py-0.5 text-xs font-medium text-[#5e5e67] dark:bg-zinc-800 dark:text-zinc-400">
                   {tCategoriesSection("toolCount", { count: categoryTools.length })}
                 </span>
               </>
@@ -272,7 +272,7 @@ export default function CategorySidebar({
                     <Icon size={15} strokeWidth={2} />
                   </span>
                   <span className="flex-1 truncate text-start">{t(`${category.slug}.title`)}</span>
-                  <span className="shrink-0 rounded-full bg-zinc-100 px-1.5 py-0.5 text-[10px] font-medium text-[#5e5e67] dark:bg-zinc-800 dark:text-zinc-400">
+                  <span className="shrink-0 rounded-full bg-zinc-100 px-1.5 py-0.5 text-xs font-medium text-[#5e5e67] dark:bg-zinc-800 dark:text-zinc-400">
                     {tCategoriesSection("toolCount", { count: categoryTools.length })}
                   </span>
                   <ChevronRight size={14} className={`shrink-0 text-zinc-400 transition-transform ${isOpen ? "rotate-90" : ""}`} />

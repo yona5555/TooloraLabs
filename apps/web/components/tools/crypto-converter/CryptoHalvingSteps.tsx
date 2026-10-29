@@ -84,7 +84,7 @@ export default function CryptoHalvingSteps() {
             {(["days", "hours", "minutes", "seconds"] as const).map((k) => (
               <div key={k} className="rounded-lg bg-blue-50 py-1.5 dark:bg-blue-500/10">
                 <div className="font-mono text-xl font-bold tabular-nums text-blue-700 dark:text-blue-300">{num(left[k])}</div>
-                <div className="text-[10px] uppercase text-zinc-500 dark:text-zinc-400">{t(`units.${k}`)}</div>
+                <div className="text-xs uppercase text-zinc-500 dark:text-zinc-400">{t(`units.${k}`)}</div>
               </div>
             ))}
           </div>

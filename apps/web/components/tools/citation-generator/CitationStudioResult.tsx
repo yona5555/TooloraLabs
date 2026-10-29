@@ -133,7 +133,7 @@ export default function CitationStudioResult({ state, onChange, source, index }:
             role="tab"
             aria-selected={style === id}
             onClick={() => onChange({ ...state, style: id })}
-            className={`rounded-md px-1 py-1.5 text-[11px] leading-3 font-bold transition ${
+            className={`rounded-md px-1 py-1.5 text-xs leading-3 font-bold transition ${
               style === id ? "bg-blue-600 text-white" : "text-zinc-600 hover:bg-white dark:text-zinc-300 dark:hover:bg-zinc-700"
             }`}
           >
@@ -144,7 +144,7 @@ export default function CitationStudioResult({ state, onChange, source, index }:
 
       <div className="rounded-lg bg-blue-50 p-2.5 dark:bg-blue-500/10" data-bp-inner>
         <div className="mb-1 flex items-center justify-between gap-2">
-          <p className="text-[11px] font-semibold text-zinc-500 dark:text-zinc-400">{t("result.reference")}</p>
+          <p className="text-xs font-semibold text-zinc-500 dark:text-zinc-400">{t("result.reference")}</p>
           <CopyButton text={text} html={html} label={t("result.copy")} doneLabel={t("result.copied")} />
         </div>
         <EntryText segs={segs} rtl={rtl} colored className="font-serif text-[15px] leading-6 text-zinc-900 dark:text-zinc-50" />
@@ -157,13 +157,13 @@ export default function CitationStudioResult({ state, onChange, source, index }:
         ].map((r) => (
           <div key={r.k} className="contents">
             <p className="min-w-0">
-              <span className="text-[11px] font-semibold text-zinc-500 dark:text-zinc-400">{r.k}: </span>
+              <span className="text-xs font-semibold text-zinc-500 dark:text-zinc-400">{r.k}: </span>
               <bdi className="font-semibold text-blue-700 dark:text-blue-300">{r.v}</bdi>
             </p>
             <CopyButton text={r.v} label={t("result.copy")} doneLabel={t("result.copied")} compact />
           </div>
         ))}
-        <label className="col-span-2 flex items-center gap-2 text-[11px] font-semibold text-zinc-500 dark:text-zinc-400">
+        <label className="col-span-2 flex items-center gap-2 text-xs font-semibold text-zinc-500 dark:text-zinc-400">
           {t("result.page")}
           <input
             value={state.page}

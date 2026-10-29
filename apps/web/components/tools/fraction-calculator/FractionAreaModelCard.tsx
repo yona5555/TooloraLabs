@@ -41,7 +41,7 @@ export default function FractionAreaModelCard() {
       visual={
         <div className="flex w-full flex-col gap-5 py-2">
           <div className="flex flex-col gap-1.5">
-            <span className="text-[10px] font-bold uppercase" style={{ color: "var(--glass-accent-1-strong)" }}>
+            <span className="text-xs font-bold uppercase" style={{ color: "var(--glass-accent-1-strong)" }}>
               {t("rowA", { num: formatMathValue(numeratorA), den: formatMathValue(denominatorA) })}
             </span>
             <div
@@ -56,7 +56,7 @@ export default function FractionAreaModelCard() {
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <span className="text-[10px] font-bold uppercase" style={{ color: "var(--glass-accent-2-strong)" }}>
+            <span className="text-xs font-bold uppercase" style={{ color: "var(--glass-accent-2-strong)" }}>
               {t("rowB", { num: formatMathValue(numeratorB), den: formatMathValue(denominatorB) })}
             </span>
             {/* The nested segment is drawn to the SAME scale as row A directly above, so its own

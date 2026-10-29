@@ -91,7 +91,7 @@ export default function ZipCompressorResult({ isProcessing, onDownloadZip, extra
                 </span>
                 <span className="font-semibold text-zinc-700 dark:text-zinc-200">{r.size ? `−${f((1 - r.ratio) * 100, 1)}%` : "0%"}</span>
               </div>
-              <div className="mt-2 flex items-center justify-between text-[11px] text-zinc-500 dark:text-zinc-400">
+              <div className="mt-2 flex items-center justify-between text-xs text-zinc-500 dark:text-zinc-400">
                 <span>{tr("entropy", { e: f(r.entropy, 2) })}</span>
                 <span dir="ltr" className="font-mono">CRC {r.crc32.toString(16).padStart(8, "0").toUpperCase()}</span>
               </div>

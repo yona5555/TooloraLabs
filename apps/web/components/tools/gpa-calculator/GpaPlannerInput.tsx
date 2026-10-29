@@ -89,7 +89,7 @@ export default function GpaPlannerInput({ state, onChange, onReset, onPrint }: P
           <legend className="flex items-center gap-2 px-1 text-sm font-bold text-blue-700 dark:text-blue-300">
             {t("semesterN", { n: si + 1 })}
             {si === state.semesters.length - 1 && (
-              <span className="rounded bg-blue-100 px-1.5 text-[10px] font-semibold text-blue-700 dark:bg-blue-500/20 dark:text-blue-300">
+              <span className="rounded bg-blue-100 px-1.5 text-xs font-semibold text-blue-700 dark:bg-blue-500/20 dark:text-blue-300">
                 {t("input.current")}
               </span>
             )}
@@ -99,7 +99,7 @@ export default function GpaPlannerInput({ state, onChange, onReset, onPrint }: P
               </button>
             )}
           </legend>
-          <div className="grid grid-cols-[minmax(0,1fr)_3rem_4.5rem_1.75rem] gap-1.5 text-[11px] font-semibold text-zinc-500 dark:text-zinc-400">
+          <div className="grid grid-cols-[minmax(0,1fr)_3rem_4.5rem_1.75rem] gap-1.5 text-xs font-semibold text-zinc-500 dark:text-zinc-400">
             <span>{t("input.course")}</span>
             <span>{t("input.credits")}</span>
             <span>{state.entry === "percent" ? t("input.percent") : t("input.grade")}</span>
@@ -205,7 +205,7 @@ export default function GpaPlannerInput({ state, onChange, onReset, onPrint }: P
           {t("input.reset")}
         </button>
       </div>
-      <p className="text-[11px] leading-4 text-zinc-500 dark:text-zinc-400">{t("input.savedNote")}</p>
+      <p className="text-xs leading-4 text-zinc-500 dark:text-zinc-400">{t("input.savedNote")}</p>
     </SectionCard>
   );
 }

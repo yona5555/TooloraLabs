@@ -30,7 +30,7 @@ export default function VolatilityDial({ value, limits, max, valueText, zoneLabe
         {valueText}
       </p>
       <p className={`text-sm font-semibold ${zone === "low" ? "text-emerald-600" : zone === "medium" ? "text-amber-600" : "text-red-600"}`}>{zoneLabels[zone]}</p>
-      <div className="mt-2 flex flex-wrap justify-center gap-3 text-[11px] text-zinc-500 dark:text-zinc-400">
+      <div className="mt-2 flex flex-wrap justify-center gap-3 text-xs text-zinc-500 dark:text-zinc-400">
         <span><span className="me-1 inline-block h-2 w-2 rounded-full bg-emerald-500" />{zoneLabels.low} &lt;{limits.low}%</span>
         <span><span className="me-1 inline-block h-2 w-2 rounded-full bg-amber-400" />{zoneLabels.medium}</span>
         <span><span className="me-1 inline-block h-2 w-2 rounded-full bg-red-500" />{zoneLabels.high} &gt;{limits.medium}%</span>

@@ -18,7 +18,7 @@ export default function SidebarFillList({ title, note, rows }: { title: string; 
             <span className="min-w-0 flex-1">
               <span className="block truncate text-xs font-semibold text-zinc-900 dark:text-zinc-100">{r.label}</span>
               {r.sub && (
-                <span dir="ltr" className="block text-[10px] uppercase text-zinc-400">
+                <span dir="ltr" className="block text-xs uppercase text-zinc-400">
                   {r.sub}
                 </span>
               )}
@@ -28,7 +28,7 @@ export default function SidebarFillList({ title, note, rows }: { title: string; 
                 {r.value}
               </span>
               {r.changeText && (
-                <span dir="ltr" className={`font-mono text-[10px] ${changeColor(r.change)}`}>
+                <span dir="ltr" className={`font-mono text-xs ${changeColor(r.change)}`}>
                   {r.changeText}
                 </span>
               )}
@@ -36,7 +36,7 @@ export default function SidebarFillList({ title, note, rows }: { title: string; 
           </li>
         ))}
       </ul>
-      {note && <p className="border-t border-zinc-100 px-4 py-1.5 text-[10px] text-zinc-400 dark:border-zinc-800 dark:text-zinc-500">{note}</p>}
+      {note && <p className="border-t border-zinc-100 px-4 py-1.5 text-xs text-zinc-400 dark:border-zinc-800 dark:text-zinc-500">{note}</p>}
     </div>
     </div>
   );

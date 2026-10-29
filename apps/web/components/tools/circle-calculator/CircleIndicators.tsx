@@ -63,8 +63,8 @@ export function CircleSolveSteps() {
             className={`flex h-(--step-h) min-w-0 flex-1 flex-col justify-end rounded-xl border-2 p-2 max-md:h-auto max-md:w-(--step-w) max-md:flex-none ${colors[i]}`}
             style={{ "--step-h": `${88 + i * 34}px`, "--step-w": `${55 + i * 15}%` } as CSSProperties}
           >
-            <span className="text-[11px] font-semibold text-zinc-500 dark:text-zinc-400">{`${i + 1}. ${tf(s.field)}`}</span>
-            <span dir="ltr" className="truncate font-mono text-[10px] text-zinc-500 dark:text-zinc-400">{s.formula}</span>
+            <span className="text-xs font-semibold text-zinc-500 dark:text-zinc-400">{`${i + 1}. ${tf(s.field)}`}</span>
+            <span dir="ltr" className="truncate font-mono text-xs text-zinc-500 dark:text-zinc-400">{s.formula}</span>
             <span dir="ltr" className="truncate font-mono text-sm font-bold text-zinc-900 dark:text-zinc-100">{f(s.value)}</span>
           </div>
         ))}
@@ -193,7 +193,7 @@ export function CircleSensitivityTrio() {
             <span dir="ltr" className="font-mono text-xs text-zinc-600 dark:text-zinc-300">{`r ${f(pt.radius)}`}</span>
             <span dir="ltr" className="font-mono text-xs text-zinc-600 dark:text-zinc-300">{`C ${f(pt.circumference, 2)}`}</span>
             <span dir="ltr" className="font-mono text-sm font-bold text-zinc-900 dark:text-zinc-100">{`A ${f(pt.area, 2)}`}</span>
-            {i !== 1 && <span dir="ltr" className={`mt-1 rounded-full px-2 py-0.5 font-mono text-[10px] font-semibold ${i === 0 ? "bg-amber-100 text-amber-800 dark:bg-amber-500/15 dark:text-amber-300" : "bg-emerald-100 text-emerald-800 dark:bg-emerald-500/15 dark:text-emerald-300"}`}>{`A ${change(pt.area, mid.area)}`}</span>}
+            {i !== 1 && <span dir="ltr" className={`mt-1 rounded-full px-2 py-0.5 font-mono text-xs font-semibold ${i === 0 ? "bg-amber-100 text-amber-800 dark:bg-amber-500/15 dark:text-amber-300" : "bg-emerald-100 text-emerald-800 dark:bg-emerald-500/15 dark:text-emerald-300"}`}>{`A ${change(pt.area, mid.area)}`}</span>}
           </div>
         ))}
       </div>
@@ -235,10 +235,10 @@ export function CircleAreaBars() {
         {bars.map((b) => (
           <div key={b.key} className="flex h-full min-w-0 flex-1 flex-col">
             <div className="flex flex-1 flex-col justify-end">
-              <span className="mb-1 truncate text-center font-mono text-[11px] font-bold text-zinc-800 dark:text-zinc-100">{f(b.v, 2)}</span>
+              <span className="mb-1 truncate text-center font-mono text-xs font-bold text-zinc-800 dark:text-zinc-100">{f(b.v, 2)}</span>
               <div className={`rounded-t-md bg-gradient-to-t ${b.cls} transition-all duration-500`} style={{ height: `${(b.v / q.circumscribedArea) * 100}%` }} />
             </div>
-            <span className="mt-1 hyphens-auto text-center text-[10px] leading-tight text-zinc-500 dark:text-zinc-400">{b.key === "circle" ? tf("area") : t(`bars.${b.key}`)}</span>
+            <span className="mt-1 hyphens-auto text-center text-xs leading-tight text-zinc-500 dark:text-zinc-400">{b.key === "circle" ? tf("area") : t(`bars.${b.key}`)}</span>
           </div>
         ))}
       </div>
@@ -280,7 +280,7 @@ export function CircleSquareStack() {
           </div>
         ))}
       </div>
-      <div className="mt-2 flex text-[11px] font-semibold text-blue-700 dark:text-blue-300">
+      <div className="mt-2 flex text-xs font-semibold text-blue-700 dark:text-blue-300">
         <div className="border-t-2 border-blue-600 pt-1 text-center dark:border-blue-400" style={{ width: `${share(q.inscribedArea + q.segmentsArea)}%` }}>
           {t("stack.circle")} <span dir="ltr" className="font-mono">{f(share(q.inscribedArea + q.segmentsArea), 2)}%</span>
         </div>
@@ -341,7 +341,7 @@ export function CircleEqualArea() {
                 )}
               </svg>
               <span className="text-xs font-semibold text-zinc-600 dark:text-zinc-300">{t(`equal.${s.key}`)}</span>
-              <span dir="ltr" className="font-mono text-[11px] text-zinc-500 dark:text-zinc-400">{s.label}</span>
+              <span dir="ltr" className="font-mono text-xs text-zinc-500 dark:text-zinc-400">{s.label}</span>
             </div>
           </div>
         ))}
@@ -431,7 +431,7 @@ export function CircleIsoperimetric() {
             </div>
             <div className="h-6 w-full rounded-md bg-zinc-100 dark:bg-zinc-800">
               <div className={`flex h-6 items-center justify-end rounded-md px-2 ${cls[e.shape]} transition-all duration-500`} style={{ width: `${e.shareOfCircle * 100}%` }}>
-                <span dir="ltr" className="font-mono text-[11px] font-bold text-white">{f(e.area, 2)}</span>
+                <span dir="ltr" className="font-mono text-xs font-bold text-white">{f(e.area, 2)}</span>
               </div>
             </div>
           </li>
@@ -552,20 +552,20 @@ export function CircleSectorZones() {
     >
       <div dir="ltr" className="relative pt-7">
         <div className="absolute top-0 -translate-x-1/2 transition-all" style={{ left: `${(deg / 360) * 100}%` }}>
-          <span className="block rounded bg-zinc-900 px-1.5 py-0.5 font-mono text-[10px] font-bold text-white dark:bg-zinc-100 dark:text-zinc-900">{deg}°</span>
+          <span className="block rounded bg-zinc-900 px-1.5 py-0.5 font-mono text-xs font-bold text-white dark:bg-zinc-100 dark:text-zinc-900">{deg}°</span>
           <span className="mx-auto block h-0 w-0 border-x-4 border-t-4 border-x-transparent border-t-zinc-900 dark:border-t-zinc-100" />
         </div>
         <div className="relative flex h-10 overflow-hidden rounded-lg">
           {zones.map((z) => (
             <div key={z.key} className={`flex items-center justify-center ${z.cls} ${zone === z.key ? "" : "opacity-60"}`} style={{ width: `${((z.to - z.from) / 360) * 100}%` }}>
-              <span className="text-[11px] font-semibold text-white">{t(`zones.${z.key}`)}</span>
+              <span className="text-xs font-semibold text-white">{t(`zones.${z.key}`)}</span>
             </div>
           ))}
           {[90, 180].map((m) => (
             <div key={m} className={`absolute inset-y-0 w-1 -translate-x-1/2 ${zone === (m === 90 ? "right" : "straight") ? "bg-red-600" : "bg-white dark:bg-zinc-900"}`} style={{ left: `${(m / 360) * 100}%` }} />
           ))}
         </div>
-        <div className="relative mt-1 h-4 font-mono text-[10px] text-zinc-400">
+        <div className="relative mt-1 h-4 font-mono text-xs text-zinc-400">
           {[0, 90, 180, 270, 360].map((m) => (
             <span key={m} className="absolute -translate-x-1/2" style={{ left: `${(m / 360) * 100}%` }}>{m}°</span>
           ))}

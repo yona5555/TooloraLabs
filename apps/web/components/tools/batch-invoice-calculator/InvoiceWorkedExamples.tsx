@@ -71,7 +71,7 @@ export default function InvoiceWorkedExamples() {
                   <div className="bg-sky-500" style={{ width: `${(o.net / o.grand) * 100}%` }} />
                   <div className="bg-amber-500" style={{ width: `${(o.tax / o.grand) * 100}%` }} />
                 </div>
-                <div className="mt-1 flex justify-between text-[11px] text-zinc-500 dark:text-zinc-400">
+                <div className="mt-1 flex justify-between text-xs text-zinc-500 dark:text-zinc-400">
                   <span>{t("netShare", { pct: f.pct((o.net / o.grand) * 100) })}</span>
                   <span>{t("taxShare", { pct: f.pct((o.tax / o.grand) * 100) })}</span>
                 </div>

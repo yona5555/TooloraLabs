@@ -49,7 +49,7 @@ export default function DueDateKeyDates() {
                   {wd(s.ga)} · {f.long(day)}
                 </span>
               </span>
-              <span className={`shrink-0 rounded-full px-2 py-0.5 text-[11px] font-semibold ${done ? "bg-zinc-100 text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400" : "bg-blue-50 text-blue-700 dark:bg-blue-500/10 dark:text-blue-300"}`}>
+              <span className={`shrink-0 rounded-full px-2 py-0.5 text-xs font-semibold ${done ? "bg-zinc-100 text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400" : "bg-blue-50 text-blue-700 dark:bg-blue-500/10 dark:text-blue-300"}`}>
                 {status}
               </span>
             </li>

@@ -265,7 +265,7 @@ export default function MTResult({ result, view, onPick, playing, onTogglePlay }
           ) : null}
         </div>
         {result.grid && (
-          <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-[11px] text-zinc-500 dark:text-zinc-400">
+          <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs text-zinc-500 dark:text-zinc-400">
             <span className="flex items-center gap-1">
               <i className="inline-block h-2.5 w-2.5 rounded-sm bg-emerald-500" />
               {t("legendSelected")}

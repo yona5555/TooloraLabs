@@ -47,7 +47,7 @@ export default function SwTimeSlot() {
         <div className="absolute inset-y-[-6px] w-0.5 bg-zinc-900 dark:bg-zinc-100" style={{ left: `${(slotSec / scale) * 100}%`, transition: "left 350ms ease" }} />
         <span className="absolute inset-0 flex items-center justify-center font-mono text-sm font-bold text-zinc-900 dark:text-zinc-50">{clock(speech)}</span>
       </div>
-      <div dir="ltr" className="mt-1 flex justify-between font-mono text-[11px] text-zinc-500 dark:text-zinc-400">
+      <div dir="ltr" className="mt-1 flex justify-between font-mono text-xs text-zinc-500 dark:text-zinc-400">
         <span>{clock(0)}</span>
         <span>{t("slotMark", { clock: clock(slotSec) })}</span>
       </div>
@@ -58,7 +58,7 @@ export default function SwTimeSlot() {
         <button
           type="button"
           onClick={() => jumpTo(cutTok.start, text.length, { kind: "word", index: budget })}
-          className="mt-2 text-[11px] font-semibold text-amber-700 underline-offset-2 hover:underline dark:text-amber-300"
+          className="mt-2 text-xs font-semibold text-amber-700 underline-offset-2 hover:underline dark:text-amber-300"
         >
           {t("selectCut", { n: f(diff) })}
         </button>

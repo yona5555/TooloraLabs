@@ -47,10 +47,10 @@ export default function JSONStringLengths() {
         return (
           <g key={i}>
             {h > 0 && <rect x={x} y={BASE - h} width={barW} height={h} rx={4} className={i === meanBucket ? "fill-emerald-600 dark:fill-emerald-400" : "fill-emerald-300 dark:fill-emerald-800"} />}
-            <text style={{ fontSize: svgPx(12) }} x={x + barW / 2} y={BASE - h - 5} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={x + barW / 2} y={BASE - h - 5} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
               {f(b.count)}
             </text>
-            <text style={{ fontSize: svgPx(12) }} x={x + barW / 2} y={BASE + 16} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+            <text style={{ fontSize: svgPx(12) }} x={x + barW / 2} y={BASE + 16} textAnchor="middle" fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
               {b.to === null ? `${b.from}+` : `${b.from}–${b.to}`}
             </text>
           </g>

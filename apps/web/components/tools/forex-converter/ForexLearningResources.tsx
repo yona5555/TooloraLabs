@@ -29,7 +29,7 @@ export default function ForexLearningResources() {
                 <ExternalLink size={14} aria-hidden="true" />
               </a>
               {item.isAffiliate && (
-                <span className="rounded-full border border-zinc-300 px-2.5 py-1 text-[11px] font-medium uppercase tracking-wide text-zinc-500 dark:border-zinc-700 dark:text-zinc-400">
+                <span className="rounded-full border border-zinc-300 px-2.5 py-1 text-xs font-medium uppercase tracking-wide text-zinc-500 dark:border-zinc-700 dark:text-zinc-400">
                   {tCommon("affiliateLabel")}
                 </span>
               )}

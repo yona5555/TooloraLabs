@@ -27,11 +27,11 @@ function StageRow({ label, colorClass, dotColorClass, lineColorClass, stageLabel
         {Array.from({ length: STAGE_COUNT }, (_, i) => (
           <div key={i} className="flex flex-1 items-center last:flex-none">
             <div className="flex shrink-0 flex-col items-center gap-1 text-center">
-              <span className={`flex h-6 w-6 items-center justify-center rounded-full text-[10px] font-bold text-white ${taxAt(i) ? dotColorClass : "bg-zinc-300 dark:bg-zinc-600"}`}>{i + 1}</span>
-              <span className="text-[10px] text-zinc-500 dark:text-zinc-400">
+              <span className={`flex h-6 w-6 items-center justify-center rounded-full text-xs font-bold text-white ${taxAt(i) ? dotColorClass : "bg-zinc-300 dark:bg-zinc-600"}`}>{i + 1}</span>
+              <span className="text-xs text-zinc-500 dark:text-zinc-400">
                 {stageLabel} {i + 1}
               </span>
-              <span className={`text-[10px] font-bold ${taxAt(i) ? colorClass : "text-zinc-400 dark:text-zinc-500"}`}>{taxAt(i) ? taxHereLabel : noTaxLabel}</span>
+              <span className={`text-xs font-bold ${taxAt(i) ? colorClass : "text-zinc-400 dark:text-zinc-500"}`}>{taxAt(i) ? taxHereLabel : noTaxLabel}</span>
             </div>
             {i < STAGE_COUNT - 1 && <span className={`mx-1 h-0.5 flex-1 rounded ${lineColorClass}`} aria-hidden="true" />}
           </div>

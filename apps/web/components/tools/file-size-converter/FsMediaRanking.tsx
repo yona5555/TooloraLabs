@@ -37,7 +37,7 @@ export default function FsMediaRanking() {
               {m.fill < 100 ? t("fill", { p: f(m.fill, 1) }) : ""}
             </text>
             <rect x={BAR_X} y={y + 8} width={w} height={ROW - 16} rx={4} className={m.count === 1 ? "fill-emerald-500 dark:fill-emerald-400" : "fill-blue-600 dark:fill-blue-400"} />
-            <text style={{ fontSize: svgPx(12) }} x={BAR_X + w + 5} y={y + 24} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
+            <text style={{ fontSize: svgPx(12) }} x={BAR_X + w + 5} y={y + 24} fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-700 dark:fill-zinc-200">
               × {f(m.count, 0)}
             </text>
           </g>

@@ -47,14 +47,14 @@ export default function SwMinuteMarks() {
                 >
                   <span dir="ltr" className="w-12 shrink-0 font-mono text-xs font-bold text-blue-700 dark:text-blue-300">{clock(m.sec)}</span>
                   <span dir="auto" className="min-w-0 flex-1 truncate text-sm text-zinc-800 dark:text-zinc-100">“{preview(m.index)}…”</span>
-                  {para && <span className="shrink-0 text-[10px] text-zinc-400">¶{f(para.index + 1)}</span>}
+                  {para && <span className="shrink-0 text-xs text-zinc-400">¶{f(para.index + 1)}</span>}
                 </button>
               </li>
             );
           })}
         </ol>
       )}
-      <p className="mt-2 text-[11px] text-amber-700 dark:text-amber-300">{t("hint")}</p>
+      <p className="mt-2 text-xs text-amber-700 dark:text-amber-300">{t("hint")}</p>
     </div>
   );
 

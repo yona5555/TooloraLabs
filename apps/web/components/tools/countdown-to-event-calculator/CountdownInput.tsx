@@ -223,7 +223,7 @@ export default function CountdownInput({ state, onChange, d, presets, onPreset, 
       </div>
 
       {showMoonNote && (
-        <p className="flex gap-1.5 rounded-lg bg-amber-50 px-2 py-1.5 text-[11px] leading-4 text-amber-800 dark:bg-amber-500/10 dark:text-amber-200">
+        <p className="flex gap-1.5 rounded-lg bg-amber-50 px-2 py-1.5 text-xs leading-4 text-amber-800 dark:bg-amber-500/10 dark:text-amber-200">
           <Moon size={14} className="mt-0.5 shrink-0" aria-hidden />
           {t("input.moonNote")}
         </p>

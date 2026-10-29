@@ -48,13 +48,13 @@ export default function JSONKeyFrequency() {
               x={LABEL}
               y={y + 14}
               textAnchor="end"
-              fontFamily="ui-monospace, monospace"
+              fontFamily="var(--font-mono)"
               className={i === 0 ? "fill-blue-700 font-bold dark:fill-blue-300" : "fill-zinc-600 dark:fill-zinc-300"}
             >
               {clip(r.key, 12)}
             </text>
             <rect x={BAR_X} y={y + 3} width={w} height={ROW - 8} rx={3} className={r.count > 1 ? "fill-blue-500 dark:fill-blue-400" : "fill-zinc-300 dark:fill-zinc-600"} />
-            <text style={{ fontSize: svgPx(12) }} x={BAR_X + w + 5} y={y + 14} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
+            <text style={{ fontSize: svgPx(12) }} x={BAR_X + w + 5} y={y + 14} fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-700 dark:fill-zinc-200">
               ×{f(r.count)}
             </text>
           </g>

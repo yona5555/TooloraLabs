@@ -113,7 +113,7 @@ export default function ForexTerminal({ pair, onSelectPair, converterPair, recen
 
       <InstrumentList
         title={t("listTitle")}
-        badge={<span className="text-[10px] font-semibold text-zinc-500 dark:text-zinc-400">{t("listBadge")}</span>}
+        badge={<span className="text-xs font-semibold text-zinc-500 dark:text-zinc-400">{t("listBadge")}</span>}
         rows={rows}
         activeId={pairId(pair)}
         onSelect={(id) => onSelectPair(id.split("/") as [string, string])}

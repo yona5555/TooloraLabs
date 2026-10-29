@@ -32,11 +32,11 @@ export default function KinTimeTrio() {
             <div className="mt-3 flex h-28 items-end justify-center gap-3">
               <div className="flex h-full flex-col items-center justify-end">
                 <div className="w-5 rounded-t bg-violet-500 dark:bg-violet-400" style={{ height: `${Math.max(2, (Math.abs(s.v) / vMax) * 100)}%` }} />
-                <span className="mt-1 text-[10px] text-zinc-500 dark:text-zinc-400">v</span>
+                <span className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">v</span>
               </div>
               <div className="flex h-full flex-col items-center justify-end">
                 <div className={`w-5 rounded-t ${s.x < 0 ? "bg-amber-500 dark:bg-amber-400" : "bg-blue-600 dark:bg-blue-400"}`} style={{ height: `${Math.max(2, (Math.abs(s.x) / xMax) * 100)}%` }} />
-                <span className="mt-1 text-[10px] text-zinc-500 dark:text-zinc-400">x</span>
+                <span className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">x</span>
               </div>
             </div>
             <span dir="ltr" className="mt-2 font-mono text-xs font-semibold text-violet-700 dark:text-violet-300">{`${f(s.v, 1)} m/s`}</span>

@@ -65,7 +65,7 @@ export function CdRingsCard({ d }: IndicatorProps) {
               );
             })}
             <text style={{ fontSize: svgPx(20) }} x={C} y={C - 2} textAnchor="middle" fontWeight={800} className={valueText}>{num(b.days)}</text>
-            <text x={C} y={C + 15} textAnchor="middle" fontWeight={700} fill={BLUE} style={{ fontSize: svgPx(12), fontFamily: "ui-monospace, monospace" }}>
+            <text x={C} y={C + 15} textAnchor="middle" fontWeight={700} fill={BLUE} style={{ fontSize: svgPx(12), fontFamily: "var(--font-mono)" }}>
               {hms(b.hours, b.minutes, b.seconds)}
             </text>
           </svg>

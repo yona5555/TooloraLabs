@@ -108,7 +108,7 @@ export default function RandomNumberInputPanel(p: Props) {
                 }`}
               >
                 <span className="text-xs font-semibold text-zinc-800 dark:text-zinc-100">{t(`presets.${preset.key}`)}</span>
-                <span dir="ltr" className="font-mono text-[10px] text-zinc-500 dark:text-zinc-400">
+                <span dir="ltr" className="font-mono text-xs text-zinc-500 dark:text-zinc-400">
                   {`${preset.settings.min}–${preset.settings.max} · ×${preset.settings.count}${preset.settings.allowDuplicates ? "" : " ≠"}`}
                 </span>
               </button>

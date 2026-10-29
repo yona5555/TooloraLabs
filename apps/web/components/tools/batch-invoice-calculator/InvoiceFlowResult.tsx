@@ -31,7 +31,7 @@ function Arrow({ label }: { label: string }) {
         <div className="h-3 w-1 rounded bg-blue-500/70" />
         <div className="h-0 w-0 border-x-[6px] border-t-[7px] border-x-transparent border-t-blue-500" />
       </div>
-      <span dir="ltr" className="rounded-full bg-blue-600 px-2 py-0.5 font-mono text-[10px] font-semibold text-white shadow-sm">
+      <span dir="ltr" className="rounded-full bg-blue-600 px-2 py-0.5 font-mono text-xs font-semibold text-white shadow-sm">
         {label}
       </span>
     </div>
@@ -68,7 +68,7 @@ export default function InvoiceFlowResult({ invoice, overview, f, onPrint, onCsv
             {invoice.items.map((item, i) => (
               <li key={i} className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-2">
                 <span className="min-w-0 text-xs text-zinc-700 dark:text-zinc-300">
-                  {item.name || "—"} <span dir="ltr" className="font-mono text-[10px] text-zinc-400">{f.num(item.quantity)} × {f.money(item.unitPrice)}</span>
+                  {item.name || "—"} <span dir="ltr" className="font-mono text-xs text-zinc-400">{f.num(item.quantity)} × {f.money(item.unitPrice)}</span>
                 </span>
                 <span dir="ltr" className="font-mono text-xs font-semibold text-zinc-900 dark:text-zinc-100">
                   {f.money(totals.lineTotals[i])}
@@ -109,7 +109,7 @@ export default function InvoiceFlowResult({ invoice, overview, f, onPrint, onCsv
             [t("blended"), f.pct(overview.effectiveTaxRate, 2)],
           ].map(([k, v]) => (
             <div key={k} className="min-w-0 rounded-lg bg-white/10 px-1.5 py-1.5">
-              <dt className="truncate text-[10px] text-zinc-300">{k}</dt>
+              <dt className="truncate text-xs text-zinc-300">{k}</dt>
               <dd dir="ltr" className="truncate font-mono text-xs font-semibold">
                 {v}
               </dd>

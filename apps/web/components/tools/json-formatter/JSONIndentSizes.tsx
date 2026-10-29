@@ -69,7 +69,7 @@ export default function JSONIndentSizes() {
               x={BAR_X + total + 6}
               y={y + 18}
               fontWeight={weight}
-              fontFamily="ui-monospace, monospace"
+              fontFamily="var(--font-mono)"
               className={st.active ? "fill-blue-700 dark:fill-blue-300" : "fill-zinc-500 dark:fill-zinc-400"}
             >
               {formatBytes(st.bytes)}

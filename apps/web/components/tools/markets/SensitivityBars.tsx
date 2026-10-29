@@ -15,7 +15,7 @@ export default function SensitivityBars({ points }: { points: [Point, Point, Poi
       {points.map((p, i) => (
         <div key={i} className={`flex min-w-0 flex-col rounded-xl border p-3 ${TONE[i]}`}>
           <span className="text-xs font-semibold text-zinc-600 dark:text-zinc-300">{p.label}</span>
-          <span dir="ltr" className="truncate font-mono text-[11px] text-zinc-500 dark:text-zinc-400">
+          <span dir="ltr" className="truncate font-mono text-xs text-zinc-500 dark:text-zinc-400">
             {p.sub}
           </span>
           <div className="mt-2 flex h-24 items-end">
@@ -24,7 +24,7 @@ export default function SensitivityBars({ points }: { points: [Point, Point, Poi
           <span dir="ltr" className="mt-2 truncate font-mono text-sm font-bold text-zinc-900 dark:text-zinc-100">
             {p.display}
           </span>
-          <span dir="ltr" className="truncate font-mono text-[11px] text-zinc-500 dark:text-zinc-400">
+          <span dir="ltr" className="truncate font-mono text-xs text-zinc-500 dark:text-zinc-400">
             {p.delta}
           </span>
         </div>

@@ -145,7 +145,7 @@ export default function ReadabilityInputPanel({ sampleText }: { sampleText: stri
           : t("inputHint")}
         {ok && fragments > 0 && <span className="text-amber-700 dark:text-amber-300"> · {tl("table.fragmentsNote", { n: f(fragments) })}</span>}
       </p>
-      <p className="mt-1 text-[11px] leading-4 text-zinc-400 dark:text-zinc-500">{tq("englishOnlyNote")}</p>
+      <p className="mt-1 text-xs leading-4 text-zinc-400 dark:text-zinc-500">{tq("englishOnlyNote")}</p>
     </SectionCard>
   );
 }

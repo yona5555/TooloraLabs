@@ -93,9 +93,9 @@ export default function OhmsDimmerLab() {
         </defs>
         {/* Formula/number runs isolated as LTR and set in mono; the word keeps the sans font (mono breaks Arabic joining). */}
         <text style={{ fontSize: svgPx(13) }} x={W / 2} y={18} textAnchor="middle" direction={rtl ? "rtl" : "ltr"} fontWeight={700} className="fill-zinc-800 dark:fill-zinc-100">
-          <tspan fontFamily="ui-monospace, monospace">{ltr(`I = ${f(d.current)} A`)}</tspan>
+          <tspan fontFamily="var(--font-mono)">{ltr(`I = ${f(d.current)} A`)}</tspan>
           <tspan>{` · ${t("brightness")} `}</tspan>
-          <tspan fontFamily="ui-monospace, monospace">{ltr(`${f(glow * 100, 1)}%`)}</tspan>
+          <tspan fontFamily="var(--font-mono)">{ltr(`${f(glow * 100, 1)}%`)}</tspan>
         </text>
         {/* wire loop */}
         <rect x={L} y={T} width={R - L} height={B - T} fill="none" strokeWidth={3} className="stroke-amber-700 dark:stroke-amber-500" />
@@ -104,14 +104,14 @@ export default function OhmsDimmerLab() {
         <line x1={L - 14} y1={(T + B) / 2 - 6} x2={L + 14} y2={(T + B) / 2 - 6} strokeWidth={3} className="stroke-zinc-800 dark:stroke-zinc-100" />
         <line x1={L - 8} y1={(T + B) / 2 + 6} x2={L + 8} y2={(T + B) / 2 + 6} strokeWidth={5} className="stroke-zinc-800 dark:stroke-zinc-100" />
         <text style={{ fontSize: svgPx(12) }} x={L + 20} y={(T + B) / 2 - 2} fontWeight={700} className="fill-red-600 dark:fill-red-400">+</text>
-        <text style={{ fontSize: svgPx(12) }} x={L + 18} y={(T + B) / 2 + 26} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-blue-700 dark:fill-blue-300">
+        <text style={{ fontSize: svgPx(12) }} x={L + 18} y={(T + B) / 2 + 26} fontWeight={700} fontFamily="var(--font-mono)" className="fill-blue-700 dark:fill-blue-300">
           {`${f(a.voltage)} V`}
         </text>
         {/* bulb on the top side */}
         <circle cx={W / 2} cy={T} r={34 + 18 * glow} fill={`url(#${svgId}ohms-bulb-glow)`} opacity={glow} />
         <circle cx={W / 2} cy={T} r={16} strokeWidth={2} className="fill-white stroke-zinc-500 dark:fill-zinc-900 dark:stroke-zinc-300" style={{ fill: glow > 0.02 ? `rgba(250, 204, 21, ${0.15 + 0.85 * glow})` : undefined }} />
         <path d={`M ${W / 2 - 7} ${T + 5} q 3.5 -12 7 0 q 3.5 -12 7 0`} fill="none" strokeWidth={1.5} className="stroke-zinc-700 dark:stroke-zinc-200" />
-        <text style={{ fontSize: svgPx(12) }} x={W / 2} y={T + 32} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-600 dark:fill-zinc-300">
+        <text style={{ fontSize: svgPx(12) }} x={W / 2} y={T + 32} textAnchor="middle" fontFamily="var(--font-mono)" className="fill-zinc-600 dark:fill-zinc-300">
           {`R = ${f(a.resistance)} Ω · ${f(d.loadPower)} W`}
         </text>
         {/* dimmer (rheostat) on the bottom side */}
@@ -124,7 +124,7 @@ export default function OhmsDimmerLab() {
         />
         <line x1={wiper} y1={B + 22} x2={wiper} y2={B + 6} strokeWidth={2} className="stroke-violet-600 dark:stroke-violet-400" />
         <path d={`M ${wiper - 4} ${B + 11} L ${wiper + 4} ${B + 11} L ${wiper} ${B + 5} z`} className="fill-violet-600 dark:fill-violet-400" />
-        <text style={{ fontSize: svgPx(12) }} x={W / 2} y={B + 36} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-violet-700 dark:fill-violet-300">
+        <text style={{ fontSize: svgPx(12) }} x={W / 2} y={B + 36} textAnchor="middle" fontFamily="var(--font-mono)" className="fill-violet-700 dark:fill-violet-300">
           {`Rd = ${f(k * a.resistance)} Ω · ${f(d.dimmerPower)} W`}
         </text>
         {/* flowing charges */}

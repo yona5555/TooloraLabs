@@ -38,7 +38,7 @@ function Strip({ zones, max, value, ticks, f }: { zones: Zone[]; max: number; va
       {ticks.map((v) => (
         <g key={v}>
           <line x1={sx(v)} y1={STRIP_Y} x2={sx(v)} y2={STRIP_Y + STRIP_H + 3} className="stroke-zinc-500 dark:stroke-zinc-400" />
-          <text style={{ fontSize: svgPx(12) }} x={sx(v)} y={STRIP_Y + STRIP_H + 12} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">{f(v)}</text>
+          <text style={{ fontSize: svgPx(12) }} x={sx(v)} y={STRIP_Y + STRIP_H + 12} textAnchor="middle" fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">{f(v)}</text>
         </g>
       ))}
       <g style={{ transform: `translateX(${x}px)`, transition: "transform 250ms ease" }}>

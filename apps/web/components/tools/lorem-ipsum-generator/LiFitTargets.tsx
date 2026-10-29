@@ -34,7 +34,7 @@ export default function LiFitTargets() {
                   style={{ width: `${Math.min(1, share) * 100}%`, transition: "width 350ms ease" }}
                 />
                 {over && (
-                  <span dir="auto" className="absolute inset-y-0 end-1.5 flex items-center text-[9px] font-bold text-white">
+                  <span dir="auto" className="absolute inset-y-0 end-1.5 flex items-center text-xs font-bold text-white">
                     {t("overBy", { n: f(chars - s.max) })}
                   </span>
                 )}
@@ -43,7 +43,7 @@ export default function LiFitTargets() {
           );
         })}
       </ul>
-      <p className="mt-2 text-[11px] text-amber-700 dark:text-amber-300">{t("hint", { n: f((focus?.index ?? 0) + 1) })}</p>
+      <p className="mt-2 text-xs text-amber-700 dark:text-amber-300">{t("hint", { n: f((focus?.index ?? 0) + 1) })}</p>
     </div>
   );
 
