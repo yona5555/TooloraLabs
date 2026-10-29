@@ -6,18 +6,41 @@
 # memory and its cores busy without oversubscribing them (5 memory-sized shards on 6 cores ran 4x slower per page).
 #   <outdir>/sizing.txt        the measurement and the chosen shard count
 #   <outdir>/shard-<i>.log     one progress line per page view (+ the shard's own table), shard-<i>.json its OUT
+#   <outdir>/shard-<i>.jsonl   every finished page view's full result (site-audit.mjs RESULTS)
+#   <outdir>/recorded/         the results of the interrupted runs that --resume continues (site-audit.mjs RESUME)
 #   <outdir>/progress.log      the progress lines of every shard, merged as they happen (a hang = no new line)
 #   <outdir>/inventory.json/.txt  the merged inventory (site-audit.mjs --merge); exit 1 on any finding
-# Usage: scripts/site-audit-sharded.sh <port> <outdir> [path-filter ...]   (env LOCALES, WIDTHS, THEMES as the audit)
+# Usage: scripts/site-audit-sharded.sh [--resume] <port> <outdir> [path-filter ...]   (env LOCALES, WIDTHS, THEMES as
+# the audit). --resume continues an interrupted run in <outdir> with the same arguments: the page views it already
+# finished are not visited again and count in the inventory with their recorded results (the shard count of
+# sizing.txt is kept, so no new calibration); without it every earlier result in <outdir> is deleted.
 set -euo pipefail
+resume=0; [ "${1:-}" = --resume ] && { resume=1; shift; }
 port=$1 out=$2; shift 2
 mkdir -p "$out"; out=$(cd "$out" && pwd)
-rm -f "$out"/shard-*.json "$out"/shard-*.log "$out"/inventory.* "$out"/calibration.*; : > "$out/progress.log"
+if (( resume )); then
+  # the finished views of the interrupted run move to recorded/, minus a last line cut off mid-write by the stop
+  mkdir -p "$out/recorded"
+  for f in "$out"/shard-*.jsonl; do
+    [ -e "$f" ] || continue
+    [ -n "$(tail -c1 "$f")" ] && sed -i '$d' "$f"
+    cat "$f" >> "$out/recorded/views.jsonl"; rm "$f"
+  done
+  echo "[$(date -u +%T)] resume: $(cat "$out"/recorded/*.jsonl 2>/dev/null | wc -l) page views recorded" >> "$out/progress.log"
+else
+  rm -rf "$out/recorded" "$out"/shard-*.jsonl; : > "$out/progress.log"
+fi
+rm -f "$out"/shard-*.json "$out"/shard-*.log "$out"/inventory.*
 NEXT_DIST_DIR=.next-lock NODE_OPTIONS="--import=$PWD/tests/fixtures/offline-fetch.mjs" TZ=UTC NEXT_TELEMETRY_DISABLED=1 \
   scripts/test-server.sh start "$port" apps/web
 trap 'scripts/test-server.sh stop "$port"' EXIT
 export BASE="http://localhost:$port"
 
+if (( resume )) && [ -s "$out/sizing.txt" ]; then
+  shards=$(awk '{print $(NF-1)}' "$out/sizing.txt")
+  echo "resume: $shards shards, as sized in $out/sizing.txt"
+else
+rm -f "$out"/calibration.*
 # Memory one worker adds: the container's peak during a one-worker run on two heavy tool pages (cgroup v2).
 cg=/sys/fs/cgroup
 before=$(cat "$cg/memory.current")
@@ -39,10 +62,12 @@ mib() { echo "$(( $1 / 1048576 )) MiB"; }
 printf 'memory limit %s, before the audit %s, one worker %s -> %s by memory (80%% cap %s); one worker %s.%03d cores of %s -> %s by CPU; %s shards\n' \
   "$(mib "$limit")" "$(mib "$before")" "$(mib "$per_worker")" "$by_memory" "$(mib $(( limit * 8 / 10 )))" \
   $((cpu_worker / 1000)) $((cpu_worker % 1000)) "$cores" "$by_cpu" "$shards" | tee "$out/sizing.txt"
+fi
 
+if (( resume )); then export RESUME="$out/recorded"; fi
 pids=()
 for i in $(seq 1 "$shards"); do
-  (cd apps/web && SHARD="$i/$shards" JOBS=1 PROGRESS="$out/progress.log" OUT="$out/shard-$i.json" node scripts/site-audit.mjs "$@") > "$out/shard-$i.log" 2>&1 &
+  (cd apps/web && SHARD="$i/$shards" JOBS=1 PROGRESS="$out/progress.log" OUT="$out/shard-$i.json" RESULTS="$out/shard-$i.jsonl" node scripts/site-audit.mjs "$@") > "$out/shard-$i.log" 2>&1 &
   pids+=($!)
 done
 crashed=0

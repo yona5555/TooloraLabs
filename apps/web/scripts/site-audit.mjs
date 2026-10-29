@@ -17,11 +17,14 @@
 // Usage: BASE=http://localhost:<port> node scripts/site-audit.mjs [path-filter ...]
 //   env LOCALES=en,ar  WIDTHS=1440,390  THEMES=light,dark  MIN=12  JOBS=3  SHARD=i/n (pages i, i+n, … of the
 //   sitemap order, i from 1)  OUT=<file.json> (totals, inventory by root cause, every finding)  VERBOSE=1 (one
-//   JSON line per page view)  PROGRESS=<file> (also append each progress line there). A path filter keeps the
+//   JSON line per page view)  PROGRESS=<file> (also append each progress line there)  RESULTS=<file.jsonl> (append
+//   each page view's full result as one JSON line)  RESUME=<dir> (skip every view of this run already recorded in
+//   <dir>/*.jsonl, and count its recorded result as if measured now: an interrupted run resumes). A path filter keeps the
 //   paths that contain it (e.g. /tools/pomodoro-timer). Every page view prints one progress line.
 //   --merge a.json b.json … : one inventory from shard OUT files (scripts/site-audit-sharded.sh runs the shards).
-import { appendFileSync, readFileSync, writeFileSync } from "node:fs";
+import { appendFileSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { createRequire } from "node:module";
+import { join } from "node:path";
 import { requireBase } from "../../../scripts/lib/require-base.mjs";
 import { chromium } from "playwright";
 import { clockAfterBuild, hydrationProblems, renderedAtOf, watchHydration } from "../../../tests/hydration-guard.mjs";
@@ -46,6 +49,7 @@ const jobs = Number(process.env.JOBS ?? 3);
 const AXE = readFileSync(createRequire(import.meta.url).resolve("axe-core/axe.min.js"), "utf8");
 const [shardI, shardN] = (process.env.SHARD ?? "1/1").split("/").map(Number);
 const filters = process.argv.slice(2);
+const viewKey = (r) => `${r.locale}${r.path}@${r.w}`;
 
 // Locale-free paths of the served sitemap (lib/indexable-pages.ts), in its order.
 const sitemap = await fetch(`${base}/sitemap.xml`);
@@ -58,8 +62,14 @@ const allPaths = [
       .map((p) => p.replace(/^\/[^/]+/, "")),
   ),
 ];
-const paths = allPaths.filter((p) => !filters.length || filters.some((f) => p.includes(f))).filter((_, i) => i % shardN === shardI - 1);
-if (!paths.length) throw new Error(`no page to audit (sitemap ${allPaths.length} paths, filters ${filters.join(" ") || "none"}, shard ${shardI}/${shardN})`);
+const selected = allPaths.filter((p) => !filters.length || filters.some((f) => p.includes(f)));
+if (!selected.length) throw new Error(`no page to audit (sitemap ${allPaths.length} paths, filters ${filters.join(" ") || "none"})`);
+const paths = selected.filter((_, i) => i % shardN === shardI - 1);
+// More shards than filtered pages: this shard has nothing to visit, and its empty OUT merges like any other.
+if (!paths.length) {
+  report([], { views: 0, pages: 0, locales, widths, themes, links: 0 });
+  process.exit();
+}
 
 function measure(MIN) {
   const visible = (el) => {
@@ -308,7 +318,6 @@ async function axeCheck(p) {
 }
 
 const sameOrigin = (u) => new URL(u, base).origin === new URL(base).origin;
-const links = new Map(); // url -> first page that links to it
 
 async function view(ctx, path, locale, w) {
   const url = `${base}/${locale}${path}`;
@@ -319,7 +328,7 @@ async function view(ctx, path, locale, w) {
   p.on("console", (m) => m.type() === "error" && consoleErrors.push(`console: ${m.text().split("\n")[0].slice(0, 160)}`));
   p.on("requestfailed", (r) => sameOrigin(r.url()) && !r.failure()?.errorText.includes("ERR_ABORTED") && consoleErrors.push(`request failed: ${new URL(r.url()).pathname} ${r.failure()?.errorText}`));
   p.on("response", (r) => sameOrigin(r.url()) && r.status() >= 400 && consoleErrors.push(`HTTP ${r.status()}: ${new URL(r.url()).pathname}`));
-  const out = { path, locale, w, themes: {}, ms: {} };
+  const out = { path, locale, w, themes: {}, ms: {}, links: [] };
   // per-phase time, added to the progress line: a slow phase is named, not guessed
   let t = Date.now();
   const lap = (k) => {
@@ -354,7 +363,7 @@ async function view(ctx, path, locale, w) {
       if (!sameOrigin(href) || !/^https?:/.test(href)) continue;
       const u = new URL(href);
       u.hash = "";
-      if (!links.has(u.href)) links.set(u.href, `/${locale}${path}`);
+      out.links.push(u.href);
     }
     for (const theme of themes) {
       if (theme === "dark") {
@@ -394,15 +403,30 @@ if (builtAt === null) throw new Error(`no render clock (renderedAt) on the first
 const visitClock = clockAfterBuild(builtAt);
 console.log(`site-audit: ${paths.length} pages × ${locales} × ${widths}px × ${themes}; browser clock ${visitClock.toISOString()} (build ${new Date(builtAt).toISOString()})`);
 
-const b = await chromium.launch();
+// Views recorded by an interrupted run of this audit (RESUME): only this shard's pages, locales and widths, and
+// only results of the same themes; the last record of a view wins.
 const results = [];
-const totalViews = paths.length * locales.length * widths.length;
+const wanted = new Set(paths.flatMap((path) => locales.flatMap((locale) => widths.map((w) => viewKey({ path, locale, w })))));
+if (process.env.RESUME) {
+  const recorded = new Map();
+  for (const f of readdirSync(process.env.RESUME).filter((f) => f.endsWith(".jsonl")))
+    for (const line of readFileSync(join(process.env.RESUME, f), "utf8").split("\n")) {
+      if (!line) continue;
+      const r = JSON.parse(line);
+      if (wanted.has(viewKey(r)) && themes.every((t) => r.themes[t])) recorded.set(viewKey(r), r);
+    }
+  results.push(...recorded.values());
+  console.log(`site-audit: resuming, ${results.length} of ${wanted.size} views already recorded in ${process.env.RESUME}`);
+}
+const done = new Set(results.map(viewKey));
+const b = await chromium.launch();
+const totalViews = wanted.size;
 for (const w of widths) {
   const ctx = await b.newContext(w < 800 ? { viewport: { width: w, height: 844 }, isMobile: true, hasTouch: true } : { viewport: { width: w, height: 900 } });
   await ctx.clock.setFixedTime(visitClock);
   await ctx.addInitScript(() => localStorage.setItem("theme", "light"));
   for (const locale of locales) {
-    const queue = [...paths];
+    const queue = paths.filter((path) => !done.has(viewKey({ path, locale, w })));
     await Promise.all(
       Array.from({ length: jobs }, async () => {
         while (queue.length) {
@@ -414,6 +438,7 @@ for (const w of widths) {
           const line = `[${new Date().toISOString().slice(11, 19)}] shard ${shardI}/${shardN} ${results.length}/${totalViews} /${locale}${path} @${w}px ${((Date.now() - t0) / 1000).toFixed(1)}s ${Object.entries(r.ms).map(([k, v]) => `${k}=${(v / 1000).toFixed(1)}`).join(" ")}`;
           console.log(line);
           if (process.env.PROGRESS) appendFileSync(process.env.PROGRESS, line + "\n"); // the merged progress file of all shards
+          if (process.env.RESULTS) appendFileSync(process.env.RESULTS, JSON.stringify(r) + "\n"); // RESUME reads it back
           if (process.env.VERBOSE) console.log(JSON.stringify(r));
         }
       }),
@@ -423,7 +448,9 @@ for (const w of widths) {
 }
 await b.close();
 
-// Internal links: each distinct same-origin URL once, redirects followed, must end at 200.
+// Internal links: each distinct same-origin URL once (the first view that links to it), redirects followed, must end at 200.
+const links = new Map();
+for (const r of results) for (const u of r.links ?? []) if (!links.has(u)) links.set(u, `/${r.locale}${r.path}`);
 const brokenLinks = [];
 const queue = [...links];
 await Promise.all(
