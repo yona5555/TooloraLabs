@@ -13,6 +13,12 @@ on:
 permissions:
   contents: read
 
+# Every run step is bash with pipefail (bash --noprofile --norc -eo pipefail): a failure anywhere in a pipeline fails
+# the step, so no pipe can hide a gate's exit code (scripts/workflow-shell.mjs enforces this).
+defaults:
+  run:
+    shell: bash
+
 jobs:
   build:
     runs-on: ubuntu-24.04
@@ -34,6 +40,12 @@ jobs:
       # error line from a tool fails the step, not only a non-zero exit.
       - name: Lint (zero warnings)
         run: node scripts/run-no-warnings.mjs npm run lint --workspace=apps/web
+
+      - name: No system font in the source (every family is a self-hosted var(--font-…) stack)
+        run: node scripts/system-fonts.mjs
+
+      - name: Every workflow runs bash with pipefail; no gate is piped
+        run: node scripts/workflow-shell.mjs
 
       - name: Typecheck (core)
         run: npx tsc --noEmit --project packages/core/tsconfig.json
@@ -246,16 +258,18 @@ jobs:
         if: always()
         run: scripts/test-server.sh stop 3110
 
-  # Chart text guard (§39, apps/web/scripts/axis-label-check.mjs): every tool in the registry, en + ar, at
-  # 1440 and 390 px, on the fixture build. Fails on any overlapping or clipped chart label. Six shards run in
-  # parallel so the guard finishes with desktop-lock; `chart-text-audit` is the single required check over them.
-  chart-text-shard:
+  # Site audit (apps/web/scripts/site-audit.mjs): every indexable page (the sitemap, built from
+  # lib/indexable-pages.ts), en + ar, 1440 and 390 px, light and dark, on the fixture build. Fails on any text
+  # overlap, clipped text (SVG and HTML), text below 12px, hydration error (clock = build + 3 days), console or
+  # page error, WCAG AA contrast or critical axe-core violation, or broken internal link. Twelve shards run in
+  # parallel; `site-audit` is the single required check over them. The audit's exit code is the step's: no pipe.
+  site-audit-shard:
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    timeout-minutes: 30
     strategy:
       fail-fast: false
       matrix:
-        shard: [1, 2, 3, 4, 5, 6]
+        shard: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -285,48 +299,89 @@ jobs:
       - name: Install Playwright Chromium
         run: npx playwright install --with-deps chromium
 
-      - name: Start the fixture server
-        run: NEXT_DIST_DIR=.next-lock NODE_OPTIONS="--import=$PWD/tests/fixtures/offline-fetch.mjs" TZ=UTC NEXT_TELEMETRY_DISABLED=1 scripts/test-server.sh start 3107 apps/web
-
-      - name: No overlapping or clipped chart labels (shard ${{ matrix.shard }}/6)
-        working-directory: apps/web
+      - name: Site audit (shard ${{ matrix.shard }}/12)
         env:
-          BASE: http://localhost:3107
-          LOCALES: en,ar
-          WIDTHS: 1440,390
-          SHARD: ${{ matrix.shard }}/6
-          OUT: chart-text-audit-${{ matrix.shard }}.json
-        # bash -o pipefail: the audit's exit code fails the step; without it the grep after the pipe decided
-        # the result, so a shard with findings passed and only zero-warnings caught its annotations.
-        shell: bash
-        run: node scripts/axis-label-check.mjs | grep -v '^{'
+          SHARD: ${{ matrix.shard }}/12
+          OUT: ${{ github.workspace }}/site-audit-${{ matrix.shard }}.json
+        run: scripts/site-audit.sh 3107
 
-      - name: Stop the fixture server
-        if: always()
-        run: scripts/test-server.sh stop 3107
-
-      - name: Upload the findings
+      - name: Upload the inventory
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
-          name: chart-text-audit-${{ matrix.shard }}
-          path: apps/web/chart-text-audit-${{ matrix.shard }}.json
+          name: site-audit-${{ matrix.shard }}
+          path: site-audit-${{ matrix.shard }}.json
           if-no-files-found: ignore
 
-  chart-text-audit:
+  site-audit:
     if: always()
-    needs: chart-text-shard
+    needs: site-audit-shard
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
-      - name: Every chart text shard passed
+      - name: Every site audit shard passed
         env:
-          RESULT: ${{ needs.chart-text-shard.result }}
+          RESULT: ${{ needs.site-audit-shard.result }}
         run: |
           if [ "$RESULT" != "success" ]; then
-            echo "::error::chart-text-shard result: $RESULT (see the shard logs and the chart-text-audit-* artifacts)"
+            echo "::error::site-audit-shard result: $RESULT (see the shard logs and the site-audit-* artifacts)"
             exit 1
           fi
+
+  # Gate canaries (tests/gates-self-test.mjs): every gate runs on a minimal, deliberately broken fixture and must
+  # fail on it, naming the defect: lint and warnings gates, zero-warnings, the system font and workflow shell
+  # rules, the site audit (overlap, SVG clip, HTML clip, text < 12px, hydration mismatch, console error,
+  # contrast, broken link), color + desktop lock (changed color, changed dimension), phone lock, share-images
+  # (missing og:image) and main-health (failed run). A gate that passes its broken fixture fails this job.
+  gates-self-test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Restore the Next.js build cache (fixture build)
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: apps/web/.next-lock/cache
+          key: next-lock-${{ runner.os }}-${{ hashFiles('package-lock.json', 'apps/web/next.config.ts', 'apps/web/package.json') }}-${{ hashFiles('apps/web/app/**', 'apps/web/components/**', 'apps/web/lib/**', 'apps/web/data/**', 'apps/web/messages/**', 'packages/*/src/**') }}
+          restore-keys: |
+            next-lock-${{ runner.os }}-${{ hashFiles('package-lock.json', 'apps/web/next.config.ts', 'apps/web/package.json') }}-
+            next-lock-${{ runner.os }}-
+
+      - name: Restore the Next.js build cache (phone build)
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: apps/web/.next/cache
+          key: next-phone-${{ runner.os }}-${{ hashFiles('package-lock.json', 'apps/web/next.config.ts', 'apps/web/package.json') }}-${{ hashFiles('apps/web/app/**', 'apps/web/components/**', 'apps/web/lib/**', 'apps/web/data/**', 'apps/web/messages/**', 'packages/*/src/**') }}
+          restore-keys: |
+            next-phone-${{ runner.os }}-${{ hashFiles('package-lock.json', 'apps/web/next.config.ts', 'apps/web/package.json') }}-
+            next-phone-${{ runner.os }}-
+
+      - name: Build web app (fixture build for the desktop lock canary, phone build for the phone lock canary)
+        run: |
+          npm run build:desktop-lock
+          npm run build --workspace=apps/web
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Every gate fails on its broken fixture
+        run: |
+          scripts/test-server.sh start 3110 apps/web /ar
+          status=0
+          PHONE_BASE=http://localhost:3110 npm run test:gates-self-test || status=$?
+          scripts/test-server.sh stop 3110
+          exit "$status"
 
   # Baseline approval, in this order: (1) a label approve-desktop-baseline / approve-home-phone-baseline on a
   # same-repository PR starts this job, and the matching required lock check fails at once; (2) this job
@@ -451,7 +506,7 @@ jobs:
   # included), so a warning can never merge unnoticed. always(): it still reports when a job failed or was
   # skipped. Check runs are found by their details URL (this run's id), so only checks: read is needed.
   zero-warnings:
-    needs: [build, home-phone-lock, desktop-lock, chart-text-shard, chart-text-audit, regenerate-baselines]
+    needs: [build, home-phone-lock, desktop-lock, site-audit-shard, site-audit, gates-self-test, regenerate-baselines]
     if: always()
     runs-on: ubuntu-24.04
     timeout-minutes: 5
