@@ -79,55 +79,15 @@ export function useValueFlash(durationMs = 600) {
   return { flashing, trigger };
 }
 
-/** Always starts false so server and client render identically (no hydration mismatch); setState
- * is only ever called from inside the IntersectionObserver's own async callback -- never
- * synchronously in the effect body. Reduced motion is handled in CSS (Reveal's
- * motion-reduce:transition-none below), not by special-casing this hook: an in-viewport element's
- * observer callback fires within a frame of mount either way, so reduced-motion users still see it
- * revealed almost immediately, just without the eased animation. */
-function useRevealed<T extends HTMLElement>() {
-  const ref = useRef<T>(null);
-  const [revealed, setRevealed] = useState(false);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setRevealed(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-  return { ref, revealed };
-}
-
-/** Plays once as each card enters the viewport: opacity + a small translate only, never a change
- * to the element's own box size (zero layout shift). Reduced-motion and a missing
- * IntersectionObserver both resolve to "already revealed" so content is never stuck hidden. The
- * print override is a belt-and-suspenders safety net -- browser print already shows a completely
- * separate [data-print-area] subtree (globals.css), these cards aren't in it either way. */
+/**
+ * The card wrapper (the glass font). Cards used to fade in when they entered the viewport: the server sent them
+ * at opacity 0 and only hydrated JavaScript revealed them, so the above-the-fold result card -- the largest
+ * contentful paint -- waited for the whole page's JS plus a 0.5 s fade (LCP 6.4-7.2 s on mobile, ar). Cards are
+ * now visible in the server HTML, with no entrance motion.
+ */
 function Reveal({ children, "data-testid": testId }: { children: ReactNode; "data-testid"?: string }) {
-  const { ref, revealed: observed } = useRevealed<HTMLDivElement>();
-  const reducedMotion = usePrefersReducedMotion();
-  const revealed = observed || reducedMotion;
   return (
-    <div
-      ref={ref}
-      data-revealed={revealed}
-      data-testid={testId}
-      className="print:opacity-100! print:translate-y-0!"
-      style={{
-        opacity: revealed ? 1 : 0,
-        transform: revealed ? "translateY(0)" : "translateY(12px)",
-        transition: reducedMotion ? "none" : "opacity 0.5s ease-out, transform 0.5s ease-out",
-        fontFamily: "var(--glass-font)",
-      }}
-    >
+    <div data-testid={testId} style={{ fontFamily: "var(--glass-font)" }}>
       {children}
     </div>
   );
