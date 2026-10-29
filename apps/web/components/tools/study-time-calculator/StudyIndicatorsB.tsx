@@ -101,7 +101,9 @@ export function DailyLoadCard({ d }: StudyIndicatorProps) {
   const maxM = Math.max(60, ...days.map((x) => Math.max(x.capacityMinutes, x.usedMinutes)));
   const top = Math.ceil(maxM / 60) * 60;
   const cw = (W - L - 4) / n;
-  const y = (m: number) => B - (m / top) * (B - 10);
+  // the plot top leaves room for the 12px exam ★ drawn 3px above a capacity cap that reaches the axis top
+  const T = 17;
+  const y = (m: number) => B - (m / top) * (B - T);
   const study = days.filter((x) => x.usedMinutes > 0);
   const full = days.filter((x) => x.usableMinutes > 0 && x.freeMinutes === 0).length;
   const spare = days.filter((x) => x.freeMinutes > 0).length;
