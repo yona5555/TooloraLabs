@@ -234,6 +234,18 @@ jobs:
           path: desktop-lock-timing.txt
           if-no-files-found: ignore
 
+      - name: Start the fixture server (share images)
+        run: NEXT_DIST_DIR=.next-lock NODE_OPTIONS="--import=$PWD/tests/fixtures/offline-fetch.mjs" TZ=UTC NEXT_TELEMETRY_DISABLED=1 scripts/test-server.sh start 3110 apps/web
+
+      - name: Every sitemap URL has its share image (og:image + twitter:image, 200 image/png)
+        env:
+          BASE: http://localhost:3110
+        run: npm run test:share-images
+
+      - name: Stop the fixture server (share images)
+        if: always()
+        run: scripts/test-server.sh stop 3110
+
   # Chart text guard (§39, apps/web/scripts/axis-label-check.mjs): every tool in the registry, en + ar, at
   # 1440 and 390 px, on the fixture build. Fails on any overlapping or clipped chart label. Six shards run in
   # parallel so the guard finishes with desktop-lock; `chart-text-audit` is the single required check over them.
@@ -284,6 +296,9 @@ jobs:
           WIDTHS: 1440,390
           SHARD: ${{ matrix.shard }}/6
           OUT: chart-text-audit-${{ matrix.shard }}.json
+        # bash -o pipefail: the audit's exit code fails the step; without it the grep after the pipe decided
+        # the result, so a shard with findings passed and only zero-warnings caught its annotations.
+        shell: bash
         run: node scripts/axis-label-check.mjs | grep -v '^{'
 
       - name: Stop the fixture server
