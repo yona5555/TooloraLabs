@@ -1,5 +1,6 @@
 import { parseEonetFeed, parseUsgsFeed, type EonetFeed, type Hazard, type UsgsFeed } from "@tooloralabs/tools";
 import { cachedJson } from "./upstream";
+import { dataNow } from "@/lib/data-clock";
 
 /** USGS: M4.5+ earthquakes of the past 7 days (public domain, "courtesy of the U.S. Geological Survey"). */
 const USGS_FEED = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_week.geojson";
@@ -20,7 +21,7 @@ export async function getHazards(): Promise<HazardSnapshot> {
     hazards: [...quakes, ...events],
     quakesOk: q.status === "fulfilled",
     eventsOk: e.status === "fulfilled",
-    fetchedAt: Date.now(),
+    fetchedAt: dataNow(),
     expires: expiries.length ? Math.min(...expiries) : Date.now() + 60_000,
   };
 }
