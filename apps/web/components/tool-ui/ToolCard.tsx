@@ -87,24 +87,24 @@ export default async function ToolCard({ tool, titleText, descriptionText, featu
       </div>
 
       <div className="flex min-w-0 flex-1 flex-col gap-2 p-3 sm:p-4">
-        <Heading className="line-clamp-2 text-sm font-bold leading-snug text-zinc-900 sm:text-base dark:text-zinc-50">{titleText}</Heading>
+        <Heading className="text-sm font-bold leading-snug text-zinc-900 sm:text-base dark:text-zinc-50">{titleText}</Heading>
 
         {(showFeatured || tags.length > 0) && (
-          <div className="flex h-5 flex-wrap gap-1 overflow-hidden">
+          <div className="flex flex-wrap gap-1">
             {showFeatured && (
               <span className="rounded-full bg-blue-100 px-2 py-0.5 text-xs font-semibold leading-4 text-blue-700 dark:bg-blue-500/15 dark:text-blue-300">{featuredLabel}</span>
             )}
             {tags.map((tag) => (
-              <span key={tag} className="truncate rounded-full bg-zinc-100 px-2 py-0.5 text-xs font-medium leading-4 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300">
+              <span key={tag} className="max-w-full rounded-full bg-zinc-100 px-2 py-0.5 text-xs font-medium leading-4 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300">
                 {tag}
               </span>
             ))}
           </div>
         )}
 
-        <p className="line-clamp-3 text-xs leading-snug text-zinc-500 dark:text-zinc-400">{descriptionText}</p>
+        <p className="text-xs leading-snug text-zinc-500 dark:text-zinc-400">{descriptionText}</p>
 
-        <span className="inline-flex w-fit max-w-full shrink-0 items-center gap-1 truncate rounded-lg bg-blue-600 px-3 py-1.5 text-xs font-bold text-white transition-colors group-hover:bg-blue-700 dark:bg-blue-500 dark:group-hover:bg-blue-400 dark:group-hover:text-zinc-950">
+        <span className="inline-flex w-fit max-w-full shrink-0 items-center gap-1 rounded-lg bg-blue-600 px-3 py-1.5 text-xs font-bold text-white transition-colors group-hover:bg-blue-700 dark:bg-blue-600 dark:group-hover:bg-blue-400 dark:group-hover:text-zinc-950">
           {t("openTool")}
           <ArrowRight size={12} className="rtl:rotate-180" aria-hidden="true" />
         </span>
