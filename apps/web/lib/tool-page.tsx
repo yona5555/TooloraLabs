@@ -28,7 +28,7 @@ export async function toolPageMetadata(locale: string, slug: string): Promise<Me
   const pageTitle = `${t(`${slug}.title`)} | TooloraLabs`;
   const description = t(`${slug}.description`);
   const path = `/tools/${slug}`;
-  const { images, twitter } = shareImageMetadata(locale, slug, t(`${slug}.title`));
+  const { images, twitter } = await shareImageMetadata(locale, path);
 
   return {
     title: pageTitle,

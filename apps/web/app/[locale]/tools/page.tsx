@@ -9,6 +9,7 @@ import HelpfulFeedback from "@/components/docs/HelpfulFeedback";
 import MarketPulse from "@/components/tools-page/MarketPulse";
 import { Suspense } from "react";
 import { localeAlternates } from "@/lib/seo";
+import { shareMetadata } from "@/lib/share-image/meta";
 
 type ToolsPageProps = {
   params: Promise<{ locale: string }>;
@@ -24,6 +25,7 @@ export async function generateMetadata({
     title: `${t("heading")} | TooloraLabs`,
     description: tCategoriesSection("subtitle"),
     alternates: localeAlternates(locale, "/tools"),
+    ...(await shareMetadata(locale, "/tools")),
   };
 }
 
