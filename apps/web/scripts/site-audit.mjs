@@ -19,7 +19,9 @@
 //   sitemap order, i from 1)  OUT=<file.json> (totals, inventory by root cause, every finding)  VERBOSE=1 (one
 //   JSON line per page view)  PROGRESS=<file> (also append each progress line there)  RESULTS=<file.jsonl> (append
 //   each page view's full result as one JSON line)  RESUME=<dir> (skip every view of this run already recorded in
-//   <dir>/*.jsonl, and count its recorded result as if measured now: an interrupted run resumes). A path filter keeps the
+//   <dir>/*.jsonl, and count its recorded result as if measured now: an interrupted run resumes)  PAGES=<file> (only
+//   the localized pages listed, one per line, e.g. /ar/tools/bmi-calculator: CI's affected pages,
+//   scripts/route-manifest.mjs). A path filter keeps the
 //   paths that contain it (e.g. /tools/pomodoro-timer). Every page view prints one progress line.
 //   --merge a.json b.json … : one inventory from shard OUT files (scripts/site-audit-sharded.sh runs the shards).
 import { appendFileSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
@@ -50,6 +52,8 @@ const AXE = readFileSync(createRequire(import.meta.url).resolve("axe-core/axe.mi
 const [shardI, shardN] = (process.env.SHARD ?? "1/1").split("/").map(Number);
 const filters = process.argv.slice(2);
 const viewKey = (r) => `${r.locale}${r.path}@${r.w}`;
+const listed = process.env.PAGES ? new Set(readFileSync(process.env.PAGES, "utf8").split("\n").filter(Boolean)) : null;
+const inPages = (locale, path) => !listed || listed.has(`/${locale}${path}`);
 
 // Locale-free paths of the served sitemap (lib/indexable-pages.ts), in its order.
 const sitemap = await fetch(`${base}/sitemap.xml`);
@@ -62,8 +66,8 @@ const allPaths = [
       .map((p) => p.replace(/^\/[^/]+/, "")),
   ),
 ];
-const selected = allPaths.filter((p) => !filters.length || filters.some((f) => p.includes(f)));
-if (!selected.length) throw new Error(`no page to audit (sitemap ${allPaths.length} paths, filters ${filters.join(" ") || "none"})`);
+const selected = allPaths.filter((p) => !filters.length || filters.some((f) => p.includes(f))).filter((p) => locales.some((l) => inPages(l, p)));
+if (!selected.length) throw new Error(`no page to audit (sitemap ${allPaths.length} paths, filters ${filters.join(" ") || "none"}${listed ? `, PAGES ${listed.size} pages` : ""})`);
 const paths = selected.filter((_, i) => i % shardN === shardI - 1);
 // More shards than filtered pages: this shard has nothing to visit, and its empty OUT merges like any other.
 if (!paths.length) {
@@ -307,12 +311,15 @@ function measureHtml(MIN) {
   return { checked, small, clipped };
 }
 
-async function axeCheck(p) {
-  await p.evaluate(AXE);
-  const v = await p.evaluate(async () => {
-    const r = await window.axe.run(document, { runOnly: { type: "tag", values: ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"] }, resultTypes: ["violations"] });
+// The first theme runs every WCAG 2.x A/AA rule; a later theme runs only color-contrast, the one reported rule
+// that depends on the theme (a critical violation is markup, the same in both themes, so it is reported once).
+async function axeCheck(p, contrastOnly) {
+  if (!(await p.evaluate(() => "axe" in window))) await p.evaluate(AXE);
+  const v = await p.evaluate(async (contrastOnly) => {
+    const runOnly = contrastOnly ? { type: "rule", values: ["color-contrast"] } : { type: "tag", values: ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"] };
+    const r = await window.axe.run(document, { runOnly, resultTypes: ["violations"] });
     return r.violations.flatMap((x) => (x.id === "color-contrast" || x.impact === "critical" ? x.nodes.map((n) => ({ id: x.id, impact: x.impact, target: n.target.join(" ").slice(0, 120), text: (n.any[0]?.message ?? x.help).slice(0, 140) })) : []));
-  });
+  }, contrastOnly);
   // Root cause: the rule and the element's selector with ids, nth-child and slugs dropped.
   return v.map((f) => ({ ...f, pattern: `a11y · ${f.id} · ${f.target.replace(/#[\w-]+/g, "#…").replace(/:nth-child\(\d+\)/g, "")}` }));
 }
@@ -359,6 +366,10 @@ async function view(ctx, path, locale, w) {
       window.scrollTo(0, 0);
     });
     await p.waitForTimeout(1200);
+    // The page has settled: pause its clock, so requestAnimationFrame loops (three.js scenes, canvas and CSS-in-JS
+    // animations) and timers stop burning CPU while it is measured. A running scene kept the CPU busy for the
+    // whole visit and made axe and every wait several times slower (site-audit timing, 2026-10-29).
+    await p.clock.pauseAt((await p.evaluate(() => Date.now())) + 1);
     for (const href of await p.evaluate(() => [...document.querySelectorAll("a[href]")].map((a) => a.href))) {
       if (!sameOrigin(href) || !/^https?:/.test(href)) continue;
       const u = new URL(href);
@@ -372,14 +383,15 @@ async function view(ctx, path, locale, w) {
           localStorage.setItem("theme", "dark");
           document.documentElement.classList.add("dark");
         });
-        await p.waitForTimeout(400);
+        await p.waitForTimeout(400); // React re-renders on the class change (MessageChannel, not a paused timer)
+        await p.clock.runFor(400); // then the theme's timers and frames run once, and the clock is paused again
       }
       lap("settle");
       const chart = await p.evaluate(measure, MIN);
       lap("svg");
       const html = await p.evaluate(measureHtml, MIN);
       lap("html");
-      const a11y = await axeCheck(p);
+      const a11y = await axeCheck(p, theme !== themes[0]);
       lap("axe");
       out.themes[theme] = { overlaps: chart.overlaps, clipped: [...chart.clipped, ...html.clipped], small: [...chart.small.map((f) => ({ ...f, pattern: `small · svg · ${f.card}` })), ...html.small], a11y, labels: chart.checked, texts: html.checked };
     }
@@ -406,14 +418,17 @@ console.log(`site-audit: ${paths.length} pages × ${locales} × ${widths}px × $
 // Views recorded by an interrupted run of this audit (RESUME): only this shard's pages, locales and widths, and
 // only results of the same themes; the last record of a view wins.
 const results = [];
-const wanted = new Set(paths.flatMap((path) => locales.flatMap((locale) => widths.map((w) => viewKey({ path, locale, w })))));
+const wanted = new Set(paths.flatMap((path) => locales.filter((locale) => inPages(locale, path)).flatMap((locale) => widths.map((w) => viewKey({ path, locale, w })))));
 if (process.env.RESUME) {
   const recorded = new Map();
   for (const f of readdirSync(process.env.RESUME).filter((f) => f.endsWith(".jsonl")))
     for (const line of readFileSync(join(process.env.RESUME, f), "utf8").split("\n")) {
       if (!line) continue;
       const r = JSON.parse(line);
-      if (wanted.has(viewKey(r)) && themes.every((t) => r.themes[t])) recorded.set(viewKey(r), r);
+      if (!wanted.has(viewKey(r)) || !themes.every((t) => r.themes[t])) continue;
+      // a view recorded before axe ran contrast-only after the first theme: the same rule applied to its record
+      for (const t of themes.slice(1)) r.themes[t].a11y = r.themes[t].a11y.filter((f) => f.id === "color-contrast");
+      recorded.set(viewKey(r), r);
     }
   results.push(...recorded.values());
   console.log(`site-audit: resuming, ${results.length} of ${wanted.size} views already recorded in ${process.env.RESUME}`);
@@ -423,10 +438,11 @@ const b = await chromium.launch();
 const totalViews = wanted.size;
 for (const w of widths) {
   const ctx = await b.newContext(w < 800 ? { viewport: { width: w, height: 844 }, isMobile: true, hasTouch: true } : { viewport: { width: w, height: 900 } });
-  await ctx.clock.setFixedTime(visitClock);
+  // The page clock starts at build + 3 days and runs normally until the page has settled (view() pauses it).
+  await ctx.clock.install({ time: visitClock });
   await ctx.addInitScript(() => localStorage.setItem("theme", "light"));
   for (const locale of locales) {
-    const queue = paths.filter((path) => !done.has(viewKey({ path, locale, w })));
+    const queue = paths.filter((path) => inPages(locale, path) && !done.has(viewKey({ path, locale, w })));
     await Promise.all(
       Array.from({ length: jobs }, async () => {
         while (queue.length) {
