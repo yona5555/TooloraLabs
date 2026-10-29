@@ -25,7 +25,8 @@
     "test:share-images": "node --test tests/share-images.test.mjs",
     "test:gates-self-test": "node --test --test-concurrency=1 tests/gates-self-test.mjs",
     "test:system-fonts": "node scripts/system-fonts.mjs",
-    "site-audit": "scripts/site-audit.sh"
+    "site-audit": "scripts/site-audit.sh",
+    "perf-budget": "scripts/perf-budget.sh"
   },
   "devDependencies": {
     "patch-package": "^8.0.1",
@@ -40,6 +41,9 @@
     "core-js": false
   },
   "overrides": {
-    "katex": "^0.19.1"
+    "katex": "^0.19.1",
+    "lighthouse": {
+      "@sentry/node": "11.8.0"
+    }
   }
 }

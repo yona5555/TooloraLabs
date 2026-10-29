@@ -13,7 +13,7 @@ import { mkdtempSync, readFileSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { BROKEN, CLEAN, startFixtureSite } from "./gates/fixture-site.mjs";
+import { BROKEN, CLEAN, PERF_BROKEN, PERF_CLEAN, startFixtureSite } from "./gates/fixture-site.mjs";
 
 const ROOT = fileURLToPath(new URL("..", import.meta.url));
 const WEB = join(ROOT, "apps/web");
@@ -87,6 +87,17 @@ test("site audit fails on every broken page (overlap, SVG clip, HTML clip, <12px
   }
   const clean = findings.filter((f) => f.page === `/en${CLEAN}`);
   assert.deepEqual(clean, [], "the clean control page must have no finding");
+});
+
+test("performance budgets fail on a page over each budget (LCP, TBT, CLS, Performance, JS) and pass the clean one", async () => {
+  const out = join(TMP, "perf-budget.json");
+  const r = await gateAsync("node", ["scripts/perf-budget.mjs"], { cwd: WEB, env: { BASE: `http://127.0.0.1:${SITE_PORT}/perf-canary`, LOCALES: "en", OUT: out } });
+  failsWith(r, /error title=perf-budget/, "perf budget");
+  const { pages } = JSON.parse(readFileSync(out, "utf8"));
+  const at = (page) => pages.find((p) => p.page === page) ?? assert.fail(`perf budget did not measure ${page}`);
+  for (const [page, [budgets]] of Object.entries(PERF_BROKEN))
+    for (const k of budgets) assert.ok(at(page).over.includes(k), `perf budget did not report ${page} over ${k}: ${JSON.stringify(at(page).median)}`);
+  assert.deepEqual(at(PERF_CLEAN).over, [], `the clean control page must be within every budget: ${JSON.stringify(at(PERF_CLEAN).median)}`);
 });
 
 test("share-images fails on a sitemap page without og:image", async () => {

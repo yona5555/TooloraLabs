@@ -51,9 +51,11 @@ TooloraLabs-Claude-Instructions.md is a historical archive; the binding rules ar
 - Audits, locks and previews run in the Linux container (`scripts/in-container.sh <cmd>`, colima on the Mac);
   never report macOS results for them. Local audit runs use `scripts/site-audit-sharded.sh`; `site-audit` (CI, required)
   must stay at 0 on every criterion.
+- Speed is a hard gate: `perf-budget` (CI, required; `scripts/perf-budget.sh`, Lighthouse mobile, 3 runs, median, production
+  build) fails any indexable page (en + ar) with LCP > 2.5s, TBT > 200ms, CLS > 0.1, Performance < 90 or JS over budget.
 
 ## Supply chain
-- Required checks on main (strict): build, home-phone-lock, desktop-lock, site-audit, gates-self-test, audit, Analyze (javascript-typescript),
+- Required checks on main (strict): build, home-phone-lock, desktop-lock, site-audit, gates-self-test, perf-budget, audit, Analyze (javascript-typescript),
   Analyze (actions), zero-warnings, audit-zero-warnings, codeql-zero-warnings (the last three run scripts/zero-warnings.sh).
 - Dependabot (weekly, Mon 06:00 Riyadh, 7-day cooldown; security updates immediate): minor/patch and security
   minor/patch get auto-merge (dependabot-automerge.yml, App token) and merge only after every required check

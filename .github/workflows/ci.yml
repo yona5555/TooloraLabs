@@ -328,10 +328,80 @@ jobs:
             exit 1
           fi
 
+  # Performance budgets (apps/web/scripts/perf-budget.mjs), a hard gate: every indexable page (the sitemap), en + ar,
+  # Lighthouse mobile with its default throttling, 3 runs per page, the median of each metric, on the production
+  # fixture build. Fails on any page with LCP > 2.5s, TBT > 200ms, CLS > 0.1, Performance < 90 or more JavaScript
+  # than its budget. Twelve shards in parallel (one page at a time in each); `perf-budget` is the single required
+  # check over them. The gate's exit code is the step's: no pipe.
+  perf-budget-shard:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Same build and cache as desktop-lock (that job saves it; the shards only restore).
+      - name: Restore the Next.js build cache
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: apps/web/.next-lock/cache
+          key: next-lock-${{ runner.os }}-${{ hashFiles('package-lock.json', 'apps/web/next.config.ts', 'apps/web/package.json') }}-${{ hashFiles('apps/web/app/**', 'apps/web/components/**', 'apps/web/lib/**', 'apps/web/data/**', 'apps/web/messages/**', 'packages/*/src/**') }}
+          restore-keys: |
+            next-lock-${{ runner.os }}-${{ hashFiles('package-lock.json', 'apps/web/next.config.ts', 'apps/web/package.json') }}-
+            next-lock-${{ runner.os }}-
+
+      - name: Build web app (production, live data from fixtures)
+        run: npm run build:desktop-lock
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Performance budgets (shard ${{ matrix.shard }}/12)
+        env:
+          SHARD: ${{ matrix.shard }}/12
+          OUT: ${{ github.workspace }}/perf-budget-${{ matrix.shard }}.json
+        run: scripts/perf-budget.sh 3108
+
+      - name: Upload the measurements
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: perf-budget-${{ matrix.shard }}
+          path: perf-budget-${{ matrix.shard }}.json
+          if-no-files-found: ignore
+
+  perf-budget:
+    if: always()
+    needs: perf-budget-shard
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Every performance budget shard passed
+        env:
+          RESULT: ${{ needs.perf-budget-shard.result }}
+        run: |
+          if [ "$RESULT" != "success" ]; then
+            echo "::error::perf-budget-shard result: $RESULT (see the shard logs and the perf-budget-* artifacts)"
+            exit 1
+          fi
+
   # Gate canaries (tests/gates-self-test.mjs): every gate runs on a minimal, deliberately broken fixture and must
   # fail on it, naming the defect: lint and warnings gates, zero-warnings, the system font and workflow shell
   # rules, the site audit (overlap, SVG clip, HTML clip, text < 12px, hydration mismatch, console error,
-  # contrast, broken link), color + desktop lock (changed color, changed dimension), phone lock, share-images
+  # contrast, broken link), the performance budgets (a page over each budget), color + desktop lock (changed color, changed dimension), phone lock, share-images
   # (missing og:image) and main-health (failed run). A gate that passes its broken fixture fails this job.
   gates-self-test:
     runs-on: ubuntu-24.04
@@ -506,7 +576,7 @@ jobs:
   # included), so a warning can never merge unnoticed. always(): it still reports when a job failed or was
   # skipped. Check runs are found by their details URL (this run's id), so only checks: read is needed.
   zero-warnings:
-    needs: [build, home-phone-lock, desktop-lock, site-audit-shard, site-audit, gates-self-test, regenerate-baselines]
+    needs: [build, home-phone-lock, desktop-lock, site-audit-shard, site-audit, perf-budget-shard, perf-budget, gates-self-test, regenerate-baselines]
     if: always()
     runs-on: ubuntu-24.04
     timeout-minutes: 5
