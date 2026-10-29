@@ -1,5 +1,6 @@
 import { parseMetForecast, type MetLocationforecast, type WxForecast } from "@tooloralabs/tools";
 import { cachedJson } from "./upstream";
+import { dataNow } from "@/lib/data-clock";
 
 /**
  * MET Norway Locationforecast 2.0 ("complete": adds dew point, fog and clear-sky UV).
@@ -16,5 +17,5 @@ export function roundCoord(v: number): number {
 export async function getForecast(lat: number, lon: number): Promise<{ forecast: WxForecast; expires: number; servedAt: number }> {
   const url = `${LOCATIONFORECAST}?lat=${roundCoord(lat)}&lon=${roundCoord(lon)}`;
   const { data, expires } = await cachedJson<MetLocationforecast>(url, { minTtlMs: 5 * 60_000, fallbackTtlMs: 30 * 60_000 });
-  return { forecast: parseMetForecast(data), expires, servedAt: Date.now() };
+  return { forecast: parseMetForecast(data), expires, servedAt: dataNow() };
 }
