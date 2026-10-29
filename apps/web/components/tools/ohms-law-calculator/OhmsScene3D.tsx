@@ -2,7 +2,9 @@
 
 import { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
-import { useFrame, useThree } from "@react-three/fiber";
+import { useThree } from "@react-three/fiber";
+import { useMotionEpisode } from "@/components/tool-ui/motion/motion";
+import { useSceneFrame } from "@/components/tool-ui/motion/scene-motion";
 import { Line } from "@react-three/drei";
 import Label3D from "@/components/tool-ui/three/Label3D";
 import { usePalette3D } from "@/components/tool-ui/three/theme3d";
@@ -53,13 +55,14 @@ function along(s: number, out: THREE.Vector3) {
 
 /**
  * Charges flowing round the loop. Their speed follows the current on a log scale (0.001 A crawls,
- * 100 A races), so changing V or R visibly speeds them up or slows them down.
+ * 100 A races), so changing V or R visibly speeds them up or slows them down: they flow during a motion
+ * episode after the current changes (tool-ui/motion), and rest in place otherwise.
  */
 function Charges({ current, color }: { current: number; color: string }) {
   const refs = useRef<(THREE.Mesh | null)[]>([]);
   const invalidate = useThree((s) => s.invalidate);
-  const reduced = useRef<boolean | null>(null);
   const offset = useRef(0);
+  const { active } = useMotionEpisode([current]);
   const tmp = useMemo(() => new THREE.Vector3(), []);
   const speed = 0.25 + 2.6 * clamp((log(current) + 3) / 5, 0, 1);
   const dir = current < 0 ? -1 : 1;
@@ -68,16 +71,14 @@ function Charges({ current, color }: { current: number; color: string }) {
     invalidate();
   }, [invalidate, speed]);
 
-  useFrame((state, delta) => {
-    if (reduced.current === null) reduced.current = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
-    if (!reduced.current) offset.current += dir * speed * Math.min(delta, 0.1);
+  useSceneFrame((_, dt) => {
+    offset.current += dir * speed * dt;
     refs.current.forEach((m, i) => {
       if (!m) return;
       along(offset.current + (i * PERIMETER) / PARTICLES, tmp);
       m.position.copy(tmp);
     });
-    if (!reduced.current) state.invalidate();
-  });
+  }, active);
 
   return (
     <group>

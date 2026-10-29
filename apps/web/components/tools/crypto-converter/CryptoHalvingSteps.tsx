@@ -11,6 +11,7 @@ import LiveFallback from "@/components/tools/markets/LiveFallback";
 import { svgPx } from "@/components/tool-ui/svgPx";
 import { useFitWidth } from "@/components/tool-ui/useFitWidth";
 import { labelW } from "@/components/tool-ui/labelLayout";
+import { subscribeVisibleClock } from "@/components/tool-ui/motion/motion";
 
 /** Genesis plus the four halvings so far, with the UTC date each era's first block was mined. */
 const ERA_STARTS = [
@@ -38,10 +39,8 @@ export default function CryptoHalvingSteps() {
   const [fitRef, W] = useFitWidth(MAX_W);
   const [now, setNow] = useState(() => Date.now());
 
-  useEffect(() => {
-    const id = setInterval(() => setNow(Date.now()), 1000);
-    return () => clearInterval(id);
-  }, []);
+  // tool-ui/motion: the countdown ticks each second while the page is visible, nothing while hidden
+  useEffect(() => subscribeVisibleClock(1000, () => setNow(Date.now())), []);
 
   const num = (v: number, max = 0) => formatLocalizedNumber(v, "western", { maximumFractionDigits: max });
   const fmtDate = (ms: number) => new Intl.DateTimeFormat(locale, { year: "numeric", month: "short", day: "numeric", timeZone: "UTC" }).format(ms);

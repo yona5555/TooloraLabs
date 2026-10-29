@@ -1,15 +1,14 @@
 "use client";
 import { useSyncExternalStore } from "react";
+import { subscribeVisibleClock } from "@/components/tool-ui/motion/motion";
 
 /**
  * The current time in a zone, from the browser's own clock through Intl.DateTimeFormat (the
  * world-time-converter's approach) — no network request. The server snapshot is null, so the
  * server never renders a time that would be stale or mismatch on hydration.
  */
-function subscribe(cb: () => void) {
-  const id = window.setInterval(cb, 15_000);
-  return () => window.clearInterval(id);
-}
+// tool-ui/motion: every 15 s while the page is visible, nothing while hidden
+const subscribe = (cb: () => void) => subscribeVisibleClock(15_000, cb);
 const minuteNow = () => Math.floor(Date.now() / 60_000);
 
 export default function NewYorkClock({ locale, zone }: { locale: string; zone: string }) {

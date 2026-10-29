@@ -1,5 +1,6 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
+import { useTween } from "@/components/tool-ui/motion/motion";
 import { useTranslations } from "next-intl";
 import { Pause, Play } from "lucide-react";
 import { mtSkipCount } from "@tooloralabs/tools";
@@ -17,26 +18,7 @@ type Props = {
 
 /** Counts from the previous value to the new one, so every change of fact visibly "lands". */
 function useCountUp(target: number, ms = 450) {
-  const [shown, setShown] = useState(target);
-  const from = useRef(target);
-  useEffect(() => {
-    const start = performance.now();
-    const a = from.current;
-    let raf = 0;
-    const tick = (now: number) => {
-      const p = Math.min(1, (now - start) / ms);
-      const v = Math.round(a + (target - a) * (1 - (1 - p) ** 3));
-      setShown(v);
-      if (p < 1) raf = requestAnimationFrame(tick);
-      else from.current = target;
-    };
-    raf = requestAnimationFrame(tick);
-    return () => {
-      cancelAnimationFrame(raf);
-      from.current = target;
-    };
-  }, [target, ms]);
-  return shown;
+  return Math.round(useTween(target, ms)); // tool-ui/motion: one shared loop, instant for reduced motion
 }
 
 const W = 360;

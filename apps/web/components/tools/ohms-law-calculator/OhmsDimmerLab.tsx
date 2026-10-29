@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState, useId } from "react";
+import { useMotionEpisode, useMotionLoop } from "@/components/tool-ui/motion/motion";
 import { useLocale, useTranslations } from "next-intl";
 import { ltr } from "@/components/tool-ui/MixedText";
 import { Pause, Play } from "lucide-react";
@@ -47,34 +48,22 @@ export default function OhmsDimmerLab() {
   const { draft, a, f } = useOhmsModel();
   const [k, setK] = useState(1);
   const [phase, setPhase] = useState(0);
-  const [playing, setPlaying] = useState(true);
-  const last = useRef<number | null>(null);
 
   const d = a ? dimmerCircuit(a.voltage, a.resistance, k * a.resistance) : null;
   const speed = d ? 20 + 160 * clamp((Math.log10(Math.max(Math.abs(d.current), 1e-30)) + 3) / 5, 0, 1) : 0;
+  const motion = useMotionEpisode([speed]);
+  const playing = motion.active;
+  const box = useRef<SVGSVGElement>(null);
   const speedRef = useRef(speed);
   useEffect(() => {
     speedRef.current = speed;
   }, [speed]);
 
-  useEffect(() => {
-    if (!playing) return;
-    let raf = 0;
-    last.current = null;
-    const tick = (now: number) => {
-      if (last.current === null && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) {
-        // Reduced motion: keep the charges still.
-        setPlaying(false);
-        return;
-      }
-      const dt = last.current === null ? 0 : Math.min(0.1, (now - last.current) / 1000);
-      last.current = now;
-      setPhase((p) => (p + dt * speedRef.current) % PERIM);
-      raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [playing]);
+  // tool-ui/motion: plays during a motion episode (Play, or new input values), at most EPISODE_MS, paused off
+  // screen or with the page hidden, never on load and never for reduced motion.
+  useMotionLoop(box, (dt) => {
+    setPhase((p) => (p + dt * speedRef.current) % PERIM);
+  }, playing, motion.stop);
 
   if (!a || !d) return <OhmsIndicatorUnavailable title={t("title")} />;
 
@@ -83,7 +72,7 @@ export default function OhmsDimmerLab() {
   const wiper = 150 + (60 * k) / 9;
   const lab = (
     <div className="w-full max-w-[360px]">
-      <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
+      <svg ref={box} direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
         <defs>
           <radialGradient id={`${svgId}ohms-bulb-glow`}>
             <stop offset="0%" stopColor="#fde047" stopOpacity={0.95} />
@@ -172,7 +161,7 @@ export default function OhmsDimmerLab() {
         })}
         <button
           type="button"
-          onClick={() => setPlaying((p) => !p)}
+          onClick={() => (playing ? motion.stop() : motion.play())}
           className="inline-flex items-center gap-2 rounded-lg border border-zinc-300 px-3 py-1.5 text-xs font-semibold text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
         >
           {playing ? <Pause size={14} /> : <Play size={14} />}

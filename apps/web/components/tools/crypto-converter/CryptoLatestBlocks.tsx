@@ -8,6 +8,7 @@ import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import type { LiveBlock } from "@/lib/crypto/network";
 import { useNetworkData } from "./useCryptoLive";
 import LiveFallback from "@/components/tools/markets/LiveFallback";
+import { subscribeVisibleClock } from "@/components/tool-ui/motion/motion";
 
 const SHOWN = 6;
 const tail = (hash: string) => `…${hash.slice(-6)}`;
@@ -28,10 +29,8 @@ export default function CryptoLatestBlocks() {
     setFresh(prevTip === null ? new Set() : new Set(blocks.filter((b) => b.height > prevTip).map((b) => b.height)));
   }
 
-  useEffect(() => {
-    const id = setInterval(() => setNow(Date.now()), 15_000);
-    return () => clearInterval(id);
-  }, []);
+  // tool-ui/motion: "n minutes ago" every 15 s while the page is visible, nothing while hidden
+  useEffect(() => subscribeVisibleClock(15_000, () => setNow(Date.now())), []);
 
   const num = (v: number, max = 0) => formatLocalizedNumber(v, "western", { maximumFractionDigits: max });
   const rtf = new Intl.RelativeTimeFormat(locale, { numeric: "auto" });

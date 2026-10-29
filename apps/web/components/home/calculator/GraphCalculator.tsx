@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { compileGraphExpression, findIntersections, findKeyPoints, niceStep, valueTable, type GraphCompileResult } from "@tooloralabs/tools";
 import Graph2D, { zoomView } from "./graph/Graph2D";
 import Graph3D from "./graph/Graph3D";
+import { EPISODE_MS } from "@/components/tool-ui/motion/motion";
 import {
   DEFAULT_VIEW,
   FUNCTION_COLORS,
@@ -61,6 +62,12 @@ export default function GraphCalculator({ calcDark = false }: { calcDark?: boole
   const [full, setFull] = useState(false);
   const wrap = useRef<HTMLDivElement>(null);
   const nextId = useRef(3);
+  // tool-ui/motion: Auto-rotate is an episode that ends by itself; the page is never left spinning while idle
+  useEffect(() => {
+    if (!autoRotate) return;
+    const id = setTimeout(() => setAutoRotate(false), EPISODE_MS);
+    return () => clearTimeout(id);
+  }, [autoRotate]);
 
   const compiled = useMemo(() => {
     const m = new Map<number, GraphCompileResult>();

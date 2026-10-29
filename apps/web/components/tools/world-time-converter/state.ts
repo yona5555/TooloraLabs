@@ -15,6 +15,7 @@ import {
   zonedParts,
   type WtCity,
 } from "@tooloralabs/tools";
+import { subscribeVisibleClock } from "@/components/tool-ui/motion/motion";
 
 /* ── State ──────────────────────────────────────────────────────────────────────── */
 
@@ -150,7 +151,7 @@ export function useWorldTimeState() {
 /** Server/first-paint instant (a fixed realistic moment); the live clock takes over on hydration. */
 export const SAMPLE_NOW = Date.UTC(2026, 9, 17, 13, 0, 0);
 let nowMs = 0;
-let timer: ReturnType<typeof setInterval> | null = null;
+let timer: (() => void) | null = null; // tool-ui/motion clock: nothing while the page is hidden
 const listeners = new Set<() => void>();
 const tick = () => {
   nowMs = Math.floor(Date.now() / 1000) * 1000;
@@ -160,12 +161,12 @@ function subscribe(cb: () => void) {
   listeners.add(cb);
   if (!timer) {
     tick();
-    timer = setInterval(tick, 1000);
+    timer = subscribeVisibleClock(1000, tick);
   }
   return () => {
     listeners.delete(cb);
     if (listeners.size === 0 && timer) {
-      clearInterval(timer);
+      timer();
       timer = null;
     }
   };

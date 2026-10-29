@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useTween } from "@/components/tool-ui/motion/motion";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 
 /** Number formatters in the batch's own currency, with that currency's minor-unit digits (JPY 0, BHD 3). */
@@ -18,33 +18,7 @@ export type InvoiceFormatters = ReturnType<typeof invoiceFormatters>;
 
 /** Animates from the previous value to `target` (ease-out, 600 ms); jumps straight there if motion is reduced. */
 export function useCountUp(target: number, duration = 600): number {
-  const [value, setValue] = useState(target);
-  const fromRef = useRef(target);
-
-  useEffect(() => {
-    const from = fromRef.current;
-    if (from === target) return;
-    const reduce = typeof window.matchMedia === "function" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) {
-      fromRef.current = target;
-      // eslint-disable-next-line react-hooks/set-state-in-effect -- reduced motion: show the final value at once
-      setValue(target);
-      return;
-    }
-    const start = performance.now();
-    let frame = 0;
-    const tick = (now: number) => {
-      const p = Math.min(1, (now - start) / duration);
-      const v = from + (target - from) * (1 - (1 - p) ** 3);
-      fromRef.current = v;
-      setValue(v);
-      if (p < 1) frame = requestAnimationFrame(tick);
-    };
-    frame = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(frame);
-  }, [target, duration]);
-
-  return value;
+  return useTween(target, duration); // tool-ui/motion: one shared loop, instant for reduced motion
 }
 
 /** Short ISO date shown in the visitor's locale (UTC so a date never shifts by a day). */

@@ -1,5 +1,6 @@
 "use client";
-import { useEffect, useRef, useState, useSyncExternalStore, useId } from "react";
+import { useRef, useState, useId } from "react";
+import { useMotionEpisode, useMotionLoop } from "@/components/tool-ui/motion/motion";
 import { useTranslations } from "next-intl";
 import { projectileStateAt, sampleTrajectory } from "@tooloralabs/tools";
 import PmIndicatorCard from "./PmIndicatorCard";
@@ -12,16 +13,6 @@ const L = 40;
 const R = 390;
 const T = 16;
 const B = 228;
-
-const MOTION_QUERY = "(prefers-reduced-motion: reduce)";
-function subscribeMotion(cb: () => void) {
-  const mq = window.matchMedia(MOTION_QUERY);
-  mq.addEventListener("change", cb);
-  return () => mq.removeEventListener("change", cb);
-}
-function readMotion() {
-  return window.matchMedia(MOTION_QUERY).matches;
-}
 
 export function niceCeil(v: number): number {
   if (!(v > 0)) return 1;
@@ -44,36 +35,25 @@ export default function PmLaunchLab() {
   const { setDim } = usePmLive();
   const { a, f } = usePmModel();
   const [u, setU] = useState(0.38);
-  const [choice, setChoice] = useState<boolean | null>(null);
-  // Server snapshot "reduce" keeps the SSR frame still; the browser then plays unless the visitor prefers reduced motion.
-  const reduceMotion = useSyncExternalStore(subscribeMotion, readMotion, () => true);
-  const playing = choice ?? !reduceMotion;
-  const raf = useRef<number | null>(null);
   const flight = a ? Math.min(5, Math.max(1.5, a.timeOfFlight)) : 2;
+  const motion = useMotionEpisode([flight]);
+  const playing = motion.active;
+  const box = useRef<SVGSVGElement>(null);
 
-  useEffect(() => {
-    if (!playing) return;
-    let last = performance.now();
-    let hold = 0;
-    const tick = (now: number) => {
-      const dt = (now - last) / 1000;
-      last = now;
-      setU((prev) => {
-        if (prev >= 1) {
-          hold += dt;
-          if (hold < 0.7) return 1;
-          hold = 0;
-          return 0;
-        }
-        return Math.min(1, prev + dt / flight);
-      });
-      raf.current = requestAnimationFrame(tick);
-    };
-    raf.current = requestAnimationFrame(tick);
-    return () => {
-      if (raf.current) cancelAnimationFrame(raf.current);
-    };
-  }, [playing, flight]);
+  // tool-ui/motion: the ball flies during a motion episode (Play, or new launch values), at most EPISODE_MS,
+  // paused off screen or with the page hidden, never on load and never for reduced motion.
+  const hold = useRef(0);
+  useMotionLoop(box, (dt) => {
+    setU((prev) => {
+      if (prev >= 1) {
+        hold.current += dt;
+        if (hold.current < 0.7) return 1;
+        hold.current = 0;
+        return 0;
+      }
+      return Math.min(1, prev + dt / flight);
+    });
+  }, playing, motion.stop);
 
   if (!a) return null;
 
@@ -98,7 +78,7 @@ export default function PmLaunchLab() {
 
   const svg = (
     <div className="w-full max-w-[400px]">
-      <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
+      <svg ref={box} direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
         <defs>
           <marker id={`${svgId}pm-lab-head`} viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
             <path d="M0,0 L10,5 L0,10 z" className="fill-red-600 dark:fill-red-400" />
@@ -139,7 +119,7 @@ export default function PmLaunchLab() {
       <div className="mt-2 flex items-center gap-3">
         <button
           type="button"
-          onClick={() => setChoice(!playing)}
+          onClick={() => (playing ? motion.stop() : motion.play())}
           className="rounded-lg bg-blue-600 px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-blue-700"
         >
           {playing ? t("pause") : t("play")}

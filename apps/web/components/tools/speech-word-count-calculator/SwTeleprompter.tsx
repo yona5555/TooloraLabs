@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import { useMotionLoop } from "@/components/tool-ui/motion/motion";
 import { useTranslations } from "next-intl";
 import { Pause, Play, RotateCcw } from "lucide-react";
 import SwIndicatorCard from "./SwIndicatorCard";
@@ -28,30 +29,22 @@ export default function SwTeleprompter() {
   const total = secondsFor(words, pace);
   // The speaker keeps its word when the pace changes: convert its position to this pace.
   const at = speaker ? Math.min(total, (speaker.seconds * speaker.wpm) / pace) : 0;
-  const frame = useRef<{ raf: number; last: number; pos: number }>({ raf: 0, last: 0, pos: 0 });
+  const frame = useRef({ pos: 0 });
   const lineRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (!playing || total <= 0) return;
+  // tool-ui/motion: plays only after the visitor presses Play and ends at the last word; paused off screen or
+  // with the page hidden; reduced motion stops it at once (the speaker stays where it is).
+  const sincePush = useRef(0);
+  useMotionLoop(lineRef, (dt) => {
     const state = frame.current;
-    state.last = performance.now();
-    let lastPush = 0;
-    const step = (now: number) => {
-      state.pos = Math.min(total, state.pos + ((now - state.last) / 1000) * rate);
-      state.last = now;
-      if (now - lastPush > 50 || state.pos >= total) {
-        lastPush = now;
-        setSpeaker({ seconds: state.pos, wpm: pace });
-      }
-      if (state.pos >= total) {
-        setPlaying(false);
-        return;
-      }
-      state.raf = requestAnimationFrame(step);
-    };
-    state.raf = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(state.raf);
-  }, [playing, total, pace, rate, setSpeaker]);
+    state.pos = Math.min(total, state.pos + dt * rate);
+    sincePush.current += dt;
+    if (sincePush.current > 0.05 || state.pos >= total) {
+      sincePush.current = 0;
+      setSpeaker({ seconds: state.pos, wpm: pace });
+    }
+    return state.pos < total;
+  }, playing && total > 0, () => setPlaying(false));
 
   const changePace = (next: number) => {
     if (playing) frame.current.pos = (frame.current.pos * pace) / next;

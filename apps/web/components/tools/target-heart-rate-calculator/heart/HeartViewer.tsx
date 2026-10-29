@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import dynamic from "next/dynamic";
 import { usePalette3D } from "@/components/tool-ui/three/theme3d";
+import { useMotionAllowed, useMotionEpisode } from "@/components/tool-ui/motion/motion";
 import HeartSvg from "./HeartSvg";
 
 // three/fiber/drei live only in this dynamically imported chunk, never in the page chunk.
@@ -34,27 +35,26 @@ function subscribeReduced(cb: () => void) {
 }
 
 /**
- * Realistic anatomical heart beating at the target BPM. The 3D chunk loads only when the card
- * nears the viewport; the beat pauses off screen and under prefers-reduced-motion. Labels are
- * HTML overlays (page text, so every locale shapes correctly). No WebGL → detailed 2D SVG heart.
+ * Realistic anatomical heart at the target BPM. The 3D chunk loads only when the card nears the viewport. It
+ * beats only during a motion episode (tool-ui/motion): when the target BPM changes, never on load, never off
+ * screen, with the page hidden or under prefers-reduced-motion. Labels are HTML overlays (page text, so every
+ * locale shapes correctly). No WebGL → detailed 2D SVG heart.
  */
 export default function HeartViewer({ bpm, color, labels }: { bpm: number; color: string; labels: HeartLabels }) {
   const ref = useRef<HTMLDivElement>(null);
   const p = usePalette3D();
   const [near, setNear] = useState(false);
-  const [inView, setInView] = useState(false);
   const gl = useSyncExternalStore<boolean | null>(noop, hasWebGL, () => null);
   const reduced = useSyncExternalStore(subscribeReduced, () => window.matchMedia?.(RM).matches ?? false, () => false);
+  const beat = useMotionEpisode([bpm]);
+  const allowed = useMotionAllowed(ref);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
     const io = new IntersectionObserver(
       (entries) => {
-        for (const e of entries) {
-          setInView(e.isIntersecting);
-          if (e.isIntersecting) setNear(true);
-        }
+        if (entries.some((e) => e.isIntersecting)) setNear(true);
       },
       { rootMargin: "120px" },
     );
@@ -73,9 +73,9 @@ export default function HeartViewer({ bpm, color, labels }: { bpm: number; color
       className="relative h-full min-h-[280px] w-full cursor-grab touch-none overflow-hidden rounded-xl bg-[radial-gradient(ellipse_at_50%_42%,#ffffff_0%,#f1f5f9_55%,#e2e8f0_100%)] active:cursor-grabbing dark:bg-[radial-gradient(ellipse_at_50%_42%,#2a2a31_0%,#1c1c21_55%,#141417_100%)]"
     >
       {gl === false ? (
-        <HeartSvg bpm={bpm} reduced={reduced} paused={!inView} />
+        <HeartSvg bpm={bpm} reduced={reduced} paused={!(beat.active && allowed)} />
       ) : near && gl ? (
-        <AnatomicalHeartCanvas bpm={bpm} running={inView} reduced={reduced} dark={p.dark} />
+        <AnatomicalHeartCanvas bpm={bpm} beating={beat.active} dark={p.dark} />
       ) : null}
       <span className={`${pill} start-1/2 top-2 -translate-x-1/2 text-xs font-extrabold text-zinc-900 dark:text-zinc-50`} style={{ borderColor: color, backgroundColor: p.dark ? "rgba(24,24,27,0.85)" : "rgba(255,255,255,0.9)", boxShadow: `inset 0 -2px 0 ${color}` }}>
         {labels.bpm}

@@ -1,11 +1,12 @@
 "use client";
-import { useContext, useEffect, type ComponentProps, type ReactNode } from "react";
+import { useContext, useEffect, useRef, type ComponentProps, type ReactNode } from "react";
 import { Canvas, useThree } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import Label3D from "@/components/tool-ui/three/Label3D";
 import { SceneReadyContext } from "./ViewportScene";
 import PreviewReady from "./PreviewReady";
 import FitContent from "./FitContent";
+import { SceneMotion, useSceneHost } from "@/components/tool-ui/motion/scene-motion";
 
 /** Label3D in the page font (Inter via --glass-font), not the shared default mono stack. */
 export function SiteLabel3D(props: ComponentProps<typeof Label3D>) {
@@ -35,7 +36,10 @@ export function Invalidate({ deps }: { deps: unknown[] }) {
   return null;
 }
 
-/** Shared demand-frameloop canvas: transparent (card surface shows through), demand frameloop, orbit + zoom. */
+/**
+ * Shared demand-frameloop canvas: transparent (card surface shows through), orbit + zoom. It draws only on demand
+ * and stops completely (frameloop "never") while off screen or the page is hidden (tool-ui/motion).
+ */
 export default function DemandCanvas3D({
   children,
   camera,
@@ -54,11 +58,14 @@ export default function DemandCanvas3D({
   testId: string;
 }) {
   const onReady = useContext(SceneReadyContext);
+  const host = useRef<HTMLDivElement>(null);
+  const { frameloop, motion } = useSceneHost(host);
   return (
+    <div ref={host} className="h-full w-full">
     <Canvas
       data-testid={testId}
       dpr={[1, 2]}
-      frameloop="demand"
+      frameloop={frameloop}
       camera={{ position: camera, fov: 38 }}
       gl={{ antialias: true, alpha: true, powerPreference: "low-power" }}
       className="cursor-grab touch-none active:cursor-grabbing"
@@ -68,6 +75,7 @@ export default function DemandCanvas3D({
         gl.domElement.dataset.phLive = "1";
       }}
     >
+      <SceneMotion motion={motion} frameloop={frameloop}>
       <FitContent />
       <PreviewReady />
       <FitAspect fitAspect={fitAspect} />
@@ -85,6 +93,8 @@ export default function DemandCanvas3D({
         minPolarAngle={0.55}
         maxPolarAngle={1.75}
       />
+      </SceneMotion>
     </Canvas>
+    </div>
   );
 }

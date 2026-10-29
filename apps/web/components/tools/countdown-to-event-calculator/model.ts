@@ -31,6 +31,7 @@ import {
   type CountdownYearlyRule,
   type WeekendPreset,
 } from "@tooloralabs/tools";
+import { subscribeVisibleClock } from "@/components/tool-ui/motion/motion";
 
 export type CdCalendar = "gregorian" | "hijri";
 
@@ -173,8 +174,7 @@ function subscribeClock(cb: () => void) {
     cb();
   };
   tick();
-  const id = setInterval(tick, 1000);
-  return () => clearInterval(id);
+  return subscribeVisibleClock(1000, tick); // tool-ui/motion: nothing while the page is hidden
 }
 
 /** Live "now", once per second (useSyncExternalStore: no setState in effects, no hydration tear). */

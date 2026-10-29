@@ -2,7 +2,9 @@
 
 import { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
-import { useFrame, useThree } from "@react-three/fiber";
+import { useThree } from "@react-three/fiber";
+import { useMotionEpisode } from "@/components/tool-ui/motion/motion";
+import { useSceneFrame } from "@/components/tool-ui/motion/scene-motion";
 import { Edges, Line } from "@react-three/drei";
 import type { Mat2 } from "@tooloralabs/tools";
 import Label3D from "@/components/tool-ui/three/Label3D";
@@ -144,13 +146,12 @@ export default function MatrixScene3D({
     invalidate();
   }, [key, replay, invalidate]);
 
-  useFrame((state, delta) => {
+  // the identity morphs into M during a motion episode (new matrix or Replay; tool-ui/motion); at rest it is M
+  const { active } = useMotionEpisode([key, replay]);
+  useSceneFrame((_, dt) => {
     const g = morph.current;
     if (!g) return;
-    if (progress.current < 1) {
-      progress.current = Math.min(1, progress.current + delta / DURATION);
-      state.invalidate();
-    }
+    progress.current = dt ? Math.min(1, progress.current + dt / DURATION) : 1;
     const t = ease(progress.current);
     const a = (1 + (m[0] - 1) * t) * k;
     const b = m[1] * t * k;
@@ -163,7 +164,8 @@ export default function MatrixScene3D({
     iTip.current?.position.set(a, c, 0);
     jTip.current?.position.set(b, d, 0);
     kTip.current?.position.set(0, 0, z);
-  });
+    return progress.current < 1;
+  }, active);
 
   const cubeGeom = useMemo(
     () => new THREE.BoxGeometry(1, 1, 1).translate(0.5, 0.5, 0.5),

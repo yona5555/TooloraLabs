@@ -1,5 +1,6 @@
 "use client";
-import { useEffect, useRef, useState, useId } from "react";
+import { useRef, useState, useId } from "react";
+import { useMotionEpisode, useMotionLoop } from "@/components/tool-ui/motion/motion";
 import { useTranslations } from "next-intl";
 import { Pause, Play } from "lucide-react";
 import { kinematicsAt } from "@tooloralabs/tools";
@@ -32,30 +33,18 @@ export default function ForcePushLab() {
   const t = useTranslations("tools.force-calculator.education.lab.push");
   const { setDim } = useForceLive();
   const { draft, sl, f } = useForceModel();
-  const [time, setTime] = useState(0);
-  const [playing, setPlaying] = useState(true);
-  const start = useRef<number | null>(null);
+  const [time, setTime] = useState(RUN); // at rest: the end of the run
+  const motion = useMotionEpisode([JSON.stringify(draft)]);
+  const playing = motion.active;
+  const box = useRef<SVGSVGElement>(null);
 
-  useEffect(() => {
-    if (!playing) return;
-    let raf = 0;
-    start.current = null;
-    const tick = (now: number) => {
-      if (start.current === null && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) {
-        // Reduced motion: show the end state (t = 4 s) instead of running.
-        setTime(RUN);
-        setPlaying(false);
-        return;
-      }
-      if (start.current === null) start.current = now - time * 1000;
-      const el = ((now - start.current) / 1000) % (RUN + HOLD);
-      setTime(Math.min(RUN, el));
-      raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- restart only when play toggles
-  }, [playing]);
+  // tool-ui/motion: plays during a motion episode (Play, or new input values), at most EPISODE_MS, paused off
+  // screen or with the page hidden, never on load and never for reduced motion.
+  const clock = useRef(0);
+  useMotionLoop(box, (dt) => {
+    clock.current = (clock.current + dt) % (RUN + HOLD);
+    setTime(Math.min(RUN, clock.current));
+  }, playing, motion.stop);
 
   if (!sl) return <ForceIndicatorUnavailable title={t("title")} />;
 
@@ -71,7 +60,7 @@ export default function ForcePushLab() {
 
   const lab = (
     <div className="w-full max-w-[360px]">
-      <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
+      <svg ref={box} direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
         <text style={{ fontSize: svgPx(14) }} x={W / 2} y={18} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
           {`t = ${time.toFixed(2)} s`}
         </text>
@@ -135,7 +124,7 @@ export default function ForcePushLab() {
         })}
         <button
           type="button"
-          onClick={() => setPlaying((p) => !p)}
+          onClick={() => (playing ? motion.stop() : motion.play())}
           className="inline-flex items-center gap-2 rounded-lg border border-zinc-300 px-3 py-1.5 text-xs font-semibold text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
         >
           {playing ? <Pause size={14} /> : <Play size={14} />}

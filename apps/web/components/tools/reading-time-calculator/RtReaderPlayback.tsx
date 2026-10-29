@@ -1,5 +1,6 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
+import { useMotionLoop } from "@/components/tool-ui/motion/motion";
 import { useTranslations } from "next-intl";
 import { Pause, Play, RotateCcw } from "lucide-react";
 import RtIndicatorCard from "./RtIndicatorCard";
@@ -46,30 +47,22 @@ export default function RtReaderPlayback() {
   const total = secondsFor(words, speed);
   // The reader keeps its word when the pace changes: convert its position to this pace.
   const at = reader ? Math.min(total, (reader.seconds * reader.wpm) / speed) : 0;
-  const frame = useRef<{ raf: number; last: number; pos: number }>({ raf: 0, last: 0, pos: 0 });
+  const frame = useRef({ pos: 0 });
+  const box = useRef<SVGSVGElement>(null);
 
-  useEffect(() => {
-    if (!playing || total <= 0) return;
+  // tool-ui/motion: plays only after the visitor presses Play and ends at the last word; paused off screen or
+  // with the page hidden; reduced motion stops it at once (the reader stays where it is).
+  const sincePush = useRef(0);
+  useMotionLoop(box, (dt) => {
     const state = frame.current;
-    const rate = total / playbackSeconds(total);
-    state.last = performance.now();
-    let lastPush = 0;
-    const step = (now: number) => {
-      state.pos = Math.min(total, state.pos + ((now - state.last) / 1000) * rate);
-      state.last = now;
-      if (now - lastPush > 60 || state.pos >= total) {
-        lastPush = now;
-        setReader({ seconds: state.pos, wpm: speed });
-      }
-      if (state.pos >= total) {
-        setPlaying(false);
-        return;
-      }
-      state.raf = requestAnimationFrame(step);
-    };
-    state.raf = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(state.raf);
-  }, [playing, total, speed, setReader]);
+    state.pos = Math.min(total, state.pos + dt * (total / playbackSeconds(total)));
+    sincePush.current += dt;
+    if (sincePush.current > 0.06 || state.pos >= total) {
+      sincePush.current = 0;
+      setReader({ seconds: state.pos, wpm: speed });
+    }
+    return state.pos < total;
+  }, playing && total > 0, () => setPlaying(false));
 
   const changeSpeed = (next: number) => {
     // Mid-playback the running position is kept on the same word at the new pace.
@@ -97,7 +90,7 @@ export default function RtReaderPlayback() {
 
   const indicator = (
     <div className="w-full sm:w-[340px]">
-      <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
+      <svg ref={box} direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
         <text style={{ fontSize: svgPx(12) }} x={PAD} y={BAR_Y - 8} fontWeight={600} className="fill-zinc-500 dark:fill-zinc-400">{t("paragraphsRow")}</text>
         {paragraphs.map((p, i) => (
           <rect
