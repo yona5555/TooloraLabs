@@ -2,7 +2,8 @@ name: main health
 
 # After every run on main of the workflows below, scripts/main-health.mjs opens (or comments on) the issue
 # "main-health: <workflow>" when the run failed or left a warning, and closes it on the next clean run.
-# Open issues labelled main-health = main is not healthy. dependabot-automerge is not listed: it runs only
+# The daily scheduled CI run (full site-audit and perf-budget over every indexable page) is a CI run on main, so a
+# failure there opens the same issue. Open issues labelled main-health = main is not healthy. dependabot-automerge is not listed: it runs only
 # on pull_request_target for Dependabot branches, never on main.
 # workflow_run always uses main's copy of this file and script; no PR code is checked out.
 on:

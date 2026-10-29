@@ -9,9 +9,9 @@ import { test, before, after } from "node:test";
 import assert from "node:assert/strict";
 import { spawn, spawnSync } from "node:child_process";
 import { createServer } from "node:http";
-import { mkdtempSync, readFileSync, writeFileSync } from "node:fs";
+import { mkdirSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { BROKEN, CLEAN, PERF_BROKEN, PERF_CLEAN, startFixtureSite } from "./gates/fixture-site.mjs";
 
@@ -98,6 +98,54 @@ test("performance budgets fail on a page over each budget (LCP, TBT, CLS, Perfor
   for (const [page, [budgets]] of Object.entries(PERF_BROKEN))
     for (const k of budgets) assert.ok(at(page).over.includes(k), `perf budget did not report ${page} over ${k}: ${JSON.stringify(at(page).median)}`);
   assert.deepEqual(at(PERF_CLEAN).over, [], `the clean control page must be within every budget: ${JSON.stringify(at(PERF_CLEAN).median)}`);
+});
+
+// A minimal Next.js build: tools a and b load the shared chunk, c does not; a's chunk lazy-loads another chunk; the
+// live page has no prerendered HTML (its server bundle counts). Every build gets a new build id, like next build.
+function fakeBuild(dir, { lazyA = "lazy a v1", shared = "shared v1", liveSsr = "live v1" } = {}) {
+  const id = `id-${Math.random().toString(36).slice(2)}`;
+  const put = (f, body) => {
+    mkdirSync(dirname(join(dir, f)), { recursive: true });
+    writeFileSync(join(dir, f), body);
+  };
+  put("BUILD_ID", id);
+  put("server/app-paths-manifest.json", JSON.stringify({ "/[locale]/tools/[slug]/page": "app/[locale]/tools/[slug]/page.js", "/[locale]/tools/a/page": "app/[locale]/tools/a/page.js" }));
+  put("server/app/sitemap.xml.body", `<urlset>${["a", "b", "c", "live"].map((t) => `<loc>https://x.test/en/tools/${t}</loc>`).join("")}</urlset>`);
+  const html = (chunks) => `<html><script>self.b="${id}"</script>${chunks.map((c) => `<script src="/_next/static/chunks/${c}"></script>`).join("")}</html>`;
+  put("server/app/en/tools/a.html", html(["a1.js", "shared.js"]));
+  put("server/app/en/tools/b.html", html(["b1.js", "shared.js"]));
+  put("server/app/en/tools/c.html", html(["c1.js"]));
+  for (const t of ["a", "b", "c"]) put(`server/app/en/tools/${t}.rsc`, `0:{"b":"${id}"}`);
+  put("static/chunks/a1.js", `import("static/chunks/lazy-a.js")`);
+  put("static/chunks/lazy-a.js", lazyA);
+  put("static/chunks/b1.js", "b1");
+  put("static/chunks/c1.js", "c1");
+  put("static/chunks/shared.js", shared);
+  put("server/app/[locale]/tools/[slug]/page.js", "page");
+  put("server/app/[locale]/tools/[slug]/page.js.nft.json", JSON.stringify({ files: ["../../../../chunks/ssr/live.js"] }));
+  put("server/chunks/ssr/live.js", liveSsr);
+  return dir;
+}
+
+test("affected pages: an unchanged route is skipped, a tool change marks only its routes, a shared change marks every route using it", () => {
+  const manifest = (name, opts) => {
+    const out = join(TMP, `${name}.json`);
+    const r = gate("node", ["scripts/route-manifest.mjs", "build", fakeBuild(join(TMP, `build-${name}`), opts), out], { env: { LOCALES: "en" } });
+    assert.equal(r.status, 0, r.out);
+    return out;
+  };
+  const affected = (base, head) => {
+    const out = join(TMP, "pages.txt");
+    const r = gate("node", ["scripts/route-manifest.mjs", "affected", base, head, out]);
+    assert.equal(r.status, 0, r.out);
+    return readFileSync(out, "utf8").split("\n").filter(Boolean).sort();
+  };
+  const main = manifest("main");
+  assert.deepEqual(affected(main, manifest("same")), [], "a rebuild of the same code (new build id) must mark no route");
+  assert.deepEqual(affected(main, manifest("tool", { lazyA: "lazy a v2" })), ["/en/tools/a"], "a change in tool a's lazy chunk must mark only tool a");
+  assert.deepEqual(affected(main, manifest("shared", { shared: "shared v2" })), ["/en/tools/a", "/en/tools/b"], "a change in the shared chunk must mark every route that loads it, and only those");
+  assert.deepEqual(affected(main, manifest("live", { liveSsr: "live v2" })), ["/en/tools/live"], "a change in a request-rendered page's server bundle must mark that page");
+  assert.deepEqual(affected(join(TMP, "no-such-manifest.json"), main), ["/en/tools/a", "/en/tools/b", "/en/tools/c", "/en/tools/live"], "without a main manifest every route is affected");
 });
 
 test("share-images fails on a sitemap page without og:image", async () => {

@@ -48,11 +48,17 @@ TooloraLabs-Claude-Instructions.md is a historical archive; the binding rules ar
   fixture in tests/gates/ and fails if any gate passes it. A new gate gets a canary in the same PR.
 - Every workflow runs bash with pipefail; never pipe a gate's output (`node scripts/workflow-shell.mjs`).
 - Fonts are self-hosted only (apps/web/lib/fonts.ts); no system family in source (`npm run test:system-fonts`).
-- Audits, locks and previews run in the Linux container (`scripts/in-container.sh <cmd>`, colima on the Mac);
+- Audits, locks and previews run in the Linux container (`scripts/in-container.sh [--ci-parity] <cmd>`, colima on the Mac);
   never report macOS results for them. Local audit runs use `scripts/site-audit-sharded.sh`; `site-audit` (CI, required)
   must stay at 0 on every criterion.
 - Speed is a hard gate: `perf-budget` (CI, required; `scripts/perf-budget.sh`, Lighthouse mobile, 3 runs, median, production
   build) fails any indexable page (en + ar) with LCP > 2.5s, TBT > 200ms, CLS > 0.1, Performance < 90 or JS over budget.
+- Required PR checks finish within 15 minutes: on a PR, site-audit and perf-budget measure only the pages whose route
+  fingerprint changed (`scripts/route-manifest.mjs`, CI job `affected`: chunks, prerendered HTML/RSC, server bundle,
+  fixtures, gate scripts; a shared chunk marks every page using it). The daily scheduled CI run on main measures every
+  page; main-health opens an issue when it fails.
+- Local iteration runs natively on arm64 (`scripts/in-container.sh <cmd>`); `--ci-parity` runs linux/amd64 like CI,
+  which stays the final authority.
 
 ## Supply chain
 - Required checks on main (strict): build, home-phone-lock, desktop-lock, site-audit, gates-self-test, perf-budget, audit, Analyze (javascript-typescript),

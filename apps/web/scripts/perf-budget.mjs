@@ -14,7 +14,8 @@
 //   env LOCALES=en,ar  RUNS=3  SHARD=i/n (pages i, i+n, … of the sitemap order)  OUT=<file.json> (every page's
 //   medians and runs, the pages over budget)  PROGRESS=<file> (also append each progress line there)
 //   RESULTS=<file.jsonl> (append each page's result as one JSON line)  RESUME=<dir> (skip the pages already
-//   recorded in <dir>/*.jsonl and count their recorded result: an interrupted run resumes).
+//   recorded in <dir>/*.jsonl and count their recorded result: an interrupted run resumes)  PAGES=<file> (only the
+//   localized pages listed, one per line: CI's affected pages, scripts/route-manifest.mjs).
 //   --merge a.json b.json … : one report from shard OUT files.
 import { appendFileSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
@@ -53,7 +54,8 @@ const urls = [
       .filter((p) => locales.includes(p.split("/")[1])),
   ),
 ];
-const selected = urls.filter((p) => !filters.length || filters.some((f) => p.includes(f)));
+const listed = process.env.PAGES ? new Set(readFileSync(process.env.PAGES, "utf8").split("\n").filter(Boolean)) : null;
+const selected = urls.filter((p) => !filters.length || filters.some((f) => p.includes(f))).filter((p) => !listed || listed.has(p));
 if (!selected.length) throw new Error(`no page to measure (sitemap ${urls.length} pages, filters ${filters.join(" ") || "none"})`);
 const pages = selected.filter((_, i) => i % shardN === shardI - 1);
 
