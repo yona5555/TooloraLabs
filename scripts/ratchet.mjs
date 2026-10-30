@@ -6,9 +6,9 @@
 // committed baseline (.audit/ratchet/*.json), one page at a time:
 //   site-audit:   a page's count for any criterion must not rise versus its baseline entry; a page with no
 //                 baseline entry (new, or never audited before) must have zero findings.
-//   perf-budget:  a page's LCP/TBT/CLS/JS must not rise, and its Performance score must not fall, by more than
-//                 TOLERANCE (measured run-to-run noise, see tolerance()); a page with no baseline entry must be
-//                 fully within apps/web/scripts/perf-budget.mjs's BUDGET.
+//   perf-budget:  a page's initial JS and CSS bytes, render-blocking resources and requests must not rise, and an
+//                 LCP element in the server HTML must stay there (apps/web/scripts/perf-static.mjs: deterministic,
+//                 so no tolerance); a page with no baseline entry must be fully within that script's BUDGET.
 // The baseline itself can only go down: `node scripts/ratchet.mjs update <kind> <run.json> <baseline.json>`
 // lowers it to the better of (current, committed) per page, and never raises any value - a baseline edit that
 // does (by hand or a bad update) is caught by `check-baseline`, run on the baseline files themselves whenever
@@ -17,42 +17,69 @@
 //   node scripts/ratchet.mjs check <site-audit|perf-budget> <run.json> [baseline.json]
 //   node scripts/ratchet.mjs check-baseline <site-audit|perf-budget> <new-baseline.json> <old-baseline.json>
 //   node scripts/ratchet.mjs update <site-audit|perf-budget> <run.json> <baseline.json>
+// check needs MEASURED=<file>: the exact pages this shard had to measure (scripts/expand-measured-pages.mjs), one per
+// line. It fails, naming the cause, when the results file is missing or unparsable, or when the pages it measured are
+// not exactly that list; an unmeasured page is never read as a clean one.
 // Exit 1 on any regression (check, check-baseline) or nothing to lower (update: exit 0 always, reports what moved).
-import { readFileSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
 
 const CRITERIA = ["overlap", "clip", "small", "hydration", "console", "a11y", "link", "idle"];
-// Run-to-run noise on the same build (see docs/claude/full-project-handbook.md §12 for the measurement and its
-// caveats): RUNS=10 of scripts/perf-budget.mjs against 6 representative pages, tolerance set above the largest
-// observed same-build delta for each metric across the 5 pages with no live/network dependency (one page,
-// crypto-converter, was excluded as a network-bound outlier - LCP spread alone was 3.1s from live-price fetch
-// jitter, not page-rendering variance). TBT's own noise was the biggest surprise: 308ms on a timer-heavy page
-// with nothing else changing run to run.
-export const TOLERANCE = { lcp: 60, tbt: 350, cls: 0.01, perf: 8, jsKiB: 3 };
-const METRICS = ["lcp", "tbt", "cls", "perf", "jsKiB"];
-const worse = { lcp: (c, b, t) => c > b + t, tbt: (c, b, t) => c > b + t, cls: (c, b, t) => c > b + t, jsKiB: (c, b, t) => c > b + t, perf: (c, b, t) => c < b - t };
+const METRICS = ["jsBytes", "cssBytes", "blocking", "requests", "lcpInHtml"];
+const rises = (c, b) => c > b;
+const worse = { jsBytes: rises, cssBytes: rises, blocking: rises, requests: rises, lcpInHtml: (c, b) => b && !c };
 
 const readJson = (f) => JSON.parse(readFileSync(f, "utf8"));
 
-/** Current OUT (site-audit.mjs) -> { page: { criterion: count } }, for exactly the pages it measured. */
+/** A check that cannot compare: never a pass. */
+function failCheck(kind, message) {
+  console.log(`RATCHET FAIL (${kind}): ${message}`);
+  console.error(`::error title=ratchet-${kind}::${message.split("\n")[0]}`);
+  process.exit(1);
+}
+
+/** The results file of a check; a missing, unparsable or malformed one fails with its cause. */
+function readRun(kind, file) {
+  if (!existsSync(file)) failCheck(kind, `results file ${file} is missing: the measuring step produced no results`);
+  let run;
+  try {
+    run = readJson(file);
+  } catch (e) {
+    failCheck(kind, `results file ${file} is unparsable: ${e.message}`);
+  }
+  const valid = kind === "site-audit" ? Array.isArray(run?.findings) && Array.isArray(run?.measured) : Array.isArray(run?.pages);
+  if (!valid) failCheck(kind, `results file ${file} is unparsable: it has no ${kind === "site-audit" ? "findings/measured" : "pages"} list`);
+  return run;
+}
+
+/** The results must cover exactly the shard's pages: none missing, none extra. */
+function checkPageSet(kind, run) {
+  const file = process.env.MEASURED;
+  if (!file || !existsSync(file)) failCheck(kind, `no page list to compare with: MEASURED ${file ? `file ${file} is missing` : "is not set"}`);
+  const expected = new Set(readFileSync(file, "utf8").split("\n").filter(Boolean));
+  const got = new Set(measuredPages(run, kind));
+  if (kind === "site-audit") for (const f of run.findings) got.add(f.page);
+  const missing = [...expected].filter((p) => !got.has(p));
+  const extra = [...got].filter((p) => !expected.has(p));
+  if (missing.length || extra.length) {
+    failCheck(kind, `the measured pages are not the shard's ${expected.size} pages (${missing.length} missing, ${extra.length} extra)\n${[...missing.map((p) => `  missing: ${p}`), ...extra.map((p) => `  extra: ${p}`)].join("\n")}`);
+  }
+}
+
+/** Current OUT (site-audit.mjs) -> { page: { criterion: count } }, for the pages with a finding. */
 function siteAuditCounts(run) {
   const by = {};
   for (const f of run.findings) (by[f.page] ??= Object.fromEntries(CRITERIA.map((c) => [c, 0])))[f.criterion]++;
-  // A measured page with zero findings still needs an entry (all zero) so "measured, clean" beats "not measured".
-  for (const path of new Set(run.findings.map((f) => f.page))) by[path] ??= Object.fromEntries(CRITERIA.map((c) => [c, 0]));
   return by;
 }
-/** Every page actually visited this run, zero-findings/zero-over pages included (so a now-clean page still lowers
- *  its baseline under `update`, and a check doesn't silently skip a page with no finding to report). MEASURED
- *  (env, set by the CI step from affected-pages.txt x LOCALES, one locale-prefixed path per line) is authoritative;
- *  without it (a local ad-hoc run) this falls back to the pages the run actually reported something for. */
+/** Every page the gate reports as measured, zero-findings/zero-over pages included, so a now-clean page still lowers
+ *  its baseline under `update`. */
 function measuredPages(run, kind) {
-  if (process.env.MEASURED) return readFileSync(process.env.MEASURED, "utf8").split("\n").filter(Boolean);
-  return kind === "site-audit" ? [...new Set(run.findings.map((f) => f.page))] : run.pages.map((p) => p.page);
+  return kind === "site-audit" ? run.measured : run.pages.map((p) => p.page);
 }
 
-/** Current OUT (perf-budget.mjs) -> { page: { lcp, tbt, cls, perf, jsKiB } }, measured-median or null on error. */
-function perfBudgetMedians(run) {
-  return Object.fromEntries(run.pages.map((p) => [p.page, p.median]));
+/** Current OUT (perf-static.mjs) -> { page: { jsBytes, cssBytes, blocking, requests, lcpInHtml } }, null on error. */
+function perfBudgetValues(run) {
+  return Object.fromEntries(run.pages.map((p) => [p.page, p.values]));
 }
 
 function checkSiteAudit(run, baseline) {
@@ -72,21 +99,26 @@ function checkSiteAudit(run, baseline) {
 }
 
 function checkPerfBudget(run, baseline) {
-  const medians = perfBudgetMedians(run);
+  const values = perfBudgetValues(run);
   const byPage = Object.fromEntries(run.pages.map((p) => [p.page, p]));
   const problems = [];
   for (const page of measuredPages(run, "perf-budget")) {
     const p = byPage[page];
     const base = baseline[page];
     if (!base) {
-      if (!p || p.over.length) problems.push(`${page}: new page (no baseline), over ${p?.over.join(",") ?? "error"}`);
+      if (p.over.length) problems.push(`${page}: new page (no baseline), over ${p.over.join(",")}`);
       continue;
     }
-    if (!p || !medians[page]) {
-      problems.push(`${page}: failed to measure (${p?.error ?? "not in this run"}); treated as a regression against its baseline`);
+    const stale = METRICS.filter((m) => !(m in base));
+    if (stale.length) {
+      problems.push(`${page}: baseline entry has no ${stale.join(",")}`);
       continue;
     }
-    for (const m of METRICS) if (worse[m](medians[page][m], base[m], TOLERANCE[m])) problems.push(`${page}: ${m} ${medians[page][m]} vs baseline ${base[m]} (tolerance ${TOLERANCE[m]})`);
+    if (!values[page]) {
+      problems.push(`${page}: failed to measure (${p.error}); treated as a regression against its baseline`);
+      continue;
+    }
+    for (const m of METRICS) if (worse[m](values[page][m], base[m])) problems.push(`${page}: ${m} ${values[page][m]} vs baseline ${base[m]}`);
   }
   return problems;
 }
@@ -98,7 +130,7 @@ function checkBaseline(kind, next, prev) {
     if (!(page in next)) { problems.push(`${page}: removed from the baseline (a page must stay tracked, even at 0)`); continue; }
     for (const k of keysOf()) {
       const a = prev[page][k] ?? 0, b = next[page][k] ?? 0;
-      const raised = kind === "site-audit" ? b > a : worse[k](b, a, 0);
+      const raised = kind === "site-audit" ? b > a : worse[k](b, a);
       if (raised) problems.push(`${page}.${k}: ${a} -> ${b} (the baseline can only go down)`);
     }
   }
@@ -118,11 +150,11 @@ function update(kind, run, baseline) {
       next[page] = merged;
     }
   } else {
-    const medians = perfBudgetMedians(run);
+    const values = perfBudgetValues(run);
     for (const page of measuredPages(run, "perf-budget")) {
-      if (!medians[page]) continue;
+      if (!values[page]) continue;
       const base = next[page];
-      const merged = base ? Object.fromEntries(METRICS.map((m) => [m, worse[m](base[m], medians[page][m], 0) ? medians[page][m] : base[m]])) : medians[page];
+      const merged = base ? Object.fromEntries(METRICS.map((m) => [m, worse[m](base[m], values[page][m]) ? values[page][m] : base[m]])) : values[page];
       if (JSON.stringify(merged) !== JSON.stringify(base)) changed.push(page);
       next[page] = merged;
     }
@@ -135,7 +167,8 @@ if (!["site-audit", "perf-budget"].includes(kind)) { console.error(`ratchet: kin
 
 if (mode === "check") {
   const [runFile, baselineFile = `.audit/ratchet/${kind}.json`] = rest;
-  const run = readJson(runFile), baseline = readJson(baselineFile);
+  const run = readRun(kind, runFile), baseline = readJson(baselineFile);
+  checkPageSet(kind, run);
   const problems = kind === "site-audit" ? checkSiteAudit(run, baseline) : checkPerfBudget(run, baseline);
   if (problems.length) {
     console.log(`RATCHET FAIL (${kind}): ${problems.length} page(s) regressed versus ${baselineFile}\n${problems.map((p) => `  ${p}`).join("\n")}`);
@@ -154,7 +187,7 @@ if (mode === "check") {
   console.log(`BASELINE OK (${kind}): nothing in ${nextFile} is worse than ${prevFile}`);
 } else if (mode === "update") {
   const [runFile, baselineFile] = rest;
-  const { next, changed } = update(kind, readJson(runFile), readJson(baselineFile));
+  const { next, changed } = update(kind, readRun(kind, runFile), readJson(baselineFile));
   writeFileSync(baselineFile, JSON.stringify(next, null, 1) + "\n");
   console.log(`ratchet update (${kind}): ${changed.length} page(s) lowered in ${baselineFile}${changed.length ? "\n  " + changed.join("\n  ") : ""}`);
 } else {
