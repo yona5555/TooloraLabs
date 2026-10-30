@@ -2,7 +2,7 @@
 
 Rule: no data source may be added to TooloraLabs without a section in this file.
 
-Terms verified by Yousef's assistant on 2026-10-17.
+Terms verified by xzerone's assistant on 2026-10-17.
 
 ## Open-Meteo (free API) — NOT ALLOWED
 - Terms: https://open-meteo.com/en/terms

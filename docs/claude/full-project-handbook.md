@@ -17,7 +17,7 @@
 - اعتماد baselines القفل (2026-10-26): label `approve-desktop-baseline` / `approve-home-phone-baseline` على PR من المستودع نفسه يجعل مهمة `regenerate-baselines` تكتب baseline لينكس، وتحذف الـ label، ثم تعمل commit وpush بتوكن تطبيق GitHub **toolora-baseline-bot-4jty** (App ID 5485467، صلاحياته contents + pull-requests + workflows: write، مثبَّت على TooloraLabs وحده). الأسماء فقط: يُصدَر توكن التطبيق من `vars.TOOLORA_BOT_CLIENT_ID` (متغيّر المستودع) و`secrets.TOOLORA_BOT_PRIVATE_KEY` (secret في Actions). حُذف secret `TOOLORA_BOT_APP_ID` في 2026-10-28 لأن create-github-app-token v3 يستعمل `client-id` لا `app-id`، ولا يُعاد إنشاؤه. الـ push بالتطبيق يبدأ تشغيل pull_request عادياً (لا action_required)، فلا حاجة لـ commit يدوي.
 
 ## 3. نموذج العمل بين الأجهزة
-- الماك ميني = المنسِّق والجهاز الرئيسي. اللينكس = عامل ينفّذ ولا يقرر هيكلياً. يوسف = السلطة العليا.
+- الماك ميني = المنسِّق والجهاز الرئيسي. اللينكس = عامل ينفّذ ولا يقرر هيكلياً. xzerone = السلطة العليا.
 
 ## 4. فهرس القواعد العامة
 | § | الجوهر |
