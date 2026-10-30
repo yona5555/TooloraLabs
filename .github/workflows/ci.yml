@@ -301,10 +301,9 @@ jobs:
           node scripts/route-manifest.mjs affected base-route-manifest.json route-manifest.json affected-pages.txt
           count=$(( $(wc -l < affected-pages.txt) ))
           # Shards sized so a PR with every page affected still fits the per-shard timeout: site-audit ~4.6s/page
-          # (en+ar, 2 widths, 2 themes), perf-budget ~9s/page at RUNS=1 (one Chrome reused per shard); 45 pages
-          # per perf shard ran past 9 minutes.
-          audit=$(( count ? (count + 79) / 80 : 0 )); (( audit > 12 )) && audit=12
-          perf=$(( count ? (count + 35) / 36 : 0 )); (( perf > 16 )) && perf=16
+          # (en+ar, 2 widths, 2 themes); the deterministic budgets take one short browser load per page.
+          audit=$(( count ? (count + 59) / 60 : 0 )); (( audit > 12 )) && audit=12
+          perf=$(( count ? (count + 149) / 150 : 0 )); (( perf > 16 )) && perf=16
           shards() { if (( $1 )); then echo "[$(seq -s, 1 "$1")]"; else echo "[]"; fi; }
           { echo "count=$count"; echo "audit-shards=$(shards "$audit")"; echo "audit-shard-count=$audit"; echo "perf-shards=$(shards "$perf")"; echo "perf-shard-count=$perf"; } >> "$GITHUB_OUTPUT"
           echo "$count affected pages: site-audit $audit shards, perf-budget $perf shards" >> "$GITHUB_STEP_SUMMARY"
@@ -422,13 +421,11 @@ jobs:
             exit 1
           fi
 
-  # Performance budgets (apps/web/scripts/perf-budget.mjs), Lighthouse mobile default throttling, one run per
-  # page on a PR (one Chrome reused for the shard) against every affected page. scripts/ratchet.mjs then decides
-  # pass/fail the same way as site-audit: a required check fails only if a measured page's LCP/TBT/CLS/JS rose,
-  # or its Performance score fell, by more than the measured run-to-run noise tolerance (scripts/ratchet.mjs,
-  # TOLERANCE) versus .audit/ratchet/perf-budget.json, or a page with no entry misses its own full budget. The
-  # full budget for every page, 3 runs medianed, is launch-readiness (daily on main, not required on PRs). Up to
-  # sixteen shards in parallel; `perf-budget` is the single required check over them.
+  # Deterministic performance budgets (apps/web/scripts/perf-static.mjs) on every affected page: initial JS and CSS
+  # bytes, render-blocking resources, requests, LCP element in the server HTML. scripts/ratchet.mjs then decides
+  # pass/fail as for site-audit, with no tolerance: two runs of one build give identical values. Lighthouse timing
+  # is not a PR gate (two CI runs of the same code differed by up to 1.7 s of LCP): it runs in launch-readiness,
+  # daily on main, 5 runs per page, median. `perf-budget` is the single required check over the shards.
   perf-budget-shard:
     needs: affected
     if: needs.affected.outputs.count != '0'
@@ -471,15 +468,14 @@ jobs:
         with:
           name: affected-pages
 
-      - name: Performance budgets (shard ${{ matrix.shard }}/${{ needs.affected.outputs.perf-shard-count }})
+      - name: Deterministic budgets (shard ${{ matrix.shard }}/${{ needs.affected.outputs.perf-shard-count }})
         env:
           SHARD: ${{ matrix.shard }}/${{ needs.affected.outputs.perf-shard-count }}
           PAGES: ${{ github.workspace }}/affected-pages.txt
           OUT: ${{ github.workspace }}/perf-budget-${{ matrix.shard }}.json
-          RUNS: 1
           # Measure only, as in site-audit-shard: the ratchet below judges the numbers.
           RATCHET_MEASURE: 1
-        run: scripts/perf-budget.sh 3108
+        run: scripts/perf-static.sh 3108
 
       # !cancelled(): when the run broke, the ratchet still runs and names what is missing.
       - name: This shard's exact page list

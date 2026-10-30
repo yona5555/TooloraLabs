@@ -31,6 +31,7 @@ import { appendFileSync, readdirSync, readFileSync, writeFileSync } from "node:f
 import { createRequire } from "node:module";
 import { join } from "node:path";
 import { requireBase } from "../../../scripts/lib/require-base.mjs";
+import { settle } from "../../../scripts/lib/settle.mjs";
 import { sliceShard } from "../../../scripts/lib/shard-pages.mjs";
 import { chromium } from "playwright";
 import { clockAfterBuild, hydrationProblems, renderedAtOf, watchHydration } from "../../../tests/hydration-guard.mjs";
@@ -52,6 +53,7 @@ const widths = (process.env.WIDTHS ?? "1440,390").split(",").map(Number);
 const themes = (process.env.THEMES ?? "light,dark").split(",");
 const MIN = Number(process.env.MIN ?? 12);
 const IDLE_MAX = 5; // animation frames + short timers allowed in one idle second (a stray deferred callback)
+const IDLE_WINDOWS = 3; // busy seconds in a row that make a loop
 const jobs = Number(process.env.JOBS ?? 3);
 const AXE = readFileSync(createRequire(import.meta.url).resolve("axe-core/axe.min.js"), "utf8");
 const shard = process.env.SHARD ?? "1/1";
@@ -352,8 +354,7 @@ async function view(ctx, path, locale, w) {
     const res = await p.goto(url, { waitUntil: "load", timeout: 120000 });
     if (res?.status() !== 200) consoleErrors.push(`page answered ${res?.status()}`);
     lap("load");
-    await p.evaluate(() => document.fonts.ready);
-    await p.waitForTimeout(1200);
+    await settle(p);
     for (let k = 0; k < 3; k++) {
       const n = await p.evaluate(() => {
         const t = [...document.querySelectorAll('[data-card-toggle][aria-expanded="false"]')];
@@ -361,7 +362,7 @@ async function view(ctx, path, locale, w) {
         return t.length;
       });
       if (!n) break;
-      await p.waitForTimeout(300);
+      await settle(p);
     }
     // Scroll through the page so IntersectionObserver-lazy charts mount, then back to the top.
     await p.evaluate(async () => {
@@ -371,13 +372,17 @@ async function view(ctx, path, locale, w) {
       }
       window.scrollTo(0, 0);
     });
-    await p.waitForTimeout(1200);
+    await settle(p);
     // Idle: nothing may keep animating once the page has settled (tool-ui/motion). Count the animation frames
-    // and short timers (<= 100 ms) the page requests during one idle second, with where each was requested.
-    const idle0 = await p.evaluate(() => window.__idleProbe.reset());
-    await p.waitForTimeout(1000);
-    out.idle = await p.evaluate(() => window.__idleProbe.read());
-    out.idle.since = idle0;
+    // and short timers (<= 100 ms) the page requests during one idle second, with where each was requested. A
+    // deferred callback lands in one second, a loop in all of them, so only IDLE_WINDOWS busy seconds in a row
+    // are a finding; one window would report whichever callback happened to fall inside it.
+    for (let k = 0; k < IDLE_WINDOWS; k++) {
+      await p.evaluate(() => window.__idleProbe.reset());
+      await p.waitForTimeout(1000);
+      out.idle = await p.evaluate(() => window.__idleProbe.read());
+      if (out.idle.raf + out.idle.timers <= IDLE_MAX) break;
+    }
     lap("idle");
     for (const href of await p.evaluate(() => [...document.querySelectorAll("a[href]")].map((a) => a.href))) {
       if (!sameOrigin(href) || !/^https?:/.test(href)) continue;
@@ -392,7 +397,7 @@ async function view(ctx, path, locale, w) {
           localStorage.setItem("theme", "dark");
           document.documentElement.classList.add("dark");
         });
-        await p.waitForTimeout(400);
+        await settle(p);
       }
       lap("settle");
       const chart = await p.evaluate(measure, MIN);
@@ -445,6 +450,23 @@ if (process.env.RESUME) {
 const done = new Set(results.map(viewKey));
 const b = await chromium.launch();
 const totalViews = wanted.size;
+// Random numbers (init script): one fixed sequence per page load, so a page that draws random values renders the
+// same thing on every run; fixture data and the browser clock are already fixed.
+function seedRandom() {
+  let s = 0x2f6e2b1;
+  const next = () => {
+    s = (s + 0x6d2b79f5) | 0;
+    let t = Math.imul(s ^ (s >>> 15), 1 | s);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+  Math.random = next;
+  crypto.getRandomValues = (a) => {
+    for (let i = 0; i < a.length; i++) a[i] = Math.floor(next() * 2 ** (a.BYTES_PER_ELEMENT * 8));
+    return a;
+  };
+}
+
 // The idle probe (init script): counts every animation frame and every timer of <= 100 ms that FIRES, each with
 // the call site that scheduled it (first stack frame outside the probe), so a loop is named by its source.
 function idleProbe() {
@@ -469,7 +491,7 @@ function idleProbe() {
   }
   window.__idleProbe = {
     reset: () => Object.assign(probe, { raf: 0, timers: 0, sites: {} }) && Date.now(),
-    read: () => ({ raf: probe.raf, timers: probe.timers, sites: Object.entries(probe.sites).sort((a, b) => b[1] - a[1]).slice(0, 5) }),
+    read: () => ({ raf: probe.raf, timers: probe.timers, sites: Object.keys(probe.sites).sort().slice(0, 5) }), // no counts: they follow the frame rate
   };
 }
 
@@ -478,6 +500,8 @@ for (const w of widths) {
   await ctx.clock.setFixedTime(visitClock);
   await ctx.addInitScript(() => localStorage.setItem("theme", "light"));
   await ctx.addInitScript(idleProbe);
+  await ctx.addInitScript(seedRandom);
+  await ctx.routeWebSocket(/^wss?:\/\//, () => {}); // live price streams stay silent: a real tick changes the page between runs
   for (const locale of locales) {
     const queue = paths.filter((path) => inPages(locale, path) && !done.has(viewKey({ path, locale, w })));
     await Promise.all(
@@ -522,7 +546,7 @@ for (const r of results) {
   const at = { page: `/${r.locale}${r.path}`, w: r.w, locale: r.locale };
   for (const h of hydrationProblems(at.page, r.hydration)) findings.push({ criterion: "hydration", ...at, theme: "-", detail: h, pattern: `hydration · ${r.path.startsWith("/tools/") ? r.path : "page " + r.path}` });
   if (r.idle && r.idle.raf + r.idle.timers > IDLE_MAX)
-    findings.push({ criterion: "idle", ...at, theme: "-", detail: r.idle, pattern: `idle · ${r.idle.sites[0]?.[0].replace(/\/_next\/static\/chunks\/[\w.-]+/, "chunk") ?? "?"} · ${r.path.startsWith("/tools/") ? r.path : "page " + r.path}` });
+    findings.push({ criterion: "idle", ...at, theme: "-", detail: { sites: r.idle.sites.map((s) => s.replace(/\/_next\/static\/chunks\/[\w.-]+/, "chunk")) }, pattern: `idle · ${r.idle.sites[0]?.replace(/\/_next\/static\/chunks\/[\w.-]+/, "chunk") ?? "?"} · ${r.path.startsWith("/tools/") ? r.path : "page " + r.path}` });
   for (const c of r.console) findings.push({ criterion: "console", ...at, theme: "-", detail: c, pattern: `console · ${c.replace(/\/(en|ar)(\/[^\s]*)?/g, "/{locale}…").replace(/\d+/g, "N").slice(0, 120)}` });
   for (const [theme, t] of Object.entries(r.themes)) {
     for (const f of t.overlaps) findings.push({ criterion: "overlap", ...at, theme, detail: f, pattern: f.pattern });
@@ -536,7 +560,10 @@ for (const l of brokenLinks) findings.push({ criterion: "link", page: l.from, w:
 // A page counts as measured only when every width of it was visited: scripts/ratchet.mjs compares this list with
 // the pages the shard had to measure, so an unvisited page can never pass as a clean one.
 const viewsOf = Map.groupBy(results, (r) => `/${r.locale}${r.path}`);
-const measured = [...viewsOf].filter(([, views]) => new Set(views.map((r) => r.w)).size === widths.length).map(([page]) => page);
+const measured = [...viewsOf].filter(([, views]) => new Set(views.map((r) => r.w)).size === widths.length).map(([page]) => page).sort();
+// Shards visit pages concurrently: the order of arrival is not a result.
+const order = (f) => JSON.stringify([f.page, f.w, f.theme, f.criterion, f.pattern, f.detail]);
+findings.sort((a, c) => (order(a) < order(c) ? -1 : order(a) > order(c) ? 1 : 0));
 report(findings, { views: results.length * themes.length, pages: paths.length, locales, widths, themes, links: links.size, measured });
 
 /** Totals per criterion, the inventory grouped by root cause (OUT file + table), exit code 1 on any finding; with

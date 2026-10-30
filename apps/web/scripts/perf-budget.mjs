@@ -1,3 +1,5 @@
+// Timing budgets, daily on main (launch-readiness, 5 runs per page, median), never on a PR: single-run timing differed
+// by up to 1.7 s of LCP between two CI runs of the same code. PRs use scripts/perf-static.mjs.
 // Performance budgets: a hard gate on every indexable page (the served /sitemap.xml, built from
 // lib/indexable-pages.ts) in every audited locale. The official metric of the project (reported numbers,
 // scheduled daily full run on main): Lighthouse mobile with its default (simulated/Lantern) throttling, RUNS (3)

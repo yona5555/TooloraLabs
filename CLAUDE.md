@@ -51,8 +51,10 @@ TooloraLabs-Claude-Instructions.md is a historical archive; the binding rules ar
 - Every workflow runs bash with pipefail; never pipe a gate's output (`node scripts/workflow-shell.mjs`).
 - `site-audit` and `perf-budget` (CI, required) are ratcheted, not a hard zero gate: `scripts/ratchet.mjs check`
   fails a PR only if one of its measured pages got WORSE than its entry in `.audit/ratchet/*.json` (site-audit:
-  any criterion's count rose; perf-budget: LCP/TBT/CLS/JS rose or Performance fell by more than the measured
-  run-to-run noise tolerance), or a page with no baseline entry has any finding / misses its own full budget.
+  any criterion's count rose; perf-budget: `apps/web/scripts/perf-static.mjs`, deterministic, zero tolerance: JS/CSS
+  bytes, render-blocking count or requests rose, or the LCP element left the server HTML), or a page with no baseline
+  entry has any finding / misses its own full budget. Lighthouse timing is never a PR gate: daily in `launch-readiness`,
+  5 runs per page, median; a page over budget opens a main-health issue.
   `npm run ratchet:update -- <kind> <run.json> <baseline-file>` lowers the baseline after a real improvement; it
   can never raise it (`ratchet.mjs check-baseline`, its own gates-self-test canary). Zero across the whole site
   is not required here - that is `launch-readiness` (daily on main, not a required PR check; reports the

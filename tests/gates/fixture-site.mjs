@@ -63,6 +63,28 @@ export const BROKEN = {
 };
 export const CLEAN = "/clean";
 
+// Audit determinism canary: a random amount of small text, and a slow color transition when the theme turns dark
+// (dark on dark until it ends). Two audits of this page must report the same findings.
+export const DETERMINISM = "/determinism";
+const DETERMINISM_BODY = `<style>.dark #t{color:#fff;background:#111} #t{font-size:16px;color:#111;background:#111;transition:color 3s}</style><p id="t">Slow theme transition</p><div id="r"></div><script>document.getElementById("r").innerHTML = Array.from({ length: 1 + Math.floor(Math.random() * 9) }, (_, i) => \`<p style="font-size:10px">Random row \${i}</p>\`).join("");</script>`;
+
+// Deterministic budget canary (BASE=…/static-canary): page -> [the budget it must be over, body, head].
+const noise = (n) => {
+  let s = 1, out = "";
+  while (out.length < n) out += (s = (s * 48271) % 2147483647).toString(36);
+  return out;
+};
+const BIG_JS_STATIC = `window.x="${noise(1200000)}"`;
+const BIG_CSS = `.x{content:"${noise(300000)}"}`;
+export const STATIC_BROKEN = {
+  "/en/heavy-js": ["jsBytes", `<h1 style="font-size:40px">Too much JavaScript</h1>`, `<script src="/static-canary/big.js" defer></script>`],
+  "/en/heavy-css": ["cssBytes", `<h1 style="font-size:40px">Too much CSS</h1>`, `<link rel="stylesheet" href="/static-canary/big.css">`],
+  "/en/blocking": ["blocking", `<h1 style="font-size:40px">Render blocking</h1>`, [1, 2, 3, 4].map((i) => `<script src="/static-canary/s${i}.js"></script>`).join("")],
+  "/en/requests": ["requests", `<h1 style="font-size:40px">Many requests</h1>`, Array.from({ length: 70 }, (_, i) => `<link rel="preload" as="image" href="/static-canary/i${i}.png">`).join("")],
+  "/en/client-lcp": ["lcpInHtml", `<div id="late"></div><script>document.getElementById("late").innerHTML = '<h1 style="font-size:40px">Painted only by the client</h1>'</script>`, ""],
+};
+export const STATIC_CLEAN = "/en/clean";
+
 // Performance canary (BASE=…/perf-canary): locale page path -> [budgets the gate must report it over, body].
 const BIG_JS = `window.canaryData=[${Array.from({ length: 40000 }, (_, i) => `"row-${i.toString(36)}-${(i * 7919).toString(36)}"`).join(",")}];`; // ~600 KiB
 export const PERF_BROKEN = {
@@ -79,18 +101,28 @@ const page = (title, body, head = "") =>
 export function startFixtureSite(port) {
   const pages = { [CLEAN]: page("Clean", `<h1 style="font-size:24px">Clean page</h1><p style="font-size:16px">Readable text, nothing broken.</p>`) };
   for (const [path, [, body]] of Object.entries(BROKEN)) pages[path] = page(path.slice(1), body);
+  pages[DETERMINISM] = page("Determinism", DETERMINISM_BODY);
   const loc = (p) => `<url><loc>https://fixture.test/en${p}</loc></url>`;
   const shareHead = (key) => `<meta property="og:image" content="https://fixture.test/share/en/${key}.png"><meta name="twitter:image" content="https://fixture.test/share/en/${key}.png">`;
   const png = Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=", "base64");
   const server = createServer((req, res) => {
     const url = new URL(req.url, "http://x");
     const send = (status, type, body) => res.writeHead(status, { "content-type": type }).end(body);
-    if (url.pathname === "/sitemap.xml") return send(200, "application/xml", `<urlset>${[CLEAN, ...Object.keys(BROKEN)].map(loc).join("")}</urlset>`);
+    if (url.pathname === "/sitemap.xml") return send(200, "application/xml", `<urlset>${[CLEAN, DETERMINISM, ...Object.keys(BROKEN)].map(loc).join("")}</urlset>`);
     // share-images canary: /share-canary is its BASE; the second page has no og:image / twitter:image
     if (url.pathname === "/share-canary/sitemap.xml") return send(200, "application/xml", `<urlset>${loc("/with-image")}${loc("/no-image")}</urlset>`);
     if (url.pathname === "/share-canary/en/with-image") return send(200, "text/html", page("With image", "<p>ok</p>", shareHead("with-image")));
     if (url.pathname === "/share-canary/en/no-image") return send(200, "text/html", page("No image", "<p>missing</p>"));
     if (url.pathname === "/share-canary/share/en/with-image.png") return send(200, "image/png", png);
+    // perf-static canary
+    if (url.pathname === "/static-canary/sitemap.xml") return send(200, "application/xml", `<urlset>${[STATIC_CLEAN, ...Object.keys(STATIC_BROKEN)].map((p) => `<url><loc>https://fixture.test${p}</loc></url>`).join("")}</urlset>`);
+    if (url.pathname === "/static-canary/big.js") return send(200, "text/javascript", BIG_JS_STATIC);
+    if (url.pathname === "/static-canary/big.css") return send(200, "text/css", BIG_CSS);
+    if (/^\/static-canary\/s\d\.js$/.test(url.pathname)) return send(200, "text/javascript", "");
+    if (/^\/static-canary\/i\d+\.png$/.test(url.pathname)) return send(200, "image/png", png);
+    if (url.pathname === `/static-canary${STATIC_CLEAN}`) return send(200, "text/html; charset=utf-8", page("Clean", `<h1 style="font-size:40px">Fast page</h1>`));
+    const statics = url.pathname.startsWith("/static-canary/") && STATIC_BROKEN[url.pathname.slice("/static-canary".length)];
+    if (statics) return send(200, "text/html; charset=utf-8", page("Static canary", statics[1], statics[2]));
     // perf-budget canary
     if (url.pathname === "/perf-canary/sitemap.xml") return send(200, "application/xml", `<urlset>${[PERF_CLEAN, ...Object.keys(PERF_BROKEN)].map((p) => `<url><loc>https://fixture.test${p}</loc></url>`).join("")}</urlset>`);
     if (url.pathname === "/perf-canary/big.js") return send(200, "text/javascript", BIG_JS);

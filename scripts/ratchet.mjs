@@ -6,9 +6,9 @@
 // committed baseline (.audit/ratchet/*.json), one page at a time:
 //   site-audit:   a page's count for any criterion must not rise versus its baseline entry; a page with no
 //                 baseline entry (new, or never audited before) must have zero findings.
-//   perf-budget:  a page's LCP/TBT/CLS/JS must not rise, and its Performance score must not fall, by more than
-//                 TOLERANCE (measured run-to-run noise, see tolerance()); a page with no baseline entry must be
-//                 fully within apps/web/scripts/perf-budget.mjs's BUDGET.
+//   perf-budget:  a page's initial JS and CSS bytes, render-blocking resources and requests must not rise, and an
+//                 LCP element in the server HTML must stay there (apps/web/scripts/perf-static.mjs: deterministic,
+//                 so no tolerance); a page with no baseline entry must be fully within that script's BUDGET.
 // The baseline itself can only go down: `node scripts/ratchet.mjs update <kind> <run.json> <baseline.json>`
 // lowers it to the better of (current, committed) per page, and never raises any value - a baseline edit that
 // does (by hand or a bad update) is caught by `check-baseline`, run on the baseline files themselves whenever
@@ -24,15 +24,9 @@
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 
 const CRITERIA = ["overlap", "clip", "small", "hydration", "console", "a11y", "link", "idle"];
-// Run-to-run noise on the same build (see docs/claude/full-project-handbook.md §12 for the measurement and its
-// caveats): RUNS=10 of scripts/perf-budget.mjs against 6 representative pages, tolerance set above the largest
-// observed same-build delta for each metric across the 5 pages with no live/network dependency (one page,
-// crypto-converter, was excluded as a network-bound outlier - LCP spread alone was 3.1s from live-price fetch
-// jitter, not page-rendering variance). TBT's own noise was the biggest surprise: 308ms on a timer-heavy page
-// with nothing else changing run to run.
-export const TOLERANCE = { lcp: 60, tbt: 350, cls: 0.01, perf: 8, jsKiB: 3 };
-const METRICS = ["lcp", "tbt", "cls", "perf", "jsKiB"];
-const worse = { lcp: (c, b, t) => c > b + t, tbt: (c, b, t) => c > b + t, cls: (c, b, t) => c > b + t, jsKiB: (c, b, t) => c > b + t, perf: (c, b, t) => c < b - t };
+const METRICS = ["jsBytes", "cssBytes", "blocking", "requests", "lcpInHtml"];
+const rises = (c, b) => c > b;
+const worse = { jsBytes: rises, cssBytes: rises, blocking: rises, requests: rises, lcpInHtml: (c, b) => b && !c };
 
 const readJson = (f) => JSON.parse(readFileSync(f, "utf8"));
 
@@ -83,9 +77,9 @@ function measuredPages(run, kind) {
   return kind === "site-audit" ? run.measured : run.pages.map((p) => p.page);
 }
 
-/** Current OUT (perf-budget.mjs) -> { page: { lcp, tbt, cls, perf, jsKiB } }, measured-median or null on error. */
-function perfBudgetMedians(run) {
-  return Object.fromEntries(run.pages.map((p) => [p.page, p.median]));
+/** Current OUT (perf-static.mjs) -> { page: { jsBytes, cssBytes, blocking, requests, lcpInHtml } }, null on error. */
+function perfBudgetValues(run) {
+  return Object.fromEntries(run.pages.map((p) => [p.page, p.values]));
 }
 
 function checkSiteAudit(run, baseline) {
@@ -105,7 +99,7 @@ function checkSiteAudit(run, baseline) {
 }
 
 function checkPerfBudget(run, baseline) {
-  const medians = perfBudgetMedians(run);
+  const values = perfBudgetValues(run);
   const byPage = Object.fromEntries(run.pages.map((p) => [p.page, p]));
   const problems = [];
   for (const page of measuredPages(run, "perf-budget")) {
@@ -115,11 +109,16 @@ function checkPerfBudget(run, baseline) {
       if (p.over.length) problems.push(`${page}: new page (no baseline), over ${p.over.join(",")}`);
       continue;
     }
-    if (!medians[page]) {
+    const stale = METRICS.filter((m) => !(m in base));
+    if (stale.length) {
+      problems.push(`${page}: baseline entry has no ${stale.join(",")}`);
+      continue;
+    }
+    if (!values[page]) {
       problems.push(`${page}: failed to measure (${p.error}); treated as a regression against its baseline`);
       continue;
     }
-    for (const m of METRICS) if (worse[m](medians[page][m], base[m], TOLERANCE[m])) problems.push(`${page}: ${m} ${medians[page][m]} vs baseline ${base[m]} (tolerance ${TOLERANCE[m]})`);
+    for (const m of METRICS) if (worse[m](values[page][m], base[m])) problems.push(`${page}: ${m} ${values[page][m]} vs baseline ${base[m]}`);
   }
   return problems;
 }
@@ -131,7 +130,7 @@ function checkBaseline(kind, next, prev) {
     if (!(page in next)) { problems.push(`${page}: removed from the baseline (a page must stay tracked, even at 0)`); continue; }
     for (const k of keysOf()) {
       const a = prev[page][k] ?? 0, b = next[page][k] ?? 0;
-      const raised = kind === "site-audit" ? b > a : worse[k](b, a, 0);
+      const raised = kind === "site-audit" ? b > a : worse[k](b, a);
       if (raised) problems.push(`${page}.${k}: ${a} -> ${b} (the baseline can only go down)`);
     }
   }
@@ -151,11 +150,11 @@ function update(kind, run, baseline) {
       next[page] = merged;
     }
   } else {
-    const medians = perfBudgetMedians(run);
+    const values = perfBudgetValues(run);
     for (const page of measuredPages(run, "perf-budget")) {
-      if (!medians[page]) continue;
+      if (!values[page]) continue;
       const base = next[page];
-      const merged = base ? Object.fromEntries(METRICS.map((m) => [m, worse[m](base[m], medians[page][m], 0) ? medians[page][m] : base[m]])) : medians[page];
+      const merged = base ? Object.fromEntries(METRICS.map((m) => [m, worse[m](base[m], values[page][m]) ? values[page][m] : base[m]])) : values[page];
       if (JSON.stringify(merged) !== JSON.stringify(base)) changed.push(page);
       next[page] = merged;
     }

@@ -13,7 +13,7 @@ import { mkdirSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { BROKEN, CLEAN, PERF_BROKEN, PERF_CLEAN, startFixtureSite } from "./gates/fixture-site.mjs";
+import { BROKEN, CLEAN, DETERMINISM, PERF_BROKEN, PERF_CLEAN, STATIC_BROKEN, STATIC_CLEAN, startFixtureSite } from "./gates/fixture-site.mjs";
 
 const ROOT = fileURLToPath(new URL("..", import.meta.url));
 const WEB = join(ROOT, "apps/web");
@@ -89,6 +89,33 @@ test("site audit fails on every broken page (overlap, SVG clip, HTML clip, <12px
   assert.deepEqual(clean, [], "the clean control page must have no finding");
 });
 
+test("site audit: two runs of a page with random content and a slow theme transition report identical findings", async () => {
+  const audit = async (n) => {
+    const out = join(TMP, `determinism-${n}.json`);
+    await gateAsync("node", ["scripts/site-audit.mjs", DETERMINISM], { cwd: WEB, env: { BASE: `http://127.0.0.1:${SITE_PORT}`, LOCALES: "en", WIDTHS: "1440", OUT: out } });
+    return JSON.parse(readFileSync(out, "utf8")).findings;
+  };
+  const first = await audit(1);
+  assert.ok(first.some((f) => f.criterion === "small"), "the random rows must be measured");
+  assert.ok(!first.some((f) => f.criterion === "a11y"), `the theme transition must be over before contrast is read: ${JSON.stringify(first).slice(0, 600)}`);
+  assert.deepEqual(await audit(2), first);
+});
+
+test("deterministic budgets fail on a page over each budget, pass the clean one, and repeat exactly", async () => {
+  const run = async (n) => {
+    const out = join(TMP, `perf-static-${n}.json`);
+    const r = await gateAsync("node", ["scripts/perf-static.mjs"], { cwd: WEB, env: { BASE: `http://127.0.0.1:${SITE_PORT}/static-canary`, LOCALES: "en", OUT: out } });
+    return { r, pages: JSON.parse(readFileSync(out, "utf8")).pages };
+  };
+  const { r, pages } = await run(1);
+  failsWith(r, /error title=perf-static/, "deterministic budgets");
+  const at = (page) => pages.find((p) => p.page === page) ?? assert.fail(`not measured: ${page}`);
+  for (const [page, [budget]] of Object.entries(STATIC_BROKEN)) assert.deepEqual(at(page).over, [budget], `${page}: ${JSON.stringify(at(page))}`);
+  assert.deepEqual(at(STATIC_CLEAN).over, [], `the clean page must pass: ${JSON.stringify(at(STATIC_CLEAN))}`);
+  assert.equal(at(STATIC_CLEAN).values.lcpInHtml, true);
+  assert.deepEqual((await run(2)).pages, pages, "two runs must give identical values");
+});
+
 test("performance budgets fail on a page over each budget (LCP, TBT, CLS, Performance, JS) and pass the clean one", async () => {
   const out = join(TMP, "perf-budget.json");
   const r = await gateAsync("node", ["scripts/perf-budget.mjs"], { cwd: WEB, env: { BASE: `http://127.0.0.1:${SITE_PORT}/perf-canary`, LOCALES: "en", OUT: out } });
@@ -131,23 +158,26 @@ test("site-audit ratchet: a count increase fails, a decrease passes, a new page 
   failsWith(ratchet(["check", "site-audit", newPage, baseline], { MEASURED: newMeasured }), /\/en\/tools\/zzz-canary: new page \(no baseline\)/, "site-audit ratchet (new page)");
 });
 
-test("perf-budget ratchet: a metric regression beyond tolerance fails, noise within tolerance passes", () => {
-  const baseline = writeJson("ra-pb-baseline.json", { "/en/tools/a": { lcp: 2000, tbt: 100, cls: 0.05, perf: 92, jsKiB: 300 } });
+test("perf-budget ratchet: one more byte or request fails, an LCP element leaving the server HTML fails, equal or less passes", () => {
+  const base = { jsBytes: 200000, cssBytes: 30000, blocking: 1, requests: 30, lcpInHtml: true };
+  const baseline = writeJson("ra-pb-baseline.json", { "/en/tools/a": base });
   const measured = writeText("ra-pb-measured.txt", "/en/tools/a\n");
-
-  const worse = writeJson("ra-pb-worse.json", { pages: [{ page: "/en/tools/a", median: { lcp: 2400, tbt: 100, cls: 0.05, perf: 92, jsKiB: 300 }, over: [], error: null }] });
-  failsWith(ratchet(["check", "perf-budget", worse, baseline], { MEASURED: measured }), /\/en\/tools\/a: lcp 2400 vs baseline 2000/, "perf-budget ratchet (regression)");
-
-  const noisy = writeJson("ra-pb-noisy.json", { pages: [{ page: "/en/tools/a", median: { lcp: 2060, tbt: 105, cls: 0.052, perf: 91, jsKiB: 302 }, over: [], error: null }] });
-  assert.equal(ratchet(["check", "perf-budget", noisy, baseline], { MEASURED: measured }).status, 0, "noise within tolerance must pass");
+  const run = (name, values) => writeJson(name, { pages: [{ page: "/en/tools/a", values, over: [], error: null }] });
+  for (const [k, v, re] of [["jsBytes", 200001, /jsBytes 200001 vs baseline 200000/], ["cssBytes", 30001, /cssBytes 30001 vs baseline 30000/], ["blocking", 2, /blocking 2 vs baseline 1/], ["requests", 31, /requests 31 vs baseline 30/], ["lcpInHtml", false, /lcpInHtml false vs baseline true/]])
+    failsWith(ratchet(["check", "perf-budget", run(`ra-pb-${k}.json`, { ...base, [k]: v }), baseline], { MEASURED: measured }), re, `perf-budget ratchet (${k})`);
+  failsWith(ratchet(["check", "perf-budget", run("ra-pb-stale.json", base), writeJson("ra-pb-stale-base.json", { "/en/tools/a": { lcp: 2000 } })], { MEASURED: measured }), /baseline entry has no jsBytes/, "perf-budget ratchet (old baseline format)");
+  const same = ratchet(["check", "perf-budget", run("ra-pb-same.json", base), baseline], { MEASURED: measured });
+  assert.equal(same.status, 0, same.out);
+  const less = ratchet(["check", "perf-budget", run("ra-pb-less.json", { ...base, jsBytes: 190000 }), baseline], { MEASURED: measured });
+  assert.equal(less.status, 0, less.out);
 });
 
 // Both ratchets compare the exact pages of a shard: results that cannot prove that are a failure, never a pass.
 const CLEAN_COUNTS = { overlap: 0, clip: 0, small: 0, hydration: 0, console: 0, a11y: 0, link: 0, idle: 0 };
-const MEDIAN = { lcp: 2000, tbt: 100, cls: 0.05, perf: 92, jsKiB: 300 };
+const VALUES = { jsBytes: 200000, cssBytes: 30000, blocking: 1, requests: 30, lcpInHtml: true };
 const RATCHETS = {
   "site-audit": { baseline: { "/en/tools/a": CLEAN_COUNTS, "/en/tools/b": CLEAN_COUNTS }, run: (pages) => ({ findings: [], measured: pages }) },
-  "perf-budget": { baseline: { "/en/tools/a": MEDIAN, "/en/tools/b": MEDIAN }, run: (pages) => ({ pages: pages.map((page) => ({ page, median: MEDIAN, over: [], error: null })) }) },
+  "perf-budget": { baseline: { "/en/tools/a": VALUES, "/en/tools/b": VALUES }, run: (pages) => ({ pages: pages.map((page) => ({ page, values: VALUES, over: [], error: null })) }) },
 };
 for (const [kind, { baseline, run }] of Object.entries(RATCHETS)) {
   const base = writeJson(`ps-${kind}-baseline.json`, baseline);
@@ -180,10 +210,10 @@ test("ratchet: a page with no baseline passes only with zero findings or within 
   const empty = writeJson("nb-baseline.json", {});
   const clean = ratchet(["check", "site-audit", writeJson("nb-sa-clean.json", { findings: [], measured: ["/en/tools/new"] }), empty], { MEASURED: measured });
   assert.equal(clean.status, 0, clean.out);
-  const within = ratchet(["check", "perf-budget", writeJson("nb-pb-ok.json", { pages: [{ page: "/en/tools/new", median: MEDIAN, over: [], error: null }] }), empty], { MEASURED: measured });
+  const within = ratchet(["check", "perf-budget", writeJson("nb-pb-ok.json", { pages: [{ page: "/en/tools/new", values: VALUES, over: [], error: null }] }), empty], { MEASURED: measured });
   assert.equal(within.status, 0, within.out);
-  failsWith(ratchet(["check", "perf-budget", writeJson("nb-pb-over.json", { pages: [{ page: "/en/tools/new", median: MEDIAN, over: ["lcp"], error: null }] }), empty], { MEASURED: measured }), /new page \(no baseline\), over lcp/, "perf-budget ratchet (new page over budget)");
-  failsWith(ratchet(["check", "perf-budget", writeJson("nb-pb-err.json", { pages: [{ page: "/en/tools/new", median: null, over: ["error"], error: "boom" }] }), empty], { MEASURED: measured }), /new page \(no baseline\), over error/, "perf-budget ratchet (new page not measured)");
+  failsWith(ratchet(["check", "perf-budget", writeJson("nb-pb-over.json", { pages: [{ page: "/en/tools/new", values: VALUES, over: ["lcp"], error: null }] }), empty], { MEASURED: measured }), /new page \(no baseline\), over lcp/, "perf-budget ratchet (new page over budget)");
+  failsWith(ratchet(["check", "perf-budget", writeJson("nb-pb-err.json", { pages: [{ page: "/en/tools/new", values: null, over: ["error"], error: "boom" }] }), empty], { MEASURED: measured }), /new page \(no baseline\), over error/, "perf-budget ratchet (new page not measured)");
 });
 
 test("shard page list: the same slice the gates take, without a second locale prefix", () => {
