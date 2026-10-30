@@ -7,7 +7,7 @@ paths:
 
 > يعتمد على §8–§9 و§13 و§17–§18 و§20 و§22–§43 من `TooloraLabs-Claude-Instructions.md`. لا تخترع نوعاً عشوائياً؛ اختر من القائمة بما يخدم طبيعة البيانات.
 
-- **No screenshots:** never take or review screenshots for visual work (hard rule in `CLAUDE.md`). Verify with lint/tsc/build and DOM values; end with the page URLs for Yousef to review.
+- **No screenshots:** never take or review screenshots for visual work (hard rule in `CLAUDE.md`). Verify with lint/tsc/build and DOM values; end with the page URLs for xzerone to review.
 
 ## 1. هيكل صفحة الأداة (§8)
 - **General rule (every tool):** Top of every tool page = 3 columns: input (left), result with a live indicator (middle), RelatedToolsSidebar + 300×600 AdSpace (right). Below it, cards span the full width with leaderboard ads between sections only. Reference: `loan-calculator` via `ToolAboveFold`; the right column hides on mobile and the columns stack.
@@ -22,7 +22,7 @@ paths:
 - Column fill (§17/§27): when one above-the-fold column is shorter, stretch it with `ToolAboveFold` `stretchInput` / `stretchResult` and give its last card `lg:flex-1` with real content that grows (drawing, list), never an empty band.
 - **Instant result (every tool):** the page shows a real result on load (sample data when the tool needs input); never zeros, dashes or an empty state in the result or its indicators.
 - **Drawing + table (every tool, updated 2026-10-10):** drawing cards are two parts: deep live table and live drawing; side by side or stacked follows the conditional layout rule below; RTL mirrors naturally. Use `tool-ui/three/LiveTable3DLayout` + `tool-ui/three/Scene3D` (lazy @react-three/fiber + drei, ssr:false, theme colors from `usePalette3D`). This replaces the older "drawing left, table right" direction.
-- **Drawing + table cards — no empty gaps (Yousef 2026-10-17, replaces any "always stack" / "always side-by-side" wording):** GOAL = no empty gaps in any card. Applies to every card holding a drawing (chart, scene, map, diagram, 3D, preview) plus a table, controls or info panel. (1) Card full with no visible empty space → DO NOT TOUCH IT, whatever its layout (e.g. weather "10-day forecast"). (2) Side-by-side card with empty space (one part much shorter, blank area under it) → STACKED: drawing on top at full card width, table/panel below at full card width in a 3/2/1-column grid by screen size, worked-example formula in a full-width bottom row (e.g. weather "Next 48 hours"). (3) Stacked card with empty space (drawing or controls in a narrow centred column with blank sides) → SIDE-BY-SIDE: drawing on one side, table/controls on the other, both filling the card (e.g. text tool "Layout playground"). (4) A card that had no gaps at commit 911cf931 but has gaps now is restored to its 911cf931 layout. Detection (measure, never screenshots): `apps/web/scripts/card-gap-check.mjs` at 1440px in ar and en flags side-by-side parts differing by more than 30% in height, and stacked content using less than 75% of the card inner width. Always: labels never clipped, drawings readable (axis text >= 12px), mirrored for RTL, light/dark, all 6 locales, mobile <= 768px stacked naturally with no gaps.
+- **Drawing + table cards — no empty gaps (xzerone 2026-10-17, replaces any "always stack" / "always side-by-side" wording):** GOAL = no empty gaps in any card. Applies to every card holding a drawing (chart, scene, map, diagram, 3D, preview) plus a table, controls or info panel. (1) Card full with no visible empty space → DO NOT TOUCH IT, whatever its layout (e.g. weather "10-day forecast"). (2) Side-by-side card with empty space (one part much shorter, blank area under it) → STACKED: drawing on top at full card width, table/panel below at full card width in a 3/2/1-column grid by screen size, worked-example formula in a full-width bottom row (e.g. weather "Next 48 hours"). (3) Stacked card with empty space (drawing or controls in a narrow centred column with blank sides) → SIDE-BY-SIDE: drawing on one side, table/controls on the other, both filling the card (e.g. text tool "Layout playground"). (4) A card that had no gaps at commit 911cf931 but has gaps now is restored to its 911cf931 layout. Detection (measure, never screenshots): `apps/web/scripts/card-gap-check.mjs` at 1440px in ar and en flags side-by-side parts differing by more than 30% in height, and stacked content using less than 75% of the card inner width. Always: labels never clipped, drawings readable (axis text >= 12px), mirrored for RTL, light/dark, all 6 locales, mobile <= 768px stacked naturally with no gaps.
 - **Chart labels >= 12 CSS px (2026-10-25, every tool):** chart axis labels (tick numbers, dates/times, axis titles and units on every chart, graph, gauge, dial and track scale) render at >= 12 CSS px, measured as the RENDERED size (font-size × the SVG's current scale), not SVG units: SVG label sizes are written `style={{ fontSize: svgPx(n) }}` (`tool-ui/svgPx`; `SvgLabelScale` sets each SVG's `--svg-k`), and a chart that sets its own width lays out at its box width below lg (`useBelowLg`). Labels never overlap (§39) or clip: reduce tick density (e.g. the `axisTicks` gap) instead of shrinking text. Shared label layout (2026-10-28, every chart): Mafs charts use `tool-ui/FitMafs` (+ `FitText`), hand-drawn SVG charts `tool-ui/FitSvg`, geometry in `tool-ui/chartLabels.ts`; never per-chart paddings or hidden labels. Check: `apps/web/scripts/site-audit.mjs` (the `overlap`/`clip` criteria cover this; CI jobs `site-audit-shard`/`site-audit`, required, ratcheted - see `CLAUDE.md`).
 - **Indicator set (every tool):** about 12 indicators chosen from the §31 library, all computed from the tool's real calculations and following its inputs live, with at least one interactive "wow" piece (drag, sliders or animation).
 - **History panels (every tool that has one):** × delete per entry, live grand total of all results, entry count, Clear all, click an entry to reuse its result, persisted per visitor. Use `tool-ui/HistoryTape` + `lib/use-persisted-list`.
@@ -50,7 +50,7 @@ paths:
 | 33 | بنية هرمية ثلاثية لنماذج الإدخال المتكررة |
 | 34 | بطاقة قسم/أداة مزخرفة بلون هوية لكل قسم |
 | 35 | زر رجوع موحّد في كل الصفحات |
-| 37–43 | بطاقات بإطار وترويسة زرقاء، بلا مربعات، بلا تسميات متراكبة، مقابض سحب واضحة، بلا فراغ، جداول بارزة، أزرار − / + تفاعلية (قد لا تكون في ملف التعليمات المحلي؛ اسأل يوسف قبل الاعتماد) |
+| 37–43 | بطاقات بإطار وترويسة زرقاء، بلا مربعات، بلا تسميات متراكبة، مقابض سحب واضحة، بلا فراغ، جداول بارزة، أزرار − / + تفاعلية (قد لا تكون في ملف التعليمات المحلي؛ اسأل xzerone قبل الاعتماد) |
 
 ## 3. ما يرفضه في الرسوم
 - **الرسوم الفقيرة والفارغة.** لا يريد بطاقات برسم صغير ومعلومات قليلة تملأ الصفحة (مثل «Classifying Triangles by Side Length / by Angle»). يريد رسوماً **أغنى تفصيلاً ومعلومات**، وأن تُستبدل الفارغة بها، مع إبقاء الرسوم الجيدة فاصلة بين أوراق الشرح. إما رسم غني بمعلومات أو لا رسم (§22/§17).
@@ -116,7 +116,7 @@ paths:
 - الترجمة تحت `tools['triangle-calculator'].education.lab` (6 لغات، 0 ناقص / 0 زائد).
 
 ## 7. معلَّق على المؤشرات (لم يُنفَّذ)
-- sin/cos curves under all interactive indicators (confirmed by Yousef): المكوّن المشترك `TriangleSinCosLiveCurve` تحت (1) و(2) و(10) و(12)؛ استثناء معتمد من §32 بند 6.
+- sin/cos curves under all interactive indicators (confirmed by xzerone): المكوّن المشترك `TriangleSinCosLiveCurve` تحت (1) و(2) و(10) و(12)؛ استثناء معتمد من §32 بند 6.
 - توزيع المؤشرات الـ12 المتبقية بين `AdSpace` على طول الصفحة، من أعلاها إلى أسفلها.
 
 ## 8. Blueprint theme: page backgrounds and surfaces (2026-10-11, every page)
@@ -135,10 +135,10 @@ Single source of truth: the "Blueprint theme" block in `apps/web/app/globals.css
 - **Light mode borders:** neutral borders → dividers rgba(40,80,160,.22); rounded fully bordered panels/cards/tables/FAQ/inputs → 1.5px rgba(40,80,160,.35); large rounded white panels get `0 1px 3px rgba(20,40,90,.08)`; table column dividers 1px; colored buttons keep their fill with a darker same-hue edge.
 - Shared components opt in with `data-bp-panel` (SectionCard, TOC list, feedback box) and `data-bp-inner` (stat boxes, formula box, sidebar rows). Dark mode cards/panels are unchanged. The home calculator's own dark toggle (`.calc-dark`) and print areas are excluded.
 
-## 9. Clickable actions look like buttons (Yousef, 2026-10-23, every page)
+## 9. Clickable actions look like buttons (xzerone, 2026-10-23, every page)
 Any clickable action (tabs, save, clear, copy, export, toggles, show more) must be a visible button: background or border, padding, radius, clear active/hover/focus states, and a 44×44 touch area on phone. Plain text or underlined text for an action is rejected. Real navigation links inside paragraphs stay links.
 
-## APPROVED PHONE STANDARD — every tool page below 768px (Yousef, 2026-10-24)
+## APPROVED PHONE STANDARD — every tool page below 768px (xzerone, 2026-10-24)
 Default for all tools, desktop unchanged; built into the shared components (never per tool). Full spec:
 `docs/claude/approved-visuals-and-indicators.md` § APPROVED PHONE STANDARD.
 - Back button arrow + "رجوع"/"Back" (44×44), title on one line beside it.
@@ -156,7 +156,7 @@ Default for all tools, desktop unchanged; built into the shared components (neve
   group in their order, one DOM copy (display:contents + CSS order), sans font; ONE continuous paper is
   redrawn around the article parts with uniform spacing. Desktop unchanged.
 - Phone order: 3 open cards, docs row, ad 1 (if balanced), all collapsed cards, ad 2, the article paper.
-- Phone polish rules 1–7 (Yousef, 2026-10-24; full spec in the doc above):
+- Phone polish rules 1–7 (xzerone, 2026-10-24; full spec in the doc above):
   1) section nav pinned directly under the site header from page open (one fixed element, active follows scroll);
   2) two top mini cards (88px) mirror the first two 2D kit indicators, same Drawing in compact mode, lazy, phone only;
      markets/live-ticker tools keep their live cards;
@@ -165,14 +165,14 @@ Default for all tools, desktop unchanged; built into the shared components (neve
   5) a table too wide for its card at 360px reflows into stacked rows (CSS on the same `<table>`), no sideways
      scroll; short tokens nowrap, long text wraps between words only;
   6) calculator mode tab bar: one row, icon + short label (icons only if needed), 44px, active filled;
-  7) LOCKED card order (rule 7 replaced, Yousef 2026-10-24): see "APPROVED — LOCKED: phone card order" below.
+  7) LOCKED card order (rule 7 replaced, xzerone 2026-10-24): see "APPROVED — LOCKED: phone card order" below.
 
-## APPROVED — LOCKED: phone card order, every tool below 768px (Yousef, 2026-10-24)
+## APPROVED — LOCKED: phone card order, every tool below 768px (xzerone, 2026-10-24)
 Permanent; applies to every current and future tool. Full spec: `docs/claude/approved-visuals-and-indicators.md`.
 - Card 1 = INPUT (inputs, selects, sliders, keypad). Card 2 = OUTPUT: the result card holding any result
   action (Share / Export, Copy, Print, Download, Save), always second, always open. Card 3 = the main VISUAL.
 - Input and output in one card: it is card 1, the visual card 2, the next most useful card 3.
-- CHANGED 2026-10-24 (Yousef): only the PRIMARY output card (the one with Share / Export, or the main
+- CHANGED 2026-10-24 (xzerone): only the PRIMARY output card (the one with Share / Export, or the main
   result) is always open, in place 2 (`phoneRole="output"`). SECONDARY output cards (long tables or
   schedules with a Download / Copy button, e.g. mortgage's two payment schedules) go to the collapsible
   group like other cards, with their buttons inside them (`phoneRole="output-secondary"`).
@@ -189,13 +189,13 @@ Permanent; applies to every current and future tool. Full spec: `docs/claude/app
   disabled). Exception kept: crypto-converter,
   forex-converter, commodities-tracker.
 
-## APPROVED — LOCKED: phone home page /ar and /en (Yousef, 2026-10-23)
+## APPROVED — LOCKED: phone home page /ar and /en (xzerone, 2026-10-23)
 Approved phone home page (below 768px), as shipped in commits 9cf4fb6d, be5df414, cb9012b2 and fd3b15d3:
 - One-row header: the uppercase `TOOLORALABS.COM` wordmark (shared `Wordmark`, Arial, 15px, always LTR) and the smaller Docs / theme / share / language buttons (36px visible, 44×44 hit area, 8px apart; order from the start side Docs, theme, share, language).
 - The calculator FIRST, in one device frame (tinted surface, 10px padding, 8px gaps, each section a lighter-bordered card). Rounded tabs with the active one filled light blue, then the history/archive card BEFORE the display, then the functions row, the keypad and the bottom row.
 - The categories below it: 4 visible plus "عرض المزيد من الأقسام (N)" (count computed), "عرض أقل" when open.
 - Footer: the wordmark always at the left edge on every locale; copyright and links aligned by the page language (right in Arabic, left in the other locales); 24px between rows, 44px link targets.
 
-**Do not change the approved phone home page unless Yousef explicitly asks for that exact change.**
-Locked by `npm run test:home-phone` (CI job `home-phone-lock`, ubuntu-24.04 runner) against `tests/baselines/home-phone.json` (macOS, local) and `tests/baselines/home-phone.linux.json` (CI; the page uses system fonts, so each OS has its own baseline): rects (±1px), font sizes, texts and element order of the header, calculator frame, categories list and footer at 360/390px in ar/en. The baseline is rewritten only with `npm run baseline:home-phone -- --approve`, after Yousef approves the exact change; in CI the PR label `approve-home-phone-baseline` rewrites the Linux one and uploads it as an artifact.
-Approved change (Yousef, 2026-10-24): the calculator tab bar below 768px is ONE row of five button-style tabs (border + fill on every state, active light blue, 44px tall, equal widths, no scroll, no scrollbar), each an icon over a short label (`homeCalculator.modesShort`), icons only with aria-label and title in any locale whose short label does not fit; the mode menu button is desktop only. Baseline re-approved with `npm run baseline:home-phone -- --approve` after this change.
+**Do not change the approved phone home page unless xzerone explicitly asks for that exact change.**
+Locked by `npm run test:home-phone` (CI job `home-phone-lock`, ubuntu-24.04 runner) against `tests/baselines/home-phone.json` (macOS, local) and `tests/baselines/home-phone.linux.json` (CI; the page uses system fonts, so each OS has its own baseline): rects (±1px), font sizes, texts and element order of the header, calculator frame, categories list and footer at 360/390px in ar/en. The baseline is rewritten only with `npm run baseline:home-phone -- --approve`, after xzerone approves the exact change; in CI the PR label `approve-home-phone-baseline` rewrites the Linux one and uploads it as an artifact.
+Approved change (xzerone, 2026-10-24): the calculator tab bar below 768px is ONE row of five button-style tabs (border + fill on every state, active light blue, 44px tall, equal widths, no scroll, no scrollbar), each an icon over a short label (`homeCalculator.modesShort`), icons only with aria-label and title in any locale whose short label does not fit; the mode menu button is desktop only. Baseline re-approved with `npm run baseline:home-phone -- --approve` after this change.

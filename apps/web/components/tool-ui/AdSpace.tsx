@@ -9,7 +9,7 @@ import { useTranslations } from "next-intl";
  * 728x90 (IAB Leaderboard) from md up (capped at the standard's max, so it
  * fits content columns of varying width), and below md (phone, < 768px) at
  * a fixed, centered 300x250 (IAB Medium Rectangle) — never stretched to the
- * column width (Yousef 2026-10-23). Its equal side margins keep it centered
+ * column width (xzerone 2026-10-23). Its equal side margins keep it centered
  * even in a column narrower than 300px (encyclopedia paper at 360px is 294px).
  * Desktop leaderboards are placed only by DesktopAdSlot (3 per tool page, lib/ads.ts) and grow to
  * 970x250 (IAB Billboard) in a column at least 970px wide.
