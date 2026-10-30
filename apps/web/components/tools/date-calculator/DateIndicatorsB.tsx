@@ -83,7 +83,7 @@ export function DateBusinessFormulaCard({ d, f }: IndicatorProps) {
     <g>
       <rect x={x} y={y} width={w} height={54} rx={9} fill={color} fillOpacity={0.14} stroke={color} strokeWidth={1.5} />
       <text x={x + w / 2} y={y + 26} textAnchor="middle" fontSize={17} fontWeight={800} fill={color}>{v}</text>
-      <text x={x + w / 2} y={y + 44} textAnchor="middle" fontSize={8.5} fontWeight={600} className={axisText}>{sub}</text>
+      <text x={x + w / 2} y={y + 44} textAnchor="middle" style={{ fontSize: svgPx(8.5) }} fontWeight={600} className={axisText}>{sub}</text>
     </g>
   );
   const op = (x: number, y: number, c: string) => (
