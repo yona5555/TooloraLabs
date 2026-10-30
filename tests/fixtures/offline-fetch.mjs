@@ -1,6 +1,6 @@
 // Test-mode data source for the desktop lock: preloaded into the Next.js server (and its build) with
 // NODE_OPTIONS=--import, it answers every external fetch from recorded fixtures in tests/fixtures/live/,
-// so no page waits on the network and live prices, rates and weather never change the layout.
+// so no page waits on the network and live prices, rates and weather never change the layout or the values.
 //   LIVE_FIXTURES=replay (default)  -> answer from fixtures; an unrecorded URL gets 503 at once (logged)
 //   LIVE_FIXTURES=record            -> fetch for real and save each response (needs the API keys)
 // Fixture names never hold secrets: the API key values are replaced by KEY before hashing, and in replay
@@ -16,6 +16,10 @@ const DIR = join(dirname(fileURLToPath(import.meta.url)), "live");
 const MODE = process.env.LIVE_FIXTURES === "record" ? "record" : "replay";
 const KEYS = ["EXCHANGE_RATE_API_KEY", "METALPRICE_API_KEY", "OILPRICE_API_KEY", "FRED_API_KEY"];
 if (MODE === "replay") for (const k of KEYS) process.env[k] = "fixture";
+// Replay also fixes the server's data clock (apps/web/lib/data-clock.ts) at the locks' page clock
+// (tests/desktop-lock.mjs, 2026-10-20 12:00 UTC): the fixtures are fixed, and so is the hour, candle window and
+// "today" the server picks from them, so two fixture builds render the same values (New York temperature included).
+if (MODE === "replay") process.env.TOOLORA_FIXED_NOW = "2026-10-20T12:00:00Z";
 
 const realFetch = globalThis.fetch;
 const missed = new Set();

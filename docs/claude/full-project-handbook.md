@@ -70,6 +70,10 @@
 - غياب أيٍّ منها في بناء Production (`VERCEL_ENV=production`) يوقف البناء فوراً برسالة تذكر اسم المتغير الناقص فقط: `assertMarketApiKeysForProduction` في `apps/web/lib/api-key.ts`، يُستدعى مرة واحدة من `apps/web/next.config.ts` في مرحلة `next build`. القائمة المصدر الوحيد: `MARKET_API_KEYS` في الملف نفسه؛ أي مفتاح سوق جديد يُضاف إليها.
 - بناء CI وPreview والجهاز المحلي لا يحتاجها: كل أداة تسلك مسار «لا مفتاح» الصريح (لا طلب، لا سجل، حالة «البيانات غير متاحة»).
 
+## 11. تسميات الرسوم: طبقة موحّدة، والحارس الآن داخل site-audit (2026-10-28، حُدِّث 2026-10-30)
+- **الطبقة:** `components/tool-ui/chartLabels.ts` (هندسة بحتة: `marginDelta`/`nextMargins`، `padRange`، `placeBeside`/`placeClear`/`clampInto`، `fitStep`/`thinEvery`، `physicalSide`، `stackBands`) و`useChartLabels.ts` (قياس الحبر الفعلي بـ`measureText`). كل رسم Mafs يُكتب `<FitMafs>` (`tool-ui/FitMafs.tsx`) و`<FitText>` للنص المؤلَّف؛ كل رسم SVG يدوي يُكتب `<FitSvg>` (`tool-ui/FitSvg.tsx`)، ورسوم الطقم `indicator-kit/SvgBits` `Drawing` تمر عبره (`grow={false}`). لا هوامش ثابتة ولا إخفاء نص.
+- **الحارس:** كان `apps/web/scripts/axis-label-check.mjs` + مهمتا `chart-text-shard`/`chart-text-audit` (ستة أجزاء) أداة مستقلة فحصت فقط التراكب والقص. كلاهما حُذف: `apps/web/scripts/site-audit.mjs` (§9) يغطي التراكب والقص (criteria `overlap`/`clip`) ضمن فحصه الأشمل لكل صفحة — لا داعٍ لأداة ثانية موازية، ولا لتمرير مخرَجاتها عبر pipe (كانت `axis-label-check.mjs | grep -v '^{'` تخالف قاعدة pipefail الجديدة في §9 نفسها).
+
 ## 12. لماذا لا يوجد توقيت Lighthouse في بوابات PR (2026-10-30)
 - **القياس:** تشغيلان في CI على كود الصفحات نفسه (444 صفحة، تشغيل واحد لكل صفحة): فرق LCP يصل إلى 1698ms (p95 574ms)، وTBT إلى 919ms، وCLS إلى 0.545، وPerformance إلى 23 نقطة. فرق JS صفر. أي هامش صغير يُسقط كوداً لم يتغيّر، وأي هامش كبير لا يكشف شيئاً.
 - **القرار:** بوابة PR حتمية فقط: `apps/web/scripts/perf-static.mjs` (بايتات JS وCSS، عدد الموارد الحاجبة للعرض، عدد الطلبات، وجود عنصر LCP في HTML الخادم)، بلا هامش في `scripts/ratchet.mjs`.

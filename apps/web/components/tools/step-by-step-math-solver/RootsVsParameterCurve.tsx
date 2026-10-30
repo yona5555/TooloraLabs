@@ -1,7 +1,8 @@
 "use client";
 import { useEffect, useRef } from "react";
 import { useTranslations } from "next-intl";
-import { Mafs, Coordinates, Plot, Point, useMovablePoint } from "mafs";
+import { Coordinates, Plot, Point, useMovablePoint } from "mafs";
+import FitMafs from "@/components/tool-ui/FitMafs";
 import "mafs/core.css";
 import "@/components/tool-ui/mafsTheme.css";
 import { useIsDarkMode } from "@/lib/use-dark-mode";
@@ -102,12 +103,12 @@ export default function RootsVsParameterCurve() {
               onMouseUp={handleRelease}
               onTouchEnd={handleRelease}
             >
-              <Mafs viewBox={{ x: domain, y: [-yMax, yMax] }} height={210} pan={false} zoom={false} preserveAspectRatio={false}>
+              <FitMafs viewBox={{ x: domain, y: [-yMax, yMax] }} height={210} pan={false} zoom={false} preserveAspectRatio={false}>
                 <Coordinates.Cartesian xAxis={{ lines: Math.max(1, Math.round((domain[1] - domain[0]) / 8)) }} yAxis={{ lines: Math.max(1, Math.round(yMax / 4)) }} />
                 <Plot.OfX y={rootFn} color={colors.curve} weight={2.5} />
                 <Point x={currentParam} y={rootFn(currentParam)} color="#111827" svgCircleProps={{ r: 4 }} />
                 {paramPoint.element}
-              </Mafs>
+              </FitMafs>
             </div>
           </PhoneMini>
         </div>

@@ -7,6 +7,7 @@ import { generateToolPdf } from "@/lib/pdf/generateToolPdf";
 import { WhatsAppIcon, XIcon, FacebookIcon, LinkedInIcon } from "@/lib/share-icons";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import type { GaugeSpec } from "@/lib/pdf/gauge";
+import TodayDate from "@/components/tool-ui/TodayDate";
 
 type Row = { label: string; value: string };
 
@@ -212,7 +213,7 @@ export default function DensityShareExportModal({ operationLabel, inputRows, res
             <span className="text-2xl font-bold text-blue-600">Labs</span>
           </div>
           <p className="text-sm text-zinc-500">
-            {t("shareExport.generatedOn")}: {new Date().toLocaleDateString(locale)}
+            {t("shareExport.generatedOn")}: <TodayDate locale={locale} />
           </p>
         </div>
 

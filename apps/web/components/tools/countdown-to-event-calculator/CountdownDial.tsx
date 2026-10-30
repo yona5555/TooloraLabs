@@ -4,6 +4,7 @@ import { num, pct, two } from "./model";
 import { px2 } from "@/components/tool-ui/indicator-kit/SvgBits";
 import { svgPx } from "@/components/tool-ui/svgPx";
 
+import FitSvg from "@/components/tool-ui/FitSvg";
 const S = 260;
 const C = S / 2;
 const R_OUT = 100;
@@ -36,7 +37,7 @@ export default function CountdownDial({ d }: { d: Derived }) {
   const elapsedColor = d.b.isPast ? "#10b981" : "#2563eb";
 
   return (
-    <svg viewBox={`0 0 ${S} ${S}`} width="100%" height="100%" role="img" aria-label={`${d.b.days} d ${two(d.b.hours)}:${two(d.b.minutes)}:${two(d.b.seconds)}`} style={{ direction: "ltr" }} data-testid="countdown-dial">
+    <FitSvg viewBox={`0 0 ${S} ${S}`} width="100%" height="100%" role="img" aria-label={`${d.b.days} d ${two(d.b.hours)}:${two(d.b.minutes)}:${two(d.b.seconds)}`} style={{ direction: "ltr" }} data-testid="countdown-dial">
       <circle cx={C} cy={C} r={R_OUT} fill="none" stroke="currentColor" strokeOpacity={0.12} strokeWidth={16} />
       <path d={arcPath(R_OUT, d.progress)} fill="none" stroke={elapsedColor} strokeWidth={16} strokeLinecap="round" style={{ transition: "d 600ms ease" }} />
       {marks.map((m) => {
@@ -73,6 +74,6 @@ export default function CountdownDial({ d }: { d: Derived }) {
       <text style={{ fontSize: svgPx(12) }} x={C} y={C + 38} textAnchor="middle" fontWeight={700} className="fill-zinc-500 dark:fill-zinc-400">
         {pct(d.progress)}
       </text>
-    </svg>
+    </FitSvg>
   );
 }

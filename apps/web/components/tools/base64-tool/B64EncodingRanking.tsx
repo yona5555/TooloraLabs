@@ -4,6 +4,7 @@ import B64IndicatorCard, { B64IndicatorUnavailable } from "./B64IndicatorCard";
 import { useB64Model } from "./B64LiveContext";
 import { svgPx } from "@/components/tool-ui/svgPx";
 
+import FitSvg from "@/components/tool-ui/FitSvg";
 const W = 340;
 const LABEL = 92;
 const BAR_X = LABEL + 8;
@@ -31,7 +32,7 @@ export default function B64EncodingRanking() {
   const H = rows.length * ROW + 4;
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {rows.map((r, i) => {
         const y = i * ROW;
         const w = Math.max(3, (r.v / peak) * BAR_W);
@@ -55,7 +56,7 @@ export default function B64EncodingRanking() {
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   return (

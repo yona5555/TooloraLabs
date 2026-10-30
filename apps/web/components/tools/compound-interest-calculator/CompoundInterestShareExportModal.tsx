@@ -10,6 +10,7 @@ import { WhatsAppIcon, XIcon, FacebookIcon, LinkedInIcon } from "@/lib/share-ico
 import ToolInput from "@/components/tool-ui/ToolInput";
 import type { CurrencyCode } from "@/lib/currency";
 import type { SolveMode } from "./types";
+import TodayDate from "@/components/tool-ui/TodayDate";
 
 type CompoundInterestShareExportModalProps = {
   mode: SolveMode;
@@ -339,7 +340,7 @@ export default function CompoundInterestShareExportModal({
             <span className="text-xl font-bold text-blue-600">Labs</span>
           </div>
           <p className="text-xs text-zinc-500">
-            {t("shareExport.generatedOn")}: {new Date().toLocaleDateString(locale)}
+            {t("shareExport.generatedOn")}: <TodayDate locale={locale} />
           </p>
         </div>
 

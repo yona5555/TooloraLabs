@@ -4,6 +4,7 @@ import FnIndicatorCard, { FnIndicatorUnavailable } from "./FnIndicatorCard";
 import { useFnModel } from "./FnLiveContext";
 import { svgPx } from "@/components/tool-ui/svgPx";
 
+import FitSvg from "@/components/tool-ui/FitSvg";
 const W = 340;
 const LABEL = 70;
 const BAR_X = LABEL + 8;
@@ -41,7 +42,7 @@ export default function FnUrlCost() {
   const H = ranked.length * ROW + 4;
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {ranked.map(([ch, cost], i) => {
         const y = i * ROW;
         const w = Math.max(4, (cost / peak) * BAR_W);
@@ -58,7 +59,7 @@ export default function FnUrlCost() {
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   const total = [...costs.values()].reduce((s, v) => s + v, 0);

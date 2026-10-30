@@ -5,7 +5,6 @@ import { getTranslations } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { SITE_URL } from "@/lib/site";
 import { getLocaleDir } from "@/lib/locale-meta";
-import { getLocaleFontClassName } from "@/lib/locale-fonts";
 import HtmlDocument from "@/components/layout/HtmlDocument";
 import { getClientMessages } from "@/lib/client-messages";
 import BMICalculatorEmbed from "@/components/tools/bmi-calculator/BMICalculatorEmbed";
@@ -61,7 +60,7 @@ export default async function EmbedPage({ params, searchParams }: PageProps) {
   return (
     <HtmlDocument lang={locale} dir={getLocaleDir(locale)}>
       <NextIntlClientProvider locale={locale} messages={await getClientMessages(locale, [slug])}>
-        <div className={`bg-white p-3 dark:bg-zinc-950 ${getLocaleFontClassName(locale) ?? ""}`}>
+        <div className="bg-white p-3 dark:bg-zinc-950">
           <p className="mb-3 text-center text-sm font-bold text-zinc-900 dark:text-zinc-50">
             {t(`${slug}.title`)}
           </p>

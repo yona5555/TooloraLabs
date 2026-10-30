@@ -1,6 +1,7 @@
 "use client";
 import { useTranslations } from "next-intl";
-import { Mafs, Coordinates, Plot, Line, Point, useMovablePoint } from "mafs";
+import { Coordinates, Plot, Line, Point, useMovablePoint } from "mafs";
+import FitMafs from "@/components/tool-ui/FitMafs";
 import "mafs/core.css";
 import "@/components/tool-ui/mafsTheme.css";
 import { useIsDarkMode } from "@/lib/use-dark-mode";
@@ -47,7 +48,7 @@ export default function NewtonIterationsDiagram() {
       <GapFreeRow className="mt-4">
         <div dir="ltr" className="w-full lg:flex-1">
           <div role="group" aria-label={t("ariaLabel")} className="mafs-canvas mx-auto w-full max-w-[420px] overflow-hidden rounded-xl">
-            <Mafs viewBox={{ x: domain, y: [-12, 12] }} height={240} pan={false} zoom={false} preserveAspectRatio={false}>
+            <FitMafs viewBox={{ x: domain, y: [-12, 12] }} height={240} pan={false} zoom={false} preserveAspectRatio={false}>
               <Coordinates.Cartesian xAxis={{ lines: 2 }} yAxis={{ lines: 4 }} />
               <Plot.OfX y={curveFn} color={colors.curve} weight={2.5} />
               {iterations.slice(0, -1).map((s, i) => {
@@ -59,7 +60,7 @@ export default function NewtonIterationsDiagram() {
                 <Point key={i} x={s.x} y={0} color={colors.tangent} svgCircleProps={{ r: i === iterations.length - 1 ? 5 : 3 }} />
               ))}
               {guess.element}
-            </Mafs>
+            </FitMafs>
           </div>
           <p className="mt-1 text-center text-xs text-zinc-400 dark:text-zinc-500">{t("hint")}</p>
         </div>
