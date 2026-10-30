@@ -372,6 +372,11 @@ jobs:
           SHARD: ${{ matrix.shard }}/${{ needs.affected.outputs.audit-shard-count }}
           PAGES: ${{ github.workspace }}/affected-pages.txt
           OUT: ${{ github.workspace }}/site-audit-${{ matrix.shard }}.json
+        # site-audit.mjs itself exits 1 on ANY finding (the hard, zero-tolerance gate launch-readiness runs
+        # directly) - continue-on-error so the ratchet check below, not this raw hard gate, decides the
+        # required check's result. The step still shows failed (orange) when it found anything; only the job
+        # doesn't stop here.
+        continue-on-error: true
         run: scripts/site-audit.sh 3107
 
       - name: Expand this shard's measured pages (locale x affected-pages.txt)
@@ -464,6 +469,9 @@ jobs:
           PAGES: ${{ github.workspace }}/affected-pages.txt
           OUT: ${{ github.workspace }}/perf-budget-${{ matrix.shard }}.json
           RUNS: 1
+        # perf-budget.mjs itself exits 1 on ANY page over its own BUDGET (the hard gate launch-readiness runs
+        # directly) - continue-on-error so the ratchet check below decides the required check's result.
+        continue-on-error: true
         run: scripts/perf-budget.sh 3108
 
       - name: Expand this shard's measured pages (locale x affected-pages.txt)
