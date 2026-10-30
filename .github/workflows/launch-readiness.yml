@@ -4,8 +4,10 @@ name: Launch readiness
 # gates (apps/web/scripts/site-audit.mjs, apps/web/scripts/perf-budget.mjs) at their own hard zero-tolerance
 # exit code, over EVERY indexable page (no `affected` filter, no ratchet), and reports what remains in the
 # job summary. It is the number that must reach zero before launch; scripts/ratchet.mjs's per-PR checks
-# (workflow CI, jobs site-audit/perf-budget) only forbid these counts from going UP in the meantime. A failed
-# run here still opens a main-health issue (.github/workflows/main-health.yml lists "Launch readiness").
+# (workflow CI, jobs site-audit/perf-budget) only forbid these counts from going UP in the meantime. Lighthouse
+# timing (LCP, TBT, CLS, Performance) runs only here, 5 runs per page, median: it is too noisy for a PR. Any page
+# over budget fails the run, which opens a main-health issue (.github/workflows/main-health.yml lists
+# "Launch readiness").
 on:
   schedule:
     - cron: "0 0 * * *"
@@ -46,10 +48,10 @@ jobs:
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: .nvmrc
-          cache: npm
+          package-manager-cache: false
 
       - name: Install dependencies
-        run: npm ci
+        uses: ./.github/actions/npm-ci
 
       - name: Build web app (live data from fixtures)
         run: npm run build:desktop-lock
@@ -87,10 +89,10 @@ jobs:
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: .nvmrc
-          cache: npm
+          package-manager-cache: false
 
       - name: Install dependencies
-        run: npm ci
+        uses: ./.github/actions/npm-ci
 
       - name: Build web app (production, live data from fixtures)
         run: npm run build:desktop-lock
@@ -98,11 +100,11 @@ jobs:
       - name: Install Playwright Chromium
         run: npx playwright install --with-deps chromium
 
-      - name: Performance budgets (shard ${{ matrix.shard }}/16, every page, 3 runs medianed)
+      - name: Performance budgets (shard ${{ matrix.shard }}/16, every page, 5 runs medianed)
         env:
           SHARD: ${{ matrix.shard }}/16
           OUT: ${{ github.workspace }}/perf-budget-${{ matrix.shard }}.json
-          RUNS: 3
+          RUNS: 5
         run: scripts/perf-budget.sh 3108
 
       - name: Upload the measurements
@@ -130,6 +132,7 @@ jobs:
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: .nvmrc
+          package-manager-cache: false
 
       - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:

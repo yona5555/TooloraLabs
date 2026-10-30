@@ -1,4 +1,4 @@
-# طريقة العمل مع يوسف (تصلح لأي مشروع وأي جلسة)
+# طريقة العمل مع xzerone (تصلح لأي مشروع وأي جلسة)
 
 > يُحمَّل دائماً، ويكمّل القواعد الصارمة في `CLAUDE.md` دون تكرارها.
 
@@ -17,15 +17,15 @@
 - لا تضف خطوة «فحص قبل البدء» داخل الأمر؛ هو يوقف التنفيذ بنفسه عند الحاجة.
 - إن قال «اكتب» صراحة فاكتب الأوامر. وإن لم يقلها فلا تكتب أوامر Claude Code من تلقاء نفسك.
 - حين يقول «لا تفحص، أريد أمراً فقط» فالتزم حرفياً. قال: «لا تقم بفحص لأنك ضعيف في الفحص».
-- Give Yousef ready-to-paste English commands only. Never tell him to type or do something himself (no 'type /memory', no 'run /clear', no manual steps).
-- Every English command written for Yousef must be followed by a short Arabic summary that explains exactly what the command does.
-- When a session has run long (several tasks done, or long outputs), remind Yousef to clear it and give him the /clear command.
+- Give xzerone ready-to-paste English commands only. Never tell him to type or do something himself (no 'type /memory', no 'run /clear', no manual steps).
+- Every English command written for xzerone must be followed by a short Arabic summary that explains exactly what the command does.
+- When a session has run long (several tasks done, or long outputs), remind xzerone to clear it and give him the /clear command.
 
 ## 3. الصدق في الإنجاز
 - إن لم تجد شيئاً طلبه (ملف، مكوّن) فاطلب اسمه.
 - مثال القاعدة العامة: في §32 بند 4 أُحيط قسمان بالبطاقة واستُثني الباقي فرُفض.
 
-- No screenshots: see the hard rule in `CLAUDE.md`. Finish every visual task with the list of page URLs for Yousef to review (light, dark, Arabic RTL).
+- No screenshots: see the hard rule in `CLAUDE.md`. Finish every visual task with the list of page URLs for xzerone to review (light, dark, Arabic RTL).
 
 ## 4. اقتصاد الباقة (الأهم لإطالة الجلسة)
 حصته الأسبوعية شبه مستنفدة.

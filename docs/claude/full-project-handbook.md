@@ -17,7 +17,7 @@
 - اعتماد baselines القفل (2026-10-26): label `approve-desktop-baseline` / `approve-home-phone-baseline` على PR من المستودع نفسه يجعل مهمة `regenerate-baselines` تكتب baseline لينكس، وتحذف الـ label، ثم تعمل commit وpush بتوكن تطبيق GitHub **toolora-baseline-bot-4jty** (App ID 5485467، صلاحياته contents + pull-requests + workflows: write، مثبَّت على TooloraLabs وحده). الأسماء فقط: يُصدَر توكن التطبيق من `vars.TOOLORA_BOT_CLIENT_ID` (متغيّر المستودع) و`secrets.TOOLORA_BOT_PRIVATE_KEY` (secret في Actions). حُذف secret `TOOLORA_BOT_APP_ID` في 2026-10-28 لأن create-github-app-token v3 يستعمل `client-id` لا `app-id`، ولا يُعاد إنشاؤه. الـ push بالتطبيق يبدأ تشغيل pull_request عادياً (لا action_required)، فلا حاجة لـ commit يدوي.
 
 ## 3. نموذج العمل بين الأجهزة
-- الماك ميني = المنسِّق والجهاز الرئيسي. اللينكس = عامل ينفّذ ولا يقرر هيكلياً. يوسف = السلطة العليا.
+- الماك ميني = المنسِّق والجهاز الرئيسي. اللينكس = عامل ينفّذ ولا يقرر هيكلياً. xzerone = السلطة العليا.
 
 ## 4. فهرس القواعد العامة
 | § | الجوهر |
@@ -74,10 +74,7 @@
 - **الطبقة:** `components/tool-ui/chartLabels.ts` (هندسة بحتة: `marginDelta`/`nextMargins`، `padRange`، `placeBeside`/`placeClear`/`clampInto`، `fitStep`/`thinEvery`، `physicalSide`، `stackBands`) و`useChartLabels.ts` (قياس الحبر الفعلي بـ`measureText`). كل رسم Mafs يُكتب `<FitMafs>` (`tool-ui/FitMafs.tsx`) و`<FitText>` للنص المؤلَّف؛ كل رسم SVG يدوي يُكتب `<FitSvg>` (`tool-ui/FitSvg.tsx`)، ورسوم الطقم `indicator-kit/SvgBits` `Drawing` تمر عبره (`grow={false}`). لا هوامش ثابتة ولا إخفاء نص.
 - **الحارس:** كان `apps/web/scripts/axis-label-check.mjs` + مهمتا `chart-text-shard`/`chart-text-audit` (ستة أجزاء) أداة مستقلة فحصت فقط التراكب والقص. كلاهما حُذف: `apps/web/scripts/site-audit.mjs` (§9) يغطي التراكب والقص (criteria `overlap`/`clip`) ضمن فحصه الأشمل لكل صفحة — لا داعٍ لأداة ثانية موازية، ولا لتمرير مخرَجاتها عبر pipe (كانت `axis-label-check.mjs | grep -v '^{'` تخالف قاعدة pipefail الجديدة في §9 نفسها).
 
-## 12. هامش تذبذب perf-budget في ratchet.mjs (2026-10-30)
-- **القياس:** `BASE=<fixture> LOCALES=en RUNS=10 node apps/web/scripts/perf-budget.mjs <6 صفحات ممثّلة>` على نفس البناء (لا تغيير بينها)، فمحسوبة 10 قيم خام لكل معيار لكل صفحة؛ الهامش = أكبر فرق (max−min) عبر التكرارات العشرة، عبر 5 من الصفحات الستّ.
-- **الاستثناء:** استُبعدت crypto-converter: فروقها (LCP 3.1 ثانية! Performance 16 نقطة) من تذبذب شبكة الأسعار الحيّة (fixtures لا تزال تعيد محاولات) لا من أداء الصفحة نفسها.
-- **المفاجأة:** TBT وحدها وصل تذبذبها إلى 308 م.ث على صفحة فيها مؤقِّتات كثيرة (world-time-converter) بلا أي تغيير آخر — أعلى بكثير من الافتراض الأول (40 م.ث)، فهامشها الآن 350.
-- **الهوامش الحالية** (`scripts/ratchet.mjs`، `TOLERANCE`): LCP 60ms، TBT 350ms، CLS 0.01، Performance 8، JS 3KiB.
-- **تحذير:** قيست على جهاز Mac محلي لا على عداء CI (ubuntu-24.04)؛ القيمة المعتمدة فعلياً هي ما يقيسه CI، فيُعاد القياس على CI (نفس الطريقة، launch-readiness أو تشغيل مخصص) عند تراكم بيانات كافية، وتُراجَع الهوامش إن اختلفت.
-- **أساس site-audit وperf-budget نفسهما:** قيسا فعلياً عبر تشغيل `workflow_dispatch` حقيقي على عداء CI (Linux)، لا على الجهاز المحلي؛ القياس المحلي الأول لـsite-audit اختلف بوضوح عن CI (overlap 174 محلياً مقابل 242 على CI، a11y 1730 مقابل 1093) لاختلاف رسملة الخطوط وحساب التباين بين macOS وLinux — فاستُبدل بقياس CI الحقيقي.
+## 12. لماذا لا يوجد توقيت Lighthouse في بوابات PR (2026-10-30)
+- **القياس:** تشغيلان في CI على كود الصفحات نفسه (444 صفحة، تشغيل واحد لكل صفحة): فرق LCP يصل إلى 1698ms (p95 574ms)، وTBT إلى 919ms، وCLS إلى 0.545، وPerformance إلى 23 نقطة. فرق JS صفر. أي هامش صغير يُسقط كوداً لم يتغيّر، وأي هامش كبير لا يكشف شيئاً.
+- **القرار:** بوابة PR حتمية فقط: `apps/web/scripts/perf-static.mjs` (بايتات JS وCSS، عدد الموارد الحاجبة للعرض، عدد الطلبات، وجود عنصر LCP في HTML الخادم)، بلا هامش في `scripts/ratchet.mjs`.
+- **التوقيت:** `perf-budget.mjs` في `launch-readiness` يومياً على main، 5 تشغيلات لكل صفحة والوسيط؛ أي صفحة فوق الميزانية تفتح مسألة main-health.

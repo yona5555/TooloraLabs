@@ -5,7 +5,7 @@ Keep this file short to save credits.
 Read `docs/RULES-SUMMARY.md` (compact, always applies) for the project basics, visual rules §37–44,
 and standing lessons. Read a specific section of TooloraLabs-Claude-Instructions.md only when a task
 needs it; never load the whole file. Same for ROADMAP.md and docs/claude/full-project-handbook.md.
-Auto-loaded from .claude/rules/ on top of this: working-with-yousef.md, core-principles.md and
+Auto-loaded from .claude/rules/ on top of this: working-with-xzerone.md, core-principles.md and
 financial-neutrality.md (always), and visuals.md / i18n.md / packages.md / testing.md / live-data.md /
 category-order.md / print-export.md (path-triggered — see each file's own header).
 On demand: docs/ARCHITECTURE.md — Mermaid architecture diagram + pending architecture notes.
@@ -13,7 +13,7 @@ TooloraLabs-Claude-Instructions.md is a historical archive; the binding rules ar
 
 ## قواعد لا تُخالَف
 - Never report a result you did not verify with a test or measurement.
-- Every task ends with: push the branch, open a PR, enable auto-merge (gh pr merge --auto --merge --delete-branch), report the PR URL, and stop. Never wait for CI, never poll, never ask Yousef to paste follow-up lines for CI. Progress files are deleted in the PR itself, before merge.
+- Every task ends with: push the branch, open a PR, enable auto-merge (gh pr merge --auto --merge --delete-branch), report the PR URL, and stop. Never wait for CI, never poll, never ask xzerone to paste follow-up lines for CI. Progress files are deleted in the PR itself, before merge.
 - Auto-merge is always the LAST step, enabled only after git ls-remote confirms the pushed HEAD. Baseline approvals use the label flow; required lock checks fail while an approve label is present.
 - Never regenerate or overwrite approved work in bulk; change only what is broken, one item at a time. (Tool-card previews: approved images are locked in `apps/web/public/tool-previews/approved.json`; `npm run previews -- <slug>` skips them, `--force <slug>` redoes one; `npm run test:cards` checks the served cards.)
 - Every final report MUST end with: 'Context: <percent>% — <advice>'. Above 50% the advice is 'run /clear now'.
@@ -22,7 +22,7 @@ TooloraLabs-Claude-Instructions.md is a historical archive; the binding rules ar
 - Never kill a process you did not start, and never kill by port (no lsof/fuser/pkill/kill on a port's PIDs):
   stop only what you started, by its own PID. Test servers use a dedicated port (3109 desktop-lock, 3110 CI
   via scripts/test-server.sh), checked free first; if it is taken, fail with a clear message. Port 3001 is
-  Yousef's dev server: never stop or restart it unless asked.
+  xzerone's dev server: never stop or restart it unless asked.
   No script defaults to a port: every audit/lock/preview script takes an explicit BASE/--base/--port
   (scripts/lib/require-base.mjs) or starts its own server on its dedicated free port.
 - Never use /loop, ScheduleWakeup, scheduled wakeups, sleep/until/polling loops or any other waiting mechanism.
@@ -33,25 +33,29 @@ TooloraLabs-Claude-Instructions.md is a historical archive; the binding rules ar
 - All user-facing text (progress notes, questions, reports) is in Modern Standard Arabic only, even when the command or task is written in English. Code, commands, file names and identifiers stay in English. Never write in any other language.
 - If a request is ambiguous, state your understanding in one line and wait. Never re-ask something already answered.
 - Explain every terminal command in one sentence; translate terminal options to Arabic and give the option number.
-- Never take or review screenshots (no Playwright screenshots, no image review), to save quota. Yousef reviews pages himself in the browser. At the end of any visual task, give him the list of page URLs to review (e.g. http://localhost:3001/ar/tools/<slug>). Reading values from the DOM via Playwright is still allowed when needed.
+- Never take or review screenshots (no Playwright screenshots, no image review), to save quota. xzerone reviews pages himself in the browser. At the end of any visual task, give him the list of page URLs to review (e.g. http://localhost:3001/ar/tools/<slug>). Reading values from the DOM via Playwright is still allowed when needed.
 - If you cannot find what was asked for, say so plainly; never invent a fix. Apply a general rule to every element, no exceptions.
 - git pull before work; work on a task branch and commit + push it after each finished part (main is protected: PR + green build, home-phone-lock, desktop-lock; GitHub auto-merges). No force push, no reset --hard.
 - Before each commit, once: lint, tsc, tests, build.
 - packages/core|sdk|tools are pure logic: no window/document/DOM.
-- Desktop layout is LOCKED (approved 2026-10-26): `npm run test:desktop-lock` (1440px, every tool + /, /tools, /categories, /docs, en+ar) must pass; rewrite its baseline (`baseline:desktop-lock -- --approve`, CI label `approve-desktop-baseline`) only with Yousef's approval. The label makes CI's regenerate-baselines job write the Linux baseline, remove the label and push it as the GitHub App (normal PR run, auto-merge proceeds); no manual commit.
+- Desktop layout is LOCKED (approved 2026-10-26): `npm run test:desktop-lock` (1440px, every tool + /, /tools, /categories, /docs, en+ar) must pass; rewrite its baseline (`baseline:desktop-lock -- --approve`, CI label `approve-desktop-baseline`) only with xzerone's approval. The label makes CI's regenerate-baselines job write the Linux baseline, remove the label and push it as the GitHub App (normal PR run, auto-merge proceeds); no manual commit.
 - Any new UI text goes into all 6 locales (en, ar, es, fr, de, hi) with 1:1 keys.
 - Tool route: /{locale}/tools/{slug}.
 - Never print secrets in any output, report, command or log: API keys, tokens, passwords, webhook/IPN secrets, private keys, connection strings, or values from .env* files. Refer to them by variable NAME only and mask the value (e.g. METALPRICE_API_KEY=****). Never cat or echo .env* files. Never commit secrets.
+- Never write the owner's real name or any personal data (name, email, accounts) into any file, commit, PR or comment. Refer to the owner only as xzerone.
 
 ## Gates and platform parity
 - Every gate proves itself: `npm run test:gates-self-test` (CI `gates-self-test`, required) runs each gate on a broken
   fixture in tests/gates/ and fails if any gate passes it. A new gate gets a canary in the same PR.
+- Only a push to main saves a cache; PR runs only restore (`scripts/cache-policy.mjs`, CI step in `build`). Closed PRs' caches are deleted; the route manifest is a main artifact.
 - Every workflow runs bash with pipefail; never pipe a gate's output (`node scripts/workflow-shell.mjs`).
 - Fonts are self-hosted only (`apps/web/lib/fonts.ts`); no system family in source (`npm run test:system-fonts`).
 - `site-audit` and `perf-budget` (CI, required) are ratcheted, not a hard zero gate: `scripts/ratchet.mjs check`
   fails a PR only if one of its measured pages got WORSE than its entry in `.audit/ratchet/*.json` (site-audit:
-  any criterion's count rose; perf-budget: LCP/TBT/CLS/JS rose or Performance fell by more than the measured
-  run-to-run noise tolerance), or a page with no baseline entry has any finding / misses its own full budget.
+  any criterion's count rose; perf-budget: `apps/web/scripts/perf-static.mjs`, deterministic, zero tolerance: JS/CSS
+  bytes, render-blocking count or requests rose, or the LCP element left the server HTML), or a page with no baseline
+  entry has any finding / misses its own full budget. Lighthouse timing is never a PR gate: daily in `launch-readiness`,
+  5 runs per page, median; a page over budget opens a main-health issue.
   `npm run ratchet:update -- <kind> <run.json> <baseline-file>` lowers the baseline after a real improvement; it
   can never raise it (`ratchet.mjs check-baseline`, its own gates-self-test canary). Zero across the whole site
   is not required here - that is `launch-readiness` (daily on main, not a required PR check; reports the
@@ -75,4 +79,4 @@ TooloraLabs-Claude-Instructions.md is a historical archive; the binding rules ar
   SBOM: artifact sbom-cyclonedx (90 days) on each SBOM workflow run on main.
 
 ## Adding rules
-When Yousef says "add this rule", add it to the right file in docs/claude/ (or here if it is a hard rule), then commit + push.
+When xzerone says "add this rule", add it to the right file in docs/claude/ (or here if it is a hard rule), then commit + push.
