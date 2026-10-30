@@ -2,6 +2,7 @@
 // `defaults: run: shell: bash` (GitHub runs it as `bash --noprofile --norc -eo pipefail {0}`, so a failure
 // anywhere in a pipeline fails the step), no step switches to another shell, and no step pipes a gate
 // (node / npm / npx / a repository script) into another command whose status could stand in for it.
+// A job's sparse checkout must include the file setup-node reads (main-health ran with none and never reported).
 // Usage: node scripts/workflow-shell.mjs [workflow.yml ...]   (default: .github/workflows/*.yml)
 // Exits 1 naming the workflow, job and step; tests/gates-self-test.mjs proves it on a broken fixture.
 import { readdirSync, readFileSync } from "node:fs";
@@ -20,6 +21,9 @@ export function workflowFindings(text, file = "<workflow>") {
     if (job.defaults?.run?.shell && job.defaults.run.shell !== "bash") findings.push(`${file} ${jobName}: job default shell ${job.defaults.run.shell}`);
     for (const [i, step] of (job.steps ?? []).entries()) {
       const name = `${file} ${jobName} step ${i + 1} (${step.name ?? step.uses ?? "run"})`;
+      const sparse = (job.steps ?? []).find((s) => s.with?.["sparse-checkout"])?.with["sparse-checkout"];
+      const nodeFile = step.with?.["node-version-file"];
+      if (sparse && nodeFile && !String(sparse).split(/\s+/).includes(nodeFile)) findings.push(`${name}: ${nodeFile} is outside this job's sparse checkout`);
       if (step.shell && step.shell !== "bash") findings.push(`${name}: shell ${step.shell} (not bash with pipefail)`);
       if (typeof step.run === "string" && GATE_PIPE.test(step.run)) findings.push(`${name}: a gate's output is piped into another command: ${step.run.match(GATE_PIPE)[0].trim()}`);
     }
