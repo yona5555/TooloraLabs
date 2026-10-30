@@ -641,6 +641,11 @@ body:has([data-coming-soon-page]) [data-bp-link="coming-soon"] {
       max-width: 100%;
     }
   }
+  /* sub/sup default to 0.75em (UA stylesheet): inside text-sm/text-xs cards that renders below 12px. */
+  sub,
+  sup {
+    font-size: max(0.75em, 12px);
+  }
 }
 
 /*
