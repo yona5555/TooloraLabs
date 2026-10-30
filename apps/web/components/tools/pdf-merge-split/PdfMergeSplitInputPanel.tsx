@@ -115,7 +115,7 @@ export default function PdfMergeSplitInputPanel({
                   className="flex items-center gap-2 rounded-xl border border-zinc-200 bg-zinc-50 px-3 py-2 text-sm dark:border-zinc-700 dark:bg-zinc-800/60"
                 >
                   <GripVertical size={14} className="shrink-0 text-zinc-400" />
-                  <span className="min-w-0 flex-1 truncate text-zinc-700 dark:text-zinc-300">
+                  <span className="min-w-0 flex-1 break-words text-zinc-700 dark:text-zinc-300">
                     {index + 1}. {entry.name}
                   </span>
                   <button
