@@ -11,7 +11,7 @@ const toRad = (deg: number) => (deg * Math.PI) / 180;
 
 /**
  * Shared live sin (red) / cos (green) companion placed under every interactive indicator's
- * drawing, in the same card (Yousef-approved exception to §32 item 6). Fixed height so it reads
+ * drawing, in the same card (xzerone-approved exception to §32 item 6). Fixed height so it reads
  * the same on every indicator; markers and values follow the indicator's live angle(s).
  */
 export default function TriangleSinCosLiveCurve({ angles }: Props) {

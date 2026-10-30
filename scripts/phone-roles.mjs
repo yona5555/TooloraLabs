@@ -7,16 +7,18 @@
  * At most 3 open cards (visuals.md, changed 2026-10-24). It prints every card whose
  * current role differs from the proposal (decide each ambiguous case by reading it, then set the role in
  * the source) and writes the phone card order map.
- * Usage: node scripts/phone-roles.mjs [base=http://localhost:3001] [locale=en] [--map scripts/output/card-order-map.txt]
+ * Usage: node scripts/phone-roles.mjs <base, e.g. http://localhost:3110> [locale=en] [--map scripts/output/card-order-map.txt]
  */
 import { chromium } from "playwright";
+import { requireBase } from "./lib/require-base.mjs";
 import { mkdirSync, writeFileSync } from "node:fs";
 import path from "node:path";
 
 const argv = process.argv.slice(2);
 const mi = argv.indexOf("--map");
 const mapFile = mi >= 0 ? argv.splice(mi, 2)[1] : "scripts/output/card-order-map.txt";
-const [base = "http://localhost:3001", loc = "en"] = argv;
+const [rawBase, loc = "en"] = argv;
+const base = requireBase(rawBase);
 const MARKETS = new Set(["crypto-converter", "forex-converter", "commodities-tracker"]);
 const index = await (await fetch(`${base}/${loc}/tools`)).text();
 const slugs = [...new Set([...index.matchAll(new RegExp(`href="/${loc}/tools/([a-z0-9-]+)"`, "g"))].map((m) => m[1]))].sort();

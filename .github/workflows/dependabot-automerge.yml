@@ -9,6 +9,12 @@ on:
 
 permissions: {}
 
+# Every run step is bash with pipefail (bash --noprofile --norc -eo pipefail): a failure anywhere in a pipeline fails
+# the step, so no pipe can hide a gate's exit code (scripts/workflow-shell.mjs enforces this).
+defaults:
+  run:
+    shell: bash
+
 jobs:
   automerge:
     # Both checks: the PR is Dependabot's, and so is the event (a human push to its branch does not qualify).

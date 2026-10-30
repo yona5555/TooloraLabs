@@ -9,6 +9,12 @@ on:
 permissions:
   contents: read
 
+# Every run step is bash with pipefail (bash --noprofile --norc -eo pipefail): a failure anywhere in a pipeline fails
+# the step, so no pipe can hide a gate's exit code (scripts/workflow-shell.mjs enforces this).
+defaults:
+  run:
+    shell: bash
+
 jobs:
   sbom:
     runs-on: ubuntu-24.04
@@ -21,6 +27,7 @@ jobs:
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: .nvmrc
+          package-manager-cache: false
 
       - name: Generate the CycloneDX SBOM
         run: npm sbom --sbom-format cyclonedx --omit dev --package-lock-only > sbom.cdx.json

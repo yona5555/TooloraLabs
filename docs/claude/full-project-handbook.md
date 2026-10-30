@@ -17,7 +17,7 @@
 - اعتماد baselines القفل (2026-10-26): label `approve-desktop-baseline` / `approve-home-phone-baseline` على PR من المستودع نفسه يجعل مهمة `regenerate-baselines` تكتب baseline لينكس، وتحذف الـ label، ثم تعمل commit وpush بتوكن تطبيق GitHub **toolora-baseline-bot-4jty** (App ID 5485467، صلاحياته contents + pull-requests + workflows: write، مثبَّت على TooloraLabs وحده). الأسماء فقط: يُصدَر توكن التطبيق من `vars.TOOLORA_BOT_CLIENT_ID` (متغيّر المستودع) و`secrets.TOOLORA_BOT_PRIVATE_KEY` (secret في Actions). حُذف secret `TOOLORA_BOT_APP_ID` في 2026-10-28 لأن create-github-app-token v3 يستعمل `client-id` لا `app-id`، ولا يُعاد إنشاؤه. الـ push بالتطبيق يبدأ تشغيل pull_request عادياً (لا action_required)، فلا حاجة لـ commit يدوي.
 
 ## 3. نموذج العمل بين الأجهزة
-- الماك ميني = المنسِّق والجهاز الرئيسي. اللينكس = عامل ينفّذ ولا يقرر هيكلياً. يوسف = السلطة العليا.
+- الماك ميني = المنسِّق والجهاز الرئيسي. اللينكس = عامل ينفّذ ولا يقرر هيكلياً. xzerone = السلطة العليا.
 
 ## 4. فهرس القواعد العامة
 | § | الجوهر |
@@ -57,8 +57,9 @@
 
 ## 9. خط أنابيب يتحقق من نفسه (2026-10-28)
 - **صفر تحذيرات يُفشل الفحص:** `eslint --max-warnings 0`؛ البناء في CI يمر عبر `scripts/run-no-warnings.mjs` فيفشل عند أي سطر تحذير (Next.js ⚠، webpack، React، Node، npm، deprecated)؛ اختبارات Vitest تفشل عند أي `console.warn`/`console.error` أو تحذير Node (`tests/vitest-no-console.ts` عبر `packages/*/vitest.config.mts`)؛ ومهمة `zero-warnings` في `ci.yml` تفشل إن ترك أي job في التشغيل نفسه annotation بمستوى warning أو failure. الإصلاح جذري دائماً، لا تجاهل ولا قاعدة ignore.
-- **حماية main:** classic branch protection، `strict: true` (الفرع يجب أن يكون محدَّثاً قبل الدمج)، والفحوص الإلزامية التسعة: build وhome-phone-lock وdesktop-lock وaudit وAnalyze (javascript-typescript) وAnalyze (actions) وzero-warnings وaudit-zero-warnings وcodeql-zero-warnings (الثلاثة الأخيرة تشغّل `scripts/zero-warnings.sh`).
-- **main-health:** بعد كل تشغيل على main لـ CI وCodeQL وAudit وSBOM وScorecard وPR auto-update، يفتح `scripts/main-health.mjs` (من `main-health.yml`) issue واحداً لكل workflow بعنوان `main-health: <workflow>` ووسم `main-health`، مسنَداً إلى yona5555 (فيصله إشعار)، أو يعلّق عليه إن كان مفتوحاً، عند أي نتيجة غير success أو أي annotation تحذير؛ وعند أول تشغيل نظيف يغلق issue ذلك الـworkflow وحده بتعليق فيه رابط التشغيل. التشغيل الملغى لأن تشغيلاً أحدث حلّ محله لا يُحكم عليه.
+- **حماية main:** classic branch protection، `strict: true` (الفرع يجب أن يكون محدَّثاً قبل الدمج)، والفحوص الإلزامية الاثنا عشر: build وhome-phone-lock وdesktop-lock وsite-audit وgates-self-test وperf-budget وaudit وAnalyze (javascript-typescript) وAnalyze (actions) وzero-warnings وaudit-zero-warnings وcodeql-zero-warnings (الثلاثة الأخيرة تشغّل `scripts/zero-warnings.sh`).
+- **main-health:** بعد كل تشغيل على main لـ CI وCodeQL وAudit وSBOM وScorecard وPR auto-update وLaunch readiness، يفتح `scripts/main-health.mjs` (من `main-health.yml`) issue واحداً لكل workflow بعنوان `main-health: <workflow>` ووسم `main-health`، مسنَداً إلى yona5555 (فيصله إشعار)، أو يعلّق عليه إن كان مفتوحاً، عند أي نتيجة غير success أو أي annotation تحذير؛ وعند أول تشغيل نظيف يغلق issue ذلك الـworkflow وحده بتعليق فيه رابط التشغيل. التشغيل الملغى لأن تشغيلاً أحدث حلّ محله لا يُحكم عليه.
+- **site-audit وperf-budget (ratchet):** `scripts/ratchet.mjs` يحوّل البوابتين إلى فحص لا يسمح بالتراجع (لا صفر فوري): يفشل فقط إذا ارتفع عدد معيار ما لصفحة قيست (site-audit)، أو تراجع LCP/TBT/CLS/JS أو انخفض Performance بأكثر من هامش التذبذب المقاس (perf-budget)، أو كانت صفحة جديدة بلا أساس فيها أي ملاحظة. `.audit/ratchet/site-audit.json` و`.audit/ratchet/perf-budget.json` هما الأساس؛ يُخفَّضان فقط (`npm run ratchet:update`)، وأي رفع لهما يفشل (`ratchet.mjs check-baseline`). الصفر الكامل على الموقع كله هو `launch-readiness` (يومي على main، غير إلزامي لطلبات الدمج) الذي يقيس كل صفحة ويقرّر جاهزية الإطلاق.
 - **التحقق من الآن فصاعداً = قراءة واحدة:** `gh issue list --label main-health --state open`. لا issues مفتوحة = main سليم. لا قراءة لتشغيلات جارية ولا انتظار.
 
 ## 10. الإطلاق: متغيرات Vercel Production الإلزامية (2026-10-28)
@@ -68,3 +69,8 @@
   - `EXCHANGE_RATE_API_KEY` (أسعار العملات، `lib/forex/exchangerate.ts`)
 - غياب أيٍّ منها في بناء Production (`VERCEL_ENV=production`) يوقف البناء فوراً برسالة تذكر اسم المتغير الناقص فقط: `assertMarketApiKeysForProduction` في `apps/web/lib/api-key.ts`، يُستدعى مرة واحدة من `apps/web/next.config.ts` في مرحلة `next build`. القائمة المصدر الوحيد: `MARKET_API_KEYS` في الملف نفسه؛ أي مفتاح سوق جديد يُضاف إليها.
 - بناء CI وPreview والجهاز المحلي لا يحتاجها: كل أداة تسلك مسار «لا مفتاح» الصريح (لا طلب، لا سجل، حالة «البيانات غير متاحة»).
+
+## 12. لماذا لا يوجد توقيت Lighthouse في بوابات PR (2026-10-30)
+- **القياس:** تشغيلان في CI على كود الصفحات نفسه (444 صفحة، تشغيل واحد لكل صفحة): فرق LCP يصل إلى 1698ms (p95 574ms)، وTBT إلى 919ms، وCLS إلى 0.545، وPerformance إلى 23 نقطة. فرق JS صفر. أي هامش صغير يُسقط كوداً لم يتغيّر، وأي هامش كبير لا يكشف شيئاً.
+- **القرار:** بوابة PR حتمية فقط: `apps/web/scripts/perf-static.mjs` (بايتات JS وCSS، عدد الموارد الحاجبة للعرض، عدد الطلبات، وجود عنصر LCP في HTML الخادم)، بلا هامش في `scripts/ratchet.mjs`.
+- **التوقيت:** `perf-budget.mjs` في `launch-readiness` يومياً على main، 5 تشغيلات لكل صفحة والوسيط؛ أي صفحة فوق الميزانية تفتح مسألة main-health.

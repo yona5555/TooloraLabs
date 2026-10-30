@@ -148,3 +148,8 @@ artifacts/
 
 # phone-preview dev server log
 scripts/output/
+
+# Local site-audit/perf-budget inventories (scripts/site-audit.sh, scripts/perf-budget.sh OUT=.audit/…), except
+# the committed ratchet baseline (.audit/ratchet/*.json, scripts/ratchet.mjs) which tracks on purpose.
+/.audit/*
+!/.audit/ratchet/

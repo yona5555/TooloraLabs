@@ -119,7 +119,7 @@ export async function run({ api, repo, event, log = console.log }) {
 
 export function githubApi(token) {
   return async (method, path, body, { allow404 = false } = {}) => {
-    const res = await fetch(`https://api.github.com${path}`, {
+    const res = await fetch(`${process.env.GITHUB_API_URL ?? "https://api.github.com"}${path}`, {
       method,
       headers: {
         Accept: "application/vnd.github+json",

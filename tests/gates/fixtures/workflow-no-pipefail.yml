@@ -1,0 +1,10 @@
+# Gate canary (tests/gates-self-test.mjs): no defaults.run.shell (bash -e without pipefail) and an audit piped
+# into grep, which then decides the step: the workflow shell rule must fail on it.
+name: canary
+on: pull_request
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Audit
+        run: node scripts/site-audit.mjs | grep -v '^{'

@@ -1,0 +1,148 @@
+name: Launch readiness
+
+# Not a required check: nothing here blocks a PR. Daily (03:00 Riyadh) on main, this runs the two site-wide
+# gates (apps/web/scripts/site-audit.mjs, apps/web/scripts/perf-budget.mjs) at their own hard zero-tolerance
+# exit code, over EVERY indexable page (no `affected` filter, no ratchet), and reports what remains in the
+# job summary. It is the number that must reach zero before launch; scripts/ratchet.mjs's per-PR checks
+# (workflow CI, jobs site-audit/perf-budget) only forbid these counts from going UP in the meantime. Lighthouse
+# timing (LCP, TBT, CLS, Performance) runs only here, 5 runs per page, median: it is too noisy for a PR. Any page
+# over budget fails the run, which opens a main-health issue (.github/workflows/main-health.yml lists
+# "Launch readiness").
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  pages:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    outputs:
+      audit-shards: ${{ steps.n.outputs.audit-shards }}
+      perf-shards: ${{ steps.n.outputs.perf-shards }}
+    steps:
+      - id: n
+        run: |
+          { echo 'audit-shards=[1,2,3,4,5,6,7,8,9,10,11,12]'; echo 'perf-shards=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]'; } >> "$GITHUB_OUTPUT"
+
+  site-audit-shard:
+    needs: pages
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: ${{ fromJSON(needs.pages.outputs.audit-shards) }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          package-manager-cache: false
+
+      - name: Install dependencies
+        uses: ./.github/actions/npm-ci
+
+      - name: Build web app (live data from fixtures)
+        run: npm run build:desktop-lock
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Site audit (shard ${{ matrix.shard }}/12, every page)
+        env:
+          SHARD: ${{ matrix.shard }}/12
+          OUT: ${{ github.workspace }}/site-audit-${{ matrix.shard }}.json
+        run: scripts/site-audit.sh 3107
+
+      - name: Upload the inventory
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: launch-site-audit-${{ matrix.shard }}
+          path: site-audit-${{ matrix.shard }}.json
+          if-no-files-found: ignore
+
+  perf-budget-shard:
+    needs: pages
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: ${{ fromJSON(needs.pages.outputs.perf-shards) }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          package-manager-cache: false
+
+      - name: Install dependencies
+        uses: ./.github/actions/npm-ci
+
+      - name: Build web app (production, live data from fixtures)
+        run: npm run build:desktop-lock
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Performance budgets (shard ${{ matrix.shard }}/16, every page, 5 runs medianed)
+        env:
+          SHARD: ${{ matrix.shard }}/16
+          OUT: ${{ github.workspace }}/perf-budget-${{ matrix.shard }}.json
+          RUNS: 5
+        run: scripts/perf-budget.sh 3108
+
+      - name: Upload the measurements
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: launch-perf-budget-${{ matrix.shard }}
+          path: perf-budget-${{ matrix.shard }}.json
+          if-no-files-found: ignore
+
+  report:
+    if: always()
+    needs: [site-audit-shard, perf-budget-shard]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            .nvmrc
+            scripts/launch-readiness-report.mjs
+          sparse-checkout-cone-mode: false
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          package-manager-cache: false
+
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          pattern: "launch-*"
+          merge-multiple: true
+
+      - name: Remaining counts (site-audit)
+        if: always()
+        run: node scripts/launch-readiness-report.mjs site-audit
+
+      - name: Remaining counts (perf-budget)
+        if: always()
+        run: node scripts/launch-readiness-report.mjs perf-budget
