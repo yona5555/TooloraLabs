@@ -1,4 +1,5 @@
 import { useId } from "react";
+import { svgPx } from "@/components/tool-ui/svgPx";
 type VectorArrowDiagramProps = {
   ax: number;
   ay: number;
@@ -46,13 +47,13 @@ export default function VectorArrowDiagram({ ax, ay, bx, by, labelA, labelB, lab
           <Arrow x={bx} y={by} colorClass="stroke-emerald-500 dark:stroke-emerald-400" markerId={`${svgId}vec-arrow-b`} />
           <Arrow x={ax + bx} y={ay + by} colorClass="stroke-purple-500 dark:stroke-purple-400" markerId={`${svgId}vec-arrow-sum`} />
 
-          <text x={aEnd.x + 6} y={aEnd.y - 4} fontSize={11} fontWeight={700} className="fill-blue-600 dark:fill-blue-400">
+          <text x={aEnd.x + 6} y={aEnd.y - 4} style={{ fontSize: svgPx(11) }} fontWeight={700} className="fill-blue-600 dark:fill-blue-400">
             {labelA}
           </text>
-          <text x={bEnd.x + 6} y={bEnd.y - 4} fontSize={11} fontWeight={700} className="fill-emerald-600 dark:fill-emerald-400">
+          <text x={bEnd.x + 6} y={bEnd.y - 4} style={{ fontSize: svgPx(11) }} fontWeight={700} className="fill-emerald-600 dark:fill-emerald-400">
             {labelB}
           </text>
-          <text x={sumEnd.x + 6} y={sumEnd.y + 12} fontSize={11} fontWeight={700} className="fill-purple-600 dark:fill-purple-400">
+          <text x={sumEnd.x + 6} y={sumEnd.y + 12} style={{ fontSize: svgPx(11) }} fontWeight={700} className="fill-purple-600 dark:fill-purple-400">
             {labelSum}
           </text>
 

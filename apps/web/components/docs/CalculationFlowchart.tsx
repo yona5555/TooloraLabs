@@ -1,4 +1,5 @@
 import { useId } from "react";
+import { svgPx } from "@/components/tool-ui/svgPx";
 type LoopBack = {
   /** Index of the step the loop returns to (the earlier step). */
   from: number;
@@ -119,7 +120,7 @@ export default function CalculationFlowchart({ steps, caption, loop }: Props) {
                 y={(boxCenterY(loop.from) + boxCenterY(loop.to)) / 2}
                 textAnchor="start"
                 dominantBaseline="middle"
-                fontSize={11}
+                style={{ fontSize: svgPx(11) }}
                 fontWeight={600}
                 className="fill-blue-500 dark:fill-blue-400"
               >

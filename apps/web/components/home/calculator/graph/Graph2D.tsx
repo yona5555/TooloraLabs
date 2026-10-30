@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { axisTicks, derivativeFunction, sampleCurve, traceAt, type CurveSegment } from "@tooloralabs/tools";
 import { fmt, fmtTick, type GraphView, type MarkedPoint, type PlotFunction } from "./graphShared";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 type Props = {
   fns: PlotFunction[];
@@ -227,7 +228,7 @@ export default function Graph2D({ fns, view, onView, traceX, onTrace, showDeriva
         {y0 >= 0 && y0 <= h && <line x1={0} x2={w} y1={y0} y2={y0} stroke={c.axis} strokeWidth={1.5} />}
         {x0 >= 0 && x0 <= w && <line y1={0} y2={h} x1={x0} x2={x0} stroke={c.axis} strokeWidth={1.5} />}
 
-        <g fontSize={11} fill={c.text} fontFamily="var(--font-mono)">
+        <g style={{ fontSize: svgPx(11) }} fill={c.text} fontFamily="var(--font-mono)">
           {xt.major
             .filter((v) => v !== 0 && px(v) > 12 && px(v) < w - 12)
             .map((v) => (
@@ -285,7 +286,7 @@ export default function Graph2D({ fns, view, onView, traceX, onTrace, showDeriva
             strokeWidth={2}
           />
         ))}
-        <g fontSize={10} fontFamily="var(--font-mono)">
+        <g style={{ fontSize: svgPx(10) }} fontFamily="var(--font-mono)">
           {placeLabels(labelled, px, py, w, h).map(({ p, text, x, y, tw }, i) => (
             <g key={`l${i}`}>
               <rect x={x} y={y} width={tw} height={15} rx={4} fill={c.pill} stroke={p.kind === "intersection" ? c.axis : p.color} strokeWidth={1} />

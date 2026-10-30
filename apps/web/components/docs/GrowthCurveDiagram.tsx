@@ -1,3 +1,4 @@
+import { svgPx } from "@/components/tool-ui/svgPx";
 export type GrowthPoint = { x: number; y: number };
 
 type Props = {
@@ -50,10 +51,10 @@ export default function GrowthCurveDiagram({ points, label, caption, xUnit }: Pr
             {label}
           </text>
 
-          <text x={PAD_LEFT} y={HEIGHT - 8} fontSize={10} className="fill-zinc-400 dark:fill-zinc-500">
+          <text x={PAD_LEFT} y={HEIGHT - 8} style={{ fontSize: svgPx(10) }} className="fill-zinc-400 dark:fill-zinc-500">
             0
           </text>
-          <text x={WIDTH - PAD_RIGHT} y={HEIGHT - 8} textAnchor="end" fontSize={10} className="fill-zinc-400 dark:fill-zinc-500">
+          <text x={WIDTH - PAD_RIGHT} y={HEIGHT - 8} textAnchor="end" style={{ fontSize: svgPx(10) }} className="fill-zinc-400 dark:fill-zinc-500">
             {maxX}
             {xUnit ?? ""}
           </text>

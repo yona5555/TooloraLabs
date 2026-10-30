@@ -1,6 +1,7 @@
 "use client";
 import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const VIEW_W = 880;
 const VIEW_H = 260;
@@ -64,7 +65,7 @@ export default function HouseAffordabilityConceptDiagram() {
           <text x={BAR_X + housingW / 2} y={BAR_Y + BAR_H / 2 + 5} fontSize={12} fontWeight={700} textAnchor="middle" className="fill-white">
             {d("housingLabel")}
           </text>
-          <text x={BAR_X + housingW + (debtW - housingW) / 2} y={BAR_Y + BAR_H / 2 + 5} fontSize={11} fontWeight={700} textAnchor="middle" className="fill-white">
+          <text x={BAR_X + housingW + (debtW - housingW) / 2} y={BAR_Y + BAR_H / 2 + 5} style={{ fontSize: svgPx(11) }} fontWeight={700} textAnchor="middle" className="fill-white">
             {d("otherDebtLabel")}
           </text>
           <text x={BAR_X + debtW + (BAR_W - debtW) / 2} y={BAR_Y + BAR_H / 2 + 5} fontSize={12} fontWeight={700} textAnchor="middle" className="fill-zinc-700 dark:fill-zinc-200">
@@ -72,10 +73,10 @@ export default function HouseAffordabilityConceptDiagram() {
           </text>
 
           {/* bottom captions */}
-          <text x={BAR_X + housingW / 2} y={BAR_Y + BAR_H + 26} fontSize={11} textAnchor="middle" fill="currentColor" opacity={0.6}>
+          <text x={BAR_X + housingW / 2} y={BAR_Y + BAR_H + 26} style={{ fontSize: svgPx(11) }} textAnchor="middle" fill="currentColor" opacity={0.6}>
             {d("housingCaption")}
           </text>
-          <text x={BAR_X + debtW + (BAR_W - debtW) / 2} y={BAR_Y + BAR_H + 26} fontSize={11} textAnchor="middle" fill="currentColor" opacity={0.6}>
+          <text x={BAR_X + debtW + (BAR_W - debtW) / 2} y={BAR_Y + BAR_H + 26} style={{ fontSize: svgPx(11) }} textAnchor="middle" fill="currentColor" opacity={0.6}>
             {d("remainingCaption")}
           </text>
         </svg>

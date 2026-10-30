@@ -1,3 +1,4 @@
+import { svgPx } from "@/components/tool-ui/svgPx";
 type ScalingCurveDiagramProps = {
   points: { x: number; y: number }[];
   xLabel: string;
@@ -31,16 +32,16 @@ export default function ScalingCurveDiagram({ points, xLabel, yLabel, caption }:
           {points.map((p, i) => (
             <circle key={i} cx={xAt(p.x)} cy={yAt(p.y)} r={3} className="fill-blue-600 dark:fill-blue-400" />
           ))}
-          <text x={MARGIN.left} y={HEIGHT - 18} fontSize={10} fill="currentColor" opacity={0.6}>
+          <text x={MARGIN.left} y={HEIGHT - 18} style={{ fontSize: svgPx(10) }} fill="currentColor" opacity={0.6}>
             {points[0].x}
           </text>
-          <text x={WIDTH - MARGIN.right} y={HEIGHT - 18} textAnchor="end" fontSize={10} fill="currentColor" opacity={0.6}>
+          <text x={WIDTH - MARGIN.right} y={HEIGHT - 18} textAnchor="end" style={{ fontSize: svgPx(10) }} fill="currentColor" opacity={0.6}>
             {points[points.length - 1].x}
           </text>
-          <text x={WIDTH / 2} y={HEIGHT - 18} textAnchor="middle" fontSize={10} fill="currentColor" opacity={0.6}>
+          <text x={WIDTH / 2} y={HEIGHT - 18} textAnchor="middle" style={{ fontSize: svgPx(10) }} fill="currentColor" opacity={0.6}>
             {xLabel}
           </text>
-          <text x={MARGIN.left} y={MARGIN.top - 2} fontSize={9} fill="currentColor" opacity={0.6}>
+          <text x={MARGIN.left} y={MARGIN.top - 2} style={{ fontSize: svgPx(9) }} fill="currentColor" opacity={0.6}>
             {yLabel}
           </text>
         </svg>

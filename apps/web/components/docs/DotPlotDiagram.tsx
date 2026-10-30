@@ -1,3 +1,4 @@
+import { svgPx } from "@/components/tool-ui/svgPx";
 type DotPlotDiagramProps = {
   values: number[];
   markers: { value: number; label: string; colorClass: string }[];
@@ -39,7 +40,7 @@ export default function DotPlotDiagram({ values, markers, caption }: DotPlotDiag
           {markers.map((m) => (
             <g key={m.label}>
               <line x1={xAt(m.value)} y1={MARGIN.top} x2={xAt(m.value)} y2={BASELINE_Y} strokeWidth={2} className={m.colorClass} />
-              <text x={xAt(m.value)} y={BASELINE_Y + 14} textAnchor="middle" fontSize={9} fontWeight={700} className={m.colorClass}>
+              <text x={xAt(m.value)} y={BASELINE_Y + 14} textAnchor="middle" style={{ fontSize: svgPx(9) }} fontWeight={700} className={m.colorClass}>
                 {m.label}
               </text>
             </g>

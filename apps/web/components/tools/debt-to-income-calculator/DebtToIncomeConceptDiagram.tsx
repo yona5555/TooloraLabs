@@ -1,6 +1,7 @@
 "use client";
 import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const VIEW_W = 880;
 const VIEW_H = 280;
@@ -79,7 +80,7 @@ export default function DebtToIncomeConceptDiagram() {
               return (
                 <g key={key}>
                   <rect x={x} y={BAR_Y + BAR_H + 20} width={11} height={11} rx={2} className={seg.colorClass} />
-                  <text x={x + 17} y={BAR_Y + BAR_H + 29} fontSize={11} fill="currentColor" opacity={0.75}>
+                  <text x={x + 17} y={BAR_Y + BAR_H + 29} style={{ fontSize: svgPx(11) }} fill="currentColor" opacity={0.75}>
                     {d(`legend.${key}`)}
                   </text>
                 </g>

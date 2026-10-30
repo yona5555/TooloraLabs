@@ -85,7 +85,7 @@ export default function DocsSidebarNav() {
                   className="flex w-full items-center gap-2 rounded-lg px-2.5 py-1.5 text-start font-medium text-zinc-700 transition hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-zinc-800"
                 >
                   <CategoryIcon size={16} className="shrink-0 text-zinc-400" />
-                  <span className="flex-1 truncate">{tCategories(`${category.slug}.title`)}</span>
+                  <span className="min-w-0 flex-1 break-words">{tCategories(`${category.slug}.title`)}</span>
                   {isOpen ? <ChevronDown size={14} className="shrink-0 text-zinc-400" /> : <ChevronRight size={14} className="shrink-0 text-zinc-400" />}
                 </button>
                 {isOpen && (
@@ -105,7 +105,7 @@ export default function DocsSidebarNav() {
                           }`}
                         >
                           <ToolIcon size={14} className="shrink-0 text-zinc-400" />
-                          <span className="flex-1 truncate">{tTools(`${tool.slug}.title`)}</span>
+                          <span className="min-w-0 flex-1 break-words">{tTools(`${tool.slug}.title`)}</span>
                           {!isPilotReady && (
                             <span className="shrink-0 rounded-full bg-zinc-100 px-1.5 py-0.5 text-xs font-semibold text-[#5e5e67] dark:bg-zinc-800 dark:text-zinc-400">
                               {t("soon")}

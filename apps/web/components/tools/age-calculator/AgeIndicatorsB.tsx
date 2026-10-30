@@ -233,15 +233,15 @@ export function AgeFormulaCard({ d, f }: IndicatorProps) {
   const box = (x: number, y: number, w: number, top: string, bottom: string, color: string) => (
     <g>
       <rect x={x} y={y} width={w} height={44} rx={8} fill={color} fillOpacity={0.12} stroke={color} strokeWidth={1.5} />
-      <text x={x + w / 2} y={y + 18} textAnchor="middle" fontSize={11} fontWeight={800} fill={color}>{top}</text>
-      <text x={x + w / 2} y={y + 34} textAnchor="middle" fontSize={9} className={valueText}>{bottom}</text>
+      <text x={x + w / 2} y={y + 18} textAnchor="middle" style={{ fontSize: svgPx(11) }} fontWeight={800} fill={color}>{top}</text>
+      <text x={x + w / 2} y={y + 34} textAnchor="middle" style={{ fontSize: svgPx(9) }} className={valueText}>{bottom}</text>
     </g>
   );
   const arrow = (x1: number, x2: number, y: number, text: string, color: string) => (
     <g>
       <line x1={x1} x2={x2 - 4} y1={y} y2={y} stroke={color} strokeWidth={1.5} />
       <path d={`M ${x2 - 6} ${y - 4} L ${x2} ${y} L ${x2 - 6} ${y + 4} Z`} fill={color} />
-      <text x={(x1 + x2) / 2} y={y - 6} textAnchor="middle" fontSize={10} fontWeight={800} fill={color}>{text}</text>
+      <text x={(x1 + x2) / 2} y={y - 6} textAnchor="middle" style={{ fontSize: svgPx(10) }} fontWeight={800} fill={color}>{text}</text>
     </g>
   );
   const chain = (y: number, color: string, a: typeof g, fmt: (c: typeof r.birth) => string, anchor: string) => (
@@ -269,20 +269,20 @@ export function AgeFormulaCard({ d, f }: IndicatorProps) {
         workedExampleTitle={t("worked")}
         indicator={
           <FitSvg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("formula.title")} data-annotation="" className="max-w-full">
-            <text x={0} y={14} fontSize={11} fontWeight={800} fill={AGE_COLORS.gregorian}>
+            <text x={0} y={14} style={{ fontSize: svgPx(11) }} fontWeight={800} fill={AGE_COLORS.gregorian}>
               {td("cal.gregorian")} = {td("ymd", { y: f.int(g.years), m: f.int(g.months), d: f.int(g.days) })}
             </text>
             {chain(24, AGE_COLORS.gregorian, g, f.iso, f.iso(anchorOf(g)))}
-            <text x={0} y={92} fontSize={9} className={axisText}>
+            <text x={0} y={92} style={{ fontSize: svgPx(9) }} className={axisText}>
               {t("formula.legend")}
             </text>
             {h && (
               <>
-                <text x={0} y={128} fontSize={11} fontWeight={800} fill={AGE_COLORS.hijri}>
+                <text x={0} y={128} style={{ fontSize: svgPx(11) }} fontWeight={800} fill={AGE_COLORS.hijri}>
                   {td("cal.hijri")} = {td("ymd", { y: f.int(h.years), m: f.int(h.months), d: f.int(h.days) })}
                 </text>
                 {chain(138, AGE_COLORS.hijri, h, f.hijri, f.hijri(anchorOf(h)))}
-                <text x={0} y={206} fontSize={9} className={axisText}>
+                <text x={0} y={206} style={{ fontSize: svgPx(9) }} className={axisText}>
                   {t("formula.hijriLegend")}
                 </text>
               </>

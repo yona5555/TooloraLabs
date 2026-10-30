@@ -2,6 +2,7 @@
 import { useId } from "react";
 import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import { svgPx } from "@/components/tool-ui/svgPx";
 
 const VIEW_W = 880;
 const VIEW_H = 300;
@@ -69,7 +70,7 @@ export default function CompoundInterestConceptDiagram() {
           <text x={START_X} y={BASE_Y + 34} fontSize={13} fontWeight={700} textAnchor="start" className="fill-zinc-900 dark:fill-zinc-50">
             {t("principalLabel")}
           </text>
-          <text x={START_X} y={BASE_Y + 52} fontSize={11} textAnchor="start" fill="currentColor" opacity={0.6}>
+          <text x={START_X} y={BASE_Y + 52} style={{ fontSize: svgPx(11) }} textAnchor="start" fill="currentColor" opacity={0.6}>
             {d("startingAmountCaption")}
           </text>
 
@@ -77,7 +78,7 @@ export default function CompoundInterestConceptDiagram() {
           <text x={410} y={BASE_Y + 34} fontSize={13} fontWeight={700} textAnchor="middle" className="fill-blue-700 dark:fill-blue-300">
             {t("contributionsLabel")}
           </text>
-          <text x={410} y={BASE_Y + 52} fontSize={11} textAnchor="middle" fill="currentColor" opacity={0.6}>
+          <text x={410} y={BASE_Y + 52} style={{ fontSize: svgPx(11) }} textAnchor="middle" fill="currentColor" opacity={0.6}>
             {d("contributionsCaption")}
           </text>
 
@@ -89,7 +90,7 @@ export default function CompoundInterestConceptDiagram() {
           <text x={565} y={134} fontSize={13} fontWeight={700} textAnchor="start" className="fill-amber-700 dark:fill-amber-300">
             {t("interestLabel")}
           </text>
-          <text x={565} y={152} fontSize={11} textAnchor="start" fill="currentColor" opacity={0.6}>
+          <text x={565} y={152} style={{ fontSize: svgPx(11) }} textAnchor="start" fill="currentColor" opacity={0.6}>
             {d("interestCaption")}
           </text>
 

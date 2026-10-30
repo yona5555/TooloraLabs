@@ -1,3 +1,4 @@
+import { svgPx } from "@/components/tool-ui/svgPx";
 type MultiplicationGridDiagramProps = {
   headers: number[];
   caption: string;
@@ -45,7 +46,7 @@ export default function MultiplicationGridDiagram({ headers, caption }: Multipli
                   strokeWidth={0.5}
                   opacity={0.5}
                 />
-                <text x={LABEL_COL + c * CELL + CELL / 2} y={LABEL_COL + r * CELL + CELL / 2 + 4} textAnchor="middle" fontSize={11} fill="currentColor">
+                <text x={LABEL_COL + c * CELL + CELL / 2} y={LABEL_COL + r * CELL + CELL / 2 + 4} textAnchor="middle" style={{ fontSize: svgPx(11) }} fill="currentColor">
                   {rowH * colH}
                 </text>
               </g>
