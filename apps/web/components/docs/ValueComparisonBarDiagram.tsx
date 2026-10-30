@@ -24,11 +24,11 @@ export default function ValueComparisonBarDiagram({ bars, caption }: ValueCompar
             const width = Math.max((bar.value / maxValue) * barMaxWidth, 2);
             return (
               <g key={bar.label}>
-                <text data-label-pin x={LABEL_WIDTH - 8} y={y + ROW_HEIGHT / 2 + 4} textAnchor="end" style={{ fontSize: svgPx(11) }} fill="currentColor">
+                <text x={LABEL_WIDTH - 8} y={y + ROW_HEIGHT / 2 + 4} textAnchor="end" style={{ fontSize: svgPx(11) }} fill="currentColor">
                   {bar.label}
                 </text>
                 <rect x={LABEL_WIDTH} y={y} width={width} height={ROW_HEIGHT} rx={4} className={bar.colorClass} />
-                <text data-label-pin x={LABEL_WIDTH + width + 6} y={y + ROW_HEIGHT / 2 + 4} style={{ fontSize: svgPx(11) }} fontWeight={700} fill="currentColor">
+                <text x={LABEL_WIDTH + width + 6} y={y + ROW_HEIGHT / 2 + 4} style={{ fontSize: svgPx(11) }} fontWeight={700} fill="currentColor">
                   {bar.value}
                 </text>
               </g>

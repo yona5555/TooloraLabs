@@ -48,14 +48,14 @@ export default function GrowthCurveDiagram({ points, label, caption, xUnit }: Pr
           <path d={areaPath} className="fill-blue-500/10 dark:fill-blue-400/10" />
           <path d={path} fill="none" stroke="currentColor" strokeWidth={2.5} className="text-blue-600 dark:text-blue-400" />
           <circle cx={end.px} cy={end.py} r={3.5} className="fill-blue-600 dark:fill-blue-400" />
-          <text data-label-pin x={end.px - 8} y={end.py - 10} textAnchor="end" fontSize={12} fontWeight={600} className="fill-blue-600 dark:fill-blue-400">
+          <text x={end.px - 8} y={end.py - 10} textAnchor="end" fontSize={12} fontWeight={600} className="fill-blue-600 dark:fill-blue-400">
             {label}
           </text>
 
-          <text data-label-pin x={PAD_LEFT} y={HEIGHT - 8} style={{ fontSize: svgPx(10) }} className="fill-zinc-400 dark:fill-zinc-500">
+          <text x={PAD_LEFT} y={HEIGHT - 8} style={{ fontSize: svgPx(10) }} className="fill-zinc-400 dark:fill-zinc-500">
             0
           </text>
-          <text data-label-pin x={WIDTH - PAD_RIGHT} y={HEIGHT - 8} textAnchor="end" style={{ fontSize: svgPx(10) }} className="fill-zinc-400 dark:fill-zinc-500">
+          <text x={WIDTH - PAD_RIGHT} y={HEIGHT - 8} textAnchor="end" style={{ fontSize: svgPx(10) }} className="fill-zinc-400 dark:fill-zinc-500">
             {maxX}
             {xUnit ?? ""}
           </text>

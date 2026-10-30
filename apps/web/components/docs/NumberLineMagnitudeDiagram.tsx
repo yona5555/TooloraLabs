@@ -26,7 +26,7 @@ export default function NumberLineMagnitudeDiagram({ markers, highlightExponent,
             return (
               <g key={marker.label}>
                 <line x1={x} y1={HEIGHT / 2 - 6} x2={x} y2={HEIGHT / 2 + 6} stroke="currentColor" strokeWidth={1.5} opacity={0.5} />
-                <text data-label-pin x={x} y={HEIGHT / 2 + 22} textAnchor="middle" style={{ fontSize: svgPx(9) }} fill="currentColor" opacity={0.7}>
+                <text x={x} y={HEIGHT / 2 + 22} textAnchor="middle" style={{ fontSize: svgPx(9) }} fill="currentColor" opacity={0.7}>
                   {marker.label}
                 </text>
               </g>

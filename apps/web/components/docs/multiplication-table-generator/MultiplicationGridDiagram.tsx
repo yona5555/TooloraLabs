@@ -25,12 +25,12 @@ export default function MultiplicationGridDiagram({ headers, caption }: Multipli
             <rect key={`rh-${h}`} x={0} y={LABEL_COL + i * CELL} width={LABEL_COL} height={CELL} className="fill-blue-100 dark:fill-blue-500/20" stroke="currentColor" strokeWidth={0.5} opacity={0.6} />
           ))}
           {headers.map((h, i) => (
-            <text data-label-pin key={`cht-${h}`} x={LABEL_COL + i * CELL + CELL / 2} y={LABEL_COL / 2 + 4} textAnchor="middle" fontSize={12} fontWeight={700} fill="currentColor">
+            <text key={`cht-${h}`} x={LABEL_COL + i * CELL + CELL / 2} y={LABEL_COL / 2 + 4} textAnchor="middle" fontSize={12} fontWeight={700} fill="currentColor">
               {h}
             </text>
           ))}
           {headers.map((h, i) => (
-            <text data-label-pin key={`rht-${h}`} x={LABEL_COL / 2} y={LABEL_COL + i * CELL + CELL / 2 + 4} textAnchor="middle" fontSize={12} fontWeight={700} fill="currentColor">
+            <text key={`rht-${h}`} x={LABEL_COL / 2} y={LABEL_COL + i * CELL + CELL / 2 + 4} textAnchor="middle" fontSize={12} fontWeight={700} fill="currentColor">
               {h}
             </text>
           ))}
@@ -47,7 +47,7 @@ export default function MultiplicationGridDiagram({ headers, caption }: Multipli
                   strokeWidth={0.5}
                   opacity={0.5}
                 />
-                <text data-label-pin x={LABEL_COL + c * CELL + CELL / 2} y={LABEL_COL + r * CELL + CELL / 2 + 4} textAnchor="middle" style={{ fontSize: svgPx(11) }} fill="currentColor">
+                <text x={LABEL_COL + c * CELL + CELL / 2} y={LABEL_COL + r * CELL + CELL / 2 + 4} textAnchor="middle" style={{ fontSize: svgPx(11) }} fill="currentColor">
                   {rowH * colH}
                 </text>
               </g>

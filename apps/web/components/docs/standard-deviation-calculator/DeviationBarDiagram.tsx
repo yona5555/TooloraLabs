@@ -21,7 +21,7 @@ export default function DeviationBarDiagram({ rows, meanLabel, caption }: Deviat
       <div dir="ltr" className="overflow-x-auto">
         <FitSvg viewBox={`0 0 ${WIDTH} ${height}`} role="img" aria-label={caption} className="h-auto w-full text-current" style={{ minWidth: 280 }}>
           <line x1={CENTER_X} y1={16} x2={CENTER_X} y2={height} stroke="currentColor" strokeWidth={1.5} opacity={0.4} />
-          <text data-label-pin x={CENTER_X} y={10} textAnchor="middle" style={{ fontSize: svgPx(9) }} fontWeight={700} fill="currentColor" opacity={0.6}>
+          <text x={CENTER_X} y={10} textAnchor="middle" style={{ fontSize: svgPx(9) }} fontWeight={700} fill="currentColor" opacity={0.6}>
             {meanLabel}
           </text>
           {rows.map((row, i) => {
@@ -32,7 +32,7 @@ export default function DeviationBarDiagram({ rows, meanLabel, caption }: Deviat
             return (
               <g key={i}>
                 <rect x={x} y={y} width={barWidth} height={ROW_HEIGHT} rx={3} className={isPositive ? "fill-blue-600 dark:fill-blue-400" : "fill-amber-500 dark:fill-amber-400"} />
-                <text data-label-pin
+                <text
                   x={isPositive ? x + barWidth + 6 : x - 6}
                   y={y + ROW_HEIGHT / 2 + 4}
                   textAnchor={isPositive ? "start" : "end"}

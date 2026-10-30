@@ -117,7 +117,6 @@ export default function CalculationFlowchart({ steps, caption, loop }: Props) {
                 className="text-blue-400 dark:text-blue-500"
               />
               <text
-                data-label-pin
                 x={rightEdgeX + 76}
                 y={(boxCenterY(loop.from) + boxCenterY(loop.to)) / 2}
                 textAnchor="start"
@@ -143,7 +142,6 @@ export default function CalculationFlowchart({ steps, caption, loop }: Props) {
                 strokeWidth={1.5}
               />
               <text
-                data-label-pin
                 x={centerX}
                 textAnchor="middle"
                 fontSize={FONT_SIZE}
