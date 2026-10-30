@@ -120,13 +120,13 @@ test("site-audit ratchet: a count increase fails, a decrease passes, a new page 
   const baseline = writeJson("ra-sa-baseline.json", { "/en/tools/a": { overlap: 0, clip: 0, small: 2, hydration: 0, console: 0, a11y: 0, link: 0, idle: 0 } });
   const measured = writeText("ra-sa-measured.txt", "/en/tools/a\n");
 
-  const worse = writeJson("ra-sa-worse.json", { findings: Array(3).fill({ page: "/en/tools/a", criterion: "small" }) });
+  const worse = writeJson("ra-sa-worse.json", { findings: Array(3).fill({ page: "/en/tools/a", criterion: "small" }), measured: ["/en/tools/a"] });
   failsWith(ratchet(["check", "site-audit", worse, baseline], { MEASURED: measured }), /\/en\/tools\/a: small 3 \(baseline 2\)/, "site-audit ratchet (increase)");
 
-  const better = writeJson("ra-sa-better.json", { findings: [{ page: "/en/tools/a", criterion: "small" }] });
+  const better = writeJson("ra-sa-better.json", { findings: [{ page: "/en/tools/a", criterion: "small" }], measured: ["/en/tools/a"] });
   assert.equal(ratchet(["check", "site-audit", better, baseline], { MEASURED: measured }).status, 0, "a decrease must pass");
 
-  const newPage = writeJson("ra-sa-newpage.json", { findings: [{ page: "/en/tools/zzz-canary", criterion: "overlap" }] });
+  const newPage = writeJson("ra-sa-newpage.json", { findings: [{ page: "/en/tools/zzz-canary", criterion: "overlap" }], measured: ["/en/tools/zzz-canary"] });
   const newMeasured = writeText("ra-sa-newpage-measured.txt", "/en/tools/zzz-canary\n");
   failsWith(ratchet(["check", "site-audit", newPage, baseline], { MEASURED: newMeasured }), /\/en\/tools\/zzz-canary: new page \(no baseline\)/, "site-audit ratchet (new page)");
 });
@@ -140,6 +140,62 @@ test("perf-budget ratchet: a metric regression beyond tolerance fails, noise wit
 
   const noisy = writeJson("ra-pb-noisy.json", { pages: [{ page: "/en/tools/a", median: { lcp: 2060, tbt: 105, cls: 0.052, perf: 91, jsKiB: 302 }, over: [], error: null }] });
   assert.equal(ratchet(["check", "perf-budget", noisy, baseline], { MEASURED: measured }).status, 0, "noise within tolerance must pass");
+});
+
+// Both ratchets compare the exact pages of a shard: results that cannot prove that are a failure, never a pass.
+const CLEAN_COUNTS = { overlap: 0, clip: 0, small: 0, hydration: 0, console: 0, a11y: 0, link: 0, idle: 0 };
+const MEDIAN = { lcp: 2000, tbt: 100, cls: 0.05, perf: 92, jsKiB: 300 };
+const RATCHETS = {
+  "site-audit": { baseline: { "/en/tools/a": CLEAN_COUNTS, "/en/tools/b": CLEAN_COUNTS }, run: (pages) => ({ findings: [], measured: pages }) },
+  "perf-budget": { baseline: { "/en/tools/a": MEDIAN, "/en/tools/b": MEDIAN }, run: (pages) => ({ pages: pages.map((page) => ({ page, median: MEDIAN, over: [], error: null })) }) },
+};
+for (const [kind, { baseline, run }] of Object.entries(RATCHETS)) {
+  const base = writeJson(`ps-${kind}-baseline.json`, baseline);
+  const measured = writeText(`ps-${kind}-measured.txt`, "/en/tools/a\n/en/tools/b\n");
+  const check = (file, env = { MEASURED: measured }) => ratchet(["check", kind, file, base], env);
+  test(`${kind} ratchet: a missing results file fails`, () => {
+    failsWith(check(join(TMP, `ps-${kind}-none.json`)), /results file .* is missing/, `${kind} ratchet (missing)`);
+  });
+  test(`${kind} ratchet: an unparsable results file fails`, () => {
+    failsWith(check(writeText(`ps-${kind}-bad.json`, '{"findings": [')), /results file .* is unparsable/, `${kind} ratchet (unparsable)`);
+    failsWith(check(writeJson(`ps-${kind}-shape.json`, { totals: {} })), /results file .* is unparsable/, `${kind} ratchet (no page list)`);
+  });
+  test(`${kind} ratchet: partial results fail, naming the unmeasured page`, () => {
+    failsWith(check(writeJson(`ps-${kind}-partial.json`, run(["/en/tools/a"]))), /1 missing, 0 extra[\s\S]*missing: \/en\/tools\/b/, `${kind} ratchet (partial)`);
+  });
+  test(`${kind} ratchet: an unexpected extra page fails, naming it`, () => {
+    failsWith(check(writeJson(`ps-${kind}-extra.json`, run(["/en/tools/a", "/en/tools/b", "/en/tools/c"]))), /0 missing, 1 extra[\s\S]*extra: \/en\/tools\/c/, `${kind} ratchet (extra)`);
+  });
+  test(`${kind} ratchet: no page list to compare with fails`, () => {
+    failsWith(check(writeJson(`ps-${kind}-nolist.json`, run(["/en/tools/a", "/en/tools/b"])), { MEASURED: "" }), /no page list to compare with/, `${kind} ratchet (no MEASURED)`);
+  });
+  test(`${kind} ratchet: a correct shard with no regression passes`, () => {
+    const r = check(writeJson(`ps-${kind}-ok.json`, run(["/en/tools/a", "/en/tools/b"])));
+    assert.equal(r.status, 0, r.out);
+  });
+}
+
+test("ratchet: a page with no baseline passes only with zero findings or within its full budget", () => {
+  const measured = writeText("nb-measured.txt", "/en/tools/new\n");
+  const empty = writeJson("nb-baseline.json", {});
+  const clean = ratchet(["check", "site-audit", writeJson("nb-sa-clean.json", { findings: [], measured: ["/en/tools/new"] }), empty], { MEASURED: measured });
+  assert.equal(clean.status, 0, clean.out);
+  const within = ratchet(["check", "perf-budget", writeJson("nb-pb-ok.json", { pages: [{ page: "/en/tools/new", median: MEDIAN, over: [], error: null }] }), empty], { MEASURED: measured });
+  assert.equal(within.status, 0, within.out);
+  failsWith(ratchet(["check", "perf-budget", writeJson("nb-pb-over.json", { pages: [{ page: "/en/tools/new", median: MEDIAN, over: ["lcp"], error: null }] }), empty], { MEASURED: measured }), /new page \(no baseline\), over lcp/, "perf-budget ratchet (new page over budget)");
+  failsWith(ratchet(["check", "perf-budget", writeJson("nb-pb-err.json", { pages: [{ page: "/en/tools/new", median: null, over: ["error"], error: "boom" }] }), empty], { MEASURED: measured }), /new page \(no baseline\), over error/, "perf-budget ratchet (new page not measured)");
+});
+
+test("shard page list: the same slice the gates take, without a second locale prefix", () => {
+  const pages = writeText("sp-affected.txt", ["/en", "/ar", "/en/tools", "/ar/tools", "/en/docs", "/ar/docs"].join("\n") + "\n");
+  const list = (kind, shard) => {
+    const out = join(TMP, `sp-${kind}.txt`);
+    const r = gate("node", ["scripts/expand-measured-pages.mjs", kind, pages, shard, out]);
+    assert.equal(r.status, 0, r.out);
+    return readFileSync(out, "utf8").split("\n").filter(Boolean);
+  };
+  assert.deepEqual(list("site-audit", "2/3"), ["/en/tools", "/ar/tools"], "site-audit shards locale-free paths");
+  assert.deepEqual(list("perf-budget", "2/3"), ["/ar", "/en/docs"], "perf-budget shards locale-prefixed pages");
 });
 
 test("ratchet baseline check fails when a committed baseline value is raised", () => {

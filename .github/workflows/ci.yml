@@ -298,10 +298,11 @@ jobs:
           node scripts/route-manifest.mjs build apps/web/.next-lock route-manifest.json
           node scripts/route-manifest.mjs affected base-route-manifest.json route-manifest.json affected-pages.txt
           count=$(( $(wc -l < affected-pages.txt) ))
-          # Shards sized so a PR with every page affected still fits the 9-minute per-shard timeout: site-audit
-          # ~4.6s/page (en+ar, 2 widths, 2 themes), perf-budget ~9s/page at RUNS=1 (one Chrome reused per shard).
+          # Shards sized so a PR with every page affected still fits the per-shard timeout: site-audit ~4.6s/page
+          # (en+ar, 2 widths, 2 themes), perf-budget ~9s/page at RUNS=1 (one Chrome reused per shard); 45 pages
+          # per perf shard ran past 9 minutes.
           audit=$(( count ? (count + 79) / 80 : 0 )); (( audit > 12 )) && audit=12
-          perf=$(( count ? (count + 45) / 46 : 0 )); (( perf > 16 )) && perf=16
+          perf=$(( count ? (count + 35) / 36 : 0 )); (( perf > 16 )) && perf=16
           shards() { if (( $1 )); then echo "[$(seq -s, 1 "$1")]"; else echo "[]"; fi; }
           { echo "count=$count"; echo "audit-shards=$(shards "$audit")"; echo "audit-shard-count=$audit"; echo "perf-shards=$(shards "$perf")"; echo "perf-shard-count=$perf"; } >> "$GITHUB_OUTPUT"
           echo "$count affected pages: site-audit $audit shards, perf-budget $perf shards" >> "$GITHUB_STEP_SUMMARY"
@@ -372,17 +373,21 @@ jobs:
           SHARD: ${{ matrix.shard }}/${{ needs.affected.outputs.audit-shard-count }}
           PAGES: ${{ github.workspace }}/affected-pages.txt
           OUT: ${{ github.workspace }}/site-audit-${{ matrix.shard }}.json
-        # site-audit.mjs itself exits 1 on ANY finding (the hard, zero-tolerance gate launch-readiness runs
-        # directly) - continue-on-error so the ratchet check below, not this raw hard gate, decides the
-        # required check's result. The step still shows failed (orange) when it found anything; only the job
-        # doesn't stop here.
-        continue-on-error: true
+          # Measure only: findings are the ratchet's to judge (launch-readiness runs the hard zero-tolerance gate),
+          # and a hard gate's ::error here would fail zero-warnings on a page that did not regress. A broken run
+          # still fails this step.
+          RATCHET_MEASURE: 1
         run: scripts/site-audit.sh 3107
 
-      - name: Expand this shard's measured pages (locale x affected-pages.txt)
-        run: node scripts/expand-measured-pages.mjs affected-pages.txt ${{ github.workspace }}/measured-${{ matrix.shard }}.txt
+      # !cancelled(): when the audit broke, the ratchet still runs and names what is missing.
+      - name: This shard's exact page list
+        if: ${{ !cancelled() }}
+        env:
+          SHARD: ${{ matrix.shard }}/${{ needs.affected.outputs.audit-shard-count }}
+        run: node scripts/expand-measured-pages.mjs site-audit affected-pages.txt "$SHARD" ${{ github.workspace }}/measured-${{ matrix.shard }}.txt
 
       - name: Ratchet check (shard ${{ matrix.shard }})
+        if: ${{ !cancelled() }}
         env:
           MEASURED: ${{ github.workspace }}/measured-${{ matrix.shard }}.txt
         run: node scripts/ratchet.mjs check site-audit site-audit-${{ matrix.shard }}.json .audit/ratchet/site-audit.json
@@ -469,15 +474,19 @@ jobs:
           PAGES: ${{ github.workspace }}/affected-pages.txt
           OUT: ${{ github.workspace }}/perf-budget-${{ matrix.shard }}.json
           RUNS: 1
-        # perf-budget.mjs itself exits 1 on ANY page over its own BUDGET (the hard gate launch-readiness runs
-        # directly) - continue-on-error so the ratchet check below decides the required check's result.
-        continue-on-error: true
+          # Measure only, as in site-audit-shard: the ratchet below judges the numbers.
+          RATCHET_MEASURE: 1
         run: scripts/perf-budget.sh 3108
 
-      - name: Expand this shard's measured pages (locale x affected-pages.txt)
-        run: node scripts/expand-measured-pages.mjs affected-pages.txt ${{ github.workspace }}/measured-${{ matrix.shard }}.txt
+      # !cancelled(): when the run broke, the ratchet still runs and names what is missing.
+      - name: This shard's exact page list
+        if: ${{ !cancelled() }}
+        env:
+          SHARD: ${{ matrix.shard }}/${{ needs.affected.outputs.perf-shard-count }}
+        run: node scripts/expand-measured-pages.mjs perf-budget affected-pages.txt "$SHARD" ${{ github.workspace }}/measured-${{ matrix.shard }}.txt
 
       - name: Ratchet check (shard ${{ matrix.shard }})
+        if: ${{ !cancelled() }}
         env:
           MEASURED: ${{ github.workspace }}/measured-${{ matrix.shard }}.txt
         run: node scripts/ratchet.mjs check perf-budget perf-budget-${{ matrix.shard }}.json .audit/ratchet/perf-budget.json

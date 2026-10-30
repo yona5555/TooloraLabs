@@ -17,6 +17,7 @@
 // Each finding carries a `pattern`: the root cause key the inventory is grouped by (criterion, kind, component).
 // Exits 1 when any criterion is above 0 (CI job site-audit, sharded; no pipe after it in the workflow).
 // Usage: BASE=http://localhost:<port> node scripts/site-audit.mjs [path-filter ...]
+//   RATCHET_MEASURE=1: measure only, always exit 0 unless the run itself breaks (CI's ratchet decides from OUT).
 //   env LOCALES=en,ar  WIDTHS=1440,390  THEMES=light,dark  MIN=12  JOBS=3  SHARD=i/n (pages i, i+n, … of the
 //   sitemap order, i from 1)  OUT=<file.json> (totals, inventory by root cause, every finding)  VERBOSE=1 (one
 //   JSON line per page view)  PROGRESS=<file> (also append each progress line there)  RESULTS=<file.jsonl> (append
@@ -30,6 +31,7 @@ import { appendFileSync, readdirSync, readFileSync, writeFileSync } from "node:f
 import { createRequire } from "node:module";
 import { join } from "node:path";
 import { requireBase } from "../../../scripts/lib/require-base.mjs";
+import { sliceShard } from "../../../scripts/lib/shard-pages.mjs";
 import { chromium } from "playwright";
 import { clockAfterBuild, hydrationProblems, renderedAtOf, watchHydration } from "../../../tests/hydration-guard.mjs";
 
@@ -40,7 +42,7 @@ if (process.argv[2] === "--merge") {
   const seen = new Set();
   const findings = parts.flatMap((p) => p.findings).filter((f) => f.criterion !== "link" || (!seen.has(f.detail.url) && seen.add(f.detail.url)));
   const sum = (k) => parts.reduce((n, p) => n + p[k], 0);
-  report(findings, { views: sum("views"), pages: sum("pages"), locales: parts[0].locales, widths: parts[0].widths, themes: parts[0].themes, links: sum("links"), shards: parts.length });
+  report(findings, { views: sum("views"), pages: sum("pages"), locales: parts[0].locales, widths: parts[0].widths, themes: parts[0].themes, links: sum("links"), measured: parts.flatMap((p) => p.measured ?? []), shards: parts.length });
   process.exit();
 }
 
@@ -52,7 +54,8 @@ const MIN = Number(process.env.MIN ?? 12);
 const IDLE_MAX = 5; // animation frames + short timers allowed in one idle second (a stray deferred callback)
 const jobs = Number(process.env.JOBS ?? 3);
 const AXE = readFileSync(createRequire(import.meta.url).resolve("axe-core/axe.min.js"), "utf8");
-const [shardI, shardN] = (process.env.SHARD ?? "1/1").split("/").map(Number);
+const shard = process.env.SHARD ?? "1/1";
+const [shardI, shardN] = shard.split("/").map(Number);
 const filters = process.argv.slice(2);
 const viewKey = (r) => `${r.locale}${r.path}@${r.w}`;
 const listed = process.env.PAGES ? new Set(readFileSync(process.env.PAGES, "utf8").split("\n").filter(Boolean)) : null;
@@ -71,10 +74,10 @@ const allPaths = [
 ];
 const selected = allPaths.filter((p) => !filters.length || filters.some((f) => p.includes(f))).filter((p) => locales.some((l) => inPages(l, p)));
 if (!selected.length) throw new Error(`no page to audit (sitemap ${allPaths.length} paths, filters ${filters.join(" ") || "none"}${listed ? `, PAGES ${listed.size} pages` : ""})`);
-const paths = selected.filter((_, i) => i % shardN === shardI - 1);
+const paths = sliceShard(selected, shard);
 // More shards than filtered pages: this shard has nothing to visit, and its empty OUT merges like any other.
 if (!paths.length) {
-  report([], { views: 0, pages: 0, locales, widths, themes, links: 0 });
+  report([], { views: 0, pages: 0, locales, widths, themes, links: 0, measured: [] });
   process.exit();
 }
 
@@ -530,9 +533,14 @@ for (const r of results) {
 }
 for (const l of brokenLinks) findings.push({ criterion: "link", page: l.from, w: "-", locale: "-", theme: "-", detail: l, pattern: l.pattern });
 
-report(findings, { views: results.length * themes.length, pages: paths.length, locales, widths, themes, links: links.size });
+// A page counts as measured only when every width of it was visited: scripts/ratchet.mjs compares this list with
+// the pages the shard had to measure, so an unvisited page can never pass as a clean one.
+const viewsOf = Map.groupBy(results, (r) => `/${r.locale}${r.path}`);
+const measured = [...viewsOf].filter(([, views]) => new Set(views.map((r) => r.w)).size === widths.length).map(([page]) => page);
+report(findings, { views: results.length * themes.length, pages: paths.length, locales, widths, themes, links: links.size, measured });
 
-/** Totals per criterion, the inventory grouped by root cause (OUT file + table), exit code 1 on any finding. */
+/** Totals per criterion, the inventory grouped by root cause (OUT file + table), exit code 1 on any finding; with
+ *  RATCHET_MEASURE=1 the results only go to OUT and scripts/ratchet.mjs decides, so no ::error is raised here. */
 function report(findings, meta) {
   const CRITERIA = ["overlap", "clip", "small", "hydration", "console", "a11y", "link", "idle"];
   const totals = Object.fromEntries(CRITERIA.map((c) => [c, findings.filter((f) => f.criterion === c).length]));
@@ -550,6 +558,7 @@ function report(findings, meta) {
     console.log(`\nINVENTORY BY ROOT CAUSE (${byRootCause.length} causes)\n${"count".padStart(6)} ${"pages".padStart(5)}  criterion  pattern  [example]`);
     for (const g of byRootCause.slice(0, Number(process.env.SHOW ?? 120)))
       console.log(`${String(g.count).padStart(6)} ${String(g.pages.length).padStart(5)}  ${g.criterion.padEnd(9)}  ${g.pattern}  [${g.example.page} ${g.example.w}px ${g.example.theme}]`);
+    if (process.env.RATCHET_MEASURE) return;
     console.error(`::error title=site-audit::${CRITERIA.map((c) => `${c} ${totals[c]}`).join(", ")} (inventory above${process.env.OUT ? `, ${process.env.OUT}` : ""})`);
     process.exitCode = 1;
   }

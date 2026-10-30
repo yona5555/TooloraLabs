@@ -17,6 +17,7 @@
 // (~1-2s) per run — the dominant fixed cost once dozens of pages are affected on a PR.
 // Exits 1 on any page over budget (CI job perf-budget, sharded; no pipe after it in the workflow).
 // Usage: BASE=http://localhost:<port> node scripts/perf-budget.mjs [path-filter ...]
+//   RATCHET_MEASURE=1: measure only, always exit 0 unless the run itself breaks (CI's ratchet decides from OUT).
 //   env LOCALES=en,ar  RUNS=3  SHARD=i/n (pages i, i+n, … of the sitemap order)  OUT=<file.json> (every page's
 //   medians and runs, the pages over budget)  PROGRESS=<file> (also append each progress line there)
 //   RESULTS=<file.jsonl> (append each page's result as one JSON line)  RESUME=<dir> (skip the pages already
@@ -29,6 +30,7 @@ import { chromium } from "playwright";
 import lighthouse from "lighthouse";
 import { launch } from "chrome-launcher";
 import { requireBase } from "../../../scripts/lib/require-base.mjs";
+import { sliceShard } from "../../../scripts/lib/shard-pages.mjs";
 
 export const BUDGET = { lcp: 2500, tbt: 200, cls: 0.1, perf: 90, jsKiB: 350 };
 const METRICS = [
@@ -48,7 +50,8 @@ if (process.argv[2] === "--merge") {
 const base = requireBase(process.env.BASE);
 const locales = (process.env.LOCALES ?? "en,ar").split(",");
 const RUNS = Number(process.env.RUNS ?? 3);
-const [shardI, shardN] = (process.env.SHARD ?? "1/1").split("/").map(Number);
+const shard = process.env.SHARD ?? "1/1";
+const [shardI, shardN] = shard.split("/").map(Number);
 const filters = process.argv.slice(2);
 
 const sitemap = await fetch(`${base}/sitemap.xml`);
@@ -63,7 +66,7 @@ const urls = [
 const listed = process.env.PAGES ? new Set(readFileSync(process.env.PAGES, "utf8").split("\n").filter(Boolean)) : null;
 const selected = urls.filter((p) => !filters.length || filters.some((f) => p.includes(f))).filter((p) => !listed || listed.has(p));
 if (!selected.length) throw new Error(`no page to measure (sitemap ${urls.length} pages, filters ${filters.join(" ") || "none"})`);
-const pages = selected.filter((_, i) => i % shardN === shardI - 1);
+const pages = sliceShard(selected, shard);
 
 const median = (xs) => [...xs].sort((a, b) => a - b)[Math.floor(xs.length / 2)];
 
@@ -127,7 +130,8 @@ try {
 
 report(results, { runs: RUNS, locales });
 
-/** Every page's medians (OUT), the pages over budget worst first, exit code 1 when any page is over. */
+/** Every page's medians (OUT), the pages over budget worst first, exit code 1 when any page is over; with
+ *  RATCHET_MEASURE=1 the results only go to OUT and scripts/ratchet.mjs decides, so no ::error is raised here. */
 function report(all, meta) {
   const over = all.filter((r) => r.over.length);
   // worst first: the sum of how far each metric is past its budget, relative to the budget
@@ -139,6 +143,7 @@ function report(all, meta) {
     console.log(`\nPAGES OVER BUDGET (worst first; medians of ${meta.runs} runs)`);
     for (const r of over.slice(0, Number(process.env.SHOW ?? 60)))
       console.log(`  ${r.page}  ${r.median ? METRICS.map(([k, name, fmt]) => `${name}=${fmt(r.median[k])}${r.over.includes(k) ? "!" : ""}`).join(" ") : `error: ${r.error}`}`);
+    if (process.env.RATCHET_MEASURE) return;
     console.error(`::error title=perf-budget::${over.length} of ${all.length} pages over budget (${METRICS.map(([k, name]) => `${name} ${all.filter((r) => r.over.includes(k)).length}`).join(", ")})`);
     process.exitCode = 1;
   }
