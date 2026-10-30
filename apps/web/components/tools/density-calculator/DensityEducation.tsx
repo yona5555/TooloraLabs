@@ -1,18 +1,23 @@
+import dynamic from "next/dynamic";
 import { getTranslations } from "next-intl/server";
 import EncyclopediaPaper from "@/components/tool-ui/EncyclopediaPaper";
 import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import SectionCard from "@/components/tool-ui/SectionCard";
-import DensityLive3D from "./DensityLive3D";
-import DensityFloatLab from "./DensityFloatLab";
-import DensityFormulaDiagram from "./DensityFormulaDiagram";
-import DensityVolumeTrio from "./DensityVolumeTrio";
-import DensityMaterialRanking from "./DensityMaterialRanking";
-import DensityUnitEquivalence from "./DensityUnitEquivalence";
-import DensityBuoyancyBalance from "./DensityBuoyancyBalance";
-import DensityFluidDepthBars from "./DensityFluidDepthBars";
-import DensityWaterTemperatureTrend from "./DensityWaterTemperatureTrend";
+
+// Below-the-fold education diagrams: server-rendered (dynamic() keeps ssr:true, its default) so the
+// content is still in the initial HTML, but their client hydration code splits into its own chunk
+// instead of bloating the above-the-fold bundle every visitor pays for.
+const DensityLive3D = dynamic(() => import("./DensityLive3D"));
+const DensityFloatLab = dynamic(() => import("./DensityFloatLab"));
+const DensityFormulaDiagram = dynamic(() => import("./DensityFormulaDiagram"));
+const DensityVolumeTrio = dynamic(() => import("./DensityVolumeTrio"));
+const DensityMaterialRanking = dynamic(() => import("./DensityMaterialRanking"));
+const DensityUnitEquivalence = dynamic(() => import("./DensityUnitEquivalence"));
+const DensityBuoyancyBalance = dynamic(() => import("./DensityBuoyancyBalance"));
+const DensityFluidDepthBars = dynamic(() => import("./DensityFluidDepthBars"));
+const DensityWaterTemperatureTrend = dynamic(() => import("./DensityWaterTemperatureTrend"));
 
 type ExampleRow = { calculation: string; result: string };
 

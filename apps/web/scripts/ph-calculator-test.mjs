@@ -5,6 +5,7 @@
 // clipping / fill ratio / empty bands / horizontal scroll, no serif, contrast, literal colours.
 // Usage: node scripts/ph-calculator-test.mjs [--shots]   (dev server on :3000)
 import { chromium } from "playwright";
+import { requireBase } from "../../../scripts/lib/require-base.mjs";
 import { mkdirSync, readFileSync, readdirSync, existsSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -16,7 +17,7 @@ const WEB = path.resolve(__dirname, "..");
 const PH_DIR = path.join(WEB, "components/tools/ph-calculator");
 const SHOTS = path.join(ROOT, "artifacts/ph-calculator");
 mkdirSync(SHOTS, { recursive: true });
-const BASE = "http://localhost:3000";
+const BASE = requireBase(process.env.BASE);
 const SHOTS_ON = process.argv.includes("--shots");
 const ONLY = process.argv.find((a) => a.startsWith("--only="))?.split("=")[1];
 

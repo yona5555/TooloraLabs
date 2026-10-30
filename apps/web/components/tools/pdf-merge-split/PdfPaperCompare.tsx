@@ -47,7 +47,7 @@ export default function PdfPaperCompare() {
           <text style={{ fontSize: svgPx(12) }} x={W - 120} y={28 + i * 40} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
             {p.paper === "other" ? tp("other") : p.paper}
           </text>
-          <text style={{ fontSize: svgPx(12) }} x={W - 120} y={44 + i * 40} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+          <text style={{ fontSize: svgPx(12) }} x={W - 120} y={44 + i * 40} fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
             {f(p.width * PT_TO_MM, 0)} × {f(p.height * PT_TO_MM, 0)} mm
           </text>
         </g>

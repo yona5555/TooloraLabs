@@ -60,7 +60,7 @@ export default function LiStructureFormula() {
         <text style={{ fontSize: svgPx(12) }} x={PAD} y={BAR_Y + 26} className="fill-zinc-500 dark:fill-zinc-400">{f(range.min)}</text>
         <text style={{ fontSize: svgPx(12) }} x={W - PAD} y={BAR_Y + 26} textAnchor="end" className="fill-zinc-500 dark:fill-zinc-400">{f(range.max)}</text>
       </svg>
-      <p className="mt-1 text-center text-[11px] text-zinc-500 dark:text-zinc-400">{t("legend", { words: f(words) })}</p>
+      <p className="mt-1 text-center text-xs text-zinc-500 dark:text-zinc-400">{t("legend", { words: f(words) })}</p>
     </div>
   );
 

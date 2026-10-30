@@ -4,6 +4,7 @@ import { Children, isValidElement, useEffect, useMemo, useRef, type ReactNode } 
 import * as THREE from "three";
 import { useFrame, useThree } from "@react-three/fiber";
 import { subParts } from "../MixedText";
+import { resolveFontFamily, useFontsVersion } from "@/lib/canvas-font";
 
 /**
  * Screen-space text label for the 3D scenes, drawn on a canvas sprite.
@@ -44,7 +45,7 @@ export type Label3DProps = {
   gap?: number;
   /** Take part in the scene's overlap resolver (default true). */
   avoid?: boolean;
-  /** CSS font-family for the label (defaults to the monospace stack). */
+  /** CSS font-family for the label, var() allowed (defaults to the site mono stack, --font-mono). */
   font?: string;
 };
 
@@ -107,7 +108,7 @@ function resolve(entries: Set<Entry>, camera: THREE.Camera, width: number, heigh
   }
 }
 
-const FONT = "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
+const FONT = "var(--font-mono)"; // resolved for the canvas by resolveFontFamily
 const RES = 3; // canvas pixels per CSS pixel, crisp on retina
 
 function flatten(node: ReactNode): string {
@@ -137,13 +138,16 @@ export default function Label3D({
   away,
   gap = 8,
   avoid = true,
-  font: family = FONT,
+  font: cssFamily = FONT,
 }: Label3DProps) {
   const label = text ?? flatten(children);
   const sprite = useRef<THREE.Sprite>(null);
   const tmp = useMemo(() => ({ a: new THREE.Vector3(), b: new THREE.Vector3(), s: new THREE.Vector3() }), []);
 
+  const fontsVersion = useFontsVersion();
   const { texture, w, h } = useMemo(() => {
+    void fontsVersion; // a web font finished loading: draw again, now in that font
+    const family = resolveFontFamily(cssFamily);
     const padX = bg ? 6 : 1;
     const padY = bg ? 2 : 1;
     const canvas = document.createElement("canvas");
@@ -196,7 +200,7 @@ export default function Label3D({
     tex.minFilter = THREE.LinearFilter;
     tex.generateMipmaps = false;
     return { texture: tex, w: cw, h: ch };
-  }, [label, color, bg, border, fontSize, weight, family]);
+    }, [label, color, bg, border, fontSize, weight, cssFamily, fontsVersion]);
 
   useEffect(() => () => texture.dispose(), [texture]);
 

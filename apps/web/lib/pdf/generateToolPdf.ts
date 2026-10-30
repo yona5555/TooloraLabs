@@ -1,3 +1,4 @@
+import { resolveFontFamily } from "@/lib/canvas-font";
 import { drawGaugeCanvas, type GaugeSpec } from "./gauge";
 
 export type PdfRow = { label: string; value: string };
@@ -194,8 +195,8 @@ export async function generateToolPdf(options: GenerateToolPdfOptions): Promise<
     import("html2canvas-pro"),
   ]);
 
-  const localeRoot = document.querySelector("[lang]") as HTMLElement | null;
-  const fontFamily = localeRoot ? getComputedStyle(localeRoot).fontFamily : "Arial, sans-serif";
+  // the page's own self-hosted stack for this locale (lib/fonts.ts), resolved: the copy is drawn off-page
+  const fontFamily = resolveFontFamily("var(--font-sans)");
 
   const container = document.createElement("div");
   container.dir = dir;

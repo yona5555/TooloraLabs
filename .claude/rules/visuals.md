@@ -141,7 +141,8 @@ Any clickable action (tabs, save, clear, copy, export, toggles, show more) must 
 ## APPROVED PHONE STANDARD — every tool page below 768px (Yousef, 2026-10-24)
 Default for all tools, desktop unchanged; built into the shared components (never per tool). Full spec:
 `docs/claude/approved-visuals-and-indicators.md` § APPROVED PHONE STANDARD.
-- Back button arrow + "رجوع"/"Back" (44×44), title on one line beside it.
+- Back button arrow + "رجوع"/"Back" (44×44), title beside it, wrapping to a second line instead of
+  truncating/ellipsis when it does not fit one line (2026-10-30: no title text is ever clipped).
 - Two top mini cards (`PhoneMiniCards`) only where verified live data already loads (crypto, commodities,
   forex, weather); otherwise nothing.
 - First 3 blue-header cards open without toggle; cards 4+ collapsed to the header with the
@@ -191,11 +192,26 @@ Permanent; applies to every current and future tool. Full spec: `docs/claude/app
 
 ## APPROVED — LOCKED: phone home page /ar and /en (Yousef, 2026-10-23)
 Approved phone home page (below 768px), as shipped in commits 9cf4fb6d, be5df414, cb9012b2 and fd3b15d3:
-- One-row header: the uppercase `TOOLORALABS.COM` wordmark (shared `Wordmark`, Arial, 15px, always LTR) and the smaller Docs / theme / share / language buttons (36px visible, 44×44 hit area, 8px apart; order from the start side Docs, theme, share, language).
+- One-row header: the uppercase `TOOLORALABS.COM` wordmark (shared `Wordmark`, Arimo, 15px, always LTR) and the smaller Docs / theme / share / language buttons (36px visible, 44×44 hit area, 8px apart; order from the start side Docs, theme, share, language).
 - The calculator FIRST, in one device frame (tinted surface, 10px padding, 8px gaps, each section a lighter-bordered card). Rounded tabs with the active one filled light blue, then the history/archive card BEFORE the display, then the functions row, the keypad and the bottom row.
 - The categories below it: 4 visible plus "عرض المزيد من الأقسام (N)" (count computed), "عرض أقل" when open.
 - Footer: the wordmark always at the left edge on every locale; copyright and links aligned by the page language (right in Arabic, left in the other locales); 24px between rows, 44px link targets.
 
 **Do not change the approved phone home page unless Yousef explicitly asks for that exact change.**
-Locked by `npm run test:home-phone` (CI job `home-phone-lock`, ubuntu-24.04 runner) against `tests/baselines/home-phone.json` (macOS, local) and `tests/baselines/home-phone.linux.json` (CI; the page uses system fonts, so each OS has its own baseline): rects (±1px), font sizes, texts and element order of the header, calculator frame, categories list and footer at 360/390px in ar/en. The baseline is rewritten only with `npm run baseline:home-phone -- --approve`, after Yousef approves the exact change; in CI the PR label `approve-home-phone-baseline` rewrites the Linux one and uploads it as an artifact.
+Locked by `npm run test:home-phone -- --base <url>` (a server on a dedicated port, e.g. 3110; CI job `home-phone-lock`, ubuntu-24.04 runner) against `tests/baselines/home-phone.json` (macOS, local) and `tests/baselines/home-phone.linux.json` (CI and the Linux container; fonts are self-hosted, but text rasterising differs by OS, so each OS has its own baseline): rects (±1px), font sizes, texts and element order of the header, calculator frame, categories list and footer at 360/390px in ar/en. The baseline is rewritten only with `npm run baseline:home-phone -- --approve`, after Yousef approves the exact change; in CI the PR label `approve-home-phone-baseline` rewrites the Linux one and uploads it as an artifact.
 Approved change (Yousef, 2026-10-24): the calculator tab bar below 768px is ONE row of five button-style tabs (border + fill on every state, active light blue, 44px tall, equal widths, no scroll, no scrollbar), each an icon over a short label (`homeCalculator.modesShort`), icons only with aria-label and title in any locale whose short label does not fit; the mode menu button is desktop only. Baseline re-approved with `npm run baseline:home-phone -- --approve` after this change.
+
+## Brand mark and share images (approved by Yousef 2026-10-29, PR #24)
+- **Σ mark:** blue-600 (#2563eb) rounded tile with a white Σ on a 16-unit grid (`public/favicon.svg`, crisp at
+  16px). Desktop header logo = Σ tile + the unchanged wordmark (`public/logo.svg`, `assets/logo-full-dark.svg`);
+  the phone header keeps the written site name. Favicons, apple-touch-icon and the manifest icons
+  (`app/manifest.ts`) come from `npm run icons --workspace=apps/web` (`scripts/brand-icons.mjs`).
+- **Share images:** every indexable page has one: `/share/{locale}/{key}.png` (`app/share/[locale]/[image]/route.tsx`,
+  1200×630, prerendered; key `home`, a tool slug, else `page-` + the path). The page list is
+  `lib/indexable-pages.ts`, the one source of the sitemap too: a new indexable page goes there (with its share
+  title) and its page's generateMetadata spreads `shareMetadata(locale, path)` (or puts `shareImageMetadata`'s
+  images in its own openGraph). `npm run test:share-images` (BASE = a fixture server, also in CI desktop-lock)
+  fails when any sitemap URL lacks og:image/twitter:image or its image is not 200 image/png. Titles are shaped by HarfBuzz
+  (`lib/share-image/shape.ts`, bidi runs + face fallback chain from `assets/fonts`), never by satori, which
+  has no shaper. `npm run test:share-text --workspace=apps/web` compares the shaped ar/hi/en titles with
+  Chromium's rendering (ink IoU >= 0.80, same width) and must pass after any change to it.

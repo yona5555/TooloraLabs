@@ -70,7 +70,7 @@ export default function SwSentenceBreaths() {
         <text style={{ fontSize: svgPx(12) }} x={W - PAD_X} y={BASE + 14} textAnchor="end" className="fill-zinc-500 dark:fill-zinc-400">{f(shown.length)}</text>
         <text style={{ fontSize: svgPx(12) }} x={W / 2} y={BASE + 14} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">{t("axis")}</text>
       </FitSvg>
-      <p className="mt-1 text-[11px] text-amber-700 dark:text-amber-300">
+      <p className="mt-1 text-xs text-amber-700 dark:text-amber-300">
         {t("hint")}
         {sentences.length > MAX_BARS && ` · ${t("capped", { n: f(MAX_BARS), total: f(sentences.length) })}`}
       </p>

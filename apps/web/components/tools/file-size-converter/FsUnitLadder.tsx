@@ -35,7 +35,7 @@ export default function FsUnitLadder() {
       {out.decimal.map((d, i) => (
         <g key={d.unit}>
           <circle cx={i * step + step / 2} cy={y(logs[i])} r={i === a.decimalLevel ? 7 : 4} className={i === a.decimalLevel ? "fill-amber-500" : "fill-blue-600 dark:fill-blue-400"} />
-          <text style={{ fontSize: svgPx(12) }} x={i * step + step / 2} y={y(logs[i]) - 10} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
+          <text style={{ fontSize: svgPx(12) }} x={i * step + step / 2} y={y(logs[i]) - 10} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-700 dark:fill-zinc-200">
             {d.value >= 0.01 && d.value < 1e6 ? f(d.value, d.value < 10 ? 2 : 0) : `1e${Math.round(logs[i])}`}
           </text>
           <text style={{ fontSize: svgPx(12) }} x={i * step + step / 2} y={BASE + 18} textAnchor="middle" fontWeight={600} className="fill-zinc-600 dark:fill-zinc-300">

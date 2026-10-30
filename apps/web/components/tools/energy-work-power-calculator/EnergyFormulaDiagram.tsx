@@ -72,13 +72,13 @@ export default function EnergyFormulaDiagram() {
             <text style={{ fontSize: svgPx(15) }} x={25} y={y + 28} textAnchor="middle" fontWeight={800} className={r.cls}>
               {r.sym}
             </text>
-            <text style={{ fontSize: svgPx(12) }} x={58} y={y + 18} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={58} y={y + 18} fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
               {r.formula}
             </text>
-            <text style={{ fontSize: svgPx(12) }} x={58} y={y + 35} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+            <text style={{ fontSize: svgPx(12) }} x={58} y={y + 35} fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
               {r.sub}
             </text>
-            <text style={{ fontSize: svgPx(12.5) }} x={W - 12} y={y + 18} textAnchor="end" fontWeight={700} fontFamily="ui-monospace, monospace" className={r.cls}>
+            <text style={{ fontSize: svgPx(12.5) }} x={W - 12} y={y + 18} textAnchor="end" fontWeight={700} fontFamily="var(--font-mono)" className={r.cls}>
               {`= ${r.value}`}
             </text>
           </g>

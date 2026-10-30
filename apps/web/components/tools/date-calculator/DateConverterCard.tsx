@@ -77,7 +77,7 @@ export default function DateConverterCard({ f, seed }: Props) {
           {hCivil && <MonthFacts c={hCivil} f={f} />}
         </div>
       </div>
-      <p className="mt-3 text-[11px] leading-4 text-zinc-500 dark:text-zinc-400">{tc("note")}</p>
+      <p className="mt-3 text-xs leading-4 text-zinc-500 dark:text-zinc-400">{tc("note")}</p>
     </SectionCard>
   );
 }

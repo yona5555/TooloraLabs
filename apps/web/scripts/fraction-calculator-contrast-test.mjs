@@ -6,6 +6,7 @@
 // every text element actually renders in Inter (not a silent fallback), every indicator visual
 // fills at least 70% of its box, and no table is clipped at 1440px or 390px.
 import { chromium } from "playwright";
+import { requireBase } from "../../../scripts/lib/require-base.mjs";
 import { mkdirSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -14,7 +15,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ARTIFACTS_DIR = path.resolve(__dirname, "../../../artifacts/fraction-fix");
 mkdirSync(ARTIFACTS_DIR, { recursive: true });
 
-const BASE = "http://localhost:3000";
+const BASE = requireBase(process.env.BASE);
 const URL = `${BASE}/en/tools/fraction-calculator`;
 
 let failures = [];

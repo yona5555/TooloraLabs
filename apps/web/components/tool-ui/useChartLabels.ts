@@ -5,7 +5,7 @@ import { NO_MARGINS, marginDelta, nextMargins, type Box, type Margins } from "./
 /**
  * The DOM half of the shared chart label layout (`chartLabels.ts` holds the geometry): measures label text
  * as it is really drawn — canvas `measureText` in the label's own computed font, so the glyph ink, not
- * the font box (IBM Plex Sans Arabic's font box is 0.18em deeper than Arial's for the same digits) — and
+ * the font box (IBM Plex Sans Arabic's font box is 0.18em deeper than Arimo's for the same digits) — and
  * feeds those boxes back into the chart's layout.
  */
 
@@ -58,7 +58,7 @@ function measureIn(el: Element): Measure {
 }
 
 /**
- * Fallback before the first client measurement (server render, first paint): Arial-like proportions, so the
+ * Fallback before the first client measurement (server render, first paint): Arimo proportions, so the
  * server HTML is already close and the measured layout replaces it in the same frame (layout effect).
  */
 const estimate: Measure = (text, px) => ({ width: text.length * px * 0.62, ascent: px * 0.72, descent: px * 0.21 });
@@ -94,13 +94,17 @@ export function useLabelMeasure() {
     // `--svg-k` is set on the SVG's style by SvgLabelScale; a font swap changes every measurement
     const mo = new MutationObserver(update);
     mo.observe(el, { attributes: true, attributeFilter: ["style"] });
-    void document.fonts?.ready.then(() => {
+    // every web font that finishes loading (a lazily used face too, after `ready` has resolved) re-measures
+    const onFonts = () => {
       metricsCache.clear();
       if (live) setState((s) => ({ ...s, measure: measureIn(el) }));
-    });
+    };
+    document.fonts.addEventListener("loadingdone", onFonts);
+    void document.fonts.ready.then(onFonts);
     return () => {
       live = false;
       mo.disconnect();
+      document.fonts.removeEventListener("loadingdone", onFonts);
     };
   }, [el]);
   return [ref, state.measure, state.k] as const;
@@ -167,17 +171,20 @@ export function useLabelFit(key: string, floorOf?: (width: number, height: numbe
     // the chart library mounts and re-renders its own SVG (ticks, labels) after our margins reach it
     const mo = new MutationObserver(schedule);
     mo.observe(el, { subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ["x", "y", "viewBox", "transform"] });
-    void document.fonts?.ready.then(() => {
+    const onFonts = () => {
       if (!live) return;
       metricsCache.clear();
       setFit((f) => ({ ...f, measure: estimate }));
       schedule();
-    });
+    };
+    document.fonts.addEventListener("loadingdone", onFonts);
+    void document.fonts.ready.then(onFonts);
     return () => {
       live = false;
       if (frame) cancelAnimationFrame(frame);
       ro.disconnect();
       mo.disconnect();
+      document.fonts.removeEventListener("loadingdone", onFonts);
     };
   }, [el, key]);
   return [ref, fit] as const;

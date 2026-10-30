@@ -4,6 +4,7 @@
 // motion +print), placement/scatter structure, per-indicator ISOLATION, hero defects (label
 // collision, percent format, multi-ring donut), and extreme-drag safety.
 import { chromium } from "playwright";
+import { requireBase } from "../../../scripts/lib/require-base.mjs";
 import { mkdirSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -24,7 +25,7 @@ if (toolArg !== "fraction-calculator") {
   process.exit(1);
 }
 
-const BASE = "http://localhost:3000";
+const BASE = requireBase(process.env.BASE);
 const URL = `${BASE}/en/tools/fraction-calculator`;
 const RAW_FLOAT_RE = /\d\.\d{6,}/;
 const BAD_WORD_RE = /\bNaN\b|\bInfinity\b|\bundefined\b/;

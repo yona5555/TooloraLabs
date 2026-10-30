@@ -47,6 +47,7 @@ TooloraLabs-Claude-Instructions.md is a historical archive; the binding rules ar
 - Every gate proves itself: `npm run test:gates-self-test` (CI `gates-self-test`, required) runs each gate on a broken
   fixture in tests/gates/ and fails if any gate passes it. A new gate gets a canary in the same PR.
 - Every workflow runs bash with pipefail; never pipe a gate's output (`node scripts/workflow-shell.mjs`).
+- Fonts are self-hosted only (`apps/web/lib/fonts.ts`); no system family in source (`npm run test:system-fonts`).
 - `site-audit` and `perf-budget` (CI, required) are ratcheted, not a hard zero gate: `scripts/ratchet.mjs check`
   fails a PR only if one of its measured pages got WORSE than its entry in `.audit/ratchet/*.json` (site-audit:
   any criterion's count rose; perf-budget: LCP/TBT/CLS/JS rose or Performance fell by more than the measured

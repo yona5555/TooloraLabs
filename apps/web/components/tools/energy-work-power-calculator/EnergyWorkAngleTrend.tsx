@@ -47,12 +47,12 @@ export default function EnergyWorkAngleTrend() {
       <line x1={L} y1={MID} x2={R} y2={MID} className="stroke-zinc-300 dark:stroke-zinc-600" />
       <line x1={L} y1={T} x2={L} y2={B} className="stroke-zinc-300 dark:stroke-zinc-600" />
       {[0, 45, 90, 135, 180].map((d) => (
-        <text style={{ fontSize: svgPx(12) }} key={d} x={sx(d)} y={B + 14} textAnchor={d === 180 ? "end" : "middle"} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+        <text style={{ fontSize: svgPx(12) }} key={d} x={sx(d)} y={B + 14} textAnchor={d === 180 ? "end" : "middle"} fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
           {`${d}°`}
         </text>
       ))}
       {[1, 0, -1].map((k) => (
-        <text style={{ fontSize: svgPx(12) }} key={k} x={L - 5} y={sy(k * Wmax) + 3} textAnchor="end" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+        <text style={{ fontSize: svgPx(12) }} key={k} x={L - 5} y={sy(k * Wmax) + 3} textAnchor="end" fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
           {f(k * w.alignedWork, 2)}
         </text>
       ))}
@@ -65,7 +65,7 @@ export default function EnergyWorkAngleTrend() {
       <path d={path} fill="none" strokeWidth={2.5} className="stroke-blue-600 dark:stroke-blue-400" />
       <line x1={sx(90)} y1={T} x2={sx(90)} y2={B} strokeDasharray="3 3" className="stroke-zinc-400 dark:stroke-zinc-500" />
       <circle cx={cx} cy={cy} r={7} className="fill-red-600 dark:fill-red-400" />
-      <text style={{ fontSize: svgPx(12) }} x={cx > W / 2 ? cx - 10 : cx + 10} y={cy < MID ? cy + 18 : cy - 10} textAnchor={cx > W / 2 ? "end" : "start"} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-red-600 dark:fill-red-400">
+      <text style={{ fontSize: svgPx(12) }} x={cx > W / 2 ? cx - 10 : cx + 10} y={cy < MID ? cy + 18 : cy - 10} textAnchor={cx > W / 2 ? "end" : "start"} fontWeight={700} fontFamily="var(--font-mono)" className="fill-red-600 dark:fill-red-400">
         {`${f(a, 1)}° → ${f(w.work, 2)} J`}
       </text>
     </svg>

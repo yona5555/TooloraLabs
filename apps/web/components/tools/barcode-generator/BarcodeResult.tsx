@@ -91,7 +91,7 @@ export default function BarcodeResult() {
               <g key={i}>
                 <rect x={x + 0.6} y={4} width={w - 1.2} height={10} rx={3} className={ROLE_FILL[s.role]} />
                 {showLabel && (
-                  <text style={{ fontSize: svgPx(Math.min(14, w * 0.9)) }} x={x + w / 2} y={34} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
+                  <text style={{ fontSize: svgPx(Math.min(14, w * 0.9)) }} x={x + w / 2} y={34} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-700 dark:fill-zinc-200">
                     {s.label === " " ? "␣" : s.label}
                   </text>
                 )}

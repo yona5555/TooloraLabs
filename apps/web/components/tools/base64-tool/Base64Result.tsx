@@ -71,9 +71,9 @@ export default function Base64Result() {
       >
         {shownGroups.map((g, i) => (
           <div key={i} className="flex min-h-9 items-center gap-3 rounded-md bg-white px-3 dark:bg-zinc-900">
-            <span className="w-6 shrink-0 text-end font-mono text-[11px] text-zinc-400">{i + 1}</span>
+            <span className="w-6 shrink-0 text-end font-mono text-xs text-zinc-400">{i + 1}</span>
             <span className="shrink-0 font-mono text-xs text-zinc-600 dark:text-zinc-300">{g.bytes.map((b) => b.toString(16).padStart(2, "0")).join(" ")}</span>
-            <span className="min-w-0 flex-1 truncate font-mono text-[10px] tracking-tight text-zinc-400">{g.bytes.map((b) => b.toString(2).padStart(8, "0")).join(" ")}</span>
+            <span className="min-w-0 flex-1 break-words font-mono text-xs tracking-tight text-zinc-400">{g.bytes.map((b) => b.toString(2).padStart(8, "0")).join(" ")}</span>
             <span className={`shrink-0 font-mono text-base font-bold tracking-widest ${GROUP_TEXT[i % 2]}`}>
               {g.chars.map((c, k) => (
                 <span key={k} className={c === "=" ? "text-rose-500" : ""}>

@@ -54,7 +54,7 @@ export default function BarcodeSVG({
         x={barsWidth / 2}
         y={BAR_HEIGHT + TALL_EXTRA + TEXT_HEIGHT - 4}
         textAnchor="middle"
-        fontFamily="monospace"
+        fontFamily="var(--font-mono)"
         letterSpacing={2}
         fill="black"
         direction="ltr"

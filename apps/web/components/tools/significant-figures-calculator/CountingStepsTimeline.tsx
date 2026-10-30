@@ -29,7 +29,7 @@ export default function CountingStepsTimeline() {
               >
                 {entry.char}
               </span>
-              {i === firstSignificantIndex && <span className="text-[9px] font-semibold text-blue-600 dark:text-blue-400">{t("startHere")}</span>}
+              {i === firstSignificantIndex && <span className="text-xs font-semibold text-blue-600 dark:text-blue-400">{t("startHere")}</span>}
             </div>
           ))}
         </div>

@@ -34,7 +34,7 @@ export default function SdRunningTrend() {
         {[0, 0.5, 1].map((q) => (
           <g key={q}>
             <line x1={L} y1={sy(q * maxY)} x2={W - R} y2={sy(q * maxY)} strokeDasharray={q ? "3 3" : undefined} className="stroke-zinc-200 dark:stroke-zinc-700" />
-            <text style={{ fontSize: svgPx(12) }} x={L - 5} y={sy(q * maxY) + 3} textAnchor="end" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+            <text style={{ fontSize: svgPx(12) }} x={L - 5} y={sy(q * maxY) + 3} textAnchor="end" fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
               {f(q * maxY, 2)}
             </text>
           </g>

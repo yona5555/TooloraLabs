@@ -1,10 +1,11 @@
 // Scans side-by-side indicator rows (visual + table) and reports height mismatches (vertical gaps).
 // Usage: node apps/web/scripts/card-gap-scan.mjs slug [width]
 import { chromium } from "playwright";
+import { requireBase } from "../../../scripts/lib/require-base.mjs";
 const [slug, W = "1440"] = process.argv.slice(2);
 const b = await chromium.launch();
 const p = await (await b.newContext({ viewport: { width: Number(W), height: 900 } })).newPage();
-await p.goto(`http://localhost:3000/en/tools/${slug}`, { waitUntil: "load" });
+await p.goto(`${requireBase(process.env.BASE)}/en/tools/${slug}`, { waitUntil: "load" });
 await p.waitForTimeout(2500);
 await p.evaluate(async () => { for (let y = 0; y < document.body.scrollHeight; y += 500) { window.scrollTo(0, y); await new Promise((r) => setTimeout(r, 100)); } });
 const out = await p.evaluate(() => {

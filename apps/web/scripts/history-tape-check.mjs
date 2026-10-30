@@ -2,8 +2,9 @@
 // click reuses. Screenshots of the scientific panel in en light/dark + ar light.
 // Usage: node apps/web/scripts/history-tape-check.mjs outDir
 import { chromium } from "playwright";
+import { requireBase } from "../../../scripts/lib/require-base.mjs";
 const S = process.argv[2];
-const BASE = process.env.BASE_URL ?? "http://localhost:3000";
+const BASE = requireBase(process.env.BASE);
 const b = await chromium.launch();
 const ctx = await b.newContext({ viewport: { width: 1440, height: 900 } });
 const p = await ctx.newPage();

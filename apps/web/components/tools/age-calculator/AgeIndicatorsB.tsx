@@ -41,7 +41,7 @@ export function AgeLifeStagesCard({ d, f }: IndicatorProps) {
       <IndicatorWithTable
         workedExampleTitle={t("worked")}
         indicator={
-          <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("stages.title")} className="max-w-full">
+          <FitSvg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("stages.title")} className="max-w-full">
             <rect x={L} y={44} width={W - L - R} height={36} rx={6} fill="currentColor" fillOpacity={0.07} />
             {stages.map((s, i) => {
               const w = s.days * unit;
@@ -67,7 +67,7 @@ export function AgeLifeStagesCard({ d, f }: IndicatorProps) {
             </text>
             <text style={{ fontSize: svgPx(12) }} x={L} y={H - 6} className={axisText}>{r.birth.year}</text>
             <text style={{ fontSize: svgPx(12) }} x={W - R} y={H - 6} textAnchor="end" className={axisText}>{td("result.days")}: {f.int(r.totalDays)}</text>
-          </svg>
+          </FitSvg>
         }
         rows={[
           ...stages
@@ -111,7 +111,7 @@ export function AgeLifeGaugeCard({ state, setState, d, f }: IndicatorProps) {
         indicator={
           <div className="w-[320px] max-w-full">
             <PhoneMini slot={1} title={t("life.title")}>
-            <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("life.title")} className="max-w-full">
+            <FitSvg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("life.title")} className="max-w-full">
               {stops.map((c, i) => (
                 <path key={c} d={arc(Math.PI * (1 - i / 5), Math.PI * (1 - (i + 1) / 5))} stroke={c} strokeWidth={22} fill="none" />
               ))}
@@ -131,7 +131,7 @@ export function AgeLifeGaugeCard({ state, setState, d, f }: IndicatorProps) {
               <text style={{ fontSize: svgPx(12) }} x={cx} y={cy + 28} textAnchor="middle" className={axisText}>
                 {t("life.of", { y: f.num(life.lifeExpectancyYears, 1) })}
               </text>
-            </svg>
+            </FitSvg>
             </PhoneMini>
             <div role="radiogroup" className="mx-auto mt-1 grid w-48 grid-cols-2 gap-1 rounded-lg bg-zinc-100 p-1 dark:bg-zinc-800" data-bp-inner>
               {(["male", "female"] as Gender[]).map((g) => (
@@ -228,31 +228,36 @@ export function AgeFormulaCard({ d, f }: IndicatorProps) {
   const { report: r } = d;
   const g = r.gregorian;
   const h = r.hijri;
-  const W = 400;
+  // 4 boxes of BOX_W, 3 gaps of GAP between them (a delta-arrow label lives in each gap):
+  // W = 4 * BOX_W + 3 * GAP. Widened from the original 82/24 (W=400, zero slack) because the 12px
+  // label-size floor no longer fits box/arrow labels in that width without the chain overlapping.
+  const BOX_W = 96;
+  const GAP = 32;
+  const W = 4 * BOX_W + 3 * GAP;
   const H = h ? 230 : 120;
   const box = (x: number, y: number, w: number, top: string, bottom: string, color: string) => (
     <g>
       <rect x={x} y={y} width={w} height={44} rx={8} fill={color} fillOpacity={0.12} stroke={color} strokeWidth={1.5} />
-      <text x={x + w / 2} y={y + 18} textAnchor="middle" fontSize={11} fontWeight={800} fill={color}>{top}</text>
-      <text x={x + w / 2} y={y + 34} textAnchor="middle" fontSize={9} className={valueText}>{bottom}</text>
+      <text x={x + w / 2} y={y + 18} textAnchor="middle" style={{ fontSize: svgPx(11) }} fontWeight={800} fill={color}>{top}</text>
+      <text x={x + w / 2} y={y + 34} textAnchor="middle" style={{ fontSize: svgPx(9) }} className={valueText}>{bottom}</text>
     </g>
   );
   const arrow = (x1: number, x2: number, y: number, text: string, color: string) => (
     <g>
       <line x1={x1} x2={x2 - 4} y1={y} y2={y} stroke={color} strokeWidth={1.5} />
       <path d={`M ${x2 - 6} ${y - 4} L ${x2} ${y} L ${x2 - 6} ${y + 4} Z`} fill={color} />
-      <text x={(x1 + x2) / 2} y={y - 6} textAnchor="middle" fontSize={10} fontWeight={800} fill={color}>{text}</text>
+      <text x={(x1 + x2) / 2} y={y - 6} textAnchor="middle" style={{ fontSize: svgPx(10) }} fontWeight={800} fill={color}>{text}</text>
     </g>
   );
   const chain = (y: number, color: string, a: typeof g, fmt: (c: typeof r.birth) => string, anchor: string) => (
     <g>
-      {box(0, y, 82, td("result.birth"), fmt(r.birth), color)}
-      {arrow(82, 106, y + 22, `+${f.int(a.years)}`, color)}
-      {box(106, y, 82, td("result.lastBirthday"), fmt(a.lastBirthdayGregorian), color)}
-      {arrow(188, 212, y + 22, `+${f.int(a.months)}`, color)}
-      {box(212, y, 82, t("formula.anchor"), anchor, color)}
-      {arrow(294, 318, y + 22, `+${f.int(a.days)}`, color)}
-      {box(318, y, 82, td("result.reference"), fmt(r.reference), color)}
+      {box(0, y, BOX_W, td("result.birth"), fmt(r.birth), color)}
+      {arrow(BOX_W, BOX_W + GAP, y + 22, `+${f.int(a.years)}`, color)}
+      {box(BOX_W + GAP, y, BOX_W, td("result.lastBirthday"), fmt(a.lastBirthdayGregorian), color)}
+      {arrow(2 * BOX_W + GAP, 2 * (BOX_W + GAP), y + 22, `+${f.int(a.months)}`, color)}
+      {box(2 * (BOX_W + GAP), y, BOX_W, t("formula.anchor"), anchor, color)}
+      {arrow(3 * BOX_W + 2 * GAP, 3 * (BOX_W + GAP), y + 22, `+${f.int(a.days)}`, color)}
+      {box(3 * (BOX_W + GAP), y, BOX_W, td("result.reference"), fmt(r.reference), color)}
     </g>
   );
   const anchorOf = (a: typeof g) => {
@@ -269,20 +274,20 @@ export function AgeFormulaCard({ d, f }: IndicatorProps) {
         workedExampleTitle={t("worked")}
         indicator={
           <FitSvg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("formula.title")} data-annotation="" className="max-w-full">
-            <text x={0} y={14} fontSize={11} fontWeight={800} fill={AGE_COLORS.gregorian}>
+            <text x={0} y={14} style={{ fontSize: svgPx(11) }} fontWeight={800} fill={AGE_COLORS.gregorian}>
               {td("cal.gregorian")} = {td("ymd", { y: f.int(g.years), m: f.int(g.months), d: f.int(g.days) })}
             </text>
             {chain(24, AGE_COLORS.gregorian, g, f.iso, f.iso(anchorOf(g)))}
-            <text x={0} y={92} fontSize={9} className={axisText}>
+            <text x={0} y={92} style={{ fontSize: svgPx(9) }} className={axisText}>
               {t("formula.legend")}
             </text>
             {h && (
               <>
-                <text x={0} y={128} fontSize={11} fontWeight={800} fill={AGE_COLORS.hijri}>
+                <text x={0} y={128} style={{ fontSize: svgPx(11) }} fontWeight={800} fill={AGE_COLORS.hijri}>
                   {td("cal.hijri")} = {td("ymd", { y: f.int(h.years), m: f.int(h.months), d: f.int(h.days) })}
                 </text>
                 {chain(138, AGE_COLORS.hijri, h, f.hijri, f.hijri(anchorOf(h)))}
-                <text x={0} y={206} fontSize={9} className={axisText}>
+                <text x={0} y={206} style={{ fontSize: svgPx(9) }} className={axisText}>
                   {t("formula.hijriLegend")}
                 </text>
               </>

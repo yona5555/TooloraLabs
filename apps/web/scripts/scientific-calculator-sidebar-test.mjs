@@ -4,6 +4,7 @@
 // and snapping, tan-infinity at 90/270, Deg/Rad following the calculator's live mode, label
 // collisions, no squares in the new SVGs, literal-color grep, and contrast.
 import { chromium } from "playwright";
+import { requireBase } from "../../../scripts/lib/require-base.mjs";
 import { readFileSync, mkdirSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -12,7 +13,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ARTIFACTS_DIR = path.resolve(__dirname, "../../../artifacts/scientific-calculator-fill");
 mkdirSync(ARTIFACTS_DIR, { recursive: true });
 
-const BASE = "http://localhost:3000";
+const BASE = requireBase(process.env.BASE);
 const URL = `${BASE}/en/tools/scientific-calculator`;
 
 let failures = [];

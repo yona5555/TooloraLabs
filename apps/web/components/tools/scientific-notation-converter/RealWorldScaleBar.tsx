@@ -35,7 +35,7 @@ export default function RealWorldScaleBar() {
               ))}
               <div className="absolute top-1/2 h-4 w-4 -translate-y-1/2 -translate-x-1/2 rounded-full border-2 border-white bg-blue-600 transition-all duration-300 dark:border-zinc-900" style={{ left: `${pct}%` }} />
             </div>
-            <div className="relative mt-2 h-14 w-full text-[10px]">
+            <div className="relative mt-2 h-14 w-full text-xs">
               {REFERENCE.map((r, i) => {
                 const left = ((r.exponent - -10) / 26) * 100;
                 // the end labels hang inward so they stay inside the card on a phone

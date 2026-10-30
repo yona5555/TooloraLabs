@@ -44,14 +44,14 @@ export default function RsGradeLadder() {
           <path d="M0 -22 l14 5 l-14 5 z" className="fill-blue-700 dark:fill-blue-300" />
           <circle cx={0} cy={0} r={4} className="fill-zinc-800 dark:fill-zinc-100" />
         </g>
-        <text style={{ fontSize: svgPx(20) }} x={W - PAD} y={16} textAnchor="end" fontWeight={800} fontFamily="ui-monospace, monospace" className="fill-zinc-900 dark:fill-zinc-50">
+        <text style={{ fontSize: svgPx(20) }} x={W - PAD} y={16} textAnchor="end" fontWeight={800} fontFamily="var(--font-mono)" className="fill-zinc-900 dark:fill-zinc-50">
           {f(grade)}
         </text>
         <text style={{ fontSize: svgPx(12) }} x={W - PAD} y={30} textAnchor="end" fontWeight={700} fill={band.color}>
           {tl("gradeLabel")}
         </text>
       </svg>
-      <ul className="mt-2 grid grid-cols-2 gap-x-3 gap-y-1 text-[11px]">
+      <ul className="mt-2 grid grid-cols-2 gap-x-3 gap-y-1 text-xs">
         {GRADE_BANDS.map((b) => (
           <li key={b.key} className={`flex items-center gap-1.5 ${b === band ? "font-bold text-zinc-900 dark:text-zinc-50" : "text-zinc-500 dark:text-zinc-400"}`}>
             <span className="h-2.5 w-2.5 shrink-0 rounded-full" style={{ background: b.color }} />

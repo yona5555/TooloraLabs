@@ -29,11 +29,11 @@ export default function GcfLcmStackedCore() {
             <span dir="ltr" className="font-mono text-zinc-500 dark:text-zinc-400">{`${f(gcf)} × ${f(b.value / gcf)}`}</span>
           </div>
           <div dir="ltr" className="flex h-6 w-full overflow-hidden rounded-md bg-zinc-100 dark:bg-zinc-800">
-            <div className="flex items-center justify-center bg-emerald-500 max-md:bg-emerald-600 text-[10px] font-bold text-white dark:bg-emerald-400 dark:text-zinc-900" style={{ width: pct(gcf) }}>
+            <div className="flex items-center justify-center bg-emerald-500 max-md:bg-emerald-600 text-xs font-bold text-white dark:bg-emerald-400 dark:text-zinc-900" style={{ width: pct(gcf) }}>
               {gcf > 1 ? f(gcf) : ""}
             </div>
             <div
-              className={`flex items-center justify-center text-[10px] font-bold ${b.lcmBar ? "bg-violet-500 max-md:bg-violet-600 text-white dark:bg-violet-400 dark:text-zinc-900" : "bg-blue-400 max-md:bg-blue-600 text-white dark:bg-blue-500 max-md:dark:bg-blue-600"}`}
+              className={`flex items-center justify-center text-xs font-bold ${b.lcmBar ? "bg-violet-500 max-md:bg-violet-600 text-white dark:bg-violet-400 dark:text-zinc-900" : "bg-blue-400 max-md:bg-blue-600 text-white dark:bg-blue-500 max-md:dark:bg-blue-600"}`}
               style={{ width: `calc(${pct(b.value)} - ${pct(gcf)})` }}
             >
               {b.value / gcf > 1 ? f(b.value / gcf) : ""}
@@ -41,7 +41,7 @@ export default function GcfLcmStackedCore() {
           </div>
         </div>
       ))}
-      <div className="flex flex-wrap gap-3 pt-1 text-[11px] text-zinc-500 dark:text-zinc-400">
+      <div className="flex flex-wrap gap-3 pt-1 text-xs text-zinc-500 dark:text-zinc-400">
         <span className="inline-flex items-center gap-1"><span className="h-2.5 w-2.5 rounded-sm bg-emerald-500" />{t("core")}</span>
         <span className="inline-flex items-center gap-1"><span className="h-2.5 w-2.5 rounded-sm bg-blue-400" />{t("own")}</span>
         <span className="inline-flex items-center gap-1"><span className="h-2.5 w-2.5 rounded-sm bg-violet-500" />{t("extra")}</span>

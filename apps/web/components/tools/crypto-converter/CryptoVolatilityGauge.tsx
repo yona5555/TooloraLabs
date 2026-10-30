@@ -81,7 +81,7 @@ export default function CryptoVolatilityGauge({ coin, digitStyle }: Props) {
               {f.num(vol.annualizedPercent, 1)}%
             </p>
             <p className={`text-sm font-semibold ${zone === "low" ? "text-emerald-600" : zone === "medium" ? "text-amber-600" : "text-red-600"}`}>{t(`zones.${zone}`)}</p>
-            <div className="mt-2 flex gap-3 text-[11px] text-zinc-500 dark:text-zinc-400">
+            <div className="mt-2 flex gap-3 text-xs text-zinc-500 dark:text-zinc-400">
               <span><span className="me-1 inline-block h-2 w-2 rounded-full bg-emerald-500" />{t("zones.low")} &lt;{VOLATILITY_ZONE_LIMITS.low}%</span>
               <span><span className="me-1 inline-block h-2 w-2 rounded-full bg-amber-400" />{t("zones.medium")}</span>
               <span><span className="me-1 inline-block h-2 w-2 rounded-full bg-red-500" />{t("zones.high")} &gt;{VOLATILITY_ZONE_LIMITS.medium}%</span>

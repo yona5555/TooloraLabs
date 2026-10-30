@@ -53,7 +53,7 @@ export default function RtPresetCompare() {
           );
         })}
       </ul>
-      <p className="mt-2 text-[11px] text-amber-700 dark:text-amber-300">{t("hint")}</p>
+      <p className="mt-2 text-xs text-amber-700 dark:text-amber-300">{t("hint")}</p>
     </div>
   );
 

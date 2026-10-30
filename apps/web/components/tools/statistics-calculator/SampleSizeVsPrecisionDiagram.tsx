@@ -33,7 +33,7 @@ export default function SampleSizeVsPrecisionDiagram() {
           <div className="relative h-2 w-full rounded-full bg-zinc-200 dark:bg-zinc-700">
             <div className="absolute top-1/2 h-4 w-4 -translate-y-1/2 -translate-x-1/2 rounded-full border-2 border-white bg-blue-600 transition-all duration-300 dark:border-zinc-900" style={{ left: `${pct}%` }} />
           </div>
-          <div className="mt-1 flex justify-between text-[10px] font-semibold uppercase tracking-wide text-zinc-400 dark:text-zinc-500">
+          <div className="mt-1 flex justify-between text-xs font-semibold uppercase tracking-wide text-zinc-400 dark:text-zinc-500">
             <span>{t("zones.smallN")}</span>
             <span>{t("zones.largeN")}</span>
           </div>

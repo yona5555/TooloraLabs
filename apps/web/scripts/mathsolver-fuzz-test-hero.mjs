@@ -3,8 +3,9 @@
 // shows a raw long decimal, NaN, Infinity, -0, or "undefined" -- the exact bug class the rebuild
 // was commissioned to fix.
 import { chromium } from "playwright";
+import { requireBase } from "../../../scripts/lib/require-base.mjs";
 
-const BASE = "http://localhost:3000";
+const BASE = requireBase(process.env.BASE);
 const TOTAL_DRAGS = 500;
 // A value is "clean" if it's a short integer, a simple a/b fraction, or a decimal with <=4
 // significant digits after rounding -- anything wildly long (raw float noise) fails this.

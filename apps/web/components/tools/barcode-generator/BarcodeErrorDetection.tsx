@@ -45,7 +45,7 @@ export default function BarcodeErrorDetection() {
             </text>
             <rect x={BAR_X} y={y + 4} width={Math.max(2, caught)} height={22} rx={4} className="fill-emerald-500 dark:fill-emerald-400" />
             {BAR_W - caught > 0.5 && <rect x={BAR_X + caught} y={y + 4} width={BAR_W - caught} height={22} rx={4} className="fill-rose-500 dark:fill-rose-400" />}
-            <text style={{ fontSize: svgPx(12) }} x={BAR_X} y={y + 44} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+            <text style={{ fontSize: svgPx(12) }} x={BAR_X} y={y + 44} fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
               {f(g.detected)} / {f(g.total)} · {pct(g.detected, g.total || 1)}
             </text>
           </g>

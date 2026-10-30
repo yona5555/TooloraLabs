@@ -5,6 +5,7 @@ import { DateCalculator as DateTool } from "@tooloralabs/tools";
 import EncyclopediaLiveWidget from "@/components/tool-ui/EncyclopediaLiveWidget";
 import { DATE_SCENARIOS } from "./types";
 import { svgPx } from "@/components/tool-ui/svgPx";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { shiftISO, useTodayISO } from "@/lib/use-today";
 
 const tool = new DateTool();
@@ -48,7 +49,7 @@ export default function DateAddSubtractTimelineDiagram() {
       <p className="mb-4 text-sm leading-6 opacity-80">{t("intro")}</p>
 
       <div dir="ltr" className="w-full">
-        <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={t("ariaLabel")} className="w-full">
+        <FitSvg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={t("ariaLabel")} className="w-full">
           <line x1={MARGIN} y1={HEIGHT / 2} x2={WIDTH - MARGIN} y2={HEIGHT / 2} strokeWidth={3} className="stroke-current/15" />
 
           <circle cx={MARGIN} cy={HEIGHT / 2} r={7} className="fill-zinc-400 dark:fill-zinc-500" />
@@ -82,7 +83,7 @@ export default function DateAddSubtractTimelineDiagram() {
           <text style={{ fontSize: svgPx(12) }} x={WIDTH - MARGIN} y={HEIGHT / 2 + 22} textAnchor="middle" fontWeight="600" className="fill-current">
             {formatDate(resultISO)}
           </text>
-        </svg>
+        </FitSvg>
       </div>
 
       <div role="tablist" className="mt-2 flex flex-wrap justify-center gap-2">

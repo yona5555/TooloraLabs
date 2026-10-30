@@ -33,7 +33,7 @@ export default function MmmQuartileStacked() {
           </div>
         ))}
       </div>
-      <div dir="ltr" className="mt-2 flex justify-between font-mono text-[11px] text-zinc-600 dark:text-zinc-300">
+      <div dir="ltr" className="mt-2 flex justify-between font-mono text-xs text-zinc-600 dark:text-zinc-300">
         {cuts.map((c, i) => (
           <span key={i} className="flex flex-col items-center">
             <span className="font-semibold">{["min", "Q1", "Q2", "Q3", "max"][i]}</span>
@@ -41,7 +41,7 @@ export default function MmmQuartileStacked() {
           </span>
         ))}
       </div>
-      <div className="mt-3 grid grid-cols-4 gap-1 text-center text-[11px] text-zinc-500 dark:text-zinc-400">
+      <div className="mt-3 grid grid-cols-4 gap-1 text-center text-xs text-zinc-500 dark:text-zinc-400">
         {segs.map((s, i) => (
           <span key={i}>{`${t("quarter")} ${i + 1} · ${f((s.len / total) * 100, 0)}%`}</span>
         ))}

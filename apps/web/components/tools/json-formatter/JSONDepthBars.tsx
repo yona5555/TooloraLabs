@@ -34,7 +34,7 @@ export default function JSONDepthBars() {
           <g key={i}>
             <rect x={x} y={BASE - h} width={barW} height={h} rx={4} className={i === widest ? "fill-blue-600 dark:fill-blue-400" : "fill-blue-300 dark:fill-blue-800"} />
             {(slot >= 18 || i === widest) && (
-              <text style={{ fontSize: svgPx(12) }} x={x + barW / 2} y={BASE - h - 5} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+              <text style={{ fontSize: svgPx(12) }} x={x + barW / 2} y={BASE - h - 5} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
                 {f(c)}
               </text>
             )}

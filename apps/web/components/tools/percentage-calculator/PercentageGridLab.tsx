@@ -90,7 +90,7 @@ export default function PercentageGridLab() {
           );
         })}
       </div>
-      <span className="font-mono text-[11px] text-zinc-500 dark:text-zinc-400">{caption}</span>
+      <span className="font-mono text-xs text-zinc-500 dark:text-zinc-400">{caption}</span>
     </div>
   );
 

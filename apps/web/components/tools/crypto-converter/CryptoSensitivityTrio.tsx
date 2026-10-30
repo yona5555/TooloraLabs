@@ -41,7 +41,7 @@ export default function CryptoSensitivityTrio({ fromCoin, toCoin, amount, digitS
           {points.map((p, i) => (
             <div key={p.shiftPercent} className={`flex flex-col rounded-xl border p-3 ${tone[i]}`}>
               <span className="text-xs font-semibold text-zinc-600 dark:text-zinc-300">{t(i === 0 ? "low" : i === 1 ? "now" : "high")}</span>
-              <span dir="ltr" className="font-mono text-[11px] text-zinc-500 dark:text-zinc-400">
+              <span dir="ltr" className="font-mono text-xs text-zinc-500 dark:text-zinc-400">
                 {from} {f.money(p.fromPrice)}
               </span>
               <div className="mt-2 flex h-24 items-end">
@@ -50,7 +50,7 @@ export default function CryptoSensitivityTrio({ fromCoin, toCoin, amount, digitS
               <span dir="ltr" className="mt-2 truncate font-mono text-sm font-bold text-zinc-900 dark:text-zinc-100">
                 {f.amount(p.converted)} {to}
               </span>
-              <span dir="ltr" className="font-mono text-[11px] text-zinc-500 dark:text-zinc-400">
+              <span dir="ltr" className="font-mono text-xs text-zinc-500 dark:text-zinc-400">
                 {p.shiftPercent === 0 ? "—" : `${p.shiftPercent > 0 ? "+" : ""}${f.amount(p.converted - points[1].converted)} ${to}`}
               </span>
             </div>

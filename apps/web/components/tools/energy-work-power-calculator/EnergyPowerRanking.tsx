@@ -43,7 +43,7 @@ export default function EnergyPowerRanking() {
           );
         })}
       </ol>
-      <p className="mt-2 text-[11px] leading-snug text-zinc-400 dark:text-zinc-500">{t("source")}</p>
+      <p className="mt-2 text-xs leading-snug text-zinc-400 dark:text-zinc-500">{t("source")}</p>
     </div>
   );
 

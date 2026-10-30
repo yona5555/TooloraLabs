@@ -38,7 +38,7 @@ export function TcWeekBarsCard({ s, set, d, f }: CardProps) {
               ariaLabel={t("week.title")}
               offLabel={tc("result.off")}
             />
-            <p className="mt-1 flex flex-wrap items-center justify-center gap-3 text-[11px] text-zinc-500 dark:text-zinc-400">
+            <p className="mt-1 flex flex-wrap items-center justify-center gap-3 text-xs text-zinc-500 dark:text-zinc-400">
               <span className="flex items-center gap-1"><span className="inline-block h-2.5 w-2.5 rounded-sm" style={{ background: C.main }} />{tc("result.regular")}</span>
               <span className="flex items-center gap-1"><span className="inline-block h-2.5 w-2.5 rounded-sm" style={{ background: C.ot }} />{tc("result.overtime")}</span>
               <span>{t("week.hint")}</span>
@@ -245,7 +245,7 @@ export function TcRoundingTrioCard({ s, set, d, f }: CardProps) {
                     onClick={() => set({ dec: { ...s.dec, round: m } })}
                     className={`rounded-xl border-2 p-2 text-center transition ${s.dec.round === m ? "border-blue-600 bg-blue-50 dark:bg-blue-500/10" : "border-zinc-200 dark:border-zinc-700"}`}
                   >
-                    <p className="text-[11px] font-semibold text-zinc-500 dark:text-zinc-400">{tc(`round.${m}`)}</p>
+                    <p className="text-xs font-semibold text-zinc-500 dark:text-zinc-400">{tc(`round.${m}`)}</p>
                     <p dir="ltr" className="font-mono text-lg font-bold text-zinc-900 dark:text-zinc-100">{f.durHm(v)}</p>
                     <p dir="ltr" className="font-mono text-xs text-zinc-500 dark:text-zinc-400">{f.num(v / 3600)} h</p>
                     <svg width="100%" height="36" viewBox="0 0 100 36" className="mt-1" style={{ direction: "ltr" }}>

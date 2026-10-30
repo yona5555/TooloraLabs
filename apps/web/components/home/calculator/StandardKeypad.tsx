@@ -94,7 +94,7 @@ export default function StandardKeypad({ dispatch }: StandardKeypadProps) {
           {button.label === "⌫" ? (
             <Delete size={16} />
           ) : (
-            <AutoFitText text={button.label} dir="ltr" allowWrap={false} className="font-semibold" steps={["text-base", "text-sm", "text-xs", "text-[10px]"]} />
+            <AutoFitText text={button.label} dir="ltr" allowWrap={false} className="font-semibold" steps={["text-base", "text-sm", "text-xs", "text-xs"]} />
           )}
         </button>
       ))}

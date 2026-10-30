@@ -51,7 +51,7 @@ export default function PasswordCrackLadder() {
               y={y + 28}
               textAnchor={x(v) > W - 70 ? "end" : "start"}
               fontWeight={700}
-              fontFamily="ui-monospace, monospace"
+              fontFamily="var(--font-mono)"
               className={x(v) > W - 70 ? "fill-white" : "fill-zinc-700 dark:fill-zinc-200"}
             >
               {v > HI ? `> 10³⁰ s` : `${pow10Text(v)} s`}

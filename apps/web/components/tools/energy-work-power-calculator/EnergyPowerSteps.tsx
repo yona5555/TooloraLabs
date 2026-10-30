@@ -34,13 +34,13 @@ export default function EnergyPowerSteps() {
         return (
           <g key={s.factor}>
             <rect x={x + 2} y={BASE - h} width={STEP - 4} height={Math.max(1, h)} rx={3} className={on ? "fill-amber-500 dark:fill-amber-400" : "fill-zinc-300 dark:fill-zinc-600"} />
-            <text style={{ fontSize: svgPx(12) }} x={x + STEP / 2} y={BASE - h - 7} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={x + STEP / 2} y={BASE - h - 7} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
               {f(s.power, 2)}
             </text>
-            <text style={{ fontSize: svgPx(12) }} x={x + STEP / 2} y={BASE + 15} textAnchor="middle" fontWeight={on ? 700 : 500} fontFamily="ui-monospace, monospace" className={on ? "fill-amber-600 dark:fill-amber-400" : "fill-zinc-600 dark:fill-zinc-300"}>
+            <text style={{ fontSize: svgPx(12) }} x={x + STEP / 2} y={BASE + 15} textAnchor="middle" fontWeight={on ? 700 : 500} fontFamily="var(--font-mono)" className={on ? "fill-amber-600 dark:fill-amber-400" : "fill-zinc-600 dark:fill-zinc-300"}>
               {names[i]}
             </text>
-            <text style={{ fontSize: svgPx(12) }} x={x + STEP / 2} y={BASE + 30} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+            <text style={{ fontSize: svgPx(12) }} x={x + STEP / 2} y={BASE + 30} textAnchor="middle" fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
               {`${f(s.time, 2)} s`}
             </text>
           </g>

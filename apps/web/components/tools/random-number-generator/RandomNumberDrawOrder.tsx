@@ -33,7 +33,7 @@ export default function RandomNumberDrawOrder({ d, f }: { d: Draw; f: RngFormatt
           { id: "repeat", k: t("repeat"), v: f.pct(repeat, 2) },
         ].map((row) => (
           <div key={row.id} className="rounded-lg bg-zinc-50 px-3 py-1.5 dark:bg-zinc-800/50">
-            <dt className="text-[11px] text-zinc-500 dark:text-zinc-400">{row.k}</dt>
+            <dt className="text-xs text-zinc-500 dark:text-zinc-400">{row.k}</dt>
             <dd dir="ltr" className="truncate font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100" data-testid={`rng-order-${row.id}`}>
               {row.v}
             </dd>

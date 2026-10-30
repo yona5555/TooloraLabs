@@ -90,7 +90,7 @@ export default function ScientificAngleExplorer() {
           {(["sin", "cos", "tan"] as const).map((fn) => {
             const sg = f.signs[fn];
             return (
-              <span key={fn} className={`rounded-full px-2 py-0.5 text-[11px] font-bold ${signTone(sg)}`}>
+              <span key={fn} className={`rounded-full px-2 py-0.5 text-xs font-bold ${signTone(sg)}`}>
                 {`${fn} ${sg === "undef" ? "∄" : sg}`}
               </span>
             );

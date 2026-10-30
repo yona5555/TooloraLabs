@@ -1,3 +1,5 @@
+import { svgPx } from "@/components/tool-ui/svgPx";
+import FitSvg from "@/components/tool-ui/FitSvg";
 export type BreakdownSegment = { label: string; value: number; colorClass: string };
 
 type Props = {
@@ -32,14 +34,14 @@ export default function BreakdownBarDiagram({ segments, totalLabel, caption }: P
   return (
     <figure className="my-2">
       <div dir="ltr" className="flex justify-center overflow-x-auto">
-        <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={caption} className="h-auto w-full max-w-lg">
+        <FitSvg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={caption} className="h-auto w-full max-w-lg">
           {positioned.map((seg) => (
             <rect key={seg.label} x={seg.x} y={BAR_TOP} width={seg.width} height={BAR_HEIGHT} className={seg.colorClass} />
           ))}
           <rect x={0} y={BAR_TOP} width={WIDTH} height={BAR_HEIGHT} rx={8} fill="none" stroke="currentColor" strokeWidth={1} className="text-zinc-300 dark:text-zinc-700" />
 
           {positioned.map((seg) => (
-            <text key={`label-${seg.label}`} x={seg.x + seg.width / 2} y={BAR_TOP + BAR_HEIGHT / 2 + 4} textAnchor="middle" fontSize={11} fontWeight={600} className="fill-white">
+            <text key={`label-${seg.label}`} x={seg.x + seg.width / 2} y={BAR_TOP + BAR_HEIGHT / 2 + 4} textAnchor="middle" style={{ fontSize: svgPx(11) }} fontWeight={600} className="fill-white">
               {seg.width > 60 ? seg.label : ""}
             </text>
           ))}
@@ -52,13 +54,13 @@ export default function BreakdownBarDiagram({ segments, totalLabel, caption }: P
             {segments.map((seg, i) => (
               <g key={seg.label} transform={`translate(${i * 150}, 0)`}>
                 <rect width={10} height={10} rx={2} className={seg.colorClass} />
-                <text x={16} y={9} fontSize={11} className="fill-zinc-600 dark:fill-zinc-300">
+                <text x={16} y={9} style={{ fontSize: svgPx(11) }} className="fill-zinc-600 dark:fill-zinc-300">
                   {seg.label}
                 </text>
               </g>
             ))}
           </g>
-        </svg>
+        </FitSvg>
       </div>
       <figcaption className="mt-2 text-center text-sm text-zinc-500 dark:text-zinc-400">{caption}</figcaption>
     </figure>

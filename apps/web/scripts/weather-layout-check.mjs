@@ -1,6 +1,7 @@
 // DOM check (no screenshots): weather cards put the table at the start side, labels unclipped, RTL chart mirroring, map fullscreen.
 import { chromium } from "playwright";
-const base = process.env.BASE ?? "http://localhost:3001";
+import { requireBase } from "../../../scripts/lib/require-base.mjs";
+const base = requireBase(process.env.BASE);
 const browser = await chromium.launch();
 for (const [locale, width, theme] of [["ar", 1440, "light"], ["en", 1440, "dark"], ["ar", 375, "light"]]) {
   const page = await browser.newPage({ viewport: { width, height: 900 } });

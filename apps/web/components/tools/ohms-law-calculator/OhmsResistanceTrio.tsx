@@ -39,16 +39,16 @@ export default function OhmsResistanceTrio() {
           <g key={it.factor}>
             <rect x={cx - BAR - 2} y={BASE - hI} width={BAR} height={Math.max(1, hI)} rx={5} className={CLS[i]} />
             <rect x={cx + 2} y={BASE - hP} width={BAR} height={Math.max(1, hP)} rx={5} strokeWidth={2} className="fill-red-500/15 stroke-red-500 dark:fill-red-400/15 dark:stroke-red-400" />
-            <text style={{ fontSize: svgPx(12) }} x={cx - BAR / 2 - 2} y={BASE - hI - 6} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={cx - BAR / 2 - 2} y={BASE - hI - 6} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
               {`${f(it.current, 3)} A`}
             </text>
-            <text style={{ fontSize: svgPx(12) }} x={cx + BAR / 2 + 2} y={BASE - hP - 18} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-red-600 dark:fill-red-400">
+            <text style={{ fontSize: svgPx(12) }} x={cx + BAR / 2 + 2} y={BASE - hP - 18} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className="fill-red-600 dark:fill-red-400">
               {`${f(it.power, 3)} W`}
             </text>
             <text style={{ fontSize: svgPx(12) }} x={cx} y={BASE + 16} textAnchor="middle" fontWeight={600} className="fill-zinc-600 dark:fill-zinc-300">
               {names[i]}
             </text>
-            <text style={{ fontSize: svgPx(12) }} x={cx} y={BASE + 31} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+            <text style={{ fontSize: svgPx(12) }} x={cx} y={BASE + 31} textAnchor="middle" fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
               {`${f(it.resistance)} Ω`}
             </text>
           </g>

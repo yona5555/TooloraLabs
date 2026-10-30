@@ -2,7 +2,7 @@ import { Inter } from "next/font/google";
 
 /**
  * The hard rules for this tool's glass cards call for Inter specifically. The site's own default
- * body font is Arial/Helvetica (app/globals.css), so Inter isn't loaded anywhere else -- this is
+ * body font is Arimo (lib/fonts.ts), so Inter isn't loaded anywhere else -- this is
  * the one place it's pulled in, scoped to these cards only via the CSS variable below rather than
  * changed site-wide. No preload: it is never the LCP text, and a preload would compete with it.
  */

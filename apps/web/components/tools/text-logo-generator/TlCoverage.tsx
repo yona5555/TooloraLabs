@@ -48,7 +48,7 @@ export default function TlCoverage() {
           );
         })}
       </svg>
-      <div className="flex flex-wrap gap-x-3 gap-y-1 text-[11px] text-zinc-600 dark:text-zinc-300">
+      <div className="flex flex-wrap gap-x-3 gap-y-1 text-xs text-zinc-600 dark:text-zinc-300">
         {SEGMENTS.map((seg) => (
           <span key={seg.key} className="inline-flex items-center gap-1">
             <svg width={10} height={10} aria-hidden>

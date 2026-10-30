@@ -109,7 +109,7 @@ export default function CitationStudioInput({ state, onChange, onReset }: Props)
         </form>
         <p
           role="status"
-          className={`mt-1 min-h-4 text-[11px] leading-4 ${status.kind === "error" ? "text-red-600 dark:text-red-400" : "text-zinc-500 dark:text-zinc-400"}`}
+          className={`mt-1 min-h-4 text-xs leading-4 ${status.kind === "error" ? "text-red-600 dark:text-red-400" : "text-zinc-500 dark:text-zinc-400"}`}
         >
           {status.kind === "loading"
             ? t("input.status.loading")
@@ -152,7 +152,7 @@ export default function CitationStudioInput({ state, onChange, onReset }: Props)
 
       <fieldset className="rounded-xl border border-zinc-200 p-2.5 dark:border-zinc-700">
         <legend className="px-1 text-sm font-bold text-blue-700 dark:text-blue-300">{t("fields.authors")}</legend>
-        <div className="grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)_1.75rem] gap-1.5 text-[11px] font-semibold text-zinc-500 dark:text-zinc-400">
+        <div className="grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)_1.75rem] gap-1.5 text-xs font-semibold text-zinc-500 dark:text-zinc-400">
           <span>{t("input.given")}</span>
           <span>{t("input.family")}</span>
           <span />
@@ -181,7 +181,7 @@ export default function CitationStudioInput({ state, onChange, onReset }: Props)
           <Plus size={14} />
           {t("input.addAuthor")}
         </button>
-        <p className="mt-1 text-[11px] leading-4 text-zinc-500 dark:text-zinc-400">{t("input.orgHint")}</p>
+        <p className="mt-1 text-xs leading-4 text-zinc-500 dark:text-zinc-400">{t("input.orgHint")}</p>
       </fieldset>
 
       <div className="grid grid-cols-2 gap-2">
@@ -208,7 +208,7 @@ export default function CitationStudioInput({ state, onChange, onReset }: Props)
         <RotateCcw size={15} />
         {t("input.reset")}
       </button>
-      <p className="text-[11px] leading-4 text-zinc-500 dark:text-zinc-400">{t("input.savedNote")}</p>
+      <p className="text-xs leading-4 text-zinc-500 dark:text-zinc-400">{t("input.savedNote")}</p>
     </SectionCard>
   );
 }

@@ -58,7 +58,7 @@ export default async function TipFormulaDiagram() {
                 <text style={{ fontSize: svgPx(12) }} x={stop.zoneStart + STOP_ZONE_W / 2} y={RIBBON_TOP + 22} textAnchor="middle" fontWeight={600} fill="white" opacity={0.85}>
                   {stop.label}
                 </text>
-                <text style={{ fontSize: svgPx(13) }} x={stop.zoneStart + STOP_ZONE_W / 2} y={RIBBON_TOP + 40} textAnchor="middle" fontWeight={700} fill="white" fontFamily="monospace">
+                <text style={{ fontSize: svgPx(13) }} x={stop.zoneStart + STOP_ZONE_W / 2} y={RIBBON_TOP + 40} textAnchor="middle" fontWeight={700} fill="white" fontFamily="var(--font-mono)">
                   {stop.value}
                 </text>
               </g>
@@ -67,7 +67,7 @@ export default async function TipFormulaDiagram() {
             <text style={{ fontSize: svgPx(12) }} x={resultZoneStart + RESULT_ZONE_W / 2} y={RIBBON_TOP + 22} textAnchor="middle" fontWeight={600} fill="white" opacity={0.85}>
               {tRoot("workedExampleTitle")}
             </text>
-            <text style={{ fontSize: svgPx(17) }} x={resultZoneStart + RESULT_ZONE_W / 2} y={RIBBON_TOP + 44} textAnchor="middle" fontWeight={700} fill="white" fontFamily="monospace">
+            <text style={{ fontSize: svgPx(17) }} x={resultZoneStart + RESULT_ZONE_W / 2} y={RIBBON_TOP + 44} textAnchor="middle" fontWeight={700} fill="white" fontFamily="var(--font-mono)">
               ${TOTAL.toFixed(2)}
             </text>
           </svg>

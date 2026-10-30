@@ -37,7 +37,7 @@ export default function QRMinVersionSteps() {
               {v > 40 ? "—" : `v${v}`}
             </text>
             {v <= 40 && (
-              <text style={{ fontSize: svgPx(12) }} x={i * step + step / 2} y={BASE - 8} textAnchor="middle" fontFamily="ui-monospace, monospace" className={active ? "fill-white" : "fill-blue-800 dark:fill-blue-200"}>
+              <text style={{ fontSize: svgPx(12) }} x={i * step + step / 2} y={BASE - 8} textAnchor="middle" fontFamily="var(--font-mono)" className={active ? "fill-white" : "fill-blue-800 dark:fill-blue-200"}>
                 {17 + 4 * v}²
               </text>
             )}

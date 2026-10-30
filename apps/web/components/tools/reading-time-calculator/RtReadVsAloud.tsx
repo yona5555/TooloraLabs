@@ -31,10 +31,10 @@ export default function RtReadVsAloud() {
           <div className="mt-1 h-4 rounded-full bg-zinc-100 dark:bg-zinc-800">
             <div className={`h-4 rounded-full ${l.bar}`} style={{ width: `${(l.sec / longest) * 100}%`, transition: "width 250ms ease" }} />
           </div>
-          <p className="mt-0.5 text-[11px] text-zinc-500 dark:text-zinc-400">{t("pace", { wpm: f(l.rate) })}</p>
+          <p className="mt-0.5 text-xs text-zinc-500 dark:text-zinc-400">{t("pace", { wpm: f(l.rate) })}</p>
         </div>
       ))}
-      <label className="flex items-center gap-2 text-[11px] text-zinc-500 dark:text-zinc-400">
+      <label className="flex items-center gap-2 text-xs text-zinc-500 dark:text-zinc-400">
         <span className="shrink-0">{t("speakPace")}</span>
         <input type="range" min={90} max={200} step={5} value={speak} onChange={(e) => setSpeak(Number(e.target.value))} className="w-full accent-violet-600" aria-label={t("speakPace")} />
       </label>

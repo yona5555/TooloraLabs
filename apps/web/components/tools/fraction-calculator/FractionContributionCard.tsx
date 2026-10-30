@@ -43,7 +43,7 @@ export default function FractionContributionCard() {
               B
             </div>
           </div>
-          <p className="text-center text-[11px]" style={{ color: "var(--glass-muted)" }}>
+          <p className="text-center text-xs" style={{ color: "var(--glass-muted)" }}>
             {t("gapToOne", { gap: formatMathValue(share.gapToOne) })}
           </p>
         </div>

@@ -132,7 +132,7 @@ export default function ImageCompare({
             <div className="absolute inset-0" style={bg(originalUrl)} />
             {resultUrl && <div data-testid="image-lens-after" className="absolute inset-0" style={{ ...bg(resultUrl), clipPath: "inset(0 0 0 50%)" }} />}
             <div className="absolute inset-y-0 left-1/2 w-0.5 -translate-x-1/2" style={{ background: "var(--ph-knob)" }} />
-            <span className="absolute bottom-2 left-1/2 -translate-x-1/2 rounded-full px-2 py-0.5 text-[11px] font-bold tabular-nums" style={{ background: "var(--ph-surface)", color: "var(--ph-ink)" }}>
+            <span className="absolute bottom-2 left-1/2 -translate-x-1/2 rounded-full px-2 py-0.5 text-xs font-bold tabular-nums" style={{ background: "var(--ph-surface)", color: "var(--ph-ink)" }}>
               ×{ZOOM}
             </span>
           </div>

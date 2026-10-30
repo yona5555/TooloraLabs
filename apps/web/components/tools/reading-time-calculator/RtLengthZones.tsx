@@ -25,7 +25,7 @@ export default function RtLengthZones() {
           className="absolute top-0 flex -translate-x-1/2 flex-col items-center"
           style={{ left: `${zone.position * 100}%`, transition: "left 400ms cubic-bezier(.3,1.3,.5,1)" }}
         >
-          <span className="rounded-md bg-zinc-900 px-1.5 py-0.5 font-mono text-[11px] font-bold whitespace-nowrap text-white dark:bg-white dark:text-zinc-900">{clock(result.totalSeconds)}</span>
+          <span className="rounded-md bg-zinc-900 px-1.5 py-0.5 font-mono text-xs font-bold whitespace-nowrap text-white dark:bg-white dark:text-zinc-900">{clock(result.totalSeconds)}</span>
           <span className="h-0 w-0 border-x-[5px] border-t-[6px] border-x-transparent border-t-zinc-900 dark:border-t-white" />
         </div>
         <div className="relative flex h-7 overflow-hidden rounded-lg">
@@ -38,18 +38,18 @@ export default function RtLengthZones() {
             title={t("spanTitle")}
           />
         </div>
-        <div className="mt-1 flex text-[9px] text-zinc-500 dark:text-zinc-400">
+        <div className="mt-1 flex text-xs text-zinc-500 dark:text-zinc-400">
           {LENGTH_ZONES.map((z, i) => (
             <span key={z.key} className="flex-1 text-center font-mono">{`${f(i === 0 ? 0 : LENGTH_ZONES[i - 1].max / 60)}–${f(z.max / 60)}`}</span>
           ))}
         </div>
       </div>
-      <div className="mt-1 flex text-[10px] font-semibold">
+      <div className="mt-1 flex text-xs font-semibold">
         {LENGTH_ZONES.map((z, i) => (
           <span key={z.key} className={`flex-1 text-center ${i === zone.index ? z.text : "text-zinc-400 dark:text-zinc-500"}`}>{t(z.key)}</span>
         ))}
       </div>
-      <p className="mt-2 text-[11px] text-zinc-500 dark:text-zinc-400">{t("legend")}</p>
+      <p className="mt-2 text-xs text-zinc-500 dark:text-zinc-400">{t("legend")}</p>
     </div>
   );
 

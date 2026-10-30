@@ -243,7 +243,7 @@ export function VariablesRanked({ a }: IndicatorProps) {
                 <span dir="ltr" className="truncate font-mono text-sm font-semibold text-zinc-800 dark:text-zinc-100">
                   {v.name}
                 </span>
-                <span className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-semibold ${tagClass[tag(v)]}`}>
+                <span className={`shrink-0 rounded-full px-2 py-0.5 text-xs font-semibold ${tagClass[tag(v)]}`}>
                   {t(`vars.tag.${tag(v)}`)} · {lineNo(v.line)} · {t("vars.used", { count: v.usedBy })}
                 </span>
               </span>
@@ -282,7 +282,7 @@ export function DependencyFlow({ a }: IndicatorProps) {
   const Node = ({ n, level }: { n: DependencyNode; level: number }) => (
     <li className="relative">
       <div className={`flex items-center gap-2 rounded-lg border px-3 py-1.5 ${level === 0 ? "border-emerald-400 bg-emerald-50 dark:border-emerald-500/50 dark:bg-emerald-500/10" : n.children.length ? "border-violet-300 bg-violet-50 dark:border-violet-500/40 dark:bg-violet-500/10" : "border-blue-300 bg-blue-50 dark:border-blue-500/40 dark:bg-blue-500/10"}`}>
-        <span className="font-mono text-[10px] text-zinc-400">{lineNo(n.line)}</span>
+        <span className="font-mono text-xs text-zinc-400">{lineNo(n.line)}</span>
         <span dir="ltr" className="font-mono text-sm font-semibold text-zinc-800 dark:text-zinc-100">
           {n.name ?? t("flow.bottom")}
         </span>
@@ -376,7 +376,7 @@ export function EvaluationStairs({ a, line, onLine }: LineProps) {
           {steps.map((s, i) => (
             <li key={i} className="flex items-center gap-2 transition-all duration-300" style={{ paddingInlineStart: `${Math.min(i, 8) * 1.25}rem` }}>
               <span className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-md font-mono text-xs font-bold text-white ${color[s.kind]}`}>{i + 1}</span>
-              <span className="text-[11px] text-zinc-500 dark:text-zinc-400">{t(`steps.kind.${s.kind}`)}</span>
+              <span className="text-xs text-zinc-500 dark:text-zinc-400">{t(`steps.kind.${s.kind}`)}</span>
               <span dir="ltr" className={`ms-auto truncate rounded-lg border px-3 py-1 font-mono text-sm ${i === steps.length - 1 ? "border-emerald-400 bg-emerald-50 font-bold dark:border-emerald-500/50 dark:bg-emerald-500/10" : "border-zinc-200 bg-white dark:border-zinc-700 dark:bg-zinc-900"}`}>
                 {s.text}
               </span>
@@ -487,16 +487,16 @@ export function ScopeTimeline({ a }: IndicatorProps) {
             const used = usedAt(s);
             return (
               <li key={s.index} className="relative flex w-24 flex-col items-center text-center sm:w-auto sm:min-w-0 sm:flex-1">
-                <span className={`z-10 flex h-6 w-6 items-center justify-center rounded-full font-mono text-[10px] font-bold text-white ${s.reassign ? "bg-amber-500" : s.deps.length ? "bg-violet-500" : "bg-blue-600"}`}>{i + 1}</span>
-                <span className="mt-1 font-mono text-[10px] text-zinc-400">{lineNo(s.index)}</span>
+                <span className={`z-10 flex h-6 w-6 items-center justify-center rounded-full font-mono text-xs font-bold text-white ${s.reassign ? "bg-amber-500" : s.deps.length ? "bg-violet-500" : "bg-blue-600"}`}>{i + 1}</span>
+                <span className="mt-1 font-mono text-xs text-zinc-400">{lineNo(s.index)}</span>
                 <span dir="ltr" className="font-mono text-sm font-semibold text-zinc-800 dark:text-zinc-100">
                   {s.name}
                 </span>
                 <span dir="ltr" className="font-mono text-sm font-bold text-blue-700 dark:text-blue-300">
                   {compact(s.value as number)}
                 </span>
-                <span className="mt-1 text-[10px] text-zinc-500 dark:text-zinc-400">{s.reassign ? t("timeline.reassigned") : s.deps.length ? t("timeline.derived") : t("timeline.input")}</span>
-                <span className="text-[10px] text-zinc-400">{used.length ? t("timeline.usedAt", { lines: used.join(" ") }) : t("timeline.unused")}</span>
+                <span className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">{s.reassign ? t("timeline.reassigned") : s.deps.length ? t("timeline.derived") : t("timeline.input")}</span>
+                <span className="text-xs text-zinc-400">{used.length ? t("timeline.usedAt", { lines: used.join(" ") }) : t("timeline.unused")}</span>
               </li>
             );
           })}
@@ -738,7 +738,7 @@ export function RoundingEquivalence({ a, line, onLine }: LineProps) {
             <span dir="ltr" className="mt-2 break-all font-mono text-base font-bold text-zinc-900 dark:text-zinc-100">
               {c.v}
             </span>
-            <span className="mt-1 text-[10px] text-zinc-400">{t(`round.cardNote.${c.k}`)}</span>
+            <span className="mt-1 text-xs text-zinc-400">{t(`round.cardNote.${c.k}`)}</span>
             {i < cards.length - 1 && <span aria-hidden className="absolute -end-3 top-1/2 z-10 hidden -translate-y-1/2 text-zinc-400 lg:block">≈</span>}
           </div>
         ))}

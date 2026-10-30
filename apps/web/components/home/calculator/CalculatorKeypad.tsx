@@ -160,7 +160,7 @@ export default function CalculatorKeypad({ state, dispatch }: CalculatorKeypadPr
                 dir="ltr"
                 allowWrap={false}
                 className="font-semibold"
-                steps={["text-sm", "text-xs", "text-[10px]", "text-[9px]"]}
+                steps={["text-sm", "text-xs", "text-xs", "text-xs"]}
               />
             )}
           </button>

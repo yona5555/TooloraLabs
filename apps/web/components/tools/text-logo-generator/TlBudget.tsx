@@ -59,7 +59,7 @@ export default function TlBudget() {
           {f(limit)}
         </text>
       </svg>
-      <p className="text-[11px] text-zinc-500 dark:text-zinc-400">{t("legend")}</p>
+      <p className="text-xs text-zinc-500 dark:text-zinc-400">{t("legend")}</p>
     </div>
   );
 

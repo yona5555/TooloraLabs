@@ -18,9 +18,9 @@ export default function InventoryTaxImpactBar({ columns, cogsLabel, title }: Inv
           const heightPct = Math.max((col.cogs / max) * 100, 4);
           return (
             <div key={col.key} className="flex w-16 shrink-0 flex-col items-center justify-end gap-1" style={{ height: "100%" }}>
-              <span className="text-[11px] font-bold text-amber-700 dark:text-amber-300">${col.cogs}</span>
+              <span className="text-xs font-bold text-amber-700 dark:text-amber-300">${col.cogs}</span>
               <div className={`w-10 rounded-t-md ${col.colorClass}`} style={{ height: `${heightPct}%` }} />
-              <span className="text-[11px] text-zinc-500 dark:text-zinc-400">{col.label}</span>
+              <span className="text-xs text-zinc-500 dark:text-zinc-400">{col.label}</span>
             </div>
           );
         })}

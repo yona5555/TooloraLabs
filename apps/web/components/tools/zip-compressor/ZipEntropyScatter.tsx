@@ -46,7 +46,7 @@ export default function ZipEntropyScatter() {
       {rows.map((r, i) => (
         <g key={r.name}>
           <circle cx={x(r.entropy)} cy={y(r.ratio)} r={9} strokeWidth={2} className={`${FILE_FILL[i % FILE_FILL.length]} stroke-white dark:stroke-zinc-900`} />
-          <text style={{ fontSize: svgPx(12) }} x={Math.min(x(r.entropy) + 12, W - 70)} y={y(r.ratio) + 4} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
+          <text style={{ fontSize: svgPx(12) }} x={Math.min(x(r.entropy) + 12, W - 70)} y={y(r.ratio) + 4} fontFamily="var(--font-mono)" className="fill-zinc-700 dark:fill-zinc-200">
             {r.name.length > 10 ? `${r.name.slice(0, 9)}…` : r.name}
           </text>
         </g>

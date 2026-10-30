@@ -21,7 +21,7 @@ export default function PregnancyWeekLadder() {
   return (
     <SectionCard title={t("title")} className="lg:flex lg:flex-1 lg:flex-col" bodyClassName="flex flex-col p-4 lg:flex-1 lg:p-6">
       <p className="text-sm text-zinc-600 dark:text-zinc-300">{t("intro")}</p>
-      <div className="mt-3 grid grid-cols-[3rem_1fr_auto] gap-x-3 px-3 text-[11px] font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+      <div className="mt-3 grid grid-cols-[3rem_1fr_auto] gap-x-3 px-3 text-xs font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
         <span>{t("colWeek")}</span>
         <span>{t("colDate")}</span>
         <span className="text-end">{t("colSize")}</span>

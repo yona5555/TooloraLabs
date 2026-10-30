@@ -49,11 +49,11 @@ export default function FnUrlCost() {
         const esc = [...enc.encode(ch)].map((b) => `%${b.toString(16).toUpperCase().padStart(2, "0")}`).join("");
         return (
           <g key={ch}>
-            <text style={{ fontSize: svgPx(14) }} x={LABEL} y={y + 18} textAnchor="end" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(14) }} x={LABEL} y={y + 18} textAnchor="end" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
               {/\s/.test(ch) ? "␣" : ch}
             </text>
             <rect x={BAR_X} y={y + 6} width={w} height={ROW - 12} rx={3} className={i === 0 ? "fill-rose-500 dark:fill-rose-400" : "fill-rose-300 dark:fill-rose-700"} />
-            <text style={{ fontSize: svgPx(12) }} x={BAR_X + w + 5} y={y + 18} fontFamily="ui-monospace, monospace" className="fill-zinc-600 dark:fill-zinc-300">
+            <text style={{ fontSize: svgPx(12) }} x={BAR_X + w + 5} y={y + 18} fontFamily="var(--font-mono)" className="fill-zinc-600 dark:fill-zinc-300">
               +{cost} · {esc.length > 12 ? `${esc.slice(0, 12)}…` : esc}
             </text>
           </g>

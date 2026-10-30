@@ -74,7 +74,7 @@ export function RomanExamplesCard({ value, onPick }: { value: number; onPick: (v
               <span className="text-sm font-bold tabular-nums" style={{ color: "var(--ph-ink)" }}>
                 {n0(n)}
               </span>
-              <span className="text-[11px] font-semibold" style={{ color: "var(--cv-from)" }}>
+              <span className="text-xs font-semibold" style={{ color: "var(--cv-from)" }}>
                 {toRoman(n)}
               </span>
             </button>
@@ -101,7 +101,7 @@ export function RomanExamplesCard({ value, onPick }: { value: number; onPick: (v
               <span className="text-sm font-bold" style={{ color: "var(--cv-from)" }}>
                 {c.sym}
               </span>
-              <span className="text-[11px] tabular-nums" style={{ color: "var(--ph-ink-muted)" }}>
+              <span className="text-xs tabular-nums" style={{ color: "var(--ph-ink-muted)" }}>
                 {n0(c.v)}
               </span>
             </div>

@@ -45,7 +45,7 @@ export default function RsSyllableBars() {
                 strokeWidth={2}
                 style={{ transition: "y 300ms ease, height 300ms ease" }}
               />
-              <text style={{ fontSize: svgPx(12) }} x={x + barW / 2} y={y(counts[i]) - 4} textAnchor="middle" fontWeight={800} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+              <text style={{ fontSize: svgPx(12) }} x={x + barW / 2} y={y(counts[i]) - 4} textAnchor="middle" fontWeight={800} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
                 {f(counts[i])}
               </text>
               <text style={{ fontSize: svgPx(12) }} x={x + barW / 2} y={BASE + 14} textAnchor="middle" fontWeight={700} className="fill-zinc-600 dark:fill-zinc-300">
@@ -59,7 +59,7 @@ export default function RsSyllableBars() {
         <text style={{ fontSize: svgPx(12) }} x={PAD_X + 2 * slot + 4} y={TOP - 4} fontWeight={700} className="fill-rose-500 dark:fill-rose-400">{t("hardZone")}</text>
         <text style={{ fontSize: svgPx(12) }} x={W / 2} y={BASE + 28} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">{t("axis")}</text>
       </svg>
-      <p className="mt-1 text-[11px] text-amber-700 dark:text-amber-300">{t("hint")}</p>
+      <p className="mt-1 text-xs text-amber-700 dark:text-amber-300">{t("hint")}</p>
     </div>
   );
 

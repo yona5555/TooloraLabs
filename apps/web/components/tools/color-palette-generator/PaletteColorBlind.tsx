@@ -43,7 +43,7 @@ export default function PaletteColorBlind() {
               y={y + 4}
               textAnchor="end"
               fontWeight={700}
-              fontFamily="ui-monospace, monospace"
+              fontFamily="var(--font-mono)"
               className={ok ? "fill-emerald-700 dark:fill-emerald-300" : "fill-rose-600 dark:fill-rose-300"}
             >
               {f(row.min, 0)}

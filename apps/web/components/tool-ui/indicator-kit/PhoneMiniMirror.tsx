@@ -34,7 +34,7 @@ export default function PhoneMiniMirror({ title, visual, source }: { title: Reac
       onClick={() => (source.current?.querySelector("[data-card]") ?? source.current)?.scrollIntoView({ behavior: "smooth", block: "start" })}
       className="flex h-full w-full min-w-0 flex-col gap-0.5 overflow-hidden rounded-xl border border-blue-200 bg-white px-2 pt-1.5 pb-1 text-start dark:border-blue-500/30 dark:bg-zinc-900"
     >
-      <span className="w-full truncate text-[11px] leading-4 font-semibold text-zinc-600 dark:text-zinc-300">{title}</span>
+      <span className="w-full truncate text-xs leading-4 font-semibold text-zinc-600 dark:text-zinc-300">{title}</span>
       <span aria-hidden="true" dir="ltr" className="relative block min-h-0 w-full flex-1">
         <MiniContext.Provider value>{copy}</MiniContext.Provider>
       </span>

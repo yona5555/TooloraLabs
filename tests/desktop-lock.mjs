@@ -14,9 +14,8 @@
 //   npm run test:desktop-lock:full                 -> every tool page plus /, /tools, /categories, /docs
 //   npm run baseline:desktop-lock -- --approve     -> rewrite the measured pages in the baseline (add --full
 //                                                     or --only for other sets; other pages are kept)
-// Options: --only slug,slug (a subset), --base http://localhost:3001 (an already running server; its live
-// data is NOT fixed), --timing file (per-page load/measure times and slow requests), --baseline file (compare
-// against another file instead of the committed baseline; tests/gates-self-test.mjs's tampered-copy canary).
+// Options: --only slug,slug (a subset), --base <url> (an already running server; its live
+// data is NOT fixed), --timing file (per-page load/measure times and slow requests), --baseline file.
 // Without --base it starts `next start` on the .next-lock build with tests/fixtures/offline-fetch.mjs
 // preloaded: every external fetch (prices, rates, weather, hazards) is answered from tests/fixtures/live,
 // so no page waits on the network and live values never move the layout. Every wait is bounded (10s load,
@@ -28,9 +27,10 @@
 // render the same every day; Math.random and crypto.getRandomValues are seeded and WebSockets get no frames, so
 // nothing else moves.
 // Approve mode (--write --approve) writes the baseline from that one measurement and exits; it never
-// re-measures (CI compares in a later run, against the committed baseline). The
-// pages use system fonts in places, so each OS has its own baseline: desktop.json on macOS (local),
-// desktop.linux.json on Linux (CI runner ubuntu-24.04, CI set only).
+// re-measures (CI compares in a later run, against the committed baseline). Every font is self-hosted
+// (apps/web/lib/fonts.ts), but text rasterising still differs by OS, so each has its own baseline:
+// desktop.json on macOS (local), desktop.linux.json on Linux (CI runner ubuntu-24.04, and locally the
+// container of scripts/in-container.sh).
 import { spawn } from "node:child_process";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
@@ -49,6 +49,7 @@ const arg = (name, def) => {
   const i = process.argv.indexOf(`--${name}`);
   return i > -1 ? process.argv[i + 1] : def;
 };
+// --baseline <file>: compare against another file (the gate canary's tampered copy, tests/gates-self-test.mjs).
 const BASELINE = arg("baseline") ? resolve(arg("baseline")) : join(ROOT, `tests/baselines/desktop${process.platform === "linux" ? ".linux" : ""}.json`);
 const PORT = 3109;
 const BASE = arg("base", `http://localhost:${PORT}`);

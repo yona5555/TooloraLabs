@@ -73,7 +73,7 @@ export default function ImageFormatReference({
             const pct = b.size > 0 ? Math.max(3, (b.size / top) * 100) : 0;
             const body = (
               <>
-                <span className="whitespace-nowrap text-[11px] font-semibold tabular-nums" style={{ color: "var(--ph-ink)" }}>
+                <span className="whitespace-nowrap text-xs font-semibold tabular-nums" style={{ color: "var(--ph-ink)" }}>
                   {b.size > 0 ? formatBytes(b.size) : "…"}
                 </span>
                 <span className="flex w-full flex-1 flex-col justify-end">

@@ -53,7 +53,7 @@ function Chip({ id, href, label, note, children, trailing }: { id: string; href:
     <li className="group relative min-w-0">
       <Link href={href} aria-describedby={note ? noteId : undefined} className={CHIP}>
         <span className="flex min-w-0 flex-col leading-4">
-          <span className="flex items-center gap-1 whitespace-nowrap text-[11px] font-medium text-zinc-500 dark:text-zinc-400">
+          <span className="flex items-center gap-1 whitespace-nowrap text-xs font-medium text-zinc-500 dark:text-zinc-400">
             {label}
             {note && <Clock3 size={10} aria-hidden="true" className="shrink-0 opacity-70" />}
           </span>
@@ -65,7 +65,7 @@ function Chip({ id, href, label, note, children, trailing }: { id: string; href:
         <span
           id={noteId}
           role="tooltip"
-          className="pointer-events-none absolute inset-x-0 top-full z-30 mt-1 hidden rounded-md border border-zinc-200 bg-white p-2 text-[11px] leading-4 text-zinc-600 shadow-lg group-focus-within:block group-hover:block dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300"
+          className="pointer-events-none absolute inset-x-0 top-full z-30 mt-1 hidden rounded-md border border-zinc-200 bg-white p-2 text-xs leading-4 text-zinc-600 shadow-lg group-focus-within:block group-hover:block dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300"
         >
           {note.map((line) => (
             <span key={line} className="block">
@@ -176,7 +176,7 @@ export default async function MarketPulse({ locale }: { locale: string }) {
                 {price}
               </span>
               {ind.change !== null && Number.isFinite(ind.change) && (
-                <span dir="ltr" className={`text-[11px] font-medium tabular-nums ${up ? "text-emerald-600 dark:text-emerald-400" : "text-red-600 dark:text-red-400"}`}>
+                <span dir="ltr" className={`text-xs font-medium tabular-nums ${up ? "text-emerald-600 dark:text-emerald-400" : "text-red-600 dark:text-red-400"}`}>
                   {up ? "+" : ""}
                   {ind.change.toFixed(2)}%
                 </span>
@@ -196,7 +196,7 @@ export default async function MarketPulse({ locale }: { locale: string }) {
           <span className="flex items-baseline gap-1.5 whitespace-nowrap">
             <span dir="ltr" className="text-xs font-semibold tabular-nums text-zinc-900 dark:text-zinc-50">{deg(step.tempC)}C</span>
             {today && (
-              <span dir="ltr" className="text-[11px] font-medium tabular-nums text-zinc-500 dark:text-zinc-400">
+              <span dir="ltr" className="text-xs font-medium tabular-nums text-zinc-500 dark:text-zinc-400">
                 {deg(today.minC)} / {deg(today.maxC)}
               </span>
             )}

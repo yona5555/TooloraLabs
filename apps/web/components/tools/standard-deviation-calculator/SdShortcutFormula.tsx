@@ -25,7 +25,7 @@ export default function SdShortcutFormula() {
       <text style={{ fontSize: svgPx(12) }} x={x + w / 2} y={y + 20} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
         {top}
       </text>
-      <text style={{ fontSize: svgPx(14) }} x={x + w / 2} y={y + 40} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+      <text style={{ fontSize: svgPx(14) }} x={x + w / 2} y={y + 40} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
         {value}
       </text>
     </g>
@@ -45,7 +45,7 @@ export default function SdShortcutFormula() {
         {match ? "=" : "≈"}
       </text>
       <rect x={60} y={184} width={180} height={32} rx={10} strokeWidth={1.5} className="fill-emerald-50 stroke-emerald-600 dark:fill-emerald-500/10 dark:stroke-emerald-400" />
-      <text style={{ fontSize: svgPx(13) }} x={150} y={205} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+      <text style={{ fontSize: svgPx(13) }} x={150} y={205} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
         {`Σ(x − μ)² = ${f(a.sumSquares)}`}
       </text>
     </svg>

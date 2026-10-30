@@ -1,10 +1,21 @@
+import dynamic from "next/dynamic";
 import { getTranslations } from "next-intl/server";
 import EncyclopediaPaper from "@/components/tool-ui/EncyclopediaPaper";
 import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
-import { MolCurveCard, MolDonutCard, MolFlowCard, MolRulerCard, MolSerialCard } from "./MolarityCards2D";
-import { MolCylindersCard, MolDropletCard, MolHeapsCard } from "./MolarityCards3D";
+
+// Below-the-fold education diagrams: server-rendered (dynamic() keeps ssr:true, its default) so the
+// content is still in the initial HTML, but their client hydration code splits into its own chunk
+// instead of bloating the above-the-fold bundle every visitor pays for.
+const MolCurveCard = dynamic(() => import("./MolarityCards2D").then((m) => m.MolCurveCard));
+const MolDonutCard = dynamic(() => import("./MolarityCards2D").then((m) => m.MolDonutCard));
+const MolFlowCard = dynamic(() => import("./MolarityCards2D").then((m) => m.MolFlowCard));
+const MolRulerCard = dynamic(() => import("./MolarityCards2D").then((m) => m.MolRulerCard));
+const MolSerialCard = dynamic(() => import("./MolarityCards2D").then((m) => m.MolSerialCard));
+const MolCylindersCard = dynamic(() => import("./MolarityCards3D").then((m) => m.MolCylindersCard));
+const MolDropletCard = dynamic(() => import("./MolarityCards3D").then((m) => m.MolDropletCard));
+const MolHeapsCard = dynamic(() => import("./MolarityCards3D").then((m) => m.MolHeapsCard));
 
 type ExampleRow = { calculation: string; result: string };
 

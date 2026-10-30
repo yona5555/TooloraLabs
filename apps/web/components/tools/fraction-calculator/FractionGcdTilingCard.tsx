@@ -38,7 +38,7 @@ export default function FractionGcdTilingCard() {
             const widthPct = (s.a / maxA) * 100;
             return (
               <div key={i} className="flex items-center gap-2" style={{ opacity: active ? 1 : 0.35 }}>
-                <span className="w-10 shrink-0 text-end text-[10px] font-semibold" style={{ color: "var(--glass-muted)" }}>
+                <span className="w-10 shrink-0 text-end text-xs font-semibold" style={{ color: "var(--glass-muted)" }}>
                   {formatMathValue(s.a)}
                 </span>
                 <div className="flex h-5 overflow-hidden rounded-sm" style={{ width: `${widthPct}%` }}>

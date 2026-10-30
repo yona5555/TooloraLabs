@@ -165,7 +165,7 @@ export default function CalculatorDisplay({ state, dispatch, archive, onDeleteAr
           >
             <span className="shrink-0 text-xs font-semibold text-zinc-500 calcdark:text-zinc-400">{tHome("display.grandTotal")}</span>
             {skipped > 0 && (
-              <span className="shrink-0 text-[10px] text-zinc-400 calcdark:text-zinc-500">{tHome("display.skippedEntries", { count: skipped })}</span>
+              <span className="shrink-0 text-xs text-zinc-400 calcdark:text-zinc-500">{tHome("display.skippedEntries", { count: skipped })}</span>
             )}
             <span dir="ltr" className="ms-auto min-w-0 truncate text-sm font-bold text-zinc-900 calcdark:text-zinc-50" data-grand-total>
               {totalText}

@@ -35,7 +35,7 @@ export default function StdDevZoneStrip() {
             <div className="absolute inset-y-0 left-[16%] w-[68%] bg-emerald-300/70 dark:bg-emerald-500/50" />
             <div className="absolute inset-y-0 right-0 w-[16%] bg-amber-300/70 dark:bg-amber-500/50" />
           </div>
-          <div className="mt-1 flex justify-between text-[10px] font-semibold uppercase tracking-wide text-zinc-400 dark:text-zinc-500">
+          <div className="mt-1 flex justify-between text-xs font-semibold uppercase tracking-wide text-zinc-400 dark:text-zinc-500">
             <span>{"−σ"}</span>
             <span>{t("zones.within1")}</span>
             <span>{"+σ"}</span>

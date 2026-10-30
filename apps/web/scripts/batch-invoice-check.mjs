@@ -2,10 +2,11 @@
 // every indicator's values, CSV/XLSX exports, top-area gaps, console errors, optional screenshots.
 // Usage: node apps/web/scripts/batch-invoice-check.mjs [outDir]   (screenshots only when outDir is given)
 import { chromium } from "playwright";
+import { requireBase } from "../../../scripts/lib/require-base.mjs";
 import JSZip from "jszip";
 import fs from "node:fs";
 
-const BASE = process.env.BASE_URL ?? "http://localhost:3000";
+const BASE = requireBase(process.env.BASE);
 const outDir = process.argv[2];
 const browser = await chromium.launch();
 const IND = ["line-items", "composition", "net-tax", "formula", "trend", "timeline", "clients", "concentration", "balance", "sensitivity", "vat-table", "currencies"];

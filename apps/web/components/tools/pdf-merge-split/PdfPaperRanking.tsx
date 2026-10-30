@@ -43,11 +43,11 @@ export default function PdfPaperRanking() {
               {r.name === "other" ? tp("other") : r.name}
               {r.landscape ? " ⟷" : ""}
             </text>
-            <text style={{ fontSize: svgPx(12) }} x={LABEL} y={y + 26} textAnchor="end" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+            <text style={{ fontSize: svgPx(12) }} x={LABEL} y={y + 26} textAnchor="end" fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
               {f(r.w * PT_TO_MM, 0)}×{f(r.h * PT_TO_MM, 0)} mm
             </text>
             <rect x={BAR_X} y={y + 4} width={w} height={ROW - 12} rx={3} className={i === 0 ? "fill-blue-600 dark:fill-blue-400" : "fill-blue-300 dark:fill-blue-800"} />
-            <text style={{ fontSize: svgPx(12) }} x={BAR_X + w + 5} y={y + 18} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
+            <text style={{ fontSize: svgPx(12) }} x={BAR_X + w + 5} y={y + 18} fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-700 dark:fill-zinc-200">
               {f(r.count)}
             </text>
           </g>

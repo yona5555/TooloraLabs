@@ -46,10 +46,10 @@ export default function PdfSourceDonut() {
         return (
           <g key={i}>
             <circle cx={208} cy={y} r={6} className={SOURCE_FILL[i % SOURCE_FILL.length]} />
-            <text style={{ fontSize: svgPx(12) }} x={220} y={y + 4} fontFamily="ui-monospace, monospace" className="fill-zinc-600 dark:fill-zinc-300">
+            <text style={{ fontSize: svgPx(12) }} x={220} y={y + 4} fontFamily="var(--font-mono)" className="fill-zinc-600 dark:fill-zinc-300">
               {s.length > 12 ? `${s.slice(0, 11)}…` : s}
             </text>
-            <text style={{ fontSize: svgPx(12) }} x={W - 4} y={y + 4} textAnchor="end" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={W - 4} y={y + 4} textAnchor="end" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
               {f(counts[i])}
             </text>
           </g>

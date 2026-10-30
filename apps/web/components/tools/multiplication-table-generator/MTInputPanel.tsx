@@ -150,7 +150,7 @@ export default function MTInputPanel(props: Props) {
                 ? `${view.fmt(view.a)} × ${view.fmt(view.b)} = ${view.fmt(dos.mid)}² − ${view.fmt(dos.half)}² = ${view.fmt(dos.mid * dos.mid)} − ${view.fmt(dos.half * dos.half)}`
                 : `${view.fmt(view.a)} × ${view.fmt(view.b)} = ${view.fmt(view.a)} × ${view.fmt(view.b - 1)} + ${view.fmt(view.a)}`}
             </p>
-            <p className="mt-1 text-[11px] text-zinc-500 dark:text-zinc-400">{dos.exact ? t("squaresExact") : t("squaresOdd")}</p>
+            <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">{dos.exact ? t("squaresExact") : t("squaresOdd")}</p>
           </div>
           <ul dir="ltr" tabIndex={0} className="max-h-48 min-h-0 flex-1 divide-y lg:max-h-none lg:basis-0 divide-zinc-100 overflow-y-auto dark:divide-zinc-800">
             {squares.map((n) => (

@@ -52,7 +52,7 @@ export default async function MarketsPulse({ locale }: { locale: string }) {
       <span className="flex items-baseline gap-1.5">
         <span dir="ltr">{text}</span>
         {change !== null && Number.isFinite(change) && (
-          <span dir="ltr" className={`text-[11px] font-medium ${up ? "text-emerald-600 dark:text-emerald-400" : "text-red-600 dark:text-red-400"}`}>
+          <span dir="ltr" className={`text-xs font-medium ${up ? "text-emerald-600 dark:text-emerald-400" : "text-red-600 dark:text-red-400"}`}>
             {up ? "+" : ""}
             {change.toFixed(2)}%
           </span>

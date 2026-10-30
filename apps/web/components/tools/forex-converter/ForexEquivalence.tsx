@@ -48,10 +48,10 @@ export default function ForexEquivalence({ currencies, fromCurrency, amount, dig
         {targets.map(({ c, value }) => (
           <div key={c.code} className="min-w-0 rounded-xl border border-zinc-200 p-2.5 dark:border-zinc-700">
             <div className="flex items-center gap-1.5">
-              <span dir="ltr" className="rounded bg-zinc-100 px-1.5 py-0.5 font-mono text-[10px] font-bold text-zinc-600 dark:bg-zinc-700 dark:text-zinc-300">
+              <span dir="ltr" className="rounded bg-zinc-100 px-1.5 py-0.5 font-mono text-xs font-bold text-zinc-600 dark:bg-zinc-700 dark:text-zinc-300">
                 {c.code}
               </span>
-              <span className="truncate text-[11px] text-zinc-500 dark:text-zinc-400">{name(c.code, c.name)}</span>
+              <span className="truncate text-xs text-zinc-500 dark:text-zinc-400">{name(c.code, c.name)}</span>
             </div>
             <p dir="ltr" className="mt-1 truncate font-mono text-sm font-bold text-zinc-900 dark:text-zinc-100">
               = {f.num(value, value !== 0 && Math.abs(value) < 1 ? 4 : 2)}

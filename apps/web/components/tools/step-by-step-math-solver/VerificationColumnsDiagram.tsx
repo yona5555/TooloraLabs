@@ -57,17 +57,17 @@ export default function VerificationColumnsDiagram() {
             ].map((bar) => (
               <div key={bar.label} className="flex flex-col items-center gap-1">
                 <div className={`w-10 rounded-t-md ${bar.color} transition-all duration-200`} style={{ height: `${Math.max(4, (Math.abs(bar.value) / maxH) * 90)}px` }} />
-                <span className="text-[10px] font-semibold text-zinc-500 dark:text-zinc-400">{bar.label}</span>
-                <span className="font-mono text-[11px] text-zinc-700 dark:text-zinc-200">{fmt(bar.value)}</span>
+                <span className="text-xs font-semibold text-zinc-500 dark:text-zinc-400">{bar.label}</span>
+                <span className="font-mono text-xs text-zinc-700 dark:text-zinc-200">{fmt(bar.value)}</span>
               </div>
             ))}
           </div>
           <label className="flex w-full max-w-[200px] flex-col items-center gap-1">
-            <span className="text-[11px] text-zinc-500 dark:text-zinc-400">{t("testXLabel", { x: fmt(x) })}</span>
+            <span className="text-xs text-zinc-500 dark:text-zinc-400">{t("testXLabel", { x: fmt(x) })}</span>
             <input type="range" min={-10} max={10} step={0.1} value={x} onChange={(e) => setTestX(parseFloat(e.target.value))} className="w-full accent-amber-600 dark:accent-amber-400" aria-label={t("testXAria")} />
           </label>
           {root !== null && (
-            <button type="button" onClick={() => setTestX(root)} className="rounded-full border border-dashed border-zinc-300 px-3 py-1 text-[11px] text-zinc-500 hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-400 dark:hover:bg-zinc-800">
+            <button type="button" onClick={() => setTestX(root)} className="rounded-full border border-dashed border-zinc-300 px-3 py-1 text-xs text-zinc-500 hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-400 dark:hover:bg-zinc-800">
               {t("jumpToRoot")}
             </button>
           )}

@@ -1,3 +1,5 @@
+import { svgPx } from "@/components/tool-ui/svgPx";
+import FitSvg from "@/components/tool-ui/FitSvg";
 type VennOverlapDiagramProps = {
   leftLabel: string;
   rightLabel: string;
@@ -27,30 +29,30 @@ export default function VennOverlapDiagram({
   return (
     <figure className="my-2">
       <div dir="ltr" className="flex justify-center overflow-x-auto">
-        <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={caption} className="h-auto w-80 text-current" style={{ minWidth: 280 }}>
+        <FitSvg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={caption} className="h-auto w-80 text-current" style={{ minWidth: 280 }}>
           <circle cx={LEFT_CX} cy={CY} r={R} className="fill-blue-500 dark:fill-blue-400" opacity={0.35} />
           <circle cx={RIGHT_CX} cy={CY} r={R} className="fill-emerald-500 dark:fill-emerald-400" opacity={0.35} />
 
-          <text x={LEFT_CX - 40} y={30} fontSize={11} fontWeight={700} fill="currentColor">
+          <text x={LEFT_CX - 40} y={30} style={{ fontSize: svgPx(11) }} fontWeight={700} fill="currentColor">
             {leftLabel}
           </text>
-          <text x={RIGHT_CX + 10} y={30} fontSize={11} fontWeight={700} fill="currentColor">
+          <text x={RIGHT_CX + 10} y={30} style={{ fontSize: svgPx(11) }} fontWeight={700} fill="currentColor">
             {rightLabel}
           </text>
-          <text x={WIDTH / 2} y={CY - 4} textAnchor="middle" fontSize={10} fontWeight={700} fill="currentColor">
+          <text x={WIDTH / 2} y={CY - 4} textAnchor="middle" style={{ fontSize: svgPx(10) }} fontWeight={700} fill="currentColor">
             {overlapLabel}
           </text>
 
-          <text x={LEFT_CX - 40} y={CY + 8} fontSize={10} fill="currentColor" opacity={0.85}>
+          <text x={LEFT_CX - 40} y={CY + 8} style={{ fontSize: svgPx(10) }} fill="currentColor" opacity={0.85}>
             {leftOnlyItems}
           </text>
-          <text x={WIDTH / 2} y={CY + 12} textAnchor="middle" fontSize={10} fill="currentColor" opacity={0.85}>
+          <text x={WIDTH / 2} y={CY + 12} textAnchor="middle" style={{ fontSize: svgPx(10) }} fill="currentColor" opacity={0.85}>
             {overlapItems}
           </text>
-          <text x={RIGHT_CX + 10} y={CY + 8} fontSize={10} fill="currentColor" opacity={0.85}>
+          <text x={RIGHT_CX + 10} y={CY + 8} style={{ fontSize: svgPx(10) }} fill="currentColor" opacity={0.85}>
             {rightOnlyItems}
           </text>
-        </svg>
+        </FitSvg>
       </div>
       <figcaption className="mt-2 text-center text-sm opacity-70">{caption}</figcaption>
     </figure>

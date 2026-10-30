@@ -48,10 +48,10 @@ export default function FsGapBars() {
               rx={4}
               className="fill-emerald-600 dark:fill-emerald-400"
             />
-            <text style={{ fontSize: svgPx(12) }} x={cx - 19} y={y(d.value) - 5} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-blue-700 dark:fill-blue-300">
+            <text style={{ fontSize: svgPx(12) }} x={cx - 19} y={y(d.value) - 5} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className="fill-blue-700 dark:fill-blue-300">
               {num(d.value)}
             </text>
-            <text style={{ fontSize: svgPx(12) }} x={cx + 19} y={pairTouch ? Math.min(y(b.value), y(d.value) - 14) - 5 : y(b.value) - 5} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-emerald-700 dark:fill-emerald-300">
+            <text style={{ fontSize: svgPx(12) }} x={cx + 19} y={pairTouch ? Math.min(y(b.value), y(d.value) - 14) - 5 : y(b.value) - 5} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className="fill-emerald-700 dark:fill-emerald-300">
               {num(b.value)}
             </text>
             <text style={{ fontSize: svgPx(12) }} x={cx} y={BASE + 16} textAnchor="middle" fontWeight={600} className="fill-zinc-600 dark:fill-zinc-300">

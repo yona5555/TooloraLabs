@@ -60,7 +60,7 @@ export default function LiSentenceRhythm() {
         <text style={{ fontSize: svgPx(12) }} x={PAD_L} y={H - 6} className="fill-zinc-500 dark:fill-zinc-400">{f(1)}</text>
         <text style={{ fontSize: svgPx(12) }} x={W - PAD_R} y={H - 6} textAnchor="end" className="fill-zinc-500 dark:fill-zinc-400">{f(shown.length)}</text>
       </svg>
-      <p className="mt-1 text-[11px] text-zinc-500 dark:text-zinc-400">
+      <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">
         {t("legend", { min: f(WPS.min), max: f(WPS.max) })}
         {a.sentences.length > MAX_BARS && ` · ${t("capped", { n: f(MAX_BARS), total: f(a.sentences.length) })}`}
       </p>

@@ -9,17 +9,16 @@
 //   npm run test:home-phone                        -> compare (exit 1 on any change)
 //   npm run baseline:home-phone -- --approve       -> rewrite the baseline (only with --approve)
 // Options: --base <url> (required: a server on a dedicated free port, e.g. scripts/test-server.sh start 3110 apps/web),
-// --baseline file (compare against another file instead of the committed baseline; tests/gates-self-test.mjs's
-// tampered-copy canary).
-// The page uses system fonts (Arial), so each OS has its own baseline: home-phone.json on macOS
-// (local), home-phone.linux.json on Linux (CI runner ubuntu-24.04).
+// --baseline file (compare against another file). Every font is self-hosted (apps/web/lib/fonts.ts), but text
+// rasterising still differs by OS, so each has its own baseline: home-phone.json on macOS (local),
+// home-phone.linux.json on Linux (CI runner ubuntu-24.04, and locally the scripts/in-container.sh container).
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { createRequire } from "node:module";
-import { requireBase } from "../scripts/lib/require-base.mjs";
 import { compareColors, THEMES } from "./color-lock.mjs";
 import { hydrationProblems, watchHydration } from "./hydration-guard.mjs";
+import { requireBase } from "../scripts/lib/require-base.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const { chromium } = createRequire(join(ROOT, "apps/web/package.json"))("playwright");
@@ -27,6 +26,7 @@ const arg = (name, def) => {
   const i = process.argv.indexOf(`--${name}`);
   return i > -1 ? process.argv[i + 1] : def;
 };
+// --baseline <file>: compare against another file (the gate canary's tampered copy, tests/gates-self-test.mjs).
 const BASELINE = arg("baseline") ? resolve(arg("baseline")) : join(ROOT, `tests/baselines/home-phone${process.platform === "linux" ? ".linux" : ""}.json`);
 const BASE = requireBase(arg("base"));
 const WRITE = process.argv.includes("--write");

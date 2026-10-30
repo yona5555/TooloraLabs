@@ -1,24 +1,29 @@
+import dynamic from "next/dynamic";
 import { getTranslations } from "next-intl/server";
 import EncyclopediaPaper from "@/components/tool-ui/EncyclopediaPaper";
 import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
-import ScientificAngleExplorer from "./ScientificAngleExplorer";
-import AngleModeEquivalence from "./AngleModeEquivalence";
-import PowerRootBarChart from "./PowerRootBarChart";
-import LogComparisonBarList from "./LogComparisonBarList";
-import TrigWaveCurve from "./TrigWaveCurve";
-import ExponentialTangentCurve from "./ExponentialTangentCurve";
-import InverseTrigRangeZone from "./InverseTrigRangeZone";
-import DerivativeSlopeDiagram from "./DerivativeSlopeDiagram";
-import IntegralAreaDiagram from "./IntegralAreaDiagram";
-import OrderOfOperationsStepper from "./OrderOfOperationsStepper";
-import SignPolarityBalance from "./SignPolarityBalance";
-import PercentFlowDiagram from "./PercentFlowDiagram";
-import CombinatoricsTable from "./CombinatoricsTable";
-import MathConstantsCards from "./MathConstantsCards";
-import FactorialMagnitudeScale from "./FactorialMagnitudeScale";
-import MemoryTimelineDiagram from "./MemoryTimelineDiagram";
+
+// Below-the-fold education diagrams: server-rendered (dynamic() keeps ssr:true, its default) so the
+// content is still in the initial HTML, but their client hydration code splits into its own chunk
+// instead of bloating the above-the-fold bundle every visitor pays for.
+const ScientificAngleExplorer = dynamic(() => import("./ScientificAngleExplorer"));
+const AngleModeEquivalence = dynamic(() => import("./AngleModeEquivalence"));
+const PowerRootBarChart = dynamic(() => import("./PowerRootBarChart"));
+const LogComparisonBarList = dynamic(() => import("./LogComparisonBarList"));
+const TrigWaveCurve = dynamic(() => import("./TrigWaveCurve"));
+const ExponentialTangentCurve = dynamic(() => import("./ExponentialTangentCurve"));
+const InverseTrigRangeZone = dynamic(() => import("./InverseTrigRangeZone"));
+const DerivativeSlopeDiagram = dynamic(() => import("./DerivativeSlopeDiagram"));
+const IntegralAreaDiagram = dynamic(() => import("./IntegralAreaDiagram"));
+const OrderOfOperationsStepper = dynamic(() => import("./OrderOfOperationsStepper"));
+const SignPolarityBalance = dynamic(() => import("./SignPolarityBalance"));
+const PercentFlowDiagram = dynamic(() => import("./PercentFlowDiagram"));
+const CombinatoricsTable = dynamic(() => import("./CombinatoricsTable"));
+const MathConstantsCards = dynamic(() => import("./MathConstantsCards"));
+const FactorialMagnitudeScale = dynamic(() => import("./FactorialMagnitudeScale"));
+const MemoryTimelineDiagram = dynamic(() => import("./MemoryTimelineDiagram"));
 
 type ExampleRow = { expression: string; result: string };
 

@@ -21,7 +21,7 @@ export default function SleepTimeLadder() {
   return (
     <SectionCard title={t("title")} className="lg:flex lg:flex-1 lg:flex-col" bodyClassName="flex flex-col p-4 lg:flex-1 lg:p-6">
       <p className="text-sm text-zinc-600 dark:text-zinc-300">{t(wakeUp ? "introWake" : "introBed", { latency: `${snap.latency} min` })}</p>
-      <div className="mt-3 grid grid-cols-[1fr_auto_auto] gap-x-3 px-3 text-[11px] font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+      <div className="mt-3 grid grid-cols-[1fr_auto_auto] gap-x-3 px-3 text-xs font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
         <span>{t(wakeUp ? "colWake" : "colBed")}</span>
         <span className="w-20 text-end">{t("col6")}</span>
         <span className="w-20 text-end">{t("col5")}</span>

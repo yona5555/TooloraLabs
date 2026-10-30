@@ -24,12 +24,12 @@ export default function MatrixCompositionFlow() {
     <div className={`min-w-[96px] rounded-xl border px-3 py-2 text-center ${tone}`}>
       <p className="text-xs font-semibold">{label}</p>
       <p className="font-mono text-sm font-bold">{point}</p>
-      <p className="font-mono text-[11px] opacity-80 max-md:opacity-100">{area}</p>
+      <p className="font-mono text-xs opacity-80 max-md:opacity-100">{area}</p>
     </div>
   );
   const arrow = (m: string) => (
     <div className="flex flex-col items-center px-1">
-      <span className="font-mono text-[11px] font-semibold text-blue-700 dark:text-blue-300">{m}</span>
+      <span className="font-mono text-xs font-semibold text-blue-700 dark:text-blue-300">{m}</span>
       <ArrowRight className="text-blue-500" size={20} />
     </div>
   );
