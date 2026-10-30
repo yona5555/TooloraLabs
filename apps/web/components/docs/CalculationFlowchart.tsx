@@ -1,5 +1,6 @@
 import { useId } from "react";
 import { svgPx } from "@/components/tool-ui/svgPx";
+import FitSvg from "@/components/tool-ui/FitSvg";
 type LoopBack = {
   /** Index of the step the loop returns to (the earlier step). */
   from: number;
@@ -84,7 +85,7 @@ export default function CalculationFlowchart({ steps, caption, loop }: Props) {
   return (
     <figure className="my-2">
       <div dir="ltr" className="flex justify-center overflow-x-auto">
-        <svg viewBox={`0 0 ${width} ${height}`} role="img" aria-label={caption} className="h-auto w-full max-w-xl">
+        <FitSvg viewBox={`0 0 ${width} ${height}`} role="img" aria-label={caption} className="h-auto w-full max-w-xl">
           {steps.map((_, i) =>
             i < steps.length - 1 ? (
               <line
@@ -163,7 +164,7 @@ export default function CalculationFlowchart({ steps, caption, loop }: Props) {
               <path d="M 0 0 L 10 5 L 0 10 z" className="fill-blue-400 dark:fill-blue-500" />
             </marker>
           </defs>
-        </svg>
+        </FitSvg>
       </div>
       <figcaption className="mt-2 text-center text-sm text-zinc-500 dark:text-zinc-400">{caption}</figcaption>
     </figure>

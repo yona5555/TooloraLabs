@@ -1,4 +1,5 @@
 import { svgPx } from "@/components/tool-ui/svgPx";
+import FitSvg from "@/components/tool-ui/FitSvg";
 type ValueComparisonBarDiagramProps = {
   bars: { label: string; value: number; colorClass: string }[];
   caption: string;
@@ -17,7 +18,7 @@ export default function ValueComparisonBarDiagram({ bars, caption }: ValueCompar
   return (
     <figure className="my-2">
       <div dir="ltr" className="overflow-x-auto">
-        <svg viewBox={`0 0 ${WIDTH} ${height}`} role="img" aria-label={caption} className="h-auto w-full text-current" style={{ minWidth: 280 }}>
+        <FitSvg viewBox={`0 0 ${WIDTH} ${height}`} role="img" aria-label={caption} className="h-auto w-full text-current" style={{ minWidth: 280 }}>
           {bars.map((bar, i) => {
             const y = i * (ROW_HEIGHT + ROW_GAP);
             const width = Math.max((bar.value / maxValue) * barMaxWidth, 2);
@@ -33,7 +34,7 @@ export default function ValueComparisonBarDiagram({ bars, caption }: ValueCompar
               </g>
             );
           })}
-        </svg>
+        </FitSvg>
       </div>
       <figcaption className="mt-2 text-center text-sm opacity-70">{caption}</figcaption>
     </figure>

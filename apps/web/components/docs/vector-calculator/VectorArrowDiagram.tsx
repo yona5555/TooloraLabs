@@ -1,5 +1,6 @@
 import { useId } from "react";
 import { svgPx } from "@/components/tool-ui/svgPx";
+import FitSvg from "@/components/tool-ui/FitSvg";
 type VectorArrowDiagramProps = {
   ax: number;
   ay: number;
@@ -35,7 +36,7 @@ export default function VectorArrowDiagram({ ax, ay, bx, by, labelA, labelB, lab
   return (
     <figure className="my-2">
       <div dir="ltr" className="flex justify-center overflow-x-auto">
-        <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={caption} className="h-auto w-72 text-current" style={{ minWidth: 260 }}>
+        <FitSvg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={caption} className="h-auto w-72 text-current" style={{ minWidth: 260 }}>
           <line x1={0} y1={ORIGIN_Y} x2={WIDTH} y2={ORIGIN_Y} stroke="currentColor" strokeWidth={1} opacity={0.2} />
           <line x1={ORIGIN_X} y1={0} x2={ORIGIN_X} y2={HEIGHT} stroke="currentColor" strokeWidth={1} opacity={0.2} />
 
@@ -68,7 +69,7 @@ export default function VectorArrowDiagram({ ax, ay, bx, by, labelA, labelB, lab
               <path d="M 0 0 L 10 5 L 0 10 z" className="fill-purple-500 dark:fill-purple-400" />
             </marker>
           </defs>
-        </svg>
+        </FitSvg>
       </div>
       <figcaption className="mt-2 text-center text-sm opacity-70">{caption}</figcaption>
     </figure>

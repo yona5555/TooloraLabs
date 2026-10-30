@@ -1,4 +1,5 @@
 import { svgPx } from "@/components/tool-ui/svgPx";
+import FitSvg from "@/components/tool-ui/FitSvg";
 type TriangleAnatomyDiagramProps = {
   labelA: string;
   labelB: string;
@@ -20,7 +21,7 @@ export default function TriangleAnatomyDiagram({ labelA, labelB, labelC, labelAn
   return (
     <figure className="my-2">
       <div dir="ltr" className="flex justify-center overflow-x-auto">
-        <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={caption} className="h-auto w-64 text-current" style={{ minWidth: 220 }}>
+        <FitSvg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={caption} className="h-auto w-64 text-current" style={{ minWidth: 220 }}>
           <polygon
             points={`${P_A.x},${P_A.y} ${P_B.x},${P_B.y} ${P_C.x},${P_C.y}`}
             className="fill-blue-500/15 dark:fill-blue-400/15"
@@ -45,7 +46,7 @@ export default function TriangleAnatomyDiagram({ labelA, labelB, labelC, labelAn
           <text x={P_C.x} y={P_C.y - 8} textAnchor="middle" style={{ fontSize: svgPx(10) }} className="fill-blue-600 dark:fill-blue-400">
             {labelAngleC}
           </text>
-        </svg>
+        </FitSvg>
       </div>
       <figcaption className="mt-2 text-center text-sm opacity-70">{caption}</figcaption>
     </figure>

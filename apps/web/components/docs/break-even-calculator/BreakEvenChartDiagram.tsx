@@ -1,4 +1,5 @@
 import { svgPx } from "@/components/tool-ui/svgPx";
+import FitSvg from "@/components/tool-ui/FitSvg";
 type BreakEvenChartDiagramProps = {
   fixedCosts: number;
   variableCostPerUnit: number;
@@ -42,7 +43,7 @@ export default function BreakEvenChartDiagram({
   return (
     <figure className="my-2">
       <div dir="ltr" className="flex justify-center overflow-x-auto">
-        <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={caption} className="h-auto w-full max-w-sm text-current">
+        <FitSvg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={caption} className="h-auto w-full max-w-sm text-current">
           <line x1={MARGIN.left} y1={MARGIN.top} x2={MARGIN.left} y2={MARGIN.top + PLOT_H} stroke="currentColor" strokeWidth={1} opacity={0.3} />
           <line x1={MARGIN.left} y1={MARGIN.top + PLOT_H} x2={WIDTH - MARGIN.right} y2={MARGIN.top + PLOT_H} stroke="currentColor" strokeWidth={1} opacity={0.3} />
 
@@ -68,7 +69,7 @@ export default function BreakEvenChartDiagram({
           <text x={WIDTH - MARGIN.right} y={HEIGHT - 10} textAnchor="end" style={{ fontSize: svgPx(9) }} opacity={0.6} fill="currentColor">
             {maxUnits}
           </text>
-        </svg>
+        </FitSvg>
       </div>
       <figcaption className="mt-2 text-center text-sm opacity-70">{caption}</figcaption>
     </figure>

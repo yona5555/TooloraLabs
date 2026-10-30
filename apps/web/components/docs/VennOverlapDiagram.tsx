@@ -1,4 +1,5 @@
 import { svgPx } from "@/components/tool-ui/svgPx";
+import FitSvg from "@/components/tool-ui/FitSvg";
 type VennOverlapDiagramProps = {
   leftLabel: string;
   rightLabel: string;
@@ -28,7 +29,7 @@ export default function VennOverlapDiagram({
   return (
     <figure className="my-2">
       <div dir="ltr" className="flex justify-center overflow-x-auto">
-        <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={caption} className="h-auto w-80 text-current" style={{ minWidth: 280 }}>
+        <FitSvg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={caption} className="h-auto w-80 text-current" style={{ minWidth: 280 }}>
           <circle cx={LEFT_CX} cy={CY} r={R} className="fill-blue-500 dark:fill-blue-400" opacity={0.35} />
           <circle cx={RIGHT_CX} cy={CY} r={R} className="fill-emerald-500 dark:fill-emerald-400" opacity={0.35} />
 
@@ -51,7 +52,7 @@ export default function VennOverlapDiagram({
           <text x={RIGHT_CX + 10} y={CY + 8} style={{ fontSize: svgPx(10) }} fill="currentColor" opacity={0.85}>
             {rightOnlyItems}
           </text>
-        </svg>
+        </FitSvg>
       </div>
       <figcaption className="mt-2 text-center text-sm opacity-70">{caption}</figcaption>
     </figure>

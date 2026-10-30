@@ -41,7 +41,7 @@ export function AgeLifeStagesCard({ d, f }: IndicatorProps) {
       <IndicatorWithTable
         workedExampleTitle={t("worked")}
         indicator={
-          <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("stages.title")} className="max-w-full">
+          <FitSvg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("stages.title")} className="max-w-full">
             <rect x={L} y={44} width={W - L - R} height={36} rx={6} fill="currentColor" fillOpacity={0.07} />
             {stages.map((s, i) => {
               const w = s.days * unit;
@@ -67,7 +67,7 @@ export function AgeLifeStagesCard({ d, f }: IndicatorProps) {
             </text>
             <text style={{ fontSize: svgPx(12) }} x={L} y={H - 6} className={axisText}>{r.birth.year}</text>
             <text style={{ fontSize: svgPx(12) }} x={W - R} y={H - 6} textAnchor="end" className={axisText}>{td("result.days")}: {f.int(r.totalDays)}</text>
-          </svg>
+          </FitSvg>
         }
         rows={[
           ...stages
@@ -111,7 +111,7 @@ export function AgeLifeGaugeCard({ state, setState, d, f }: IndicatorProps) {
         indicator={
           <div className="w-[320px] max-w-full">
             <PhoneMini slot={1} title={t("life.title")}>
-            <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("life.title")} className="max-w-full">
+            <FitSvg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("life.title")} className="max-w-full">
               {stops.map((c, i) => (
                 <path key={c} d={arc(Math.PI * (1 - i / 5), Math.PI * (1 - (i + 1) / 5))} stroke={c} strokeWidth={22} fill="none" />
               ))}
@@ -131,7 +131,7 @@ export function AgeLifeGaugeCard({ state, setState, d, f }: IndicatorProps) {
               <text style={{ fontSize: svgPx(12) }} x={cx} y={cy + 28} textAnchor="middle" className={axisText}>
                 {t("life.of", { y: f.num(life.lifeExpectancyYears, 1) })}
               </text>
-            </svg>
+            </FitSvg>
             </PhoneMini>
             <div role="radiogroup" className="mx-auto mt-1 grid w-48 grid-cols-2 gap-1 rounded-lg bg-zinc-100 p-1 dark:bg-zinc-800" data-bp-inner>
               {(["male", "female"] as Gender[]).map((g) => (

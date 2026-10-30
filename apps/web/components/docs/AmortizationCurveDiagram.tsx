@@ -1,4 +1,5 @@
 import { svgPx } from "@/components/tool-ui/svgPx";
+import FitSvg from "@/components/tool-ui/FitSvg";
 export type AmortizationRow = { period: number; principal: number; interest: number };
 
 type Props = {
@@ -42,7 +43,7 @@ export default function AmortizationCurveDiagram({ rows, labelPrincipal, labelIn
   return (
     <figure className="my-2">
       <div dir="ltr" className="flex justify-center overflow-x-auto">
-        <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={caption} className="h-auto w-full max-w-xl">
+        <FitSvg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={caption} className="h-auto w-full max-w-xl">
           <line x1={PAD_LEFT} y1={PAD_TOP} x2={PAD_LEFT} y2={PAD_TOP + plotH} stroke="currentColor" strokeWidth={1} className="text-zinc-300 dark:text-zinc-700" />
           <line x1={PAD_LEFT} y1={PAD_TOP + plotH} x2={WIDTH - PAD_RIGHT} y2={PAD_TOP + plotH} stroke="currentColor" strokeWidth={1} className="text-zinc-300 dark:text-zinc-700" />
 
@@ -66,7 +67,7 @@ export default function AmortizationCurveDiagram({ rows, labelPrincipal, labelIn
               {labelInterest}
             </text>
           </g>
-        </svg>
+        </FitSvg>
       </div>
       <figcaption className="mt-2 text-center text-sm text-zinc-500 dark:text-zinc-400">{caption}</figcaption>
     </figure>

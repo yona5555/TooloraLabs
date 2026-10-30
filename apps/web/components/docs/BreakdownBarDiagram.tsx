@@ -1,4 +1,5 @@
 import { svgPx } from "@/components/tool-ui/svgPx";
+import FitSvg from "@/components/tool-ui/FitSvg";
 export type BreakdownSegment = { label: string; value: number; colorClass: string };
 
 type Props = {
@@ -33,7 +34,7 @@ export default function BreakdownBarDiagram({ segments, totalLabel, caption }: P
   return (
     <figure className="my-2">
       <div dir="ltr" className="flex justify-center overflow-x-auto">
-        <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={caption} className="h-auto w-full max-w-lg">
+        <FitSvg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={caption} className="h-auto w-full max-w-lg">
           {positioned.map((seg) => (
             <rect key={seg.label} x={seg.x} y={BAR_TOP} width={seg.width} height={BAR_HEIGHT} className={seg.colorClass} />
           ))}
@@ -59,7 +60,7 @@ export default function BreakdownBarDiagram({ segments, totalLabel, caption }: P
               </g>
             ))}
           </g>
-        </svg>
+        </FitSvg>
       </div>
       <figcaption className="mt-2 text-center text-sm text-zinc-500 dark:text-zinc-400">{caption}</figcaption>
     </figure>

@@ -1,4 +1,5 @@
 import { svgPx } from "@/components/tool-ui/svgPx";
+import FitSvg from "@/components/tool-ui/FitSvg";
 type CircleAnatomyDiagramProps = {
   radiusLabel: string;
   diameterLabel: string;
@@ -15,7 +16,7 @@ export default function CircleAnatomyDiagram({ radiusLabel, diameterLabel, circu
   return (
     <figure className="my-2">
       <div dir="ltr" className="flex justify-center overflow-x-auto">
-        <svg viewBox={`0 0 ${SIZE} ${SIZE}`} role="img" aria-label={caption} className="h-auto w-56 text-current" style={{ minWidth: 200 }}>
+        <FitSvg viewBox={`0 0 ${SIZE} ${SIZE}`} role="img" aria-label={caption} className="h-auto w-56 text-current" style={{ minWidth: 200 }}>
           <circle cx={CX} cy={CY} r={R} fill="none" strokeWidth={2} className="stroke-blue-600 dark:stroke-blue-400" />
           <line x1={CX} y1={CY} x2={CX + R} y2={CY} strokeWidth={2} className="stroke-emerald-500 dark:stroke-emerald-400" />
           <circle cx={CX} cy={CY} r={2.5} fill="currentColor" />
@@ -29,7 +30,7 @@ export default function CircleAnatomyDiagram({ radiusLabel, diameterLabel, circu
           <text x={CX} y={20} textAnchor="middle" style={{ fontSize: svgPx(11) }} fontWeight={700} className="fill-blue-600 dark:fill-blue-400">
             {circumferenceLabel}
           </text>
-        </svg>
+        </FitSvg>
       </div>
       <figcaption className="mt-2 text-center text-sm opacity-70">{caption}</figcaption>
     </figure>

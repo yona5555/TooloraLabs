@@ -1,4 +1,5 @@
 import { svgPx } from "@/components/tool-ui/svgPx";
+import FitSvg from "@/components/tool-ui/FitSvg";
 type MatrixAnatomyDiagramProps = {
   a11: number;
   a12: number;
@@ -61,7 +62,7 @@ export default function MatrixAnatomyDiagram({
   return (
     <figure className="my-2">
       <div dir="ltr" className="flex justify-center overflow-x-auto">
-        <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={caption} className="h-auto w-80 text-current" style={{ minWidth: 280 }}>
+        <FitSvg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={caption} className="h-auto w-80 text-current" style={{ minWidth: 280 }}>
           <text x={30} y={16} style={{ fontSize: svgPx(11) }} fontWeight={700} fill="currentColor">
             {labelMatrix}
           </text>
@@ -86,7 +87,7 @@ export default function MatrixAnatomyDiagram({
             {labelInverse}
           </text>
           <Grid x={180} y={gridY} values={[inv11, inv12, inv21, inv22]} />
-        </svg>
+        </FitSvg>
       </div>
       <figcaption className="mt-2 text-center text-sm opacity-70">{caption}</figcaption>
     </figure>
