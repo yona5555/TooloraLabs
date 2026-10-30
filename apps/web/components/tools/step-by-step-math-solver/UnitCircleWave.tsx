@@ -1,6 +1,7 @@
 "use client";
 import { useTranslations } from "next-intl";
-import { Mafs, Coordinates, Circle, Plot, Line, Point, useMovablePoint } from "mafs";
+import { Coordinates, Circle, Plot, Line, Point, useMovablePoint } from "mafs";
+import FitMafs from "@/components/tool-ui/FitMafs";
 import "mafs/core.css";
 import "@/components/tool-ui/mafsTheme.css";
 import { useIsDarkMode } from "@/lib/use-dark-mode";
@@ -44,21 +45,21 @@ export default function UnitCircleWave() {
       <GapFreeRow className="mt-4">
         <div dir="ltr" className="flex w-full flex-col gap-3 sm:flex-row lg:flex-1">
           <div role="group" aria-label={t("circleAriaLabel")} className="mafs-canvas mx-auto w-full max-w-[180px] overflow-hidden rounded-xl">
-            <Mafs viewBox={{ x: [-1.4, 1.4], y: [-1.4, 1.4] }} height={170} pan={false} zoom={false} preserveAspectRatio={false}>
+            <FitMafs viewBox={{ x: [-1.4, 1.4], y: [-1.4, 1.4] }} height={170} pan={false} zoom={false} preserveAspectRatio={false}>
               <Coordinates.Cartesian xAxis={{ lines: 100 }} yAxis={{ lines: 100 }} />
               <Circle center={[0, 0]} radius={1} color={colors.circle} fillOpacity={0} />
               <Line.Segment point1={[0, 0]} point2={angle.point} color={colors.ref} weight={2} />
               <Point x={Math.cos((referenceDeg * Math.PI) / 180)} y={Math.sin((referenceDeg * Math.PI) / 180)} color={colors.circle} svgCircleProps={{ r: 4 }} />
               {angle.element}
-            </Mafs>
+            </FitMafs>
           </div>
           <div role="group" aria-label={t("waveAriaLabel")} className="mafs-canvas mx-auto w-full max-w-[220px] overflow-hidden rounded-xl">
-            <Mafs viewBox={{ x: [0, 360], y: [-1.3, 1.3] }} height={170} pan={false} zoom={false} preserveAspectRatio={false}>
+            <FitMafs viewBox={{ x: [0, 360], y: [-1.3, 1.3] }} height={170} pan={false} zoom={false} preserveAspectRatio={false}>
               <Coordinates.Cartesian xAxis={{ lines: 90 }} yAxis={{ lines: 0.5, labels: (v) => (Math.abs(v) <= 1 ? `${v}` : "") }} />
               <Plot.OfX y={(x) => Math.sin((x * Math.PI) / 180)} color={colors.sin} />
               <Plot.OfX y={(x) => Math.cos((x * Math.PI) / 180)} color={colors.cos} />
               <Line.Segment point1={[deg, -1.3]} point2={[deg, 1.3]} color={colors.ref} weight={1.5} style="dashed" opacity={0.6} />
-            </Mafs>
+            </FitMafs>
           </div>
         </div>
         <WorkedExampleNote

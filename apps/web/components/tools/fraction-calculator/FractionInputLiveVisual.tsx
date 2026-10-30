@@ -37,7 +37,7 @@ export default function FractionInputLiveVisual() {
 
   return (
     <div dir="ltr" data-input-live-visual className="mt-5 flex min-h-[120px] flex-1 flex-col justify-center gap-4 rounded-xl p-3" style={{ background: "var(--glass-table-wrap-bg)" }}>
-      <p className="text-[10px] font-bold uppercase tracking-wide" style={{ color: "var(--glass-muted)" }}>
+      <p className="text-xs font-bold uppercase tracking-wide" style={{ color: "var(--glass-muted)" }}>
         {t("liveVisualLabel")}
       </p>
       <div className="flex flex-col gap-1.5">

@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { svgPx } from "@/components/tool-ui/svgPx";
 import { labelW, staggerRows } from "@/components/tool-ui/labelLayout";
 
+import FitSvg from "@/components/tool-ui/FitSvg";
 /**
  * Static illustrative chart for the education intro — not tied to the user's live inputs (unlike
  * the above-fold result panel), since it's meant to make a single fixed point (your income sets
@@ -49,7 +50,7 @@ export default function HouseAffordabilityIncomeChart() {
   return (
     <figure className="my-2">
       <div dir="ltr" className="mx-auto max-w-sm overflow-x-auto">
-        <svg width={CHART_WIDTH} height={CHART_HEIGHT} viewBox={`0 0 ${CHART_WIDTH} ${CHART_HEIGHT}`} role="img" aria-label={t("chartAriaLabel")} className="block text-current">
+        <FitSvg width={CHART_WIDTH} height={CHART_HEIGHT} viewBox={`0 0 ${CHART_WIDTH} ${CHART_HEIGHT}`} role="img" aria-label={t("chartAriaLabel")} className="block text-current">
           <line x1={0} y1={barBottom} x2={CHART_WIDTH} y2={barBottom} stroke="currentColor" strokeWidth={1} opacity={0.25} />
           {SCENARIOS.map((s, i) => {
             const x = groupX(i);
@@ -72,7 +73,7 @@ export default function HouseAffordabilityIncomeChart() {
               </g>
             );
           })}
-        </svg>
+        </FitSvg>
       </div>
 
       <figcaption className="mt-2 text-center text-sm opacity-70">{t("caption")}</figcaption>

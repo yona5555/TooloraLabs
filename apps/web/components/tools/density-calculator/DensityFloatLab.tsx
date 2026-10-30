@@ -1,5 +1,6 @@
 "use client";
-import { useEffect, useRef, useState, useId } from "react";
+import { useRef, useState, useId } from "react";
+import { useMotionEpisode, useMotionLoop } from "@/components/tool-ui/motion/motion";
 import { useLocale, useTranslations } from "next-intl";
 import { Pause, Play } from "lucide-react";
 import { niceCeil, STANDARD_GRAVITY } from "@tooloralabs/tools";
@@ -41,29 +42,18 @@ export default function DensityFloatLab() {
   const { setDim } = useDensityLive();
   const { draft, a, f } = useDensityModel();
   const [fluidKey, setFluidKey] = useState("water");
-  const [time, setTime] = useState(0);
-  const [playing, setPlaying] = useState(true);
-  const start = useRef<number | null>(null);
+  const [time, setTime] = useState(RUN); // at rest: the end of the run
+  const motion = useMotionEpisode([fluidKey, JSON.stringify(draft)]);
+  const playing = motion.active;
+  const box = useRef<SVGSVGElement>(null);
 
-  useEffect(() => {
-    if (!playing) return;
-    let raf = 0;
-    start.current = null;
-    const tick = (now: number) => {
-      if (start.current === null && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) {
-        // Reduced motion: show the resting state instead of running.
-        setTime(RUN);
-        setPlaying(false);
-        return;
-      }
-      if (start.current === null) start.current = now;
-      const el = ((now - start.current) / 1000) % (RUN + HOLD);
-      setTime(Math.min(RUN, el));
-      raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [playing, fluidKey]);
+  // tool-ui/motion: plays during a motion episode (Play, or new input values), at most EPISODE_MS, paused off
+  // screen or with the page hidden, never on load and never for reduced motion.
+  const clock = useRef(0);
+  useMotionLoop(box, (dt) => {
+    clock.current = (clock.current + dt) % (RUN + HOLD);
+    setTime(Math.min(RUN, clock.current));
+  }, playing, motion.stop);
 
   if (!a) return <DensityIndicatorUnavailable title={t("title")} />;
 
@@ -113,17 +103,17 @@ export default function DensityFloatLab() {
           </button>
         ))}
       </div>
-      <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
-        <text style={{ fontSize: svgPx(13) }} x={4} y={16} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+      <svg ref={box} direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
+        <text style={{ fontSize: svgPx(13) }} x={4} y={16} fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
           {`t = ${time.toFixed(2)} s`}
         </text>
-        <text style={{ fontSize: svgPx(12) }} x={W - 4} y={16} textAnchor="end" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+        <text style={{ fontSize: svgPx(12) }} x={W - 4} y={16} textAnchor="end" fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
           <SvgSubs text={`ρ = ${f(a.density)} · ρ_f = ${f(fluid.fluidDensity)} g/cm³`} />
         </text>
-        <text style={{ fontSize: svgPx(12) }} x={4} y={36} fontFamily="ui-monospace, monospace" className="fill-emerald-700 dark:fill-emerald-400">
+        <text style={{ fontSize: svgPx(12) }} x={4} y={36} fontFamily="var(--font-mono)" className="fill-emerald-700 dark:fill-emerald-400">
           <SvgSubs text={`F_b = ${f(buoyNow, 3)} N`} />
         </text>
-        <text style={{ fontSize: svgPx(12) }} x={W - 4} y={36} textAnchor="end" fontFamily="ui-monospace, monospace" className="fill-red-600 dark:fill-red-400">
+        <text style={{ fontSize: svgPx(12) }} x={W - 4} y={36} textAnchor="end" fontFamily="var(--font-mono)" className="fill-red-600 dark:fill-red-400">
           {`W = ${f(a.weight, 3)} N`}
         </text>
         <text style={{ fontSize: svgPx(12) }} x={rtl ? W - 4 : 4} y={54} direction={rtl ? "rtl" : "ltr"} fontWeight={600} className="fill-violet-700 dark:fill-violet-300">
@@ -155,7 +145,7 @@ export default function DensityFloatLab() {
         <text style={{ fontSize: svgPx(12) }} x={TX} y={H - 3} className="fill-zinc-500 dark:fill-zinc-400">
           0
         </text>
-        <text style={{ fontSize: svgPx(12) }} x={TX + TANK} y={H - 3} textAnchor="end" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+        <text style={{ fontSize: svgPx(12) }} x={TX + TANK} y={H - 3} textAnchor="end" fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
           {`${f(tankCm)} cm · a = ${f(a.cubeEdge, 3)} cm`}
         </text>
         <defs>
@@ -191,7 +181,7 @@ export default function DensityFloatLab() {
         })}
         <button
           type="button"
-          onClick={() => setPlaying((p) => !p)}
+          onClick={() => (playing ? motion.stop() : motion.play())}
           className="inline-flex items-center gap-2 rounded-lg border border-zinc-300 px-3 py-1.5 text-xs font-semibold text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
         >
           {playing ? <Pause size={14} /> : <Play size={14} />}

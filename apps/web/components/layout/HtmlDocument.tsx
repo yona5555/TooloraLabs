@@ -1,6 +1,7 @@
 import ThemeInitScript from "@/components/layout/ThemeInitScript";
 import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 import FitNumbers from "@/components/layout/FitNumbers";
+import { fontVariables } from "@/lib/fonts";
 
 /**
  * The <html>/<body> shell. Rendered by each root-level segment ([locale] layout, embed page,
@@ -17,7 +18,7 @@ export default function HtmlDocument({
   children: React.ReactNode;
 }) {
   return (
-    <html lang={lang} dir={dir} suppressHydrationWarning>
+    <html lang={lang} dir={dir} className={fontVariables} suppressHydrationWarning>
       <body className="text-zinc-900 antialiased dark:text-zinc-100">
         <ThemeInitScript />
         <GoogleAnalytics />

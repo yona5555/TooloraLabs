@@ -1,7 +1,8 @@
 "use client";
 import { useEffect, useRef } from "react";
 import { useTranslations } from "next-intl";
-import { Coordinates, Mafs, Polygon, Text, useMovablePoint } from "mafs";
+import { Coordinates, Polygon, useMovablePoint } from "mafs";
+import FitMafs, { FitText } from "@/components/tool-ui/FitMafs";
 import "mafs/core.css";
 import "@/components/tool-ui/mafsTheme.css";
 import { mtFriendlySplit } from "@tooloralabs/tools";
@@ -82,20 +83,20 @@ export default function MTAreaModelLab({ view, onPick }: { view: MtView; onPick:
       }}
     >
       <div dir="ltr" data-preview="visual" data-preview-hero className="mafs-canvas overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-700" data-testid="mt-area" data-rows={rows} data-cols={cols}>
-        <Mafs height={300} viewBox={{ x: [-0.6, board + 0.6], y: [-0.6, board + 0.6] }} preserveAspectRatio={false} pan={false} zoom={false}>
+        <FitMafs height={300} viewBox={{ x: [-0.6, board + 0.6], y: [-0.6, board + 0.6] }} preserveAspectRatio={false} pan={false} zoom={false}>
           <Coordinates.Cartesian xAxis={{ lines: 1, labels: (n) => (n % 2 === 0 && n > 0 ? String(n) : "") }} yAxis={{ lines: 1, labels: (n) => (n % 2 === 0 && n > 0 ? String(n) : "") }} />
           <Polygon points={[[0, 0], [cols, 0], [cols, r1], [0, r1]]} color={c.low} fillOpacity={0.35} weight={2} />
           {r2 > 0 && <Polygon points={[[0, r1], [cols, r1], [cols, rows], [0, rows]]} color={c.high} fillOpacity={0.35} weight={2} />}
-          <Text x={cols / 2} y={r1 / 2} size={cols >= 4 ? 16 : 12} color={c.text}>
+          <FitText x={cols / 2} y={r1 / 2} size={cols >= 4 ? 16 : 12} color={c.text}>
             {`${r1}×${cols}=${r1 * cols}`}
-          </Text>
+          </FitText>
           {r2 > 0 && (
-            <Text x={cols / 2} y={r1 + r2 / 2} size={cols >= 4 ? 16 : 12} color={c.text}>
+            <FitText x={cols / 2} y={r1 + r2 / 2} size={cols >= 4 ? 16 : 12} color={c.text}>
               {`${r2}×${cols}=${r2 * cols}`}
-            </Text>
+            </FitText>
           )}
           {handle.element}
-        </Mafs>
+        </FitMafs>
       </div>
       <div className="mt-3 flex flex-wrap items-center gap-2 text-xs">
         <span className="flex items-center gap-1 text-zinc-600 dark:text-zinc-300">

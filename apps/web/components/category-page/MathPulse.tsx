@@ -2,6 +2,7 @@
 import { useSyncExternalStore } from "react";
 import { useTranslations } from "next-intl";
 import IndicatorStrip, { type IndicatorItem } from "./IndicatorStrip";
+import { subscribeVisibleClock } from "@/components/tool-ui/motion/motion";
 
 /**
  * The math section's indicators. Every figure is computed in the browser, with no request:
@@ -16,10 +17,8 @@ const PHI = (1 + Math.sqrt(5)) / 2;
 const W = 44;
 const H = 18;
 
-function subscribe(cb: () => void) {
-  const id = window.setInterval(cb, 60_000);
-  return () => window.clearInterval(id);
-}
+// tool-ui/motion: checks the day each minute while the page is visible, nothing while hidden
+const subscribe = (cb: () => void) => subscribeVisibleClock(60_000, cb);
 const localDay = () => {
   const d = new Date();
   return d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate();

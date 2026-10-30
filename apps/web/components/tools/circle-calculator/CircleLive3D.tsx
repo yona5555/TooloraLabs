@@ -101,7 +101,7 @@ export default function CircleLive3D({ r, knownField, fmt }: Props) {
       headings={[tc("colQuantity"), tc("colFormula"), tc("colValue")]}
       hint={tc("hint")}
       drawing={
-        <Scene3D camera={[4.2, 4.4, 5.4]} autoRotate>
+        <Scene3D camera={[4.2, 4.4, 5.4]}>
           <CircleScene3D labels={{ r: `r = ${n(r)}`, d: `d = ${n(d)}`, c: `C = ${n(C)}`, a: `A = ${n(A)}` }} />
         </Scene3D>
       }

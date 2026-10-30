@@ -15,6 +15,7 @@ import WxCredits from "./WxCredits";
 import { WxDailyCard, WxHourlyCard, WxHumidityCard, WxMoonCard, WxPressureCard, WxSunCard, WxUvCard, WxWindCard } from "./WxIndicators";
 import WeatherPhoneCards from "./WeatherPhoneCards";
 import { makeWxFmt, useWeatherDerived, useWxT, type WxPlace } from "./wx";
+import { subscribeVisibleClock } from "@/components/tool-ui/motion/motion";
 
 type Props = {
   initialCityId: string;
@@ -30,10 +31,10 @@ function useMinuteClock(start: number) {
   useEffect(() => {
     const tick = () => setNow(Date.now());
     const first = setTimeout(tick, 0);
-    const id = setInterval(tick, 60_000);
+    const stop = subscribeVisibleClock(60_000, tick); // tool-ui/motion: nothing while the page is hidden
     return () => {
       clearTimeout(first);
-      clearInterval(id);
+      stop();
     };
   }, []);
   return now;

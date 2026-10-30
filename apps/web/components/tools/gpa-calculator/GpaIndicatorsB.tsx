@@ -10,6 +10,7 @@ import { useIndicatorT, type IndicatorProps } from "./GpaIndicatorsA";
 import { svgPx } from "@/components/tool-ui/svgPx";
 import { useFitWidth } from "@/components/tool-ui/useFitWidth";
 
+import FitSvg from "@/components/tool-ui/FitSvg";
 const axisText = "fill-zinc-500 dark:fill-zinc-400";
 const valueText = "fill-zinc-800 dark:fill-zinc-100";
 const field =
@@ -149,7 +150,7 @@ export function GpaHonorsStripCard({ d, f }: IndicatorProps) {
       <IndicatorWithTable
         workedExampleTitle={t("worked")}
         indicator={
-          <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("honors.title")} className="max-w-full">
+          <FitSvg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("honors.title")} className="max-w-full">
             {zones.map((z, i) => (
               <g key={i}>
                 <rect x={x(z.from)} y={40} width={x(z.to) - x(z.from)} height={26} fill={z.honor ? z.color : "currentColor"} fillOpacity={z.honor ? 0.85 : 0.12} />
@@ -184,7 +185,7 @@ export function GpaHonorsStripCard({ d, f }: IndicatorProps) {
                 <text style={{ fontSize: svgPx(12) }} x={W - R - 109 + i * 40} y={H - 3} className={axisText}>{i + 1}</text>
               </g>
             ))}
-          </svg>
+          </FitSvg>
         }
         rows={[
           { label: t("honors.current"), value: f.gpa(d.cumulativeGpa), note: d.honors.current ? tp(`honors.${d.honors.current}`) : tp("honors.none") },

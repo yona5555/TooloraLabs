@@ -1,5 +1,6 @@
 "use client";
-import { useEffect, useMemo, useState, type ReactNode } from "react";
+import { useMemo, useState, type ReactNode } from "react";
+import { useMotionEpisode, useVisibleInterval } from "@/components/tool-ui/motion/motion";
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, parseLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import {
@@ -54,7 +55,8 @@ export default function MultiplicationTableGenerator({ education }: { education:
   const [rangeEnd, setRangeEnd] = useState(DEFAULTS.to);
   const [k, setK] = useState(DEFAULTS.k);
   const [cell, setCell] = useState({ row: DEFAULTS.row, col: DEFAULTS.col });
-  const [playing, setPlaying] = useState(false);
+  const motion = useMotionEpisode();
+  const playing = motion.active;
 
   function handleClear() {
     setMode("single");
@@ -64,7 +66,7 @@ export default function MultiplicationTableGenerator({ education }: { education:
     setRangeEnd(DEFAULTS.to);
     setK(DEFAULTS.k);
     setCell({ row: DEFAULTS.row, col: DEFAULTS.col });
-    setPlaying(false);
+    motion.stop();
   }
 
   const digitStyle: DigitStyle = resolveDigitStyle(number, maxMultiplier, rangeStart, rangeEnd);
@@ -114,17 +116,20 @@ export default function MultiplicationTableGenerator({ education }: { education:
     }
   }
 
-  // "Play" walks the selected multiplier through the table, so the hero and every indicator animate.
-  useEffect(() => {
-    if (!playing || !view) return;
-    const id = setInterval(() => {
+  // "Play" walks the selected multiplier through the table, so the hero and every indicator animate: a motion
+  // episode (tool-ui/motion, at most EPISODE_MS), paused with the page hidden, never for reduced motion.
+  useVisibleInterval(
+    null,
+    () => {
+      if (!view) return;
       const list = view.multipliers;
       const next = list[(list.indexOf(view.b) + 1) % list.length];
       if (mode === "single") setK(next);
       else setCell((c) => ({ ...c, col: next }));
-    }, 800);
-    return () => clearInterval(id);
-  }, [playing, view, mode]);
+    },
+    800,
+    { motion: true, active: playing && !!view },
+  );
 
   const ind = view ? { view, onPick: pick } : null;
 
@@ -168,7 +173,7 @@ export default function MultiplicationTableGenerator({ education }: { education:
               mode={mode}
               onModeChange={(m) => {
                 setMode(m);
-                setPlaying(false);
+                motion.stop();
               }}
               number={number}
               onNumberChange={setNumber}
@@ -187,7 +192,7 @@ export default function MultiplicationTableGenerator({ education }: { education:
               view={view}
             />
           }
-          result={<MTResult result={result} view={view} onPick={pick} playing={playing} onTogglePlay={() => setPlaying((p) => !p)} />}
+          result={<MTResult result={result} view={view} onPick={pick} playing={playing} onTogglePlay={() => (playing ? motion.stop() : motion.play())} />}
           sidebar={<RelatedToolsSidebar currentSlug="multiplication-table-generator" category="math" relatedList={RELATED_TOOLS} relatedListTitle={t("relatedTools.title")} />}
           secondary={ind ? <ProductBars {...ind} /> : undefined}
           sidebarFill={view ? <SidebarFillList title={t("sidebar.title")} note={t("sidebar.note")} rows={sidebarRows} /> : undefined}

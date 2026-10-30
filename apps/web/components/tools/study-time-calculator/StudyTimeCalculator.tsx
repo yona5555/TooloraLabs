@@ -1,5 +1,5 @@
 "use client";
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
@@ -11,6 +11,7 @@ import StudyStudioResult from "./StudyStudioResult";
 import { ForgettingCurveCard, PomodoroCycleCard, PriorityFormulaCard, ReviewScheduleCard } from "./StudyIndicatorsA";
 import { DailyLoadCard, FocusRatioCard, HoursPerExamCard, SlackBalanceCard } from "./StudyIndicatorsB";
 import { sampleState, useDerived, useStudioState } from "./studio";
+import { useTodayISO } from "@/lib/use-today";
 
 export default function StudyTimeCalculator({ education }: { education: ReactNode }) {
   const tNav = useTranslations("tools.study-time-calculator.nav");
@@ -20,7 +21,16 @@ export default function StudyTimeCalculator({ education }: { education: ReactNod
     return Array.isArray(raw) ? (raw as string[]) : [];
   };
 
-  const [state, setState] = useStudioState(() => sampleState(sampleNames()));
+  // The sample exams are dated from today (useTodayISO: the render day while hydrating, then the
+  // browser's day). While the visitor has neither edited nor restored a plan, the sample follows today.
+  const today = useTodayISO();
+  const [sample, setSample] = useState(() => ({ day: today, state: sampleState(sampleNames(), today) }));
+  const [state, setState] = useStudioState(() => sample.state);
+  if (sample.day !== today && state === sample.state) {
+    const next = { day: today, state: sampleState(sampleNames(), today) };
+    setSample(next);
+    setState(next.state);
+  }
   const d = useDerived(state);
   const props = { state, setState, d };
 
@@ -36,7 +46,7 @@ export default function StudyTimeCalculator({ education }: { education: ReactNod
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           stretchResult
-          input={<StudyStudioInput state={state} onChange={setState} onReset={() => setState(sampleState(sampleNames()))} />}
+          input={<StudyStudioInput state={state} onChange={setState} onReset={() => setState(sampleState(sampleNames(), today))} />}
           result={
             <div className="flex flex-col gap-3 lg:flex-1">
               <StudyStudioResult state={state} d={d} />

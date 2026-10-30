@@ -1,7 +1,8 @@
 "use client";
 import { useState, useSyncExternalStore, useEffect, useRef } from "react";
 import { useTranslations } from "next-intl";
-import { Mafs, Coordinates, Polygon, Polyline, Point, Text, useMovablePoint } from "mafs";
+import { Coordinates, Polygon, Polyline, Point, useMovablePoint } from "mafs";
+import FitMafs, { FitText } from "@/components/tool-ui/FitMafs";
 import "mafs/core.css";
 import "./triangleMafsTheme.css";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
@@ -312,7 +313,7 @@ export default function TriangleInteractiveDiagram({ vertices: initialVertices, 
         onTouchStart={handleDragStart}
         onTouchEnd={handleDragEnd}
       >
-        <Mafs viewBox={viewBox} height={300} pan={false} zoom={false}>
+        <FitMafs viewBox={viewBox} height={300} pan={false} zoom={false}>
           <Coordinates.Cartesian xAxis={{ axis: false, lines: false, labels: xLabels }} yAxis={{ axis: false, lines: false, labels: yLabels }} />
 
           <Polygon points={[A.point, B.point, C.point]} color={colors.blueA} fillOpacity={0.1} strokeOpacity={0} />
@@ -332,26 +333,26 @@ export default function TriangleInteractiveDiagram({ vertices: initialVertices, 
           />
           {rightAngleMark && <Polyline points={rightAngleMark} color={colors.fg} weight={1.5} fillOpacity={0} />}
           <Point x={projection.foot.x} y={projection.foot.y} color={colors.fg} opacity={0.6} svgCircleProps={{ r: 3 }} />
-          <Text x={footLabelPos.x} y={footLabelPos.y} size={12} color={colors.fg}>
+          <FitText x={footLabelPos.x} y={footLabelPos.y} size={12} color={colors.fg}>
             H
-          </Text>
+          </FitText>
 
           <Polyline points={arc} color={colors.blueA} weight={2} fillOpacity={0} />
-          <Text x={arcLabelPos.x} y={arcLabelPos.y} size={12} color={colors.blueA}>
+          <FitText x={arcLabelPos.x} y={arcLabelPos.y} size={12} color={colors.blueA}>
             {`${fmt(angles[activeIndex])}°`}
-          </Text>
+          </FitText>
 
-          <Text x={heightLabelPos.x} y={heightLabelPos.y} size={12} color={colors.red}>
+          <FitText x={heightLabelPos.x} y={heightLabelPos.y} size={12} color={colors.red}>
             {heightFormulaText}
-          </Text>
-          <Text x={adjacentLabelPos.x} y={adjacentLabelPos.y} size={12} color={colors.green}>
+          </FitText>
+          <FitText x={adjacentLabelPos.x} y={adjacentLabelPos.y} size={12} color={colors.green}>
             {adjacentFormulaText}
-          </Text>
+          </FitText>
 
           {VERTEX_LABELS.map((label, i) => (
-            <Text key={label} x={vertexLabelPositions[i].x} y={vertexLabelPositions[i].y} size={13} color={i === 0 ? colors.blueA : i === 1 ? colors.violetB : colors.amberC}>
+            <FitText key={label} x={vertexLabelPositions[i].x} y={vertexLabelPositions[i].y} size={13} color={i === 0 ? colors.blueA : i === 1 ? colors.violetB : colors.amberC}>
               {label}
-            </Text>
+            </FitText>
           ))}
 
           <MafsHoverPoint point={A.point} tooltip={trigTooltip("A", angleADeg)} />
@@ -361,7 +362,7 @@ export default function TriangleInteractiveDiagram({ vertices: initialVertices, 
           {A.element}
           {B.element}
           {C.element}
-        </Mafs>
+        </FitMafs>
       </div>
 
       <p className="mt-2 text-center text-xs text-zinc-500 dark:text-zinc-400">{t("hint")}</p>

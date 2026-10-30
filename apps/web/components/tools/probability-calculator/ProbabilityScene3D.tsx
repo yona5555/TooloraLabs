@@ -2,7 +2,9 @@
 
 import { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
-import { useFrame, useThree } from "@react-three/fiber";
+import { useThree } from "@react-three/fiber";
+import { useMotionEpisode } from "@/components/tool-ui/motion/motion";
+import { useSceneFrame } from "@/components/tool-ui/motion/scene-motion";
 import { Edges } from "@react-three/drei";
 import Label3D from "@/components/tool-ui/three/Label3D";
 import { usePalette3D } from "@/components/tool-ui/three/theme3d";
@@ -57,11 +59,10 @@ export default function ProbabilityScene3D({ counts, target, labels, headline }:
     invalidate();
   }, [key, invalidate]);
 
-  useFrame((state, delta) => {
-    if (progress.current < 1) {
-      progress.current = Math.min(1, progress.current + delta / DURATION);
-      state.invalidate();
-    }
+  // the columns morph during a motion episode after the counts change (tool-ui/motion); at rest they are final
+  const { active } = useMotionEpisode([key]);
+  useSceneFrame((_, dt) => {
+    progress.current = dt ? Math.min(1, progress.current + dt / DURATION) : 1;
     const e = ease(progress.current);
     for (let i = 0; i < N * N; i++) {
       const h = from.current[i] + (goal[i] - from.current[i]) * e;
@@ -69,7 +70,8 @@ export default function ProbabilityScene3D({ counts, target, labels, headline }:
       const m = meshes.current[i];
       if (m) m.scale.set(SIZE, h, SIZE);
     }
-  });
+    return progress.current < 1;
+  }, active);
 
   const geom = useMemo(() => new THREE.BoxGeometry(1, 1, 1).translate(0, 0.5, 0), []);
   const colors = [p.accent, p.primary, p.positive, p.dark ? "#52525b" : "#cbd5e1"];

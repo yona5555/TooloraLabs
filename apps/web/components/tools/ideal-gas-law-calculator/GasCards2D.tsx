@@ -7,6 +7,7 @@ import { clamp } from "@/components/tool-ui/indicator-kit/format";
 import { g4, GAS_SEED_INDEX, GASES, PRESSURE_SEED_INDEX, PRESSURES, R_LATM, SEED, tempCss, ZERO_C } from "./gasMath";
 import { svgPx } from "@/components/tool-ui/svgPx";
 
+import FitSvg from "@/components/tool-ui/FitSvg";
 /**
  * The five 2D gas law indicator cards. Each drawing is laid out in real pixels at the measured
  * width of its box (viewBox = box), so labels keep their size on a phone and marks span the box.
@@ -276,7 +277,7 @@ function GasDialPlot({ s }: { s: Stepper }) {
   };
   return (
     <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
-      <svg ref={ref} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={`${name} ${g4(src.p)} atm`}>
+      <FitSvg ref={ref} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={`${name} ${g4(src.p)} atm`}>
         <path d={arc(0.1, 1)} fill="none" style={{ stroke: "var(--chem-cold)" }} strokeWidth={16} />
         <path d={arc(1, 10)} fill="none" style={{ stroke: "var(--ph-neutral)" }} strokeWidth={16} />
         <path d={arc(10, 1000)} fill="none" style={{ stroke: "var(--chem-hot)" }} strokeWidth={16} />
@@ -297,7 +298,7 @@ function GasDialPlot({ s }: { s: Stepper }) {
         <text x={cx} y={H - 8} fontWeight={800} textAnchor="middle" style={{ fontSize: svgPx(13), fill: "var(--ph-ink)" }}>
           {`${g4(src.p)} atm`}
         </text>
-      </svg>
+      </FitSvg>
       <SvgHandle x={tip[0]} y={tip[1]} viewW={W} viewH={H} direction="horizontal" label={t("handle")} valueText={`${name} · ${g4(src.p)} atm`} s={s} drag={drag} testId="gas-dial-handle" />
     </div>
   );

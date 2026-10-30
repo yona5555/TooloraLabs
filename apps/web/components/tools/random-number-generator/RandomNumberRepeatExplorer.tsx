@@ -1,7 +1,8 @@
 "use client";
 import { useEffect, useMemo, useRef } from "react";
 import { useTranslations } from "next-intl";
-import { Coordinates, Line, Mafs, Polyline, Text, useMovablePoint } from "mafs";
+import { Coordinates, Line, Polyline, useMovablePoint } from "mafs";
+import FitMafs, { FitText } from "@/components/tool-ui/FitMafs";
 import "mafs/core.css";
 import "@/components/tool-ui/mafsTheme.css";
 import { drawsForDuplicateChance, duplicateProbability, expectedDistinct } from "@tooloralabs/tools";
@@ -114,7 +115,7 @@ export default function RandomNumberRepeatExplorer({ n, k, allowDuplicates, onCo
         </span>
       </div>
       <div role="group" dir="ltr" data-preview="visual" data-preview-hero className="mafs-canvas w-full overflow-hidden rounded-xl" aria-label={t("dup.hint")} data-testid="dup-mafs">
-        <Mafs viewBox={{ x: [-xMax * 0.06, xMax * 1.03], y: [-0.14, 1.08] }} height={260} pan={false} zoom={false} preserveAspectRatio={false}>
+        <FitMafs viewBox={{ x: [-xMax * 0.06, xMax * 1.03], y: [-0.14, 1.08] }} height={260} pan={false} zoom={false} preserveAspectRatio={false}>
           <Coordinates.Cartesian
             xAxis={{ lines: xStep, labels: (x) => (x > 0 ? f.int(x) : "") }}
             yAxis={{ lines: 0.25, labels: (y) => (y > 0 && y <= 1 ? `${Math.round(y * 100)}%` : "") }}
@@ -123,11 +124,11 @@ export default function RandomNumberRepeatExplorer({ n, k, allowDuplicates, onCo
           <Line.Segment point1={[0, 0.5]} point2={[Math.min(k50, xMax), 0.5]} color={amber} style="dashed" opacity={0.8} />
           <Polyline points={curve} color={blue} weight={3} />
           <Line.Segment point1={[shownK, 0]} point2={point.point} color={blue} opacity={0.5} />
-          <Text x={point.point[0]} y={Math.min(1.02, point.point[1] + 0.09)} size={13} color={blue}>
+          <FitText x={point.point[0]} y={Math.min(1.02, point.point[1] + 0.09)} size={13} color={blue}>
             {f.pct(p, 1)}
-          </Text>
+          </FitText>
           {point.element}
-        </Mafs>
+        </FitMafs>
       </div>
       <p className="mt-2 text-center text-xs text-zinc-500 dark:text-zinc-400">{t("dup.hint")}</p>
     </IndicatorCard>

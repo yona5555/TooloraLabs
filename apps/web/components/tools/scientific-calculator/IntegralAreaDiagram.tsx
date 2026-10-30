@@ -1,6 +1,7 @@
 "use client";
 import { useTranslations } from "next-intl";
-import { Mafs, Coordinates, Plot, Polygon } from "mafs";
+import { Coordinates, Plot, Polygon } from "mafs";
+import FitMafs from "@/components/tool-ui/FitMafs";
 import "mafs/core.css";
 import "@/components/tool-ui/mafsTheme.css";
 import { useIsDarkMode } from "@/lib/use-dark-mode";
@@ -40,11 +41,11 @@ export default function IntegralAreaDiagram() {
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
       <GapFreeRow className="mt-4">
         <div dir="ltr" className="mafs-canvas w-full overflow-hidden rounded-xl lg:flex-1">
-          <Mafs viewBox={{ x: [0, 360], y: [-0.2, 1.3] }} height={200} pan={false} zoom={false} preserveAspectRatio={false}>
+          <FitMafs viewBox={{ x: [0, 360], y: [-0.2, 1.3] }} height={200} pan={false} zoom={false} preserveAspectRatio={false}>
             <Coordinates.Cartesian xAxis={{ lines: 90 }} yAxis={{ lines: 0.5, labels: (v) => (Math.abs(v) <= 1 ? `${v}` : "") }} />
             <Plot.OfX y={(x) => Math.sin((x * Math.PI) / 180)} color={colors.rose} />
             {dims.angleDeg > 0.5 && <Polygon points={points} color={colors.rose} fillOpacity={0.25} strokeOpacity={0} />}
-          </Mafs>
+          </FitMafs>
         </div>
         <WorkedExampleNote
           title={t("worked.title")}

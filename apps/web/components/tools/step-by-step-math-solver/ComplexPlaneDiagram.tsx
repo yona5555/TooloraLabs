@@ -1,6 +1,7 @@
 "use client";
 import { useTranslations } from "next-intl";
-import { Mafs, Coordinates, Circle, Point, Text, Line, useMovablePoint } from "mafs";
+import { Coordinates, Circle, Point, Line, useMovablePoint } from "mafs";
+import FitMafs, { FitText } from "@/components/tool-ui/FitMafs";
 import "mafs/core.css";
 import "@/components/tool-ui/mafsTheme.css";
 import { useIsDarkMode } from "@/lib/use-dark-mode";
@@ -71,17 +72,17 @@ export default function ComplexPlaneDiagram() {
       <GapFreeRow className="mt-4">
         <div dir="ltr" className="w-full lg:flex-1">
           <div role="group" aria-label={t("ariaLabel")} className="mafs-canvas mx-auto w-full max-w-[360px] overflow-hidden rounded-xl">
-            <Mafs viewBox={{ x: [-xMax, xMax], y: [-yMax, yMax] }} height={220} pan={false} zoom={false} preserveAspectRatio={false}>
+            <FitMafs viewBox={{ x: [-xMax, xMax], y: [-yMax, yMax] }} height={220} pan={false} zoom={false} preserveAspectRatio={false}>
               <Coordinates.Cartesian xAxis={{ lines: Math.max(1, Math.round(xMax / 4)), labels: () => "" }} yAxis={{ lines: Math.max(1, Math.round(yMax / 4)), labels: () => "" }} />
               {magnitude > 0 && <Circle center={[0, 0]} radius={magnitude} color={colors.circle} fillOpacity={0} strokeOpacity={0.35} />}
               {r && <Point x={re1} y={im1} color={colors.root} svgCircleProps={{ r: 6 }} />}
               {r && (im2 !== im1 || re2 !== re1) && <Point x={re2} y={im2} color={colors.root} svgCircleProps={{ r: 6 }} />}
               <Line.Segment point1={[0, 0]} point2={explorer.point} color={colors.circle} weight={1.5} opacity={0.6} />
               {explorer.element}
-              <Text x={0} y={-yMax + 0.6} size={12} color={colors.root}>
+              <FitText x={0} y={-yMax + 0.6} size={12} color={colors.root}>
                 {t("realAxisLabel")}
-              </Text>
-            </Mafs>
+              </FitText>
+            </FitMafs>
           </div>
         </div>
         <WorkedExampleNote

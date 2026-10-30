@@ -1,5 +1,6 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
+import { useMotionLoop } from "@/components/tool-ui/motion/motion";
 import { useTranslations } from "next-intl";
 import { Pause, Play } from "lucide-react";
 import IndicatorCard from "@/components/tools/markets/IndicatorCard";
@@ -24,28 +25,17 @@ export default function CircleUnroll() {
   const { f, n } = fmt;
   const [p, setP] = useState(0.68);
   const [playing, setPlaying] = useState(false);
-  const raf = useRef<number | null>(null);
-  const pRef = useRef(p);
-  useEffect(() => {
-    pRef.current = p;
-  }, [p]);
+  const box = useRef<SVGSVGElement>(null);
 
-  useEffect(() => {
-    if (!playing) return;
-    let start: number | null = null;
-    const from = pRef.current >= 0.999 ? 0 : pRef.current;
-    const step = (ts: number) => {
-      if (start === null) start = ts;
-      const next = Math.min(1, from + (ts - start) / DURATION);
-      setP(next);
-      if (next < 1) raf.current = requestAnimationFrame(step);
-      else setPlaying(false);
-    };
-    raf.current = requestAnimationFrame(step);
-    return () => {
-      if (raf.current !== null) cancelAnimationFrame(raf.current);
-    };
-  }, [playing]);
+  // tool-ui/motion: unrolls after Play only, paused off screen or with the page hidden, not for reduced motion
+  const run = useRef({ from: 0, t: 0 });
+  useMotionLoop(box, (dt) => {
+    const r = run.current;
+    r.t += dt * 1000;
+    const next = Math.min(1, r.from + r.t / DURATION);
+    setP(next);
+    return next < 1;
+  }, playing, () => setPlaying(false));
 
   const d = 2 * r;
   const C = Math.PI * d;
@@ -70,7 +60,10 @@ export default function CircleUnroll() {
         <div className="flex flex-wrap items-center gap-3">
           <button
             type="button"
-            onClick={() => setPlaying((v) => !v)}
+            onClick={() => {
+              if (!playing) run.current = { from: p >= 0.999 ? 0 : p, t: 0 };
+              setPlaying(!playing);
+            }}
             className="flex items-center gap-1.5 rounded-lg bg-blue-600 px-3 py-1.5 text-sm font-semibold text-white transition hover:bg-blue-700"
           >
             {playing ? <Pause size={14} /> : <Play size={14} />}
@@ -106,7 +99,7 @@ export default function CircleUnroll() {
       }}
     >
       <div dir="ltr" className="overflow-x-auto">
-        <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} className="mx-auto block h-auto max-w-full" role="img" aria-label={t("unroll.aria")}>
+        <svg ref={box} width={W} height={H} viewBox={`0 0 ${W} ${H}`} className="mx-auto block h-auto max-w-full" role="img" aria-label={t("unroll.aria")}>
           {/* Ground line and the d marks. */}
           <line x1={X0 - 12} y1={BASE} x2={W - 8} y2={BASE} className="stroke-zinc-300 dark:stroke-zinc-600" strokeWidth={2} />
           {[1, 2, 3].map((k) => (
