@@ -5,7 +5,8 @@ import { useTranslations } from "next-intl";
 import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import SectionCard from "@/components/tool-ui/SectionCard";
-import { useBelowLg } from "@/components/tool-ui/useBelowLg";
+import { fitStep, thinEvery } from "@/components/tool-ui/chartLabels";
+import { useLabelMeasure } from "@/components/tool-ui/useChartLabels";
 import type { YearlyGrowthPoint } from "@tooloralabs/tools";
 import { computeNiceTicks } from "./niceTicks";
 import type { CurrencyCode } from "@/lib/currency";
@@ -31,22 +32,19 @@ const VOLUME_HEIGHT = 40;
 const XAXIS_HEIGHT = 20;
 const CHART_HEIGHT = MARGIN.top + MAIN_HEIGHT + VOLUME_GAP + VOLUME_HEIGHT + XAXIS_HEIGHT;
 
+/** Bar step before the container is measured (server render). */
 const MIN_STEP = 22;
-/** Year labels sit at least this many px apart: 12px labels never touch (§39). */
-const X_LABEL_GAP = 30;
 const BAR_WIDTH_RATIO = 14 / 22;
 const TOOLTIP_WIDTH = 168;
 const TOOLTIP_HEIGHT = 78;
 const TOOLTIP_HEIGHT_WITH_INFLATION = 94;
-/** Beyond this many years, only every Nth x-axis label is drawn so they don't overlap. */
-const MAX_DENSE_LABELS = 40;
 
 export default function RetirementGrowthChart({ hasCalculated, yearlySchedule, currentSavings, totalContributions, totalGrowth, digitStyle, currency, inflationRate }: RetirementGrowthChartProps) {
   const t = useTranslations("tools.retirement-calculator");
   const containerRef = useRef<HTMLDivElement>(null);
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
   const [containerWidth, setContainerWidth] = useState(0);
-  const belowLg = useBelowLg();
+  const [measureRef, measure] = useLabelMeasure();
 
   useLayoutEffect(() => {
     const el = containerRef.current;
@@ -69,7 +67,8 @@ export default function RetirementGrowthChart({ hasCalculated, yearlySchedule, c
 
   const rawMaxBalance = Math.max(...yearlySchedule.map((row) => row.balance), 1);
   const maxYearlyInterest = Math.max(...yearlySchedule.map((row) => row.yearlyInterest), 1);
-  const step = Math.max(belowLg && containerWidth > 0 ? 0 : MIN_STEP, (containerWidth - MARGIN.left - MARGIN.right) / yearlySchedule.length);
+  // shared label layout: the plot fills its container (no scroll box cutting off the last years)
+  const step = fitStep(containerWidth, MARGIN.left + MARGIN.right, yearlySchedule.length, MIN_STEP);
   const barWidth = step * BAR_WIDTH_RATIO;
   const plotWidth = yearlySchedule.length * step;
   const chartWidth = MARGIN.left + plotWidth + MARGIN.right;
@@ -123,7 +122,8 @@ export default function RetirementGrowthChart({ hasCalculated, yearlySchedule, c
     : 0;
   const tooltipY = MARGIN.top + 4;
 
-  const labelEvery = Math.max(1, Math.ceil(yearlySchedule.length / MAX_DENSE_LABELS), Math.ceil(X_LABEL_GAP / step));
+  const yearLabel = (year: number) => formatLocalizedNumber(year, digitStyle, { maximumFractionDigits: 0 });
+  const labelEvery = thinEvery(step, Math.max(...yearlySchedule.map((row) => measure(yearLabel(row.year), 12).width)));
 
   return (
     <SectionCard phoneRole="visual" title={t("growthChart.title")}>
@@ -132,6 +132,7 @@ export default function RetirementGrowthChart({ hasCalculated, yearlySchedule, c
       <div ref={containerRef} dir="ltr" tabIndex={0} className="mt-4 overflow-x-auto">
         <PhoneMini slot={1} title={t("growthChart.title")}>
           <svg
+            ref={measureRef}
             width={chartWidth}
             height={CHART_HEIGHT}
             viewBox={`0 0 ${chartWidth} ${CHART_HEIGHT}`}
@@ -202,7 +203,7 @@ export default function RetirementGrowthChart({ hasCalculated, yearlySchedule, c
             {yearlySchedule.map((row, i) =>
               i % labelEvery === 0 ? (
                 <text style={{ fontSize: svgPx(12) }} key={`year-${row.year}`} x={barCenterX(i)} y={volumeBottom + XAXIS_HEIGHT - 6} textAnchor="middle" fill="currentColor" opacity={0.6}>
-                  {formatLocalizedNumber(row.year, digitStyle, { maximumFractionDigits: 0 })}
+                  {yearLabel(row.year)}
                 </text>
               ) : null
             )}

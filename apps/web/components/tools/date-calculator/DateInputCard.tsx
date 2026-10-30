@@ -43,7 +43,7 @@ export function Segmented<T extends string>({ value, options, onChange, small }:
           role="radio"
           aria-checked={value === o.v}
           onClick={() => onChange(o.v)}
-          className={`rounded-md px-2 font-semibold transition ${small ? "py-1 text-[11px]" : "py-1.5 text-xs"} ${
+          className={`rounded-md px-2 font-semibold transition ${small ? "py-1 text-xs" : "py-1.5 text-xs"} ${
             value === o.v ? "bg-blue-600 text-white" : "text-zinc-600 hover:bg-white dark:text-zinc-300 dark:hover:bg-zinc-700"
           }`}
         >
@@ -89,7 +89,7 @@ export function DualDateInput({ title, value, onChange, f }: { title: string; va
           <input inputMode="numeric" value={value.hy} onChange={(e) => onChange(patchHijri(value, { hy: e.target.value }))} aria-label={t("input.year")} placeholder={t("input.year")} className={`${field} text-center`} />
         </div>
       )}
-      <p className="mt-1 rounded-md bg-blue-50 px-2 py-1 text-[11px] text-blue-800 dark:bg-blue-500/10 dark:text-blue-200" data-bp-inner>
+      <p className="mt-1 rounded-md bg-blue-50 px-2 py-1 text-xs text-blue-800 dark:bg-blue-500/10 dark:text-blue-200" data-bp-inner>
         {civil
           ? `${value.cal === "gregorian" ? f.hijri(civil) : f.greg(civil)} · ${f.weekday(civilWeekday(civil))}`
           : t("input.invalidDate")}
@@ -212,7 +212,7 @@ export default function DateInputCard({ state, onChange, onReset, d, f, copyText
             {state.holidays.map((h) => {
               const c = parseCivilDate(h)!;
               return (
-                <span key={h} className="flex items-center gap-1 rounded-md bg-amber-50 py-0.5 ps-2 pe-1 text-[11px] font-medium text-amber-800 dark:bg-amber-500/10 dark:text-amber-200">
+                <span key={h} className="flex items-center gap-1 rounded-md bg-amber-50 py-0.5 ps-2 pe-1 text-xs font-medium text-amber-800 dark:bg-amber-500/10 dark:text-amber-200">
                   {f.greg(c)}
                   <button type="button" onClick={() => set({ holidays: state.holidays.filter((x) => x !== h) })} aria-label={t("input.removeHoliday")} className="rounded hover:text-red-600">
                     <X size={12} />
@@ -220,7 +220,7 @@ export default function DateInputCard({ state, onChange, onReset, d, f, copyText
                 </span>
               );
             })}
-            <button type="button" onClick={() => set({ holidays: [] })} className="px-1 text-[11px] font-semibold text-zinc-500 hover:text-red-600 dark:text-zinc-400">
+            <button type="button" onClick={() => set({ holidays: [] })} className="px-1 text-xs font-semibold text-zinc-500 hover:text-red-600 dark:text-zinc-400">
               {t("input.clearHolidays")}
             </button>
           </div>
@@ -260,7 +260,7 @@ export default function DateInputCard({ state, onChange, onReset, d, f, copyText
           <RotateCcw size={14} />
         </button>
       </div>
-      <p className="text-[11px] leading-4 text-zinc-500 dark:text-zinc-400">{t("input.linkNote")}</p>
+      <p className="text-xs leading-4 text-zinc-500 dark:text-zinc-400">{t("input.linkNote")}</p>
     </SectionCard>
   );
 }

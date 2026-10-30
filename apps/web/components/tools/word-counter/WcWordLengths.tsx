@@ -30,8 +30,8 @@ export default function WcWordLengths() {
       {buckets.map((c, i) => (
         <g key={i}>
           <rect x={PAD + i * slot + 2} y={y(c)} width={slot - 4} height={BASE - y(c)} rx={2} className={i + 1 > 6 ? "fill-violet-500 dark:fill-violet-400" : "fill-sky-500 dark:fill-sky-400"} style={{ transition: "y 250ms ease, height 250ms ease" }} />
-          {c > 0 && <text style={{ fontSize: svgPx(12) }} x={PAD + i * slot + slot / 2} y={y(c) - 3} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-600 dark:fill-zinc-300">{f(c)}</text>}
-          <text style={{ fontSize: svgPx(12) }} x={PAD + i * slot + slot / 2} y={BASE + 12} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+          {c > 0 && <text style={{ fontSize: svgPx(12) }} x={PAD + i * slot + slot / 2} y={y(c) - 3} textAnchor="middle" fontFamily="var(--font-mono)" className="fill-zinc-600 dark:fill-zinc-300">{f(c)}</text>}
+          <text style={{ fontSize: svgPx(12) }} x={PAD + i * slot + slot / 2} y={BASE + 12} textAnchor="middle" fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
             {i === buckets.length - 1 ? `${f(i + 1)}+` : f(i + 1)}
           </text>
         </g>

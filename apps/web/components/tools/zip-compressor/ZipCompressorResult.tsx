@@ -66,7 +66,7 @@ export default function ZipCompressorResult({ isProcessing, onDownloadZip, extra
                 <svg width={10} height={10} aria-hidden="true">
                   <circle cx={5} cy={5} r={5} className={FILE_FILL[i % FILE_FILL.length]} />
                 </svg>
-                <span dir="ltr" className="min-w-0 flex-1 truncate font-mono font-semibold text-zinc-800 dark:text-zinc-100">
+                <span dir="ltr" className="min-w-0 flex-1 break-words font-mono font-semibold text-zinc-800 dark:text-zinc-100">
                   {r.name}
                 </span>
                 <span className="shrink-0 text-xs text-zinc-500 dark:text-zinc-400">{r.method === 8 ? "DEFLATE" : r.method === 0 ? tr("stored") : `#${r.method}`}</span>
@@ -91,7 +91,7 @@ export default function ZipCompressorResult({ isProcessing, onDownloadZip, extra
                 </span>
                 <span className="font-semibold text-zinc-700 dark:text-zinc-200">{r.size ? `−${f((1 - r.ratio) * 100, 1)}%` : "0%"}</span>
               </div>
-              <div className="mt-2 flex items-center justify-between text-[11px] text-zinc-500 dark:text-zinc-400">
+              <div className="mt-2 flex items-center justify-between text-xs text-zinc-500 dark:text-zinc-400">
                 <span>{tr("entropy", { e: f(r.entropy, 2) })}</span>
                 <span dir="ltr" className="font-mono">CRC {r.crc32.toString(16).padStart(8, "0").toUpperCase()}</span>
               </div>

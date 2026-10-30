@@ -45,14 +45,14 @@ export default function RsHardWords() {
                   onClick={() => setHighlight(on ? null : { kind: "word", key: g.key, word: g.word })}
                   className={`grid w-full grid-cols-[1.25rem_7.5rem_1fr] items-center gap-2 rounded-lg px-1.5 py-1 text-start transition ${on ? "bg-amber-100 ring-2 ring-amber-400 dark:bg-amber-500/15" : "hover:bg-zinc-100 dark:hover:bg-zinc-800"}`}
                 >
-                  <span className="font-mono text-[11px] text-zinc-400">{f(i + 1)}</span>
+                  <span className="font-mono text-xs text-zinc-400">{f(i + 1)}</span>
                   <span dir="auto" className="truncate text-sm font-semibold text-zinc-800 dark:text-zinc-100">{g.word}</span>
                   <span className="relative h-5 rounded bg-zinc-100 dark:bg-zinc-800">
                     <span
                       className={`absolute inset-y-0 start-0 rounded ${on ? "bg-amber-400" : g.syllables >= 5 ? "bg-red-500 dark:bg-red-500" : g.syllables === 4 ? "bg-orange-500" : "bg-amber-500"}`}
                       style={{ width: `${(g.syllables / max) * 100}%`, transition: "width 300ms ease" }}
                     />
-                    <span dir="ltr" className="absolute inset-y-0 end-1.5 flex items-center font-mono text-[11px] font-bold text-zinc-700 dark:text-zinc-100">
+                    <span dir="ltr" className="absolute inset-y-0 end-1.5 flex items-center font-mono text-xs font-bold text-zinc-700 dark:text-zinc-100">
                       {t("barValue", { syllables: f(g.syllables), count: f(g.count) })}
                     </span>
                   </span>
@@ -62,7 +62,7 @@ export default function RsHardWords() {
           })}
         </ul>
       )}
-      <p className="mt-2 text-[11px] text-amber-700 dark:text-amber-300">{t("hint")}</p>
+      <p className="mt-2 text-xs text-amber-700 dark:text-amber-300">{t("hint")}</p>
     </div>
   );
 

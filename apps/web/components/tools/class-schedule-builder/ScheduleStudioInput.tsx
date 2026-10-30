@@ -84,7 +84,7 @@ export default function ScheduleStudioInput({ state, onChange, onReset, timeZone
               role="radio"
               aria-checked={sel.kind === k}
               onClick={() => update({ kind: k })}
-              className={`rounded-md px-1 py-1.5 text-[11px] font-semibold transition ${sel.kind === k ? "bg-blue-600 text-white" : "text-zinc-600 hover:bg-white dark:text-zinc-300 dark:hover:bg-zinc-700"}`}
+              className={`rounded-md px-1 py-1.5 text-xs font-semibold transition ${sel.kind === k ? "bg-blue-600 text-white" : "text-zinc-600 hover:bg-white dark:text-zinc-300 dark:hover:bg-zinc-700"}`}
             >
               {t(`kinds.${k}`)}
             </button>
@@ -102,7 +102,7 @@ export default function ScheduleStudioInput({ state, onChange, onReset, timeZone
                   type="button"
                   aria-pressed={on}
                   onClick={() => toggleDay(d)}
-                  className={`rounded-md border py-1.5 text-[11px] font-bold transition ${
+                  className={`rounded-md border py-1.5 text-xs font-bold transition ${
                     on ? "border-blue-600 bg-blue-600 text-white" : "border-zinc-300 text-zinc-600 hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-800"
                   }`}
                 >
@@ -124,7 +124,7 @@ export default function ScheduleStudioInput({ state, onChange, onReset, timeZone
           </label>
         </div>
         {(timeError || sel.days.length === 0) && (
-          <p role="alert" className="text-[11px] font-semibold text-red-600 dark:text-red-400">
+          <p role="alert" className="text-xs font-semibold text-red-600 dark:text-red-400">
             {timeError ? t("input.errorTime") : t("input.errorDays")}
           </p>
         )}
@@ -214,12 +214,12 @@ export default function ScheduleStudioInput({ state, onChange, onReset, timeZone
             <input type="date" dir="ltr" value={state.breakEnd} onChange={(e) => onChange({ ...state, breakEnd: e.target.value })} className={field} />
           </label>
         </div>
-        {state.termEnd < state.termStart && <p className="text-[11px] font-semibold text-red-600 dark:text-red-400">{t("input.errorTerm")}</p>}
+        {state.termEnd < state.termStart && <p className="text-xs font-semibold text-red-600 dark:text-red-400">{t("input.errorTerm")}</p>}
         <label className="flex items-start gap-2 text-xs text-zinc-600 dark:text-zinc-300">
           <input type="checkbox" checked={state.useTz && !!timeZone} disabled={!timeZone} onChange={(e) => onChange({ ...state, useTz: e.target.checked })} className="mt-0.5 accent-blue-600" />
           <span>
             {t("input.useTz")} <bdi dir="ltr" className="font-mono font-semibold text-zinc-800 dark:text-zinc-100">{timeZone ?? "—"}</bdi>
-            <span className="block text-[11px] text-zinc-500 dark:text-zinc-400">{state.useTz && timeZone ? t("input.tzNote") : t("input.floatingNote")}</span>
+            <span className="block text-xs text-zinc-500 dark:text-zinc-400">{state.useTz && timeZone ? t("input.tzNote") : t("input.floatingNote")}</span>
           </span>
         </label>
       </fieldset>
@@ -232,7 +232,7 @@ export default function ScheduleStudioInput({ state, onChange, onReset, timeZone
         <RotateCcw size={15} />
         {t("input.reset")}
       </button>
-      <p className="text-[11px] leading-4 text-zinc-500 dark:text-zinc-400">{t("input.savedNote")}</p>
+      <p className="text-xs leading-4 text-zinc-500 dark:text-zinc-400">{t("input.savedNote")}</p>
     </SectionCard>
   );
 }

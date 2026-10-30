@@ -13,6 +13,8 @@ const EMPTY_MATH_SUBS = "algebra-number-theory|calculus-analysis|probability-sta
 const nextConfig: NextConfig = {
   // A second production build beside the dev server's (e.g. a branch-vs-main comparison) sets its own folder.
   distDir: process.env.NEXT_DIST_DIR || ".next",
+  // HarfBuzz (share-image text shaping) loads its wasm next to its own module: keep it a plain Node import.
+  serverExternalPackages: ["harfbuzzjs"],
   // Dev only: Next blocks the HMR socket and dev chunks for any host but localhost, so a phone on the
   // LAN (http://<mac-ip>:3001) never hydrates and no button responds. Allow the private LAN ranges.
   ...(process.env.NODE_ENV === "development" && {

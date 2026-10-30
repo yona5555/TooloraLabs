@@ -37,7 +37,7 @@ export default function SdSensitivityTrio() {
         return (
           <g key={it.key}>
             <rect x={cx - BAR / 2} y={BASE - h} width={BAR} height={Math.max(1, h)} rx={6} className={it.cls} />
-            <text style={{ fontSize: svgPx(12) }} x={cx} y={BASE - h - 16} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={cx} y={BASE - h - 16} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
               {f(it.v)}
             </text>
             {it.key !== "current" && (
@@ -48,7 +48,7 @@ export default function SdSensitivityTrio() {
             <text style={{ fontSize: svgPx(12) }} x={Math.max(labelW(t(it.key)) / 2 + 2, Math.min(W - labelW(t(it.key)) / 2 - 2, cx))} y={BASE + 16} textAnchor="middle" fontWeight={600} className="fill-zinc-700 dark:fill-zinc-200">
               {t(it.key)}
             </text>
-            <text style={{ fontSize: svgPx(12) }} x={cx} y={BASE + 30} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+            <text style={{ fontSize: svgPx(12) }} x={cx} y={BASE + 30} textAnchor="middle" fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
               {it.sub}
             </text>
           </g>

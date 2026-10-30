@@ -163,7 +163,7 @@ export default function StudyStudioResult({ state, d }: Props) {
           { k: t("result.pomodoros"), v: f.n(d.pomodoroTotals.pomodoros) },
         ].map((s) => (
           <div key={s.k} className="rounded-lg bg-blue-50 px-1 py-1.5 dark:bg-blue-500/10" data-bp-inner>
-            <p className="truncate text-[10px] font-semibold text-zinc-500 dark:text-zinc-400">{s.k}</p>
+            <p className="truncate text-xs font-semibold text-zinc-500 dark:text-zinc-400">{s.k}</p>
             <p dir="ltr" className="font-mono text-sm font-bold text-blue-700 dark:text-blue-300">
               {s.v}
             </p>

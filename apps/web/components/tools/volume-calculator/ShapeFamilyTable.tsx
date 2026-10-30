@@ -39,7 +39,7 @@ export default function ShapeFamilyTable() {
                   <tr key={r.shape} className={`border-b border-zinc-100 dark:border-zinc-800 ${active ? "bg-blue-50 dark:bg-blue-500/10" : ""}`}>
                     <td className={`px-3 py-2 ${active ? "font-bold text-blue-700 dark:text-blue-300" : ""}`}>
                       {tShape(`shape.${r.shape}`)}
-                      {active && <span className="ms-2 rounded-full bg-blue-600 px-2 py-0.5 text-[10px] font-bold text-white">{t("activeTag")}</span>}
+                      {active && <span className="ms-2 rounded-full bg-blue-600 px-2 py-0.5 text-xs font-bold text-white">{t("activeTag")}</span>}
                     </td>
                     <td className="px-3 py-2 font-mono">{round(r.volume)}</td>
                   </tr>

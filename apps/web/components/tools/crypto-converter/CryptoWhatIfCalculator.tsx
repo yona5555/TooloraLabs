@@ -1,5 +1,5 @@
 "use client";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, parseLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import { calculateInvestmentReturn, MAX_HISTORY_DAYS, type CryptoCoin } from "@tooloralabs/tools";
@@ -7,6 +7,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import CryptoCoinPicker from "./CryptoCoinPicker";
 import { useCryptoFormatters, useFiat } from "./cryptoFormat";
+import { shiftISO, useTodayISO } from "@/lib/use-today";
 
 type CryptoWhatIfCalculatorProps = {
   coins: CryptoCoin[];
@@ -14,26 +15,20 @@ type CryptoWhatIfCalculatorProps = {
   digitStyle: DigitStyle;
 };
 
-function todayIsoDate(): string {
-  return new Date().toISOString().slice(0, 10);
-}
-
-function minIsoDate(): string {
-  const d = new Date();
-  d.setUTCDate(d.getUTCDate() - MAX_HISTORY_DAYS);
-  return d.toISOString().slice(0, 10);
-}
-
 export default function CryptoWhatIfCalculator({ coins, onCoinDiscovered, digitStyle }: CryptoWhatIfCalculatorProps) {
   const t = useTranslations("tools.crypto-converter.whatIf");
   const [coinId, setCoinId] = useState("bitcoin");
   const [amount, setAmount] = useState("1000");
-  const [date, setDate] = useState(minIsoDate());
+  // The UTC day from useTodayISO (the render day while hydrating, then the browser's); an untouched date
+  // stays at the start of the supported history (null = the default).
+  const today = useTodayISO({ utc: true });
+  const min = shiftISO(today, -MAX_HISTORY_DAYS);
+  const max = today;
+  const [pickedDate, setDate] = useState<string | null>(null);
+  const date = pickedDate ?? min;
   const [status, setStatus] = useState<"idle" | "loading" | "error" | "success">("idle");
   const [priceThen, setPriceThen] = useState<number | null>(null);
 
-  const min = useMemo(() => minIsoDate(), []);
-  const max = useMemo(() => todayIsoDate(), []);
   const selectedCoin = coins.find((coin) => coin.id === coinId);
 
   async function handleCalculate() {

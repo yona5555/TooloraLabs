@@ -54,7 +54,7 @@ export default function InstrumentList({ title, badge, rows, activeId, onSelect,
                 {r.icon}
                 <span className="min-w-0 flex-1">
                   <span className="block truncate text-xs font-semibold text-zinc-900 dark:text-zinc-100">{r.name}</span>
-                  <span dir="ltr" className="block text-[10px] uppercase text-zinc-400">
+                  <span dir="ltr" className="block text-xs uppercase text-zinc-400">
                     {r.sub}
                   </span>
                 </span>
@@ -62,7 +62,7 @@ export default function InstrumentList({ title, badge, rows, activeId, onSelect,
                   <span key={r.flashKey ?? 0} dir="ltr" className={`rounded px-1 font-mono text-xs text-zinc-900 dark:text-zinc-100 ${flash}`}>
                     {r.price}
                   </span>
-                  <span dir="ltr" className={`font-mono text-[10px] ${changeColor(r.change)}`}>
+                  <span dir="ltr" className={`font-mono text-xs ${changeColor(r.change)}`}>
                     {r.changeText}
                   </span>
                 </span>
@@ -71,7 +71,7 @@ export default function InstrumentList({ title, badge, rows, activeId, onSelect,
           );
         })}
       </ul>
-      {note && <p className="border-t border-zinc-100 px-3 py-1.5 text-[10px] text-zinc-400 dark:border-zinc-800 dark:text-zinc-500">{note}</p>}
+      {note && <p className="border-t border-zinc-100 px-3 py-1.5 text-xs text-zinc-400 dark:border-zinc-800 dark:text-zinc-500">{note}</p>}
     </div>
   );
 }
@@ -79,7 +79,7 @@ export default function InstrumentList({ title, badge, rows, activeId, onSelect,
 /** The pulsing green badge for a list fed by a live stream. */
 export function LiveBadge({ label }: { label: string }) {
   return (
-    <span className="flex items-center gap-1.5 text-[10px] font-semibold text-emerald-600 dark:text-emerald-400">
+    <span className="flex items-center gap-1.5 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
       <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500" />
       {label}
     </span>

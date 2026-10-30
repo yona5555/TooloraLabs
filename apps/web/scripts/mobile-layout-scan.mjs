@@ -1,15 +1,16 @@
 // Phone layout scan: page-level horizontal scroll, elements spilling out of their card / clipping box,
 // numeric text nodes broken across lines, and the phone section order (input + result before any drawing).
-// Usage: node apps/web/scripts/mobile-layout-scan.mjs [--base http://localhost:3005] [--locales en,ar]
+// Usage: node apps/web/scripts/mobile-layout-scan.mjs --base http://localhost:3110 [--locales en,ar]
 //        [--widths 320,360] [--slugs a,b] [--jobs 6] [--details]
 // Exit code 1 when any page has an overflow or a broken number.
 import { chromium } from "playwright";
+import { requireBase } from "../../../scripts/lib/require-base.mjs";
 
 const arg = (name, def) => {
   const i = process.argv.indexOf(`--${name}`);
   return i > -1 ? process.argv[i + 1] : def;
 };
-const BASE = arg("base", "http://localhost:3005");
+const BASE = requireBase(arg("base"));
 const LOCALES = arg("locales", "en,ar,es,fr,de,hi").split(",");
 const WIDTHS = arg("widths", "320,360,375,390,430").split(",").map(Number);
 const JOBS = Number(arg("jobs", "6"));

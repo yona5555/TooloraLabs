@@ -2,6 +2,7 @@
 import { useSyncExternalStore } from "react";
 import { useTranslations } from "next-intl";
 import IndicatorStrip, { type IndicatorItem } from "./IndicatorStrip";
+import { subscribeVisibleClock } from "@/components/tool-ui/motion/motion";
 
 /**
  * The date & time section's indicators, all computed in the browser from the device clock, with no
@@ -12,10 +13,8 @@ import IndicatorStrip, { type IndicatorItem } from "./IndicatorStrip";
 
 const DAY = 86_400_000;
 
-function subscribe(cb: () => void) {
-  const id = window.setInterval(cb, 1000);
-  return () => window.clearInterval(id);
-}
+// tool-ui/motion: ticks each second while the page is visible, nothing while hidden
+const subscribe = (cb: () => void) => subscribeVisibleClock(1000, cb);
 const nowSeconds = () => Math.floor(Date.now() / 1000);
 
 const isLeap = (y: number) => (y % 4 === 0 && y % 100 !== 0) || y % 400 === 0;

@@ -80,7 +80,7 @@ export default function LoremResult() {
           );
         })}
       </div>
-      <p className="mt-1.5 text-[11px] text-zinc-400 dark:text-zinc-500">{tl("selectHint")}</p>
+      <p className="mt-1.5 text-xs text-zinc-400 dark:text-zinc-500">{tl("selectHint")}</p>
 
       <div className="mt-3 flex flex-col gap-4 lg:flex-1 lg:flex-col-reverse">
         <table className="min-w-0 flex-1 border-collapse text-sm">
@@ -89,7 +89,7 @@ export default function LoremResult() {
               <tr key={r.key} className="border-b border-zinc-200 last:border-0 dark:border-zinc-700/70">
                 <th scope="row" className="py-1.5 pe-2 text-start align-top font-medium text-zinc-600 dark:text-zinc-300">
                   {r.label}
-                  {r.note && <span dir="auto" className="block text-[11px] font-normal text-zinc-400 dark:text-zinc-500">{r.note}</span>}
+                  {r.note && <span dir="auto" className="block text-xs font-normal text-zinc-400 dark:text-zinc-500">{r.note}</span>}
                 </th>
                 <td
                   dir={r.key === "request" ? "auto" : "ltr"}

@@ -55,11 +55,11 @@ export default function WorldClockGrid({ s, set, d, f }: CardProps) {
                 <p dir="ltr" className="text-start font-mono text-lg leading-6 font-bold text-zinc-800 tabular-nums dark:text-zinc-100" suppressHydrationWarning>
                   {f.timeSec(now, c.zone)}
                 </p>
-                <p className="text-[11px] text-zinc-500 dark:text-zinc-400">
+                <p className="text-xs text-zinc-500 dark:text-zinc-400">
                   {f.date(now, c.zone)} · <bdi dir="ltr">{f.offset(off)}</bdi>
                   {isDstActive(now, c.zone) ? ` · ${t("dst")}` : ""}
                 </p>
-                <p className="flex items-center gap-1 text-[11px] text-zinc-500 dark:text-zinc-400">
+                <p className="flex items-center gap-1 text-xs text-zinc-500 dark:text-zinc-400">
                   {night ? <Moon size={11} className="text-blue-400" /> : <Sun size={11} className="text-amber-500" />}
                   {t("sun", { el: f.signed(Math.round(el * 10) / 10) })}
                 </p>

@@ -80,7 +80,7 @@ export default function CsvJsonResult() {
               {a.columns.map((c) => (
                 <th key={c.name} className="px-2 py-1.5 text-start font-semibold whitespace-nowrap text-zinc-700 dark:text-zinc-200">
                   <span className="block">{c.name}</span>
-                  <span className={`mt-0.5 inline-block rounded px-1 text-[10px] font-bold text-white ${TYPE_BG[c.type]}`}>{tt(c.type)}</span>
+                  <span className={`mt-0.5 inline-block rounded px-1 text-xs font-bold text-white ${TYPE_BG[c.type]}`}>{tt(c.type)}</span>
                 </th>
               ))}
             </tr>

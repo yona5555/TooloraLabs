@@ -108,7 +108,7 @@ export default function CategoryToolsSidebar({ categorySlug }: { categorySlug: s
                   <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg ${TOOL_BADGE_COLORS[colorIndex]}`}>
                     <Icon size={15} strokeWidth={2} aria-hidden />
                   </span>
-                  <span className="min-w-0 flex-1 truncate text-start">{tTools(`${tool.slug}.title`)}</span>
+                  <span className="min-w-0 flex-1 break-words text-start">{tTools(`${tool.slug}.title`)}</span>
                 </Link>
               </li>
             );

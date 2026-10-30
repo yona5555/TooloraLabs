@@ -1,6 +1,7 @@
 "use client";
 import { useTranslations } from "next-intl";
-import { Coordinates, Mafs, MovablePoint, Polygon, Text, Vector } from "mafs";
+import { Coordinates, MovablePoint, Polygon, Vector } from "mafs";
+import FitMafs, { FitText } from "@/components/tool-ui/FitMafs";
 import "mafs/core.css";
 import "@/components/tool-ui/mafsTheme.css";
 import { classifyTransform2, columns2, det2 } from "@tooloralabs/tools";
@@ -47,18 +48,18 @@ export default function MatrixBasisDragLab() {
   const plane = (
     <div className="w-full lg:w-[340px]">
       <div role="group" dir="ltr" aria-label={t("aria")} className="mafs-canvas w-full overflow-hidden rounded-xl">
-        <Mafs viewBox={{ x: [-R, R], y: [-R, R] }} height={300} pan={false} zoom={false} preserveAspectRatio="contain">
+        <FitMafs viewBox={{ x: [-R, R], y: [-R, R] }} height={300} pan={false} zoom={false} preserveAspectRatio="contain">
           <Coordinates.Cartesian xAxis={{ lines: step }} yAxis={{ lines: step }} />
           <Polygon points={[[0, 0], [1, 0], [1, 1], [0, 1]]} color={c.muted} fillOpacity={0.08} strokeStyle="dashed" />
           <Polygon points={[[0, 0], ci, [ci[0] + cj[0], ci[1] + cj[1]], cj]} color={fill} fillOpacity={0.22} />
           <Vector tip={ci} color={c.i} weight={3} />
           <Vector tip={cj} color={c.j} weight={3} />
-          <Text x={(ci[0] + cj[0]) / 2} y={(ci[1] + cj[1]) / 2} size={13} color={fill}>
+          <FitText x={(ci[0] + cj[0]) / 2} y={(ci[1] + cj[1]) / 2} size={13} color={fill}>
             {`det = ${f(d)}`}
-          </Text>
+          </FitText>
           <MovablePoint point={ci} color={c.i} constrain={clamp} onMove={([x, y]) => { setDim("a11", String(x)); setDim("a21", String(y)); }} />
           <MovablePoint point={cj} color={c.j} constrain={clamp} onMove={([x, y]) => { setDim("a12", String(x)); setDim("a22", String(y)); }} />
-        </Mafs>
+        </FitMafs>
       </div>
       <p className="mt-2 text-center text-xs text-zinc-500 dark:text-zinc-400">{t("hint")}</p>
     </div>

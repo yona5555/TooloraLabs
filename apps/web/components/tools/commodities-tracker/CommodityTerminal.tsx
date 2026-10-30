@@ -132,7 +132,7 @@ export default function CommodityTerminal({ instrument, onSelect, spot, digitSty
 
       <InstrumentList
         title={t("listTitle")}
-        badge={<span className="text-[10px] font-semibold text-zinc-500 dark:text-zinc-400">{t("listBadge")}</span>}
+        badge={<span className="text-xs font-semibold text-zinc-500 dark:text-zinc-400">{t("listBadge")}</span>}
         rows={rows}
         activeId={instrument}
         onSelect={(id) => onSelect(id as CommodityId)}

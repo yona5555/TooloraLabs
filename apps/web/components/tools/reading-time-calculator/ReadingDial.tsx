@@ -71,7 +71,7 @@ export default function ReadingDial() {
         </g>
         <circle cx={C} cy={C} r={30} className="fill-white dark:fill-zinc-900" />
         <circle cx={C} cy={C} r={3} className="fill-amber-500 dark:fill-amber-400" />
-        <text style={{ fontSize: svgPx(20) }} x={C} y={C - 8} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-900 dark:fill-zinc-100">
+        <text style={{ fontSize: svgPx(20) }} x={C} y={C - 8} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-900 dark:fill-zinc-100">
           {clock(result.totalSeconds)}
         </text>
         <text style={{ fontSize: svgPx(12) }} x={C} y={C + 18} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">

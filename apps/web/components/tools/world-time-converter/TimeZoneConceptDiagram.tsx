@@ -1,4 +1,5 @@
 import { svgPx } from "@/components/tool-ui/svgPx";
+import FitSvg from "@/components/tool-ui/FitSvg";
 type ClockExample = { label: string; offsetLabel: string; hour: number; minute: number };
 
 const EXAMPLES: ClockExample[] = [
@@ -38,7 +39,7 @@ export default function TimeZoneConceptDiagram({ sameInstantLabel, caption }: Ti
   return (
     <figure className="my-2">
       <div dir="ltr" className="overflow-x-auto">
-        <svg viewBox={`0 0 ${width} ${HEIGHT}`} role="img" aria-label={caption} className="h-auto w-full min-w-[480px] max-md:min-w-0">
+        <FitSvg viewBox={`0 0 ${width} ${HEIGHT}`} role="img" aria-label={caption} className="h-auto w-full min-w-[480px] max-md:min-w-0">
           <line x1={SPACING / 2} y1={18} x2={width - SPACING / 2} y2={18} stroke="currentColor" strokeWidth={1.5} />
           <text style={{ fontSize: svgPx(12) }} x={width / 2} y={12} textAnchor="middle" fontWeight={700} fill="currentColor">
             {sameInstantLabel}
@@ -69,14 +70,14 @@ export default function TimeZoneConceptDiagram({ sameInstantLabel, caption }: Ti
                   <tspan x={cx} dy="1.3em" opacity={0.75}>
                     {example.offsetLabel}
                   </tspan>
-                  <tspan x={cx} dy="1.25em" fontFamily="monospace">
+                  <tspan x={cx} dy="1.25em" fontFamily="var(--font-mono)">
                     {String(example.hour).padStart(2, "0")}:{String(example.minute).padStart(2, "0")}
                   </tspan>
                 </text>
               </g>
             );
           })}
-        </svg>
+        </FitSvg>
       </div>
       <figcaption className="mt-2 text-sm opacity-70">{caption}</figcaption>
     </figure>

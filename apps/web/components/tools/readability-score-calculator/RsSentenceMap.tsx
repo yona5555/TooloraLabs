@@ -77,7 +77,7 @@ export default function RsSentenceMap() {
           {excerpt}
         </blockquote>
       )}
-      <p className="mt-1 text-[11px] text-amber-700 dark:text-amber-300">
+      <p className="mt-1 text-xs text-amber-700 dark:text-amber-300">
         {t("hint")}
         {sentences.length > MAX_BARS && ` · ${t("capped", { n: f(MAX_BARS), total: f(sentences.length) })}`}
       </p>

@@ -1,5 +1,6 @@
 "use client";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
+import { useMotionLoop } from "@/components/tool-ui/motion/motion";
 import { useTranslations } from "next-intl";
 import { Play } from "lucide-react";
 import { euclidTiling, gcd2 } from "@tooloralabs/tools";
@@ -26,26 +27,22 @@ export default function GcfLcmEuclidTilingLab() {
   const palette = isDark ? DARK : LIGHT;
   const { a, b, f } = useGcfLcmModel();
   const setNumber = useSetGcfLcmNumber();
-  const [playStart, setPlayStart] = useState<number | null>(null);
-  const [now, setNow] = useState(0);
+  const [elapsed, setElapsed] = useState<number | null>(null); // ms into the play, null when not playing
 
   const { squares, truncated } = useMemo(() => euclidTiling(a, b, 240), [a, b]);
   const g = gcd2(a, b);
   const total = squares.length;
 
-  useEffect(() => {
-    if (playStart === null) return;
-    let raf = 0;
-    const tick = (ts: number) => {
-      setNow(ts);
-      if (ts - playStart > total * STEP_MS + 400) setPlayStart(null);
-      else raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [playStart, total]);
+  // tool-ui/motion: the squares are laid one by one after Play only, paused off screen or with the page hidden;
+  // reduced motion shows them all at once.
+  const box = useRef<SVGSVGElement>(null);
+  useMotionLoop(box, (dt) => {
+    const next = (elapsed ?? 0) + dt * 1000;
+    setElapsed(next);
+    return next <= total * STEP_MS + 400;
+  }, elapsed !== null, () => setElapsed(null));
 
-  const shown = playStart === null ? total : Math.max(0, Math.min(total, Math.floor((now - playStart) / STEP_MS) + 1));
+  const shown = elapsed === null ? total : Math.max(0, Math.min(total, Math.floor(elapsed / STEP_MS) + 1));
   const k = Math.min((W - 4) / a, (H - 4) / b);
   const ox = (W - a * k) / 2;
   const oy = (H - b * k) / 2;
@@ -71,7 +68,7 @@ export default function GcfLcmEuclidTilingLab() {
         max={sliderMax(value)}
         value={value}
         onChange={(e) => {
-          setPlayStart(null);
+          setElapsed(null);
           setNumber(idx, Number(e.target.value));
         }}
         className="mt-1 w-full accent-blue-600"
@@ -82,7 +79,7 @@ export default function GcfLcmEuclidTilingLab() {
 
   const drawing = (
     <div className="w-full lg:w-[340px]">
-      <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} className="mx-auto block max-w-full" role="img" aria-label={t("title")}>
+      <svg ref={box} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} className="mx-auto block max-w-full" role="img" aria-label={t("title")}>
         <rect x={ox} y={oy} width={a * k} height={b * k} className="fill-zinc-100 stroke-zinc-400 dark:fill-zinc-800 dark:stroke-zinc-500" strokeWidth={1.5} />
         {squares.slice(0, shown).map((s, i) => {
           const isG = s.size === g;
@@ -113,7 +110,7 @@ export default function GcfLcmEuclidTilingLab() {
         {slider(t("sliderB"), b, 1)}
         <button
           type="button"
-          onClick={() => setPlayStart(performance.now())}
+          onClick={() => setElapsed(0)}
           className="inline-flex items-center justify-center gap-1 rounded-lg bg-blue-600 px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-blue-700"
         >
           <Play size={12} aria-hidden />

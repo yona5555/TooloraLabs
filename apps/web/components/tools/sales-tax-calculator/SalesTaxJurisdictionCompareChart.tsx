@@ -20,7 +20,7 @@ export default function SalesTaxJurisdictionCompareChart({ items }: SalesTaxJuri
             <div className="flex w-full flex-1 items-end">
               <div className="w-full rounded-t-md bg-amber-500 dark:bg-amber-400" style={{ height: `${heightPct}%` }} />
             </div>
-            <span className="text-center text-[10px] text-zinc-500 dark:text-zinc-400">{item.label}</span>
+            <span className="text-center text-xs text-zinc-500 dark:text-zinc-400">{item.label}</span>
           </div>
         );
       })}

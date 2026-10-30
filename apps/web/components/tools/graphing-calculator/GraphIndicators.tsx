@@ -404,7 +404,7 @@ export function GraphShapeDonut() {
               );
             })}
           </svg>
-          <ul className="space-y-1 text-[11px] text-zinc-600 dark:text-zinc-300">
+          <ul className="space-y-1 text-xs text-zinc-600 dark:text-zinc-300">
             <li className="font-semibold">{t("ringTrend")}</li>
             <li className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-emerald-500" />{tv("increasing")}</li>
             <li className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-rose-500" />{tv("decreasing")}</li>
@@ -500,24 +500,24 @@ export function GraphDifferenceQuotient() {
             <div className="flex flex-col items-center">
               <div className="flex items-center gap-2">
                 <div className={`${box} bg-violet-100 text-violet-800 dark:bg-violet-500/15 dark:text-violet-200`}>
-                  <div className="text-[10px] opacity-70 max-md:opacity-100">f(x + h)</div>
+                  <div className="text-xs opacity-70 max-md:opacity-100">f(x + h)</div>
                   <div className="text-sm font-bold">{b === null ? "∅" : fmtNum(b, 4)}</div>
                 </div>
                 <span className="text-lg font-bold text-zinc-500">−</span>
                 <div className={`${box} bg-blue-100 text-blue-800 dark:bg-blue-500/15 dark:text-blue-200`}>
-                  <div className="text-[10px] opacity-70 max-md:opacity-100">f(x)</div>
+                  <div className="text-xs opacity-70 max-md:opacity-100">f(x)</div>
                   <div className="text-sm font-bold">{a === null ? "∅" : fmtNum(a, 4)}</div>
                 </div>
               </div>
               <div className="my-1.5 h-0.5 w-full bg-zinc-700 dark:bg-zinc-300" />
               <div className={`${box} bg-amber-100 text-amber-800 dark:bg-amber-500/15 dark:text-amber-200`}>
-                <div className="text-[10px] opacity-70 max-md:opacity-100">h</div>
+                <div className="text-xs opacity-70 max-md:opacity-100">h</div>
                 <div className="text-sm font-bold">{h}</div>
               </div>
             </div>
             <span className="text-2xl font-bold text-zinc-500">=</span>
             <div className={`${box} bg-emerald-100 text-emerald-800 dark:bg-emerald-500/15 dark:text-emerald-200`}>
-              <div className="text-[10px] opacity-70 max-md:opacity-100">{t("secant")}</div>
+              <div className="text-xs opacity-70 max-md:opacity-100">{t("secant")}</div>
               <div className="text-lg font-bold">{q === null ? "∅" : fmtNum(q, 4)}</div>
             </div>
           </div>
@@ -562,12 +562,12 @@ export function GraphSymmetryEquivalence() {
             {a.symmetrySamples.map((s) => (
               <div key={s.x} className="contents">
                 <div className="rounded-lg bg-blue-50 px-2 py-2 text-center font-mono dark:bg-blue-500/10">
-                  <div className="text-[10px] text-zinc-500 dark:text-zinc-400">{`x = ${fmtNum(s.x, 2)}`}</div>
+                  <div className="text-xs text-zinc-500 dark:text-zinc-400">{`x = ${fmtNum(s.x, 2)}`}</div>
                   <div className="font-semibold text-blue-800 dark:text-blue-200">{fmtNum(s.fx, 4)}</div>
                 </div>
                 <div className="text-center font-mono text-base font-bold text-zinc-600 dark:text-zinc-300">{rel(s.fx, s.fNegX)}</div>
                 <div className="rounded-lg bg-violet-50 px-2 py-2 text-center font-mono dark:bg-violet-500/10">
-                  <div className="text-[10px] text-zinc-500 dark:text-zinc-400">{`x = ${fmtNum(-s.x, 2)}`}</div>
+                  <div className="text-xs text-zinc-500 dark:text-zinc-400">{`x = ${fmtNum(-s.x, 2)}`}</div>
                   <div className="font-semibold text-violet-800 dark:text-violet-200">{fmtNum(s.fNegX, 4)}</div>
                 </div>
               </div>

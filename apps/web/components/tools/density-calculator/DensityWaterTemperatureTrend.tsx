@@ -6,6 +6,7 @@ import DensityIndicatorCard, { DensityIndicatorUnavailable } from "./DensityIndi
 import { useDensityModel } from "./DensityLiveContext";
 import { svgPx } from "@/components/tool-ui/svgPx";
 
+import FitSvg from "@/components/tool-ui/FitSvg";
 const W = 330;
 const H = 200;
 const L = 46;
@@ -40,14 +41,14 @@ export default function DensityWaterTemperatureTrend() {
 
   const indicator = (
     <div className="w-full max-w-[330px]">
-      <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
+      <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
         <text style={{ fontSize: svgPx(12) }} x={L - 6} y={12} textAnchor="end" className="fill-zinc-500 dark:fill-zinc-400">
           g/cm³
         </text>
         {Y_TICKS.map((v) => (
           <g key={v}>
             <line x1={L} y1={y(v)} x2={W - R} y2={y(v)} className="stroke-zinc-200 dark:stroke-zinc-700" />
-            <text style={{ fontSize: svgPx(12) }} x={L - 6} y={y(v) + 3} textAnchor="end" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+            <text style={{ fontSize: svgPx(12) }} x={L - 6} y={y(v) + 3} textAnchor="end" fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
               {f(v, 2)}
             </text>
           </g>
@@ -66,10 +67,10 @@ export default function DensityWaterTemperatureTrend() {
         {/* the chosen temperature */}
         <line x1={px} y1={T} x2={px} y2={T + PH} strokeDasharray="3 3" className="stroke-blue-400 dark:stroke-blue-500" />
         <circle cx={px} cy={py} r={6} className="fill-blue-600 dark:fill-blue-400" />
-        <text style={{ fontSize: svgPx(12) }} x={px} y={Math.max(T + 10, py - 10)} textAnchor={anchor} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-blue-700 dark:fill-blue-300">
+        <text style={{ fontSize: svgPx(12) }} x={px} y={Math.max(T + 10, py - 10)} textAnchor={anchor} fontWeight={700} fontFamily="var(--font-mono)" className="fill-blue-700 dark:fill-blue-300">
           {`${f(rho, 4)} · ${temp} °C`}
         </text>
-      </svg>
+      </FitSvg>
       <input
         type="range"
         dir="ltr"

@@ -280,7 +280,7 @@ export function ForexTopList({ currencies, fromCurrency, amount, digitStyle }: {
                   </span>
                 </td>
                 <td className="px-3 py-2">
-                  <span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${tagTone[tag(c.code)]}`}>{t(`tags.${tag(c.code)}`)}</span>
+                  <span className={`rounded-full px-2 py-0.5 text-xs font-semibold ${tagTone[tag(c.code)]}`}>{t(`tags.${tag(c.code)}`)}</span>
                 </td>
                 <td dir="ltr" className="px-3 py-2 text-end font-mono text-zinc-900 dark:text-zinc-100">
                   {f.rate(c.ratePerUsd)}

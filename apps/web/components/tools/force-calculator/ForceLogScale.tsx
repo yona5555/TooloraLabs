@@ -63,10 +63,10 @@ export default function ForceLogScale() {
       {ticks.map((e) => (
         <line key={e} x1={sx(e)} y1={AXIS + 5} x2={sx(e)} y2={AXIS + 9} className="stroke-zinc-400 dark:stroke-zinc-500" />
       ))}
-      <text style={{ fontSize: svgPx(12) }} x={X0 - 6} y={AXIS + 4} textAnchor="end" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={X0 - 6} y={AXIS + 4} textAnchor="end" fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
         {pow10(lo)}
       </text>
-      <text style={{ fontSize: svgPx(12) }} x={X1 + 6} y={AXIS + 4} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={X1 + 6} y={AXIS + 4} fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
         {pow10(hi)}
       </text>
       {/* reference forces: slot labels on two alternating rows, with leader lines */}
@@ -81,7 +81,7 @@ export default function ForceLogScale() {
             <text style={{ fontSize: svgPx(12) }} x={lx} y={ny} textAnchor="middle" fontWeight={600} className="fill-zinc-600 dark:fill-zinc-300">
               {t(`refs.${r.key}`)}
             </text>
-            <text style={{ fontSize: svgPx(12) }} x={lx} y={ny + 13} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-400 dark:fill-zinc-500">
+            <text style={{ fontSize: svgPx(12) }} x={lx} y={ny + 13} textAnchor="middle" fontFamily="var(--font-mono)" className="fill-zinc-400 dark:fill-zinc-500">
               {`${f(r.force, 1)} N`}
             </text>
           </g>
@@ -97,7 +97,7 @@ export default function ForceLogScale() {
           <g key={l.key}>
             <line x1={x} y1={AXIS - 6} x2={lx} y2={y + 6} strokeWidth={1.5} className={l.stroke} />
             <path d={`M ${x - 5} ${AXIS - 13} L ${x + 5} ${AXIS - 13} L ${x} ${AXIS - 5} z`} className={l.cls} />
-            <text style={{ fontSize: svgPx(12) }} x={lx} y={y} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className={l.cls}>
+            <text style={{ fontSize: svgPx(12) }} x={lx} y={y} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className={l.cls}>
               {l.label}
             </text>
           </g>

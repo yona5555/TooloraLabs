@@ -55,7 +55,7 @@ export default function CryptoFearGreed() {
                   <div key={z.zone} className={ZONE_BG[z.zone]} style={{ width: `${z.max - z.min + 1}%` }} />
                 ))}
               </div>
-              <div className="mt-1.5 flex text-[10px] leading-3 text-zinc-600 dark:text-zinc-300">
+              <div className="mt-1.5 flex text-xs leading-3 text-zinc-600 dark:text-zinc-300">
                 {FEAR_GREED_ZONES.map((z) => (
                   <div key={z.zone} className="px-0.5 text-center" style={{ width: `${z.max - z.min + 1}%` }}>
                     <div className="font-semibold">{t(`zones.${z.zone}`)}</div>
@@ -79,7 +79,7 @@ export default function CryptoFearGreed() {
                 />
               ))}
             </div>
-            <div className="mt-1 flex justify-between font-mono text-[10px] text-zinc-400">
+            <div className="mt-1 flex justify-between font-mono text-xs text-zinc-400">
               <span>{date(points[0].timestamp)}</span>
               <span>{date(today.timestamp)}</span>
             </div>

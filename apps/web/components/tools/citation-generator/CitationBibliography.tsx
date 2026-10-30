@@ -67,7 +67,7 @@ export default function CitationBibliography({ state, onChange }: Props) {
                 ) : (
                   <p className="text-sm text-zinc-400 italic">{t("bib.untitled")}</p>
                 )}
-                <div className="mt-1 flex flex-wrap gap-1.5 text-[10px] font-semibold">
+                <div className="mt-1 flex flex-wrap gap-1.5 text-xs font-semibold">
                   <span className="rounded bg-zinc-100 px-1.5 py-0.5 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300">{t(`types.${s.type}`)}</span>
                   {rtl && <span className="rounded bg-amber-100 px-1.5 py-0.5 text-amber-800 dark:bg-amber-500/20 dark:text-amber-300">{t("bib.arabic")}</span>}
                   {on && <span className="rounded bg-blue-600 px-1.5 py-0.5 text-white">{t("bib.editing")}</span>}

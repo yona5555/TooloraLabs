@@ -1,5 +1,6 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
+import { useMotionEpisode, useMotionLoop } from "@/components/tool-ui/motion/motion";
 import { useTranslations } from "next-intl";
 import { Pause, Play } from "lucide-react";
 import { ENERGY_GRAVITY, fallAtTime } from "@tooloralabs/tools";
@@ -32,33 +33,21 @@ export default function EnergyDropLab() {
   const t = useTranslations("tools.energy-work-power-calculator.education.lab.drop");
   const { setDim } = useEnergyLive();
   const { potential: pa, f } = useEnergyModel();
-  const [phase, setPhase] = useState(0);
-  const [playing, setPlaying] = useState(true);
-  const start = useRef<number | null>(null);
+  const [phase, setPhase] = useState(Math.SQRT1_2); // at rest: halfway down
 
   const tf = pa.fallTime;
   const play = Math.max(0.8, Math.min(4, tf));
+  const motion = useMotionEpisode([play]);
+  const playing = motion.active;
+  const box = useRef<SVGSVGElement>(null);
 
-  useEffect(() => {
-    if (!playing) return;
-    let raf = 0;
-    start.current = null;
-    const tick = (now: number) => {
-      if (start.current === null && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) {
-        // Reduced motion: show the halfway state instead of running.
-        setPhase(Math.SQRT1_2);
-        setPlaying(false);
-        return;
-      }
-      if (start.current === null) start.current = now - phase * play * 1000;
-      const el = ((now - start.current) / 1000) % (play + HOLD);
-      setPhase(Math.min(1, el / play));
-      raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- restart only when play toggles or the fall changes
-  }, [playing, play]);
+  // tool-ui/motion: plays during a motion episode (Play, or new input values), at most EPISODE_MS, paused off
+  // screen or with the page hidden, never on load and never for reduced motion.
+  const clock = useRef(0);
+  useMotionLoop(box, (dt) => {
+    clock.current = (clock.current + dt) % (play + HOLD);
+    setPhase(Math.min(1, clock.current / play));
+  }, playing, motion.stop);
 
   const now = fallAtTime(pa.mass, pa.height, phase * tf);
   const total = Math.abs(pa.potentialEnergy) || 1e-30;
@@ -74,8 +63,8 @@ export default function EnergyDropLab() {
 
   const lab = (
     <div className="w-full max-w-[360px]">
-      <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
-        <text style={{ fontSize: svgPx(13) }} x={W / 2} y={18} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+      <svg ref={box} direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
+        <text style={{ fontSize: svgPx(13) }} x={W / 2} y={18} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
           {`t = ${f(now.time, 2)} s · v = ${f(now.speed, 2)} m/s`}
         </text>
         <line x1={10} y1={GROUND} x2={W - 10} y2={GROUND} strokeWidth={2} className="stroke-zinc-300 dark:stroke-zinc-600" />
@@ -85,14 +74,14 @@ export default function EnergyDropLab() {
         {[1, 0.5, 0].map((k) => (
           <g key={k}>
             <line x1={TOWER_X - 40} y1={GROUND - k * span} x2={TOWER_X - 24} y2={GROUND - k * span} className="stroke-zinc-400 dark:stroke-zinc-500" />
-            <text style={{ fontSize: svgPx(12) }} x={TOWER_X - 44} y={GROUND - k * span + 4} textAnchor="end" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+            <text style={{ fontSize: svgPx(12) }} x={TOWER_X - 44} y={GROUND - k * span + 4} textAnchor="end" fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
               {`${f(pa.height * k, 2)}`}
             </text>
           </g>
         ))}
         <line x1={TOWER_X} y1={TOP} x2={TOWER_X} y2={GROUND} strokeDasharray="3 4" className="stroke-zinc-300 dark:stroke-zinc-600" />
         <circle cx={TOWER_X} cy={ballY} r={10} className="fill-blue-600 dark:fill-blue-400" />
-        <text style={{ fontSize: svgPx(12) }} x={TOWER_X} y={GROUND + 16} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+        <text style={{ fontSize: svgPx(12) }} x={TOWER_X} y={GROUND + 16} textAnchor="middle" fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
           {`${f(now.height, 2)} m`}
         </text>
         {/* energy bars: PE + KE = total */}
@@ -101,7 +90,7 @@ export default function EnergyDropLab() {
           return (
             <g key={b.label}>
               <rect x={BARS_X[i] - BAR_W / 2} y={GROUND - hh} width={BAR_W} height={Math.max(1, hh)} rx={4} className={b.cls} />
-              <text style={{ fontSize: svgPx(12) }} x={BARS_X[i]} y={GROUND - hh - 6} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+              <text style={{ fontSize: svgPx(12) }} x={BARS_X[i]} y={GROUND - hh - 6} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
                 {f(b.value, 1)}
               </text>
               <text style={{ fontSize: svgPx(12) }} x={BARS_X[i]} y={GROUND + 16} textAnchor="middle" fontWeight={600} className="fill-zinc-600 dark:fill-zinc-300">
@@ -138,7 +127,7 @@ export default function EnergyDropLab() {
         })}
         <button
           type="button"
-          onClick={() => setPlaying((p) => !p)}
+          onClick={() => (playing ? motion.stop() : motion.play())}
           className="inline-flex items-center gap-2 rounded-lg border border-zinc-300 px-3 py-1.5 text-xs font-semibold text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
         >
           {playing ? <Pause size={14} /> : <Play size={14} />}

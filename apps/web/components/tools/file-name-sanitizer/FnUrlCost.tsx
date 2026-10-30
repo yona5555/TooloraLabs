@@ -4,6 +4,7 @@ import FnIndicatorCard, { FnIndicatorUnavailable } from "./FnIndicatorCard";
 import { useFnModel } from "./FnLiveContext";
 import { svgPx } from "@/components/tool-ui/svgPx";
 
+import FitSvg from "@/components/tool-ui/FitSvg";
 const W = 340;
 const LABEL = 70;
 const BAR_X = LABEL + 8;
@@ -41,24 +42,24 @@ export default function FnUrlCost() {
   const H = ranked.length * ROW + 4;
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {ranked.map(([ch, cost], i) => {
         const y = i * ROW;
         const w = Math.max(4, (cost / peak) * BAR_W);
         const esc = [...enc.encode(ch)].map((b) => `%${b.toString(16).toUpperCase().padStart(2, "0")}`).join("");
         return (
           <g key={ch}>
-            <text style={{ fontSize: svgPx(14) }} x={LABEL} y={y + 18} textAnchor="end" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(14) }} x={LABEL} y={y + 18} textAnchor="end" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
               {/\s/.test(ch) ? "␣" : ch}
             </text>
             <rect x={BAR_X} y={y + 6} width={w} height={ROW - 12} rx={3} className={i === 0 ? "fill-rose-500 dark:fill-rose-400" : "fill-rose-300 dark:fill-rose-700"} />
-            <text style={{ fontSize: svgPx(12) }} x={BAR_X + w + 5} y={y + 18} fontFamily="ui-monospace, monospace" className="fill-zinc-600 dark:fill-zinc-300">
+            <text style={{ fontSize: svgPx(12) }} x={BAR_X + w + 5} y={y + 18} fontFamily="var(--font-mono)" className="fill-zinc-600 dark:fill-zinc-300">
               +{cost} · {esc.length > 12 ? `${esc.slice(0, 12)}…` : esc}
             </text>
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   const total = [...costs.values()].reduce((s, v) => s + v, 0);

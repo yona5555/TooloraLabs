@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import { useMotionLoop } from "@/components/tool-ui/motion/motion";
 import { useTranslations } from "next-intl";
 import { Pause, Play, RotateCcw } from "lucide-react";
 import SwIndicatorCard from "./SwIndicatorCard";
@@ -28,30 +29,22 @@ export default function SwTeleprompter() {
   const total = secondsFor(words, pace);
   // The speaker keeps its word when the pace changes: convert its position to this pace.
   const at = speaker ? Math.min(total, (speaker.seconds * speaker.wpm) / pace) : 0;
-  const frame = useRef<{ raf: number; last: number; pos: number }>({ raf: 0, last: 0, pos: 0 });
+  const frame = useRef({ pos: 0 });
   const lineRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (!playing || total <= 0) return;
+  // tool-ui/motion: plays only after the visitor presses Play and ends at the last word; paused off screen or
+  // with the page hidden; reduced motion stops it at once (the speaker stays where it is).
+  const sincePush = useRef(0);
+  useMotionLoop(lineRef, (dt) => {
     const state = frame.current;
-    state.last = performance.now();
-    let lastPush = 0;
-    const step = (now: number) => {
-      state.pos = Math.min(total, state.pos + ((now - state.last) / 1000) * rate);
-      state.last = now;
-      if (now - lastPush > 50 || state.pos >= total) {
-        lastPush = now;
-        setSpeaker({ seconds: state.pos, wpm: pace });
-      }
-      if (state.pos >= total) {
-        setPlaying(false);
-        return;
-      }
-      state.raf = requestAnimationFrame(step);
-    };
-    state.raf = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(state.raf);
-  }, [playing, total, pace, rate, setSpeaker]);
+    state.pos = Math.min(total, state.pos + dt * rate);
+    sincePush.current += dt;
+    if (sincePush.current > 0.05 || state.pos >= total) {
+      sincePush.current = 0;
+      setSpeaker({ seconds: state.pos, wpm: pace });
+    }
+    return state.pos < total;
+  }, playing && total > 0, () => setPlaying(false));
 
   const changePace = (next: number) => {
     if (playing) frame.current.pos = (frame.current.pos * pace) / next;
@@ -96,7 +89,7 @@ export default function SwTeleprompter() {
   const indicator = (
     <div className="w-full sm:w-[360px]">
       <div className="relative overflow-hidden rounded-xl bg-zinc-900 px-4 py-3 text-zinc-100 shadow-inner dark:bg-black">
-        <div className="mb-2 flex items-center justify-between text-[10px] font-semibold uppercase tracking-wide text-zinc-400">
+        <div className="mb-2 flex items-center justify-between text-xs font-semibold uppercase tracking-wide text-zinc-400">
           <span>{t("sentenceOf", { n: f((sent?.index ?? 0) + 1), total: f(sentences.length) })}</span>
           <span dir="ltr" className="font-mono">{clock(at)} / {clock(total)}</span>
         </div>
@@ -176,18 +169,18 @@ export default function SwTeleprompter() {
               type="button"
               aria-pressed={rate === r}
               onClick={() => setRate(r)}
-              className={`px-1.5 py-1 font-mono text-[11px] font-semibold transition ${rate === r ? "bg-blue-600 text-white" : "text-zinc-600 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800"}`}
+              className={`px-1.5 py-1 font-mono text-xs font-semibold transition ${rate === r ? "bg-blue-600 text-white" : "text-zinc-600 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800"}`}
             >
               {`${f(r)}×`}
             </button>
           ))}
         </div>
       </div>
-      <label className="mt-2 flex items-center gap-2 text-[11px] text-zinc-500 dark:text-zinc-400">
+      <label className="mt-2 flex items-center gap-2 text-xs text-zinc-500 dark:text-zinc-400">
         <span className="shrink-0">{t("pace", { wpm: f(pace) })}</span>
         <input type="range" min={MIN_PACE} max={MAX_PACE} step={5} value={pace} onChange={(e) => changePace(Number(e.target.value))} className="w-full accent-blue-600" aria-label={t("paceLabel")} />
       </label>
-      <p className="mt-1 text-[11px] text-amber-700 dark:text-amber-300">{t("hint")}</p>
+      <p className="mt-1 text-xs text-amber-700 dark:text-amber-300">{t("hint")}</p>
     </div>
   );
 

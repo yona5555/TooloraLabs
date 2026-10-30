@@ -1,7 +1,8 @@
 "use client";
 
 import { useRef, type ReactNode } from "react";
-import { useFrame } from "@react-three/fiber";
+import { useMotionEpisode } from "@/components/tool-ui/motion/motion";
+import { useSceneFrame } from "@/components/tool-ui/motion/scene-motion";
 import Label3D from "@/components/tool-ui/three/Label3D";
 import type { Mesh, MeshStandardMaterial } from "three";
 import { usePalette3D } from "@/components/tool-ui/three/theme3d";
@@ -27,16 +28,21 @@ function Label({ position, color, children, size = 12, opacity = 1 }: { position
   );
 }
 
-/** A digit removed by rounding: translucent, slowly pulsing and sinking so it reads as fading away. */
+/**
+ * A digit removed by rounding: translucent, pulsing and sinking so it reads as fading away, during a motion
+ * episode after the rounding changed (tool-ui/motion); at rest it stays translucent.
+ */
 function DroppedBlock({ x, z, h, color }: { x: number; z: number; h: number; color: string }) {
   const mesh = useRef<Mesh>(null);
   const mat = useRef<MeshStandardMaterial>(null);
-  useFrame((state) => {
-    const k = (Math.sin(state.clock.elapsedTime * 1.8 + x) + 1) / 2;
+  const t = useRef(0);
+  const { active } = useMotionEpisode([h, x]);
+  useSceneFrame((_, dt) => {
+    t.current += dt;
+    const k = (Math.sin(t.current * 1.8 + x) + 1) / 2;
     if (mat.current) mat.current.opacity = 0.12 + 0.28 * k;
     if (mesh.current) mesh.current.position.y = Y0 + h / 2 - 0.12 * (1 - k);
-    state.invalidate();
-  });
+  }, active);
   return (
     <mesh ref={mesh} position={[x, Y0 + h / 2, z]}>
       <boxGeometry args={[BLOCK, h, BLOCK]} />

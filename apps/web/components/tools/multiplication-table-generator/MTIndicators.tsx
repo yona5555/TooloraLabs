@@ -86,12 +86,12 @@ export function ProductBars({ view, onPick }: P) {
           const on = m === view.b;
           return (
             <button key={m} type="button" onClick={() => onPick(view.a, m)} className="group flex h-full min-w-0 flex-1 flex-col items-center justify-end" aria-label={`${view.a} × ${m} = ${v}`}>
-              <span className={`mb-0.5 max-w-full truncate font-mono text-[10px] font-bold ${on ? "text-emerald-600 dark:text-emerald-400" : "text-zinc-600 dark:text-zinc-300"}`}>{f(v)}</span>
+              <span className={`mb-0.5 max-w-full truncate font-mono text-xs font-bold ${on ? "text-emerald-600 dark:text-emerald-400" : "text-zinc-600 dark:text-zinc-300"}`}>{f(v)}</span>
               <span
                 className={`w-full rounded-t-md transition-all duration-500 ${on ? "bg-emerald-500" : "bg-blue-500/80 group-hover:bg-blue-600 dark:bg-blue-400/70"}`}
                 style={{ height: `${Math.max(2, (v / max) * 82)}%` }}
               />
-              <span className={`mt-1 font-mono text-[10px] ${on ? "font-bold text-emerald-600 dark:text-emerald-400" : "text-zinc-400"}`}>×{f(m)}</span>
+              <span className={`mt-1 font-mono text-xs ${on ? "font-bold text-emerald-600 dark:text-emerald-400" : "text-zinc-400"}`}>×{f(m)}</span>
             </button>
           );
         })}
@@ -114,12 +114,12 @@ function GroupRows({ size, count, f, tone }: { size: number; count: number; f: M
               <span className={`flex h-2.5 w-full items-center rounded-full ${tone}`} />
             )}
           </span>
-          <span dir="ltr" className="w-14 shrink-0 text-end font-mono text-[10px] text-zinc-500 dark:text-zinc-400">
+          <span dir="ltr" className="w-14 shrink-0 text-end font-mono text-xs text-zinc-500 dark:text-zinc-400">
             {f(size * (r + 1))}
           </span>
         </div>
       ))}
-      {count > rows && <p className="text-[11px] text-zinc-400">{t("array.more", { n: f(count - rows) })}</p>}
+      {count > rows && <p className="text-xs text-zinc-400">{t("array.more", { n: f(count - rows) })}</p>}
     </div>
   );
 }
@@ -323,7 +323,7 @@ export function RowSumStacked({ view, onPick }: P) {
             );
           })}
         </div>
-        <div className="mt-1 flex justify-between font-mono text-[10px] text-zinc-500 dark:text-zinc-400">
+        <div className="mt-1 flex justify-between font-mono text-xs text-zinc-500 dark:text-zinc-400">
           <span>0</span>
           <span>{f(Math.round(row.sum / 2))}</span>
           <span className="font-bold text-zinc-800 dark:text-zinc-100">{f(row.sum)}</span>
@@ -373,7 +373,7 @@ export function GridSumFormula({ view }: P) {
       </div>
       <div dir="ltr" className="flex flex-wrap items-center justify-center gap-2 font-mono" data-testid="mt-formula" data-sum={sum}>
         <div className={`${box} border-blue-400 bg-blue-50 dark:bg-blue-500/10`}>
-          <p className="text-[10px] uppercase text-blue-600 dark:text-blue-300">{t("formula.boxSide")}</p>
+          <p className="text-xs uppercase text-blue-600 dark:text-blue-300">{t("formula.boxSide")}</p>
           <p className="text-lg font-bold text-zinc-900 dark:text-zinc-100">
             ({f(view.lo)} + … + {f(view.hi)})
           </p>
@@ -382,7 +382,7 @@ export function GridSumFormula({ view }: P) {
         <span className="text-3xl font-bold text-zinc-400">²</span>
         <span className="text-3xl text-zinc-400">=</span>
         <div className={`${box} border-violet-400 bg-violet-50 dark:bg-violet-500/10`}>
-          <p className="text-[10px] uppercase text-violet-600 dark:text-violet-300">{t("formula.boxSquare")}</p>
+          <p className="text-xs uppercase text-violet-600 dark:text-violet-300">{t("formula.boxSquare")}</p>
           <p className="text-lg font-bold text-zinc-900 dark:text-zinc-100">
             {f(side)} × {f(side)}
           </p>
@@ -390,7 +390,7 @@ export function GridSumFormula({ view }: P) {
         </div>
         <span className="text-3xl text-zinc-400">=</span>
         <div className={`${box} border-emerald-500 bg-emerald-50 dark:bg-emerald-500/10`}>
-          <p className="text-[10px] uppercase text-emerald-700 dark:text-emerald-300">{t("formula.boxTotal")}</p>
+          <p className="text-xs uppercase text-emerald-700 dark:text-emerald-300">{t("formula.boxTotal")}</p>
           <p className="text-4xl font-black text-emerald-700 dark:text-emerald-300">{f(sum)}</p>
         </div>
       </div>
@@ -445,7 +445,7 @@ export function UnitsDigitTimeline({ view }: P) {
                   >
                     {d}
                   </span>
-                  <span className="mt-1 max-w-full truncate font-mono text-[11px] text-zinc-500 dark:text-zinc-400">{f(view.a * k)}</span>
+                  <span className="mt-1 max-w-full truncate font-mono text-xs text-zinc-500 dark:text-zinc-400">{f(view.a * k)}</span>
                 </li>
               );
             })}
@@ -454,7 +454,7 @@ export function UnitsDigitTimeline({ view }: P) {
         ))}
         {cyc.period < 10 && (
           <div className="mt-2 grid grid-cols-10 gap-1">
-            <span className="rounded-full bg-blue-100 py-0.5 text-center text-[10px] font-semibold text-blue-700 dark:bg-blue-500/20 dark:text-blue-300" style={{ gridColumn: `1 / span ${cyc.period}` }}>
+            <span className="rounded-full bg-blue-100 py-0.5 text-center text-xs font-semibold text-blue-700 dark:bg-blue-500/20 dark:text-blue-300" style={{ gridColumn: `1 / span ${cyc.period}` }}>
               {t("units.cycle", { n: f(cyc.period) })}
             </span>
           </div>
@@ -506,14 +506,14 @@ export function DigitalRootStrip({ view, onPick }: P) {
               >
                 <span className={`absolute inset-x-0 bottom-0 transition-all duration-500 ${ROOT_COLORS[roots[i]]}`} style={{ height: `${(roots[i] / 9) * 100}%` }} />
                 <span className="relative font-mono text-base font-black text-zinc-800 dark:text-zinc-100">{roots[i]}</span>
-                <span className="relative font-mono text-[9px] font-semibold text-white">×{m}</span>
+                <span className="relative font-mono text-xs font-semibold text-white">×{m}</span>
               </button>
             );
           })}
         </div>
         <div className="mt-2 flex flex-wrap justify-center gap-1.5">
           {Array.from({ length: 9 }, (_, i) => i + 1).map((r) => (
-            <span key={r} className={`flex items-center gap-1 rounded-full px-2 py-0.5 font-mono text-[10px] text-white ${ROOT_COLORS[r]} ${roots.includes(r) ? "" : "opacity-25"}`}>
+            <span key={r} className={`flex items-center gap-1 rounded-full px-2 py-0.5 font-mono text-xs text-white ${ROOT_COLORS[r]} ${roots.includes(r) ? "" : "opacity-25"}`}>
               {r}
             </span>
           ))}
@@ -563,7 +563,7 @@ export function FactorPairsEquivalence({ view, onPick }: P) {
               <span dir="ltr" className="block font-mono text-base font-bold text-zinc-900 dark:text-zinc-100">
                 {f(i)} × {f(j)}
               </span>
-              <span dir="ltr" className="block font-mono text-[11px] text-zinc-500">
+              <span dir="ltr" className="block font-mono text-xs text-zinc-500">
                 = {f(view.product)}
               </span>
               <svg viewBox="0 0 100 64" width="100%" height={92} className="mx-auto my-1 block" aria-hidden="true">
@@ -576,7 +576,7 @@ export function FactorPairsEquivalence({ view, onPick }: P) {
                   return <rect x={(100 - ww) / 2} y={(64 - hh) / 2} width={ww} height={hh} rx="2" className={on ? "fill-emerald-400/70 stroke-emerald-600" : fits ? "fill-blue-300/60 stroke-blue-500" : "fill-zinc-300/60 stroke-zinc-400"} strokeWidth="1.2" />;
                 })()}
               </svg>
-              <span className={`mt-1 inline-block rounded-full px-2 py-0.5 text-[10px] font-semibold ${fits ? "bg-blue-100 text-blue-700 dark:bg-blue-500/20 dark:text-blue-300" : "bg-zinc-100 text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400"}`}>
+              <span className={`mt-1 inline-block rounded-full px-2 py-0.5 text-xs font-semibold ${fits ? "bg-blue-100 text-blue-700 dark:bg-blue-500/20 dark:text-blue-300" : "bg-zinc-100 text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400"}`}>
                 {fits ? t("pairs.inGrid") : t("pairs.outGrid")}
               </span>
             </button>
@@ -613,7 +613,7 @@ export function MemoryStairs({ view }: P) {
       <div dir="ltr" className="flex h-44 items-end gap-2" data-testid="mt-stairs" data-left={last.remaining}>
         {steps.map((s, i) => (
           <div key={s.key} className="flex h-full min-w-0 flex-1 flex-col items-center justify-end">
-            {i > 0 && <span className="font-mono text-[10px] text-red-500">−{f(s.removed)}</span>}
+            {i > 0 && <span className="font-mono text-xs text-red-500">−{f(s.removed)}</span>}
             <span className="font-mono text-sm font-bold text-zinc-900 dark:text-zinc-100">{f(s.remaining)}</span>
             <span className={`w-full rounded-t-lg transition-all duration-500 ${i === steps.length - 1 ? "bg-emerald-500" : "bg-blue-500"}`} style={{ height: `${Math.max(3, (s.remaining / max) * 72)}%`, opacity: 1 - i * 0.08 }} />
           </div>
@@ -621,7 +621,7 @@ export function MemoryStairs({ view }: P) {
       </div>
       <div className="mt-1 flex gap-2">
         {steps.map((s) => (
-          <span key={s.key} className="min-w-0 flex-1 text-center text-[10px] leading-tight text-zinc-500 dark:text-zinc-400">
+          <span key={s.key} className="min-w-0 flex-1 text-center text-xs leading-tight text-zinc-500 dark:text-zinc-400">
             {t(`stairs.short.${s.key}`)}
           </span>
         ))}

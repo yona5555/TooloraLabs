@@ -102,7 +102,7 @@ export default function ZipCompressorInputPanel({
                     key={entry.id}
                     className="flex items-center gap-2 rounded-xl border border-zinc-200 bg-zinc-50 px-3 py-2 text-sm dark:border-zinc-700 dark:bg-zinc-800/60"
                   >
-                    <span className="min-w-0 flex-1 truncate text-zinc-700 dark:text-zinc-300">{entry.file.name}</span>
+                    <span className="min-w-0 flex-1 break-words text-zinc-700 dark:text-zinc-300">{entry.file.name}</span>
                     <span dir="ltr" className="shrink-0 text-xs text-zinc-400 dark:text-zinc-500">
                       {formatBytes(entry.file.size)}
                     </span>

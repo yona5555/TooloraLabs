@@ -2,6 +2,8 @@
 import { useId } from "react";
 import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import { svgPx } from "@/components/tool-ui/svgPx";
+import FitSvg from "@/components/tool-ui/FitSvg";
 
 const VIEW_W = 880;
 const VIEW_H = 300;
@@ -34,7 +36,7 @@ export default function CompoundInterestConceptDiagram() {
     <SectionCard title={d("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{d("intro")}</p>
       <div dir="ltr" tabIndex={0} className="mt-4 overflow-x-auto">
-        <svg viewBox={`0 0 ${VIEW_W} ${VIEW_H}`} role="img" aria-label={d("ariaLabel")} data-annotation="" className="mx-auto block w-full max-w-3xl text-current">
+        <FitSvg viewBox={`0 0 ${VIEW_W} ${VIEW_H}`} role="img" aria-label={d("ariaLabel")} data-annotation="" className="mx-auto block w-full max-w-3xl text-current">
           <defs>
             <marker id={`${svgId}ci-arrow`} viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
               <path d="M0,0 L10,5 L0,10 Z" className="fill-zinc-400 dark:fill-zinc-500" />
@@ -69,7 +71,7 @@ export default function CompoundInterestConceptDiagram() {
           <text x={START_X} y={BASE_Y + 34} fontSize={13} fontWeight={700} textAnchor="start" className="fill-zinc-900 dark:fill-zinc-50">
             {t("principalLabel")}
           </text>
-          <text x={START_X} y={BASE_Y + 52} fontSize={11} textAnchor="start" fill="currentColor" opacity={0.6}>
+          <text x={START_X} y={BASE_Y + 52} style={{ fontSize: svgPx(11) }} textAnchor="start" fill="currentColor" opacity={0.6}>
             {d("startingAmountCaption")}
           </text>
 
@@ -77,7 +79,7 @@ export default function CompoundInterestConceptDiagram() {
           <text x={410} y={BASE_Y + 34} fontSize={13} fontWeight={700} textAnchor="middle" className="fill-blue-700 dark:fill-blue-300">
             {t("contributionsLabel")}
           </text>
-          <text x={410} y={BASE_Y + 52} fontSize={11} textAnchor="middle" fill="currentColor" opacity={0.6}>
+          <text x={410} y={BASE_Y + 52} style={{ fontSize: svgPx(11) }} textAnchor="middle" fill="currentColor" opacity={0.6}>
             {d("contributionsCaption")}
           </text>
 
@@ -89,7 +91,7 @@ export default function CompoundInterestConceptDiagram() {
           <text x={565} y={134} fontSize={13} fontWeight={700} textAnchor="start" className="fill-amber-700 dark:fill-amber-300">
             {t("interestLabel")}
           </text>
-          <text x={565} y={152} fontSize={11} textAnchor="start" fill="currentColor" opacity={0.6}>
+          <text x={565} y={152} style={{ fontSize: svgPx(11) }} textAnchor="start" fill="currentColor" opacity={0.6}>
             {d("interestCaption")}
           </text>
 
@@ -98,7 +100,7 @@ export default function CompoundInterestConceptDiagram() {
           <text x={END_X - 14} y={38} fontSize={14} fontWeight={700} textAnchor="end" className="fill-zinc-900 dark:fill-zinc-50">
             {t("futureValueLabel")}
           </text>
-        </svg>
+        </FitSvg>
       </div>
     </SectionCard>
   );

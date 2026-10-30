@@ -34,7 +34,7 @@ function Gauge({ pct, label, value, color }: { pct: number; label: string; value
           {value}
         </text>
       </svg>
-      <span className="text-center text-[11px] font-semibold text-zinc-600 dark:text-zinc-300">{label}</span>
+      <span className="text-center text-xs font-semibold text-zinc-600 dark:text-zinc-300">{label}</span>
     </div>
   );
 }
@@ -67,7 +67,7 @@ export default function RadialProgressGauges() {
             <Gauge pct={remainderPct} label={t("remainderLabel")} value={fmt(remainder)} color="#dc2626" />
           </div>
           <label className="flex w-full max-w-[220px] flex-col items-center gap-1">
-            <span className="text-[11px] text-zinc-500 dark:text-zinc-400">{t("probeLabel", { x: fmt(testX) })}</span>
+            <span className="text-xs text-zinc-500 dark:text-zinc-400">{t("probeLabel", { x: fmt(testX) })}</span>
             <input type="range" min={-10} max={10} step={0.1} value={testX} onChange={(e) => setTestX(parseFloat(e.target.value))} className="w-full accent-red-600 dark:accent-red-400" aria-label={t("probeAria")} />
           </label>
         </div>

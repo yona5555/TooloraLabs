@@ -1,9 +1,7 @@
 import type { MetadataRoute } from "next";
 import { routing } from "@/i18n/routing";
-import { tools } from "@/data/tools";
-import { categoryPages } from "@/data/categories";
 import { SITE_URL } from "@/lib/site";
-import { DOCUMENTED_TOOL_SLUGS } from "@/lib/docs-tools";
+import { indexablePaths } from "@/lib/indexable-pages";
 
 function urlFor(path: string, locale: string) {
   return `${SITE_URL}/${locale}${path}`;
@@ -17,27 +15,7 @@ function alternatesFor(path: string) {
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticPaths = [
-    "",
-    "/tools",
-    "/docs",
-    "/categories",
-    "/compare/financial-calculators",
-    "/embed-tools",
-    "/coming-soon",
-    "/about",
-    "/contact",
-    "/privacy",
-    "/terms",
-    "/affiliate-disclosure",
-  ];
-  const categoryPaths = categoryPages.map((category) => `/categories/${category.slug}`);
-  const toolPaths = tools.map((tool) => `/tools/${tool.slug}`);
-  const docsPaths = DOCUMENTED_TOOL_SLUGS.map((slug) => `/docs/${slug}`);
-
-  const paths = [...staticPaths, ...categoryPaths, ...toolPaths, ...docsPaths];
-
-  return paths.flatMap((path) =>
+  return indexablePaths.flatMap((path) =>
     routing.locales.map((locale) => ({
       url: urlFor(path, locale),
       alternates: { languages: alternatesFor(path) },

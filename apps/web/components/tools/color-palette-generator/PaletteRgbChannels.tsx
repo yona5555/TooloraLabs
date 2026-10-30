@@ -44,7 +44,7 @@ export default function PaletteRgbChannels() {
                 <g key={ch.key}>
                   <rect x={gx + k * (bw + 2)} y={BASE - h} width={bw} height={h} rx={3} className={ch.fill} />
                   {bw >= 14 && (
-                    <text style={{ fontSize: svgPx(12) }} x={gx + k * (bw + 2) + bw / 2} y={BASE - h - 4} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-600 dark:fill-zinc-300">
+                    <text style={{ fontSize: svgPx(12) }} x={gx + k * (bw + 2) + bw / 2} y={BASE - h - 4} textAnchor="middle" fontFamily="var(--font-mono)" className="fill-zinc-600 dark:fill-zinc-300">
                       {v}
                     </text>
                   )}

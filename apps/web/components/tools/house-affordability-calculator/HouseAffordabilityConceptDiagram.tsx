@@ -1,6 +1,8 @@
 "use client";
 import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import { svgPx } from "@/components/tool-ui/svgPx";
+import FitSvg from "@/components/tool-ui/FitSvg";
 
 const VIEW_W = 880;
 const VIEW_H = 260;
@@ -26,7 +28,7 @@ export default function HouseAffordabilityConceptDiagram() {
     <SectionCard title={d("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{d("intro")}</p>
       <div dir="ltr" tabIndex={0} className="mt-4 overflow-x-auto">
-        <svg viewBox={`0 0 ${VIEW_W} ${VIEW_H}`} role="img" aria-label={d("ariaLabel")} data-annotation="" className="mx-auto block w-full max-w-3xl text-current">
+        <FitSvg viewBox={`0 0 ${VIEW_W} ${VIEW_H}`} role="img" aria-label={d("ariaLabel")} data-annotation="" className="mx-auto block w-full max-w-3xl text-current">
           {/* income label above the bar */}
           <text x={BAR_X + BAR_W / 2} y={30} fontSize={14} fontWeight={700} textAnchor="middle" className="fill-zinc-900 dark:fill-zinc-50">
             {d("incomeLabel")}
@@ -64,7 +66,7 @@ export default function HouseAffordabilityConceptDiagram() {
           <text x={BAR_X + housingW / 2} y={BAR_Y + BAR_H / 2 + 5} fontSize={12} fontWeight={700} textAnchor="middle" className="fill-white">
             {d("housingLabel")}
           </text>
-          <text x={BAR_X + housingW + (debtW - housingW) / 2} y={BAR_Y + BAR_H / 2 + 5} fontSize={11} fontWeight={700} textAnchor="middle" className="fill-white">
+          <text x={BAR_X + housingW + (debtW - housingW) / 2} y={BAR_Y + BAR_H / 2 + 5} style={{ fontSize: svgPx(11) }} fontWeight={700} textAnchor="middle" className="fill-white">
             {d("otherDebtLabel")}
           </text>
           <text x={BAR_X + debtW + (BAR_W - debtW) / 2} y={BAR_Y + BAR_H / 2 + 5} fontSize={12} fontWeight={700} textAnchor="middle" className="fill-zinc-700 dark:fill-zinc-200">
@@ -72,13 +74,13 @@ export default function HouseAffordabilityConceptDiagram() {
           </text>
 
           {/* bottom captions */}
-          <text x={BAR_X + housingW / 2} y={BAR_Y + BAR_H + 26} fontSize={11} textAnchor="middle" fill="currentColor" opacity={0.6}>
+          <text x={BAR_X + housingW / 2} y={BAR_Y + BAR_H + 26} style={{ fontSize: svgPx(11) }} textAnchor="middle" fill="currentColor" opacity={0.6}>
             {d("housingCaption")}
           </text>
-          <text x={BAR_X + debtW + (BAR_W - debtW) / 2} y={BAR_Y + BAR_H + 26} fontSize={11} textAnchor="middle" fill="currentColor" opacity={0.6}>
+          <text x={BAR_X + debtW + (BAR_W - debtW) / 2} y={BAR_Y + BAR_H + 26} style={{ fontSize: svgPx(11) }} textAnchor="middle" fill="currentColor" opacity={0.6}>
             {d("remainingCaption")}
           </text>
-        </svg>
+        </FitSvg>
       </div>
     </SectionCard>
   );

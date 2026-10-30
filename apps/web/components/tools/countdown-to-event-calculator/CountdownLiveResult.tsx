@@ -104,7 +104,7 @@ export default function CountdownLiveResult({ state, d }: Props) {
             <p className={`font-mono text-2xl font-bold tabular-nums ${b.isPast ? "text-emerald-700 dark:text-emerald-300" : "text-blue-700 dark:text-blue-300"}`} data-testid={`unit-${i}`}>
               {i === 0 ? num(v) : String(v).padStart(2, "0")}
             </p>
-            <p className="text-[10px] leading-3 font-semibold text-zinc-500 dark:text-zinc-400">{l}</p>
+            <p className="text-xs leading-3 font-semibold text-zinc-500 dark:text-zinc-400">{l}</p>
           </div>
         ))}
       </div>

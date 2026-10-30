@@ -47,21 +47,21 @@ export default function HeroCategories() {
 
         const hoverOverlay = (
           <div className={`flex h-full min-h-0 flex-col items-center gap-1 p-2.5 text-center ${textColorClass}`}>
-            <h2 className="shrink-0 text-[11px] leading-tight font-bold sm:text-xs">{tc(`${category.slug}.title`)}</h2>
+            <h2 className="shrink-0 text-xs leading-tight font-bold">{tc(`${category.slug}.title`)}</h2>
 
-            <p className="line-clamp-5 min-h-0 flex-1 overflow-hidden text-[9px] leading-snug opacity-90 sm:text-[10px]">{overviewText}</p>
+            <p className="line-clamp-5 min-h-0 flex-1 overflow-hidden text-xs leading-snug opacity-90">{overviewText}</p>
 
             <div className="pointer-events-auto flex w-full min-w-0 shrink-0 flex-col gap-1">
               <Link
                 href={categoryHref(category.slug)}
-                className={`relative z-50 inline-flex items-center justify-center gap-1 rounded-md px-2 py-1 text-[9px] font-bold transition-colors sm:text-[10px] ${ctaClass}`}
+                className={`relative z-50 inline-flex items-center justify-center gap-1 rounded-md px-2 py-1 text-xs font-bold transition-colors ${ctaClass}`}
               >
                 {tNav("browse")}
                 <ArrowRight size={9} className="rtl:rotate-180" />
               </Link>
               <Link
                 href="/contact"
-                className={`relative z-50 inline-flex items-center justify-center rounded-md border px-2 py-1 text-[9px] font-medium transition-colors sm:text-[10px] ${secondaryClass}`}
+                className={`relative z-50 inline-flex items-center justify-center rounded-md border px-2 py-1 text-xs font-medium transition-colors ${secondaryClass}`}
               >
                 {tFooter("contact")}
               </Link>
@@ -82,16 +82,16 @@ export default function HeroCategories() {
             hoverOverlay={hoverOverlay}
           >
             <div className="flex flex-1 flex-col items-center gap-1 p-2 text-center sm:p-2.5">
-              <span className="w-full truncate text-[11px] font-bold text-zinc-800 dark:text-zinc-100 sm:text-xs">{tc(`${category.slug}.title`)}</span>
-              <span className="line-clamp-2 text-[9px] leading-tight text-zinc-500 dark:text-zinc-400 sm:text-[10px]">
+              <span className="w-full truncate text-xs font-bold text-zinc-800 dark:text-zinc-100">{tc(`${category.slug}.title`)}</span>
+              <span className="line-clamp-2 text-xs leading-tight text-zinc-500 dark:text-zinc-400">
                 {tc(`${category.slug}.description`)}
               </span>
               <span className="mt-auto flex flex-col items-center gap-0.5 pt-1">
-                  <span className="rounded-full bg-zinc-100 px-1.5 py-0.5 text-[9px] font-medium text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400 sm:text-[10px]">
+                  <span className="rounded-full bg-zinc-100 px-1.5 py-0.5 text-xs font-medium text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400">
                     {tSection("toolCount", { count: toolCount })}
                   </span>
                   {comingSoonCount > 0 && (
-                    <span className="rounded-full bg-blue-50 px-1.5 py-0.5 text-[9px] font-medium text-blue-500 dark:bg-blue-500/10 dark:text-blue-400 sm:text-[10px]">
+                    <span className="rounded-full bg-blue-50 px-1.5 py-0.5 text-xs font-medium text-blue-500 dark:bg-blue-500/10 dark:text-blue-400">
                       {tSection("comingSoonCount", { count: comingSoonCount })}
                     </span>
                   )}

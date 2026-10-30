@@ -46,13 +46,13 @@ export default function SwPaceCompare() {
                 <span className="mt-1 block h-3 rounded-full bg-zinc-100 dark:bg-zinc-800">
                   <span className={`block h-3 rounded-full ${PACE_TONES[r.key].bg}`} style={{ width: `${(sec / longest) * 100}%`, transition: "width 300ms ease" }} />
                 </span>
-                {r.style && <span className="mt-0.5 block text-[11px] text-zinc-500 dark:text-zinc-400">{r.style}</span>}
+                {r.style && <span className="mt-0.5 block text-xs text-zinc-500 dark:text-zinc-400">{r.style}</span>}
               </button>
             </li>
           );
         })}
       </ul>
-      <p className="mt-2 text-[11px] text-amber-700 dark:text-amber-300">{t("hint")}</p>
+      <p className="mt-2 text-xs text-amber-700 dark:text-amber-300">{t("hint")}</p>
     </div>
   );
 

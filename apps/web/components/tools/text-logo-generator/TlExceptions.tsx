@@ -48,10 +48,10 @@ export default function TlExceptions() {
                 <td dir="ltr" className="px-2 py-1 text-center">
                   <span className="text-zinc-500">{r.source}</span> → <span className="text-base text-zinc-900 dark:text-zinc-50">{r.styled}</span>
                 </td>
-                <td dir="ltr" className="px-2 py-1 text-center font-mono text-[10px] text-zinc-400 line-through">{hex(r.hole)}</td>
-                <td dir="ltr" className="px-2 py-1 text-center font-mono text-[10px] text-blue-700 dark:text-blue-300">{hex(r.cp)}</td>
+                <td dir="ltr" className="px-2 py-1 text-center font-mono text-xs text-zinc-400 line-through">{hex(r.hole)}</td>
+                <td dir="ltr" className="px-2 py-1 text-center font-mono text-xs text-blue-700 dark:text-blue-300">{hex(r.cp)}</td>
                 <td className="px-2 py-1 text-end">
-                  {hit && <span className="rounded-full bg-amber-100 px-1.5 py-0.5 text-[10px] font-semibold text-amber-800 dark:bg-amber-500/20 dark:text-amber-300">{t("inText")}</span>}
+                  {hit && <span className="rounded-full bg-amber-100 px-1.5 py-0.5 text-xs font-semibold text-amber-800 dark:bg-amber-500/20 dark:text-amber-300">{t("inText")}</span>}
                 </td>
               </tr>
             );

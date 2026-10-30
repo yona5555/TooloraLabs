@@ -43,10 +43,10 @@ export default function BarcodeWidthHistogram() {
           <g key={i}>
             {hb > 0 && <rect x={cx - bw - 2} y={BASE - hb} width={bw} height={hb} rx={4} className="fill-zinc-800 dark:fill-zinc-200" />}
             {hs > 0 && <rect x={cx + 2} y={BASE - hs} width={bw} height={hs} rx={4} className="fill-sky-300 dark:fill-sky-700" />}
-            <text style={{ fontSize: svgPx(12) }} x={cx - bw / 2 - 2} y={BASE - hb - 5} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={cx - bw / 2 - 2} y={BASE - hb - 5} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
               {f(a.barWidths[i])}
             </text>
-            <text style={{ fontSize: svgPx(12) }} x={cx + bw / 2 + 2} y={BASE - hs - 5} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-sky-700 dark:fill-sky-300">
+            <text style={{ fontSize: svgPx(12) }} x={cx + bw / 2 + 2} y={BASE - hs - 5} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className="fill-sky-700 dark:fill-sky-300">
               {f(a.spaceWidths[i])}
             </text>
             <text style={{ fontSize: svgPx(12) }} x={cx} y={BASE + 18} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">

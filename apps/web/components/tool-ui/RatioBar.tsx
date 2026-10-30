@@ -34,7 +34,7 @@ export default function RatioBar({ label, valuePercent, capPercent, valueLabel, 
         <div className={`h-full rounded-full transition-all duration-700 ease-out ${overCap ? "bg-red-500 dark:bg-red-500" : "bg-blue-600 dark:bg-blue-400"}`} style={{ width: `${fillPct}%` }} />
         <div className="absolute top-0 h-full w-0.5 bg-zinc-500 dark:bg-zinc-300" style={{ left: `${capPositionPct}%` }} />
       </div>
-      <p className="mt-1 text-[11px] text-zinc-400 dark:text-zinc-500">{capLabel}</p>
+      <p className="mt-1 text-xs text-zinc-400 dark:text-zinc-500">{capLabel}</p>
     </div>
   );
 }

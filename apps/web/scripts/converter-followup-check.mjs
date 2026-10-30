@@ -1,7 +1,8 @@
 // Converter follow-up checks: Result-card gauge two-way sync (unit), image sample/compare/upload,
 // fonts, console errors, and the requested screenshots. Usage: node apps/web/scripts/converter-followup-check.mjs
 import { chromium } from "playwright";
-const B = "http://localhost:3000";
+import { requireBase } from "../../../scripts/lib/require-base.mjs";
+const B = requireBase(process.env.BASE);
 const b = await chromium.launch();
 const out = {};
 async function open(path, W, theme = "dark") {

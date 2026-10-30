@@ -1,11 +1,12 @@
 // Scientific Notation Converter check: ladder drag (values read during drag), constants click, top crop.
 // Usage: node apps/web/scripts/scientific-notation-check.mjs outDir [width]
 import { chromium } from "playwright";
+import { requireBase } from "../../../scripts/lib/require-base.mjs";
 const [S, W = "1440"] = process.argv.slice(2);
 const b = await chromium.launch();
 const p = await (await b.newContext({ viewport: { width: Number(W), height: 900 } })).newPage();
 const errs = []; p.on("pageerror", (e) => errs.push(String(e)));
-await p.goto("http://localhost:3000/en/tools/scientific-notation-converter", { waitUntil: "load" });
+await p.goto(`${requireBase(process.env.BASE)}/en/tools/scientific-notation-converter`, { waitUntil: "load" });
 await p.waitForTimeout(3000);
 const read = () => p.evaluate(() => ({
   res: document.querySelector('[data-testid="sci-result"]')?.textContent,

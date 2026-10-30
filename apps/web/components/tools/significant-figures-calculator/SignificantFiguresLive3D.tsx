@@ -143,7 +143,7 @@ export default function SignificantFiguresLive3D({ camera = [0, 3.6, 7.4] }: { c
           <Scene3D camera={camera}>
             <SignificantFiguresScene3D towers={towers} />
           </Scene3D>
-          <ul className="pointer-events-none absolute start-2 top-2 flex flex-col gap-1 rounded-lg bg-white/80 px-2 py-1.5 text-[11px] text-zinc-700 dark:bg-zinc-900/80 dark:text-zinc-200">
+          <ul className="pointer-events-none absolute start-2 top-2 flex flex-col gap-1 rounded-lg bg-white/80 px-2 py-1.5 text-xs text-zinc-700 dark:bg-zinc-900/80 dark:text-zinc-200">
             {legend.map((l) => (
               <li key={l.label} className="flex items-center gap-1.5">
                 <span className="inline-block h-2.5 w-2.5 rounded-sm" style={{ backgroundColor: l.color }} />

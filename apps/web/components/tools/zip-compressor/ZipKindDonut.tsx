@@ -66,7 +66,7 @@ export default function ZipKindDonut() {
             <text style={{ fontSize: svgPx(12) }} x={220} y={y + 4} className="fill-zinc-600 dark:fill-zinc-300">
               {t(k.key)}
             </text>
-            <text style={{ fontSize: svgPx(12) }} x={under ? 220 : W - 4} y={under ? y + 18 : y + 4} textAnchor={under ? "start" : "end"} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={under ? 220 : W - 4} y={under ? y + 18 : y + 4} textAnchor={under ? "start" : "end"} fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
               {value}
             </text>
           </g>

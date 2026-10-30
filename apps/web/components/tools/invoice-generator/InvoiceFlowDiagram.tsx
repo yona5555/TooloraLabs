@@ -17,7 +17,7 @@ const TOTAL = TAXABLE + TAX;
 function Stop({ label, value, colorClass }: { label: string; value: string; colorClass: string }) {
   return (
     <div className={`flex shrink-0 flex-col items-center gap-0.5 rounded-xl px-3 py-2.5 text-center ${colorClass}`}>
-      <span className="text-[10px] font-medium opacity-80 max-md:opacity-100">{label}</span>
+      <span className="text-xs font-medium opacity-80 max-md:opacity-100">{label}</span>
       <span dir="ltr" className="font-mono text-xs font-bold">
         {value}
       </span>

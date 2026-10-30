@@ -133,7 +133,7 @@ export default function StoichiometryResultScene({
           it ? (
             <div key={i} data-sto-substance={it.formula} className="flex min-w-0 flex-col items-center gap-0.5 text-center" style={{ containerType: "inline-size" }}>
               {it.role === "co" && valid && (
-                <span data-testid="sto-required" className="rounded-full px-1.5 text-[11px] font-bold leading-5" style={{ color: "var(--ph-ink)", border: "1px solid var(--ph-line)" }}>
+                <span data-testid="sto-required" className="rounded-full px-1.5 text-xs font-bold leading-5" style={{ color: "var(--ph-ink)", border: "1px solid var(--ph-line)" }}>
                   {t("required")}
                 </span>
               )}

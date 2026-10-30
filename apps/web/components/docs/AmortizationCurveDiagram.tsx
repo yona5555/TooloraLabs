@@ -1,3 +1,5 @@
+import { svgPx } from "@/components/tool-ui/svgPx";
+import FitSvg from "@/components/tool-ui/FitSvg";
 export type AmortizationRow = { period: number; principal: number; interest: number };
 
 type Props = {
@@ -41,31 +43,31 @@ export default function AmortizationCurveDiagram({ rows, labelPrincipal, labelIn
   return (
     <figure className="my-2">
       <div dir="ltr" className="flex justify-center overflow-x-auto">
-        <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={caption} className="h-auto w-full max-w-xl">
+        <FitSvg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={caption} className="h-auto w-full max-w-xl">
           <line x1={PAD_LEFT} y1={PAD_TOP} x2={PAD_LEFT} y2={PAD_TOP + plotH} stroke="currentColor" strokeWidth={1} className="text-zinc-300 dark:text-zinc-700" />
           <line x1={PAD_LEFT} y1={PAD_TOP + plotH} x2={WIDTH - PAD_RIGHT} y2={PAD_TOP + plotH} stroke="currentColor" strokeWidth={1} className="text-zinc-300 dark:text-zinc-700" />
 
           <path d={interestPath} className="fill-orange-400/70 dark:fill-orange-500/60" />
           <path d={principalPath} className="fill-blue-600/70 dark:fill-blue-400/60" />
 
-          <text x={PAD_LEFT} y={HEIGHT - 8} fontSize={10} className="fill-zinc-400 dark:fill-zinc-500">
+          <text x={PAD_LEFT} y={HEIGHT - 8} style={{ fontSize: svgPx(10) }} className="fill-zinc-400 dark:fill-zinc-500">
             0
           </text>
-          <text x={WIDTH - PAD_RIGHT} y={HEIGHT - 8} textAnchor="end" fontSize={10} className="fill-zinc-400 dark:fill-zinc-500">
+          <text x={WIDTH - PAD_RIGHT} y={HEIGHT - 8} textAnchor="end" style={{ fontSize: svgPx(10) }} className="fill-zinc-400 dark:fill-zinc-500">
             {maxPeriod}
           </text>
 
           <g transform={`translate(${PAD_LEFT}, ${PAD_TOP})`}>
             <rect width={10} height={10} rx={2} className="fill-blue-600/70 dark:fill-blue-400/60" />
-            <text x={16} y={9} fontSize={11} className="fill-zinc-600 dark:fill-zinc-300">
+            <text x={16} y={9} style={{ fontSize: svgPx(11) }} className="fill-zinc-600 dark:fill-zinc-300">
               {labelPrincipal}
             </text>
             <rect x={130} width={10} height={10} rx={2} className="fill-orange-400/70 dark:fill-orange-500/60" />
-            <text x={146} y={9} fontSize={11} className="fill-zinc-600 dark:fill-zinc-300">
+            <text x={146} y={9} style={{ fontSize: svgPx(11) }} className="fill-zinc-600 dark:fill-zinc-300">
               {labelInterest}
             </text>
           </g>
-        </svg>
+        </FitSvg>
       </div>
       <figcaption className="mt-2 text-center text-sm text-zinc-500 dark:text-zinc-400">{caption}</figcaption>
     </figure>

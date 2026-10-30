@@ -33,13 +33,13 @@ export default function WcReadSpeak() {
           <div className="mt-1 h-4 rounded-full bg-zinc-100 dark:bg-zinc-800">
             <div className={`h-4 rounded-full ${l.bar}`} style={{ width: `${(secs(l.wpm) / longest) * 100}%`, transition: "width 250ms ease" }} />
           </div>
-          <label className="mt-1.5 flex items-center gap-2 text-[11px] text-zinc-500 dark:text-zinc-400">
+          <label className="mt-1.5 flex items-center gap-2 text-xs text-zinc-500 dark:text-zinc-400">
             <span className="shrink-0">{t("pace", { wpm: f(l.wpm) })}</span>
             <input type="range" min={l.min} max={l.max} step={5} value={l.wpm} onChange={(e) => l.set(Number(e.target.value))} className={`w-full ${l.accent}`} aria-label={t(l.key)} />
           </label>
         </div>
       ))}
-      <p className="text-[11px] text-zinc-500 dark:text-zinc-400">{t("ratio", { x: f(secs(speakWpm) / Math.max(secs(readWpm), 1e-9), 2) })}</p>
+      <p className="text-xs text-zinc-500 dark:text-zinc-400">{t("ratio", { x: f(secs(speakWpm) / Math.max(secs(readWpm), 1e-9), 2) })}</p>
     </div>
   );
 

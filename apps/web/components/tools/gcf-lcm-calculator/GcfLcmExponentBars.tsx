@@ -56,7 +56,7 @@ export default function GcfLcmExponentBars() {
           );
         })}
       </svg>
-      <div className="mt-1 flex flex-wrap justify-center gap-x-3 gap-y-1 text-[11px] text-zinc-500 dark:text-zinc-400">
+      <div className="mt-1 flex flex-wrap justify-center gap-x-3 gap-y-1 text-xs text-zinc-500 dark:text-zinc-400">
         {nums.map((n, i) => (
           <span key={i} className="inline-flex items-center gap-1">
             <svg width={10} height={10}><rect width={10} height={10} rx={2} className={BAR_COLORS[i % BAR_COLORS.length]} /></svg>

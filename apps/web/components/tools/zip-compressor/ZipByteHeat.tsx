@@ -29,7 +29,7 @@ export default function ZipByteHeat() {
         const y = i * ROW;
         return (
           <g key={r.name}>
-            <text style={{ fontSize: svgPx(12) }} x={LABEL - 6} y={y + 19} textAnchor="end" fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
+            <text style={{ fontSize: svgPx(12) }} x={LABEL - 6} y={y + 19} textAnchor="end" fontFamily="var(--font-mono)" className="fill-zinc-700 dark:fill-zinc-200">
               {r.name.length > 10 ? `${r.name.slice(0, 9)}…` : r.name}
             </text>
             {r.histogram.map((c, k) => (
@@ -39,7 +39,7 @@ export default function ZipByteHeat() {
         );
       })}
       {[0, 4, 8, 12, 15].map((k) => (
-        <text style={{ fontSize: svgPx(12) }} key={k} x={k === 15 ? W - 2 : LABEL + k * cw + cw / 2} y={H - 6} textAnchor={k === 15 ? "end" : "middle"} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+        <text style={{ fontSize: svgPx(12) }} key={k} x={k === 15 ? W - 2 : LABEL + k * cw + cw / 2} y={H - 6} textAnchor={k === 15 ? "end" : "middle"} fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
           {k * 16}
         </text>
       ))}

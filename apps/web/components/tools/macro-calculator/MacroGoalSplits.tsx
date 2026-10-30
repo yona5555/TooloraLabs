@@ -36,7 +36,7 @@ export default function MacroGoalSplits() {
                 {MACROS.map((m) => (
                   <span
                     key={m}
-                    className="flex items-center justify-center text-[10px] font-bold text-white tabular-nums"
+                    className="flex items-center justify-center text-xs font-bold text-white tabular-nums"
                     style={{ width: `${sp[m].percent}%`, background: COLORS[m] }}
                   >
                     {Math.round(sp[m].percent)}%

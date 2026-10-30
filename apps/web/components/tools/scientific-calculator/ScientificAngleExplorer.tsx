@@ -1,7 +1,8 @@
 "use client";
 import { useEffect, useRef, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
-import { Mafs, Coordinates, Circle, Line, Text, useMovablePoint } from "mafs";
+import { Coordinates, Circle, Line, useMovablePoint } from "mafs";
+import FitMafs, { FitText } from "@/components/tool-ui/FitMafs";
 import "mafs/core.css";
 import "@/components/tool-ui/mafsTheme.css";
 import { angleFromPoint, pointOnCircle, constrainToCircle, unitCircleFacts } from "@tooloralabs/tools";
@@ -89,7 +90,7 @@ export default function ScientificAngleExplorer() {
           {(["sin", "cos", "tan"] as const).map((fn) => {
             const sg = f.signs[fn];
             return (
-              <span key={fn} className={`rounded-full px-2 py-0.5 text-[11px] font-bold ${signTone(sg)}`}>
+              <span key={fn} className={`rounded-full px-2 py-0.5 text-xs font-bold ${signTone(sg)}`}>
                 {`${fn} ${sg === "undef" ? "∄" : sg}`}
               </span>
             );
@@ -106,7 +107,7 @@ export default function ScientificAngleExplorer() {
     <SectionCard title={t("title")} className="my-4" bodyClassName="p-4 lg:p-5">
       <div className="grid grid-cols-1 items-stretch gap-4 md:grid-cols-2">
         <div role="group" dir="ltr" aria-label={t("ariaLabel")} className="mafs-canvas w-full overflow-hidden rounded-xl" data-testid="explorer-mafs">
-          <Mafs viewBox={{ x: [-4, 4], y: [-4, 4] }} height={340} pan={false} zoom={false}>
+          <FitMafs viewBox={{ x: [-4, 4], y: [-4, 4] }} height={340} pan={false} zoom={false}>
             <Coordinates.Cartesian xAxis={{ lines: 1 }} yAxis={{ lines: 1 }} />
             <Circle center={[0, 0]} radius={RADIUS} color={colors.blue} fillOpacity={0} strokeOpacity={0.4} />
 
@@ -114,15 +115,15 @@ export default function ScientificAngleExplorer() {
             <MafsHoverSegment point1={projX} point2={point.point} color={colors.rose} weight={2.5} tooltip={t("sinTooltip", { value: sin })} />
             <Line.Segment point1={origin} point2={point.point} color={colors.blue} />
 
-            <Text x={point.point[0] / 2} y={point.point[1] >= 0 ? -0.85 : 0.85} size={13} color={colors.emerald}>
+            <FitText x={point.point[0] / 2} y={point.point[1] >= 0 ? -0.85 : 0.85} size={13} color={colors.emerald}>
               {`cos ${cos}`}
-            </Text>
-            <Text x={point.point[0] + (point.point[0] >= 0 ? 0.75 : -0.75)} y={point.point[1] / 2} size={13} color={colors.rose}>
+            </FitText>
+            <FitText x={point.point[0] + (point.point[0] >= 0 ? 0.75 : -0.75)} y={point.point[1] / 2} size={13} color={colors.rose}>
               {`sin ${sin}`}
-            </Text>
+            </FitText>
 
             {point.element}
-          </Mafs>
+          </FitMafs>
         </div>
 
         <div className="flex flex-col overflow-hidden rounded-xl border border-blue-200 dark:border-blue-500/30" data-testid="explorer-table">

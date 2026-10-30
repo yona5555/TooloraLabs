@@ -36,17 +36,17 @@ export default function MmmCentreCards() {
     <div className="grid w-full grid-cols-3 gap-2 lg:w-[380px]">
       {cards.map((c) => (
         <div key={c.key} className={`flex flex-col rounded-xl border-2 p-2.5 ${c.ring}`}>
-          <span className="text-[11px] font-semibold text-zinc-500 dark:text-zinc-400">{tr(c.key)}</span>
+          <span className="text-xs font-semibold text-zinc-500 dark:text-zinc-400">{tr(c.key)}</span>
           <span dir="ltr" className="mt-0.5 truncate font-mono text-base font-bold text-zinc-800 dark:text-zinc-100">{c.value}</span>
           <div dir="ltr" className="relative mt-2 h-2 rounded-full bg-zinc-100 dark:bg-zinc-800">
             {c.v !== null && <span className={`absolute top-1/2 h-3.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded ${c.bar}`} style={{ left: `${pos(c.v)}%` }} />}
           </div>
-          <div dir="ltr" className="mt-0.5 flex justify-between font-mono text-[9px] text-zinc-400">
+          <div dir="ltr" className="mt-0.5 flex justify-between font-mono text-xs text-zinc-400">
             <span>{f(a.min)}</span>
             <span>{f(a.max)}</span>
           </div>
-          <span className="mt-1.5 text-[11px] leading-4 text-zinc-600 dark:text-zinc-300">{c.uses}</span>
-          <span className={`mt-1 text-[11px] font-semibold ${c.robust ? "text-emerald-700 dark:text-emerald-300" : "text-rose-700 dark:text-rose-300"}`}>
+          <span className="mt-1.5 text-xs leading-4 text-zinc-600 dark:text-zinc-300">{c.uses}</span>
+          <span className={`mt-1 text-xs font-semibold ${c.robust ? "text-emerald-700 dark:text-emerald-300" : "text-rose-700 dark:text-rose-300"}`}>
             {c.robust ? t("robust") : t("sensitive")}
           </span>
         </div>

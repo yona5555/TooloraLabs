@@ -90,24 +90,24 @@ export default function RandomNumberResult({ result, seed, f }: Props) {
         <div className="mt-5">
           <div className="flex items-baseline justify-between gap-2">
             <p className="text-xs font-semibold text-zinc-600 dark:text-zinc-300">{t("spreadTitle")}</p>
-            <span className={`rounded-full px-2 py-0.5 text-[11px] font-semibold ${verdictTone}`} data-testid="rng-verdict">
+            <span className={`rounded-full px-2 py-0.5 text-xs font-semibold ${verdictTone}`} data-testid="rng-verdict">
               {t(`verdict.${verdict}`)}
             </span>
           </div>
           <div dir="ltr" className="mt-2 flex h-24 items-end gap-1" data-testid="rng-hero-hist">
             {bins.map((b) => (
               <div key={b.from} className="relative flex h-full min-w-0 flex-1 flex-col justify-end">
-                <span className="mb-0.5 text-center font-mono text-[10px] font-bold text-zinc-700 dark:text-zinc-200">{f.int(b.count)}</span>
+                <span className="mb-0.5 text-center font-mono text-xs font-bold text-zinc-700 dark:text-zinc-200">{f.int(b.count)}</span>
                 <div className="rounded-t-md bg-blue-600 transition-all duration-500 dark:bg-blue-500" style={{ height: pc((b.count / scale) * 100) }} />
                 <div className="absolute inset-x-0 border-t-2 border-dashed border-amber-500" style={{ bottom: pc((b.expected / scale) * 100) }} />
               </div>
             ))}
           </div>
-          <div dir="ltr" className="mt-1 flex justify-between font-mono text-[10px] text-zinc-400">
+          <div dir="ltr" className="mt-1 flex justify-between font-mono text-xs text-zinc-400">
             <span>{f.int(result.lo)}</span>
             <span>{f.int(result.hi)}</span>
           </div>
-          <p className="mt-1 text-[11px] text-zinc-500 dark:text-zinc-400">{t("spreadLegend", { expected: f.num(bins[0].expected, 1) })}</p>
+          <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">{t("spreadLegend", { expected: f.num(bins[0].expected, 1) })}</p>
         </div>
 
         <dl className="mt-4 grid grid-cols-2 gap-2 border-t border-zinc-100 pt-4 text-sm dark:border-zinc-800">

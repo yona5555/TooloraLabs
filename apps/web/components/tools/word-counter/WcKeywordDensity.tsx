@@ -28,14 +28,14 @@ export default function WcKeywordDensity() {
                   onClick={() => setHighlight(active ? null : k.word)}
                   className={`grid w-full grid-cols-[1.25rem_6.5rem_1fr] items-center gap-2 rounded-lg px-1.5 py-1 text-start transition ${active ? "bg-amber-100 ring-2 ring-amber-400 dark:bg-amber-500/15" : "hover:bg-zinc-100 dark:hover:bg-zinc-800"}`}
                 >
-                  <span className="font-mono text-[11px] text-zinc-400">{f(i + 1)}</span>
+                  <span className="font-mono text-xs text-zinc-400">{f(i + 1)}</span>
                   <span dir="auto" className="truncate text-sm font-semibold text-zinc-800 dark:text-zinc-100">{k.word}</span>
                   <span className="relative h-5 rounded bg-zinc-100 dark:bg-zinc-800">
                     <span
                       className={`absolute inset-y-0 start-0 rounded ${active ? "bg-amber-400" : i === 0 ? "bg-blue-600 dark:bg-blue-500" : "bg-blue-400 dark:bg-blue-600"}`}
                       style={{ width: `${(k.count / max) * 100}%`, transition: "width 300ms ease" }}
                     />
-                    <span dir="ltr" className="absolute inset-y-0 end-1.5 flex items-center font-mono text-[11px] font-bold text-zinc-700 dark:text-zinc-100">
+                    <span dir="ltr" className="absolute inset-y-0 end-1.5 flex items-center font-mono text-xs font-bold text-zinc-700 dark:text-zinc-100">
                       {f(k.count)} · {pct(k.density)}
                     </span>
                   </span>
@@ -45,7 +45,7 @@ export default function WcKeywordDensity() {
           })}
         </ul>
       )}
-      <p className="mt-2 text-[11px] text-amber-700 dark:text-amber-300">{t("hint")}</p>
+      <p className="mt-2 text-xs text-amber-700 dark:text-amber-300">{t("hint")}</p>
     </div>
   );
 

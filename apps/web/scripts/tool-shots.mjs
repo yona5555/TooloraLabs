@@ -1,8 +1,9 @@
 // Full-page screenshots of one or more tools. Usage:
 // node apps/web/scripts/tool-shots.mjs outDir slug[,slug] [combos]   combos e.g. "en-light-1440,en-dark-375"
 import { chromium } from "playwright";
+import { requireBase } from "../../../scripts/lib/require-base.mjs";
 import fs from "node:fs";
-const BASE = process.env.BASE_URL ?? "http://localhost:3000";
+const BASE = requireBase(process.env.BASE);
 const [outDir, slugs, combos = "en-light-1440,en-dark-1440,ar-light-1440,en-light-375,en-dark-375,ar-light-375"] = process.argv.slice(2);
 fs.mkdirSync(outDir, { recursive: true });
 const browser = await chromium.launch(process.env.BROWSER_PATH ? { executablePath: process.env.BROWSER_PATH } : {});

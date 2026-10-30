@@ -55,6 +55,12 @@ jobs:
       - name: Lint (zero warnings)
         run: node scripts/run-no-warnings.mjs npm run lint --workspace=apps/web
 
+      - name: No system font in the source (every family is a self-hosted var(--font-…) stack)
+        run: node scripts/system-fonts.mjs
+
+      - name: Every workflow runs bash with pipefail; no gate is piped
+        run: node scripts/workflow-shell.mjs
+
       - name: Typecheck (core)
         run: npx tsc --noEmit --project packages/core/tsconfig.json
 
@@ -84,6 +90,9 @@ jobs:
 
       - name: Test (main-health script, mocked GitHub API)
         run: node scripts/run-no-warnings.mjs npm run test:main-health
+
+      - name: Test (color lock comparison, desktop + phone home locks)
+        run: node scripts/run-no-warnings.mjs npm run test:color-lock
 
       # Any warning line in the build output (Next.js ⚠, webpack, React, Node, npm) fails the step.
       # Next.js build cache (https://nextjs.org/docs/messages/no-cache): restored from main's last build; only a
@@ -117,6 +126,9 @@ jobs:
 
       - name: Install Playwright Chromium
         run: npx playwright install --with-deps chromium
+
+      - name: Test (hydration guard fails a real server/client date mismatch)
+        run: node scripts/run-no-warnings.mjs npm run test:hydration-guard
 
       - name: Served tool-card previews + LOCKED phone card order and zero duplicate ids (every tool at 390px)
         # Test servers use the dedicated port 3110 (never 3001, the dev server's) through scripts/test-server.sh:
@@ -242,6 +254,18 @@ jobs:
           name: desktop-lock-timing
           path: desktop-lock-timing.txt
           if-no-files-found: ignore
+
+      - name: Start the fixture server (share images)
+        run: NEXT_DIST_DIR=.next-lock NODE_OPTIONS="--import=$PWD/tests/fixtures/offline-fetch.mjs" TZ=UTC NEXT_TELEMETRY_DISABLED=1 scripts/test-server.sh start 3110 apps/web
+
+      - name: Every sitemap URL has its share image (og:image + twitter:image, 200 image/png)
+        env:
+          BASE: http://localhost:3110
+        run: npm run test:share-images
+
+      - name: Stop the fixture server (share images)
+        if: always()
+        run: scripts/test-server.sh stop 3110
 
   # Affected pages (scripts/route-manifest.mjs): a route-level manifest of this build (every chunk each page's
   # HTML/RSC loads, plus its own server bundle for a request-rendered page), diffed against main's manifest

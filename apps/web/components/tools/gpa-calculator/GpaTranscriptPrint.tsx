@@ -1,5 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
+import { useTodayDate } from "@/components/tool-ui/TodayDate";
 import { courseLetter, type Derived, type Formatters, type PlannerState } from "./planner";
 
 /** Transcript-style summary, invisible on screen and the only thing printed (global [data-print-area] print CSS). */
@@ -7,12 +8,13 @@ export default function GpaTranscriptPrint({ state, d, f }: { state: PlannerStat
   const t = useTranslations("tools.gpa-calculator.planner");
   const th = "border border-zinc-400 px-2 py-1 text-start";
   const td = "border border-zinc-300 px-2 py-1";
+  const today = useTodayDate();
 
   return (
     <div data-print-area className="hidden bg-white text-black">
       <div className="text-xl font-bold">{t("print.title")}</div>
-      <p className="text-sm" suppressHydrationWarning>
-        {t(`scales.${state.scale}`)} · {t("print.date", { date: new Date().toLocaleDateString() })}
+      <p className="text-sm">
+        {t(`scales.${state.scale}`)} · {t("print.date", { date: today })}
       </p>
       {d.priorCredits > 0 && (
         <p className="mt-3 text-sm">

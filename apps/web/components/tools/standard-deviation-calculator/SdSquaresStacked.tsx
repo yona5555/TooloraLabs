@@ -54,7 +54,7 @@ export default function SdSquaresStacked() {
         return (
           <g key={p.index}>
             <rect x={0} y={y} width={12} height={12} rx={3} className={COLORS[i % COLORS.length]} />
-            <text style={{ fontSize: svgPx(12) }} x={18} y={y + 10} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
+            <text style={{ fontSize: svgPx(12) }} x={18} y={y + 10} fontFamily="var(--font-mono)" className="fill-zinc-700 dark:fill-zinc-200">
               {`x = ${f(p.value)}  (${f(p.deviation)})² = ${f(p.squaredDeviation)}`}
             </text>
             <text style={{ fontSize: svgPx(12) }} x={W} y={y + 10} textAnchor="end" fontWeight={700} className="fill-zinc-800 dark:fill-zinc-100">

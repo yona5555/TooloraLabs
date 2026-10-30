@@ -47,7 +47,7 @@ export default function TlGlyphInspector() {
       <div dir="ltr" className="flex items-center justify-center gap-4 rounded-xl bg-zinc-50 py-3 dark:bg-zinc-800/50">
         <div className="text-center">
           <div className="text-3xl text-zinc-500 dark:text-zinc-400">{g.source === " " ? "␣" : g.source}</div>
-          <div className="font-mono text-[11px] text-zinc-500">{hex(g.sourceCodePoint)}</div>
+          <div className="font-mono text-xs text-zinc-500">{hex(g.sourceCodePoint)}</div>
         </div>
         <svg width={44} height={16} viewBox="0 0 44 16" aria-hidden>
           <path d="M2 8 H38 M32 3 L40 8 L32 13" fill="none" strokeWidth={2} className="stroke-blue-600 dark:stroke-blue-400" />
@@ -56,10 +56,10 @@ export default function TlGlyphInspector() {
           <div key={`${active.style}-${activeChar}`} className="text-4xl text-blue-700 dark:text-blue-300" style={{ animation: "tl-pop 300ms ease both" }}>
             {g.source === " " ? "␣" : g.styled}
           </div>
-          <div className="font-mono text-[11px] text-blue-700 dark:text-blue-300">{hex(g.styledCodePoint)}</div>
+          <div className="font-mono text-xs text-blue-700 dark:text-blue-300">{hex(g.styledCodePoint)}</div>
         </div>
       </div>
-      <p className="text-center text-[11px] text-zinc-400 dark:text-zinc-500">{t("hint")}</p>
+      <p className="text-center text-xs text-zinc-400 dark:text-zinc-500">{t("hint")}</p>
       <style>{`@keyframes tl-pop { from { opacity: 0; transform: scale(.6); } to { opacity: 1; transform: none; } }`}</style>
     </div>
   );

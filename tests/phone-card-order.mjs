@@ -13,13 +13,15 @@
  *   the server HTML alone, no script. (Ad 1's balance and the in-article ads are measured, not ordered.)
  * - Every article ad slot shares one parent (globals.css selects ad 2 as the slot with no slot before it).
  * The markets tools keep their approved order (live data first) and are skipped for the role checks.
- * Usage: node tests/phone-card-order.mjs [--ids] [base=http://localhost:3001] [locale=en] [slug...]
+ * Usage: node tests/phone-card-order.mjs [--ids] <base, e.g. http://localhost:3110> [locale=en] [slug...]
  */
 import { chromium } from "playwright";
+import { requireBase } from "../scripts/lib/require-base.mjs";
 
 const argv = process.argv.slice(2);
 const checkIds = argv.includes("--ids");
-const [base = "http://localhost:3001", loc = "en", ...only] = argv.filter((a) => a !== "--ids");
+const [rawBase, loc = "en", ...only] = argv.filter((a) => a !== "--ids");
+const base = requireBase(rawBase);
 const MARKETS = new Set(["crypto-converter", "forex-converter", "commodities-tracker"]);
 
 const index = await (await fetch(`${base}/${loc}/tools`)).text();

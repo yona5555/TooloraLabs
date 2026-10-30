@@ -1,6 +1,7 @@
 "use client";
 import { useTranslations } from "next-intl";
-import { Mafs, Coordinates, Line, Point, Text, Theme, useMovablePoint, type vec } from "mafs";
+import { Coordinates, Line, Point, Theme, useMovablePoint, type vec } from "mafs";
+import FitMafs, { FitText } from "@/components/tool-ui/FitMafs";
 import "mafs/core.css";
 import "./triangleMafsTheme.css";
 import SectionCard from "@/components/tool-ui/SectionCard";
@@ -57,21 +58,21 @@ export default function TriangleAngleDragSensitivity() {
           dir="ltr"
           className="triangle-mafs w-full shrink-0 overflow-hidden rounded-xl lg:w-[320px]"
         >
-          <Mafs viewBox={{ x: [-2, 8], y: [-1, 7] }} height={260} pan={false} zoom={false}>
+          <FitMafs viewBox={{ x: [-2, 8], y: [-1, 7] }} height={260} pan={false} zoom={false}>
             <Coordinates.Cartesian xAxis={{ lines: 2 }} yAxis={{ lines: 2 }} />
             <Line.Segment point1={[CX, CY]} point2={B} color={Theme.foreground} />
             <Line.Segment point1={[CX, CY]} point2={drag.point} color={Theme.blue} />
             <Line.Segment point1={B} point2={drag.point} color={Theme.green} />
             <Point x={lowerPoint[0]} y={lowerPoint[1]} color={Theme.indigo} />
-            <Text x={lowerPoint[0]} y={lowerPoint[1] + 0.5} size={12} color={Theme.indigo}>
+            <FitText x={lowerPoint[0]} y={lowerPoint[1] + 0.5} size={12} color={Theme.indigo}>
               {`${Math.round(angleSensitivity.lower.angleC)}°`}
-            </Text>
+            </FitText>
             <Point x={higherPoint[0]} y={higherPoint[1]} color={Theme.pink} />
-            <Text x={higherPoint[0]} y={higherPoint[1] + 0.5} size={12} color={Theme.pink}>
+            <FitText x={higherPoint[0]} y={higherPoint[1] + 0.5} size={12} color={Theme.pink}>
               {`${Math.round(angleSensitivity.higher.angleC)}°`}
-            </Text>
+            </FitText>
             {drag.element}
-          </Mafs>
+          </FitMafs>
         </div>
         <TriangleWorkedExampleNote
           title={tw("title")}

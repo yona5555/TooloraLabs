@@ -1,6 +1,8 @@
 "use client";
 import { useEffect, useMemo, useRef, type RefObject } from "react";
-import { useFrame, useThree } from "@react-three/fiber";
+import { useThree } from "@react-three/fiber";
+import { useMotionEpisode } from "@/components/tool-ui/motion/motion";
+import { useSceneFrame } from "@/components/tool-ui/motion/scene-motion";
 import type { Group } from "three";
 import DemandCanvas3D, { SiteLabel3D as Label3D, Invalidate } from "@/components/tool-ui/three/DemandCanvas3D";
 import { useTokenColors, type TokenColors } from "@/components/tool-ui/indicator-kit/tokenColors";
@@ -38,16 +40,14 @@ function Spinning({ formula, at, k, phase, c }: { formula: string; at: [number, 
   );
 }
 
-/** Slow turn of every molecule; skipped for reduced motion. The canvas only lives while on screen. */
-function Spin({ root }: { root: RefObject<Group | null> }) {
-  const reduce = useMemo(() => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches, []);
-  useFrame((state, dt) => {
-    if (reduce || !root.current) return;
-    root.current.traverse((o) => {
-      if (o.userData.spin) o.rotation.y += Math.min(dt, 0.05) * 0.45;
+/** Slow turn of every molecule during a motion episode (the reaction's data changed; tool-ui/motion), else still. */
+function Spin({ root, trigger }: { root: RefObject<Group | null>; trigger: string }) {
+  const { active } = useMotionEpisode([trigger]);
+  useSceneFrame((_, dt) => {
+    root.current?.traverse((o) => {
+      if (o.userData.spin) o.rotation.y += dt * 0.45;
     });
-    state.invalidate();
-  });
+  }, active);
   return null;
 }
 
@@ -82,7 +82,7 @@ function Scene({ p, c }: { p: StoSceneProps; c: TokenColors }) {
   const arrowLen = sw * 0.6;
   return (
     <group ref={root}>
-      <Spin root={root} />
+      <Spin root={root} trigger={JSON.stringify(p)} />
       {p.items.map((it, i) => {
         const x = xAt(i < nR ? i : i + 1);
         const n = shownCount(it.coefficient);

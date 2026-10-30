@@ -5,6 +5,7 @@ import DensityIndicatorCard, { DensityIndicatorUnavailable } from "./DensityIndi
 import { useDensityModel } from "./DensityLiveContext";
 import { svgPx } from "@/components/tool-ui/svgPx";
 
+import FitSvg from "@/components/tool-ui/FitSvg";
 const W = 320;
 const H = 210;
 const BASE = 160;
@@ -25,7 +26,7 @@ export default function DensityVolumeTrio() {
   const showWater = DENSITY_WATER <= maxD * 1.05 && DENSITY_WATER >= maxD * 0.02;
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <line x1={0} y1={BASE} x2={W} y2={BASE} className="stroke-zinc-300 dark:stroke-zinc-600" />
       {items.map((it, i) => {
         const cx = (W / 3) * i + W / 6;
@@ -33,13 +34,13 @@ export default function DensityVolumeTrio() {
         return (
           <g key={it.factor}>
             <rect x={cx - BAR / 2} y={BASE - h} width={BAR} height={Math.max(1, h)} rx={6} className={CLS[i]} />
-            <text style={{ fontSize: svgPx(12) }} x={cx} y={BASE - h - 8} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={cx} y={BASE - h - 8} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
               {f(it.density, 3)}
             </text>
             <text style={{ fontSize: svgPx(12) }} x={cx} y={BASE + 16} textAnchor="middle" fontWeight={600} className="fill-zinc-600 dark:fill-zinc-300">
               {names[i]}
             </text>
-            <text style={{ fontSize: svgPx(12) }} x={cx} y={BASE + 31} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+            <text style={{ fontSize: svgPx(12) }} x={cx} y={BASE + 31} textAnchor="middle" fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
               {`${f(it.volume)} cm³`}
             </text>
           </g>
@@ -56,7 +57,7 @@ export default function DensityVolumeTrio() {
       <text style={{ fontSize: svgPx(12) }} x={4} y={14} className="fill-zinc-500 dark:fill-zinc-400">
         {`ρ (g/cm³) · m = ${f(a.mass)} g`}
       </text>
-    </svg>
+    </FitSvg>
   );
 
   return (

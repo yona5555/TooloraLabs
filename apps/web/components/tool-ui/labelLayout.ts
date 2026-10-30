@@ -2,7 +2,7 @@
  * Pure label-layout helpers for chart SVGs (no React, usable in server components): estimated label
  * width, wrapping, staggering, thinning and legend packing, so 12px labels never overlap (§39).
  */
-/** Rough rendered width of a label (Arial/Inter average glyph ≈ 0.6em, bold included). */
+/** Rough rendered width of a label (Arimo/Inter average glyph ≈ 0.6em, bold included). */
 export const labelW = (text: string, size = 12) => text.length * size * 0.62;
 
 /**

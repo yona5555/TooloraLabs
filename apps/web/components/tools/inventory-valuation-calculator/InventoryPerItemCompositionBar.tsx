@@ -28,10 +28,10 @@ export default function InventoryPerItemCompositionBar({ items, soldLabel, endin
             <div key={i} className="text-sm">
               <p className="mb-1 truncate font-semibold text-zinc-700 dark:text-zinc-200">{row.label}</p>
               <div className="flex h-6 w-full overflow-hidden rounded-lg">
-                <div className="flex items-center justify-center bg-zinc-400 text-[10px] font-bold text-white dark:bg-zinc-600" style={{ width: `${soldPct}%` }}>
+                <div className="flex items-center justify-center bg-zinc-400 text-xs font-bold text-white dark:bg-zinc-600" style={{ width: `${soldPct}%` }}>
                   {soldPct > 12 && row.unitsSold}
                 </div>
-                <div className="flex items-center justify-center bg-blue-600 text-[10px] font-bold text-white dark:bg-blue-400" style={{ width: `${endingPct}%` }}>
+                <div className="flex items-center justify-center bg-blue-600 text-xs font-bold text-white dark:bg-blue-400" style={{ width: `${endingPct}%` }}>
                   {endingPct > 12 && row.endingUnits}
                 </div>
               </div>

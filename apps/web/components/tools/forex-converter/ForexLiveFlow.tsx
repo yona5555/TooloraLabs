@@ -52,7 +52,7 @@ function CurrencyNode({
   return (
     <div className="min-w-0 rounded-xl border border-zinc-200 bg-zinc-50 p-2.5 dark:border-zinc-700 dark:bg-zinc-800/50">
       <div className="flex items-center gap-2">
-        <span dir="ltr" className="rounded bg-blue-600 px-1.5 py-0.5 font-mono text-[11px] font-bold text-white">
+        <span dir="ltr" className="rounded bg-blue-600 px-1.5 py-0.5 font-mono text-xs font-bold text-white">
           {currency.code}
         </span>
         <span className="truncate text-sm font-semibold text-zinc-900 dark:text-zinc-100">{name(currency.code, currency.name)}</span>
@@ -65,11 +65,11 @@ function CurrencyNode({
       </div>
       <div dir="ltr" className="mt-1 flex items-end justify-between gap-1">
         {values === "none" ? (
-          <span className="text-[10px] text-zinc-400">{t("noTrend")}</span>
+          <span className="text-xs text-zinc-400">{t("noTrend")}</span>
         ) : (
           <Sparkline values={values} up={(change ?? 0) >= 0} />
         )}
-        <span className="text-[10px] text-zinc-400">{t("spark30d", { code: other.code })}</span>
+        <span className="text-xs text-zinc-400">{t("spark30d", { code: other.code })}</span>
       </div>
       <p dir="ltr" className="mt-1 truncate text-end font-mono text-sm font-semibold text-blue-700 dark:text-blue-300">
         {amountLabel}
@@ -149,7 +149,7 @@ export default function ForexLiveFlow({ fromCurrency, toCurrency, amountText, am
               <CurrencyNode currency={fromCurrency} other={toCurrency} recent={recent} amountLabel={`${f.num(amt, 2)} ${F}`} digitStyle={digitStyle} />
               {/* Flow arrow with the rate on its shaft; marching dashes show money moving the reading way (RTL too). */}
               <div className="flex flex-col items-center gap-1" aria-hidden>
-                <div dir="ltr" className="rounded-full bg-blue-600 px-2 py-0.5 font-mono text-[10px] font-semibold text-white shadow-sm" data-testid="flow-rate">
+                <div dir="ltr" className="rounded-full bg-blue-600 px-2 py-0.5 font-mono text-xs font-semibold text-white shadow-sm" data-testid="flow-rate">
                   × {f.rate(rate)}
                 </div>
                 <div className="flex items-center">

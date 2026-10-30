@@ -40,14 +40,14 @@ export default function LiLetterFrequency() {
               <rect x={x + 3 + slot * 0.48} y={H - BOTTOM - eh} width={slot * 0.3} height={eh} rx={2} className="fill-zinc-300 dark:fill-zinc-600" style={{ transition: "y 300ms ease, height 300ms ease" }}>
                 <title>{`${t("legendEnglish")} ${l.letter}: ${pct(l.english)}`}</title>
               </rect>
-              <text style={{ fontSize: svgPx(12) }} x={x + slot / 2} y={H - 4} textAnchor="middle" fontWeight={600} fontFamily="ui-monospace, monospace" className="fill-zinc-600 dark:fill-zinc-300">
+              <text style={{ fontSize: svgPx(12) }} x={x + slot / 2} y={H - 4} textAnchor="middle" fontWeight={600} fontFamily="var(--font-mono)" className="fill-zinc-600 dark:fill-zinc-300">
                 {l.letter}
               </text>
             </g>
           );
         })}
       </svg>
-      <ul className="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-[11px] text-zinc-500 dark:text-zinc-400">
+      <ul className="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-xs text-zinc-500 dark:text-zinc-400">
         <li className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-sm bg-blue-600 dark:bg-blue-500" />{t("legendText")}</li>
         <li className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-sm bg-amber-500 dark:bg-amber-400" />{t("legendVowels")}</li>
         <li className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-sm bg-zinc-300 dark:bg-zinc-600" />{t("legendEnglish")}</li>

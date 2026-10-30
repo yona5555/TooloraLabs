@@ -1,6 +1,8 @@
 "use client";
 import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import { svgPx } from "@/components/tool-ui/svgPx";
+import FitSvg from "@/components/tool-ui/FitSvg";
 
 const VIEW_W = 880;
 const VIEW_H = 280;
@@ -41,7 +43,7 @@ export default function DebtToIncomeConceptDiagram() {
     <SectionCard title={d("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{d("intro")}</p>
       <div dir="ltr" tabIndex={0} className="mt-4 overflow-x-auto">
-        <svg viewBox={`0 0 ${VIEW_W} ${VIEW_H}`} role="img" aria-label={d("ariaLabel")} data-annotation="" className="mx-auto block w-full max-w-3xl text-current">
+        <FitSvg viewBox={`0 0 ${VIEW_W} ${VIEW_H}`} role="img" aria-label={d("ariaLabel")} data-annotation="" className="mx-auto block w-full max-w-3xl text-current">
           <text x={BAR_X + BAR_W / 2} y={30} fontSize={14} fontWeight={700} textAnchor="middle" className="fill-zinc-900 dark:fill-zinc-50">
             {d("incomeLabel")}
           </text>
@@ -79,7 +81,7 @@ export default function DebtToIncomeConceptDiagram() {
               return (
                 <g key={key}>
                   <rect x={x} y={BAR_Y + BAR_H + 20} width={11} height={11} rx={2} className={seg.colorClass} />
-                  <text x={x + 17} y={BAR_Y + BAR_H + 29} fontSize={11} fill="currentColor" opacity={0.75}>
+                  <text x={x + 17} y={BAR_Y + BAR_H + 29} style={{ fontSize: svgPx(11) }} fill="currentColor" opacity={0.75}>
                     {d(`legend.${key}`)}
                   </text>
                 </g>
@@ -91,7 +93,7 @@ export default function DebtToIncomeConceptDiagram() {
           <text x={BAR_X} y={BAR_Y + BAR_H + 60} fontSize={13} fontWeight={600} fill="currentColor" opacity={0.7}>
             {d("formulaLabel")}
           </text>
-        </svg>
+        </FitSvg>
       </div>
     </SectionCard>
   );

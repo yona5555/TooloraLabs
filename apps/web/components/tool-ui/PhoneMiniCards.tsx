@@ -36,18 +36,18 @@ export default function PhoneMiniCards({ label, cards }: { label: string; cards:
           <li key={c.key} className="min-w-0">
             <div data-ticker-card="" className="flex h-16 w-full items-center justify-between gap-2 rounded-xl border border-zinc-200 bg-white px-3 dark:border-zinc-700 dark:bg-zinc-900">
               <span className="flex min-w-0 flex-col gap-0.5 leading-4">
-                <span className="truncate text-[11px] font-medium text-zinc-500 dark:text-zinc-400">{c.label}</span>
+                <span className="truncate text-xs font-medium text-zinc-500 dark:text-zinc-400">{c.label}</span>
                 <span dir="ltr" className="truncate text-start text-sm font-bold tabular-nums text-zinc-900 dark:text-zinc-50">
                   {c.value}
                 </span>
                 {hasChange ? (
-                  <span dir="ltr" className={`truncate text-start text-[11px] font-semibold tabular-nums ${up ? "text-emerald-600 dark:text-emerald-400" : "text-red-600 dark:text-red-400"}`}>
+                  <span dir="ltr" className={`truncate text-start text-xs font-semibold tabular-nums ${up ? "text-emerald-600 dark:text-emerald-400" : "text-red-600 dark:text-red-400"}`}>
                     {up ? "+" : ""}
                     {c.change!.toFixed(2)}%{c.changeLabel ? ` · ${c.changeLabel}` : ""}
                   </span>
                 ) : (
                   c.detail && (
-                    <span dir="ltr" className="truncate text-start text-[11px] font-medium tabular-nums text-zinc-500 dark:text-zinc-400">
+                    <span dir="ltr" className="truncate text-start text-xs font-medium tabular-nums text-zinc-500 dark:text-zinc-400">
                       {c.detail}
                     </span>
                   )

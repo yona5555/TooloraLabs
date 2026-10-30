@@ -136,12 +136,12 @@ export function WeekGrid({ state, d, onPick, compact = false }: { state: StudioS
                     style={{ transition: "all 300ms ease" }}
                   />
                   {bh >= 13 && bw >= 22 && (
-                    <text x={bx + bw / 2} y={by + Math.min(bh / 2 + 3, 11)} textAnchor="middle" fontSize={bw < 34 ? 6.5 : 7.5} fontWeight={800} fill="white">
+                    <text x={bx + bw / 2} y={by + Math.min(bh / 2 + 3, 11)} textAnchor="middle" style={{ fontSize: svgPx(bw < 34 ? 6.5 : 7.5) }} fontWeight={800} fill="white">
                       {(c.code || c.name).slice(0, bw < 34 ? 6 : 9)}
                     </text>
                   )}
                   {bh >= 26 && bw >= 30 && !compact && (
-                    <text x={bx + bw / 2} y={by + 20} textAnchor="middle" fontSize={6.5} fill="white" fillOpacity={0.9}>
+                    <text x={bx + bw / 2} y={by + 20} textAnchor="middle" style={{ fontSize: svgPx(6.5) }} fill="white" fillOpacity={0.9}>
                       {hm(m.startMinutes)}
                     </text>
                   )}

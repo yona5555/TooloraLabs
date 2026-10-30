@@ -35,7 +35,7 @@ export default function SdPopSampleEquivalence() {
           ⇄
         </span>
         <span dir="ltr" className="font-mono text-xs font-semibold text-violet-700 dark:text-violet-300">{`× ${f(a.besselFactor, 4)}`}</span>
-        <span dir="ltr" className="font-mono text-[10px] text-zinc-500 dark:text-zinc-400">{`√(${n}/${Math.max(1, n - 1)})`}</span>
+        <span dir="ltr" className="font-mono text-xs text-zinc-500 dark:text-zinc-400">{`√(${n}/${Math.max(1, n - 1)})`}</span>
       </div>
       {column(t("sample"), n > 1 ? `${n - 1}` : "—", a.sampleVariance, a.sampleStdDev, "s", "border-violet-300 bg-violet-50 dark:border-violet-500/40 dark:bg-violet-500/10")}
     </div>

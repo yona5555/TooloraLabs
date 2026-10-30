@@ -4,6 +4,7 @@ import BarcodeIndicatorCard, { BarcodeIndicatorUnavailable } from "./BarcodeIndi
 import { useBarcodeModel } from "./BarcodeLiveContext";
 import { svgPx } from "@/components/tool-ui/svgPx";
 
+import FitSvg from "@/components/tool-ui/FitSvg";
 const W = 340;
 const MAX_COLS = 13;
 
@@ -27,13 +28,13 @@ export default function BarcodeCheckDigitFlow() {
   const H = 170;
 
   const cell = (x: number, y: number, text: string, cls: string, bold = false) => (
-    <text style={{ fontSize: svgPx(Math.min(13, cw * 0.62)) }} x={x} y={y} textAnchor="middle" fontWeight={bold ? 700 : 500} fontFamily="ui-monospace, monospace" className={cls}>
+    <text style={{ fontSize: svgPx(Math.min(13, cw * 0.62)) }} x={x} y={y} textAnchor="middle" fontWeight={bold ? 700 : 500} fontFamily="var(--font-mono)" className={cls}>
       {text}
     </text>
   );
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {[t("rowChar"), t("rowWeight"), t("rowProduct")].map((label, i) => (
         <text style={{ fontSize: svgPx(12) }} key={label} x={0} y={rowY[i]} className="fill-zinc-500 dark:fill-zinc-400">
           {label}
@@ -67,13 +68,13 @@ export default function BarcodeCheckDigitFlow() {
         );
       })}
       <path d={`M ${x0} ${rowY[2] + 16} H ${W}`} className="stroke-zinc-300 dark:stroke-zinc-600" />
-      <text style={{ fontSize: svgPx(14) }} x={(x0 + W) / 2} y={rowY[2] + 40} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+      <text style={{ fontSize: svgPx(14) }} x={(x0 + W) / 2} y={rowY[2] + 40} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
         Σ = {f(c.sum)} → {f(c.sum)} mod {c.modulo} = {c.remainder}
       </text>
-      <text style={{ fontSize: svgPx(15) }} x={(x0 + W) / 2} y={rowY[2] + 68} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-amber-600 dark:fill-amber-300">
+      <text style={{ fontSize: svgPx(15) }} x={(x0 + W) / 2} y={rowY[2] + 68} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className="fill-amber-600 dark:fill-amber-300">
         {isCode128 ? t("resultCode128", { n: c.check }) : t("resultEan", { r: c.remainder, n: c.check })}
       </text>
-    </svg>
+    </FitSvg>
   );
 
   return (

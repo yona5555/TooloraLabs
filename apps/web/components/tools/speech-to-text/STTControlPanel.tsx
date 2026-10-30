@@ -113,7 +113,7 @@ export default function STTControlPanel({
             {tv("received")}
           </p>
           {isExample && (
-            <span className="rounded-full px-2 py-0.5 text-[11px] font-bold" style={{ background: "var(--ai-soft)", color: "var(--ph-ink)" }}>
+            <span className="rounded-full px-2 py-0.5 text-xs font-bold" style={{ background: "var(--ai-soft)", color: "var(--ph-ink)" }}>
               {tv("example")}
             </span>
           )}

@@ -1,6 +1,7 @@
 // Above-the-fold gap scan (§41): column bottom edges and vertical gaps between stacked blocks.
 // Usage: node apps/web/scripts/fold-gap-scan.mjs slug[,slug] [width] [locale] [shotDir]
 import { chromium } from "playwright";
+import { requireBase } from "../../../scripts/lib/require-base.mjs";
 const [slugs, W = "1440", locale = "en", shotDir] = process.argv.slice(2);
 const b = await chromium.launch();
 for (const slug of slugs.split(",")) {
@@ -9,7 +10,7 @@ for (const slug of slugs.split(",")) {
   const errs = [];
   p.on("pageerror", (e) => errs.push(String(e)));
   p.on("console", (m) => m.type() === "error" && errs.push(m.text()));
-  await p.goto(`http://localhost:3000/${locale}/tools/${slug}`, { waitUntil: "load" });
+  await p.goto(`${requireBase(process.env.BASE)}/${locale}/tools/${slug}`, { waitUntil: "load" });
   await p.evaluate(() => localStorage.setItem("theme", "dark"));
   await p.reload({ waitUntil: "load" });
   await p.waitForTimeout(3000);

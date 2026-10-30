@@ -8,6 +8,7 @@ import { generateToolPdf } from "@/lib/pdf/generateToolPdf";
 import { WhatsAppIcon, XIcon, FacebookIcon, LinkedInIcon } from "@/lib/share-icons";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import type { MatrixResult as Result } from "./types";
+import TodayDate from "@/components/tool-ui/TodayDate";
 
 type Matrices = { a11: number; a12: number; a21: number; a22: number; b11: number; b12: number; b21: number; b22: number };
 
@@ -226,7 +227,7 @@ export default function MatrixShareExportModal({ result, digitStyle, matrices }:
             <span className="text-xl font-bold text-blue-600">Labs</span>
           </div>
           <p className="text-xs text-zinc-500">
-            {t("shareExport.generatedOn")}: {new Date().toLocaleDateString(locale)}
+            {t("shareExport.generatedOn")}: <TodayDate locale={locale} />
           </p>
         </div>
 

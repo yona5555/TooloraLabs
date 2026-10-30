@@ -51,14 +51,14 @@ export default function CryptoPhoneTicker({ coins, trends, fromCoinId, onPick }:
               }`}
             >
               <span className="flex min-w-0 flex-col gap-0.5 leading-4">
-                <span className="truncate text-[11px] font-medium text-zinc-500 dark:text-zinc-400">
+                <span className="truncate text-xs font-medium text-zinc-500 dark:text-zinc-400">
                   {name} <span dir="ltr">· {coin.symbol.toUpperCase()}</span>
                 </span>
                 <span dir="ltr" className="truncate text-start text-sm font-bold tabular-nums text-zinc-900 dark:text-zinc-50">
                   ${money.format(coin.currentPrice)}
                 </span>
                 {change !== null && change !== undefined && Number.isFinite(change) && (
-                  <span dir="ltr" className={`text-start text-[11px] font-semibold tabular-nums ${up ? "text-emerald-600 dark:text-emerald-400" : "text-red-600 dark:text-red-400"}`}>
+                  <span dir="ltr" className={`text-start text-xs font-semibold tabular-nums ${up ? "text-emerald-600 dark:text-emerald-400" : "text-red-600 dark:text-red-400"}`}>
                     {up ? "+" : ""}
                     {change.toFixed(2)}% · {t("change")}
                   </span>

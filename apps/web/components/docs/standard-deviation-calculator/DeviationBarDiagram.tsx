@@ -1,3 +1,5 @@
+import { svgPx } from "@/components/tool-ui/svgPx";
+import FitSvg from "@/components/tool-ui/FitSvg";
 type DeviationBarDiagramProps = {
   rows: { label: string; value: number; deviation: number }[];
   meanLabel: string;
@@ -17,9 +19,9 @@ export default function DeviationBarDiagram({ rows, meanLabel, caption }: Deviat
   return (
     <figure className="my-2">
       <div dir="ltr" className="overflow-x-auto">
-        <svg viewBox={`0 0 ${WIDTH} ${height}`} role="img" aria-label={caption} className="h-auto w-full text-current" style={{ minWidth: 280 }}>
+        <FitSvg viewBox={`0 0 ${WIDTH} ${height}`} role="img" aria-label={caption} className="h-auto w-full text-current" style={{ minWidth: 280 }}>
           <line x1={CENTER_X} y1={16} x2={CENTER_X} y2={height} stroke="currentColor" strokeWidth={1.5} opacity={0.4} />
-          <text x={CENTER_X} y={10} textAnchor="middle" fontSize={9} fontWeight={700} fill="currentColor" opacity={0.6}>
+          <text x={CENTER_X} y={10} textAnchor="middle" style={{ fontSize: svgPx(9) }} fontWeight={700} fill="currentColor" opacity={0.6}>
             {meanLabel}
           </text>
           {rows.map((row, i) => {
@@ -34,7 +36,7 @@ export default function DeviationBarDiagram({ rows, meanLabel, caption }: Deviat
                   x={isPositive ? x + barWidth + 6 : x - 6}
                   y={y + ROW_HEIGHT / 2 + 4}
                   textAnchor={isPositive ? "start" : "end"}
-                  fontSize={10}
+                  style={{ fontSize: svgPx(10) }}
                   fontWeight={700}
                   fill="currentColor"
                 >
@@ -43,7 +45,7 @@ export default function DeviationBarDiagram({ rows, meanLabel, caption }: Deviat
               </g>
             );
           })}
-        </svg>
+        </FitSvg>
       </div>
       <figcaption className="mt-2 text-center text-sm opacity-70">{caption}</figcaption>
     </figure>

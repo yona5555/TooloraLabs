@@ -61,11 +61,11 @@ export default function CsvColumnExplorer() {
           const w = Math.max(4, (x.count / peak) * 150);
           return (
             <g key={x.value}>
-              <text style={{ fontSize: svgPx(12) }} x={120} y={y + 16} textAnchor="end" fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
+              <text style={{ fontSize: svgPx(12) }} x={120} y={y + 16} textAnchor="end" fontFamily="var(--font-mono)" className="fill-zinc-700 dark:fill-zinc-200">
                 {x.value.length > 14 ? `${x.value.slice(0, 13)}…` : x.value}
               </text>
               <rect x={128} y={y + 4} width={w} height={18} rx={3} className={TYPE_FILL[col.type]} />
-              <text style={{ fontSize: svgPx(12) }} x={134 + w} y={y + 17} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
+              <text style={{ fontSize: svgPx(12) }} x={134 + w} y={y + 17} fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-700 dark:fill-zinc-200">
                 ×{x.count}
               </text>
             </g>

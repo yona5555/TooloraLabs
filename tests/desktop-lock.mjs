@@ -4,26 +4,33 @@
 // (top-level <svg> rects), the layout each drawing + table row picked (GapFreeRow `data-gap-layout`,
 // IndicatorWithTable `data-split`), the main headings (h1/h2 rect + font size) and the page height. Fails
 // when any rect moves or resizes by more than 1px, or any order, title, layout or font size changes.
+// Colors are locked too (tests/color-lock.mjs): each card, its header strip, each chart and each heading
+// records its computed background-color, color and border-color in the light theme and, after a reload
+// with localStorage theme=dark (the site's own mechanism), in the dark theme; any difference fails. Every
+// shown control inside main (button, [role=tab], input, select, a) is locked for its colors the same way,
+// in document order under a short label (tag or role + text), so a restyled control fails by name.
 //   npm run build:desktop-lock                     -> the build it runs against (.next-lock, live fixtures)
 //   npm run test:desktop-lock                      -> CI set: home + 12 representative tools (26 pages)
 //   npm run test:desktop-lock:full                 -> every tool page plus /, /tools, /categories, /docs
 //   npm run baseline:desktop-lock -- --approve     -> rewrite the measured pages in the baseline (add --full
 //                                                     or --only for other sets; other pages are kept)
-// Options: --only slug,slug (a subset), --base http://localhost:3001 (an already running server; its live
-// data is NOT fixed), --timing file (per-page load/measure times and slow requests), --baseline file (compare
-// against another file instead of the committed baseline; tests/gates-self-test.mjs's tampered-copy canary).
+// Options: --only slug,slug (a subset), --base <url> (an already running server; its live
+// data is NOT fixed), --timing file (per-page load/measure times and slow requests), --baseline file.
 // Without --base it starts `next start` on the .next-lock build with tests/fixtures/offline-fetch.mjs
 // preloaded: every external fetch (prices, rates, weather, hazards) is answered from tests/fixtures/live,
 // so no page waits on the network and live values never move the layout. Every wait is bounded (10s load,
 // 10s network idle, ~5s settling, 30s hard cap per page): a stuck page fails by name instead of hanging.
+// A React hydration error on any load (tests/hydration-guard.mjs) fails that page by name.
 // Before the first page the server is confirmed up and warmed (every page under test, the routes they
 // prefetch, their static files), and pages run on half the cores (at most 4) so the one server is never starved.
 // The clock is fixed (2026-10-20 12:00 UTC, timezone UTC, server TZ=UTC and LANG=C.UTF-8) so the date tools
-// render the same every day; Math.random is seeded and WebSockets get no frames, so nothing else moves.
+// render the same every day; Math.random and crypto.getRandomValues are seeded and WebSockets get no frames, so
+// nothing else moves.
 // Approve mode (--write --approve) writes the baseline from that one measurement and exits; it never
-// re-measures (CI compares in a later run, against the committed baseline). The
-// pages use system fonts in places, so each OS has its own baseline: desktop.json on macOS (local),
-// desktop.linux.json on Linux (CI runner ubuntu-24.04, CI set only).
+// re-measures (CI compares in a later run, against the committed baseline). Every font is self-hosted
+// (apps/web/lib/fonts.ts), but text rasterising still differs by OS, so each has its own baseline:
+// desktop.json on macOS (local), desktop.linux.json on Linux (CI runner ubuntu-24.04, and locally the
+// container of scripts/in-container.sh).
 import { spawn } from "node:child_process";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
@@ -31,6 +38,8 @@ import { fileURLToPath } from "node:url";
 import { createRequire } from "node:module";
 import { createConnection } from "node:net";
 import { availableParallelism } from "node:os";
+import { compareColors, compareControls, THEMES } from "./color-lock.mjs";
+import { watchHydration } from "./hydration-guard.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const WEB = join(ROOT, "apps/web");
@@ -40,6 +49,7 @@ const arg = (name, def) => {
   const i = process.argv.indexOf(`--${name}`);
   return i > -1 ? process.argv[i + 1] : def;
 };
+// --baseline <file>: compare against another file (the gate canary's tampered copy, tests/gates-self-test.mjs).
 const BASELINE = arg("baseline") ? resolve(arg("baseline")) : join(ROOT, `tests/baselines/desktop${process.platform === "linux" ? ".linux" : ""}.json`);
 const PORT = 3109;
 const BASE = arg("base", `http://localhost:${PORT}`);
@@ -97,24 +107,44 @@ async function measure() {
   function read() {
     const main = document.querySelector("main");
     const shown = (e) => e.getClientRects().length > 0 && !e.closest('dialog, [role="dialog"]');
+    const colors = (e) => {
+      const s = getComputedStyle(e);
+      return [s.backgroundColor, s.color, s.borderColor];
+    };
     const row = (label, e, font = "") => {
       const r = e.getBoundingClientRect();
       return [label, +r.x.toFixed(1), +(r.y + scrollY).toFixed(1), +r.width.toFixed(1), +r.height.toFixed(1), font];
     };
-    const cards = [...main.querySelectorAll("[data-card]")]
+    // Rows and colors come from the same elements, in the same order: [row, {element, header?}].
+    const cardPairs = [...main.querySelectorAll("[data-card]")]
       .filter((c) => shown(c) && !c.parentElement.closest("[data-card]"))
       .map((c) => {
         const h = c.querySelector("[data-card-header] :is(h2,h3)") ?? c.querySelector("h2,h3");
-        return row((h?.textContent ?? "?").trim().slice(0, 40), c, h ? getComputedStyle(h).fontSize : "");
+        const header = c.querySelector(":scope > [data-card-header]");
+        return [row((h?.textContent ?? "?").trim().slice(0, 40), c, h ? getComputedStyle(h).fontSize : ""), header ? { element: colors(c), header: colors(header) } : { element: colors(c) }];
       })
-      .sort((a, b) => a[2] - b[2] || a[1] - b[1]);
-    const charts = [...main.querySelectorAll("svg")]
+      .sort((a, b) => a[0][2] - b[0][2] || a[0][1] - b[0][1]);
+    const chartPairs = [...main.querySelectorAll("svg")]
       .filter((s) => shown(s) && !s.parentElement.closest("svg") && !s.closest("[data-card-header], button, a") && s.getBoundingClientRect().width >= 100)
-      .map((s) => row("svg", s));
+      .map((s) => [row("svg", s), { element: colors(s) }]);
     const layouts = [...main.querySelectorAll("[data-gap-layout], [data-split]")].filter(shown).map((e) => e.dataset.gapLayout ?? e.dataset.split);
-    const headings = [...main.querySelectorAll("h1, h2")].filter((h) => shown(h) && !h.closest("[data-card]")).map((h) => row(h.textContent.trim().slice(0, 40), h, getComputedStyle(h).fontSize));
-    return { height: document.documentElement.scrollHeight, cards, charts, layouts, headings };
+    const headingPairs = [...main.querySelectorAll("h1, h2")].filter((h) => shown(h) && !h.closest("[data-card]")).map((h) => [row(h.textContent.trim().slice(0, 40), h, getComputedStyle(h).fontSize), { element: colors(h) }]);
+    const controlLabel = (e) => {
+      const kind = e.getAttribute("role") === "tab" ? "tab" : e.tagName.toLowerCase() + (e.type && e.tagName === "INPUT" ? `[${e.type}]` : "");
+      const name = e.getAttribute("aria-label") || (e.tagName === "INPUT" || e.tagName === "SELECT" ? e.name || e.id : e.textContent);
+      return `${kind} ${(name ?? "").replace(/\s+/g, " ").trim().slice(0, 40)}`.trim();
+    };
+    const controlPairs = [...main.querySelectorAll('button, [role="tab"], input, select, a')].filter(shown).map((e) => [controlLabel(e), { element: colors(e) }]);
+    const split = (pairs) => [pairs.map((p) => p[0]), pairs.map((p) => p[1])];
+    const [cards, cardColors] = split(cardPairs), [charts, chartColors] = split(chartPairs), [headings, headingColors] = split(headingPairs), [controls, controlColors] = split(controlPairs);
+    return { height: document.documentElement.scrollHeight, cards, charts, layouts, headings, controls, colors: { cards: cardColors, charts: chartColors, headings: headingColors, controls: controlColors } };
   }
+}
+
+// { part: [{ element: [bg, color, border], header? }] } per theme -> { part: [{ element: { light, dark }, header? }] }.
+function themed(light, dark) {
+  return Object.fromEntries(Object.entries(light).map(([part, items]) => [part, items.map((item, i) =>
+    Object.fromEntries(Object.entries(item).map(([name, value]) => [name, { light: value, dark: dark[part]?.[i]?.[name] }])))]));
 }
 
 let server;
@@ -222,6 +252,13 @@ async function worker() {
         t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
         return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
       };
+      // crypto.getRandomValues from the same seed (a generated password, a random draw): the page renders
+      // the same values on every run, so its control labels and chart widths never move.
+      crypto.getRandomValues = (arr) => {
+        const bytes = new Uint8Array(arr.buffer, arr.byteOffset, arr.byteLength);
+        for (let i = 0; i < bytes.length; i++) bytes[i] = Math.floor(Math.random() * 256);
+        return arr;
+      };
       document.addEventListener("DOMContentLoaded", () => {
         const st = document.createElement("style");
         st.textContent = "*,*::before,*::after{transition:none!important;animation:none!important;caret-color:transparent!important}";
@@ -229,6 +266,8 @@ async function worker() {
       });
     });
     const page = await ctx.newPage();
+    // Any React hydration error (tests/hydration-guard.mjs) on the light or the dark load fails the page.
+    const hydration = watchHydration(page);
     await page.route((url) => !sameOrigin(url.href), (route) => route.abort());
     // page.route does not see WebSockets: the live Coinbase ticker would reach the real feed and move live
     // prices. Every socket is answered locally and never sends a frame, so the snapshot (fixture) prices stay.
@@ -258,7 +297,21 @@ async function worker() {
       // two equal reads with no request in flight inside measure(). Live data comes from fixtures, so this is quick on every page.
       await page.waitForLoadState("networkidle", { timeout: 10000 }).catch(() => slow.push("network not idle after 10s"));
       t1 = Date.now();
-      ({ reads, data: current[job] } = await page.evaluate(measure));
+      let light;
+      ({ reads, data: light } = await page.evaluate(measure));
+      // The dark theme the way the site applies it (ThemeInitScript reads localStorage before paint): the
+      // same page reloaded, measured again, and only its colors kept.
+      await page.evaluate(() => localStorage.setItem("theme", "dark"));
+      const again = await page.reload({ waitUntil: "load", timeout: 10000 });
+      if (!again || again.status() !== 200) throw new Error(`dark reload answered ${again?.status()}`);
+      await page.waitForLoadState("networkidle", { timeout: 10000 }).catch(() => slow.push("dark: network not idle after 10s"));
+      const { data: dark } = await page.evaluate(measure);
+      // A hydration error makes React re-render the whole document, which drops the `dark` class from
+      // <html>: the "dark" colors would then be the light ones. Fail by name instead of recording them.
+      if (!(await page.evaluate(() => document.documentElement.classList.contains("dark")))) throw new Error("dark theme not applied after reload (no .dark on <html>: a hydration error re-rendered the document)");
+      const hydrationErrors = hydration();
+      if (hydrationErrors.length) throw new Error(`hydration error (${hydrationErrors[0]})${hydrationErrors.length > 1 ? ` and ${hydrationErrors.length - 1} more` : ""}`);
+      current[job] = { ...light, colors: themed(light.colors, dark.colors) };
     };
     let cap;
     await Promise.race([visit(), new Promise((_, no) => (cap = setTimeout(() => no(new Error(`not measured within ${PAGE_CAP_MS / 1000}s`)), PAGE_CAP_MS)))])
@@ -316,13 +369,17 @@ for (const [view, cur] of Object.entries(sorted)) {
       if (a[i][0] !== b[i][0]) { problems.push(`${where}: order changed (now "${b[i][0]}")`); break; }
       if (a[i][5] !== b[i][5]) problems.push(`${where}: font-size ${b[i][5]} (approved ${a[i][5]})`);
       for (const k of keys) if (Math.abs(a[i][k] - b[i][k]) > TOLERANCE) problems.push(`${where}: ${"_xywh"[k]} ${b[i][k]} (approved ${a[i][k]})`);
+      const was = base.colors?.[part]?.[i] ?? {}, now = cur.colors[part][i];
+      for (const name of new Set([...Object.keys(was), ...Object.keys(now)])) problems.push(...compareColors(`${where} ${name}`, was[name], now[name]));
     }
   }
+  checked += cur.controls.length;
+  problems.push(...compareControls(view, base.controls, base.colors?.controls, cur.controls, cur.colors.controls));
 }
 if (FULL && !ONLY) for (const view of Object.keys(baseline)) if (!sorted[view]) problems.push(`${view}: not measured`);
 if (problems.length) {
   console.error(problems.slice(0, Number(process.env.LOCK_SHOW ?? 80)).join("\n"));
-  console.error(`FAIL: ${problems.length} change(s) to the approved desktop layout (${Object.keys(sorted).length} pages, ${checked} items checked).`);
+  console.error(`FAIL: ${problems.length} change(s) to the approved desktop layout or colors (${Object.keys(sorted).length} pages, ${checked} items checked).`);
   process.exit(1);
 }
-console.log(`PASS: approved desktop layout unchanged (${Object.keys(sorted).length} pages at ${WIDTH}px, ${checked} items, tolerance ${TOLERANCE}px).`);
+console.log(`PASS: approved desktop layout and colors unchanged (${Object.keys(sorted).length} pages at ${WIDTH}px, ${checked} items, tolerance ${TOLERANCE}px, ${THEMES.join(" + ")} colors).`);

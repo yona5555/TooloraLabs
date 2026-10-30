@@ -1,6 +1,7 @@
 "use client";
 import { useTranslations } from "next-intl";
-import { Mafs, Coordinates, Polygon, Text, useMovablePoint } from "mafs";
+import { Coordinates, Polygon, useMovablePoint } from "mafs";
+import FitMafs, { FitText } from "@/components/tool-ui/FitMafs";
 import "mafs/core.css";
 import "@/components/tool-ui/mafsTheme.css";
 import { useIsDarkMode } from "@/lib/use-dark-mode";
@@ -42,7 +43,7 @@ export default function VietaRectangleDiagram() {
         <div dir="ltr" className="w-full lg:flex-1">
           {isQuadratic ? (
             <div role="group" aria-label={t("ariaLabel")} className="mafs-canvas mx-auto w-full max-w-[320px] overflow-hidden rounded-xl">
-              <Mafs viewBox={{ x: [-1, 11], y: [-1, 11] }} height={220} pan={false} zoom={false} preserveAspectRatio={false}>
+              <FitMafs viewBox={{ x: [-1, 11], y: [-1, 11] }} height={220} pan={false} zoom={false} preserveAspectRatio={false}>
                 <Coordinates.Cartesian xAxis={{ lines: 2 }} yAxis={{ lines: 2 }} />
                 <Polygon
                   points={[
@@ -67,14 +68,14 @@ export default function VietaRectangleDiagram() {
                     strokeOpacity={0.6}
                   />
                 )}
-                <Text x={cw / 2} y={-0.6} size={12} color={colors.rect}>
+                <FitText x={cw / 2} y={-0.6} size={12} color={colors.rect}>
                   {`w = ${fmt(cw)}`}
-                </Text>
-                <Text x={-0.6} y={ch / 2} size={12} color={colors.rect}>
+                </FitText>
+                <FitText x={-0.6} y={ch / 2} size={12} color={colors.rect}>
                   {`h = ${fmt(ch)}`}
-                </Text>
+                </FitText>
                 {corner.element}
-              </Mafs>
+              </FitMafs>
             </div>
           ) : (
             <p className="rounded-xl border border-zinc-200 bg-zinc-50 p-4 text-center text-sm text-zinc-500 dark:border-zinc-700 dark:bg-zinc-800/40 dark:text-zinc-400">{t("notApplicable")}</p>

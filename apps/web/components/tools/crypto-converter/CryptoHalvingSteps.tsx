@@ -11,6 +11,7 @@ import LiveFallback from "@/components/tools/markets/LiveFallback";
 import { svgPx } from "@/components/tool-ui/svgPx";
 import { useFitWidth } from "@/components/tool-ui/useFitWidth";
 import { labelW } from "@/components/tool-ui/labelLayout";
+import { subscribeVisibleClock } from "@/components/tool-ui/motion/motion";
 
 /** Genesis plus the four halvings so far, with the UTC date each era's first block was mined. */
 const ERA_STARTS = [
@@ -38,10 +39,8 @@ export default function CryptoHalvingSteps() {
   const [fitRef, W] = useFitWidth(MAX_W);
   const [now, setNow] = useState(() => Date.now());
 
-  useEffect(() => {
-    const id = setInterval(() => setNow(Date.now()), 1000);
-    return () => clearInterval(id);
-  }, []);
+  // tool-ui/motion: the countdown ticks each second while the page is visible, nothing while hidden
+  useEffect(() => subscribeVisibleClock(1000, () => setNow(Date.now())), []);
 
   const num = (v: number, max = 0) => formatLocalizedNumber(v, "western", { maximumFractionDigits: max });
   const fmtDate = (ms: number) => new Intl.DateTimeFormat(locale, { year: "numeric", month: "short", day: "numeric", timeZone: "UTC" }).format(ms);
@@ -84,7 +83,7 @@ export default function CryptoHalvingSteps() {
             {(["days", "hours", "minutes", "seconds"] as const).map((k) => (
               <div key={k} className="rounded-lg bg-blue-50 py-1.5 dark:bg-blue-500/10">
                 <div className="font-mono text-xl font-bold tabular-nums text-blue-700 dark:text-blue-300">{num(left[k])}</div>
-                <div className="text-[10px] uppercase text-zinc-500 dark:text-zinc-400">{t(`units.${k}`)}</div>
+                <div className="text-xs uppercase text-zinc-500 dark:text-zinc-400">{t(`units.${k}`)}</div>
               </div>
             ))}
           </div>

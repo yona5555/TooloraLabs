@@ -49,6 +49,7 @@ TooloraLabs-Claude-Instructions.md is a historical archive; the binding rules ar
   fixture in tests/gates/ and fails if any gate passes it. A new gate gets a canary in the same PR.
 - Only a push to main saves a cache; PR runs only restore (`scripts/cache-policy.mjs`, CI step in `build`). Closed PRs' caches are deleted; the route manifest is a main artifact.
 - Every workflow runs bash with pipefail; never pipe a gate's output (`node scripts/workflow-shell.mjs`).
+- Fonts are self-hosted only (`apps/web/lib/fonts.ts`); no system family in source (`npm run test:system-fonts`).
 - `site-audit` and `perf-budget` (CI, required) are ratcheted, not a hard zero gate: `scripts/ratchet.mjs check`
   fails a PR only if one of its measured pages got WORSE than its entry in `.audit/ratchet/*.json` (site-audit:
   any criterion's count rose; perf-budget: `apps/web/scripts/perf-static.mjs`, deterministic, zero tolerance: JS/CSS

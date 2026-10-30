@@ -18,6 +18,7 @@ import { px2 } from "@/components/tool-ui/indicator-kit/SvgBits";
 import { svgPx } from "@/components/tool-ui/svgPx";
 import { useFitWidth } from "@/components/tool-ui/useFitWidth";
 import { labelW, thinLabels, wrapLabel } from "@/components/tool-ui/labelLayout";
+import { clampInto } from "@/components/tool-ui/chartLabels";
 
 const axisText = "fill-zinc-500 dark:fill-zinc-400";
 const valueText = "fill-zinc-800 dark:fill-zinc-100";
@@ -76,11 +77,13 @@ export function WtDstTimelineCard({ d, f }: CardProps) {
                   {r.tr.length === 0 && <text style={{ fontSize: svgPx(12) }} x={L + 6} y={yy - 4} className={axisText}>{t("dst.none")}</text>}
                   {r.tr.map((tr) => {
                     const fwd = tr.offsetAfter > tr.offsetBefore;
+                    const label = `${f.shortDate(tr.utcMs, r.c.zone)} ${fwd ? "+" : "−"}${f.num(Math.abs(tr.offsetAfter - tr.offsetBefore) / 60)}`;
                     return (
                       <g key={tr.utcMs}>
                         <circle cx={x(tr.utcMs)} cy={yy} r={6} fill={fwd ? "#f59e0b" : "#3b82f6"} stroke="white" strokeWidth={1.5} />
-                        <text style={{ fontSize: svgPx(12) }} x={x(tr.utcMs)} y={yy - 9} textAnchor="middle" fontWeight={700} fill={fwd ? "#b45309" : "#1d4ed8"}>
-                          {f.shortDate(tr.utcMs, r.c.zone)} {fwd ? "+" : "−"}{f.num(Math.abs(tr.offsetAfter - tr.offsetBefore) / 60)}
+                        {/* centred on its change, moved the least to stay inside the chart (a change near either end of the year) */}
+                        <text style={{ fontSize: svgPx(12) }} x={clampInto(x(tr.utcMs), labelW(label), 0, W)} y={yy - 9} textAnchor="middle" fontWeight={700} fill={fwd ? "#b45309" : "#1d4ed8"}>
+                          {label}
                         </text>
                       </g>
                     );
@@ -317,7 +320,7 @@ export function WtWeekCard({ d, f }: CardProps) {
                 </tr>
               </tbody>
             </table>
-            <p className="mt-1 text-[11px] text-zinc-500 dark:text-zinc-400">{t("week.legend")}</p>
+            <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">{t("week.legend")}</p>
           </div>
         }
         rows={[

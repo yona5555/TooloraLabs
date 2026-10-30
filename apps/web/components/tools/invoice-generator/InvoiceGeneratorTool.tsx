@@ -19,6 +19,7 @@ import InvoiceChecklistReference from "./InvoiceChecklistReference";
 import InvoiceLineItemsBarDiagram from "./InvoiceLineItemsBarDiagram";
 import InvoiceRunningTotalWaterfall from "./InvoiceRunningTotalWaterfall";
 import InvoiceBeforeAfterDiscountBar from "./InvoiceBeforeAfterDiscountBar";
+import { shiftISO, useTodayISO } from "@/lib/use-today";
 
 const RELATED_TOOLS = ["batch-invoice-calculator", "sales-tax-calculator", "inventory-valuation-calculator"];
 
@@ -26,16 +27,6 @@ const tool = new InvoiceGenerator();
 
 function emptyLine(): DraftLine {
   return { description: "", quantity: "1", unitPrice: "" };
-}
-
-function todayISO(): string {
-  return new Date().toISOString().slice(0, 10);
-}
-
-function inDaysISO(days: number): string {
-  const d = new Date();
-  d.setDate(d.getDate() + days);
-  return d.toISOString().slice(0, 10);
 }
 
 const DEFAULT_LINES: DraftLine[] = [
@@ -53,8 +44,13 @@ export default function InvoiceGeneratorTool({ education }: { education: ReactNo
   const [fromName, setFromName] = useState("");
   const [toName, setToName] = useState("");
   const [invoiceNumber, setInvoiceNumber] = useState("INV-0001");
-  const [issueDate, setIssueDate] = useState(todayISO());
-  const [dueDate, setDueDate] = useState(inDaysISO(14));
+  // Today comes from useTodayISO (the render day while hydrating, then the browser's day); untouched
+  // dates stay relative to it (null = the default), so the first client render matches the HTML.
+  const today = useTodayISO();
+  const [pickedIssueDate, setIssueDate] = useState<string | null>(null);
+  const [pickedDueDate, setDueDate] = useState<string | null>(null);
+  const issueDate = pickedIssueDate ?? today;
+  const dueDate = pickedDueDate ?? shiftISO(today, 14);
   const [currency, setCurrency] = useState<CurrencyCode>(DEFAULT_CURRENCY);
   const [lines, setLines] = useState<DraftLine[]>(DEFAULT_LINES);
   const [taxRate, setTaxRate] = useState(DEFAULT_TAX_RATE);
@@ -123,8 +119,8 @@ export default function InvoiceGeneratorTool({ education }: { education: ReactNo
     setFromName("");
     setToName("");
     setInvoiceNumber("INV-0001");
-    setIssueDate(todayISO());
-    setDueDate(inDaysISO(14));
+    setIssueDate(null);
+    setDueDate(null);
     setCurrency(DEFAULT_CURRENCY);
     setLines([emptyLine()]);
     setTaxRate(DEFAULT_TAX_RATE);

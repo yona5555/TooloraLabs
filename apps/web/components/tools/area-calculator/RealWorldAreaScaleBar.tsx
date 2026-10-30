@@ -45,7 +45,7 @@ export default function RealWorldAreaScaleBar() {
             ))}
             <div className="absolute top-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white bg-blue-600 transition-all duration-300 dark:border-zinc-900 dark:bg-blue-400" style={{ left: `${Math.min(100, Math.max(0, livePct))}%` }} />
           </div>
-          <div className="relative mt-2 h-14 w-full text-[11px]">
+          <div className="relative mt-2 h-14 w-full text-xs">
             {marks.map((m, i) => (
               // labels near either end hang inward so they stay inside the card on a phone
               <div key={m.key} className={`absolute ${m.pct < 15 ? "text-start" : m.pct > 85 ? "-translate-x-full text-end" : "-translate-x-1/2 text-center"}`} style={{ left: `${m.pct}%`, top: `${(i % 2) * 26}px` }}>

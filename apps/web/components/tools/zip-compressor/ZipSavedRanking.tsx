@@ -32,7 +32,7 @@ export default function ZipSavedRanking() {
               x={LABEL}
               y={y + 19}
               textAnchor="end"
-              fontFamily="ui-monospace, monospace"
+              fontFamily="var(--font-mono)"
               className={i === 0 ? "fill-blue-700 font-bold dark:fill-blue-300" : "fill-zinc-600 dark:fill-zinc-300"}
             >
               {r.name.length > 12 ? `${r.name.slice(0, 11)}…` : r.name}
@@ -45,7 +45,7 @@ export default function ZipSavedRanking() {
               rx={3}
               className={r.saved > 0 ? (i === 0 ? "fill-blue-600 dark:fill-blue-400" : "fill-blue-300 dark:fill-blue-800") : "fill-rose-400 dark:fill-rose-600"}
             />
-            <text style={{ fontSize: svgPx(12) }} x={BAR_X + w + 5} y={y + 19} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
+            <text style={{ fontSize: svgPx(12) }} x={BAR_X + w + 5} y={y + 19} fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-700 dark:fill-zinc-200">
               {r.saved < 0 ? "+" : ""}
               {formatBytes(Math.abs(r.saved))}
             </text>

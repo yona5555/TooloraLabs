@@ -130,7 +130,7 @@ export default function CalculatorTopBar({ mode, setMode, calcDark, onToggleCalc
               className={`shrink-0 rounded-lg px-2.5 py-1.5 text-xs font-semibold transition sm:text-sm max-md:flex max-md:min-h-11 max-md:min-w-0 max-md:flex-1 max-md:basis-0 max-md:flex-col max-md:items-center max-md:justify-center max-md:gap-0.5 max-md:border max-md:px-0.5 max-md:py-1 ${tabStateClasses(mode, m)}`}
             >
               <Icon size={16} aria-hidden="true" className="shrink-0 md:hidden" />
-              <span data-tab-short="" className={`block w-full overflow-hidden text-center text-[10px] leading-3 whitespace-nowrap md:hidden ${iconsOnly ? "invisible h-0" : ""}`}>
+              <span data-tab-short="" className={`block w-full overflow-hidden text-center text-xs leading-3 whitespace-nowrap md:hidden ${iconsOnly ? "invisible h-0" : ""}`}>
                 {tHome(`modesShort.${m}`)}
               </span>
               <span className="max-md:hidden">{tHome(`modes.${m}`)}</span>

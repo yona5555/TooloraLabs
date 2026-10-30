@@ -51,7 +51,7 @@ export default function QRPrintTrio() {
             <text style={{ fontSize: svgPx(12) }} x={caps[k].x} y={base + 16 + lane[k] * 32} textAnchor="middle" fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
               {t("module", { m })}
             </text>
-            <text style={{ fontSize: svgPx(12) }} x={caps[k].x} y={base + 32 + lane[k] * 32} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+            <text style={{ fontSize: svgPx(12) }} x={caps[k].x} y={base + 32 + lane[k] * 32} textAnchor="middle" fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
               {f(widths[k], 1)} mm
             </text>
           </g>

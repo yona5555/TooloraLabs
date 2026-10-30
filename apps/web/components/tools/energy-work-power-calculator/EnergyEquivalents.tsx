@@ -28,7 +28,7 @@ export default function EnergyEquivalents() {
   const indicator = (
     <div className="flex w-full max-w-[380px] flex-col items-stretch gap-3 sm:w-[380px] sm:flex-row">
       <div className="flex w-full shrink-0 flex-col items-center sm:w-[118px] justify-center rounded-xl border-2 border-blue-500 bg-blue-50 px-2 py-4 text-center dark:border-blue-400 dark:bg-blue-500/10">
-        <span className="text-[11px] font-semibold text-blue-700 dark:text-blue-300">{tForm(`mode.${draft.mode}`)}</span>
+        <span className="text-xs font-semibold text-blue-700 dark:text-blue-300">{tForm(`mode.${draft.mode}`)}</span>
         <span dir="ltr" className="mt-1 font-mono text-lg font-bold text-blue-700 dark:text-blue-300">
           {f(E)}
         </span>

@@ -1,3 +1,5 @@
+import { svgPx } from "@/components/tool-ui/svgPx";
+import FitSvg from "@/components/tool-ui/FitSvg";
 type MatrixAnatomyDiagramProps = {
   a11: number;
   a12: number;
@@ -60,8 +62,8 @@ export default function MatrixAnatomyDiagram({
   return (
     <figure className="my-2">
       <div dir="ltr" className="flex justify-center overflow-x-auto">
-        <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={caption} className="h-auto w-80 text-current" style={{ minWidth: 280 }}>
-          <text x={30} y={16} fontSize={11} fontWeight={700} fill="currentColor">
+        <FitSvg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={caption} className="h-auto w-80 text-current" style={{ minWidth: 280 }}>
+          <text x={30} y={16} style={{ fontSize: svgPx(11) }} fontWeight={700} fill="currentColor">
             {labelMatrix}
           </text>
           <Grid x={10} y={gridY} values={[a11, a12, a21, a22]} />
@@ -70,7 +72,7 @@ export default function MatrixAnatomyDiagram({
             →
           </text>
 
-          <text x={115} y={16} fontSize={11} fontWeight={700} fill="currentColor">
+          <text x={115} y={16} style={{ fontSize: svgPx(11) }} fontWeight={700} fill="currentColor">
             {labelDeterminant}
           </text>
           <text x={140} y={gridY + CELL + 5} textAnchor="middle" fontSize={16} fontWeight={700} className="fill-purple-600 dark:fill-purple-400">
@@ -81,11 +83,11 @@ export default function MatrixAnatomyDiagram({
             →
           </text>
 
-          <text x={220} y={16} textAnchor="middle" fontSize={11} fontWeight={700} fill="currentColor">
+          <text x={220} y={16} textAnchor="middle" style={{ fontSize: svgPx(11) }} fontWeight={700} fill="currentColor">
             {labelInverse}
           </text>
           <Grid x={180} y={gridY} values={[inv11, inv12, inv21, inv22]} />
-        </svg>
+        </FitSvg>
       </div>
       <figcaption className="mt-2 text-center text-sm opacity-70">{caption}</figcaption>
     </figure>

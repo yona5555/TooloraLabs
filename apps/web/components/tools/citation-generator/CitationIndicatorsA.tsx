@@ -20,6 +20,7 @@ import { PART_COLORS, type StudioState } from "./studio";
 import { svgPx } from "@/components/tool-ui/svgPx";
 import { useFitWidth } from "@/components/tool-ui/useFitWidth";
 import { labelW, thinLabels } from "@/components/tool-ui/labelLayout";
+import { useTodayISO } from "@/lib/use-today";
 
 export type CiteIndicatorProps = { state: StudioState; onChange: (s: StudioState) => void; source: CiteSource; index: number };
 
@@ -240,7 +241,8 @@ export function CitationMixCard({ state }: CiteIndicatorProps) {
 /* 4 · Source recency on a year axis (timeline with zones for the last 5 and 10 years) */
 export function CitationRecencyCard({ state }: CiteIndicatorProps) {
   const t = useCiteT();
-  const now = new Date().getFullYear();
+  // The current year from useTodayISO, so the server and the hydrating render agree.
+  const now = Number(useTodayISO().slice(0, 4));
   const dated = state.list
     .map((s, i) => ({ i, y: Number.parseInt(s.year, 10), title: s.title }))
     .filter((d) => Number.isFinite(d.y) && d.y > 1000 && d.y <= now + 1)

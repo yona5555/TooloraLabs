@@ -5,16 +5,12 @@ import { DateCalculator as DateTool } from "@tooloralabs/tools";
 import EncyclopediaLiveWidget from "@/components/tool-ui/EncyclopediaLiveWidget";
 import { DATE_SCENARIOS } from "./types";
 import { svgPx } from "@/components/tool-ui/svgPx";
+import FitSvg from "@/components/tool-ui/FitSvg";
+import { shiftISO, useTodayISO } from "@/lib/use-today";
 
 const tool = new DateTool();
 
 const ADD_SUBTRACT_SCENARIOS = DATE_SCENARIOS.filter((s) => s.mode === "addSubtract");
-
-function isoDaysAgo(daysAgo: number): string {
-  const d = new Date();
-  d.setDate(d.getDate() - daysAgo);
-  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
-}
 
 const WIDTH = 340;
 const HEIGHT = 60;
@@ -28,18 +24,20 @@ export default function DateAddSubtractTimelineDiagram() {
   const tUnits = useTranslations("tools.date-calculator.form.units");
   const tOperations = useTranslations("tools.date-calculator.form.operations");
   const locale = useLocale();
+  // Today from useTodayISO: the render day while hydrating (matches the HTML), then the browser's day.
+  const today = useTodayISO();
   const [selectedKey, setSelectedKey] = useState(ADD_SUBTRACT_SCENARIOS[0]?.key ?? "add90Days");
 
   const scenario = ADD_SUBTRACT_SCENARIOS.find((s) => s.key === selectedKey) ?? ADD_SUBTRACT_SCENARIOS[0];
 
   const { startISO, resultISO } = useMemo(() => {
-    const startDate = isoDaysAgo(scenario.startDaysAgo);
+    const startDate = shiftISO(today, -scenario.startDaysAgo);
     const output = tool.execute(
       { mode: "addSubtract", startDate, amount: Number(scenario.amount), unit: scenario.unit, operation: scenario.operation },
       { locale: "en-US" },
     );
     return { startISO: startDate, resultISO: output.data.resultDateISO ?? startDate };
-  }, [scenario]);
+  }, [scenario, today]);
 
   const dateFmt = useMemo(() => new Intl.DateTimeFormat(locale, { year: "numeric", month: "short", day: "numeric" }), [locale]);
   const formatDate = (iso: string) => dateFmt.format(new Date(`${iso}T00:00:00`));
@@ -51,7 +49,7 @@ export default function DateAddSubtractTimelineDiagram() {
       <p className="mb-4 text-sm leading-6 opacity-80">{t("intro")}</p>
 
       <div dir="ltr" className="w-full">
-        <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={t("ariaLabel")} className="w-full">
+        <FitSvg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={t("ariaLabel")} className="w-full">
           <line x1={MARGIN} y1={HEIGHT / 2} x2={WIDTH - MARGIN} y2={HEIGHT / 2} strokeWidth={3} className="stroke-current/15" />
 
           <circle cx={MARGIN} cy={HEIGHT / 2} r={7} className="fill-zinc-400 dark:fill-zinc-500" />
@@ -85,7 +83,7 @@ export default function DateAddSubtractTimelineDiagram() {
           <text style={{ fontSize: svgPx(12) }} x={WIDTH - MARGIN} y={HEIGHT / 2 + 22} textAnchor="middle" fontWeight="600" className="fill-current">
             {formatDate(resultISO)}
           </text>
-        </svg>
+        </FitSvg>
       </div>
 
       <div role="tablist" className="mt-2 flex flex-wrap justify-center gap-2">

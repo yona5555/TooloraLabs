@@ -3,8 +3,9 @@
 // (transform/cx/cy/d) actually changed, AND its worked-example text changed, AND the reverse
 // direction (editing a field) also moves things.
 import { chromium } from "playwright";
+import { requireBase } from "../../../scripts/lib/require-base.mjs";
 
-const BASE = "http://localhost:3000";
+const BASE = requireBase(process.env.BASE);
 
 const INDICATOR_TITLES = [
   "Balance Diagram", "Decision Path", "Progress Gauges", "Newton's-Method Iterations",

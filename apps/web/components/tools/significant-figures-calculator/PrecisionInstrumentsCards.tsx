@@ -36,7 +36,7 @@ export default function PrecisionInstrumentsCards() {
               }`}
             >
               <p className={`text-xs font-semibold ${inst.key === match.key ? "text-blue-700 dark:text-blue-300" : "text-zinc-500 dark:text-zinc-400"}`}>{t(`instruments.${inst.key}`)}</p>
-              <p className="mt-1 font-mono text-[11px] text-zinc-400 dark:text-zinc-500">{t("decimalsLabel", { count: inst.minDecimals })}</p>
+              <p className="mt-1 font-mono text-xs text-zinc-400 dark:text-zinc-500">{t("decimalsLabel", { count: inst.minDecimals })}</p>
             </div>
           ))}
         </div>

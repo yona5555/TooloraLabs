@@ -9,6 +9,7 @@ import { labelW } from "@/components/tool-ui/labelLayout";
 import { useFitWidth } from "@/components/tool-ui/useFitWidth";
 import { paletteTextClass } from "@/lib/palette-text";
 
+import FitSvg from "@/components/tool-ui/FitSvg";
 export type StudyIndicatorProps = { state: StudioState; setState: (s: StudioState) => void; d: Derived };
 
 export const axisText = "fill-zinc-500 dark:fill-zinc-400";
@@ -259,7 +260,7 @@ export function ForgettingCurveCard({ d }: StudyIndicatorProps) {
         indicator={
           <div className="w-[400px] max-w-full">
             <ExamChips d={d} value={e.id} onPick={setPick} />
-            <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.curve.title")} className="max-w-full">
+            <FitSvg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.curve.title")} className="max-w-full">
               {[0, 0.25, 0.5, 0.75, 1].map((r) => (
                 <g key={r}>
                   <line x1={L} x2={W - 10} y1={y(r)} y2={y(r)} stroke="currentColor" strokeOpacity={0.12} />
@@ -294,7 +295,7 @@ export function ForgettingCurveCard({ d }: StudyIndicatorProps) {
               <text style={{ fontSize: svgPx(12) }} x={W - 10} y={B + 27} textAnchor="end" className={axisText}>
                 {t("ind.curve.axis")}
               </text>
-            </svg>
+            </FitSvg>
             <div className="mt-1 flex flex-wrap gap-x-3 text-xs text-zinc-600 dark:text-zinc-300">
               <span style={{ color: c }} className={paletteTextClass(c)}>━ {t("ind.curve.with")}</span>
               <span className="text-zinc-400">┅ {t("ind.curve.without")}</span>
@@ -327,7 +328,7 @@ export function PriorityFormulaCard({ d }: StudyIndicatorProps) {
   const box = (bx: number, by: number, v: string, color: string, w = 40) => (
     <g>
       <rect x={bx} y={by} width={w} height={22} rx={5} fill={color} fillOpacity={0.14} stroke={color} strokeOpacity={0.6} />
-      <text x={bx + w / 2} y={by + 15} textAnchor="middle" fontSize={11} fontWeight={800} fill={color}>
+      <text x={bx + w / 2} y={by + 15} textAnchor="middle" style={{ fontSize: svgPx(11) }} fontWeight={800} fill={color}>
         {v}
       </text>
     </g>
@@ -339,14 +340,14 @@ export function PriorityFormulaCard({ d }: StudyIndicatorProps) {
       <IndicatorWithTable
         workedExampleTitle={t("ind.worked")}
         indicator={
-          <svg data-annotation="" width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.priority.title")} className="max-w-full">
+          <FitSvg data-annotation="" width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.priority.title")} className="max-w-full">
             {[
               { x: 22, k: "difficulty" },
               { x: 74, k: "credits" },
               { x: 126, k: "urgency" },
               { x: 186, k: "priority" },
             ].map((h) => (
-              <text key={h.k} x={h.x + 22} y={12} textAnchor="middle" fontSize={9} fontWeight={700} className={axisText}>
+              <text key={h.k} x={h.x + 22} y={12} textAnchor="middle" style={{ fontSize: svgPx(9) }} fontWeight={700} className={axisText}>
                 {t(`ind.priority.${h.k}`)}
               </text>
             ))}
@@ -357,7 +358,7 @@ export function PriorityFormulaCard({ d }: StudyIndicatorProps) {
               return (
                 <g key={e.id}>
                   <circle cx={9} cy={y + 11} r={7} fill={c} />
-                  <text x={9} y={y + 14.5} textAnchor="middle" fontSize={9} fontWeight={800} fill="white">
+                  <text x={9} y={y + 14.5} textAnchor="middle" style={{ fontSize: svgPx(9) }} fontWeight={800} fill="white">
                     {i + 1}
                   </text>
                   {box(22, y, String(e.difficulty), "#ef4444")}
@@ -368,13 +369,13 @@ export function PriorityFormulaCard({ d }: StudyIndicatorProps) {
                   <text x={180} y={y + 15} textAnchor="middle" fontSize={12} className={valueText}>=</text>
                   {box(186, y, f.n(e.priority, 1), c, 52)}
                   <rect x={246} y={y + 4} width={Math.max(2, bw)} height={14} rx={4} fill={c} style={{ transition: "width 400ms ease" }} />
-                  <text x={250 + Math.max(2, bw)} y={y + 15} fontSize={10} fontWeight={700} className={valueText}>
+                  <text x={250 + Math.max(2, bw)} y={y + 15} style={{ fontSize: svgPx(10) }} fontWeight={700} className={valueText}>
                     {f.pct(e.priority / sum)}
                   </text>
                 </g>
               );
             })}
-          </svg>
+          </FitSvg>
         }
         rows={[
           ...exams.map((e) => ({

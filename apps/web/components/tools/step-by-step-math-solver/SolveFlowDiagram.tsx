@@ -63,7 +63,7 @@ export default function SolveFlowDiagram() {
                     <div className={`h-px flex-1 ${STATION_LINE_HIDE} ${i === stations.length - 1 ? "opacity-0" : i < step ? "bg-blue-400 dark:bg-blue-500/60" : "bg-zinc-200 dark:bg-zinc-700"}`} />
                   </div>
                   <p className={`${STATION_NAME} text-xs font-semibold ${active ? "text-blue-700 dark:text-blue-300" : "text-zinc-600 dark:text-zinc-300"}`}>{t(`stations.${s.key}`)}</p>
-                  <p dir="ltr" className={`${STATION_VALUE} max-w-[110px] truncate font-mono text-[11px] text-zinc-500 dark:text-zinc-400 max-md:max-w-full`} title={s.value}>
+                  <p dir="ltr" className={`${STATION_VALUE} max-w-[110px] truncate font-mono text-xs text-zinc-500 dark:text-zinc-400 max-md:max-w-full`} title={s.value}>
                     {s.value}
                   </p>
                 </li>

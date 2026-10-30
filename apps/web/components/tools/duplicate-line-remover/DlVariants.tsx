@@ -38,10 +38,10 @@ export default function DlVariants() {
             <text style={{ fontSize: svgPx(12) }} x={12} y={y + 26} textAnchor="middle" fontWeight={700} className="fill-white">
               {g.variants.length}
             </text>
-            <text style={{ fontSize: svgPx(12) }} x={30} y={y + 18} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={30} y={y + 18} fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
               {g.canonical.length > 34 ? `${g.canonical.slice(0, 33)}…` : g.canonical}
             </text>
-            <text style={{ fontSize: svgPx(12) }} x={30} y={y + 35} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+            <text style={{ fontSize: svgPx(12) }} x={30} y={y + 35} fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
               {g.variants
                 .map((v) => `"${v.replace(/ /g, "·")}"`)
                 .join("  ")

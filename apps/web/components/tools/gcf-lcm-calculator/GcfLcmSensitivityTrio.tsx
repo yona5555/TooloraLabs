@@ -29,7 +29,7 @@ export default function GcfLcmSensitivityTrio() {
         const cur = c.key === "current";
         return (
           <div key={c.key} className={`flex flex-col items-center rounded-xl border p-2 text-center ${cur ? "border-blue-500 bg-blue-50 dark:border-blue-400 dark:bg-blue-500/10" : "border-zinc-200 dark:border-zinc-700"}`}>
-            <span className="text-[10px] font-semibold text-zinc-500 uppercase dark:text-zinc-400">{t(c.key)}</span>
+            <span className="text-xs font-semibold text-zinc-500 uppercase dark:text-zinc-400">{t(c.key)}</span>
             <span dir="ltr" className="font-mono text-xs text-zinc-600 dark:text-zinc-300">{[c.a, ...rest].map((n) => f(n)).join(", ")}</span>
             <div className="mt-2 flex h-24 items-end gap-1.5" dir="ltr">
               <div className="w-5 rounded-t bg-emerald-500 dark:bg-emerald-400" style={{ height: `${Math.max(6, (Math.log(c.gcf + 1) / Math.log(maxL + 1)) * 96)}px` }} />

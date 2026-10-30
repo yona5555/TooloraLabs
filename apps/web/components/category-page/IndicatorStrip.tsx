@@ -30,7 +30,7 @@ export default function IndicatorStrip({ label, items }: { label: string; items:
           <li key={item.id} className="group relative min-w-0 flex-[1_1_10.5rem]">
             <Link href={item.href} aria-describedby={item.note ? noteId : undefined} className={CHIP}>
               <span className="flex min-w-0 flex-col leading-4">
-                <span className="truncate text-[11px] font-medium text-zinc-500 dark:text-zinc-400">{item.label}</span>
+                <span className="truncate text-xs font-medium text-zinc-500 dark:text-zinc-400">{item.label}</span>
                 <span className="truncate text-xs font-semibold tabular-nums text-zinc-900 dark:text-zinc-50">{item.value}</span>
               </span>
               {item.trailing}
@@ -39,7 +39,7 @@ export default function IndicatorStrip({ label, items }: { label: string; items:
               <span
                 id={noteId}
                 role="tooltip"
-                className="pointer-events-none absolute inset-x-0 top-full z-30 mt-1 hidden rounded-md border border-zinc-200 bg-white p-2 text-[11px] leading-4 text-zinc-600 shadow-lg group-focus-within:block group-hover:block dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300"
+                className="pointer-events-none absolute inset-x-0 top-full z-30 mt-1 hidden rounded-md border border-zinc-200 bg-white p-2 text-xs leading-4 text-zinc-600 shadow-lg group-focus-within:block group-hover:block dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300"
               >
                 {item.note}
               </span>

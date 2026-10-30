@@ -1,7 +1,8 @@
 "use client";
 import { useEffect, useRef } from "react";
 import { useTranslations } from "next-intl";
-import { Mafs, Coordinates, useMovablePoint } from "mafs";
+import { Coordinates, useMovablePoint } from "mafs";
+import FitMafs from "@/components/tool-ui/FitMafs";
 import "mafs/core.css";
 import "@/components/tool-ui/mafsTheme.css";
 import { ScientificNotationConverter } from "@tooloralabs/tools";
@@ -117,11 +118,11 @@ export default function ScientificNotationMagnitudeDrag() {
       {/* axis title above the plot, not inside it: drawn at the top of the y axis it ran into the "9" tick (§39) */}
       <p dir="ltr" className="mb-1 text-center text-xs text-zinc-500 dark:text-zinc-400">{t("axisHint")}</p>
       <div role="group" dir="ltr" aria-label={t("ariaLabel")} className="mafs-canvas w-full overflow-hidden rounded-xl">
-        <Mafs viewBox={{ x: [EXP_MIN, EXP_MAX], y: [COEF_MIN, COEF_MAX] }} height={260} pan={false} zoom={false} preserveAspectRatio={false}>
+        <FitMafs viewBox={{ x: [EXP_MIN, EXP_MAX], y: [COEF_MIN, COEF_MAX] }} height={260} pan={false} zoom={false} preserveAspectRatio={false}>
           <Coordinates.Cartesian xAxis={{ lines: 3 }} yAxis={{ lines: 1 }} />
           {pointA.element}
           {showB && pointB.element}
-        </Mafs>
+        </FitMafs>
       </div>
 
       <p className="mt-2 text-center text-xs text-zinc-500 dark:text-zinc-400">{t("hint")}</p>

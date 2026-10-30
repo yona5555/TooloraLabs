@@ -95,7 +95,7 @@ export default function RtSpeedCurve() {
           <text style={{ fontSize: svgPx(12) }} x={yoursSpot.dx} y={yoursSpot.dy} textAnchor={yoursSpot.anchor} fontWeight={700} className="fill-blue-700 dark:fill-blue-300">{yoursText}</text>
         </g>
       </svg>
-      <label className="mt-1 flex items-center gap-2 text-[11px] text-zinc-500 dark:text-zinc-400">
+      <label className="mt-1 flex items-center gap-2 text-xs text-zinc-500 dark:text-zinc-400">
         <span className="shrink-0">{t("try", { wpm: f(trial) })}</span>
         <input type="range" min={MIN} max={MAX} step={10} value={trial} onChange={(e) => setTrial(Number(e.target.value))} className="w-full accent-amber-500" aria-label={t("tryLabel")} />
       </label>

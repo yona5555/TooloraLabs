@@ -2,8 +2,9 @@
 // display-currency switching, chart pair switching, fullscreen, console errors, optional screenshots.
 // Usage: node apps/web/scripts/market-tool-check.mjs <slug> [outDir]   (screenshots only when outDir is given)
 import { chromium } from "playwright";
+import { requireBase } from "../../../scripts/lib/require-base.mjs";
 
-const BASE = process.env.BASE_URL ?? "http://localhost:3000";
+const BASE = requireBase(process.env.BASE);
 const slug = process.argv[2] ?? "forex-converter";
 const outDir = process.argv[3];
 const browser = await chromium.launch();

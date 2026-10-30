@@ -79,7 +79,7 @@ export default function SWResult() {
               <tr key={r.key} className="border-b border-zinc-200 last:border-0 dark:border-zinc-700/70">
                 <th scope="row" className="py-1.5 pe-2 text-start align-top font-medium text-zinc-600 dark:text-zinc-300">
                   {r.label}
-                  {r.note && <span className="block text-[11px] font-normal text-zinc-400 dark:text-zinc-500">{r.note}</span>}
+                  {r.note && <span className="block text-xs font-normal text-zinc-400 dark:text-zinc-500">{r.note}</span>}
                 </th>
                 <td
                   dir={r.strong || r.key === "wpm" || r.key === "longest" ? "auto" : "ltr"}

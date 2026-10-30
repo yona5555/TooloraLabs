@@ -20,6 +20,7 @@ import { VAT_CHECKED, VAT_TABLE } from "./types";
 import { svgPx } from "@/components/tool-ui/svgPx";
 import { useMeasuredWidth } from "@/components/tool-ui/useMeasuredWidth";
 
+import FitSvg from "@/components/tool-ui/FitSvg";
 export type IndicatorProps = { invoices: BatchInvoice[]; overview: BatchOverview; f: InvoiceFormatters };
 
 /** One colour per invoice, reused by every indicator so an invoice reads the same everywhere. */
@@ -77,7 +78,7 @@ export function LineItemsRanked({ invoices, overview, f }: IndicatorProps) {
             <span className="min-w-0">
               <span className="flex items-baseline justify-between gap-2">
                 <span className="truncate text-sm font-medium text-zinc-800 dark:text-zinc-100">{r.name || "—"}</span>
-                <span className="shrink-0 text-[10px] text-zinc-400">{r.invoiceNumber}</span>
+                <span className="shrink-0 text-xs text-zinc-400">{r.invoiceNumber}</span>
               </span>
               <span className="mt-1 block h-2.5 overflow-hidden rounded-full bg-zinc-100 dark:bg-zinc-800">
                 <span className="block h-full rounded-full transition-all duration-500" style={{ width: `${(r.total / max) * 100}%`, background: colorOf(r.invoiceId) }} />
@@ -87,7 +88,7 @@ export function LineItemsRanked({ invoices, overview, f }: IndicatorProps) {
               <span dir="ltr" className="block font-mono text-sm font-bold text-zinc-900 dark:text-zinc-100">
                 {f.money(r.total)}
               </span>
-              <span dir="ltr" className="block font-mono text-[10px] text-zinc-500">
+              <span dir="ltr" className="block font-mono text-xs text-zinc-500">
                 {f.pct(r.share)}
               </span>
             </span>
@@ -218,12 +219,12 @@ export function NetTaxStacked({ overview, f }: IndicatorProps) {
             </div>
             <div dir="ltr" className="mt-1 flex items-center gap-2">
             <div className="flex h-6 overflow-hidden rounded-md bg-zinc-100 dark:bg-zinc-800" style={{ width: `calc(${Math.max(8, (r.total / max) * 100)}% - 5rem)` }}>
-              <div className="flex items-center justify-start overflow-hidden px-1.5 font-mono text-[10px] font-semibold text-white transition-all duration-500" style={{ width: `${r.total ? (r.subtotal / r.total) * 100 : 0}%`, background: NET }}>
+              <div className="flex items-center justify-start overflow-hidden px-1.5 font-mono text-xs font-semibold text-white transition-all duration-500" style={{ width: `${r.total ? (r.subtotal / r.total) * 100 : 0}%`, background: NET }}>
                 {f.compact(r.subtotal)}
               </div>
               <div className="transition-all duration-500" style={{ width: `${r.total ? (r.tax / r.total) * 100 : 0}%`, background: TAX }} />
             </div>
-            <span className="shrink-0 font-mono text-[11px] font-semibold text-amber-600 dark:text-amber-400">+{f.compact(r.tax)}</span>
+            <span className="shrink-0 font-mono text-xs font-semibold text-amber-600 dark:text-amber-400">+{f.compact(r.tax)}</span>
             </div>
           </li>
         ))}
@@ -340,9 +341,9 @@ export function InvoiceTimeline({ invoices, overview, f }: IndicatorProps) {
           {pts.map((p, i) => (
             <div key={p.id} className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2" style={{ left: `${pos(p.dayOffset, i)}%` }}>
               <div className={`absolute bottom-4 left-1/2 w-24 -translate-x-1/2 text-center ${i % 2 ? "bottom-auto top-4" : ""}`}>
-                <p className="truncate text-[11px] font-semibold text-zinc-800 dark:text-zinc-100">{p.number || "—"}</p>
-                <p className="font-mono text-[11px] font-bold text-blue-700 dark:text-blue-300">{f.compact(p.total)}</p>
-                <p className="text-[10px] text-zinc-400">{shortDate(p.date, locale)}</p>
+                <p className="truncate text-xs font-semibold text-zinc-800 dark:text-zinc-100">{p.number || "—"}</p>
+                <p className="font-mono text-xs font-bold text-blue-700 dark:text-blue-300">{f.compact(p.total)}</p>
+                <p className="text-xs text-zinc-400">{shortDate(p.date, locale)}</p>
               </div>
               <span className="block h-4 w-4 rounded-full border-[3px] border-white shadow dark:border-zinc-900" style={{ background: INVOICE_COLORS[invoices.findIndex((x) => x.id === p.id) % INVOICE_COLORS.length] }} />
             </div>
@@ -387,7 +388,7 @@ export function RevenueByClient({ invoices, overview, f }: IndicatorProps) {
             <span className="min-w-0">
               <span className="flex items-baseline gap-2">
                 <span className="truncate text-sm font-semibold text-zinc-800 dark:text-zinc-100">{r.client}</span>
-                <span className="shrink-0 text-[10px] text-zinc-400">{t("clients.invoices", { count: r.invoiceCount })}</span>
+                <span className="shrink-0 text-xs text-zinc-400">{t("clients.invoices", { count: r.invoiceCount })}</span>
               </span>
               <span className="mt-1 block h-3 overflow-hidden rounded-full bg-zinc-100 dark:bg-zinc-800">
                 <span className={`block h-full rounded-full transition-all duration-500 ${i === 0 ? "bg-blue-600" : "bg-blue-400/70"}`} style={{ width: `${(r.total / (top?.total || 1)) * 100}%` }} />
@@ -395,7 +396,7 @@ export function RevenueByClient({ invoices, overview, f }: IndicatorProps) {
             </span>
             <span className="text-end">
               <span dir="ltr" className="block font-mono text-sm font-bold text-zinc-900 dark:text-zinc-100">{f.money(r.total)}</span>
-              <span dir="ltr" className="block font-mono text-[10px] text-zinc-500">{f.pct(r.share)}</span>
+              <span dir="ltr" className="block font-mono text-xs text-zinc-500">{f.pct(r.share)}</span>
             </span>
           </li>
         ))}
@@ -451,7 +452,7 @@ export function ClientConcentration({ invoices, overview, f }: IndicatorProps) {
           {f.pct(share)}
         </p>
         <p className={`text-sm font-semibold ${zoneClass}`}>{t(`gauge.zone.${zone}`)}</p>
-        <div className="mt-3 grid w-full max-w-md grid-cols-3 gap-2 text-center text-[11px]">
+        <div className="mt-3 grid w-full max-w-md grid-cols-3 gap-2 text-center text-xs">
           <span className="rounded-lg bg-emerald-50 px-2 py-1 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-300">{t("gauge.zone.low")} <bdi dir="ltr">&lt; 25%</bdi></span>
           <span className="rounded-lg bg-amber-50 px-2 py-1 text-amber-700 dark:bg-amber-500/10 dark:text-amber-300">25–50%</span>
           <span className="rounded-lg bg-red-50 px-2 py-1 text-red-700 dark:bg-red-500/10 dark:text-red-300">{t("gauge.zone.high")} <bdi dir="ltr">&gt; 50%</bdi></span>
@@ -486,7 +487,7 @@ export function NetTaxBalance({ overview, f }: IndicatorProps) {
       }}
     >
       <div dir="ltr" className="flex justify-center overflow-x-auto" data-testid="ind-balance">
-        <svg width={420} height={250} viewBox="0 0 420 250" role="img" aria-label={t("balance.title")}>
+        <FitSvg width={420} height={250} viewBox="0 0 420 250" role="img" aria-label={t("balance.title")}>
           <polygon points="195,235 225,235 210,118" className="fill-zinc-300 dark:fill-zinc-600" />
           {(() => {
             const dy = Math.sin((tilt * Math.PI) / 180) * 160;
@@ -508,7 +509,7 @@ export function NetTaxBalance({ overview, f }: IndicatorProps) {
           })()}
           <text style={{ fontSize: svgPx(12) }} x={210} y={24} textAnchor="middle" className="fill-zinc-500">{t("balance.per100", { amount: f.money(100) })}</text>
           <text style={{ fontSize: svgPx(22) }} x={210} y={50} textAnchor="middle" className="fill-zinc-900 font-mono font-bold dark:fill-zinc-100">{f.money(per100)}</text>
-        </svg>
+        </FitSvg>
       </div>
     </IndicatorCard>
   );
@@ -550,7 +551,7 @@ export function TaxSensitivityTrio({ invoices, overview, f }: IndicatorProps) {
 function FormulaBox({ k, v, tone }: { k: string; v: string; tone: string }) {
   return (
     <div className={`min-w-0 rounded-xl border-2 px-3 py-2 text-center ${tone}`}>
-      <p className="truncate text-[11px] font-semibold uppercase tracking-wide opacity-80 max-md:opacity-100">{k}</p>
+      <p className="truncate text-xs font-semibold uppercase tracking-wide opacity-80 max-md:opacity-100">{k}</p>
       <p dir="ltr" className="truncate font-mono text-base font-bold">{v}</p>
     </div>
   );
@@ -649,7 +650,7 @@ export function CurrencyEquivalence({ overview, f, fx }: IndicatorProps & { fx: 
           </li>
         ))}
       </ul>
-      <p className="mt-2 text-[11px] text-zinc-400">{t("fx.source", { date: fx?.date ?? "—" })}</p>
+      <p className="mt-2 text-xs text-zinc-400">{t("fx.source", { date: fx?.date ?? "—" })}</p>
     </IndicatorCard>
   );
 }
@@ -707,18 +708,18 @@ export function VatReferenceTable({ overview, f, onUseRate }: IndicatorProps & {
               <tr key={r.country} onClick={() => setPicked(r.country)} className={`cursor-pointer ${r.country === picked ? "bg-blue-50 dark:bg-blue-500/10" : "hover:bg-zinc-50 dark:hover:bg-zinc-800/40"}`}>
                 <td className="px-3 py-1.5">
                   <span className="font-medium text-zinc-800 dark:text-zinc-100">{regionName(r.country)}</span>
-                  <span className="ms-1.5 text-[10px] text-zinc-400">{t(`vat.region.${r.region}`)}</span>
+                  <span className="ms-1.5 text-xs text-zinc-400">{t(`vat.region.${r.region}`)}</span>
                 </td>
                 <td className="px-2 py-1.5">
-                  <span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${kindTone[r.kind]}`}>{t(`vat.kind.${r.kind}`)}</span>
+                  <span className={`rounded-full px-2 py-0.5 text-xs font-semibold ${kindTone[r.kind]}`}>{t(`vat.kind.${r.kind}`)}</span>
                 </td>
                 <td dir="ltr" className="px-2 py-1.5 text-end font-mono font-semibold text-zinc-900 dark:text-zinc-100">{r.rate === null ? "—" : f.pct(r.rate, 2)}</td>
                 <td dir="ltr" className="px-2 py-1.5 text-end font-mono text-xs text-zinc-700 dark:text-zinc-300">{f.money(overview.net * (1 + (r.rate ?? 0) / 100))}</td>
-                <td className="px-2 py-1.5 text-[11px]">
+                <td className="px-2 py-1.5 text-xs">
                   <a href={r.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline dark:text-blue-400" onClick={(e) => e.stopPropagation()}>
                     {r.source}
                   </a>
-                  {r.since !== "—" && <span dir="ltr" className="block text-[10px] text-zinc-400">{t("vat.since", { date: r.since })}</span>}
+                  {r.since !== "—" && <span dir="ltr" className="block text-xs text-zinc-400">{t("vat.since", { date: r.since })}</span>}
                 </td>
                 <td className="px-2 py-1.5 text-end">
                   {r.rate !== null && (
@@ -729,7 +730,7 @@ export function VatReferenceTable({ overview, f, onUseRate }: IndicatorProps & {
                         setPicked(r.country);
                         onUseRate(r.rate!);
                       }}
-                      className="rounded-md border border-blue-300 px-2 py-0.5 text-[11px] font-semibold text-blue-700 hover:bg-blue-50 dark:border-blue-500/40 dark:text-blue-300 dark:hover:bg-blue-500/10"
+                      className="rounded-md border border-blue-300 px-2 py-0.5 text-xs font-semibold text-blue-700 hover:bg-blue-50 dark:border-blue-500/40 dark:text-blue-300 dark:hover:bg-blue-500/10"
                     >
                       {t("vat.use")}
                     </button>
@@ -740,7 +741,7 @@ export function VatReferenceTable({ overview, f, onUseRate }: IndicatorProps & {
           </tbody>
         </table>
       </div>
-      <p className="mt-2 text-[11px] text-zinc-400">{t("vat.footnote", { date: VAT_CHECKED })}</p>
+      <p className="mt-2 text-xs text-zinc-400">{t("vat.footnote", { date: VAT_CHECKED })}</p>
     </IndicatorCard>
   );
 }

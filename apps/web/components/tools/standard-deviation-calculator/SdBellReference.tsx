@@ -6,6 +6,7 @@ import SdIndicatorCard from "./SdIndicatorCard";
 import { useSdModel } from "./SdLiveContext";
 import { svgPx } from "@/components/tool-ui/svgPx";
 
+import FitSvg from "@/components/tool-ui/FitSvg";
 const W = 320;
 const H = 190;
 const BASE = 150;
@@ -48,7 +49,7 @@ export default function SdBellReference() {
 
   const indicator = (
     <div className="w-full max-w-[320px]">
-      <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+      <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
         <polygon points={fill.join(" ")} className="fill-blue-200 dark:fill-blue-500/30" />
         <polyline points={pts.join(" ")} fill="none" strokeWidth={2} className="stroke-blue-600 dark:stroke-blue-400" />
         <line x1={10} y1={BASE} x2={W - 10} y2={BASE} className="stroke-zinc-400 dark:stroke-zinc-500" />
@@ -59,7 +60,7 @@ export default function SdBellReference() {
               {k === 0 ? "μ" : `${k > 0 ? "+" : "−"}${Math.abs(k)}σ`}
             </text>
             {(k === -2 || k === 0 || k === 2) && (
-              <text style={{ fontSize: svgPx(12) }} x={sx(k)} y={BASE + 27} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-600 dark:fill-zinc-300">
+              <text style={{ fontSize: svgPx(12) }} x={sx(k)} y={BASE + 27} textAnchor="middle" fontFamily="var(--font-mono)" className="fill-zinc-600 dark:fill-zinc-300">
                 {f(a.mean + k * sigma, 2)}
               </text>
             )}
@@ -67,10 +68,10 @@ export default function SdBellReference() {
         ))}
         <line x1={sx(zc)} y1={sy(zc) - 6} x2={sx(zc)} y2={BASE} strokeWidth={2} className="stroke-rose-600 dark:stroke-rose-400" />
         <circle cx={sx(zc)} cy={sy(zc)} r={5} className="fill-rose-600 dark:fill-rose-400" />
-        <text style={{ fontSize: svgPx(12) }} x={labelX} y={14} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-rose-700 dark:fill-rose-300">
+        <text style={{ fontSize: svgPx(12) }} x={labelX} y={14} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className="fill-rose-700 dark:fill-rose-300">
           {`x = ${f(value)} · z = ${f(z, 2)} · Φ = ${pct(phi)}`}
         </text>
-      </svg>
+      </FitSvg>
       <div className="mt-2 flex flex-wrap justify-center gap-1.5" role="group" aria-label={t("pick")}>
         {chips.map((v) => (
           <button

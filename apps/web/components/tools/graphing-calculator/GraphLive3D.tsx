@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useRef, useState } from "react";
+import { useMotionEpisode, useMotionLoop } from "@/components/tool-ui/motion/motion";
 import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
 import { derivativeAt, secondDerivativeAt } from "@tooloralabs/tools";
@@ -26,24 +27,18 @@ export default function GraphLive3D() {
   const tc = useTranslations("common.live3d");
   const { expression, xMin, xMax, f, analysis: a, traceX, setTraceX } = useGraphLive();
   const [mode, setMode] = useState<GraphSceneMode>("plot");
-  const [playing, setPlaying] = useState(false);
+  const motion = useMotionEpisode();
+  const playing = motion.active;
+  const box = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (!playing) return;
-    let raf = 0;
-    let last = performance.now();
-    const tick = (now: number) => {
-      const dt = (now - last) / 1000;
-      last = now;
-      setTraceX((prev) => {
-        const next = prev + ((xMax - xMin) / 6) * dt;
-        return next >= xMax ? xMin : next;
-      });
-      raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [playing, xMin, xMax, setTraceX]);
+  // tool-ui/motion: the trace point sweeps during the visitor's Play episode (at most EPISODE_MS), paused off
+  // screen or with the page hidden, never for reduced motion.
+  useMotionLoop(box, (dt) => {
+    setTraceX((prev) => {
+      const next = prev + ((xMax - xMin) / 6) * dt;
+      return next >= xMax ? xMin : next;
+    });
+  }, playing, motion.stop);
 
   const ty = f(traceX);
   const d1 = derivativeAt(f, traceX);
@@ -112,7 +107,7 @@ export default function GraphLive3D() {
     }`;
 
   return (
-    <div className="flex h-full flex-col gap-3">
+    <div ref={box} className="flex h-full flex-col gap-3">
       <div className="flex flex-wrap items-center gap-2">
         <div role="group" className="flex gap-1">
           <button type="button" aria-pressed={mode === "plot"} className={btn(mode === "plot")} onClick={() => setMode("plot")}>
@@ -122,7 +117,7 @@ export default function GraphLive3D() {
             {t("modeSurface")}
           </button>
         </div>
-        <button type="button" aria-pressed={playing} className={btn(playing)} onClick={() => setPlaying((v) => !v)}>
+        <button type="button" aria-pressed={playing} className={btn(playing)} onClick={() => (playing ? motion.stop() : motion.play())}>
           {playing ? t("pause") : t("play")}
         </button>
         <label className="flex min-w-[160px] flex-1 items-center gap-2 text-xs text-zinc-500 dark:text-zinc-400">
@@ -135,7 +130,7 @@ export default function GraphLive3D() {
             step={(xMax - xMin) / 400}
             value={traceX}
             onChange={(e) => {
-              setPlaying(false);
+              motion.stop();
               setTraceX(Number(e.target.value));
             }}
             className="w-full accent-blue-600"

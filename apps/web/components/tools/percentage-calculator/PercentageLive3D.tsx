@@ -113,7 +113,7 @@ export default function PercentageLive3D({ live }: { live: PercentageLive }) {
       headings={[tc("colQuantity"), tc("colFormula"), tc("colValue")]}
       hint={tc("hint")}
       drawing={
-        <Scene3D camera={[3.2, 4.6, 4.6]} autoRotate>
+        <Scene3D camera={[3.2, 4.6, 4.6]}>
           <PercentageScene3D
             share={frame.share}
             loss={mode === "percentage-change" && frame.share < 100}

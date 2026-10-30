@@ -24,12 +24,12 @@ export default function ProbabilityRegionStackedBar() {
               style={{ width: `${p * 100}%` }}
               className={`${REGION_BG[i]} flex items-center justify-center ${target[i] ? "ring-2 ring-inset ring-zinc-900 dark:ring-white" : "opacity-70"}`}
             >
-              {p >= 0.09 && <span className="font-mono text-[11px] font-bold text-white drop-shadow">{pct(p, 1)}</span>}
+              {p >= 0.09 && <span className="font-mono text-xs font-bold text-white drop-shadow">{pct(p, 1)}</span>}
             </div>
           ) : null,
         )}
       </div>
-      <div dir="ltr" className="mt-1 flex justify-between font-mono text-[10px] text-zinc-400">
+      <div dir="ltr" className="mt-1 flex justify-between font-mono text-xs text-zinc-400">
         <span>0%</span>
         <span>50%</span>
         <span>100%</span>

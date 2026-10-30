@@ -30,7 +30,7 @@ type Props = {
 
 const field =
   "w-full min-w-0 rounded-lg border border-zinc-300 bg-white px-2.5 py-2 text-sm text-zinc-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 dark:focus:ring-blue-500/20";
-const label = "mb-1 block text-[11px] font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400";
+const label = "mb-1 block text-xs font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400";
 const iconBtn =
   "flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-zinc-300 text-zinc-500 transition hover:bg-zinc-100 disabled:cursor-not-allowed disabled:opacity-40 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800";
 
@@ -104,7 +104,7 @@ export default function InvoiceBatchEditor(p: Props) {
             }`}
           >
             <span className="max-w-[7.5rem] truncate text-xs font-semibold text-zinc-800 dark:text-zinc-100">{inv.number || t("untitled", { n: i + 1 })}</span>
-            <span dir="ltr" className="font-mono text-[10px] text-zinc-500 dark:text-zinc-400">
+            <span dir="ltr" className="font-mono text-xs text-zinc-500 dark:text-zinc-400">
               {f.money(totals[i] ?? 0)}
             </span>
           </button>
@@ -164,15 +164,15 @@ export default function InvoiceBatchEditor(p: Props) {
                   </div>
                   <div className="mt-1.5 grid grid-cols-[minmax(0,0.8fr)_minmax(0,1fr)_minmax(0,1.3fr)] items-end gap-1.5">
                     <label className="min-w-0">
-                      <span className="block text-[10px] text-zinc-400">{t("qty")}</span>
+                      <span className="block text-xs text-zinc-400">{t("qty")}</span>
                       <input className={`${field} py-1.5`} inputMode="decimal" dir="ltr" value={item.quantity} onChange={(e) => p.onUpdateItem(invoice.id, item.id, { quantity: e.target.value })} data-testid="qty-input" />
                     </label>
                     <label className="min-w-0">
-                      <span className="block text-[10px] text-zinc-400">{t("price")}</span>
+                      <span className="block text-xs text-zinc-400">{t("price")}</span>
                       <input className={`${field} py-1.5`} inputMode="decimal" dir="ltr" value={item.unitPrice} onChange={(e) => p.onUpdateItem(invoice.id, item.id, { unitPrice: e.target.value })} data-testid="price-input" />
                     </label>
                     <div className="min-w-0 text-end">
-                      <span className="block text-[10px] text-zinc-400">{t("lineTotal")}</span>
+                      <span className="block text-xs text-zinc-400">{t("lineTotal")}</span>
                       <span dir="ltr" className="block truncate py-1.5 font-mono text-sm font-bold text-blue-700 dark:text-blue-300" data-testid="line-total">
                         {f.money(total)}
                       </span>
@@ -192,7 +192,7 @@ export default function InvoiceBatchEditor(p: Props) {
           {t("empty")}
         </div>
       )}
-      <p className="mt-3 text-[11px] text-zinc-400 dark:text-zinc-500">{t("savedNote")}</p>
+      <p className="mt-3 text-xs text-zinc-400 dark:text-zinc-500">{t("savedNote")}</p>
 
       {/* §20 quick picks: fills the rest of the column with real rates, each pricing the selected invoice. */}
       <div className="mt-3 flex min-h-[11rem] flex-1 flex-col">
@@ -204,13 +204,13 @@ export default function InvoiceBatchEditor(p: Props) {
                 <button type="button" disabled={!invoice} onClick={() => p.onApplyRate(r.rate!)} className="flex w-full items-center gap-2 px-2.5 py-1.5 text-start transition hover:bg-blue-50 disabled:opacity-50 dark:hover:bg-blue-500/10">
                   <span className="min-w-0 flex-1 truncate text-xs text-zinc-700 dark:text-zinc-300">{regions(r.country)}</span>
                   <span dir="ltr" className="font-mono text-xs font-semibold text-blue-700 dark:text-blue-300">{f.pct(r.rate!, 2)}</span>
-                  <span dir="ltr" className="w-20 truncate text-end font-mono text-[10px] text-zinc-500">{f.money(selectedNet * (1 + r.rate! / 100))}</span>
+                  <span dir="ltr" className="w-20 truncate text-end font-mono text-xs text-zinc-500">{f.money(selectedNet * (1 + r.rate! / 100))}</span>
                 </button>
               </li>
             ))}
           </ul>
         </div>
-        <p className="mt-1 text-[10px] text-zinc-400">{t("quickRatesNote")}</p>
+        <p className="mt-1 text-xs text-zinc-400">{t("quickRatesNote")}</p>
       </div>
     </SectionCard>
   );

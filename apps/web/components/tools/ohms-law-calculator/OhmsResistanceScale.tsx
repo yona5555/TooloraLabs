@@ -62,10 +62,10 @@ export default function OhmsResistanceScale() {
       {ticks.map((e) => (
         <line key={e} x1={sx(e)} y1={AXIS + 5} x2={sx(e)} y2={AXIS + 9} className="stroke-zinc-400 dark:stroke-zinc-500" />
       ))}
-      <text style={{ fontSize: svgPx(12) }} x={X0 - 6} y={AXIS + 4} textAnchor="end" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={X0 - 6} y={AXIS + 4} textAnchor="end" fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
         {pow10(lo)}
       </text>
-      <text style={{ fontSize: svgPx(12) }} x={X1 + 6} y={AXIS + 4} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={X1 + 6} y={AXIS + 4} fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
         {pow10(hi)}
       </text>
       <text style={{ fontSize: svgPx(12) }} x={X0} y={AXIS - 14} className="fill-blue-600 dark:fill-blue-400">
@@ -85,10 +85,10 @@ export default function OhmsResistanceScale() {
             <text style={{ fontSize: svgPx(12) }} x={slx} y={ny} textAnchor="middle" fontWeight={600} className="fill-zinc-600 dark:fill-zinc-300">
               {t(`refs.${r.key}`)}
             </text>
-            <text style={{ fontSize: svgPx(12) }} x={slx} y={ny + 13} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-400 dark:fill-zinc-500">
+            <text style={{ fontSize: svgPx(12) }} x={slx} y={ny + 13} textAnchor="middle" fontFamily="var(--font-mono)" className="fill-zinc-400 dark:fill-zinc-500">
               {`${f(r.resistance, 2)} Ω`}
             </text>
-            <text style={{ fontSize: svgPx(12) }} x={slx} y={ny + 26} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-emerald-600 dark:fill-emerald-400">
+            <text style={{ fontSize: svgPx(12) }} x={slx} y={ny + 26} textAnchor="middle" fontFamily="var(--font-mono)" className="fill-emerald-600 dark:fill-emerald-400">
               {`${f(V / r.resistance, 2)} A`}
             </text>
           </g>
@@ -96,7 +96,7 @@ export default function OhmsResistanceScale() {
       })}
       <line x1={x} y1={AXIS - 6} x2={lx} y2={30} strokeWidth={1.5} className="stroke-red-600 dark:stroke-red-400" />
       <path d={`M ${x - 5} ${AXIS - 13} L ${x + 5} ${AXIS - 13} L ${x} ${AXIS - 5} z`} className="fill-red-600 dark:fill-red-400" />
-      <text style={{ fontSize: svgPx(12) }} x={lx} y={24} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-red-600 dark:fill-red-400">
+      <text style={{ fontSize: svgPx(12) }} x={lx} y={24} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className="fill-red-600 dark:fill-red-400">
         {`R = ${f(R)} Ω`}
       </text>
     </svg>

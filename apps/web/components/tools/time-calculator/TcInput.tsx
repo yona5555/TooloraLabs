@@ -21,7 +21,7 @@ export const field =
   "w-full min-w-0 rounded-lg border border-zinc-300 bg-white px-2 py-1.5 text-sm text-zinc-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 dark:focus:ring-blue-500/20";
 const label = "mb-1 block text-xs font-semibold text-zinc-600 dark:text-zinc-300";
 const chip =
-  "rounded-full border border-zinc-300 px-2.5 py-1 text-[11px] font-semibold text-zinc-600 transition hover:border-blue-400 hover:bg-blue-50 hover:text-blue-700 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-blue-500/10 dark:hover:text-blue-300";
+  "rounded-full border border-zinc-300 px-2.5 py-1 text-xs font-semibold text-zinc-600 transition hover:border-blue-400 hover:bg-blue-50 hover:text-blue-700 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-blue-500/10 dark:hover:text-blue-300";
 
 export function Segmented<T extends string>({ value, options, onChange }: { value: T; options: { v: T; label: string }[]; onChange: (v: T) => void }) {
   return (
@@ -79,7 +79,7 @@ export default function TcInput({ s, set, d, f, onCopy, onShare, onReset, copied
       <div>
         <span className={label}>{t("input.mode")}</span>
         <Segmented<Mode> value={s.mode} onChange={(mode) => set({ mode })} options={MODES.map((m) => ({ v: m, label: t(`modes.${m}`) }))} />
-        <p className="mt-1.5 text-[11px] leading-4 text-zinc-500 dark:text-zinc-400">{t(`modeHint.${s.mode}`)}</p>
+        <p className="mt-1.5 text-xs leading-4 text-zinc-500 dark:text-zinc-400">{t(`modeHint.${s.mode}`)}</p>
       </div>
 
       <div>
@@ -89,7 +89,7 @@ export default function TcInput({ s, set, d, f, onCopy, onShare, onReset, copied
 
       {s.mode === "sum" && (
         <div>
-          <div className="grid grid-cols-[1.9rem_minmax(0,1fr)_2.6rem_2.3rem_2.3rem_1.6rem] gap-1 text-[10px] font-semibold text-zinc-500 dark:text-zinc-400">
+          <div className="grid grid-cols-[1.9rem_minmax(0,1fr)_2.6rem_2.3rem_2.3rem_1.6rem] gap-1 text-xs font-semibold text-zinc-500 dark:text-zinc-400">
             <span />
             <span>{t("input.entry")}</span>
             <span className="text-center">{t("input.h")}</span>
@@ -179,7 +179,7 @@ export default function TcInput({ s, set, d, f, onCopy, onShare, onReset, copied
                 <input type="date" value={s.span.endDate} onChange={(e) => e.target.value && set({ span: { ...s.span, endDate: e.target.value } })} className={field} />
               </label>
             ) : (
-              <p className="col-span-2 text-[11px] text-zinc-500 dark:text-zinc-400">{t("input.autoEnd", { date: f.date(d.span.endDate) })}</p>
+              <p className="col-span-2 text-xs text-zinc-500 dark:text-zinc-400">{t("input.autoEnd", { date: f.date(d.span.endDate) })}</p>
             )}
             <label className="block">
               <span className={label}>{t("input.breakMin")}</span>
@@ -237,7 +237,7 @@ export default function TcInput({ s, set, d, f, onCopy, onShare, onReset, copied
             </select>
           </label>
           <div className="space-y-1">
-            <div className="grid grid-cols-[3.6rem_minmax(0,1fr)_minmax(0,1fr)_2.6rem] gap-1 text-[10px] font-semibold text-zinc-500 dark:text-zinc-400">
+            <div className="grid grid-cols-[3.6rem_minmax(0,1fr)_minmax(0,1fr)_2.6rem] gap-1 text-xs font-semibold text-zinc-500 dark:text-zinc-400">
               <span>{t("input.day")}</span>
               <span>{t("input.start")}</span>
               <span>{t("input.end")}</span>
@@ -340,7 +340,7 @@ export default function TcInput({ s, set, d, f, onCopy, onShare, onReset, copied
           <RotateCcw size={15} />
         </button>
       </div>
-      <p className="text-[11px] leading-4 text-zinc-500 dark:text-zinc-400">{t("input.savedNote")}</p>
+      <p className="text-xs leading-4 text-zinc-500 dark:text-zinc-400">{t("input.savedNote")}</p>
     </SectionCard>
   );
 }

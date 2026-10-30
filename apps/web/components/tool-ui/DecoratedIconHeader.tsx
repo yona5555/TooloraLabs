@@ -23,7 +23,7 @@ const FINANCIAL_SYMBOLS = ["$", "€", "¢", "£"];
 const GEOMETRIC_SYMBOLS = ["△", "○", "□", "◇"];
 const SYMBOL_POOL = [...MATH_SYMBOLS, ...FINANCIAL_SYMBOLS, ...GEOMETRIC_SYMBOLS];
 
-const SIZE_CLASSES = ["text-[11px] sm:text-xs", "text-xs sm:text-sm", "text-sm sm:text-base", "text-sm sm:text-lg"];
+const SIZE_CLASSES = ["text-xs", "text-xs sm:text-sm", "text-sm sm:text-base", "text-sm sm:text-lg"];
 // Icon and decoration are always dark now (§34 revision) — every palette color in
 // lib/category-palette.ts is a calm/pastel tone, and dark reads more clearly on all
 // of them than white did on the ones near the light end of the palette.

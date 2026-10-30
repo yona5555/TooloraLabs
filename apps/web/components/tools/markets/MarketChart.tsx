@@ -244,7 +244,7 @@ export default function MarketChart({
         {state.status === "ready" && shown && (
           <div
             data-testid="candle-tooltip"
-            className="pointer-events-none absolute start-2 top-2 z-10 rounded-lg bg-white/90 px-2.5 py-1.5 font-mono text-[11px] leading-5 text-zinc-700 shadow-sm ring-1 ring-zinc-200 dark:bg-zinc-900/90 dark:text-zinc-200 dark:ring-zinc-700"
+            className="pointer-events-none absolute start-2 top-2 z-10 rounded-lg bg-white/90 px-2.5 py-1.5 font-mono text-xs leading-5 text-zinc-700 shadow-sm ring-1 ring-zinc-200 dark:bg-zinc-900/90 dark:text-zinc-200 dark:ring-zinc-700"
           >
             <div className="font-sans font-semibold">{formatDate(shown.time)}</div>
             {mode === "candles" ? (

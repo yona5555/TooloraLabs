@@ -43,7 +43,7 @@ export default function QRLevelBars() {
               rx={5}
               className={active ? "fill-blue-600 dark:fill-blue-400" : fits ? "fill-blue-300 hover:fill-blue-400 dark:fill-blue-800" : "fill-zinc-300 dark:fill-zinc-700"}
             />
-            <text style={{ fontSize: svgPx(12) }} x={x + w / 2} y={y(cap) - 6} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={x + w / 2} y={y(cap) - 6} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
               {f(cap)}
             </text>
             <text style={{ fontSize: svgPx(13) }} x={x + w / 2} y={BASE + 16} textAnchor="middle" fontWeight={700} className={active ? "fill-blue-700 dark:fill-blue-300" : "fill-zinc-600 dark:fill-zinc-300"}>

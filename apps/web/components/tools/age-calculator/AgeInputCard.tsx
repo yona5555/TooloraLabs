@@ -165,7 +165,7 @@ export default function AgeInputCard({ state, onChange, onReset, d, f, copyText 
           </select>
         </label>
       </div>
-      <p className="-mt-2 text-[11px] leading-4 text-zinc-500 dark:text-zinc-400">{t("input.leapNote")}</p>
+      <p className="-mt-2 text-xs leading-4 text-zinc-500 dark:text-zinc-400">{t("input.leapNote")}</p>
 
       {d.error && (
         <p role="alert" className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-xs font-medium text-red-700 dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-300">
@@ -200,7 +200,7 @@ export default function AgeInputCard({ state, onChange, onReset, d, f, copyText 
           <RotateCcw size={14} />
         </button>
       </div>
-      <p className="text-[11px] leading-4 text-zinc-500 dark:text-zinc-400">{t("input.linkNote")}</p>
+      <p className="text-xs leading-4 text-zinc-500 dark:text-zinc-400">{t("input.linkNote")}</p>
     </SectionCard>
   );
 }

@@ -53,7 +53,7 @@ export default function PasswordPolicyRanking() {
               rx={3}
               className={me ? "fill-blue-600 dark:fill-blue-400" : r.bits >= 60 ? "fill-emerald-400 dark:fill-emerald-600" : "fill-zinc-300 dark:fill-zinc-600"}
             />
-            <text style={{ fontSize: svgPx(12) }} x={BAR_X + w + 5} y={y + 17} fontWeight={me ? 700 : 500} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
+            <text style={{ fontSize: svgPx(12) }} x={BAR_X + w + 5} y={y + 17} fontWeight={me ? 700 : 500} fontFamily="var(--font-mono)" className="fill-zinc-700 dark:fill-zinc-200">
               {f(r.bits, 1)}
             </text>
           </g>

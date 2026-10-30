@@ -55,7 +55,7 @@ export default function CryptoCoinTimeline({ coin, digitStyle }: Props) {
             <li key={s.key} className="relative flex flex-col items-center px-1 text-center">
               <span className={`z-10 h-4 w-4 rounded-full ring-4 ring-white dark:ring-zinc-900 ${s.dot}`} />
               <span className="mt-2 text-xs font-semibold text-zinc-800 dark:text-zinc-100">{t(`stations.${s.key}`)}</span>
-              <span className="text-[11px] text-zinc-500 dark:text-zinc-400">
+              <span className="text-xs text-zinc-500 dark:text-zinc-400">
                 {s.key === "now" ? t("today") : s.key === "genesis" && genesisDate === undefined ? "…" : s.date ? fmtDate(s.date) : t("notRecorded")}
               </span>
               {s.price !== null && (
@@ -64,7 +64,7 @@ export default function CryptoCoinTimeline({ coin, digitStyle }: Props) {
                 </span>
               )}
               {s.pct !== null && (
-                <span className={`font-mono text-[11px] font-semibold ${changeColor(-s.pct)}`}>
+                <span className={`font-mono text-xs font-semibold ${changeColor(-s.pct)}`}>
                   {t("nowVs", { pct: ltrIsolate(f.signedPct(s.pct, 1)) })}
                 </span>
               )}

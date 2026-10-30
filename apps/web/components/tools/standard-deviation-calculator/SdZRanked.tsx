@@ -37,11 +37,11 @@ export default function SdZRanked() {
         const y = i * ROW;
         return (
           <g key={r.index}>
-            <text style={{ fontSize: svgPx(12) }} x={LABEL_W - 6} y={y + 16} textAnchor="end" fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
+            <text style={{ fontSize: svgPx(12) }} x={LABEL_W - 6} y={y + 16} textAnchor="end" fontFamily="var(--font-mono)" className="fill-zinc-700 dark:fill-zinc-200">
               {`x = ${f(r.value)}`}
             </text>
             <rect x={LABEL_W} y={y + 5} width={Math.max(2, sx(r.z) - LABEL_W)} height={ROW - 9} rx={4} className={BAND_FILL[bandOf(r.z)]} />
-            <text style={{ fontSize: svgPx(12) }} x={W} y={y + 16} textAnchor="end" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={W} y={y + 16} textAnchor="end" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
               {`${r.z >= 0 ? "+" : "−"}${f(Math.abs(r.z), 2)}`}
             </text>
           </g>

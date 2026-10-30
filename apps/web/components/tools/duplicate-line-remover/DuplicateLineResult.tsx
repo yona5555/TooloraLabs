@@ -60,13 +60,13 @@ export default function DuplicateLineResult() {
       <ol data-preview="visual" className="mt-4 grid max-h-96 auto-rows-fr gap-1 overflow-auto rounded-xl bg-zinc-50 p-2 lg:max-h-none lg:min-h-0 lg:flex-1 lg:basis-0 dark:bg-zinc-800/50">
         {a.lines.map((l) => (
           <li key={l.position} className={`flex items-center gap-2 rounded-md px-2 py-1 text-sm ${l.kept ? "bg-white dark:bg-zinc-900" : "bg-rose-50 dark:bg-rose-500/10"}`}>
-            <span className="w-6 shrink-0 text-end font-mono text-[11px] text-zinc-400">{l.position}</span>
-            <span dir="auto" className={`min-w-0 flex-1 truncate font-mono ${l.kept ? "text-zinc-800 dark:text-zinc-100" : "text-rose-600 line-through dark:text-rose-300"}`}>
+            <span className="w-6 shrink-0 text-end font-mono text-xs text-zinc-400">{l.position}</span>
+            <span dir="auto" className={`min-w-0 flex-1 break-words font-mono ${l.kept ? "text-zinc-800 dark:text-zinc-100" : "text-rose-600 line-through dark:text-rose-300"}`}>
               {l.raw}
             </span>
-            {!l.kept && <span className="shrink-0 text-[11px] text-rose-600 dark:text-rose-300">{tr("repeats", { n: l.firstPosition })}</span>}
+            {!l.kept && <span className="shrink-0 text-xs text-rose-600 dark:text-rose-300">{tr("repeats", { n: l.firstPosition })}</span>}
             {l.kept && l.occurrences > 1 && (
-              <span className="shrink-0 rounded bg-amber-100 px-1.5 text-[11px] font-bold text-amber-700 dark:bg-amber-500/20 dark:text-amber-300">×{l.occurrences}</span>
+              <span className="shrink-0 rounded bg-amber-100 px-1.5 text-xs font-bold text-amber-700 dark:bg-amber-500/20 dark:text-amber-300">×{l.occurrences}</span>
             )}
           </li>
         ))}

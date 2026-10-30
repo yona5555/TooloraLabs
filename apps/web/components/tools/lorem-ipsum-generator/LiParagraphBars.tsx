@@ -30,7 +30,7 @@ export default function LiParagraphBars() {
                 onClick={() => selectParagraph(on ? null : p.index, true)}
                 className={`grid w-full grid-cols-[2rem_1fr_2.75rem] items-center gap-2 rounded-lg px-1.5 py-1 text-start transition ${on ? "bg-amber-100 ring-2 ring-amber-400 dark:bg-amber-500/15" : "hover:bg-zinc-100 dark:hover:bg-zinc-800"}`}
               >
-                <span className="flex items-center gap-1 text-[11px] font-semibold text-zinc-600 dark:text-zinc-300">
+                <span className="flex items-center gap-1 text-xs font-semibold text-zinc-600 dark:text-zinc-300">
                   <span className={`h-2 w-2 shrink-0 rounded-full ${SEGMENT_DOTS[i % SEGMENT_DOTS.length]}`} />¶{f(i + 1)}
                 </span>
                 <span className="relative h-5 rounded bg-zinc-100 dark:bg-zinc-800">
@@ -38,7 +38,7 @@ export default function LiParagraphBars() {
                     className={`absolute inset-y-0 start-0 rounded ${on ? "bg-amber-400" : SEGMENT_DOTS[i % SEGMENT_DOTS.length]}`}
                     style={{ width: `${(p.words / max) * 100}%`, transition: "width 300ms ease" }}
                   />
-                  <span dir="auto" className="absolute inset-y-0 end-1.5 flex items-center text-[10px] text-zinc-600 dark:text-zinc-200">
+                  <span dir="auto" className="absolute inset-y-0 end-1.5 flex items-center text-xs text-zinc-600 dark:text-zinc-200">
                     {t("sentencesShort", { n: f(p.sentences) })}
                   </span>
                 </span>
@@ -48,7 +48,7 @@ export default function LiParagraphBars() {
           );
         })}
       </ul>
-      <p className="mt-2 text-[11px] text-amber-700 dark:text-amber-300">
+      <p className="mt-2 text-xs text-amber-700 dark:text-amber-300">
         {t("hint")}
         {a.paragraphs.length > MAX_ROWS && ` · ${t("capped", { n: f(MAX_ROWS), total: f(a.paragraphs.length) })}`}
       </p>

@@ -21,12 +21,12 @@ export default function SalesTaxRateComparisonBarDiagram({ bars, formatValue, ca
           const heightPct = Math.max((bar.value / maxValue) * 100, 4);
           return (
             <div key={bar.label} className="flex w-12 shrink-0 flex-col items-center justify-end gap-1" style={{ height: "100%" }}>
-              <span className="text-[10px] font-bold text-zinc-700 dark:text-zinc-200">{formatValue(bar.value)}</span>
+              <span className="text-xs font-bold text-zinc-700 dark:text-zinc-200">{formatValue(bar.value)}</span>
               <div
                 className={`w-8 rounded-t-md ${bar.highlighted ? "bg-blue-600 dark:bg-blue-400" : "bg-zinc-300 dark:bg-zinc-600"}`}
                 style={{ height: `${heightPct}%` }}
               />
-              <span className="text-[10px] text-zinc-500 dark:text-zinc-400">{bar.label}</span>
+              <span className="text-xs text-zinc-500 dark:text-zinc-400">{bar.label}</span>
             </div>
           );
         })}

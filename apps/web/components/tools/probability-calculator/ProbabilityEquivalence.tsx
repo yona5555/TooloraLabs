@@ -43,9 +43,9 @@ export default function ProbabilityEquivalence() {
     <div className="grid w-full grid-cols-2 gap-2 lg:w-[320px]">
       {forms.map((form, i) => (
         <div key={i} className={`flex flex-col items-center rounded-xl border px-2 py-2.5 ${i === 2 ? "border-blue-500 bg-blue-50 dark:border-blue-400 dark:bg-blue-500/15" : "border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800/40"}`}>
-          <span className="text-[11px] font-semibold text-zinc-500 dark:text-zinc-400">{form.label}</span>
+          <span className="text-xs font-semibold text-zinc-500 dark:text-zinc-400">{form.label}</span>
           <span dir="ltr" className="font-mono text-base font-bold text-zinc-800 dark:text-zinc-100">{form.value}</span>
-          <span aria-hidden className="text-[10px] font-bold text-blue-500">{i < forms.length - 1 ? "=" : "≡"}</span>
+          <span aria-hidden className="text-xs font-bold text-blue-500">{i < forms.length - 1 ? "=" : "≡"}</span>
         </div>
       ))}
     </div>

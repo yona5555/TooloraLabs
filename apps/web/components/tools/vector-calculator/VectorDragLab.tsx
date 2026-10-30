@@ -1,5 +1,6 @@
 "use client";
-import { Coordinates, Mafs, MovablePoint, Polygon, Text, Theme, Vector } from "mafs";
+import { Coordinates, MovablePoint, Polygon, Text, Theme, Vector } from "mafs";
+import FitMafs from "@/components/tool-ui/FitMafs";
 import "mafs/core.css";
 import "@/components/tool-ui/mafsTheme.css";
 import { useTranslations } from "next-intl";
@@ -39,7 +40,7 @@ export default function VectorDragLab() {
       indicator={
         <div className="w-full max-w-[300px] sm:w-[380px] sm:max-w-none">
           <div dir="ltr" className="mafs-canvas overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-700">
-            <Mafs viewBox={{ x: [-L, L], y: [-L, L] }} preserveAspectRatio="contain" height={320} pan={false} zoom={false}>
+            <FitMafs viewBox={{ x: [-L, L], y: [-L, L] }} preserveAspectRatio="contain" height={320} pan={false} zoom={false}>
               {/* No tick label on the frame edge (it would be clipped) or at the origin. */}
               <Coordinates.Cartesian
                 xAxis={{ lines: step, labels: (x) => (Math.abs(x) < L - 1e-9 && x !== 0 ? String(x) : "") }}
@@ -56,7 +57,7 @@ export default function VectorDragLab() {
               <Text x={r.sum[0]} y={r.sum[1]} attach="ne" attachDistance={10} color={Theme.violet} size={13}>A+B</Text>
               <MovablePoint point={[ax, ay]} color={Theme.blue} onMove={([x, y]) => { setDim("ax", clean(fit(x))); setDim("ay", clean(fit(y))); }} />
               <MovablePoint point={[bx, by]} color={Theme.green} onMove={([x, y]) => { setDim("bx", clean(fit(x))); setDim("by", clean(fit(y))); }} />
-            </Mafs>
+            </FitMafs>
           </div>
           <p className="mt-2 text-center text-xs text-zinc-500 dark:text-zinc-400">{t("hint", { az: dims.az || "0", bz: dims.bz || "0" })}</p>
         </div>

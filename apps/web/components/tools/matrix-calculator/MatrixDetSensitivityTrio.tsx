@@ -26,7 +26,7 @@ export default function MatrixDetSensitivityTrio() {
         return (
           <div key={c.delta} className={`flex w-[100px] flex-col items-center rounded-xl border px-2 pt-2 pb-3 ${current ? "border-blue-400 bg-blue-50 dark:border-blue-400/60 dark:bg-blue-500/10" : "border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800/40"}`}>
             <p className="text-xs font-semibold text-zinc-600 dark:text-zinc-300">{label(c.delta)}</p>
-            <p dir="ltr" className="font-mono text-[11px] text-zinc-500 dark:text-zinc-400">{`a₁₁ = ${f(c.a11)}`}</p>
+            <p dir="ltr" className="font-mono text-xs text-zinc-500 dark:text-zinc-400">{`a₁₁ = ${f(c.a11)}`}</p>
             <div className="mt-2 flex h-[128px] items-end">
               <div style={{ height: h }} className={`w-10 rounded-t-md ${c.det < 0 ? "bg-amber-500 dark:bg-amber-400" : current ? "bg-blue-600 dark:bg-blue-400" : "bg-zinc-400 dark:bg-zinc-500"}`} />
             </div>
