@@ -13,7 +13,7 @@ import { mkdirSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { BROKEN, CLEAN, PERF_BROKEN, PERF_CLEAN, startFixtureSite } from "./gates/fixture-site.mjs";
+import { BROKEN, CLEAN, DETERMINISM, PERF_BROKEN, PERF_CLEAN, STATIC_BROKEN, STATIC_CLEAN, startFixtureSite } from "./gates/fixture-site.mjs";
 
 const ROOT = fileURLToPath(new URL("..", import.meta.url));
 const WEB = join(ROOT, "apps/web");
@@ -89,6 +89,34 @@ test("site audit fails on every broken page (overlap, SVG clip, HTML clip, <12px
   assert.deepEqual(clean, [], "the clean control page must have no finding");
 });
 
+test("site audit: two runs of a page with random content and a slow theme transition report identical findings", async () => {
+  const audit = async (n) => {
+    const out = join(TMP, `determinism-${n}.json`);
+    await gateAsync("node", ["scripts/site-audit.mjs", DETERMINISM], { cwd: WEB, env: { BASE: `http://127.0.0.1:${SITE_PORT}`, LOCALES: "en", WIDTHS: "1440", OUT: out } });
+    return JSON.parse(readFileSync(out, "utf8")).findings;
+  };
+  const first = await audit(1);
+  assert.ok(first.some((f) => f.criterion === "small"), "the random rows must be measured");
+  assert.ok(first.some((f) => f.detail?.text === "2030-01-16T12:00:00.000Z"), `the browser clock must be the fixed one, not one that moves with the build: ${JSON.stringify(first).slice(0, 600)}`);
+  assert.ok(!first.some((f) => f.criterion === "a11y"), `the theme transition must be over before contrast is read: ${JSON.stringify(first).slice(0, 600)}`);
+  assert.deepEqual(await audit(2), first);
+});
+
+test("deterministic budgets fail on a page over each budget, pass the clean one, and repeat exactly", async () => {
+  const run = async (n) => {
+    const out = join(TMP, `perf-static-${n}.json`);
+    const r = await gateAsync("node", ["scripts/perf-static.mjs"], { cwd: WEB, env: { BASE: `http://127.0.0.1:${SITE_PORT}/static-canary`, LOCALES: "en", OUT: out } });
+    return { r, pages: JSON.parse(readFileSync(out, "utf8")).pages };
+  };
+  const { r, pages } = await run(1);
+  failsWith(r, /error title=perf-static/, "deterministic budgets");
+  const at = (page) => pages.find((p) => p.page === page) ?? assert.fail(`not measured: ${page}`);
+  for (const [page, [budget]] of Object.entries(STATIC_BROKEN)) assert.deepEqual(at(page).over, [budget], `${page}: ${JSON.stringify(at(page))}`);
+  assert.deepEqual(at(STATIC_CLEAN).over, [], `the clean page must pass: ${JSON.stringify(at(STATIC_CLEAN))}`);
+  assert.equal(at(STATIC_CLEAN).values.lcpInHtml, true);
+  assert.deepEqual((await run(2)).pages, pages, "two runs must give identical values");
+});
+
 test("performance budgets fail on a page over each budget (LCP, TBT, CLS, Performance, JS) and pass the clean one", async () => {
   const out = join(TMP, "perf-budget.json");
   const r = await gateAsync("node", ["scripts/perf-budget.mjs"], { cwd: WEB, env: { BASE: `http://127.0.0.1:${SITE_PORT}/perf-canary`, LOCALES: "en", OUT: out } });
@@ -120,26 +148,85 @@ test("site-audit ratchet: a count increase fails, a decrease passes, a new page 
   const baseline = writeJson("ra-sa-baseline.json", { "/en/tools/a": { overlap: 0, clip: 0, small: 2, hydration: 0, console: 0, a11y: 0, link: 0, idle: 0 } });
   const measured = writeText("ra-sa-measured.txt", "/en/tools/a\n");
 
-  const worse = writeJson("ra-sa-worse.json", { findings: Array(3).fill({ page: "/en/tools/a", criterion: "small" }) });
+  const worse = writeJson("ra-sa-worse.json", { findings: Array(3).fill({ page: "/en/tools/a", criterion: "small" }), measured: ["/en/tools/a"] });
   failsWith(ratchet(["check", "site-audit", worse, baseline], { MEASURED: measured }), /\/en\/tools\/a: small 3 \(baseline 2\)/, "site-audit ratchet (increase)");
 
-  const better = writeJson("ra-sa-better.json", { findings: [{ page: "/en/tools/a", criterion: "small" }] });
+  const better = writeJson("ra-sa-better.json", { findings: [{ page: "/en/tools/a", criterion: "small" }], measured: ["/en/tools/a"] });
   assert.equal(ratchet(["check", "site-audit", better, baseline], { MEASURED: measured }).status, 0, "a decrease must pass");
 
-  const newPage = writeJson("ra-sa-newpage.json", { findings: [{ page: "/en/tools/zzz-canary", criterion: "overlap" }] });
+  const newPage = writeJson("ra-sa-newpage.json", { findings: [{ page: "/en/tools/zzz-canary", criterion: "overlap" }], measured: ["/en/tools/zzz-canary"] });
   const newMeasured = writeText("ra-sa-newpage-measured.txt", "/en/tools/zzz-canary\n");
   failsWith(ratchet(["check", "site-audit", newPage, baseline], { MEASURED: newMeasured }), /\/en\/tools\/zzz-canary: new page \(no baseline\)/, "site-audit ratchet (new page)");
 });
 
-test("perf-budget ratchet: a metric regression beyond tolerance fails, noise within tolerance passes", () => {
-  const baseline = writeJson("ra-pb-baseline.json", { "/en/tools/a": { lcp: 2000, tbt: 100, cls: 0.05, perf: 92, jsKiB: 300 } });
+test("perf-budget ratchet: one more byte or request fails, an LCP element leaving the server HTML fails, equal or less passes", () => {
+  const base = { jsBytes: 200000, cssBytes: 30000, blocking: 1, requests: 30, lcpInHtml: true };
+  const baseline = writeJson("ra-pb-baseline.json", { "/en/tools/a": base });
   const measured = writeText("ra-pb-measured.txt", "/en/tools/a\n");
+  const run = (name, values) => writeJson(name, { pages: [{ page: "/en/tools/a", values, over: [], error: null }] });
+  for (const [k, v, re] of [["jsBytes", 200001, /jsBytes 200001 vs baseline 200000/], ["cssBytes", 30001, /cssBytes 30001 vs baseline 30000/], ["blocking", 2, /blocking 2 vs baseline 1/], ["requests", 31, /requests 31 vs baseline 30/], ["lcpInHtml", false, /lcpInHtml false vs baseline true/]])
+    failsWith(ratchet(["check", "perf-budget", run(`ra-pb-${k}.json`, { ...base, [k]: v }), baseline], { MEASURED: measured }), re, `perf-budget ratchet (${k})`);
+  failsWith(ratchet(["check", "perf-budget", run("ra-pb-stale.json", base), writeJson("ra-pb-stale-base.json", { "/en/tools/a": { lcp: 2000 } })], { MEASURED: measured }), /baseline entry has no jsBytes/, "perf-budget ratchet (old baseline format)");
+  const same = ratchet(["check", "perf-budget", run("ra-pb-same.json", base), baseline], { MEASURED: measured });
+  assert.equal(same.status, 0, same.out);
+  const less = ratchet(["check", "perf-budget", run("ra-pb-less.json", { ...base, jsBytes: 190000 }), baseline], { MEASURED: measured });
+  assert.equal(less.status, 0, less.out);
+});
 
-  const worse = writeJson("ra-pb-worse.json", { pages: [{ page: "/en/tools/a", median: { lcp: 2400, tbt: 100, cls: 0.05, perf: 92, jsKiB: 300 }, over: [], error: null }] });
-  failsWith(ratchet(["check", "perf-budget", worse, baseline], { MEASURED: measured }), /\/en\/tools\/a: lcp 2400 vs baseline 2000/, "perf-budget ratchet (regression)");
+// Both ratchets compare the exact pages of a shard: results that cannot prove that are a failure, never a pass.
+const CLEAN_COUNTS = { overlap: 0, clip: 0, small: 0, hydration: 0, console: 0, a11y: 0, link: 0, idle: 0 };
+const VALUES = { jsBytes: 200000, cssBytes: 30000, blocking: 1, requests: 30, lcpInHtml: true };
+const RATCHETS = {
+  "site-audit": { baseline: { "/en/tools/a": CLEAN_COUNTS, "/en/tools/b": CLEAN_COUNTS }, run: (pages) => ({ findings: [], measured: pages }) },
+  "perf-budget": { baseline: { "/en/tools/a": VALUES, "/en/tools/b": VALUES }, run: (pages) => ({ pages: pages.map((page) => ({ page, values: VALUES, over: [], error: null })) }) },
+};
+for (const [kind, { baseline, run }] of Object.entries(RATCHETS)) {
+  const base = writeJson(`ps-${kind}-baseline.json`, baseline);
+  const measured = writeText(`ps-${kind}-measured.txt`, "/en/tools/a\n/en/tools/b\n");
+  const check = (file, env = { MEASURED: measured }) => ratchet(["check", kind, file, base], env);
+  test(`${kind} ratchet: a missing results file fails`, () => {
+    failsWith(check(join(TMP, `ps-${kind}-none.json`)), /results file .* is missing/, `${kind} ratchet (missing)`);
+  });
+  test(`${kind} ratchet: an unparsable results file fails`, () => {
+    failsWith(check(writeText(`ps-${kind}-bad.json`, '{"findings": [')), /results file .* is unparsable/, `${kind} ratchet (unparsable)`);
+    failsWith(check(writeJson(`ps-${kind}-shape.json`, { totals: {} })), /results file .* is unparsable/, `${kind} ratchet (no page list)`);
+  });
+  test(`${kind} ratchet: partial results fail, naming the unmeasured page`, () => {
+    failsWith(check(writeJson(`ps-${kind}-partial.json`, run(["/en/tools/a"]))), /1 missing, 0 extra[\s\S]*missing: \/en\/tools\/b/, `${kind} ratchet (partial)`);
+  });
+  test(`${kind} ratchet: an unexpected extra page fails, naming it`, () => {
+    failsWith(check(writeJson(`ps-${kind}-extra.json`, run(["/en/tools/a", "/en/tools/b", "/en/tools/c"]))), /0 missing, 1 extra[\s\S]*extra: \/en\/tools\/c/, `${kind} ratchet (extra)`);
+  });
+  test(`${kind} ratchet: no page list to compare with fails`, () => {
+    failsWith(check(writeJson(`ps-${kind}-nolist.json`, run(["/en/tools/a", "/en/tools/b"])), { MEASURED: "" }), /no page list to compare with/, `${kind} ratchet (no MEASURED)`);
+  });
+  test(`${kind} ratchet: a correct shard with no regression passes`, () => {
+    const r = check(writeJson(`ps-${kind}-ok.json`, run(["/en/tools/a", "/en/tools/b"])));
+    assert.equal(r.status, 0, r.out);
+  });
+}
 
-  const noisy = writeJson("ra-pb-noisy.json", { pages: [{ page: "/en/tools/a", median: { lcp: 2060, tbt: 105, cls: 0.052, perf: 91, jsKiB: 302 }, over: [], error: null }] });
-  assert.equal(ratchet(["check", "perf-budget", noisy, baseline], { MEASURED: measured }).status, 0, "noise within tolerance must pass");
+test("ratchet: a page with no baseline passes only with zero findings or within its full budget", () => {
+  const measured = writeText("nb-measured.txt", "/en/tools/new\n");
+  const empty = writeJson("nb-baseline.json", {});
+  const clean = ratchet(["check", "site-audit", writeJson("nb-sa-clean.json", { findings: [], measured: ["/en/tools/new"] }), empty], { MEASURED: measured });
+  assert.equal(clean.status, 0, clean.out);
+  const within = ratchet(["check", "perf-budget", writeJson("nb-pb-ok.json", { pages: [{ page: "/en/tools/new", values: VALUES, over: [], error: null }] }), empty], { MEASURED: measured });
+  assert.equal(within.status, 0, within.out);
+  failsWith(ratchet(["check", "perf-budget", writeJson("nb-pb-over.json", { pages: [{ page: "/en/tools/new", values: VALUES, over: ["lcp"], error: null }] }), empty], { MEASURED: measured }), /new page \(no baseline\), over lcp/, "perf-budget ratchet (new page over budget)");
+  failsWith(ratchet(["check", "perf-budget", writeJson("nb-pb-err.json", { pages: [{ page: "/en/tools/new", values: null, over: ["error"], error: "boom" }] }), empty], { MEASURED: measured }), /new page \(no baseline\), over error/, "perf-budget ratchet (new page not measured)");
+});
+
+test("shard page list: the same slice the gates take, without a second locale prefix", () => {
+  const pages = writeText("sp-affected.txt", ["/en", "/ar", "/en/tools", "/ar/tools", "/en/docs", "/ar/docs"].join("\n") + "\n");
+  const list = (kind, shard) => {
+    const out = join(TMP, `sp-${kind}.txt`);
+    const r = gate("node", ["scripts/expand-measured-pages.mjs", kind, pages, shard, out]);
+    assert.equal(r.status, 0, r.out);
+    return readFileSync(out, "utf8").split("\n").filter(Boolean);
+  };
+  assert.deepEqual(list("site-audit", "2/3"), ["/en/tools", "/ar/tools"], "site-audit shards locale-free paths");
+  assert.deepEqual(list("perf-budget", "2/3"), ["/ar", "/en/docs"], "perf-budget shards locale-prefixed pages");
 });
 
 test("ratchet baseline check fails when a committed baseline value is raised", () => {
@@ -196,6 +283,45 @@ test("affected pages: an unchanged route is skipped, a tool change marks only it
   assert.deepEqual(affected(main, manifest("shared", { shared: "shared v2" })), ["/en/tools/a", "/en/tools/b"], "a change in the shared chunk must mark every route that loads it, and only those");
   assert.deepEqual(affected(main, manifest("live", { liveSsr: "live v2" })), ["/en/tools/live"], "a change in a request-rendered page's server bundle must mark that page");
   assert.deepEqual(affected(join(TMP, "no-such-manifest.json"), main), ["/en/tools/a", "/en/tools/b", "/en/tools/c", "/en/tools/live"], "without a main manifest every route is affected");
+});
+
+test("cache policy fails on a PR run that saves a cache; passes this repository's workflows", () => {
+  const r = gate("node", ["scripts/cache-policy.mjs", join(FIX, "workflow-pr-cache-save.yml")]);
+  failsWith(r, /saves-on-pr step 1 .*a cache save without the guard/, "cache policy (save)");
+  assert.match(r.out, /saves-on-pr step 2 .*actions\/cache saves from every ref/);
+  assert.match(r.out, /saves-on-pr step 3 .*setup-node `cache` saves from every ref/);
+  assert.match(r.out, /saves-on-pr step 4 .*package-manager-cache: false/);
+  const ok = gate("node", ["scripts/cache-policy.mjs"]);
+  assert.equal(ok.status, 0, ok.out);
+});
+
+test("a missing base manifest marks every page affected and says why; a valid one is used", () => {
+  const env = { PATH: `${join(FIX, "bin")}:${process.env.PATH}`, GH_TOKEN: "canary", GITHUB_REPOSITORY: "o/r", GITHUB_STEP_SUMMARY: "" };
+  const out = join(TMP, "base-manifest.json");
+  const head = writeJson("bm-head.json", { locales: ["en"], routes: { "/en": { a: "1" }, "/en/tools": { a: "1" } } });
+  const affected = () => {
+    const pages = join(TMP, "bm-pages.txt");
+    const r = gate("node", ["scripts/route-manifest.mjs", "affected", out, head, pages]);
+    assert.equal(r.status, 0, r.out);
+    return readFileSync(pages, "utf8").split("\n").filter(Boolean);
+  };
+  const fetchBase = (mock, zip) => gate("bash", ["scripts/base-route-manifest.sh", out], { env: { ...env, GH_MOCK: mock, GH_MOCK_ZIP: zip ?? "" } });
+  const zipOf = (name, body) => {
+    const dir = mkdtempSync(join(TMP, name));
+    writeFileSync(join(dir, "route-manifest.json"), body);
+    assert.equal(spawnSync("zip", ["-q", "m.zip", "route-manifest.json"], { cwd: dir }).status, 0, "zip must be installed");
+    return join(dir, "m.zip");
+  };
+  for (const [mock, why, zip] of [["no-run", /main has no successful CI run/], ["no-artifact", /no unexpired route-manifest artifact/], ["manifest", /not a readable zip/, writeText("bm-junk.zip", "not a zip")], ["manifest", /holds no valid manifest/, zipOf("bm-bad", "{}")]]) {
+    const r = fetchBase(mock, zip);
+    assert.equal(r.status, 0, r.out);
+    assert.match(r.out, why);
+    assert.match(r.out, /Every page is marked affected/);
+    assert.deepEqual(affected(), ["/en", "/en/tools"], `${why}: every page must be affected`);
+  }
+  const r = fetchBase("manifest", zipOf("bm-ok", JSON.stringify({ locales: ["en"], routes: { "/en": { a: "1" }, "/en/tools": { a: "0" } } })));
+  assert.equal(r.status, 0, r.out);
+  assert.deepEqual(affected(), ["/en/tools"], "a valid base manifest must narrow the pages");
 });
 
 test("share-images fails on a sitemap page without og:image", async () => {
