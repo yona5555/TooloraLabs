@@ -1,6 +1,7 @@
 "use client";
 import { useSyncExternalStore } from "react";
 import { useRenderedAt } from "./RenderClock";
+import { subscribeVisibleClock } from "@/components/tool-ui/motion/motion";
 
 export const SPARK_W = 112;
 export const SPARK_H = 34;
@@ -25,10 +26,8 @@ export default function Sparkline({ values, up, width = SPARK_W, height = SPARK_
 
 const MINUTE = 60_000;
 const minuteNow = () => Math.floor(Date.now() / MINUTE) * MINUTE;
-const subscribeMinutes = (tick: () => void) => {
-  const interval = setInterval(tick, MINUTE);
-  return () => clearInterval(interval);
-};
+// tool-ui/motion: each minute while the page is visible, nothing while hidden
+const subscribeMinutes = (tick: () => void) => subscribeVisibleClock(MINUTE, tick);
 
 /** "now" / "5 minutes ago" for a timestamp, re-rendered every minute. Hydrates on the server's clock. */
 export function useRelativeUpdatedLabel(lastUpdated: number, locale: string): string {

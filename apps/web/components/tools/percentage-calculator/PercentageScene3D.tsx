@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useMemo, useRef } from "react";
-import { useFrame, useThree } from "@react-three/fiber";
+import { useThree } from "@react-three/fiber";
+import { useMotionEpisode } from "@/components/tool-ui/motion/motion";
+import { useSceneFrame } from "@/components/tool-ui/motion/scene-motion";
 import Label3D from "@/components/tool-ui/three/Label3D";
 import type { Mesh } from "three";
 import { usePalette3D } from "@/components/tool-ui/three/theme3d";
@@ -48,11 +50,13 @@ export default function PercentageScene3D({ share, loss, labels }: PercentageSce
 
   useEffect(() => invalidate(), [target, invalidate]);
 
-  useFrame(() => {
+  // the bars grow to a new share during a motion episode (tool-ui/motion); on load and at rest they snap to it
+  const { active } = useMotionEpisode([share]);
+  useSceneFrame((_, dt) => {
     let moving = false;
     for (let i = 0; i < 200; i++) {
       const h = heights.current[i];
-      const next = h + (target[i] - h) * 0.18;
+      const next = dt ? h + (target[i] - h) * 0.18 : target[i];
       const done = Math.abs(target[i] - next) < 0.002;
       heights.current[i] = done ? target[i] : next;
       if (!done) moving = true;
@@ -64,8 +68,8 @@ export default function PercentageScene3D({ share, loss, labels }: PercentageSce
       const base = i < 100 ? 0 : RISE;
       m.position.y = base + hh / 2;
     }
-    if (moving) invalidate();
-  });
+    return moving;
+  }, active);
 
   const s = Math.min(Math.max(share, 0), 200);
   const pos = (idx: number): [number, number] => {

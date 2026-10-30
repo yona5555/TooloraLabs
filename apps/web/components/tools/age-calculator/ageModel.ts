@@ -16,6 +16,7 @@ import {
   type LeapDayRule,
 } from "@tooloralabs/tools";
 import { resolveDigitStyle } from "@/lib/digit-style";
+import { subscribeVisibleClock } from "@/components/tool-ui/motion/motion";
 
 export type CalendarSystem = "gregorian" | "hijri";
 
@@ -151,8 +152,7 @@ function subscribeToday(cb: () => void) {
     }
   };
   tick();
-  const id = setInterval(tick, 60_000);
-  return () => clearInterval(id);
+  return subscribeVisibleClock(60_000, tick); // tool-ui/motion: nothing while the page is hidden
 }
 export function useTodayIso(): string {
   return useSyncExternalStore(

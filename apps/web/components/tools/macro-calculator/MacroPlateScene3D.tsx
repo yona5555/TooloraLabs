@@ -2,7 +2,9 @@
 
 import { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
-import { useFrame, useThree } from "@react-three/fiber";
+import { useThree } from "@react-three/fiber";
+import { useMotionEpisode } from "@/components/tool-ui/motion/motion";
+import { useSceneFrame } from "@/components/tool-ui/motion/scene-motion";
 import Label3D from "@/components/tool-ui/three/Label3D";
 import { usePalette3D } from "@/components/tool-ui/three/theme3d";
 
@@ -26,7 +28,6 @@ export default function MacroPlateScene3D({ parts, total }: MacroPlateScene3DPro
   const p = usePalette3D();
   const invalidate = useThree((s) => s.invalidate);
   const meshes = useRef<(THREE.Mesh | null)[]>([]);
-  const reduced = useRef<boolean | null>(null);
   const gmax = Math.max(1, ...parts.map((part) => part.grams));
   const targets = parts.map((part) => Math.max(0.02, (part.grams / gmax) * HMAX));
   const bg = p.dark ? "rgba(24,24,27,0.85)" : "rgba(255,255,255,0.92)";
@@ -36,20 +37,21 @@ export default function MacroPlateScene3D({ parts, total }: MacroPlateScene3DPro
     invalidate();
   }, [invalidate, targetKey]);
 
-  useFrame((state) => {
-    if (reduced.current === null) reduced.current = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
+  // the slices grow to their new height during a motion episode (tool-ui/motion); at rest they snap to it
+  const { active } = useMotionEpisode([targetKey]);
+  useSceneFrame((_, dt) => {
     let moving = false;
     meshes.current.forEach((m, i) => {
       if (!m) return;
       const target = targets[i];
       const cur = m.scale.y;
-      const next = reduced.current ? target : cur + (target - cur) * 0.18;
+      const next = dt ? cur + (target - cur) * 0.18 : target;
       const done = Math.abs(next - target) < 0.002;
       m.scale.y = done ? target : next;
       if (!done) moving = true;
     });
-    if (moving) state.invalidate();
-  });
+    return moving;
+  }, active);
 
   const lens = parts.map((part) => (part.percent / 100) * Math.PI * 2);
   const slices = parts.map((part, i) => {

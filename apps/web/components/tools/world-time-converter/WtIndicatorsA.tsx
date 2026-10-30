@@ -1,5 +1,6 @@
 "use client";
-import { useEffect, useMemo, useRef, useState, type PointerEvent as RPointerEvent } from "react";
+import { useMemo, useRef, useState, type PointerEvent as RPointerEvent } from "react";
+import { useMotionEpisode, useVisibleInterval } from "@/components/tool-ui/motion/motion";
 import { useTranslations } from "next-intl";
 import { ChevronLeft, ChevronRight, Pause, Play, Radio } from "lucide-react";
 import {
@@ -54,14 +55,13 @@ export function WtDayNightMapCard({ d, f }: CardProps) {
   const now = useNow();
   const t = useIndT();
   const [shift, setShift] = useState(0); // minutes from now
-  const [playing, setPlaying] = useState(false);
   const [pinned, setPinned] = useState(false);
-
-  useEffect(() => {
-    if (!playing) return;
-    const id = setInterval(() => setShift((m) => (m >= 720 ? -720 : m + 10)), 60);
-    return () => clearInterval(id);
-  }, [playing]);
+  // tool-ui/motion: Play sweeps the terminator through the day as a motion episode (at most EPISODE_MS), paused
+  // off screen or with the page hidden, never for reduced motion.
+  const motion = useMotionEpisode();
+  const playing = motion.active;
+  const mapBox = useRef<HTMLDivElement>(null);
+  useVisibleInterval(mapBox, () => setShift((m) => (m >= 720 ? -720 : m + 10)), 60, { motion: true, active: playing });
 
   const at = pinned ? d.conv.utcMs : now + shift * 60_000;
   const sun = wtSolarPosition(at);
@@ -107,7 +107,7 @@ export function WtDayNightMapCard({ d, f }: CardProps) {
       <IndicatorWithTable
         workedExampleTitle={t("worked")}
         indicator={
-          <div className="w-full max-w-[720px]">
+          <div ref={mapBox} className="w-full max-w-[720px]">
             <PhoneMini slot={0} title={t("map.title")}>
               <FitSvg ref={mapRef} viewBox={`0 0 ${W} ${H}`} width={W} height={H} style={{ direction: "ltr" }} className="h-auto w-full max-w-full rounded-lg" role="img" aria-label={t("map.title")}>
                 <rect width={W} height={H} className="fill-sky-200 dark:fill-[#0b2447]" />
@@ -160,7 +160,7 @@ export function WtDayNightMapCard({ d, f }: CardProps) {
               </FitSvg>
             </PhoneMini>
             <div className="mt-2 flex flex-wrap items-center gap-2">
-              <button type="button" onClick={() => { setPinned(false); setPlaying((p) => !p); }} aria-label={playing ? t("map.pause") : t("map.play")} className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 text-white hover:bg-blue-700">
+              <button type="button" onClick={() => { setPinned(false); if (playing) motion.stop(); else motion.play(); }} aria-label={playing ? t("map.pause") : t("map.play")} className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 text-white hover:bg-blue-700">
                 {playing ? <Pause size={14} /> : <Play size={14} />}
               </button>
               <input
@@ -169,16 +169,16 @@ export function WtDayNightMapCard({ d, f }: CardProps) {
                 max={720}
                 step={10}
                 value={shift}
-                onChange={(e) => { setPinned(false); setPlaying(false); setShift(Number(e.target.value)); }}
+                onChange={(e) => { setPinned(false); motion.stop(); setShift(Number(e.target.value)); }}
                 aria-label={t("map.scrub")}
                 className="min-w-[140px] flex-1 accent-blue-600"
                 dir="ltr"
               />
-              <button type="button" onClick={() => { setPinned(false); setPlaying(false); setShift(0); }} className={`flex items-center gap-1 rounded-lg border px-2 py-1 text-xs font-semibold ${live ? "border-emerald-500 text-emerald-700 dark:text-emerald-300" : "border-zinc-300 text-zinc-600 dark:border-zinc-600 dark:text-zinc-300"}`}>
+              <button type="button" onClick={() => { setPinned(false); motion.stop(); setShift(0); }} className={`flex items-center gap-1 rounded-lg border px-2 py-1 text-xs font-semibold ${live ? "border-emerald-500 text-emerald-700 dark:text-emerald-300" : "border-zinc-300 text-zinc-600 dark:border-zinc-600 dark:text-zinc-300"}`}>
                 <Radio size={12} className={live ? "animate-pulse" : ""} />
                 {t("map.live")}
               </button>
-              <button type="button" onClick={() => { setPlaying(false); setPinned((p) => !p); }} className={`rounded-lg border px-2 py-1 text-xs font-semibold ${pinned ? "border-blue-500 text-blue-700 dark:text-blue-300" : "border-zinc-300 text-zinc-600 dark:border-zinc-600 dark:text-zinc-300"}`}>
+              <button type="button" onClick={() => { motion.stop(); setPinned((p) => !p); }} className={`rounded-lg border px-2 py-1 text-xs font-semibold ${pinned ? "border-blue-500 text-blue-700 dark:text-blue-300" : "border-zinc-300 text-zinc-600 dark:border-zinc-600 dark:text-zinc-300"}`}>
                 {t("map.converted")}
               </button>
             </div>
@@ -303,7 +303,7 @@ export function WtMeetingCard({ s, d, f }: CardProps) {
               <rect x={LBL + idx * CW} y={TOP - 4} width={CW} height={d.all.length * RH + RH + 4} fill="none" stroke="currentColor" strokeWidth={2} className="text-zinc-900 dark:text-white" style={{ transition: "x 120ms ease" }} />
               <text style={{ fontSize: svgPx(12) }} x={Math.min(W - 40, LBL + idx * CW + CW / 2)} y={10} textAnchor="middle" fontWeight={800} className={valueText}>{slotLabel(idx)}</text>
             </svg>
-            <div className="mt-1 flex flex-wrap gap-3 text-[11px] text-zinc-600 dark:text-zinc-300">
+            <div className="mt-1 flex flex-wrap gap-3 text-xs text-zinc-600 dark:text-zinc-300">
               {(["work", "shoulder", "night", "weekend"] as const).map((k) => (
                 <span key={k} className="flex items-center gap-1">
                   <span className="inline-block h-2.5 w-2.5 rounded-sm" style={{ background: STATUS_COLORS[k] }} />

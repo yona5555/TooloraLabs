@@ -2,7 +2,9 @@
 
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
-import { useFrame, useThree } from "@react-three/fiber";
+import { useThree } from "@react-three/fiber";
+import { useMotionEpisode } from "@/components/tool-ui/motion/motion";
+import { useSceneFrame } from "@/components/tool-ui/motion/scene-motion";
 import { Line } from "@react-three/drei";
 import Label3D from "@/components/tool-ui/three/Label3D";
 import { usePalette3D } from "@/components/tool-ui/three/theme3d";
@@ -69,27 +71,26 @@ function Arrow({ from, to, color, width = 4 }: { from: P3; to: P3; color: string
 }
 
 /**
- * Loop clock for the demand-rendered canvas: calls `onPhase(phase 0…1)` every frame of a
- * `period`-second cycle and keeps requesting frames. With reduced motion it renders `still` once.
+ * Cycle clock for the demand-rendered canvas: during a motion episode after the scene's data (`trigger`)
+ * changed it calls `onPhase(phase 0…1)` each frame of a `period`-second cycle (tool-ui/motion); at rest (no
+ * episode, off screen, hidden, reduced motion) it draws `still`.
  */
-function useLoop(period: number, onPhase: (phase: number) => void, still = 1) {
+function useLoop(trigger: string, period: number, onPhase: (phase: number) => void, still = 1) {
   const invalidate = useThree((s) => s.invalidate);
-  const reduced = useRef<boolean | null>(null);
-  const start = useRef<number | null>(null);
+  const t = useRef(0);
+  const { active } = useMotionEpisode([trigger]);
   useEffect(() => {
     invalidate();
   }, [invalidate]);
-  useFrame((state) => {
-    if (reduced.current === null) reduced.current = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
-    if (reduced.current) {
+  useSceneFrame((_, dt) => {
+    if (!dt) {
+      t.current = 0;
       onPhase(still);
       return;
     }
-    const now = state.clock.getElapsedTime();
-    if (start.current === null) start.current = now;
-    onPhase(((now - start.current) % period) / period);
-    state.invalidate();
-  });
+    t.current += dt;
+    onPhase((t.current % period) / period);
+  }, active);
 }
 
 /** Work: a block dragged along its displacement d by a force F at angle θ, split into F cos θ (does work) and F sin θ (does none). */
@@ -99,7 +100,7 @@ function WorkScene({ d }: { d: WorkSceneData }) {
   const D = 3.6;
   const S = 0.8;
   const block = useRef<THREE.Group>(null);
-  useLoop(3.2, (ph) => {
+  useLoop(JSON.stringify(d), 3.2, (ph) => {
     // ease-in-out run over 75 % of the cycle, then hold at the end
     const k = Math.min(1, ph / 0.75);
     const e = k * k * (3 - 2 * k);
@@ -168,7 +169,7 @@ function KineticScene({ d }: { d: KineticSceneData }) {
   // Visual speed grows with log(v) so slow walkers and fast cars both read.
   const vis = d.velocity > 0 ? 0.6 + 0.9 * clamp(log(d.velocity) / 3, 0, 1) : 0;
   const span = 6;
-  useLoop(vis > 0 ? span / vis / 1.6 : 4, (ph) => {
+  useLoop(JSON.stringify(d), vis > 0 ? span / vis / 1.6 : 4, (ph) => {
     if (cart.current) cart.current.position.x = -3 + span * ph;
   }, 0.45);
   const maxE = Math.max(...d.energies.map(Math.abs), 1e-30);
@@ -230,7 +231,7 @@ function PotentialScene({ d }: { d: PotentialSceneData }) {
   const ke = useRef<THREE.Mesh>(null);
   // Real fall time when it is watchable, otherwise slowed down or sped up to 0.6–2.5 s.
   const play = clamp(d.fallTime, 0.6, 2.5);
-  useLoop(play + 1.2, (ph) => {
+  useLoop(JSON.stringify(d), play + 1.2, (ph) => {
     const tt = Math.min(1, (ph * (play + 1.2)) / play);
     const frac = tt * tt; // dropped fraction: ½gt² / h
     if (ball.current) ball.current.position.y = R + H * (1 - frac);
@@ -306,7 +307,7 @@ function PowerScene({ d }: { d: PowerSceneData }) {
   const TOTAL = 3.2;
   const h = TOTAL / n;
   const refs = useRef<(THREE.Mesh | null)[]>([]);
-  useLoop(n * 0.45 + 1.2, (ph) => {
+  useLoop(JSON.stringify(d), n * 0.45 + 1.2, (ph) => {
     const lit = (ph * (n * 0.45 + 1.2)) / 0.45;
     refs.current.forEach((m, i) => {
       if (!m) return;
