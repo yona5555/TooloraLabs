@@ -103,7 +103,7 @@ export default function PdfMergeSplitResult({ isProcessing, resultCount, onDownl
                 <svg width={10} height={10} aria-hidden="true">
                   <circle cx={5} cy={5} r={5} className={SOURCE_FILL[row.i % SOURCE_FILL.length]} />
                 </svg>
-                <span dir="ltr" className="min-w-0 flex-1 truncate font-mono text-zinc-700 dark:text-zinc-200">
+                <span dir="ltr" className="min-w-0 flex-1 break-words font-mono text-zinc-700 dark:text-zinc-200">
                   {row.label}
                 </span>
                 <span className="shrink-0 text-xs text-zinc-500 dark:text-zinc-400">{tr("pages", { n: row.pages })}</span>

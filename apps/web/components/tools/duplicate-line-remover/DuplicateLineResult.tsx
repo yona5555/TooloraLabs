@@ -61,7 +61,7 @@ export default function DuplicateLineResult() {
         {a.lines.map((l) => (
           <li key={l.position} className={`flex items-center gap-2 rounded-md px-2 py-1 text-sm ${l.kept ? "bg-white dark:bg-zinc-900" : "bg-rose-50 dark:bg-rose-500/10"}`}>
             <span className="w-6 shrink-0 text-end font-mono text-xs text-zinc-400">{l.position}</span>
-            <span dir="auto" className={`min-w-0 flex-1 truncate font-mono ${l.kept ? "text-zinc-800 dark:text-zinc-100" : "text-rose-600 line-through dark:text-rose-300"}`}>
+            <span dir="auto" className={`min-w-0 flex-1 break-words font-mono ${l.kept ? "text-zinc-800 dark:text-zinc-100" : "text-rose-600 line-through dark:text-rose-300"}`}>
               {l.raw}
             </span>
             {!l.kept && <span className="shrink-0 text-xs text-rose-600 dark:text-rose-300">{tr("repeats", { n: l.firstPosition })}</span>}

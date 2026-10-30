@@ -161,7 +161,7 @@ export function NotepadSyntaxTable({ onInsert }: { onInsert: (line: string) => v
           <li key={f.key}>
             <button type="button" onClick={() => onInsert(f.expr)} title={t("insert")} className="flex w-full items-center gap-2 rounded-md px-1.5 py-1.5 text-start transition hover:bg-blue-50 dark:hover:bg-blue-500/10">
               <span className="w-24 shrink-0 truncate text-xs text-zinc-500 dark:text-zinc-400">{t(`fn.${f.key}`)}</span>
-              <span dir="ltr" className="min-w-0 flex-1 truncate font-mono text-sm text-zinc-800 dark:text-zinc-100">
+              <span dir="ltr" className="min-w-0 flex-1 break-words font-mono text-sm text-zinc-800 dark:text-zinc-100">
                 {f.expr}
               </span>
               <span dir="ltr" className="shrink-0 font-mono text-sm font-semibold text-blue-600 dark:text-blue-400">
