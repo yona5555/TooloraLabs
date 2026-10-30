@@ -225,12 +225,34 @@ main :is(button, a, [role="tab"], input, select):is(.border-blue-500, .border-bl
   :root:not(.dark) main .text-emerald-600 { color: var(--color-emerald-700); }
   :root:not(.dark) main .text-red-600 { color: var(--color-red-700); }
   :root:not(.dark) main .text-blue-500 { color: var(--color-blue-700); }
+  :root:not(.dark) main .text-sky-600 { color: var(--color-sky-700); }
+  :root:not(.dark) main .text-rose-600 { color: var(--color-rose-700); }
+  :root:not(.dark) main .text-red-500 { color: var(--color-red-600); }
   .dark main .dark\:text-zinc-600 { color: #9494a0; }
   .dark main .text-emerald-600:not([class*="dark:text-"]) { color: var(--color-emerald-400); }
 }
 body .text-\[\#5170ff\]:not(:where(.dark *)) {
   color: #4560f2;
 }
+/* AA white text on a colored fill (badges, bars, progress steps, chart legends across many tools): a
+   -400/-500 weight background under white text almost never reaches 4.5:1 (verified against the site
+   audit's axe-core contrast measurements, cross-checked by converting each OKLCH swatch to linear sRGB)
+   -- raised to the lightest same-hue weight that clears it. Scoped to where the fill actually carries
+   white text (:has/.text-white), so a purely decorative use of the same utility (no text on it) keeps
+   its original color; applies in both themes since dark: variants point at the same color tokens. */
+main :is(.bg-red-400.text-white, .bg-red-500.text-white, .bg-red-400:has(.text-white), .bg-red-500:has(.text-white)) { background-color: var(--color-red-600); }
+main :is(.bg-orange-400.text-white, .bg-orange-500.text-white, .bg-orange-400:has(.text-white), .bg-orange-500:has(.text-white)) { background-color: var(--color-orange-700); }
+main :is(.bg-amber-400.text-white, .bg-amber-500.text-white, .bg-amber-400:has(.text-white), .bg-amber-500:has(.text-white)) { background-color: var(--color-amber-700); }
+main :is(.bg-lime-400.text-white, .bg-lime-500.text-white, .bg-lime-400:has(.text-white), .bg-lime-500:has(.text-white)) { background-color: var(--color-lime-700); }
+main :is(.bg-emerald-400.text-white, .bg-emerald-500.text-white, .bg-emerald-400:has(.text-white), .bg-emerald-500:has(.text-white)) { background-color: var(--color-emerald-700); }
+main :is(.bg-teal-400.text-white, .bg-teal-500.text-white, .bg-teal-400:has(.text-white), .bg-teal-500:has(.text-white)) { background-color: var(--color-teal-700); }
+main :is(.bg-cyan-400.text-white, .bg-cyan-500.text-white, .bg-cyan-400:has(.text-white), .bg-cyan-500:has(.text-white)) { background-color: var(--color-cyan-700); }
+main :is(.bg-sky-400.text-white, .bg-sky-500.text-white, .bg-sky-400:has(.text-white), .bg-sky-500:has(.text-white)) { background-color: var(--color-sky-700); }
+main :is(.bg-blue-400.text-white, .bg-blue-500.text-white, .bg-blue-400:has(.text-white), .bg-blue-500:has(.text-white)) { background-color: var(--color-blue-600); }
+main :is(.bg-indigo-400.text-white, .bg-indigo-400:has(.text-white)) { background-color: var(--color-indigo-500); }
+main :is(.bg-violet-400.text-white, .bg-violet-500.text-white, .bg-violet-400:has(.text-white), .bg-violet-500:has(.text-white)) { background-color: var(--color-violet-600); }
+main :is(.bg-fuchsia-400.text-white, .bg-fuchsia-500.text-white, .bg-fuchsia-400:has(.text-white), .bg-fuchsia-500:has(.text-white)) { background-color: var(--color-fuchsia-600); }
+main :is(.bg-rose-400.text-white, .bg-rose-500.text-white, .bg-rose-400:has(.text-white), .bg-rose-500:has(.text-white)) { background-color: var(--color-rose-600); }
 body [data-site-bar] {
   border-color: var(--bp-frame);
   background-color: color-mix(in srgb, var(--bp-base) 85%, transparent);
