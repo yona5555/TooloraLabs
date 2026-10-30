@@ -21,10 +21,13 @@
 import { readFileSync, writeFileSync } from "node:fs";
 
 const CRITERIA = ["overlap", "clip", "small", "hydration", "console", "a11y", "link", "idle"];
-// Run-to-run noise on the same build (see docs/claude/full-project-handbook.md, "perf-budget ratchet tolerance"
-// for how these were measured: RUNS=5 of scripts/perf-budget.mjs against ten representative pages on an
-// otherwise idle CI runner, the tolerance set above the largest observed same-build delta for each metric).
-export const TOLERANCE = { lcp: 150, tbt: 40, cls: 0.02, perf: 3, jsKiB: 5 };
+// Run-to-run noise on the same build (see docs/claude/full-project-handbook.md §12 for the measurement and its
+// caveats): RUNS=10 of scripts/perf-budget.mjs against 6 representative pages, tolerance set above the largest
+// observed same-build delta for each metric across the 5 pages with no live/network dependency (one page,
+// crypto-converter, was excluded as a network-bound outlier - LCP spread alone was 3.1s from live-price fetch
+// jitter, not page-rendering variance). TBT's own noise was the biggest surprise: 308ms on a timer-heavy page
+// with nothing else changing run to run.
+export const TOLERANCE = { lcp: 60, tbt: 350, cls: 0.01, perf: 8, jsKiB: 3 };
 const METRICS = ["lcp", "tbt", "cls", "perf", "jsKiB"];
 const worse = { lcp: (c, b, t) => c > b + t, tbt: (c, b, t) => c > b + t, cls: (c, b, t) => c > b + t, jsKiB: (c, b, t) => c > b + t, perf: (c, b, t) => c < b - t };
 
