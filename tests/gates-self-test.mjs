@@ -74,6 +74,7 @@ test("workflow shell rule fails on a workflow without pipefail that pipes a gate
   const r = gate("node", ["scripts/workflow-shell.mjs", join(FIX, "workflow-no-pipefail.yml")]);
   failsWith(r, /no top-level defaults\.run\.shell: bash/, "workflow shell rule");
   assert.match(r.out, /a gate's output is piped/);
+  assert.match(r.out, /\.nvmrc is outside this job's sparse checkout/);
 });
 
 test("site audit fails on every broken page (overlap, SVG clip, HTML clip, <12px, hydration, console, contrast, link, idle animation loop) and passes the clean one", async () => {
