@@ -320,14 +320,20 @@ jobs:
 
       - name: Affected pages
         id: pages
+        env:
+          EVENT_NAME: ${{ github.event_name }}
         run: |
           node scripts/route-manifest.mjs build apps/web/.next-lock route-manifest.json
           node scripts/route-manifest.mjs affected base-route-manifest.json route-manifest.json affected-pages.txt
           count=$(( $(wc -l < affected-pages.txt) ))
           # pages per shard from measured times: site-audit ~4.6 s a page (en or ar, 2 widths, 2 themes; CI shard of
-          # 37 pages in 170 s), perf-budget ~30 s a page (3 Lighthouse mobile runs); a shard gets at most ~7 minutes
+          # 37 pages in 170 s). perf-budget: the daily schedule keeps 3 Lighthouse runs/page (~30 s/page, a fresh
+          # Chrome per run, matching a Lighthouse CLI run exactly) for trend fidelity; a PR/push runs RUNS=1 against
+          # one Chrome reused for the whole shard (~9 s/page measured, scripts/perf-budget.mjs) so a shard still
+          # finishes within its timeout even when every page is affected. A shard gets at most ~7 minutes either way.
           audit=$(( count ? (count + 79) / 80 : 0 )); (( audit > 12 )) && audit=12
-          perf=$(( count ? (count + 13) / 14 : 0 )); (( perf > 16 )) && perf=16
+          if [ "$EVENT_NAME" = schedule ]; then perf=$(( count ? (count + 13) / 14 : 0 )); else perf=$(( count ? (count + 45) / 46 : 0 )); fi
+          (( perf > 16 )) && perf=16
           shards() { if (( $1 )); then echo "[$(seq -s, 1 "$1")]"; else echo "[]"; fi; }
           { echo "count=$count"; echo "audit-shards=$(shards "$audit")"; echo "audit-shard-count=$audit"; echo "perf-shards=$(shards "$perf")"; echo "perf-shard-count=$perf"; } >> "$GITHUB_OUTPUT"
           echo "$count affected pages: site-audit $audit shards, perf-budget $perf shards" >> "$GITHUB_STEP_SUMMARY"
@@ -429,10 +435,12 @@ jobs:
           fi
 
   # Performance budgets (apps/web/scripts/perf-budget.mjs), a hard gate: every indexable page (the sitemap), en + ar,
-  # Lighthouse mobile with its default throttling, 3 runs per page, the median of each metric, on the production
-  # fixture build. Fails on any page with LCP > 2.5s, TBT > 200ms, CLS > 0.1, Performance < 90 or more JavaScript
-  # than its budget. Twelve shards in parallel (one page at a time in each); `perf-budget` is the single required
-  # check over them. The gate's exit code is the step's: no pipe.
+  # Lighthouse mobile with its default (simulated/Lantern) throttling, on the production fixture build. Fails on any
+  # page with LCP > 2.5s, TBT > 200ms, CLS > 0.1, Performance < 90 or more JavaScript than its budget. The daily
+  # schedule run keeps 3 runs/page medianed (official metric, fidelity); a PR/push runs RUNS=1 (one Lighthouse run,
+  # one Chrome reused for the whole shard) so the gate still fits its timeout with every page affected. Up to sixteen
+  # shards in parallel (one page at a time in each); `perf-budget` is the single required check over them. The
+  # gate's exit code is the step's: no pipe.
   perf-budget-shard:
     needs: affected
     if: needs.affected.outputs.count != '0'
@@ -482,6 +490,7 @@ jobs:
           SHARD: ${{ matrix.shard }}/${{ needs.affected.outputs.perf-shard-count }}
           PAGES: ${{ github.workspace }}/affected-pages.txt
           OUT: ${{ github.workspace }}/perf-budget-${{ matrix.shard }}.json
+          RUNS: ${{ github.event_name == 'schedule' && 3 || 1 }}
         run: scripts/perf-budget.sh 3108
 
       - name: Upload the measurements

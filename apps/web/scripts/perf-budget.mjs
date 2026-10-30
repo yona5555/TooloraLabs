@@ -1,14 +1,20 @@
 // Performance budgets: a hard gate on every indexable page (the served /sitemap.xml, built from
-// lib/indexable-pages.ts) in every audited locale. The official metric of the project: Lighthouse mobile with its
-// default (simulated) throttling, RUNS (3) runs per page, the median of each metric, on a production build
-// (`next start`; CI and the local container use the fixture build .next-lock, so live data is fixed).
-// A page fails when any median is over its budget:
+// lib/indexable-pages.ts) in every audited locale. The official metric of the project (reported numbers,
+// scheduled daily full run on main): Lighthouse mobile with its default (simulated/Lantern) throttling, RUNS (3)
+// runs per page, the median of each metric, on a production build (`next start`; CI and the local container use
+// the fixture build .next-lock, so live data is fixed). On a PR (RUNS=1, set by the workflow) the budget still
+// gates on Lighthouse's own simulated throttling, just one run instead of three medianed, to fit the 15-minute
+// PR check window even when every page is affected; the daily scheduled run on main is the trend/fidelity source.
+// A page fails when any median (or, at RUNS=1, the single run) is over its budget:
 //   LCP  largest-contentful-paint      <= 2500 ms
 //   TBT  total-blocking-time           <= 200 ms
 //   CLS  cumulative-layout-shift       <= 0.1
 //   PERF the performance category      >= 90
 //   JS   transferred JavaScript of the route (every Script request of the load) <= BUDGET.jsKiB KiB
-// Each run gets a fresh Chrome (Playwright's Chromium, empty cache), like a Lighthouse CLI run.
+// One Chrome (Playwright's Chromium) launched once per shard process and reused for every page/run: Lighthouse
+// resets storage (cache, cookies) before each navigation on its own (settings.disableStorageReset defaults to
+// false), so a shared Chrome measures the same "empty cache" load as a fresh one, without paying a Chrome launch
+// (~1-2s) per run — the dominant fixed cost once dozens of pages are affected on a PR.
 // Exits 1 on any page over budget (CI job perf-budget, sharded; no pipe after it in the workflow).
 // Usage: BASE=http://localhost:<port> node scripts/perf-budget.mjs [path-filter ...]
 //   env LOCALES=en,ar  RUNS=3  SHARD=i/n (pages i, i+n, … of the sitemap order)  OUT=<file.json> (every page's
@@ -61,25 +67,20 @@ const pages = selected.filter((_, i) => i % shardN === shardI - 1);
 
 const median = (xs) => [...xs].sort((a, b) => a - b)[Math.floor(xs.length / 2)];
 
-/** One Lighthouse mobile run (default config = mobile, simulated throttling) in a fresh Chrome. */
-async function run(url) {
-  const chrome = await launch({ chromePath: chromium.executablePath(), chromeFlags: ["--headless=new", "--no-sandbox", "--disable-dev-shm-usage"] });
-  try {
-    const { lhr } = await lighthouse(url, { port: chrome.port, output: "json", logLevel: "error", onlyCategories: ["performance"] });
-    if (lhr.runtimeError) throw new Error(`${lhr.runtimeError.code}: ${lhr.runtimeError.message}`);
-    const a = lhr.audits;
-    const scripts = a["network-requests"].details.items.filter((r) => r.resourceType === "Script");
-    return {
-      lcp: a["largest-contentful-paint"].numericValue,
-      tbt: a["total-blocking-time"].numericValue,
-      cls: a["cumulative-layout-shift"].numericValue,
-      perf: Math.round(lhr.categories.performance.score * 100),
-      jsKiB: Math.round(scripts.reduce((n, r) => n + (r.transferSize ?? 0), 0) / 1024),
-      lcpElement: a["largest-contentful-paint-element"]?.details?.items?.[0]?.items?.[0]?.node?.snippet?.slice(0, 160) ?? null,
-    };
-  } finally {
-    await chrome.kill();
-  }
+/** One Lighthouse mobile run (default config = mobile, simulated throttling) against the shard's shared Chrome. */
+async function run(url, chromePort) {
+  const { lhr } = await lighthouse(url, { port: chromePort, output: "json", logLevel: "error", onlyCategories: ["performance"] });
+  if (lhr.runtimeError) throw new Error(`${lhr.runtimeError.code}: ${lhr.runtimeError.message}`);
+  const a = lhr.audits;
+  const scripts = a["network-requests"].details.items.filter((r) => r.resourceType === "Script");
+  return {
+    lcp: a["largest-contentful-paint"].numericValue,
+    tbt: a["total-blocking-time"].numericValue,
+    cls: a["cumulative-layout-shift"].numericValue,
+    perf: Math.round(lhr.categories.performance.score * 100),
+    jsKiB: Math.round(scripts.reduce((n, r) => n + (r.transferSize ?? 0), 0) / 1024),
+    lcpElement: a["largest-contentful-paint-element"]?.details?.items?.[0]?.items?.[0]?.node?.snippet?.slice(0, 160) ?? null,
+  };
 }
 
 const results = [];
@@ -96,25 +97,32 @@ if (process.env.RESUME) {
   console.log(`perf-budget: resuming, ${results.length} of ${pages.length} pages already recorded in ${process.env.RESUME}`);
 }
 const done = new Set(results.map((r) => r.page));
+const remaining = pages.filter((p) => !done.has(p));
 console.log(`perf-budget: ${pages.length} pages (shard ${shardI}/${shardN}) × ${RUNS} Lighthouse mobile runs, budgets ${JSON.stringify(BUDGET)}`);
 
-for (const page of pages.filter((p) => !done.has(p))) {
-  const t0 = Date.now();
-  const runs = [];
-  let error = null;
-  try {
-    for (let k = 0; k < RUNS; k++) runs.push(await run(`${base}${page}`));
-  } catch (e) {
-    error = e.message.split("\n")[0].slice(0, 200);
+// One Chrome for the whole shard (see header comment), launched only if there is a page left to run.
+const chrome = remaining.length ? await launch({ chromePath: chromium.executablePath(), chromeFlags: ["--headless=new", "--no-sandbox", "--disable-dev-shm-usage"] }) : null;
+try {
+  for (const page of remaining) {
+    const t0 = Date.now();
+    const runs = [];
+    let error = null;
+    try {
+      for (let k = 0; k < RUNS; k++) runs.push(await run(`${base}${page}`, chrome.port));
+    } catch (e) {
+      error = e.message.split("\n")[0].slice(0, 200);
+    }
+    const med = runs.length === RUNS ? Object.fromEntries(METRICS.map(([k]) => [k, median(runs.map((r) => r[k]))])) : null;
+    const over = med ? METRICS.filter(([k, , , bad]) => bad(med[k])).map(([k]) => k) : ["error"];
+    const r = { page, median: med, over, error, lcpElement: runs[0]?.lcpElement ?? null, runs };
+    results.push(r);
+    const line = `[${new Date().toISOString().slice(11, 19)}] shard ${shardI}/${shardN} ${results.length}/${pages.length} ${page} ${((Date.now() - t0) / 1000).toFixed(1)}s ${med ? METRICS.map(([k, name, fmt]) => `${name}=${fmt(med[k])}`).join(" ") : `error: ${error}`}${over.length ? `  OVER: ${over.join(",")}` : ""}`;
+    console.log(line);
+    if (process.env.PROGRESS) appendFileSync(process.env.PROGRESS, line + "\n");
+    if (process.env.RESULTS) appendFileSync(process.env.RESULTS, JSON.stringify(r) + "\n"); // RESUME reads it back
   }
-  const med = runs.length === RUNS ? Object.fromEntries(METRICS.map(([k]) => [k, median(runs.map((r) => r[k]))])) : null;
-  const over = med ? METRICS.filter(([k, , , bad]) => bad(med[k])).map(([k]) => k) : ["error"];
-  const r = { page, median: med, over, error, lcpElement: runs[0]?.lcpElement ?? null, runs };
-  results.push(r);
-  const line = `[${new Date().toISOString().slice(11, 19)}] shard ${shardI}/${shardN} ${results.length}/${pages.length} ${page} ${((Date.now() - t0) / 1000).toFixed(1)}s ${med ? METRICS.map(([k, name, fmt]) => `${name}=${fmt(med[k])}`).join(" ") : `error: ${error}`}${over.length ? `  OVER: ${over.join(",")}` : ""}`;
-  console.log(line);
-  if (process.env.PROGRESS) appendFileSync(process.env.PROGRESS, line + "\n");
-  if (process.env.RESULTS) appendFileSync(process.env.RESULTS, JSON.stringify(r) + "\n"); // RESUME reads it back
+} finally {
+  if (chrome) await chrome.kill();
 }
 
 report(results, { runs: RUNS, locales });
