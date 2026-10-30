@@ -7,6 +7,7 @@ import { MiniContext } from "./miniContext";
 export { flowRows, labelW, staggerRows, thinLabels, wrapLabel } from "@/components/tool-ui/labelLayout";
 import { svgPx } from "@/components/tool-ui/svgPx";
 
+import FitSvg from "@/components/tool-ui/FitSvg";
 /**
  * Small SVG building blocks shared by the 2D indicator cards: a token-coloured label, collision-free
  * axis ticks (§39), and the measured drawing box with its drag handle (§40).
@@ -82,9 +83,9 @@ export function Drawing({
   }
   return (
     <div ref={boxRef} data-preview="visual" className="relative w-full flex-1" style={{ minHeight: hMin }}>
-      <svg ref={svgRef} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>
+      <FitSvg grow={false} ref={svgRef} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>
         {children}
-      </svg>
+      </FitSvg>
       <SvgHandle x={handle.x} y={handle.y} viewW={W} viewH={H} direction={handle.dir} label={label} valueText={valueText} s={s} drag={drag} testId={`${testId}-handle`} />
     </div>
   );

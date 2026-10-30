@@ -1,7 +1,8 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
-import { Circle, Coordinates, Line, Mafs, Polygon, Text, useMovablePoint } from "mafs";
+import { Circle, Coordinates, Line, Polygon, Text, useMovablePoint } from "mafs";
+import FitMafs from "@/components/tool-ui/FitMafs";
 import "mafs/core.css";
 import "@/components/tool-ui/mafsTheme.css";
 import { circleDisplayScale, circleRoundSignificant, circleSquares } from "@tooloralabs/tools";
@@ -93,7 +94,7 @@ export default function CircleRadiusLab() {
       }}
     >
       <div role="group" dir="ltr" className="mafs-canvas w-full overflow-hidden rounded-xl" aria-label={t("lab.aria")}>
-        <Mafs viewBox={{ x: [-2.3, 2.3], y: [-2.3, 2.3] }} height={320} pan={false} zoom={false}>
+        <FitMafs viewBox={{ x: [-2.3, 2.3], y: [-2.3, 2.3] }} height={320} pan={false} zoom={false}>
           {/* A radius is never negative: label only the positive whole grid steps (1, 2), so the
               tick labels stay far apart at any scale and in every locale. */}
           <Coordinates.Cartesian
@@ -114,7 +115,7 @@ export default function CircleRadiusLab() {
           <Text x={0} y={hu + 0.06} attach="n" size={13} color={c.green}>{`d = ${n(2 * r)}`}</Text>
           <Text x={0} y={-hu - 0.06} attach="s" size={12} color={c.blue}>{`A = ${n(A)}`}</Text>
           {handle.element}
-        </Mafs>
+        </FitMafs>
       </div>
       <div className="mt-2 flex flex-wrap gap-3 text-xs text-zinc-500 dark:text-zinc-400">
         <span className="flex items-center gap-1.5"><span className="h-0.5 w-4 bg-red-600 dark:bg-red-400" />{t("lab.legendRadius")}</span>

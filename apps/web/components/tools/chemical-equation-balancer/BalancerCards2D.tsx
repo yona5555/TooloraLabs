@@ -6,6 +6,7 @@ import { IndicatorCard, KitControls, KitTable, KitTrack, SvgChem, SvgHandle, use
 import { atomLedger, atomsOf, balance, balancedText, elToken, REACTIONS, uniFormula } from "./chemMath";
 import { svgPx } from "@/components/tool-ui/svgPx";
 
+import FitSvg from "@/components/tool-ui/FitSvg";
 /**
  * The five 2D balancer indicator cards. Each drawing is laid out in real pixels at the measured
  * width of its box (viewBox = box), so labels keep their size on a phone and marks span the box.
@@ -403,7 +404,7 @@ export function BalRingsCard({ side }: { side: Side }) {
       table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
       visual={
         <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
-          <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>
+          <FitSvg viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>
             {ring(R * 0.42, R * 0.68, "l")}
             {ring(R * 0.74, R, "r")}
             <text x={cx} y={cy + 5} fontWeight={800} textAnchor="middle" style={{ fontSize: svgPx(15), fill: "var(--ph-ink)" }}>
@@ -420,7 +421,7 @@ export function BalRingsCard({ side }: { side: Side }) {
                 </text>
               </g>
             ))}
-          </svg>
+          </FitSvg>
         </div>
       }
     />

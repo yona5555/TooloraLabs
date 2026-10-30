@@ -15,12 +15,6 @@ export function isoToDay(iso: string): number {
   return Math.round(Date.UTC(y, m - 1, d) / DAY_MS);
 }
 
-/** Today's local calendar date as a day number. */
-export function todayDay(): number {
-  const n = new Date();
-  return Math.round(Date.UTC(n.getFullYear(), n.getMonth(), n.getDate()) / DAY_MS);
-}
-
 /** Positive modulo (cycle day of a date before the entered LMP still lands in 0 … c−1). */
 export const mod = (a: number, n: number) => ((a % n) + n) % n;
 
@@ -50,13 +44,14 @@ export type OvSnap = {
   dayIdx: number;
 };
 
-export function snapOf(lmpISO: string, cycle: number, luteal: number, r: OvulationResult): OvSnap {
+/** `todayISO` comes from useTodayISO, so the server and the hydrating render agree on today. */
+export function snapOf(lmpISO: string, cycle: number, luteal: number, r: OvulationResult, todayISO: string): OvSnap {
   const lmp = isoToDay(lmpISO);
   const cycles = r.cycles.map((c, i) => {
     const next = isoToDay(c.nextPeriodDateISO);
     return { n: c.cycleNumber, start: i === 0 ? lmp : isoToDay(r.cycles[i - 1].nextPeriodDateISO), fwStart: isoToDay(c.fertileWindowStartISO), ov: isoToDay(c.ovulationDateISO), fwEnd: isoToDay(c.fertileWindowEndISO), next };
   });
-  const today = todayDay();
+  const today = isoToDay(todayISO);
   const ovOffset = cycles[0].ov - lmp;
   return { lmp, cycle, luteal, today, cycles, ovOffset, sinceLmp: today - lmp, dayIdx: mod(today - lmp, cycle) };
 }

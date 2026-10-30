@@ -1,6 +1,7 @@
 "use client";
 import { useTranslations } from "next-intl";
-import { Mafs, Coordinates, Polygon, Theme, useMovablePoint } from "mafs";
+import { Coordinates, Polygon, Theme, useMovablePoint } from "mafs";
+import FitMafs from "@/components/tool-ui/FitMafs";
 import "mafs/core.css";
 import "./triangleMafsTheme.css";
 import SectionCard from "@/components/tool-ui/SectionCard";
@@ -69,13 +70,13 @@ export default function TriangleInteractivePlayground() {
           dir="ltr"
           className="triangle-mafs w-full shrink-0 overflow-hidden rounded-xl lg:w-[320px]"
         >
-          <Mafs viewBox={{ x: [-2, 9], y: [-2, 7] }} height={280} pan={false} zoom={false}>
+          <FitMafs viewBox={{ x: [-2, 9], y: [-2, 7] }} height={280} pan={false} zoom={false}>
             <Coordinates.Cartesian xAxis={{ lines: 2 }} yAxis={{ lines: 2 }} />
             <Polygon points={[A.point, B.point, C.point]} color={Theme.blue} fillOpacity={0.12} />
             {A.element}
             {B.element}
             {C.element}
-          </Mafs>
+          </FitMafs>
         </div>
         <TriangleWorkedExampleNote
           title={tw("title")}

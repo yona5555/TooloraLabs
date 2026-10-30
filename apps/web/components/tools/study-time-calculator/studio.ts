@@ -40,18 +40,13 @@ const STORAGE_KEY = "tooloralabs:study-planner:v1";
 let idCounter = 0;
 export const newId = () => `${Date.now().toString(36)}-${(idCounter++).toString(36)}`;
 
-/** Today's local calendar date as YYYY-MM-DD. */
-export function todayIso(): string {
-  const d = new Date();
-  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
-}
-
 /**
  * Realistic sample: a student with four exams over the next 16 days (one hard, high-credit
  * chemistry exam in the middle), a lighter Friday and a longer weekend, and the classic 25/5/15
- * Pomodoro rhythm. Subject names come from translations (`studio.sample.exams`).
+ * Pomodoro rhythm. Subject names come from translations (`studio.sample.exams`); `start` is today from
+ * useTodayISO, so the server and the hydrating render agree.
  */
-export function sampleState(names: string[], start = todayIso()): StudioState {
+export function sampleState(names: string[], start: string): StudioState {
   const base: Omit<StudioExam, "id" | "name" | "date">[] = [
     { difficulty: 3, credits: 4, topics: 6, hours: 8 },
     { difficulty: 5, credits: 4, topics: 8, hours: 14 },

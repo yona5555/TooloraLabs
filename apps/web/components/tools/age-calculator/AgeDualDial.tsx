@@ -3,6 +3,7 @@ import type { CalendarAge } from "@tooloralabs/tools";
 import { px2 } from "@/components/tool-ui/indicator-kit/SvgBits";
 import { svgPx } from "@/components/tool-ui/svgPx";
 
+import FitSvg from "@/components/tool-ui/FitSvg";
 type Ring = { age: CalendarAge; color: string; label: string; next: string };
 
 /**
@@ -20,7 +21,7 @@ export default function AgeDualDial({ outer, inner, centerTop, centerBottom }: {
   const sw = 20;
 
   return (
-    <svg viewBox={`0 0 ${S} ${S}`} width="100%" height="100%" style={{ direction: "ltr" }} role="img" aria-label={`${centerTop} ${centerBottom}`} className="mx-auto block max-h-full">
+    <FitSvg viewBox={`0 0 ${S} ${S}`} width="100%" height="100%" style={{ direction: "ltr" }} role="img" aria-label={`${centerTop} ${centerBottom}`} className="mx-auto block max-h-full">
       {rings.map((ring) => {
         const circ = 2 * Math.PI * ring.r;
         const p = ring.age.isBirthdayToday ? 1 : Math.min(1, Math.max(0, ring.age.yearProgress));
@@ -70,7 +71,7 @@ export default function AgeDualDial({ outer, inner, centerTop, centerBottom }: {
           {ring.next}
         </text>
       ))}
-    </svg>
+    </FitSvg>
   );
 }
 

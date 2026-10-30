@@ -1,6 +1,7 @@
 "use client";
 import { useTranslations } from "next-intl";
-import { Mafs, Coordinates, Plot, Point, Line } from "mafs";
+import { Coordinates, Plot, Point, Line } from "mafs";
+import FitMafs from "@/components/tool-ui/FitMafs";
 import "mafs/core.css";
 import "@/components/tool-ui/mafsTheme.css";
 import { ScientificCalculator } from "@tooloralabs/tools";
@@ -35,7 +36,7 @@ export default function ExponentialTangentCurve() {
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
       <GapFreeRow className="mt-4">
         <div dir="ltr" className="mafs-canvas w-full overflow-hidden rounded-xl lg:flex-1">
-          <Mafs viewBox={{ x: [0, 360], y: [-8, 8] }} height={200} pan={false} zoom={false} preserveAspectRatio={false}>
+          <FitMafs viewBox={{ x: [0, 360], y: [-8, 8] }} height={200} pan={false} zoom={false} preserveAspectRatio={false}>
             <Coordinates.Cartesian xAxis={{ lines: 90 }} yAxis={{ lines: 2 }} />
             <Line.Segment point1={[90, -8]} point2={[90, 8]} color={colors.zinc} weight={1} style="dashed" opacity={0.5} />
             <Line.Segment point1={[270, -8]} point2={[270, 8]} color={colors.zinc} weight={1} style="dashed" opacity={0.5} />
@@ -43,7 +44,7 @@ export default function ExponentialTangentCurve() {
             <Plot.OfX y={(x) => Math.max(-8, Math.min(8, Math.tan((x * Math.PI) / 180)))} domain={[91, 269]} color={colors.amber} />
             <Plot.OfX y={(x) => Math.max(-8, Math.min(8, Math.tan((x * Math.PI) / 180)))} domain={[271, 360]} color={colors.amber} />
             {isDefined && <Point x={dims.angleDeg} y={clampedTan} color={colors.amber} />}
-          </Mafs>
+          </FitMafs>
         </div>
         <WorkedExampleNote
           title={t("worked.title")}

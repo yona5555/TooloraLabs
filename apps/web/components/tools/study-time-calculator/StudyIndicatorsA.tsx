@@ -9,6 +9,7 @@ import { labelW } from "@/components/tool-ui/labelLayout";
 import { useFitWidth } from "@/components/tool-ui/useFitWidth";
 import { paletteTextClass } from "@/lib/palette-text";
 
+import FitSvg from "@/components/tool-ui/FitSvg";
 export type StudyIndicatorProps = { state: StudioState; setState: (s: StudioState) => void; d: Derived };
 
 export const axisText = "fill-zinc-500 dark:fill-zinc-400";
@@ -259,7 +260,7 @@ export function ForgettingCurveCard({ d }: StudyIndicatorProps) {
         indicator={
           <div className="w-[400px] max-w-full">
             <ExamChips d={d} value={e.id} onPick={setPick} />
-            <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.curve.title")} className="max-w-full">
+            <FitSvg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.curve.title")} className="max-w-full">
               {[0, 0.25, 0.5, 0.75, 1].map((r) => (
                 <g key={r}>
                   <line x1={L} x2={W - 10} y1={y(r)} y2={y(r)} stroke="currentColor" strokeOpacity={0.12} />
@@ -294,7 +295,7 @@ export function ForgettingCurveCard({ d }: StudyIndicatorProps) {
               <text style={{ fontSize: svgPx(12) }} x={W - 10} y={B + 27} textAnchor="end" className={axisText}>
                 {t("ind.curve.axis")}
               </text>
-            </svg>
+            </FitSvg>
             <div className="mt-1 flex flex-wrap gap-x-3 text-xs text-zinc-600 dark:text-zinc-300">
               <span style={{ color: c }} className={paletteTextClass(c)}>━ {t("ind.curve.with")}</span>
               <span className="text-zinc-400">┅ {t("ind.curve.without")}</span>
@@ -339,7 +340,7 @@ export function PriorityFormulaCard({ d }: StudyIndicatorProps) {
       <IndicatorWithTable
         workedExampleTitle={t("ind.worked")}
         indicator={
-          <svg data-annotation="" width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.priority.title")} className="max-w-full">
+          <FitSvg data-annotation="" width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.priority.title")} className="max-w-full">
             {[
               { x: 22, k: "difficulty" },
               { x: 74, k: "credits" },
@@ -374,7 +375,7 @@ export function PriorityFormulaCard({ d }: StudyIndicatorProps) {
                 </g>
               );
             })}
-          </svg>
+          </FitSvg>
         }
         rows={[
           ...exams.map((e) => ({

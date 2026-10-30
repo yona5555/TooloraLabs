@@ -10,6 +10,7 @@ import { svgPx } from "@/components/tool-ui/svgPx";
 import { useFitWidth } from "@/components/tool-ui/useFitWidth";
 import { flowRows, labelW } from "@/components/tool-ui/labelLayout";
 
+import FitSvg from "@/components/tool-ui/FitSvg";
 export type SchedIndicatorProps = { state: StudioState; onChange: (s: StudioState) => void; d: Derived };
 
 const BUFFER_STEPS = [0, 5, 10, 15, 20, 30];
@@ -130,7 +131,7 @@ export function ScheduleDailyLoadCard({ d }: SchedIndicatorProps) {
         workedExampleTitle={t("ind.worked")}
         indicator={
           <PhoneMini slot={1} title={t("ind.load.title")}>
-          <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.load.title")} className="max-w-full">
+          <FitSvg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.load.title")} className="max-w-full">
             <line x1={10} x2={W - 10} y1={B} y2={B} stroke="currentColor" strokeOpacity={0.35} />
             {days.map((day, i) => {
               const s = d.stats.days[DAY_CODES.indexOf(day)];
@@ -160,7 +161,7 @@ export function ScheduleDailyLoadCard({ d }: SchedIndicatorProps) {
                 </text>
               </g>
             )}
-          </svg>
+          </FitSvg>
           </PhoneMini>
         }
         rows={[
