@@ -1,7 +1,8 @@
 "use client";
 import { useSyncExternalStore } from "react";
 import { useTranslations } from "next-intl";
-import { Mafs, Coordinates, Plot, Line, Point, Text } from "mafs";
+import { Coordinates, Plot, Line, Point, Text } from "mafs";
+import FitMafs, { FitText } from "@/components/tool-ui/FitMafs";
 import "mafs/core.css";
 import "./triangleMafsTheme.css";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
@@ -80,7 +81,7 @@ export default function TriangleAngleSinCosCurve({ angleADeg, angleBDeg, angleCD
       <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">{t("caption", { vertex: activeLetter })}</p>
 
       <div dir="ltr" className="triangle-mafs mt-3 w-full overflow-hidden rounded-xl">
-        <Mafs
+        <FitMafs
           viewBox={{ x: [-12, 192], y: [-1.35, 1.35] }}
           height={190}
           pan={false}
@@ -94,9 +95,9 @@ export default function TriangleAngleSinCosCurve({ angleADeg, angleBDeg, angleCD
 
           {RADIAN_TICKS.map(({ deg, label }, i) =>
             showTick[i] ? (
-              <Text key={deg} x={deg} y={-1.2} size={12} color={colors.faint}>
+              <FitText key={deg} x={deg} y={-1.2} size={12} color={colors.faint}>
                 {label}
-              </Text>
+              </FitText>
             ) : null,
           )}
 
@@ -131,7 +132,7 @@ export default function TriangleAngleSinCosCurve({ angleADeg, angleBDeg, angleCD
           <Text x={activeDeg} y={cosActive} attach={cosActive >= 0 ? "n" : "s"} attachDistance={10} color={colors.cos} size={12}>
             {`cos ${activeLetter} = ${fmt(cosActive)}`}
           </Text>
-        </Mafs>
+        </FitMafs>
       </div>
 
       <p dir="ltr" className="mt-2 text-center font-mono text-xs text-zinc-500 dark:text-zinc-400">

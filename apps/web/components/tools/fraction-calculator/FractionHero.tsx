@@ -1,7 +1,8 @@
 "use client";
 import { useEffect, useRef } from "react";
 import { useTranslations } from "next-intl";
-import { Mafs, Coordinates, Line, Text, useMovablePoint } from "mafs";
+import { Coordinates, Line, useMovablePoint } from "mafs";
+import FitMafs, { FitText } from "@/components/tool-ui/FitMafs";
 import "mafs/core.css";
 import "@/components/tool-ui/mafsTheme.css";
 import { GlassHeroCard } from "@/components/tool-ui/glass/GlassPrimitives";
@@ -160,7 +161,7 @@ export default function FractionHero() {
         {/* Number line */}
         <div dir="ltr" className="w-full lg:flex-1">
           <div role="group" aria-label={t("ariaLabel")} className="mafs-canvas w-full overflow-hidden rounded-xl">
-            <Mafs viewBox={{ x: [dataMin, dataMax], y: [-0.5, 0.5] }} height={170} pan={false} zoom={false} preserveAspectRatio={false}>
+            <FitMafs viewBox={{ x: [dataMin, dataMax], y: [-0.5, 0.5] }} height={170} pan={false} zoom={false} preserveAspectRatio={false}>
               <Coordinates.Cartesian
                 xAxis={{
                   lines: 1 / 6,
@@ -178,15 +179,15 @@ export default function FractionHero() {
               />
               <Line.Segment point1={[dataMin, 0.15]} point2={[dataMax, 0.15]} color={COLOR_A} weight={1.5} opacity={0.4} />
               <Line.Segment point1={[dataMin, -0.15]} point2={[dataMax, -0.15]} color={COLOR_B} weight={1.5} opacity={0.4} />
-              <Text x={valueA} y={0.34} size={12} color={COLOR_A}>
+              <FitText x={valueA} y={0.34} size={12} color={COLOR_A}>
                 {`A = ${formatMathValue(numeratorA)}/${formatMathValue(denominatorA)}`}
-              </Text>
-              <Text x={valueB} y={-0.34} size={12} color={COLOR_B}>
+              </FitText>
+              <FitText x={valueB} y={-0.34} size={12} color={COLOR_B}>
                 {`B = ${formatMathValue(numeratorB)}/${formatMathValue(denominatorB)}`}
-              </Text>
+              </FitText>
               <g data-point-role="pointA">{pointA.element}</g>
               <g data-point-role="pointB">{pointB.element}</g>
-            </Mafs>
+            </FitMafs>
           </div>
         </div>
 

@@ -1,6 +1,7 @@
 "use client";
 import { useTranslations } from "next-intl";
-import { Mafs, Coordinates, Point, Text, useMovablePoint } from "mafs";
+import { Coordinates, Point, useMovablePoint } from "mafs";
+import FitMafs, { FitText } from "@/components/tool-ui/FitMafs";
 import "mafs/core.css";
 import "@/components/tool-ui/mafsTheme.css";
 import { useIsDarkMode } from "@/lib/use-dark-mode";
@@ -52,21 +53,21 @@ export default function NumberLineSolutionSet() {
         <div dir="ltr" className="w-full lg:flex-1">
           <PhoneMini slot={1} title={t("title")}>
             <div role="group" aria-label={t("ariaLabel")} className="mafs-canvas mx-auto w-full max-w-[420px] overflow-hidden rounded-xl">
-              <Mafs viewBox={{ x: domain, y: [-2, 2] }} height={140} pan={false} zoom={false} preserveAspectRatio={false}>
+              <FitMafs viewBox={{ x: domain, y: [-2, 2] }} height={140} pan={false} zoom={false} preserveAspectRatio={false}>
                 <Coordinates.Cartesian xAxis={{ lines: 1 }} yAxis={{ lines: 100 }} />
                 {roots.map((r, i) => (
                   <Point key={i} x={r} y={0} color={colors.root} svgCircleProps={{ r: 6 }} />
                 ))}
                 {roots.map((r, i) => (
-                  <Text key={`t${i}`} x={r} y={1.05} size={12} color={colors.root}>
+                  <FitText key={`t${i}`} x={r} y={1.05} size={12} color={colors.root}>
                     {fmt(r)}
-                  </Text>
+                  </FitText>
                 ))}
                 {explorer.element}
-                <Text x={ex} y={-1.3} size={12} color={colors.explorer}>
+                <FitText x={ex} y={-1.3} size={12} color={colors.explorer}>
                   {fmt(ex)}
-                </Text>
-              </Mafs>
+                </FitText>
+              </FitMafs>
             </div>
           </PhoneMini>
         </div>

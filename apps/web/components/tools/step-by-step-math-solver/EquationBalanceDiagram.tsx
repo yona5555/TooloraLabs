@@ -1,6 +1,7 @@
 "use client";
 import { useTranslations } from "next-intl";
-import { Mafs, Coordinates, Line, Point, Text, useMovablePoint } from "mafs";
+import { Coordinates, Line, Point, useMovablePoint } from "mafs";
+import FitMafs, { FitText } from "@/components/tool-ui/FitMafs";
 import "mafs/core.css";
 import "@/components/tool-ui/mafsTheme.css";
 import { useIsDarkMode } from "@/lib/use-dark-mode";
@@ -78,24 +79,24 @@ export default function EquationBalanceDiagram() {
       <GapFreeRow className="mt-4">
         <div dir="ltr" className="w-full lg:flex-1">
           <div role="group" aria-label={t("ariaLabel")} className="mafs-canvas mx-auto w-full max-w-[380px] overflow-hidden rounded-xl">
-            <Mafs viewBox={{ x: [-5, 5], y: [-6, 4] }} height={220} pan={false} zoom={false} preserveAspectRatio={false}>
+            <FitMafs viewBox={{ x: [-5, 5], y: [-6, 4] }} height={220} pan={false} zoom={false} preserveAspectRatio={false}>
               <Coordinates.Cartesian xAxis={{ lines: 100 }} yAxis={{ lines: 100 }} />
               <Line.Segment point1={[0, -1]} point2={[0, 1]} color={colors.beam} weight={3} />
               <Line.Segment point1={beamLeft} point2={beamRight} color={colors.beam} weight={3} />
               <Point x={beamLeft[0]} y={beamLeft[1]} color={colors.left} svgCircleProps={{ r: 7 }} />
               <Point x={beamRight[0]} y={beamRight[1]} color={colors.right} svgCircleProps={{ r: 7 }} />
-              <Text x={beamLeft[0]} y={beamLeft[1] + 0.9} size={12} color={colors.left}>
+              <FitText x={beamLeft[0]} y={beamLeft[1] + 0.9} size={12} color={colors.left}>
                 {fmt(lhs)}
-              </Text>
-              <Text x={beamRight[0]} y={beamRight[1] + 0.9} size={12} color={colors.right}>
+              </FitText>
+              <FitText x={beamRight[0]} y={beamRight[1] + 0.9} size={12} color={colors.right}>
                 {fmt(rhs)}
-              </Text>
+              </FitText>
               <Line.Segment point1={[-10, -4]} point2={[10, -4]} color={colors.beam} weight={1} opacity={0.3} />
               {testPoint.element}
-              <Text x={x} y={-4.9} size={12} color={colors.right}>
+              <FitText x={x} y={-4.9} size={12} color={colors.right}>
                 {`x = ${fmt(x)}`}
-              </Text>
-            </Mafs>
+              </FitText>
+            </FitMafs>
           </div>
           <p className="mt-1 text-center text-xs text-zinc-400 dark:text-zinc-500">{t("dragHint")}</p>
         </div>

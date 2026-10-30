@@ -1,7 +1,8 @@
 "use client";
 import { useMemo } from "react";
 import { useTranslations } from "next-intl";
-import { Coordinates, Mafs, Point, Polyline, Text, useMovablePoint } from "mafs";
+import { Coordinates, Point, Polyline, Text, useMovablePoint } from "mafs";
+import FitMafs from "@/components/tool-ui/FitMafs";
 import "mafs/core.css";
 import "@/components/tool-ui/mafsTheme.css";
 import { sweepVariable, valueWithOverride, type NotepadAnalysis } from "@tooloralabs/tools";
@@ -109,7 +110,7 @@ function Lab({ a, text, name, base, line, onApply }: { a: NotepadAnalysis; text:
             <span className={`rounded-full px-2.5 py-1 font-mono text-xs font-semibold ${delta >= 0 ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-300" : "bg-red-50 text-red-700 dark:bg-red-500/10 dark:text-red-300"}`}>{signed(delta)}</span>
           </div>
           <div role="group" dir="ltr" aria-label={t("lab.aria")} className="mafs-canvas w-full overflow-hidden rounded-xl">
-            <Mafs viewBox={{ x: [x0, x1], y: [y0, y1], padding: 0 }} height={280} pan={false} zoom={false} preserveAspectRatio={false}>
+            <FitMafs viewBox={{ x: [x0, x1], y: [y0, y1], padding: 0 }} height={280} pan={false} zoom={false} preserveAspectRatio={false}>
               <Coordinates.Cartesian xAxis={{ lines: xStep, labels: (n) => compact(n) }} yAxis={{ lines: yStep, labels: (n) => compact(n) }} />
               {segments.map((seg, i) => (
                 <Polyline key={i} points={seg} color={blue} weight={3} />
@@ -119,7 +120,7 @@ function Lab({ a, text, name, base, line, onApply }: { a: NotepadAnalysis; text:
                 {t("lab.typed")}
               </Text>
               {point.element}
-            </Mafs>
+            </FitMafs>
           </div>
           <label className="mt-3 flex items-center gap-3 text-xs text-zinc-500 dark:text-zinc-400">
             <span className="shrink-0">{t("lab.slider")}</span>

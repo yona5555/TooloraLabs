@@ -12,6 +12,8 @@ import type { ToolEntryProps } from "@/components/tools/entries/types";
 import { tools } from "@/data/tools";
 import { hasCategoryPage } from "@/data/categories";
 import { SITE_URL } from "@/lib/site";
+import { RenderClockProvider } from "@/components/tools/markets/RenderClock";
+import { renderTime } from "@/lib/render-time";
 
 export async function toolPageMetadata(locale: string, slug: string): Promise<Metadata> {
   const tool = tools.find((item) => item.slug === slug);
@@ -245,7 +247,9 @@ export async function ToolPageView({
         compact={isAboveFoldLayout}
         backText={tcommon("back")}
       >
-        {component}
+        {/* Every tool page (prerendered or live) sends its render time, so client code reading "now" or
+            "today" (useTodayISO, useRelativeUpdatedLabel) hydrates on the same clock as the HTML. */}
+        <RenderClockProvider renderedAt={renderTime()}>{component}</RenderClockProvider>
       </ToolPageLayout>
       {!isAboveFoldLayout && (
         <RelatedTools locale={locale} category={tool.category} currentSlug={slug} />

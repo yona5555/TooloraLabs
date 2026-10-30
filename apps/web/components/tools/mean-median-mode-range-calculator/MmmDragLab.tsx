@@ -1,7 +1,8 @@
 "use client";
 import { useRef, useState } from "react";
 import { useTranslations } from "next-intl";
-import { Coordinates, Line, Mafs, MovablePoint, Polygon, Text } from "mafs";
+import { Coordinates, Line, MovablePoint, Polygon } from "mafs";
+import FitMafs, { FitText } from "@/components/tool-ui/FitMafs";
 import "mafs/core.css";
 import "@/components/tool-ui/mafsTheme.css";
 import { useIsDarkMode } from "@/lib/use-dark-mode";
@@ -76,20 +77,20 @@ export default function MmmDragLab() {
   const plane = (
     <div className="w-full lg:w-[380px]">
       <div role="group" dir="ltr" aria-label={t("aria")} className="mafs-canvas w-full overflow-hidden rounded-xl">
-        <Mafs viewBox={{ x: [vx0, vx1], y: [-1.9, top] }} height={280} pan={false} zoom={false} preserveAspectRatio={false}>
+        <FitMafs viewBox={{ x: [vx0, vx1], y: [-1.9, top] }} height={280} pan={false} zoom={false} preserveAspectRatio={false}>
           <Coordinates.Cartesian xAxis={{ lines: step, labels: (x) => f(x) }} yAxis={false} />
           <Line.Segment point1={[a.min, -0.45]} point2={[a.max, -0.45]} color={c.range} weight={3} />
-          <Text x={rangeX} y={-0.8} size={12} color={c.range}>
+          <FitText x={rangeX} y={-0.8} size={12} color={c.range}>
             {`${tr("range")} = ${f(a.range)}`}
-          </Text>
+          </FitText>
           <Line.Segment point1={[a.median, 0]} point2={[a.median, top - 0.9]} color={c.median} style="dashed" weight={2} />
-          <Text x={a.median} y={top - 0.55} size={12} color={c.median}>
+          <FitText x={a.median} y={top - 0.55} size={12} color={c.median}>
             {`${tr("median")} ${f(a.median)}`}
-          </Text>
+          </FitText>
           <Polygon points={[[a.mean, -0.08], [a.mean - d, -1.2], [a.mean + d, -1.2]]} color={c.mean} fillOpacity={0.85} />
-          <Text x={a.mean} y={near ? -1.55 : top - 0.55} size={12} color={c.mean}>
+          <FitText x={a.mean} y={near ? -1.55 : top - 0.55} size={12} color={c.mean}>
             {`x̄ ${f(a.mean)}`}
-          </Text>
+          </FitText>
           {values.map((v, i) => (
             <MovablePoint
               key={i}
@@ -99,7 +100,7 @@ export default function MmmDragLab() {
               onMove={([x]) => move(i, x)}
             />
           ))}
-        </Mafs>
+        </FitMafs>
       </div>
       <p className="mt-2 text-center text-xs text-zinc-500 dark:text-zinc-400">{t("hint")}</p>
     </div>

@@ -334,9 +334,8 @@ test("share-images fails on a sitemap page without og:image", async () => {
   failsWith(r, /\/share-canary\/en\/no-image: no og:image/, "share-images");
 });
 
-// The locks compare against a copy of their committed baseline with one dimension changed: the lock must fail
-// and name that value (whatever else it reports). The color-lock canary variant (tampering a captured color
-// too) lands with the desktop/home-phone color-capture change (PR B), not with this generic gate infra.
+// The locks compare against a copy of their committed baseline with one dimension and one color changed: the
+// lock must fail and name exactly those two values (whatever else it reports).
 function tamper(file, mutate) {
   const b = JSON.parse(readFileSync(join(ROOT, file), "utf8"));
   const expected = mutate(b);
@@ -345,22 +344,25 @@ function tamper(file, mutate) {
   return { copy, expected };
 }
 
-test("desktop lock fails on a changed card dimension", () => {
+test("desktop lock + color lock fail on a changed card dimension and a changed card color", () => {
   const { copy, expected } = tamper(`tests/baselines/desktop${process.platform === "linux" ? ".linux" : ""}.json`, (b) => {
     const v = b["/en/tools/bmi-calculator"];
     v.cards[0][3] += 40; // width
-    return [new RegExp(`/en/tools/bmi-calculator cards #0 .*: w ${"\\d"}.* \\(approved ${v.cards[0][3]}\\)`)];
+    const part = Object.keys(v.colors.cards[0])[0];
+    v.colors.cards[0][part].light[0] = "rgb(1, 2, 3)";
+    return [new RegExp(`/en/tools/bmi-calculator cards #0 .*: w ${"\\d"}.* \\(approved ${v.cards[0][3]}\\)`), /\/en\/tools\/bmi-calculator cards #0 .* light background-color: .* \(approved rgb\(1, 2, 3\)\)/];
   });
   const r = gate("node", ["tests/desktop-lock.mjs", "--only", "bmi-calculator", "--baseline", copy]);
   for (const re of expected) failsWith(r, re, "desktop lock");
 });
 
-test("phone lock fails on a changed header dimension", () => {
+test("phone lock + color lock fail on a changed header dimension and a changed header color", () => {
   assert.ok(process.env.PHONE_BASE, "PHONE_BASE (a `next start` of the normal build on a free port) is required: the phone lock canary cannot be skipped");
   const { copy, expected } = tamper(`tests/baselines/home-phone${process.platform === "linux" ? ".linux" : ""}.json`, (b) => {
     const h = b["en@390"].regions.header[0];
     h.h += 30;
-    return [new RegExp(`en@390 header #0 <header>: h \\d.* \\(approved ${h.h}\\)`)];
+    h.colors.light[0] = "rgb(1, 2, 3)";
+    return [new RegExp(`en@390 header #0 <header>: h \\d.* \\(approved ${h.h}\\)`), /en@390 header #0 <header> light background-color: .* \(approved rgb\(1, 2, 3\)\)/];
   });
   const r = gate("node", ["tests/home-phone-regression.mjs", "--base", process.env.PHONE_BASE, "--baseline", copy]);
   for (const re of expected) failsWith(r, re, "phone lock");

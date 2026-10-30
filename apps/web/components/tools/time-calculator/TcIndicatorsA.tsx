@@ -12,6 +12,7 @@ import { labelW } from "@/components/tool-ui/labelLayout";
 import { useFitWidth } from "@/components/tool-ui/useFitWidth";
 import { paletteTextClass } from "@/lib/palette-text";
 
+import FitSvg from "@/components/tool-ui/FitSvg";
 const axisText = "fill-zinc-500 dark:fill-zinc-400";
 const valueText = "fill-zinc-800 dark:fill-zinc-100";
 
@@ -244,7 +245,7 @@ export function TcDstTimelineCard({ d, f }: CardProps) {
       <IndicatorWithTable
         workedExampleTitle={t("worked")}
         indicator={
-          <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("dstline.title")} className="max-w-full">
+          <FitSvg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("dstline.title")} className="max-w-full">
             {[...new Set(offs)].map((o) => (
               <text style={{ fontSize: svgPx(12) }} key={o} x={L - 4} y={y(o) + 3} textAnchor="end" className={axisText}>{f.offset(o)}</text>
             ))}
@@ -276,7 +277,7 @@ export function TcDstTimelineCard({ d, f }: CardProps) {
             {!trs.length && (
               <text style={{ fontSize: svgPx(12) }} x={(L + W) / 2} y={30} textAnchor="middle" fontWeight={700} className={valueText}>{zone ? t("dstline.noDst", { zone: zoneName(zone) }) : t("dstline.floating")}</text>
             )}
-          </svg>
+          </FitSvg>
         }
         rows={[
           { label: tc("input.zone"), value: zoneName(zone), note: zone ? `UTC${f.offset(offs[0])} (${f.month(0)})` : undefined },

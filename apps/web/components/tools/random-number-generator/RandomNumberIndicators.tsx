@@ -26,6 +26,7 @@ import { pc, type RngFormatters } from "./format";
 import { PRESETS, type PresetKey } from "./types";
 import { svgPx } from "@/components/tool-ui/svgPx";
 
+import FitSvg from "@/components/tool-ui/FitSvg";
 /** Everything the indicators read about the current draw, computed once by the page. */
 export type Draw = {
   lo: number;
@@ -150,7 +151,7 @@ export function RunningAverage({ d, f }: IndicatorProps) {
         ],
       }}
     >
-      <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} className="h-auto max-w-full" role="img" aria-label={t("mean.title")} data-testid="ind-running-average">
+      <FitSvg width={W} height={H} viewBox={`0 0 ${W} ${H}`} className="h-auto max-w-full" role="img" aria-label={t("mean.title")} data-testid="ind-running-average">
         <polygon points={funnel} className="fill-amber-400/20" />
         {[d.lo, d.mu, d.hi].map((v) => (
           <g key={v}>
@@ -172,7 +173,7 @@ export function RunningAverage({ d, f }: IndicatorProps) {
         <text style={{ fontSize: svgPx(13) }} x={L} y={H - 8} className="fill-zinc-400 font-mono">1</text>
         <text style={{ fontSize: svgPx(13) }} x={W - R} y={H - 8} textAnchor="end" className="fill-zinc-400 font-mono">{f.int(d.k)}</text>
         <text style={{ fontSize: svgPx(13) }} x={(L + W - R) / 2} y={H - 8} textAnchor="middle" className="fill-zinc-400">{t("mean.axisDraws")}</text>
-      </svg>
+      </FitSvg>
       <div className="mt-2 flex flex-wrap gap-4 text-xs text-zinc-500 dark:text-zinc-400">
         <span className="flex items-center gap-1.5"><span className="w-4 border-t-2 border-blue-600" />{t("mean.legendMean")}</span>
         <span className="flex items-center gap-1.5"><span className="w-4 border-t-2 border-dashed border-amber-500" />{t("mean.legendMu")}</span>
@@ -275,7 +276,7 @@ export function SpreadInRange({ d, f }: IndicatorProps) {
         ],
       }}
     >
-      <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} className="h-auto max-w-full" role="img" aria-label={t("spread.title")} data-testid="ind-spread">
+      <FitSvg width={W} height={H} viewBox={`0 0 ${W} ${H}`} className="h-auto max-w-full" role="img" aria-label={t("spread.title")} data-testid="ind-spread">
         <rect x={sdLo} y={lineY - 16} width={Math.max(2, sdHi - sdLo)} height={32} rx={6} className="fill-blue-500/10" />
         <line x1={L} x2={W - R} y1={lineY} y2={lineY} strokeWidth={2} className="stroke-zinc-300 dark:stroke-zinc-600" />
         {marks.map((m) => (
@@ -294,7 +295,7 @@ export function SpreadInRange({ d, f }: IndicatorProps) {
         <text style={{ fontSize: svgPx(14) }} x={L} y={lineY + 36} className="fill-zinc-500 font-mono">{f.int(d.lo)}</text>
         <text style={{ fontSize: svgPx(14) }} x={W - R} y={lineY + 36} textAnchor="end" className="fill-zinc-500 font-mono">{f.int(d.hi)}</text>
         <text style={{ fontSize: svgPx(13) }} x={(sdLo + sdHi) / 2} y={lineY + 36} textAnchor="middle" className="fill-blue-600 dark:fill-blue-400">±1 SD</text>
-      </svg>
+      </FitSvg>
     </IndicatorCard>
   );
 }

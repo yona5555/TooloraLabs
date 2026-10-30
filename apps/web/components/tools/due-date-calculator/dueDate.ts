@@ -23,12 +23,6 @@ export function dayToISO(day: number): string {
   return new Date(day * DAY_MS).toISOString().slice(0, 10);
 }
 
-/** Today's local calendar date as a day number. */
-export function todayDay(): number {
-  const n = new Date();
-  return Math.round(Date.UTC(n.getFullYear(), n.getMonth(), n.getDate()) / DAY_MS);
-}
-
 /** Gestational age in clinical "weeks+days" notation, e.g. 10+3. */
 export const wd = (days: number) => `${Math.floor(days / 7)}+${days % 7}`;
 

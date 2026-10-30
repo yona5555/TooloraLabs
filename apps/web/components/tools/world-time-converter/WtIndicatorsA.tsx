@@ -28,6 +28,7 @@ import { svgPx } from "@/components/tool-ui/svgPx";
 import { useFitWidth, useSvgUnitsPerPx } from "@/components/tool-ui/useFitWidth";
 import { labelW, placeLabels } from "@/components/tool-ui/labelLayout";
 
+import FitSvg from "@/components/tool-ui/FitSvg";
 export function useIndT() {
   return useTranslations("tools.world-time-converter.wt.ind");
 }
@@ -108,7 +109,7 @@ export function WtDayNightMapCard({ d, f }: CardProps) {
         indicator={
           <div className="w-full max-w-[720px]">
             <PhoneMini slot={0} title={t("map.title")}>
-              <svg ref={mapRef} viewBox={`0 0 ${W} ${H}`} width={W} height={H} style={{ direction: "ltr" }} className="h-auto w-full max-w-full rounded-lg" role="img" aria-label={t("map.title")}>
+              <FitSvg ref={mapRef} viewBox={`0 0 ${W} ${H}`} width={W} height={H} style={{ direction: "ltr" }} className="h-auto w-full max-w-full rounded-lg" role="img" aria-label={t("map.title")}>
                 <rect width={W} height={H} className="fill-sky-200 dark:fill-[#0b2447]" />
                 <path d={land} className="fill-emerald-100 stroke-emerald-700/40 dark:fill-emerald-900 dark:stroke-emerald-400/30" strokeWidth={0.6} />
                 <path d={water} className="fill-sky-200 dark:fill-[#0b2447]" />
@@ -156,7 +157,7 @@ export function WtDayNightMapCard({ d, f }: CardProps) {
                 <text style={{ fontSize: svgPx(12) }} x={W - 4 - utcW / 2} y={H - 4 - utcH / 2 + fs * 0.35} textAnchor="middle" fontWeight={700} fill="#f8fafc">
                   {utcText}
                 </text>
-              </svg>
+              </FitSvg>
             </PhoneMini>
             <div className="mt-2 flex flex-wrap items-center gap-2">
               <button type="button" onClick={() => { setPinned(false); setPlaying((p) => !p); }} aria-label={playing ? t("map.pause") : t("map.play")} className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 text-white hover:bg-blue-700">
@@ -411,7 +412,7 @@ export function WtOffsetBarsCard({ d, f }: CardProps) {
         workedExampleTitle={t("worked")}
         indicator={
           <PhoneMini slot={1} title={t("offsets.title")}>
-            <svg viewBox={`0 0 ${W} ${H}`} ref={fitRef} width={W} height={H} style={{ direction: "ltr" }} className="h-auto max-w-full" role="img" aria-label={t("offsets.title")}>
+            <FitSvg viewBox={`0 0 ${W} ${H}`} ref={fitRef} width={W} height={H} style={{ direction: "ltr" }} className="h-auto max-w-full" role="img" aria-label={t("offsets.title")}>
               {ticks.map((h) => (
                 <g key={h}>
                   <line x1={L} x2={W} y1={y(h)} y2={y(h)} stroke="currentColor" strokeOpacity={h === 0 ? 0.5 : 0.1} />
@@ -435,7 +436,7 @@ export function WtOffsetBarsCard({ d, f }: CardProps) {
               <text style={{ fontSize: svgPx(12) }} x={W - 138} y={12} className={axisText}>{t("offsets.std")}</text>
               <rect x={W - 80} y={4} width={9} height={9} fill="#f59e0b" />
               <text style={{ fontSize: svgPx(12) }} x={W - 68} y={12} className={axisText}>{t("offsets.dst")}</text>
-            </svg>
+            </FitSvg>
           </PhoneMini>
         }
         rows={[
