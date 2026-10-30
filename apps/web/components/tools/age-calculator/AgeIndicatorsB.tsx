@@ -9,6 +9,7 @@ import { axisText, useDualT, useIndicatorT, valueText, type IndicatorProps } fro
 import { svgPx } from "@/components/tool-ui/svgPx";
 import { useFitWidth } from "@/components/tool-ui/useFitWidth";
 
+import FitSvg from "@/components/tool-ui/FitSvg";
 const STAGE_COLORS: Record<LifeStageKey, string> = {
   childhood: "#38bdf8",
   adolescence: "#22c55e",
@@ -186,7 +187,7 @@ export function AgeUnitsLadderCard({ d, f }: IndicatorProps) {
       <IndicatorWithTable
         workedExampleTitle={t("worked")}
         indicator={
-          <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("units.title")} className="max-w-full">
+          <FitSvg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("units.title")} className="max-w-full">
             {Array.from({ length: maxExp + 1 }, (_, e) => (
               <g key={e}>
                 <line x1={x(10 ** e)} x2={x(10 ** e)} y1={4} y2={H - 18} stroke="currentColor" strokeOpacity={e % 3 === 0 ? 0.25 : 0.1} />
@@ -206,7 +207,7 @@ export function AgeUnitsLadderCard({ d, f }: IndicatorProps) {
                 </g>
               );
             })}
-          </svg>
+          </FitSvg>
         }
         rows={[
           { label: t("units.days"), value: f.int(r.totalDays), note: `${f.iso(r.reference)} − ${f.iso(r.birth)}` },
@@ -267,7 +268,7 @@ export function AgeFormulaCard({ d, f }: IndicatorProps) {
       <IndicatorWithTable
         workedExampleTitle={t("worked")}
         indicator={
-          <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("formula.title")} data-annotation="" className="max-w-full">
+          <FitSvg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("formula.title")} data-annotation="" className="max-w-full">
             <text x={0} y={14} fontSize={11} fontWeight={800} fill={AGE_COLORS.gregorian}>
               {td("cal.gregorian")} = {td("ymd", { y: f.int(g.years), m: f.int(g.months), d: f.int(g.days) })}
             </text>
@@ -286,7 +287,7 @@ export function AgeFormulaCard({ d, f }: IndicatorProps) {
                 </text>
               </>
             )}
-          </svg>
+          </FitSvg>
         }
         rows={[
           { label: t("formula.wholeYears"), value: f.int(g.years), note: `${f.iso(r.birth)} → ${f.iso(g.lastBirthdayGregorian)}` },

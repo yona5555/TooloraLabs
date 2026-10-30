@@ -5,6 +5,7 @@ import DensityIndicatorCard, { DensityIndicatorUnavailable } from "./DensityIndi
 import { useDensityModel } from "./DensityLiveContext";
 import { svgPx } from "@/components/tool-ui/svgPx";
 
+import FitSvg from "@/components/tool-ui/FitSvg";
 const W = 320;
 const H = 210;
 const BASE = 160;
@@ -25,7 +26,7 @@ export default function DensityVolumeTrio() {
   const showWater = DENSITY_WATER <= maxD * 1.05 && DENSITY_WATER >= maxD * 0.02;
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <line x1={0} y1={BASE} x2={W} y2={BASE} className="stroke-zinc-300 dark:stroke-zinc-600" />
       {items.map((it, i) => {
         const cx = (W / 3) * i + W / 6;
@@ -56,7 +57,7 @@ export default function DensityVolumeTrio() {
       <text style={{ fontSize: svgPx(12) }} x={4} y={14} className="fill-zinc-500 dark:fill-zinc-400">
         {`ρ (g/cm³) · m = ${f(a.mass)} g`}
       </text>
-    </svg>
+    </FitSvg>
   );
 
   return (

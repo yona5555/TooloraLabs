@@ -43,10 +43,6 @@ export function addDaysISO(iso: string, days: number): string {
   return toISO(d);
 }
 
-export function todayISO(): string {
-  return toISO(new Date());
-}
-
 /** Calendar-day difference b − a (DST-safe). */
 export function diffDays(a: string, b: string): number {
   const A = parseISO(a);

@@ -6,6 +6,7 @@ import DensityIndicatorCard, { DensityIndicatorUnavailable } from "./DensityIndi
 import { useDensityModel } from "./DensityLiveContext";
 import { svgPx } from "@/components/tool-ui/svgPx";
 
+import FitSvg from "@/components/tool-ui/FitSvg";
 const W = 330;
 const H = 200;
 const L = 46;
@@ -40,7 +41,7 @@ export default function DensityWaterTemperatureTrend() {
 
   const indicator = (
     <div className="w-full max-w-[330px]">
-      <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
+      <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
         <text style={{ fontSize: svgPx(12) }} x={L - 6} y={12} textAnchor="end" className="fill-zinc-500 dark:fill-zinc-400">
           g/cm³
         </text>
@@ -69,7 +70,7 @@ export default function DensityWaterTemperatureTrend() {
         <text style={{ fontSize: svgPx(12) }} x={px} y={Math.max(T + 10, py - 10)} textAnchor={anchor} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-blue-700 dark:fill-blue-300">
           {`${f(rho, 4)} · ${temp} °C`}
         </text>
-      </svg>
+      </FitSvg>
       <input
         type="range"
         dir="ltr"

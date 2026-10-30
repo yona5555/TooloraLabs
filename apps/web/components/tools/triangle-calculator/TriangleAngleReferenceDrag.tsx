@@ -1,6 +1,7 @@
 "use client";
 import { useTranslations } from "next-intl";
-import { Mafs, Line, Point, Theme, useMovablePoint, type vec } from "mafs";
+import { Line, Point, Theme, useMovablePoint, type vec } from "mafs";
+import FitMafs from "@/components/tool-ui/FitMafs";
 import "mafs/core.css";
 import "./triangleMafsTheme.css";
 import SectionCard from "@/components/tool-ui/SectionCard";
@@ -40,13 +41,13 @@ export default function TriangleAngleReferenceDrag() {
           dir="ltr"
           className="triangle-mafs w-full shrink-0 overflow-hidden rounded-xl lg:w-[340px]"
         >
-          <Mafs viewBox={{ x: [-15, 195], y: [-2, 2] }} height={140} pan={false} zoom={false}>
+          <FitMafs viewBox={{ x: [-15, 195], y: [-2, 2] }} height={140} pan={false} zoom={false}>
             <Line.Segment point1={[0, 0]} point2={[180, 0]} color={Theme.foreground} />
             {REFERENCE_TRIANGLES.map((ref) => (
               <Point key={ref.key} x={ref.largestAngle} y={0} color={Theme.indigo} />
             ))}
             {drag.element}
-          </Mafs>
+          </FitMafs>
         </div>
         <TriangleWorkedExampleNote
           title={tw("title")}

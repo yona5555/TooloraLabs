@@ -70,9 +70,14 @@
 - غياب أيٍّ منها في بناء Production (`VERCEL_ENV=production`) يوقف البناء فوراً برسالة تذكر اسم المتغير الناقص فقط: `assertMarketApiKeysForProduction` في `apps/web/lib/api-key.ts`، يُستدعى مرة واحدة من `apps/web/next.config.ts` في مرحلة `next build`. القائمة المصدر الوحيد: `MARKET_API_KEYS` في الملف نفسه؛ أي مفتاح سوق جديد يُضاف إليها.
 - بناء CI وPreview والجهاز المحلي لا يحتاجها: كل أداة تسلك مسار «لا مفتاح» الصريح (لا طلب، لا سجل، حالة «البيانات غير متاحة»).
 
+## 11. تسميات الرسوم: طبقة موحّدة، والحارس الآن داخل site-audit (2026-10-28، حُدِّث 2026-10-30)
+- **الطبقة:** `components/tool-ui/chartLabels.ts` (هندسة بحتة: `marginDelta`/`nextMargins`، `padRange`، `placeBeside`/`placeClear`/`clampInto`، `fitStep`/`thinEvery`، `physicalSide`، `stackBands`) و`useChartLabels.ts` (قياس الحبر الفعلي بـ`measureText`). كل رسم Mafs يُكتب `<FitMafs>` (`tool-ui/FitMafs.tsx`) و`<FitText>` للنص المؤلَّف؛ كل رسم SVG يدوي يُكتب `<FitSvg>` (`tool-ui/FitSvg.tsx`)، ورسوم الطقم `indicator-kit/SvgBits` `Drawing` تمر عبره (`grow={false}`). لا هوامش ثابتة ولا إخفاء نص.
+- **الحارس:** كان `apps/web/scripts/axis-label-check.mjs` + مهمتا `chart-text-shard`/`chart-text-audit` (ستة أجزاء) أداة مستقلة فحصت فقط التراكب والقص. كلاهما حُذف: `apps/web/scripts/site-audit.mjs` (§9) يغطي التراكب والقص (criteria `overlap`/`clip`) ضمن فحصه الأشمل لكل صفحة — لا داعٍ لأداة ثانية موازية، ولا لتمرير مخرَجاتها عبر pipe (كانت `axis-label-check.mjs | grep -v '^{'` تخالف قاعدة pipefail الجديدة في §9 نفسها).
+
 ## 12. هامش تذبذب perf-budget في ratchet.mjs (2026-10-30)
 - **القياس:** `BASE=<fixture> LOCALES=en RUNS=10 node apps/web/scripts/perf-budget.mjs <6 صفحات ممثّلة>` على نفس البناء (لا تغيير بينها)، فمحسوبة 10 قيم خام لكل معيار لكل صفحة؛ الهامش = أكبر فرق (max−min) عبر التكرارات العشرة، عبر 5 من الصفحات الستّ.
 - **الاستثناء:** استُبعدت crypto-converter: فروقها (LCP 3.1 ثانية! Performance 16 نقطة) من تذبذب شبكة الأسعار الحيّة (fixtures لا تزال تعيد محاولات) لا من أداء الصفحة نفسها.
 - **المفاجأة:** TBT وحدها وصل تذبذبها إلى 308 م.ث على صفحة فيها مؤقِّتات كثيرة (world-time-converter) بلا أي تغيير آخر — أعلى بكثير من الافتراض الأول (40 م.ث)، فهامشها الآن 350.
 - **الهوامش الحالية** (`scripts/ratchet.mjs`، `TOLERANCE`): LCP 60ms، TBT 350ms، CLS 0.01، Performance 8، JS 3KiB.
 - **تحذير:** قيست على جهاز Mac محلي لا على عداء CI (ubuntu-24.04)؛ القيمة المعتمدة فعلياً هي ما يقيسه CI، فيُعاد القياس على CI (نفس الطريقة، launch-readiness أو تشغيل مخصص) عند تراكم بيانات كافية، وتُراجَع الهوامش إن اختلفت.
+- **أساس site-audit وperf-budget نفسهما:** قيسا فعلياً عبر تشغيل `workflow_dispatch` حقيقي على عداء CI (Linux)، لا على الجهاز المحلي؛ القياس المحلي الأول لـsite-audit اختلف بوضوح عن CI (overlap 174 محلياً مقابل 242 على CI، a11y 1730 مقابل 1093) لاختلاف رسملة الخطوط وحساب التباين بين macOS وLinux — فاستُبدل بقياس CI الحقيقي.

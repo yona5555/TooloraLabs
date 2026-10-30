@@ -3,7 +3,9 @@
 // Opens /ar and /en at 360px and 390px and records, for the header, the calculator frame, the
 // categories list and the footer: element order, bounding rects, computed font sizes and visible
 // texts. Fails when any rect moves or resizes by more than 1px, or any order, text or font size
-// changes, against tests/baselines/home-phone.json.
+// changes, against tests/baselines/home-phone.json. Colors are locked too (tests/color-lock.mjs): every
+// element records its computed background-color, color and border-color in the light theme and, after a
+// reload with localStorage theme=dark (the site's own mechanism), in the dark theme; any difference fails.
 //   npm run test:home-phone                        -> compare (exit 1 on any change)
 //   npm run baseline:home-phone -- --approve       -> rewrite the baseline (only with --approve)
 // Options: --base <url> (required: a server on a dedicated free port, e.g. scripts/test-server.sh start 3110 apps/web),
@@ -16,6 +18,8 @@ import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { createRequire } from "node:module";
 import { requireBase } from "../scripts/lib/require-base.mjs";
+import { compareColors, THEMES } from "./color-lock.mjs";
+import { hydrationProblems, watchHydration } from "./hydration-guard.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const { chromium } = createRequire(join(ROOT, "apps/web/package.json"))("playwright");
@@ -53,8 +57,9 @@ async function measure() {
       .filter((e) => e.getClientRects().length > 0 && !["SCRIPT", "STYLE"].includes(e.tagName))
       .map((e) => {
         const r = e.getBoundingClientRect();
+        const s = getComputedStyle(e);
         const text = [...e.childNodes].filter((n) => n.nodeType === Node.TEXT_NODE).map((n) => n.textContent.trim()).join(" ").trim();
-        return { tag: e.tagName.toLowerCase(), x: +r.x.toFixed(2), y: +(r.y + scrollY).toFixed(2), w: +r.width.toFixed(2), h: +r.height.toFixed(2), font: getComputedStyle(e).fontSize, text };
+        return { tag: e.tagName.toLowerCase(), x: +r.x.toFixed(2), y: +(r.y + scrollY).toFixed(2), w: +r.width.toFixed(2), h: +r.height.toFixed(2), font: s.fontSize, text, colors: [s.backgroundColor, s.color, s.borderColor] };
       });
     out.regions[name] = items;
   }
@@ -64,9 +69,12 @@ async function measure() {
 
 const browser = await chromium.launch();
 const current = {};
+// Any React hydration error (tests/hydration-guard.mjs) on the light or the dark load fails the lock.
+const hydrationFailures = [];
 for (const locale of ["ar", "en"]) for (const width of [360, 390]) {
   const ctx = await browser.newContext({ viewport: { width, height: 844 }, isMobile: true, hasTouch: true, deviceScaleFactor: 3, colorScheme: "light", reducedMotion: "reduce" });
   const page = await ctx.newPage();
+  const hydration = watchHydration(page);
   await page.addInitScript(() => document.addEventListener("DOMContentLoaded", () => {
     const st = document.createElement("style");
     st.textContent = "*,*::before,*::after{transition:none!important;animation:none!important}";
@@ -77,10 +85,28 @@ for (const locale of ["ar", "en"]) for (const width of [360, 390]) {
     console.error(`/${locale} answered ${res?.status()}; not measuring.`);
     process.exit(3);
   }
-  current[`${locale}@${width}`] = await page.evaluate(measure);
+  const light = await page.evaluate(measure);
+  // The dark theme the way the site applies it: the same page reloaded with localStorage theme=dark,
+  // measured again, and only its colors kept (element i of a region gets dark colors from element i).
+  await page.evaluate(() => localStorage.setItem("theme", "dark"));
+  const again = await page.reload({ waitUntil: "networkidle", timeout: 180000 });
+  if (!again || again.status() !== 200) {
+    console.error(`/${locale} (dark) answered ${again?.status()}; not measuring.`);
+    process.exit(3);
+  }
+  const dark = await page.evaluate(measure);
+  for (const [name, items] of Object.entries(light.regions)) {
+    items?.forEach((item, i) => (item.colors = { light: item.colors, dark: dark.regions[name]?.[i]?.colors }));
+  }
+  current[`${locale}@${width}`] = light;
+  hydrationFailures.push(...hydrationProblems(`/${locale} @${width}px`, hydration()));
   await ctx.close();
 }
 await browser.close();
+if (hydrationFailures.length) {
+  console.error(`${hydrationFailures.join("\n")}\nFAIL: ${hydrationFailures.length} hydration error(s) on the phone home page; not measuring.`);
+  process.exit(1);
+}
 
 if (WRITE) {
   mkdirSync(dirname(BASELINE), { recursive: true });
@@ -109,12 +135,13 @@ for (const [view, base] of Object.entries(baseline)) {
       if (a.text !== b.text) problems.push(`${where}: text now "${b.text.slice(0, 40)}"`);
       if (a.font !== b.font) problems.push(`${where}: font-size ${b.font} (approved ${a.font})`);
       for (const k of ["x", "y", "w", "h"]) if (Math.abs(a[k] - b[k]) > TOLERANCE) problems.push(`${where}: ${k} ${b[k]} (approved ${a[k]})`);
+      problems.push(...compareColors(where, a.colors, b.colors));
     }
   }
 }
 if (problems.length) {
   console.error(problems.slice(0, 60).join("\n"));
-  console.error(`FAIL: ${problems.length} change(s) to the approved phone home page (${checked} elements checked).`);
+  console.error(`FAIL: ${problems.length} change(s) to the approved phone home page layout or colors (${checked} elements checked).`);
   process.exit(1);
 }
-console.log(`PASS: approved phone home page unchanged (${checked} elements, 4 views, tolerance ${TOLERANCE}px).`);
+console.log(`PASS: approved phone home page layout and colors unchanged (${checked} elements, 4 views, tolerance ${TOLERANCE}px, ${THEMES.join(" + ")} colors).`);
