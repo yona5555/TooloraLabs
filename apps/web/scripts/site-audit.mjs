@@ -34,7 +34,7 @@ import { requireBase } from "../../../scripts/lib/require-base.mjs";
 import { settle } from "../../../scripts/lib/settle.mjs";
 import { sliceShard } from "../../../scripts/lib/shard-pages.mjs";
 import { chromium } from "playwright";
-import { clockAfterBuild, hydrationProblems, renderedAtOf, watchHydration } from "../../../tests/hydration-guard.mjs";
+import { hydrationProblems, watchHydration } from "../../../tests/hydration-guard.mjs";
 
 // --merge a.json b.json …: one inventory from the shards' OUT files (scripts/site-audit-sharded.sh); a broken
 // link found by several shards counts once.
@@ -53,6 +53,7 @@ const widths = (process.env.WIDTHS ?? "1440,390").split(",").map(Number);
 const themes = (process.env.THEMES ?? "light,dark").split(",");
 const MIN = Number(process.env.MIN ?? 12);
 const IDLE_MAX = 5; // animation frames + short timers allowed in one idle second (a stray deferred callback)
+const VISIT_CLOCK = "2030-01-16T12:00:00Z";
 const IDLE_WINDOWS = 3; // busy seconds in a row that make a loop
 const jobs = Number(process.env.JOBS ?? 3);
 const AXE = readFileSync(createRequire(import.meta.url).resolve("axe-core/axe.min.js"), "utf8");
@@ -418,15 +419,11 @@ async function view(ctx, path, locale, w) {
   return out;
 }
 
-// The browser clock: build time (the render clock of the first page that sends one) + 3 days.
-let builtAt = null;
-for (const path of allPaths.slice(0, 40)) {
-  builtAt = renderedAtOf(await (await fetch(`${base}/${locales[0]}${path}`)).text());
-  if (builtAt !== null) break;
-}
-if (builtAt === null) throw new Error(`no render clock (renderedAt) on the first sitemap pages of ${base}: the hydration guard needs it`);
-const visitClock = clockAfterBuild(builtAt);
-console.log(`site-audit: ${paths.length} pages × ${locales} × ${widths}px × ${themes}; browser clock ${visitClock.toISOString()} (build ${new Date(builtAt).toISOString()})`);
+// The browser clock: one fixed moment, far from any build, not the build time + 3 days: the page's content follows the
+// clock (sun angles, clock labels), so a clock that moves with the build moves the findings. It still differs from
+// the server's render clock, which is what exposes a time-dependent hydration mismatch.
+const visitClock = new Date(VISIT_CLOCK);
+console.log(`site-audit: ${paths.length} pages × ${locales} × ${widths}px × ${themes}; browser clock ${visitClock.toISOString()}`);
 
 // Views recorded by an interrupted run of this audit (RESUME): only this shard's pages, locales and widths, and
 // only results of the same themes; the last record of a view wins.

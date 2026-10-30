@@ -66,7 +66,7 @@ export const CLEAN = "/clean";
 // Audit determinism canary: a random amount of small text, and a slow color transition when the theme turns dark
 // (dark on dark until it ends). Two audits of this page must report the same findings.
 export const DETERMINISM = "/determinism";
-const DETERMINISM_BODY = `<style>.dark #t{color:#fff;background:#111} #t{font-size:16px;color:#111;background:#111;transition:color 3s}</style><p id="t">Slow theme transition</p><div id="r"></div><script>document.getElementById("r").innerHTML = Array.from({ length: 1 + Math.floor(Math.random() * 9) }, (_, i) => \`<p style="font-size:10px">Random row \${i}</p>\`).join("");</script>`;
+const DETERMINISM_BODY = `<style>.dark #t{color:#fff;background:#111} #t{font-size:16px;color:#111;background:#111;transition:color 3s}</style><p id="t">Slow theme transition</p><p id="c" style="font-size:10px"></p><div id="r"></div><script>document.getElementById("c").textContent = new Date().toISOString();document.getElementById("r").innerHTML = Array.from({ length: 1 + Math.floor(Math.random() * 9) }, (_, i) => \`<p style="font-size:10px">Random row \${i}</p>\`).join("");</script>`;
 
 // Deterministic budget canary (BASE=…/static-canary): page -> [the budget it must be over, body, head].
 const noise = (n) => {
