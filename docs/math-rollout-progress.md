@@ -29,7 +29,7 @@ without dynamism or depth).
    - **Gaps test**: measure the vertical gap between every consecutive visible sibling in the
      above-fold columns, the encyclopedic paper's main flow, and every indicator card's own
      internals; fail on any statistical outlier gap (>3× the page's own median gap).
-4. (Screenshot sets removed 2026-10-24: no screenshots — verify by DOM measurement; Yousef
+4. (Screenshot sets removed 2026-10-24: no screenshots — verify by DOM measurement; xzerone
    reviews the pages himself on a real device. Hard rule in `CLAUDE.md`.)
 5. Component count, distribution pattern (explanation+indicator → AdSpace → explanation+indicator
    → …), and depth bar still literally match Triangle Calculator's scale — only the reactivity

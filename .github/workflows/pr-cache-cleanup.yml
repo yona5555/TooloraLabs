@@ -1,0 +1,38 @@
+name: PR cache cleanup
+
+# A closed PR's caches can never be used again and only push main's out of the 10 GB repository limit. Deletes the
+# caches of its merge ref and its head branch (older runs may have saved some; scripts/cache-policy.mjs keeps new
+# PR runs from saving any).
+on:
+  pull_request:
+    types: [closed]
+
+permissions: {}
+
+# Every run step is bash with pipefail (bash --noprofile --norc -eo pipefail): a failure anywhere in a pipeline fails
+# the step, so no pipe can hide a gate's exit code (scripts/workflow-shell.mjs enforces this).
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  delete-caches:
+    # A fork's GITHUB_TOKEN is read-only here, and its branch name could match one of this repository's.
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      actions: write
+    steps:
+      - name: Delete the caches of the merge ref and the head branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          MERGE_REF: refs/pull/${{ github.event.pull_request.number }}/merge
+          HEAD_REF: refs/heads/${{ github.event.pull_request.head.ref }}
+        run: |
+          for ref in "$MERGE_REF" "$HEAD_REF"; do
+            ids=$(gh cache list --ref "$ref" --limit 100 --json id --jq '.[].id')
+            for id in $ids; do gh cache delete "$id"; done
+            echo "$ref: $(wc -w <<<"$ids") cache(s) deleted"
+          done

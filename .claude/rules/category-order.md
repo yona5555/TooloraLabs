@@ -13,7 +13,7 @@ category pages, the header's tools dropdown, the home sidebar, the sitemap, any 
 - Sections not in the list (the planned ones that have no live tools yet: Website Tools and the four
   math sub-sections) come after Converters in their original order and appear only once they have tools.
 - The order is the same in all six locales (en, ar, es, fr, de, hi); only the translated titles change.
-- Changing the order = editing `CATEGORY_ORDER` only, and only on Yousef's request (2026-10-19).
+- Changing the order = editing `CATEGORY_ORDER` only, and only on xzerone's request (2026-10-19).
 
 ## A category page needs 3+ live tools (2026-10-24, AdSense low-value rule)
 - A `/{locale}/categories/{slug}` page is generated only when the section has **3 or more live tools**

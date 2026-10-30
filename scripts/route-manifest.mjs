@@ -20,7 +20,7 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const sha = (buf) => createHash("sha256").update(buf).digest("hex").slice(0, 16);
 
 // Files whose change re-measures every page: the gates and the tool versions they run.
-const GATE_FILES = ["apps/web/scripts/site-audit.mjs", "apps/web/scripts/perf-budget.mjs", "tests/hydration-guard.mjs", "scripts/site-audit.sh", "scripts/perf-budget.sh", "scripts/test-server.sh", "scripts/lib/require-base.mjs", "tests/fixtures/offline-fetch.mjs"];
+const GATE_FILES = ["apps/web/scripts/site-audit.mjs", "apps/web/scripts/perf-budget.mjs", "apps/web/scripts/perf-static.mjs", "tests/hydration-guard.mjs", "scripts/site-audit.sh", "scripts/perf-budget.sh", "scripts/perf-static.sh", "scripts/test-server.sh", "scripts/lib/require-base.mjs", "tests/fixtures/offline-fetch.mjs"];
 const GATE_PACKAGES = ["playwright", "axe-core", "lighthouse", "chrome-launcher"];
 
 function gatesHash(root) {
