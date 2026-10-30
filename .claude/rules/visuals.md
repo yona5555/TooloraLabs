@@ -141,7 +141,8 @@ Any clickable action (tabs, save, clear, copy, export, toggles, show more) must 
 ## APPROVED PHONE STANDARD — every tool page below 768px (Yousef, 2026-10-24)
 Default for all tools, desktop unchanged; built into the shared components (never per tool). Full spec:
 `docs/claude/approved-visuals-and-indicators.md` § APPROVED PHONE STANDARD.
-- Back button arrow + "رجوع"/"Back" (44×44), title on one line beside it.
+- Back button arrow + "رجوع"/"Back" (44×44), title beside it, wrapping to a second line instead of
+  truncating/ellipsis when it does not fit one line (2026-10-30: no title text is ever clipped).
 - Two top mini cards (`PhoneMiniCards`) only where verified live data already loads (crypto, commodities,
   forex, weather); otherwise nothing.
 - First 3 blue-header cards open without toggle; cards 4+ collapsed to the header with the
