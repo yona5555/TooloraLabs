@@ -52,21 +52,21 @@ export default function BreakEvenChartDiagram({
 
           <line x1={bePoint.x} y1={bePoint.y} x2={bePoint.x} y2={MARGIN.top + PLOT_H} strokeDasharray="3 3" strokeWidth={1} className="stroke-emerald-500 dark:stroke-emerald-400" />
           <circle cx={bePoint.x} cy={bePoint.y} r={4} className="fill-emerald-500 dark:fill-emerald-400" />
-          <text x={bePoint.x} y={bePoint.y - 10} textAnchor="middle" style={{ fontSize: svgPx(10) }} fontWeight={700} className="fill-emerald-600 dark:fill-emerald-400">
+          <text data-label-pin x={bePoint.x} y={bePoint.y - 10} textAnchor="middle" style={{ fontSize: svgPx(10) }} fontWeight={700} className="fill-emerald-600 dark:fill-emerald-400">
             {labelBreakEven}
           </text>
 
-          <text x={WIDTH - MARGIN.right} y={yAt(maxRevenue) - 6} textAnchor="end" style={{ fontSize: svgPx(10) }} fontWeight={600} className="fill-blue-600 dark:fill-blue-400">
+          <text data-label-pin x={WIDTH - MARGIN.right} y={yAt(maxRevenue) - 6} textAnchor="end" style={{ fontSize: svgPx(10) }} fontWeight={600} className="fill-blue-600 dark:fill-blue-400">
             {labelRevenue}
           </text>
-          <text x={WIDTH - MARGIN.right} y={yAt(maxCost) + 14} textAnchor="end" style={{ fontSize: svgPx(10) }} fontWeight={600} className="fill-amber-600 dark:fill-amber-400">
+          <text data-label-pin x={WIDTH - MARGIN.right} y={yAt(maxCost) + 14} textAnchor="end" style={{ fontSize: svgPx(10) }} fontWeight={600} className="fill-amber-600 dark:fill-amber-400">
             {labelCost}
           </text>
 
-          <text x={MARGIN.left} y={HEIGHT - 10} style={{ fontSize: svgPx(9) }} opacity={0.6} fill="currentColor">
+          <text data-label-pin x={MARGIN.left} y={HEIGHT - 10} style={{ fontSize: svgPx(9) }} opacity={0.6} fill="currentColor">
             0
           </text>
-          <text x={WIDTH - MARGIN.right} y={HEIGHT - 10} textAnchor="end" style={{ fontSize: svgPx(9) }} opacity={0.6} fill="currentColor">
+          <text data-label-pin x={WIDTH - MARGIN.right} y={HEIGHT - 10} textAnchor="end" style={{ fontSize: svgPx(9) }} opacity={0.6} fill="currentColor">
             {maxUnits}
           </text>
         </FitSvg>

@@ -24,13 +24,13 @@ export default function UniformDistributionDiagram({ min, max, bandLabel, captio
             const x = MARGIN.left + ((i + 1) / 10) * plotWidth;
             return <line key={i} x1={x} y1={MARGIN.top} x2={x} y2={MARGIN.top + BAR_HEIGHT} stroke="currentColor" strokeWidth={0.5} opacity={0.3} />;
           })}
-          <text x={MARGIN.left} y={MARGIN.top + BAR_HEIGHT + 16} style={{ fontSize: svgPx(11) }} fontWeight={700} fill="currentColor">
+          <text data-label-pin x={MARGIN.left} y={MARGIN.top + BAR_HEIGHT + 16} style={{ fontSize: svgPx(11) }} fontWeight={700} fill="currentColor">
             {min}
           </text>
-          <text x={WIDTH - MARGIN.right} y={MARGIN.top + BAR_HEIGHT + 16} textAnchor="end" style={{ fontSize: svgPx(11) }} fontWeight={700} fill="currentColor">
+          <text data-label-pin x={WIDTH - MARGIN.right} y={MARGIN.top + BAR_HEIGHT + 16} textAnchor="end" style={{ fontSize: svgPx(11) }} fontWeight={700} fill="currentColor">
             {max}
           </text>
-          <text x={WIDTH / 2} y={MARGIN.top + BAR_HEIGHT / 2 + 4} textAnchor="middle" style={{ fontSize: svgPx(10) }} fontWeight={700} fill="currentColor">
+          <text data-label-pin x={WIDTH / 2} y={MARGIN.top + BAR_HEIGHT / 2 + 4} textAnchor="middle" style={{ fontSize: svgPx(10) }} fontWeight={700} fill="currentColor">
             {bandLabel}
           </text>
         </FitSvg>

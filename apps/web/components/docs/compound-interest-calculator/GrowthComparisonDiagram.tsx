@@ -60,17 +60,17 @@ export default function GrowthComparisonDiagram({ labelCompound, labelSimple, ca
           <circle cx={compoundEnd.px} cy={compoundEnd.py} r={3.5} className="fill-blue-600 dark:fill-blue-400" />
           <circle cx={simpleEnd.px} cy={simpleEnd.py} r={3.5} className="fill-orange-400 dark:fill-orange-500" />
 
-          <text x={compoundEnd.px - 8} y={compoundEnd.py - 8} textAnchor="end" fontSize={12} fontWeight={600} className="fill-blue-600 dark:fill-blue-400">
+          <text data-label-pin x={compoundEnd.px - 8} y={compoundEnd.py - 8} textAnchor="end" fontSize={12} fontWeight={600} className="fill-blue-600 dark:fill-blue-400">
             {labelCompound}
           </text>
-          <text x={simpleEnd.px - 8} y={simpleEnd.py + 16} textAnchor="end" fontSize={12} fontWeight={600} className="fill-orange-500 dark:fill-orange-400">
+          <text data-label-pin x={simpleEnd.px - 8} y={simpleEnd.py + 16} textAnchor="end" fontSize={12} fontWeight={600} className="fill-orange-500 dark:fill-orange-400">
             {labelSimple}
           </text>
 
-          <text x={PAD_LEFT} y={HEIGHT - 8} style={{ fontSize: svgPx(10) }} className="fill-zinc-400 dark:fill-zinc-500">
+          <text data-label-pin x={PAD_LEFT} y={HEIGHT - 8} style={{ fontSize: svgPx(10) }} className="fill-zinc-400 dark:fill-zinc-500">
             0
           </text>
-          <text x={WIDTH - PAD_RIGHT} y={HEIGHT - 8} textAnchor="end" style={{ fontSize: svgPx(10) }} className="fill-zinc-400 dark:fill-zinc-500">
+          <text data-label-pin x={WIDTH - PAD_RIGHT} y={HEIGHT - 8} textAnchor="end" style={{ fontSize: svgPx(10) }} className="fill-zinc-400 dark:fill-zinc-500">
             {YEARS}y
           </text>
         </FitSvg>

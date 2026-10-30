@@ -28,22 +28,22 @@ export default function TriangleAnatomyDiagram({ labelA, labelB, labelC, labelAn
             stroke="currentColor"
             strokeWidth={2}
           />
-          <text x={(P_A.x + P_B.x) / 2} y={P_A.y + 18} textAnchor="middle" style={{ fontSize: svgPx(11) }} fontWeight={700} fill="currentColor">
+          <text data-label-pin x={(P_A.x + P_B.x) / 2} y={P_A.y + 18} textAnchor="middle" style={{ fontSize: svgPx(11) }} fontWeight={700} fill="currentColor">
             {labelC}
           </text>
-          <text x={(P_B.x + P_C.x) / 2 + 14} y={(P_B.y + P_C.y) / 2} textAnchor="start" style={{ fontSize: svgPx(11) }} fontWeight={700} fill="currentColor">
+          <text data-label-pin x={(P_B.x + P_C.x) / 2 + 14} y={(P_B.y + P_C.y) / 2} textAnchor="start" style={{ fontSize: svgPx(11) }} fontWeight={700} fill="currentColor">
             {labelA}
           </text>
-          <text x={(P_A.x + P_C.x) / 2 - 14} y={(P_A.y + P_C.y) / 2} textAnchor="end" style={{ fontSize: svgPx(11) }} fontWeight={700} fill="currentColor">
+          <text data-label-pin x={(P_A.x + P_C.x) / 2 - 14} y={(P_A.y + P_C.y) / 2} textAnchor="end" style={{ fontSize: svgPx(11) }} fontWeight={700} fill="currentColor">
             {labelB}
           </text>
-          <text x={P_A.x} y={P_A.y + 2} textAnchor="end" style={{ fontSize: svgPx(10) }} className="fill-blue-600 dark:fill-blue-400">
+          <text data-label-pin x={P_A.x} y={P_A.y + 2} textAnchor="end" style={{ fontSize: svgPx(10) }} className="fill-blue-600 dark:fill-blue-400">
             {labelAngleA}
           </text>
-          <text x={P_B.x} y={P_B.y + 2} textAnchor="start" style={{ fontSize: svgPx(10) }} className="fill-blue-600 dark:fill-blue-400">
+          <text data-label-pin x={P_B.x} y={P_B.y + 2} textAnchor="start" style={{ fontSize: svgPx(10) }} className="fill-blue-600 dark:fill-blue-400">
             {labelAngleB}
           </text>
-          <text x={P_C.x} y={P_C.y - 8} textAnchor="middle" style={{ fontSize: svgPx(10) }} className="fill-blue-600 dark:fill-blue-400">
+          <text data-label-pin x={P_C.x} y={P_C.y - 8} textAnchor="middle" style={{ fontSize: svgPx(10) }} className="fill-blue-600 dark:fill-blue-400">
             {labelAngleC}
           </text>
         </FitSvg>

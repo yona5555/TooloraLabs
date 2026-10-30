@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import { svgPx } from "@/components/tool-ui/svgPx";
+import FitSvg from "@/components/tool-ui/FitSvg";
 
 const VIEW_W = 880;
 const VIEW_H = 260;
@@ -27,9 +28,9 @@ export default function HouseAffordabilityConceptDiagram() {
     <SectionCard title={d("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{d("intro")}</p>
       <div dir="ltr" tabIndex={0} className="mt-4 overflow-x-auto">
-        <svg viewBox={`0 0 ${VIEW_W} ${VIEW_H}`} role="img" aria-label={d("ariaLabel")} data-annotation="" className="mx-auto block w-full max-w-3xl text-current">
+        <FitSvg viewBox={`0 0 ${VIEW_W} ${VIEW_H}`} role="img" aria-label={d("ariaLabel")} data-annotation="" className="mx-auto block w-full max-w-3xl text-current">
           {/* income label above the bar */}
-          <text x={BAR_X + BAR_W / 2} y={30} fontSize={14} fontWeight={700} textAnchor="middle" className="fill-zinc-900 dark:fill-zinc-50">
+          <text data-label-pin x={BAR_X + BAR_W / 2} y={30} fontSize={14} fontWeight={700} textAnchor="middle" className="fill-zinc-900 dark:fill-zinc-50">
             {d("incomeLabel")}
           </text>
           <line x1={BAR_X} y1={40} x2={BAR_X + BAR_W} y2={40} strokeWidth={1} className="stroke-zinc-400 dark:stroke-zinc-500" opacity={0.5} />
@@ -43,13 +44,13 @@ export default function HouseAffordabilityConceptDiagram() {
             strokeWidth={1.5}
             className="stroke-orange-500 dark:stroke-orange-400"
           />
-          <text x={BAR_X + debtW / 2} y={48} fontSize={12} fontWeight={700} textAnchor="middle" className="fill-orange-600 dark:fill-orange-400">
+          <text data-label-pin x={BAR_X + debtW / 2} y={48} fontSize={12} fontWeight={700} textAnchor="middle" className="fill-orange-600 dark:fill-orange-400">
             {d("backEndCapLabel")}
           </text>
 
           {/* 28% front-end bracket, housing only */}
           <path d={`M${BAR_X},96 L${BAR_X},88 L${BAR_X + housingW},88 L${BAR_X + housingW},96`} fill="none" strokeWidth={1.5} className="stroke-blue-600 dark:stroke-blue-400" />
-          <text x={BAR_X + housingW / 2} y={84} fontSize={12} fontWeight={700} textAnchor="middle" className="fill-blue-700 dark:fill-blue-300">
+          <text data-label-pin x={BAR_X + housingW / 2} y={84} fontSize={12} fontWeight={700} textAnchor="middle" className="fill-blue-700 dark:fill-blue-300">
             {d("frontEndCapLabel")}
           </text>
 
@@ -62,24 +63,24 @@ export default function HouseAffordabilityConceptDiagram() {
           <line x1={BAR_X + debtW} y1={BAR_Y} x2={BAR_X + debtW} y2={BAR_Y + BAR_H} strokeWidth={1.5} className="stroke-white dark:stroke-zinc-900" />
 
           {/* segment labels */}
-          <text x={BAR_X + housingW / 2} y={BAR_Y + BAR_H / 2 + 5} fontSize={12} fontWeight={700} textAnchor="middle" className="fill-white">
+          <text data-label-pin x={BAR_X + housingW / 2} y={BAR_Y + BAR_H / 2 + 5} fontSize={12} fontWeight={700} textAnchor="middle" className="fill-white">
             {d("housingLabel")}
           </text>
-          <text x={BAR_X + housingW + (debtW - housingW) / 2} y={BAR_Y + BAR_H / 2 + 5} style={{ fontSize: svgPx(11) }} fontWeight={700} textAnchor="middle" className="fill-white">
+          <text data-label-pin x={BAR_X + housingW + (debtW - housingW) / 2} y={BAR_Y + BAR_H / 2 + 5} style={{ fontSize: svgPx(11) }} fontWeight={700} textAnchor="middle" className="fill-white">
             {d("otherDebtLabel")}
           </text>
-          <text x={BAR_X + debtW + (BAR_W - debtW) / 2} y={BAR_Y + BAR_H / 2 + 5} fontSize={12} fontWeight={700} textAnchor="middle" className="fill-zinc-700 dark:fill-zinc-200">
+          <text data-label-pin x={BAR_X + debtW + (BAR_W - debtW) / 2} y={BAR_Y + BAR_H / 2 + 5} fontSize={12} fontWeight={700} textAnchor="middle" className="fill-zinc-700 dark:fill-zinc-200">
             {d("remainingLabel")}
           </text>
 
           {/* bottom captions */}
-          <text x={BAR_X + housingW / 2} y={BAR_Y + BAR_H + 26} style={{ fontSize: svgPx(11) }} textAnchor="middle" fill="currentColor" opacity={0.6}>
+          <text data-label-pin x={BAR_X + housingW / 2} y={BAR_Y + BAR_H + 26} style={{ fontSize: svgPx(11) }} textAnchor="middle" fill="currentColor" opacity={0.6}>
             {d("housingCaption")}
           </text>
-          <text x={BAR_X + debtW + (BAR_W - debtW) / 2} y={BAR_Y + BAR_H + 26} style={{ fontSize: svgPx(11) }} textAnchor="middle" fill="currentColor" opacity={0.6}>
+          <text data-label-pin x={BAR_X + debtW + (BAR_W - debtW) / 2} y={BAR_Y + BAR_H + 26} style={{ fontSize: svgPx(11) }} textAnchor="middle" fill="currentColor" opacity={0.6}>
             {d("remainingCaption")}
           </text>
-        </svg>
+        </FitSvg>
       </div>
     </SectionCard>
   );

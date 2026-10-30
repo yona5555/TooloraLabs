@@ -53,10 +53,10 @@ export default function DateAddSubtractTimelineDiagram() {
           <line x1={MARGIN} y1={HEIGHT / 2} x2={WIDTH - MARGIN} y2={HEIGHT / 2} strokeWidth={3} className="stroke-current/15" />
 
           <circle cx={MARGIN} cy={HEIGHT / 2} r={7} className="fill-zinc-400 dark:fill-zinc-500" />
-          <text style={{ fontSize: svgPx(12) }} x={MARGIN} y={HEIGHT / 2 - 14} textAnchor="middle" className="fill-current/70">
+          <text data-label-pin style={{ fontSize: svgPx(12) }} x={MARGIN} y={HEIGHT / 2 - 14} textAnchor="middle" className="fill-current/70">
             {t("startLabel")}
           </text>
-          <text style={{ fontSize: svgPx(12) }} x={MARGIN} y={HEIGHT / 2 + 22} textAnchor="middle" fontWeight="600" className="fill-current">
+          <text data-label-pin style={{ fontSize: svgPx(12) }} x={MARGIN} y={HEIGHT / 2 + 22} textAnchor="middle" fontWeight="600" className="fill-current">
             {formatDate(startISO)}
           </text>
 
@@ -77,10 +77,10 @@ export default function DateAddSubtractTimelineDiagram() {
           </defs>
 
           <circle cx={WIDTH - MARGIN} cy={HEIGHT / 2} r={7} className={isForward ? "fill-blue-600 dark:fill-blue-300" : "fill-amber-600 dark:fill-amber-300"} />
-          <text style={{ fontSize: svgPx(12) }} x={WIDTH - MARGIN} y={HEIGHT / 2 - 14} textAnchor="middle" className="fill-current/70">
+          <text data-label-pin style={{ fontSize: svgPx(12) }} x={WIDTH - MARGIN} y={HEIGHT / 2 - 14} textAnchor="middle" className="fill-current/70">
             {t("resultLabel")}
           </text>
-          <text style={{ fontSize: svgPx(12) }} x={WIDTH - MARGIN} y={HEIGHT / 2 + 22} textAnchor="middle" fontWeight="600" className="fill-current">
+          <text data-label-pin style={{ fontSize: svgPx(12) }} x={WIDTH - MARGIN} y={HEIGHT / 2 + 22} textAnchor="middle" fontWeight="600" className="fill-current">
             {formatDate(resultISO)}
           </text>
         </FitSvg>

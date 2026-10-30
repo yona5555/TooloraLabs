@@ -33,23 +33,23 @@ export default function VennOverlapDiagram({
           <circle cx={LEFT_CX} cy={CY} r={R} className="fill-blue-500 dark:fill-blue-400" opacity={0.35} />
           <circle cx={RIGHT_CX} cy={CY} r={R} className="fill-emerald-500 dark:fill-emerald-400" opacity={0.35} />
 
-          <text x={LEFT_CX - 40} y={30} style={{ fontSize: svgPx(11) }} fontWeight={700} fill="currentColor">
+          <text data-label-pin x={LEFT_CX - 40} y={30} style={{ fontSize: svgPx(11) }} fontWeight={700} fill="currentColor">
             {leftLabel}
           </text>
-          <text x={RIGHT_CX + 10} y={30} style={{ fontSize: svgPx(11) }} fontWeight={700} fill="currentColor">
+          <text data-label-pin x={RIGHT_CX + 10} y={30} style={{ fontSize: svgPx(11) }} fontWeight={700} fill="currentColor">
             {rightLabel}
           </text>
-          <text x={WIDTH / 2} y={CY - 4} textAnchor="middle" style={{ fontSize: svgPx(10) }} fontWeight={700} fill="currentColor">
+          <text data-label-pin x={WIDTH / 2} y={CY - 4} textAnchor="middle" style={{ fontSize: svgPx(10) }} fontWeight={700} fill="currentColor">
             {overlapLabel}
           </text>
 
-          <text x={LEFT_CX - 40} y={CY + 8} style={{ fontSize: svgPx(10) }} fill="currentColor" opacity={0.85}>
+          <text data-label-pin x={LEFT_CX - 40} y={CY + 8} style={{ fontSize: svgPx(10) }} fill="currentColor" opacity={0.85}>
             {leftOnlyItems}
           </text>
-          <text x={WIDTH / 2} y={CY + 12} textAnchor="middle" style={{ fontSize: svgPx(10) }} fill="currentColor" opacity={0.85}>
+          <text data-label-pin x={WIDTH / 2} y={CY + 12} textAnchor="middle" style={{ fontSize: svgPx(10) }} fill="currentColor" opacity={0.85}>
             {overlapItems}
           </text>
-          <text x={RIGHT_CX + 10} y={CY + 8} style={{ fontSize: svgPx(10) }} fill="currentColor" opacity={0.85}>
+          <text data-label-pin x={RIGHT_CX + 10} y={CY + 8} style={{ fontSize: svgPx(10) }} fill="currentColor" opacity={0.85}>
             {rightOnlyItems}
           </text>
         </FitSvg>

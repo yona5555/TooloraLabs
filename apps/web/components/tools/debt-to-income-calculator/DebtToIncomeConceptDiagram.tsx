@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import { svgPx } from "@/components/tool-ui/svgPx";
+import FitSvg from "@/components/tool-ui/FitSvg";
 
 const VIEW_W = 880;
 const VIEW_H = 280;
@@ -42,15 +43,15 @@ export default function DebtToIncomeConceptDiagram() {
     <SectionCard title={d("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{d("intro")}</p>
       <div dir="ltr" tabIndex={0} className="mt-4 overflow-x-auto">
-        <svg viewBox={`0 0 ${VIEW_W} ${VIEW_H}`} role="img" aria-label={d("ariaLabel")} data-annotation="" className="mx-auto block w-full max-w-3xl text-current">
-          <text x={BAR_X + BAR_W / 2} y={30} fontSize={14} fontWeight={700} textAnchor="middle" className="fill-zinc-900 dark:fill-zinc-50">
+        <FitSvg viewBox={`0 0 ${VIEW_W} ${VIEW_H}`} role="img" aria-label={d("ariaLabel")} data-annotation="" className="mx-auto block w-full max-w-3xl text-current">
+          <text data-label-pin x={BAR_X + BAR_W / 2} y={30} fontSize={14} fontWeight={700} textAnchor="middle" className="fill-zinc-900 dark:fill-zinc-50">
             {d("incomeLabel")}
           </text>
           <line x1={BAR_X} y1={40} x2={BAR_X + BAR_W} y2={40} strokeWidth={1} className="stroke-zinc-400 dark:stroke-zinc-500" opacity={0.5} />
 
           {/* bracket over every debt segment */}
           <path d={`M${BAR_X},64 L${BAR_X},56 L${BAR_X + debtW},56 L${BAR_X + debtW},64`} fill="none" strokeWidth={1.5} className="stroke-orange-500 dark:stroke-orange-400" />
-          <text x={BAR_X + debtW / 2} y={52} fontSize={12} fontWeight={700} textAnchor="middle" className="fill-orange-600 dark:fill-orange-400">
+          <text data-label-pin x={BAR_X + debtW / 2} y={52} fontSize={12} fontWeight={700} textAnchor="middle" className="fill-orange-600 dark:fill-orange-400">
             {d("totalDebtLabel")}
           </text>
 
@@ -65,10 +66,10 @@ export default function DebtToIncomeConceptDiagram() {
           <line x1={BAR_X + debtW} y1={BAR_Y} x2={BAR_X + debtW} y2={BAR_Y + BAR_H} strokeWidth={1.5} className="stroke-white dark:stroke-zinc-900" />
           <rect x={BAR_X} y={BAR_Y} width={BAR_W} height={BAR_H} fill="none" strokeWidth={1.5} className="stroke-zinc-400 dark:stroke-zinc-500" />
 
-          <text x={BAR_X + housingW / 2} y={BAR_Y + BAR_H / 2 + 5} fontSize={12} fontWeight={700} textAnchor="middle" className="fill-white">
+          <text data-label-pin x={BAR_X + housingW / 2} y={BAR_Y + BAR_H / 2 + 5} fontSize={12} fontWeight={700} textAnchor="middle" className="fill-white">
             {d("housingLabel")}
           </text>
-          <text x={BAR_X + debtW + (BAR_W - debtW) / 2} y={BAR_Y + BAR_H / 2 + 5} fontSize={12} fontWeight={700} textAnchor="middle" className="fill-zinc-700 dark:fill-zinc-200">
+          <text data-label-pin x={BAR_X + debtW + (BAR_W - debtW) / 2} y={BAR_Y + BAR_H / 2 + 5} fontSize={12} fontWeight={700} textAnchor="middle" className="fill-zinc-700 dark:fill-zinc-200">
             {d("remainingLabel")}
           </text>
 
@@ -80,7 +81,7 @@ export default function DebtToIncomeConceptDiagram() {
               return (
                 <g key={key}>
                   <rect x={x} y={BAR_Y + BAR_H + 20} width={11} height={11} rx={2} className={seg.colorClass} />
-                  <text x={x + 17} y={BAR_Y + BAR_H + 29} style={{ fontSize: svgPx(11) }} fill="currentColor" opacity={0.75}>
+                  <text data-label-pin x={x + 17} y={BAR_Y + BAR_H + 29} style={{ fontSize: svgPx(11) }} fill="currentColor" opacity={0.75}>
                     {d(`legend.${key}`)}
                   </text>
                 </g>
@@ -89,10 +90,10 @@ export default function DebtToIncomeConceptDiagram() {
           </g>
 
           {/* ratio formula */}
-          <text x={BAR_X} y={BAR_Y + BAR_H + 60} fontSize={13} fontWeight={600} fill="currentColor" opacity={0.7}>
+          <text data-label-pin x={BAR_X} y={BAR_Y + BAR_H + 60} fontSize={13} fontWeight={600} fill="currentColor" opacity={0.7}>
             {d("formulaLabel")}
           </text>
-        </svg>
+        </FitSvg>
       </div>
     </SectionCard>
   );

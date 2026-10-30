@@ -51,22 +51,22 @@ export function AgeLifeStagesCard({ d, f }: IndicatorProps) {
                 <g key={s.stage}>
                   <rect x={x0} y={44} width={w} height={36} fill={STAGE_COLORS[s.stage]} fillOpacity={s.complete ? 0.85 : 1} style={{ transition: "all 500ms ease" }} />
                   {w > 34 && (
-                    <text style={{ fontSize: svgPx(12) }} x={x0 + w / 2} y={66} textAnchor="middle" fontWeight={800} fill="white">
+                    <text data-label-pin style={{ fontSize: svgPx(12) }} x={x0 + w / 2} y={66} textAnchor="middle" fontWeight={800} fill="white">
                       {f.int(s.days)}
                     </text>
                   )}
-                  <text style={{ fontSize: svgPx(12) }} x={x0 + w / 2} y={i % 2 ? 100 : 34} textAnchor="middle" fontWeight={700} fill={STAGE_COLORS[s.stage]}>
+                  <text data-label-pin style={{ fontSize: svgPx(12) }} x={x0 + w / 2} y={i % 2 ? 100 : 34} textAnchor="middle" fontWeight={700} fill={STAGE_COLORS[s.stage]}>
                     {tStage(s.stage)}
                   </text>
                 </g>
               );
             })}
             <line x1={L + horizon * unit} x2={L + horizon * unit} y1={38} y2={86} stroke={AGE_COLORS.danger} strokeDasharray="3 2" />
-            <text style={{ fontSize: svgPx(12) }} x={W - R} y={H - 22} textAnchor="end" fill={AGE_COLORS.danger}>
+            <text data-label-pin style={{ fontSize: svgPx(12) }} x={W - R} y={H - 22} textAnchor="end" fill={AGE_COLORS.danger}>
               {t("stages.horizon", { y: f.num(life.lifeExpectancyYears, 1) })}
             </text>
-            <text style={{ fontSize: svgPx(12) }} x={L} y={H - 6} className={axisText}>{r.birth.year}</text>
-            <text style={{ fontSize: svgPx(12) }} x={W - R} y={H - 6} textAnchor="end" className={axisText}>{td("result.days")}: {f.int(r.totalDays)}</text>
+            <text data-label-pin style={{ fontSize: svgPx(12) }} x={L} y={H - 6} className={axisText}>{r.birth.year}</text>
+            <text data-label-pin style={{ fontSize: svgPx(12) }} x={W - R} y={H - 6} textAnchor="end" className={axisText}>{td("result.days")}: {f.int(r.totalDays)}</text>
           </FitSvg>
         }
         rows={[
@@ -118,17 +118,17 @@ export function AgeLifeGaugeCard({ state, setState, d, f }: IndicatorProps) {
               {[0, 25, 50, 75, 100].map((v) => {
                 const a = Math.PI * (1 - v / 100);
                 return (
-                  <text style={{ fontSize: svgPx(12) }} key={v} x={cx + Math.cos(a) * (R + 18)} y={cy - Math.sin(a) * (R + 18) + 3} textAnchor="middle" className={axisText}>
+                  <text data-label-pin style={{ fontSize: svgPx(12) }} key={v} x={cx + Math.cos(a) * (R + 18)} y={cy - Math.sin(a) * (R + 18) + 3} textAnchor="middle" className={axisText}>
                     {f.int(v)}%
                   </text>
                 );
               })}
               <line x1={cx} y1={cy} x2={nx} y2={ny} stroke="currentColor" strokeWidth={3} strokeLinecap="round" style={{ transition: "all 600ms ease" }} />
               <circle cx={cx} cy={cy} r={7} fill="currentColor" />
-              <text style={{ fontSize: svgPx(24) }} x={cx} y={cy - 40} textAnchor="middle" fontWeight={800} className={valueText}>
+              <text data-label-pin style={{ fontSize: svgPx(24) }} x={cx} y={cy - 40} textAnchor="middle" fontWeight={800} className={valueText}>
                 {f.pct(p)}
               </text>
-              <text style={{ fontSize: svgPx(12) }} x={cx} y={cy + 28} textAnchor="middle" className={axisText}>
+              <text data-label-pin style={{ fontSize: svgPx(12) }} x={cx} y={cy + 28} textAnchor="middle" className={axisText}>
                 {t("life.of", { y: f.num(life.lifeExpectancyYears, 1) })}
               </text>
             </FitSvg>
@@ -191,7 +191,7 @@ export function AgeUnitsLadderCard({ d, f }: IndicatorProps) {
             {Array.from({ length: maxExp + 1 }, (_, e) => (
               <g key={e}>
                 <line x1={x(10 ** e)} x2={x(10 ** e)} y1={4} y2={H - 18} stroke="currentColor" strokeOpacity={e % 3 === 0 ? 0.25 : 0.1} />
-                <text style={{ fontSize: svgPx(12) }} x={x(10 ** e)} y={H - 4} textAnchor={e === maxExp ? "end" : "middle"} className={axisText}>{`10${["⁰", "¹", "²", "³", "⁴", "⁵", "⁶", "⁷", "⁸", "⁹", "¹⁰"][e]}`}</text>
+                <text data-label-pin style={{ fontSize: svgPx(12) }} x={x(10 ** e)} y={H - 4} textAnchor={e === maxExp ? "end" : "middle"} className={axisText}>{`10${["⁰", "¹", "²", "³", "⁴", "⁵", "⁶", "⁷", "⁸", "⁹", "¹⁰"][e]}`}</text>
               </g>
             ))}
             {units.map((u, i) => {
@@ -200,8 +200,8 @@ export function AgeUnitsLadderCard({ d, f }: IndicatorProps) {
               return (
                 <g key={u.key}>
                   <rect x={L} y={y} width={Math.max(2, xe - L)} height={RH - 9} rx={4} fill={u.color} fillOpacity={0.85} style={{ transition: "width 500ms ease" }} />
-                  <text style={{ fontSize: svgPx(12) }} x={L + 4} y={y + 13} fontWeight={800} fill="white">{t(`units.${u.key}`)}</text>
-                  <text style={{ fontSize: svgPx(12) }} x={Math.min(xe + 4, W - R)} y={y + 13} textAnchor={xe > W - 90 ? "end" : "start"} fontWeight={800} className={xe > W - 90 ? "fill-white" : valueText} dx={xe > W - 90 ? -8 : 0}>
+                  <text data-label-pin style={{ fontSize: svgPx(12) }} x={L + 4} y={y + 13} fontWeight={800} fill="white">{t(`units.${u.key}`)}</text>
+                  <text data-label-pin style={{ fontSize: svgPx(12) }} x={Math.min(xe + 4, W - R)} y={y + 13} textAnchor={xe > W - 90 ? "end" : "start"} fontWeight={800} className={xe > W - 90 ? "fill-white" : valueText} dx={xe > W - 90 ? -8 : 0}>
                     {f.int(u.v)}
                   </text>
                 </g>
@@ -233,15 +233,15 @@ export function AgeFormulaCard({ d, f }: IndicatorProps) {
   const box = (x: number, y: number, w: number, top: string, bottom: string, color: string) => (
     <g>
       <rect x={x} y={y} width={w} height={44} rx={8} fill={color} fillOpacity={0.12} stroke={color} strokeWidth={1.5} />
-      <text x={x + w / 2} y={y + 18} textAnchor="middle" style={{ fontSize: svgPx(11) }} fontWeight={800} fill={color}>{top}</text>
-      <text x={x + w / 2} y={y + 34} textAnchor="middle" style={{ fontSize: svgPx(9) }} className={valueText}>{bottom}</text>
+      <text data-label-pin x={x + w / 2} y={y + 18} textAnchor="middle" style={{ fontSize: svgPx(11) }} fontWeight={800} fill={color}>{top}</text>
+      <text data-label-pin x={x + w / 2} y={y + 34} textAnchor="middle" style={{ fontSize: svgPx(9) }} className={valueText}>{bottom}</text>
     </g>
   );
   const arrow = (x1: number, x2: number, y: number, text: string, color: string) => (
     <g>
       <line x1={x1} x2={x2 - 4} y1={y} y2={y} stroke={color} strokeWidth={1.5} />
       <path d={`M ${x2 - 6} ${y - 4} L ${x2} ${y} L ${x2 - 6} ${y + 4} Z`} fill={color} />
-      <text x={(x1 + x2) / 2} y={y - 6} textAnchor="middle" style={{ fontSize: svgPx(10) }} fontWeight={800} fill={color}>{text}</text>
+      <text data-label-pin x={(x1 + x2) / 2} y={y - 6} textAnchor="middle" style={{ fontSize: svgPx(10) }} fontWeight={800} fill={color}>{text}</text>
     </g>
   );
   const chain = (y: number, color: string, a: typeof g, fmt: (c: typeof r.birth) => string, anchor: string) => (
@@ -269,20 +269,20 @@ export function AgeFormulaCard({ d, f }: IndicatorProps) {
         workedExampleTitle={t("worked")}
         indicator={
           <FitSvg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("formula.title")} data-annotation="" className="max-w-full">
-            <text x={0} y={14} style={{ fontSize: svgPx(11) }} fontWeight={800} fill={AGE_COLORS.gregorian}>
+            <text data-label-pin x={0} y={14} style={{ fontSize: svgPx(11) }} fontWeight={800} fill={AGE_COLORS.gregorian}>
               {td("cal.gregorian")} = {td("ymd", { y: f.int(g.years), m: f.int(g.months), d: f.int(g.days) })}
             </text>
             {chain(24, AGE_COLORS.gregorian, g, f.iso, f.iso(anchorOf(g)))}
-            <text x={0} y={92} style={{ fontSize: svgPx(9) }} className={axisText}>
+            <text data-label-pin x={0} y={92} style={{ fontSize: svgPx(9) }} className={axisText}>
               {t("formula.legend")}
             </text>
             {h && (
               <>
-                <text x={0} y={128} style={{ fontSize: svgPx(11) }} fontWeight={800} fill={AGE_COLORS.hijri}>
+                <text data-label-pin x={0} y={128} style={{ fontSize: svgPx(11) }} fontWeight={800} fill={AGE_COLORS.hijri}>
                   {td("cal.hijri")} = {td("ymd", { y: f.int(h.years), m: f.int(h.months), d: f.int(h.days) })}
                 </text>
                 {chain(138, AGE_COLORS.hijri, h, f.hijri, f.hijri(anchorOf(h)))}
-                <text x={0} y={206} style={{ fontSize: svgPx(9) }} className={axisText}>
+                <text data-label-pin x={0} y={206} style={{ fontSize: svgPx(9) }} className={axisText}>
                   {t("formula.hijriLegend")}
                 </text>
               </>
