@@ -5,15 +5,16 @@
 //  - object-fit is contain (never cover) in a 4:3 box on the image's own background;
 //  - the image box lies fully inside its preview box and the card (nothing cropped);
 //  - a card without an image is a tool with no approved image for that variant.
-// Usage (prod server on 3001): npm run test:cards --workspace=apps/web   Env: BASE.
+// Usage (BASE = a prod server you started on a free port, e.g. 3110): npm run test:cards --workspace=apps/web   Env: BASE.
 import { createHash } from "node:crypto";
+import { requireBase } from "../../../scripts/lib/require-base.mjs";
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { chromium } from "playwright";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
-const base = process.env.BASE ?? "http://localhost:3001";
+const base = requireBase(process.env.BASE);
 const approved = JSON.parse(readFileSync(path.join(here, "../public/tool-previews/approved.json"), "utf8"));
 const categories = [...readFileSync(path.join(here, "../data/categories.ts"), "utf8").matchAll(/^\s{4}slug: "([^"]+)"/gm)].map((m) => m[1]);
 const pages = ["/tools", ...categories.map((c) => `/categories/${c}`)];
@@ -30,9 +31,12 @@ for (const locale of ["ar", "en"])
   for (const theme of ["light", "dark"]) {
     const set = locale === "ar" ? "ar" : "en";
     const variant = `${set}/${theme}`;
-    const context = await browser.newContext({ viewport: { width: 1440, height: 1000 }, colorScheme: theme });
+    const context = await browser.newContext({ viewport: { width: 1440, height: 1000 }, colorScheme: theme, reducedMotion: "reduce" });
     await context.addInitScript((t) => localStorage.setItem("theme", t), theme);
     const page = await context.newPage();
+    // Only BASE is reached, like the locks: no live price feed or WebSocket frame moves a card while it is checked.
+    await page.route((url) => new URL(url.href).origin !== new URL(base).origin, (route) => route.abort());
+    await page.routeWebSocket(/.*/, () => {});
     for (const p of pages) {
       const url = `${base}/${locale}${p}`;
       const res = await page.goto(url, { waitUntil: "load", timeout: 90_000 });
