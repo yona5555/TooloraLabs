@@ -254,6 +254,45 @@ test("affected pages: an unchanged route is skipped, a tool change marks only it
   assert.deepEqual(affected(join(TMP, "no-such-manifest.json"), main), ["/en/tools/a", "/en/tools/b", "/en/tools/c", "/en/tools/live"], "without a main manifest every route is affected");
 });
 
+test("cache policy fails on a PR run that saves a cache; passes this repository's workflows", () => {
+  const r = gate("node", ["scripts/cache-policy.mjs", join(FIX, "workflow-pr-cache-save.yml")]);
+  failsWith(r, /saves-on-pr step 1 .*a cache save without the guard/, "cache policy (save)");
+  assert.match(r.out, /saves-on-pr step 2 .*actions\/cache saves from every ref/);
+  assert.match(r.out, /saves-on-pr step 3 .*setup-node `cache` saves from every ref/);
+  assert.match(r.out, /saves-on-pr step 4 .*package-manager-cache: false/);
+  const ok = gate("node", ["scripts/cache-policy.mjs"]);
+  assert.equal(ok.status, 0, ok.out);
+});
+
+test("a missing base manifest marks every page affected and says why; a valid one is used", () => {
+  const env = { PATH: `${join(FIX, "bin")}:${process.env.PATH}`, GH_TOKEN: "canary", GITHUB_REPOSITORY: "o/r", GITHUB_STEP_SUMMARY: "" };
+  const out = join(TMP, "base-manifest.json");
+  const head = writeJson("bm-head.json", { locales: ["en"], routes: { "/en": { a: "1" }, "/en/tools": { a: "1" } } });
+  const affected = () => {
+    const pages = join(TMP, "bm-pages.txt");
+    const r = gate("node", ["scripts/route-manifest.mjs", "affected", out, head, pages]);
+    assert.equal(r.status, 0, r.out);
+    return readFileSync(pages, "utf8").split("\n").filter(Boolean);
+  };
+  const fetchBase = (mock, zip) => gate("bash", ["scripts/base-route-manifest.sh", out], { env: { ...env, GH_MOCK: mock, GH_MOCK_ZIP: zip ?? "" } });
+  const zipOf = (name, body) => {
+    const dir = mkdtempSync(join(TMP, name));
+    writeFileSync(join(dir, "route-manifest.json"), body);
+    assert.equal(spawnSync("zip", ["-q", "m.zip", "route-manifest.json"], { cwd: dir }).status, 0, "zip must be installed");
+    return join(dir, "m.zip");
+  };
+  for (const [mock, why, zip] of [["no-run", /main has no successful CI run/], ["no-artifact", /no unexpired route-manifest artifact/], ["manifest", /not a readable zip/, writeText("bm-junk.zip", "not a zip")], ["manifest", /holds no valid manifest/, zipOf("bm-bad", "{}")]]) {
+    const r = fetchBase(mock, zip);
+    assert.equal(r.status, 0, r.out);
+    assert.match(r.out, why);
+    assert.match(r.out, /Every page is marked affected/);
+    assert.deepEqual(affected(), ["/en", "/en/tools"], `${why}: every page must be affected`);
+  }
+  const r = fetchBase("manifest", zipOf("bm-ok", JSON.stringify({ locales: ["en"], routes: { "/en": { a: "1" }, "/en/tools": { a: "0" } } })));
+  assert.equal(r.status, 0, r.out);
+  assert.deepEqual(affected(), ["/en/tools"], "a valid base manifest must narrow the pages");
+});
+
 test("share-images fails on a sitemap page without og:image", async () => {
   // Not "node --test ...": a node:test file run as a CHILD of this already-running `node --test` process hits
   // Node's recursive-run guard ("run() is being called recursively within a test file") and silently skips,

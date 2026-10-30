@@ -46,10 +46,10 @@ jobs:
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: .nvmrc
-          cache: npm
+          package-manager-cache: false
 
       - name: Install dependencies
-        run: npm ci
+        uses: ./.github/actions/npm-ci
 
       - name: Build web app (live data from fixtures)
         run: npm run build:desktop-lock
@@ -87,10 +87,10 @@ jobs:
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: .nvmrc
-          cache: npm
+          package-manager-cache: false
 
       - name: Install dependencies
-        run: npm ci
+        uses: ./.github/actions/npm-ci
 
       - name: Build web app (production, live data from fixtures)
         run: npm run build:desktop-lock
@@ -130,6 +130,7 @@ jobs:
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: .nvmrc
+          package-manager-cache: false
 
       - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:

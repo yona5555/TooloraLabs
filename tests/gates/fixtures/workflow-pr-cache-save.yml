@@ -1,0 +1,20 @@
+# Canary fixture for scripts/cache-policy.mjs: every step here would save a cache from a PR run.
+name: canary
+on: pull_request
+jobs:
+  saves-on-pr:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/cache/save@v6
+        if: always()
+        with:
+          path: x
+          key: x
+      - uses: actions/cache@v6
+        with:
+          path: x
+          key: x
+      - uses: actions/setup-node@v7
+        with:
+          cache: npm
+      - uses: actions/setup-node@v7

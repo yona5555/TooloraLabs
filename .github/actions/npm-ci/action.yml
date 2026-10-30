@@ -1,0 +1,30 @@
+name: npm ci (main-only npm cache)
+description: >-
+  Restores the npm download cache, runs npm ci, and saves the cache only on a push to main, from the one job that
+  passes save-cache (several jobs saving one key race, and the loser's warning fails zero-warnings). setup-node's own
+  `cache: npm` cannot do this: it saves from every ref, PR runs included (scripts/cache-policy.mjs forbids it).
+inputs:
+  save-cache:
+    description: "'true' in the one job that saves the cache on a push to main"
+    default: "false"
+runs:
+  using: composite
+  steps:
+    - name: Restore the npm download cache
+      id: npm-cache
+      uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+      with:
+        path: ~/.npm
+        key: npm-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+        restore-keys: npm-${{ runner.os }}-
+
+    - name: npm ci
+      shell: bash
+      run: npm ci
+
+    - name: Save the npm download cache
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main' && inputs.save-cache == 'true' && steps.npm-cache.outputs.cache-hit != 'true'
+      uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+      with:
+        path: ~/.npm
+        key: ${{ steps.npm-cache.outputs.cache-primary-key }}

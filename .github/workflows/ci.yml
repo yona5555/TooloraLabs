@@ -38,10 +38,17 @@ jobs:
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: .nvmrc
-          cache: npm
+          package-manager-cache: false
 
       - name: Install dependencies
-        run: npm ci
+        uses: ./.github/actions/npm-ci
+        with:
+          save-cache: "true"
+
+      - name: Workflow rules (bash with pipefail, only a push to main saves a cache)
+        run: |
+          node scripts/workflow-shell.mjs
+          node scripts/cache-policy.mjs
 
       # Lint, tests and the build run through the warnings gate (scripts/run-no-warnings.mjs): any warning or
       # error line from a tool fails the step, not only a non-zero exit.
@@ -79,8 +86,10 @@ jobs:
         run: node scripts/run-no-warnings.mjs npm run test:main-health
 
       # Any warning line in the build output (Next.js ⚠, webpack, React, Node, npm) fails the step.
-      # Next.js build cache (https://nextjs.org/docs/messages/no-cache): restored from the last build of this
-      # job on this branch or main, saved after the build even when a later gate fails, so the next run starts warm.
+      # Next.js build cache (https://nextjs.org/docs/messages/no-cache): restored from main's last build; only a
+      # push to main saves it (scripts/cache-policy.mjs). home-phone-lock and the phone build of gates-self-test
+      # run the same command on the same path, so they share this key; the .next-lock builds differ
+      # (NEXT_DIST_DIR, fixture fetches) and keep their own.
       - name: Restore the Next.js build cache
         id: next-cache
         uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
@@ -93,10 +102,14 @@ jobs:
 
       - name: Build web app (zero warnings)
         id: build
-        run: node scripts/run-no-warnings.mjs npm run build --workspace=apps/web
+        # A miss on an empty cache (evicted, or main's first run) leaves no .next/cache, and Next.js then warns that
+        # caching is not configured; it is, so the directory is created and the cold build runs.
+        run: |
+          mkdir -p apps/web/.next/cache
+          node scripts/run-no-warnings.mjs npm run build --workspace=apps/web
 
       - name: Save the Next.js build cache
-        if: always() && steps.build.outcome != 'skipped' && steps.next-cache.outputs.cache-hit != 'true'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && always() && steps.build.outcome != 'skipped' && steps.next-cache.outputs.cache-hit != 'true'
         uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: apps/web/.next/cache
@@ -137,33 +150,23 @@ jobs:
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: .nvmrc
-          cache: npm
+          package-manager-cache: false
 
       - name: Install dependencies
-        run: npm ci
+        uses: ./.github/actions/npm-ci
 
-      # Next.js build cache (https://nextjs.org/docs/messages/no-cache): restored from the last build of this
-      # job on this branch or main, saved after the build even when a later gate fails, so the next run starts warm.
+      # Same build as the build job, same cache key; that job saves it on main.
       - name: Restore the Next.js build cache
-        id: next-cache
         uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: apps/web/.next/cache
-          key: next-phone-${{ runner.os }}-${{ hashFiles('package-lock.json', 'apps/web/next.config.ts', 'apps/web/package.json') }}-${{ hashFiles('apps/web/app/**', 'apps/web/components/**', 'apps/web/lib/**', 'apps/web/data/**', 'apps/web/messages/**', 'packages/*/src/**') }}
+          key: next-build-${{ runner.os }}-${{ hashFiles('package-lock.json', 'apps/web/next.config.ts', 'apps/web/package.json') }}-${{ hashFiles('apps/web/app/**', 'apps/web/components/**', 'apps/web/lib/**', 'apps/web/data/**', 'apps/web/messages/**', 'packages/*/src/**') }}
           restore-keys: |
-            next-phone-${{ runner.os }}-${{ hashFiles('package-lock.json', 'apps/web/next.config.ts', 'apps/web/package.json') }}-
-            next-phone-${{ runner.os }}-
+            next-build-${{ runner.os }}-${{ hashFiles('package-lock.json', 'apps/web/next.config.ts', 'apps/web/package.json') }}-
+            next-build-${{ runner.os }}-
 
       - name: Build web app
-        id: build
         run: npm run build --workspace=apps/web
-
-      - name: Save the Next.js build cache
-        if: always() && steps.build.outcome != 'skipped' && steps.next-cache.outputs.cache-hit != 'true'
-        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
-        with:
-          path: apps/web/.next/cache
-          key: ${{ steps.next-cache.outputs.cache-primary-key }}
 
       - name: Install Playwright Chromium
         run: npx playwright install --with-deps chromium
@@ -199,13 +202,12 @@ jobs:
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: .nvmrc
-          cache: npm
+          package-manager-cache: false
 
       - name: Install dependencies
-        run: npm ci
+        uses: ./.github/actions/npm-ci
 
-      # Next.js build cache (https://nextjs.org/docs/messages/no-cache): restored from the last build of this
-      # job on this branch or main, saved after the build even when a later gate fails, so the next run starts warm.
+      # The fixture build's cache: restored from main's last build; only a push to main saves it, from this job.
       - name: Restore the Next.js build cache
         id: next-cache
         uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
@@ -221,7 +223,7 @@ jobs:
         run: npm run build:desktop-lock
 
       - name: Save the Next.js build cache
-        if: always() && steps.build.outcome != 'skipped' && steps.next-cache.outputs.cache-hit != 'true'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && always() && steps.build.outcome != 'skipped' && steps.next-cache.outputs.cache-hit != 'true'
         uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: apps/web/.next-lock/cache
@@ -243,13 +245,17 @@ jobs:
 
   # Affected pages (scripts/route-manifest.mjs): a route-level manifest of this build (every chunk each page's
   # HTML/RSC loads, plus its own server bundle for a request-rendered page), diffed against main's manifest
-  # (restored from main's last run's cache) to list only the routes this change could affect - unchanged chunks
-  # mark nothing, a shared chunk marks every route that loads it. Without a base manifest (first run on a new
-  # cache generation, or main itself) every route is affected. site-audit and perf-budget shard only this list
-  # on a PR/push; the daily schedule (scripts/launch-readiness.mjs) always audits every page.
+  # (artifact route-manifest of main's latest successful run) to list only the routes this change could affect -
+  # unchanged chunks mark nothing, a shared chunk marks every route that loads it. Without a base manifest every
+  # route is affected and the step says why. site-audit and perf-budget shard only this list on a PR/push; the
+  # daily schedule (scripts/launch-readiness.mjs) always audits every page.
   affected:
     runs-on: ubuntu-24.04
-    timeout-minutes: 5
+    timeout-minutes: 10
+    # actions: read lists main's runs and downloads their manifest artifact.
+    permissions:
+      contents: read
+      actions: read
     outputs:
       count: ${{ steps.pages.outputs.count }}
       audit-shards: ${{ steps.pages.outputs.audit-shards }}
@@ -264,10 +270,10 @@ jobs:
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: .nvmrc
-          cache: npm
+          package-manager-cache: false
 
       - name: Install dependencies
-        run: npm ci
+        uses: ./.github/actions/npm-ci
 
       - name: Restore the Next.js build cache
         uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
@@ -278,17 +284,13 @@ jobs:
             next-lock-${{ runner.os }}-${{ hashFiles('package-lock.json', 'apps/web/next.config.ts', 'apps/web/package.json') }}-
             next-lock-${{ runner.os }}-
 
-      - name: Restore the base commit's route manifest (saved by main's run)
-        if: github.event_name == 'pull_request' || github.event_name == 'push'
-        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
-        with:
-          path: route-manifest.json
-          key: route-manifest-main-${{ github.event.pull_request.base.sha || github.event.before }}
+      - name: Fetch main's route manifest (its absence marks every page affected)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: scripts/base-route-manifest.sh base-route-manifest.json
 
       - name: Build web app (live data from fixtures)
-        run: |
-          if [ -f route-manifest.json ]; then mv route-manifest.json base-route-manifest.json; fi
-          npm run build:desktop-lock
+        run: npm run build:desktop-lock
 
       - name: Affected pages
         id: pages
@@ -313,12 +315,13 @@ jobs:
           name: affected-pages
           path: affected-pages.txt
 
-      - name: Save this commit's route manifest (main)
-        if: github.event_name == 'push'
-        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+      - name: Upload this commit's route manifest (main)
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
+          name: route-manifest
           path: route-manifest.json
-          key: route-manifest-main-${{ github.sha }}
+          retention-days: 90
 
   # Site audit (apps/web/scripts/site-audit.mjs): every affected page (the sitemap minus what `affected` ruled
   # out), en + ar, 1440 and 390 px, light and dark. Measures overlap, clip, small text, hydration, console,
@@ -330,7 +333,7 @@ jobs:
     needs: affected
     if: needs.affected.outputs.count != '0'
     runs-on: ubuntu-24.04
-    timeout-minutes: 9
+    timeout-minutes: 11
     strategy:
       fail-fast: false
       matrix:
@@ -343,10 +346,10 @@ jobs:
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: .nvmrc
-          cache: npm
+          package-manager-cache: false
 
       - name: Install dependencies
-        run: npm ci
+        uses: ./.github/actions/npm-ci
 
       - name: Restore the Next.js build cache
         uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
@@ -430,7 +433,7 @@ jobs:
     needs: affected
     if: needs.affected.outputs.count != '0'
     runs-on: ubuntu-24.04
-    timeout-minutes: 9
+    timeout-minutes: 11
     strategy:
       fail-fast: false
       matrix:
@@ -443,10 +446,10 @@ jobs:
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: .nvmrc
-          cache: npm
+          package-manager-cache: false
 
       - name: Install dependencies
-        run: npm ci
+        uses: ./.github/actions/npm-ci
 
       - name: Restore the Next.js build cache
         uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
@@ -535,10 +538,10 @@ jobs:
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: .nvmrc
-          cache: npm
+          package-manager-cache: false
 
       - name: Install dependencies
-        run: npm ci
+        uses: ./.github/actions/npm-ci
 
       - name: Restore the Next.js build cache (fixture build)
         uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
@@ -553,10 +556,10 @@ jobs:
         uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: apps/web/.next/cache
-          key: next-phone-${{ runner.os }}-${{ hashFiles('package-lock.json', 'apps/web/next.config.ts', 'apps/web/package.json') }}-${{ hashFiles('apps/web/app/**', 'apps/web/components/**', 'apps/web/lib/**', 'apps/web/data/**', 'apps/web/messages/**', 'packages/*/src/**') }}
+          key: next-build-${{ runner.os }}-${{ hashFiles('package-lock.json', 'apps/web/next.config.ts', 'apps/web/package.json') }}-${{ hashFiles('apps/web/app/**', 'apps/web/components/**', 'apps/web/lib/**', 'apps/web/data/**', 'apps/web/messages/**', 'packages/*/src/**') }}
           restore-keys: |
-            next-phone-${{ runner.os }}-${{ hashFiles('package-lock.json', 'apps/web/next.config.ts', 'apps/web/package.json') }}-
-            next-phone-${{ runner.os }}-
+            next-build-${{ runner.os }}-${{ hashFiles('package-lock.json', 'apps/web/next.config.ts', 'apps/web/package.json') }}-
+            next-build-${{ runner.os }}-
 
       - name: Build web app (fixture build for the desktop lock canary, phone build for the phone lock canary)
         run: |
@@ -642,13 +645,15 @@ jobs:
         if: steps.pending.outputs.desktop == 'true' || steps.pending.outputs.phone == 'true'
         with:
           node-version-file: .nvmrc
-          cache: npm
+          package-manager-cache: false
 
-      - name: Install dependencies and Playwright Chromium
+      - name: Install dependencies
         if: steps.pending.outputs.desktop == 'true' || steps.pending.outputs.phone == 'true'
-        run: |
-          npm ci
-          npx playwright install --with-deps chromium
+        uses: ./.github/actions/npm-ci
+
+      - name: Install Playwright Chromium
+        if: steps.pending.outputs.desktop == 'true' || steps.pending.outputs.phone == 'true'
+        run: npx playwright install --with-deps chromium
 
       - name: Write the Linux phone home baseline (one measurement)
         if: steps.pending.outputs.phone == 'true'
