@@ -8,10 +8,23 @@ on:
     # labeled: adding an approve-*-baseline label starts a run that sees it (labels are read from the
     # event, so a label added after the last push is otherwise ignored until the next push).
     types: [opened, synchronize, reopened, labeled]
+  workflow_dispatch:
+
+# A newer push to the same PR supersedes its running checks (they would only queue behind each other).
+concurrency:
+  group: ci-${{ github.event.pull_request.number || github.ref }}-${{ github.event_name }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 # Read-only by default. regenerate-baselines writes with a GitHub App installation token, not GITHUB_TOKEN.
 permissions:
   contents: read
+
+# Every run step is bash with pipefail (bash --noprofile --norc -eo pipefail): a failure anywhere in a pipeline
+# fails the step, so no pipe can hide a gate's exit code (scripts/workflow-shell.mjs enforces this on every
+# workflow file, including this one, via the gates-self-test canary).
+defaults:
+  run:
+    shell: bash
 
 jobs:
   build:
@@ -228,6 +241,323 @@ jobs:
           path: desktop-lock-timing.txt
           if-no-files-found: ignore
 
+  # Affected pages (scripts/route-manifest.mjs): a route-level manifest of this build (every chunk each page's
+  # HTML/RSC loads, plus its own server bundle for a request-rendered page), diffed against main's manifest
+  # (restored from main's last run's cache) to list only the routes this change could affect - unchanged chunks
+  # mark nothing, a shared chunk marks every route that loads it. Without a base manifest (first run on a new
+  # cache generation, or main itself) every route is affected. site-audit and perf-budget shard only this list
+  # on a PR/push; the daily schedule (scripts/launch-readiness.mjs) always audits every page.
+  affected:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      count: ${{ steps.pages.outputs.count }}
+      audit-shards: ${{ steps.pages.outputs.audit-shards }}
+      audit-shard-count: ${{ steps.pages.outputs.audit-shard-count }}
+      perf-shards: ${{ steps.pages.outputs.perf-shards }}
+      perf-shard-count: ${{ steps.pages.outputs.perf-shard-count }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Restore the Next.js build cache
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: apps/web/.next-lock/cache
+          key: next-lock-${{ runner.os }}-${{ hashFiles('package-lock.json', 'apps/web/next.config.ts', 'apps/web/package.json') }}-${{ hashFiles('apps/web/app/**', 'apps/web/components/**', 'apps/web/lib/**', 'apps/web/data/**', 'apps/web/messages/**', 'packages/*/src/**') }}
+          restore-keys: |
+            next-lock-${{ runner.os }}-${{ hashFiles('package-lock.json', 'apps/web/next.config.ts', 'apps/web/package.json') }}-
+            next-lock-${{ runner.os }}-
+
+      - name: Restore the base commit's route manifest (saved by main's run)
+        if: github.event_name == 'pull_request' || github.event_name == 'push'
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: route-manifest.json
+          key: route-manifest-main-${{ github.event.pull_request.base.sha || github.event.before }}
+
+      - name: Build web app (live data from fixtures)
+        run: |
+          if [ -f route-manifest.json ]; then mv route-manifest.json base-route-manifest.json; fi
+          npm run build:desktop-lock
+
+      - name: Affected pages
+        id: pages
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          node scripts/route-manifest.mjs build apps/web/.next-lock route-manifest.json
+          node scripts/route-manifest.mjs affected base-route-manifest.json route-manifest.json affected-pages.txt
+          count=$(( $(wc -l < affected-pages.txt) ))
+          # Shards sized so a PR with every page affected still fits the 9-minute per-shard timeout: site-audit
+          # ~4.6s/page (en+ar, 2 widths, 2 themes), perf-budget ~9s/page at RUNS=1 (one Chrome reused per shard).
+          audit=$(( count ? (count + 79) / 80 : 0 )); (( audit > 12 )) && audit=12
+          perf=$(( count ? (count + 45) / 46 : 0 )); (( perf > 16 )) && perf=16
+          shards() { if (( $1 )); then echo "[$(seq -s, 1 "$1")]"; else echo "[]"; fi; }
+          { echo "count=$count"; echo "audit-shards=$(shards "$audit")"; echo "audit-shard-count=$audit"; echo "perf-shards=$(shards "$perf")"; echo "perf-shard-count=$perf"; } >> "$GITHUB_OUTPUT"
+          echo "$count affected pages: site-audit $audit shards, perf-budget $perf shards" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload the affected pages
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: affected-pages
+          path: affected-pages.txt
+
+      - name: Save this commit's route manifest (main)
+        if: github.event_name == 'push'
+        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: route-manifest.json
+          key: route-manifest-main-${{ github.sha }}
+
+  # Site audit (apps/web/scripts/site-audit.mjs): every affected page (the sitemap minus what `affected` ruled
+  # out), en + ar, 1440 and 390 px, light and dark. Measures overlap, clip, small text, hydration, console,
+  # a11y and broken links, then scripts/ratchet.mjs decides pass/fail: a required check fails only if one of
+  # these MEASURED pages got WORSE than its .audit/ratchet/site-audit.json entry, or a page with no entry has
+  # any finding at all. Zero across the whole site is not required here - that is launch-readiness, daily on
+  # main, not required on PRs. Twelve shards in parallel; `site-audit` is the single required check over them.
+  site-audit-shard:
+    needs: affected
+    if: needs.affected.outputs.count != '0'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 9
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: ${{ fromJSON(needs.affected.outputs.audit-shards) }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Restore the Next.js build cache
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: apps/web/.next-lock/cache
+          key: next-lock-${{ runner.os }}-${{ hashFiles('package-lock.json', 'apps/web/next.config.ts', 'apps/web/package.json') }}-${{ hashFiles('apps/web/app/**', 'apps/web/components/**', 'apps/web/lib/**', 'apps/web/data/**', 'apps/web/messages/**', 'packages/*/src/**') }}
+          restore-keys: |
+            next-lock-${{ runner.os }}-${{ hashFiles('package-lock.json', 'apps/web/next.config.ts', 'apps/web/package.json') }}-
+            next-lock-${{ runner.os }}-
+
+      - name: Build web app (live data from fixtures)
+        run: npm run build:desktop-lock
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Download the affected pages
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: affected-pages
+
+      - name: Site audit (shard ${{ matrix.shard }}/${{ needs.affected.outputs.audit-shard-count }})
+        env:
+          SHARD: ${{ matrix.shard }}/${{ needs.affected.outputs.audit-shard-count }}
+          PAGES: ${{ github.workspace }}/affected-pages.txt
+          OUT: ${{ github.workspace }}/site-audit-${{ matrix.shard }}.json
+        run: scripts/site-audit.sh 3107
+
+      - name: Expand this shard's measured pages (locale x affected-pages.txt)
+        run: node scripts/expand-measured-pages.mjs affected-pages.txt ${{ github.workspace }}/measured-${{ matrix.shard }}.txt
+
+      - name: Ratchet check (shard ${{ matrix.shard }})
+        env:
+          MEASURED: ${{ github.workspace }}/measured-${{ matrix.shard }}.txt
+        run: node scripts/ratchet.mjs check site-audit site-audit-${{ matrix.shard }}.json .audit/ratchet/site-audit.json
+
+      - name: Upload the inventory
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: site-audit-${{ matrix.shard }}
+          path: site-audit-${{ matrix.shard }}.json
+          if-no-files-found: ignore
+
+  site-audit:
+    if: always()
+    needs: [affected, site-audit-shard]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 1
+    steps:
+      - name: Every site audit shard passed the ratchet (or no page is affected)
+        env:
+          AFFECTED: ${{ needs.affected.result }}
+          COUNT: ${{ needs.affected.outputs.count }}
+          RESULT: ${{ needs.site-audit-shard.result }}
+        run: |
+          if [ "$AFFECTED" != "success" ]; then echo "::error::affected: $AFFECTED"; exit 1; fi
+          if [ "$COUNT" = "0" ]; then echo "No page is affected by this change: nothing to audit."; exit 0; fi
+          if [ "$RESULT" != "success" ]; then
+            echo "::error::site-audit-shard result: $RESULT (see the shard logs and the site-audit-* artifacts)"
+            exit 1
+          fi
+
+  # Performance budgets (apps/web/scripts/perf-budget.mjs), Lighthouse mobile default throttling, one run per
+  # page on a PR (one Chrome reused for the shard) against every affected page. scripts/ratchet.mjs then decides
+  # pass/fail the same way as site-audit: a required check fails only if a measured page's LCP/TBT/CLS/JS rose,
+  # or its Performance score fell, by more than the measured run-to-run noise tolerance (scripts/ratchet.mjs,
+  # TOLERANCE) versus .audit/ratchet/perf-budget.json, or a page with no entry misses its own full budget. The
+  # full budget for every page, 3 runs medianed, is launch-readiness (daily on main, not required on PRs). Up to
+  # sixteen shards in parallel; `perf-budget` is the single required check over them.
+  perf-budget-shard:
+    needs: affected
+    if: needs.affected.outputs.count != '0'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 9
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: ${{ fromJSON(needs.affected.outputs.perf-shards) }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Restore the Next.js build cache
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: apps/web/.next-lock/cache
+          key: next-lock-${{ runner.os }}-${{ hashFiles('package-lock.json', 'apps/web/next.config.ts', 'apps/web/package.json') }}-${{ hashFiles('apps/web/app/**', 'apps/web/components/**', 'apps/web/lib/**', 'apps/web/data/**', 'apps/web/messages/**', 'packages/*/src/**') }}
+          restore-keys: |
+            next-lock-${{ runner.os }}-${{ hashFiles('package-lock.json', 'apps/web/next.config.ts', 'apps/web/package.json') }}-
+            next-lock-${{ runner.os }}-
+
+      - name: Build web app (production, live data from fixtures)
+        run: npm run build:desktop-lock
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Download the affected pages
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: affected-pages
+
+      - name: Performance budgets (shard ${{ matrix.shard }}/${{ needs.affected.outputs.perf-shard-count }})
+        env:
+          SHARD: ${{ matrix.shard }}/${{ needs.affected.outputs.perf-shard-count }}
+          PAGES: ${{ github.workspace }}/affected-pages.txt
+          OUT: ${{ github.workspace }}/perf-budget-${{ matrix.shard }}.json
+          RUNS: 1
+        run: scripts/perf-budget.sh 3108
+
+      - name: Expand this shard's measured pages (locale x affected-pages.txt)
+        run: node scripts/expand-measured-pages.mjs affected-pages.txt ${{ github.workspace }}/measured-${{ matrix.shard }}.txt
+
+      - name: Ratchet check (shard ${{ matrix.shard }})
+        env:
+          MEASURED: ${{ github.workspace }}/measured-${{ matrix.shard }}.txt
+        run: node scripts/ratchet.mjs check perf-budget perf-budget-${{ matrix.shard }}.json .audit/ratchet/perf-budget.json
+
+      - name: Upload the measurements
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: perf-budget-${{ matrix.shard }}
+          path: perf-budget-${{ matrix.shard }}.json
+          if-no-files-found: ignore
+
+  perf-budget:
+    if: always()
+    needs: [affected, perf-budget-shard]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 1
+    steps:
+      - name: Every performance budget shard passed the ratchet (or no page is affected)
+        env:
+          AFFECTED: ${{ needs.affected.result }}
+          COUNT: ${{ needs.affected.outputs.count }}
+          RESULT: ${{ needs.perf-budget-shard.result }}
+        run: |
+          if [ "$AFFECTED" != "success" ]; then echo "::error::affected: $AFFECTED"; exit 1; fi
+          if [ "$COUNT" = "0" ]; then echo "No page is affected by this change: nothing to measure."; exit 0; fi
+          if [ "$RESULT" != "success" ]; then
+            echo "::error::perf-budget-shard result: $RESULT (see the shard logs and the perf-budget-* artifacts)"
+            exit 1
+          fi
+
+  # Gate canaries (tests/gates-self-test.mjs): every required or quality gate added so far runs on a minimal,
+  # deliberately broken fixture and must fail on it, naming the defect: lint and warnings gates, zero-warnings,
+  # the system font and workflow shell rules, the site audit (overlap, SVG clip, HTML clip, text < 12px,
+  # hydration mismatch, console error, contrast, broken link), the performance budgets (a page over each
+  # budget), affected pages, share-images (missing og:image), desktop lock, phone lock and main-health (failed
+  # run). A gate that passes its broken fixture fails this job.
+  gates-self-test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Restore the Next.js build cache (fixture build)
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: apps/web/.next-lock/cache
+          key: next-lock-${{ runner.os }}-${{ hashFiles('package-lock.json', 'apps/web/next.config.ts', 'apps/web/package.json') }}-${{ hashFiles('apps/web/app/**', 'apps/web/components/**', 'apps/web/lib/**', 'apps/web/data/**', 'apps/web/messages/**', 'packages/*/src/**') }}
+          restore-keys: |
+            next-lock-${{ runner.os }}-${{ hashFiles('package-lock.json', 'apps/web/next.config.ts', 'apps/web/package.json') }}-
+            next-lock-${{ runner.os }}-
+
+      - name: Restore the Next.js build cache (phone build)
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: apps/web/.next/cache
+          key: next-phone-${{ runner.os }}-${{ hashFiles('package-lock.json', 'apps/web/next.config.ts', 'apps/web/package.json') }}-${{ hashFiles('apps/web/app/**', 'apps/web/components/**', 'apps/web/lib/**', 'apps/web/data/**', 'apps/web/messages/**', 'packages/*/src/**') }}
+          restore-keys: |
+            next-phone-${{ runner.os }}-${{ hashFiles('package-lock.json', 'apps/web/next.config.ts', 'apps/web/package.json') }}-
+            next-phone-${{ runner.os }}-
+
+      - name: Build web app (fixture build for the desktop lock canary, phone build for the phone lock canary)
+        run: |
+          npm run build:desktop-lock
+          npm run build --workspace=apps/web
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Every gate fails on its broken fixture
+        run: |
+          scripts/test-server.sh start 3110 apps/web /ar
+          status=0
+          PHONE_BASE=http://localhost:3110 npm run test:gates-self-test || status=$?
+          scripts/test-server.sh stop 3110
+          exit "$status"
+
+
   # Baseline approval, in this order: (1) a label approve-desktop-baseline / approve-home-phone-baseline on a
   # same-repository PR starts this job, and the matching required lock check fails at once; (2) this job
   # measures the head commit ONCE on the CI runner (Linux) and writes the baseline (no compare here);
@@ -351,7 +681,7 @@ jobs:
   # included), so a warning can never merge unnoticed. always(): it still reports when a job failed or was
   # skipped. Check runs are found by their details URL (this run's id), so only checks: read is needed.
   zero-warnings:
-    needs: [build, home-phone-lock, desktop-lock, regenerate-baselines]
+    needs: [build, home-phone-lock, desktop-lock, affected, site-audit-shard, site-audit, perf-budget-shard, perf-budget, gates-self-test, regenerate-baselines]
     if: always()
     runs-on: ubuntu-24.04
     timeout-minutes: 5

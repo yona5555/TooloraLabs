@@ -10,7 +10,8 @@
 //   npm run baseline:desktop-lock -- --approve     -> rewrite the measured pages in the baseline (add --full
 //                                                     or --only for other sets; other pages are kept)
 // Options: --only slug,slug (a subset), --base http://localhost:3001 (an already running server; its live
-// data is NOT fixed), --timing file (per-page load/measure times and slow requests).
+// data is NOT fixed), --timing file (per-page load/measure times and slow requests), --baseline file (compare
+// against another file instead of the committed baseline; tests/gates-self-test.mjs's tampered-copy canary).
 // Without --base it starts `next start` on the .next-lock build with tests/fixtures/offline-fetch.mjs
 // preloaded: every external fetch (prices, rates, weather, hazards) is answered from tests/fixtures/live,
 // so no page waits on the network and live values never move the layout. Every wait is bounded (10s load,
@@ -25,7 +26,7 @@
 // desktop.linux.json on Linux (CI runner ubuntu-24.04, CI set only).
 import { spawn } from "node:child_process";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
-import { dirname, join } from "node:path";
+import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { createRequire } from "node:module";
 import { createConnection } from "node:net";
@@ -35,11 +36,11 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const WEB = join(ROOT, "apps/web");
 const webRequire = createRequire(join(WEB, "package.json"));
 const { chromium } = webRequire("playwright");
-const BASELINE = join(ROOT, `tests/baselines/desktop${process.platform === "linux" ? ".linux" : ""}.json`);
 const arg = (name, def) => {
   const i = process.argv.indexOf(`--${name}`);
   return i > -1 ? process.argv[i + 1] : def;
 };
+const BASELINE = arg("baseline") ? resolve(arg("baseline")) : join(ROOT, `tests/baselines/desktop${process.platform === "linux" ? ".linux" : ""}.json`);
 const PORT = 3109;
 const BASE = arg("base", `http://localhost:${PORT}`);
 const OWN_SERVER = !process.argv.includes("--base");

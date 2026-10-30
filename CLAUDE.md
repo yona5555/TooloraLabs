@@ -23,10 +23,14 @@ TooloraLabs-Claude-Instructions.md is a historical archive; the binding rules ar
   stop only what you started, by its own PID. Test servers use a dedicated port (3109 desktop-lock, 3110 CI
   via scripts/test-server.sh), checked free first; if it is taken, fail with a clear message. Port 3001 is
   Yousef's dev server: never stop or restart it unless asked.
+  No script defaults to a port: every audit/lock/preview script takes an explicit BASE/--base/--port
+  (scripts/lib/require-base.mjs) or starts its own server on its dedicated free port.
+- Never use /loop, ScheduleWakeup, scheduled wakeups, sleep/until/polling loops or any other waiting mechanism.
+  Run each command once, write its output to a file, and read that file once.
 - Zero warnings: any CI annotation, deprecation, build, lint or console warning is fixed immediately at the root. A report that mentions a warning without fixing it is not accepted.
 
 ## Hard rules
-- Always reply to Yousef in Modern Standard Arabic, even when the command or task is written in English. Code, commands and identifiers stay in English.
+- All user-facing text (progress notes, questions, reports) is in Modern Standard Arabic only, even when the command or task is written in English. Code, commands, file names and identifiers stay in English. Never write in any other language.
 - If a request is ambiguous, state your understanding in one line and wait. Never re-ask something already answered.
 - Explain every terminal command in one sentence; translate terminal options to Arabic and give the option number.
 - Never take or review screenshots (no Playwright screenshots, no image review), to save quota. Yousef reviews pages himself in the browser. At the end of any visual task, give him the list of page URLs to review (e.g. http://localhost:3001/ar/tools/<slug>). Reading values from the DOM via Playwright is still allowed when needed.
@@ -39,9 +43,28 @@ TooloraLabs-Claude-Instructions.md is a historical archive; the binding rules ar
 - Tool route: /{locale}/tools/{slug}.
 - Never print secrets in any output, report, command or log: API keys, tokens, passwords, webhook/IPN secrets, private keys, connection strings, or values from .env* files. Refer to them by variable NAME only and mask the value (e.g. METALPRICE_API_KEY=****). Never cat or echo .env* files. Never commit secrets.
 
+## Gates and platform parity
+- Every gate proves itself: `npm run test:gates-self-test` (CI `gates-self-test`, required) runs each gate on a broken
+  fixture in tests/gates/ and fails if any gate passes it. A new gate gets a canary in the same PR.
+- Every workflow runs bash with pipefail; never pipe a gate's output (`node scripts/workflow-shell.mjs`).
+- `site-audit` and `perf-budget` (CI, required) are ratcheted, not a hard zero gate: `scripts/ratchet.mjs check`
+  fails a PR only if one of its measured pages got WORSE than its entry in `.audit/ratchet/*.json` (site-audit:
+  any criterion's count rose; perf-budget: LCP/TBT/CLS/JS rose or Performance fell by more than the measured
+  run-to-run noise tolerance), or a page with no baseline entry has any finding / misses its own full budget.
+  `npm run ratchet:update -- <kind> <run.json> <baseline-file>` lowers the baseline after a real improvement; it
+  can never raise it (`ratchet.mjs check-baseline`, its own gates-self-test canary). Zero across the whole site
+  is not required here - that is `launch-readiness` (daily on main, not a required PR check; reports the
+  remaining counts that must reach zero before launch).
+- Required PR checks finish within 15 minutes: on a PR, site-audit and perf-budget measure only the pages whose
+  route fingerprint changed (`scripts/route-manifest.mjs`, CI job `affected`: chunks, prerendered HTML/RSC,
+  server bundle, fixtures, gate scripts; a shared chunk marks every page using it).
+- Audits, locks and previews run in the Linux container (`scripts/in-container.sh [--ci-parity] <cmd>`, colima on
+  the Mac) for local platform parity with the CI runner; local iteration still runs natively on arm64 by default.
+
 ## Supply chain
-- Required checks on main (strict): build, home-phone-lock, desktop-lock, audit, Analyze (javascript-typescript), Analyze (actions),
-  zero-warnings, audit-zero-warnings, codeql-zero-warnings (the last three run scripts/zero-warnings.sh).
+- Required checks on main (strict): build, home-phone-lock, desktop-lock, site-audit, gates-self-test, perf-budget,
+  audit, Analyze (javascript-typescript), Analyze (actions), zero-warnings, audit-zero-warnings,
+  codeql-zero-warnings (the last three run scripts/zero-warnings.sh).
 - Dependabot (weekly, Mon 06:00 Riyadh, 7-day cooldown; security updates immediate): minor/patch and security
   minor/patch get auto-merge (dependabot-automerge.yml, App token) and merge only after every required check
   passes. Majors are never auto-merged: labelled major-update, reviewed one at a time.

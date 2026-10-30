@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 // Headed phone preview of the local site with full device emulation.
-//   npm run phone                      -> Pixel 7, Chromium (Android Chrome)
-//   npm run phone:iphone               -> iPhone 14, WebKit (Safari engine)
-//   npm run phone -- /ar/tools/<slug>  -> start on a specific path
-// Starts the dev server on :3001 if nothing is listening there. The window stays
+//   npm run phone -- --port <n>                      -> Pixel 7, Chromium (Android Chrome)
+//   npm run phone:iphone -- --port <n>               -> iPhone 14, WebKit (Safari engine)
+//   npm run phone -- --port <n> /ar/tools/<slug>     -> start on a specific path
+// The port is always given (no default: 3001 is the dev server and is only used when named). Opens the server
+// already listening on that port, or starts a dev server there if the port is free. The window stays
 // open until it is closed by hand; the script then exits (the dev server keeps running).
 import { execSync, spawn } from 'node:child_process';
 import { mkdirSync, openSync, readFileSync, watch } from 'node:fs';
@@ -11,12 +12,17 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { chromium, devices, webkit } from 'playwright';
 
-const PORT = 3001;
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const OUTPUT_DIR = join(ROOT, 'scripts', 'output');
 const LOG_FILE = join(OUTPUT_DIR, 'dev.log');
 
 const args = process.argv.slice(2);
+const portAt = args.indexOf('--port');
+const PORT = portAt > -1 ? Number(args[portAt + 1]) : NaN;
+if (!Number.isInteger(PORT) || PORT <= 0) {
+  console.error('phone-preview: no port given. Pass --port <n> (e.g. npm run phone -- --port 3120); there is no default port.');
+  process.exit(2);
+}
 const iphone = args.includes('--iphone');
 const path = args.find((a) => a.startsWith('/')) ?? '/ar/tools';
 const url = `http://localhost:${PORT}${path}`;

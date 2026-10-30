@@ -17,13 +17,14 @@
 // they are never regenerated or overwritten. Unapproved variants of the named tools are generated, and
 // every image that passes all gates is added to approved.json. One tool at a time; never all tools.
 //
-// Usage (prod server running on 3001):
+// Usage (BASE = a prod server you started on a free port, e.g. 3110):
 //   npm run previews -- <slug>            generate the unapproved variants of one tool
 //   npm run previews -- --force <slug>    regenerate an approved tool (drops its approval first)
 //   npm run previews -- --audit [slug..]  check the EXISTING images (DOM gates on the live page + pixel
 //                                         gates on the file) and approve the ones that pass; writes no image
-// Env: BASE (default http://localhost:3001), RETRIES (default 3), CONCURRENCY (default 4), VARIANT, VERBOSE.
+// Env: BASE (required, e.g. http://localhost:3110), RETRIES (default 3), CONCURRENCY (default 4), VARIANT, VERBOSE.
 import { createHash } from "node:crypto";
+import { requireBase } from "../../../scripts/lib/require-base.mjs";
 import { existsSync, mkdirSync, readFileSync, renameSync, statSync, unlinkSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -32,7 +33,7 @@ import sharp from "sharp";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const outRoot = path.join(here, "../public/tool-previews");
-const base = process.env.BASE ?? "http://localhost:3001";
+const base = requireBase(process.env.BASE);
 const retries = Number(process.env.RETRIES ?? 3);
 const args = process.argv.slice(2);
 const audit = args.includes("--audit");

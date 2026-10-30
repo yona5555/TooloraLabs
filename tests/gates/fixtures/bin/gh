@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Mock `gh api` for the zero-warnings canary (tests/gates-self-test.mjs): prints what the real call + its --jq
+# filter would print for one check run of this run. GH_MOCK=annotation (a warning annotation) or clean.
+set -euo pipefail
+case "$*" in
+  *"/check-runs?"*) echo 101 ;;
+  *"/check-runs/101/annotations"*) [ "${GH_MOCK:-clean}" = annotation ] && echo "[warning] src/x.ts:3 canary: a deprecated action input" || true ;;
+  *"/check-runs/101 "*) echo "build" ;;
+  *) echo "gh mock: unexpected call: $*" >&2; exit 1 ;;
+esac
