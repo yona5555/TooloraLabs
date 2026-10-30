@@ -228,7 +228,12 @@ export function AgeFormulaCard({ d, f }: IndicatorProps) {
   const { report: r } = d;
   const g = r.gregorian;
   const h = r.hijri;
-  const W = 400;
+  // 4 boxes of BOX_W, 3 gaps of GAP between them (a delta-arrow label lives in each gap):
+  // W = 4 * BOX_W + 3 * GAP. Widened from the original 82/24 (W=400, zero slack) because the 12px
+  // label-size floor no longer fits box/arrow labels in that width without the chain overlapping.
+  const BOX_W = 96;
+  const GAP = 32;
+  const W = 4 * BOX_W + 3 * GAP;
   const H = h ? 230 : 120;
   const box = (x: number, y: number, w: number, top: string, bottom: string, color: string) => (
     <g>
@@ -246,13 +251,13 @@ export function AgeFormulaCard({ d, f }: IndicatorProps) {
   );
   const chain = (y: number, color: string, a: typeof g, fmt: (c: typeof r.birth) => string, anchor: string) => (
     <g>
-      {box(0, y, 82, td("result.birth"), fmt(r.birth), color)}
-      {arrow(82, 106, y + 22, `+${f.int(a.years)}`, color)}
-      {box(106, y, 82, td("result.lastBirthday"), fmt(a.lastBirthdayGregorian), color)}
-      {arrow(188, 212, y + 22, `+${f.int(a.months)}`, color)}
-      {box(212, y, 82, t("formula.anchor"), anchor, color)}
-      {arrow(294, 318, y + 22, `+${f.int(a.days)}`, color)}
-      {box(318, y, 82, td("result.reference"), fmt(r.reference), color)}
+      {box(0, y, BOX_W, td("result.birth"), fmt(r.birth), color)}
+      {arrow(BOX_W, BOX_W + GAP, y + 22, `+${f.int(a.years)}`, color)}
+      {box(BOX_W + GAP, y, BOX_W, td("result.lastBirthday"), fmt(a.lastBirthdayGregorian), color)}
+      {arrow(2 * BOX_W + GAP, 2 * (BOX_W + GAP), y + 22, `+${f.int(a.months)}`, color)}
+      {box(2 * (BOX_W + GAP), y, BOX_W, t("formula.anchor"), anchor, color)}
+      {arrow(3 * BOX_W + 2 * GAP, 3 * (BOX_W + GAP), y + 22, `+${f.int(a.days)}`, color)}
+      {box(3 * (BOX_W + GAP), y, BOX_W, td("result.reference"), fmt(r.reference), color)}
     </g>
   );
   const anchorOf = (a: typeof g) => {
