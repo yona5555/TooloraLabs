@@ -238,6 +238,49 @@ test("ratchet baseline check fails when a committed baseline value is raised", (
   assert.equal(ratchet(["check-baseline", "site-audit", lowered, prev]).status, 0, "lowering the baseline must pass");
 });
 
+// An approved raise: label + matching raises.json entry, perf-budget sizes and counts only.
+const ROW = { jsBytes: 100, cssBytes: 10, blocking: 1, requests: 5, lcpInHtml: true };
+const RAISE = { page: "/en/tools/a", metric: "jsBytes", from: 100, to: 120, reason: "canary", pr: 7 };
+const LABELLED = { PR_LABELS: "other,approve-ratchet-raise", PR_NUMBER: "7" };
+function baselineRaise(name, kind, prevRow, nextRow, entries, env) {
+  const prev = writeJson(`rr-${name}-prev.json`, { "/en/tools/a": prevRow });
+  const next = writeJson(`rr-${name}-next.json`, { "/en/tools/a": nextRow });
+  return ratchet(["check-baseline", kind, next, prev, writeJson(`rr-${name}-raises.json`, entries)], env);
+}
+const raiseJs = (name, entries, env) => baselineRaise(name, "perf-budget", ROW, { ...ROW, jsBytes: 120 }, entries, env);
+test("ratchet raise: without the label fails", () => {
+  failsWith(raiseJs("nolabel", [RAISE], { PR_LABELS: "", PR_NUMBER: "7" }), /\/en\/tools\/a\.jsBytes: 100 -> 120 \(the baseline can only go down without the label/, "raise without label");
+});
+test("ratchet raise: the label with no matching entry fails", () => {
+  failsWith(raiseJs("noentry", [], LABELLED), /\/en\/tools\/a\.jsBytes: 100 -> 120 \(no entry of raises\.json matches/, "raise with no entry");
+  failsWith(raiseJs("otherpr", [{ ...RAISE, pr: 6 }], LABELLED), /no entry of raises\.json matches/, "raise approved for another PR");
+  failsWith(raiseJs("otherfrom", [{ ...RAISE, from: 90 }], LABELLED), /no entry of raises\.json matches/, "raise from another value");
+});
+test("ratchet raise: an entry whose to-value differs fails", () => {
+  failsWith(raiseJs("otherto", [{ ...RAISE, to: 121 }], LABELLED), /no entry of raises\.json matches/, "raise to another value");
+});
+test("ratchet raise: a visual-quality criterion fails even with the label and an entry", () => {
+  const prev = { overlap: 1, clip: 0, small: 0, hydration: 0, console: 0, a11y: 0, link: 0, idle: 0 };
+  for (const criterion of ["overlap", "clip", "small", "a11y", "idle", "hydration", "console", "link"]) {
+    const entry = { ...RAISE, metric: criterion, from: prev[criterion], to: 2 };
+    failsWith(baselineRaise(`vis-${criterion}`, "site-audit", prev, { ...prev, [criterion]: 2 }, [entry], LABELLED), new RegExp(`${criterion}: \\d -> 2 \\(${criterion} can never be raised`), `raise of ${criterion}`);
+  }
+});
+test("ratchet raise: a new page cannot enter the site-audit baseline above zero", () => {
+  const prev = writeJson("rr-new-prev.json", {});
+  const next = writeJson("rr-new-next.json", { "/en/tools/n": { overlap: 3 } });
+  failsWith(ratchet(["check-baseline", "site-audit", next, prev, writeJson("rr-new-raises.json", [])], LABELLED), /\/en\/tools\/n\.overlap: 0 -> 3/, "new page above zero");
+});
+test("ratchet raise: an LCP element leaving the server HTML can never be raised", () => {
+  const entry = { ...RAISE, metric: "lcpInHtml", from: true, to: false };
+  failsWith(baselineRaise("lcp", "perf-budget", ROW, { ...ROW, lcpInHtml: false }, [entry], LABELLED), /lcpInHtml can never be raised/, "raise of lcpInHtml");
+});
+test("ratchet raise: a fully approved jsBytes raise passes, by page or page list", () => {
+  assert.equal(raiseJs("ok", [RAISE], LABELLED).status, 0, "an approved raise must pass");
+  const { page, ...rest } = RAISE;
+  assert.equal(raiseJs("oklist", [{ ...rest, pages: ["/en/tools/z", page] }], LABELLED).status, 0, "an approved page list must pass");
+});
+
 // A minimal Next.js build: tools a and b load the shared chunk, c does not; a's chunk lazy-loads another chunk; the
 // live page has no prerendered HTML (its server bundle counts). Every build gets a new build id, like next build.
 function fakeBuild(dir, { lazyA = "lazy a v1", shared = "shared v1", liveSsr = "live v1" } = {}) {
