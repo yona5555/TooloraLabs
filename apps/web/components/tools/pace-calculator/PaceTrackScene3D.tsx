@@ -29,6 +29,7 @@ const S = 84.39 * SCALE;
 const R = 36.8 * SCALE;
 const LANES = 0.3;
 const SPEEDUP = 25;
+const MOVE_SECONDS = 8;
 
 /** Point on the lane-1 line at arc length u (0 = start line, running anticlockwise seen from above). */
 function onTrack(u: number, r = R): { x: number; z: number; heading: number } {
@@ -63,6 +64,8 @@ export default function PaceTrackScene3D({ secPerKm, title, lap, splits }: PaceT
   const invalidate = useThree((s) => s.invalidate);
   const runner = useRef<THREE.Group>(null);
   const dist = useRef(300 * SCALE);
+  const shownSpeed = useRef(speed);
+  const moveLeft = useRef(0);
   const reduced = useRef<boolean | null>(null);
   const bg = p.dark ? "rgba(24,24,27,0.85)" : "rgba(255,255,255,0.92)";
   // On-screen speed in scene units per second.
@@ -82,13 +85,20 @@ export default function PaceTrackScene3D({ secPerKm, title, lap, splits }: PaceT
     geos.infield.dispose();
   }, [geos]);
 
+  // The runner moves for MOVE_SECONDS after the pace changes, never on load, so an idle page draws nothing.
   useEffect(() => {
+    if (shownSpeed.current !== speed) moveLeft.current = MOVE_SECONDS;
+    shownSpeed.current = speed;
     invalidate();
   }, [invalidate, speed]);
 
   useFrame((state, delta) => {
     if (reduced.current === null) reduced.current = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
-    if (!reduced.current && speed > 0) dist.current += Math.min(delta, 0.05) * speed;
+    const moving = !reduced.current && speed > 0 && moveLeft.current > 0;
+    if (moving) {
+      moveLeft.current -= Math.min(delta, 0.05);
+      dist.current += Math.min(delta, 0.05) * speed;
+    }
     const pos = onTrack(dist.current, R + LANES / 2 - 0.03);
     if (runner.current) {
       runner.current.position.set(pos.x, 0, pos.z);
@@ -100,7 +110,7 @@ export default function PaceTrackScene3D({ secPerKm, title, lap, splits }: PaceT
         legB.rotation.z = -swing;
       }
     }
-    if (!reduced.current && speed > 0) state.invalidate();
+    if (moving) state.invalidate();
   });
 
   const terracotta = p.dark ? "#b45309" : "#c2410c";

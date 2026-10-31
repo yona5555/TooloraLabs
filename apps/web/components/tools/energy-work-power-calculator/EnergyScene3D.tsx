@@ -69,22 +69,30 @@ function Arrow({ from, to, color, width = 4 }: { from: P3; to: P3; color: string
 }
 
 /**
- * Loop clock for the demand-rendered canvas: calls `onPhase(phase 0…1)` every frame of a
- * `period`-second cycle and keeps requesting frames. With reduced motion it renders `still` once.
+ * Loop clock for the demand-rendered canvas: for MOVE_SECONDS after `period` changes (never on load, so an idle page
+ * draws nothing) calls `onPhase(phase 0…1)` every frame of a `period`-second cycle. At rest, and with reduced motion,
+ * it renders `still` once.
  */
+const MOVE_SECONDS = 8;
+
 function useLoop(period: number, onPhase: (phase: number) => void, still = 1) {
   const invalidate = useThree((s) => s.invalidate);
   const reduced = useRef<boolean | null>(null);
   const start = useRef<number | null>(null);
+  const shownPeriod = useRef(period);
+  const moveLeft = useRef(0);
   useEffect(() => {
+    if (shownPeriod.current !== period) moveLeft.current = MOVE_SECONDS;
+    shownPeriod.current = period;
     invalidate();
-  }, [invalidate]);
-  useFrame((state) => {
+  }, [invalidate, period]);
+  useFrame((state, delta) => {
     if (reduced.current === null) reduced.current = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
-    if (reduced.current) {
+    if (reduced.current || moveLeft.current <= 0) {
       onPhase(still);
       return;
     }
+    moveLeft.current -= Math.min(delta, 0.1);
     const now = state.clock.getElapsedTime();
     if (start.current === null) start.current = now;
     onPhase(((now - start.current) % period) / period);
