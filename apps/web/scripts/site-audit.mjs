@@ -19,7 +19,8 @@
 // Each finding carries a `pattern`: the root cause key the inventory is grouped by (criterion, kind, component).
 // Exits 1 when any criterion is above 0 (CI job site-audit, sharded; no pipe after it in the workflow).
 // Usage: BASE=http://localhost:<port> node scripts/site-audit.mjs [path-filter ...]
-//   IDLE_ONLY=1: stop each view after the idle check (console, hydration, empty and idle only): a stability sweep.
+//   IDLE_ONLY=1: stop each view after the idle check, with no later hydration visit (console, hydration of the one
+//   visit, empty and idle only): a stability sweep.
 //   RATCHET_MEASURE=1: measure only, always exit 0 unless the run itself breaks (CI's ratchet decides from OUT).
 //   env LOCALES=en,ar  WIDTHS=1440,390  THEMES=light,dark  MIN=12  JOBS=3  SHARD=i/n (pages i, i+n, … of the
 //   sitemap order, i from 1)  OUT=<file.json> (totals, inventory by root cause, every finding)  VERBOSE=1 (one

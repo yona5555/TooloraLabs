@@ -19,7 +19,21 @@ if (MODE === "replay") for (const k of KEYS) process.env[k] = "fixture";
 // Replay also fixes the server's data clock (apps/web/lib/data-clock.ts) at the locks' page clock
 // (tests/desktop-lock.mjs, 2026-10-20 12:00 UTC): the fixtures are fixed, and so is the hour, candle window and
 // "today" the server picks from them, so two fixture builds render the same values (New York temperature included).
-if (MODE === "replay") process.env.TOOLORA_FIXED_NOW = "2026-10-20T12:00:00Z";
+// Date itself is pinned too, so everything the build renders from `new Date()` agrees with the audit's browser clock.
+if (MODE === "replay") {
+  process.env.TOOLORA_FIXED_NOW = "2026-10-20T12:00:00Z";
+  const fixed = Date.parse(process.env.TOOLORA_FIXED_NOW);
+  const RealDate = Date;
+  globalThis.Date = class extends RealDate {
+    constructor(...args) {
+      if (args.length) super(...args);
+      else super(fixed);
+    }
+    static now = () => fixed;
+    static parse = RealDate.parse; // named here: Next's render sandbox does not see inherited statics
+    static UTC = RealDate.UTC;
+  };
+}
 
 const realFetch = globalThis.fetch;
 const missed = new Set();
