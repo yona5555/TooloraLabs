@@ -29,7 +29,7 @@
 // Exit 1 on any regression (check, check-baseline) or nothing to lower (update: exit 0 always, reports what moved).
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 
-const CRITERIA = ["overlap", "clip", "small", "hydration", "console", "a11y", "link", "idle"];
+const CRITERIA = ["overlap", "clip", "small", "hydration", "console", "a11y", "link", "idle", "empty"];
 const METRICS = ["jsBytes", "cssBytes", "blocking", "requests", "lcpInHtml"];
 const rises = (c, b) => c > b;
 const worse = { jsBytes: rises, cssBytes: rises, blocking: rises, requests: rises, lcpInHtml: (c, b) => b && !c };

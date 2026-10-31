@@ -8,15 +8,18 @@
 //   clip       text cut by its SVG viewport or by a clipping ancestor (SVG and HTML), text cut by its own
 //              overflow (ellipsis, line clamp, scroll box), and a page wider than the viewport
 //   small      any visible text rendered below MIN (12) CSS px, transforms and SVG scale included
-//   hydration  React hydration errors with the browser clock at build day + 3 days (tests/hydration-guard.mjs)
+//   hydration  React hydration errors, from one more load of the page with the browser clock 3 days after the
+//              server's (tests/hydration-guard.mjs)
 //   console    console errors, uncaught page errors, failed same-origin requests, a page that is not 200
 //   a11y       axe-core: WCAG 2.x AA color contrast and every violation of critical impact
 //   link       every same-origin <a href> on the audited pages answers 200 (after redirects)
+//   empty      a chart drawn with no data: a line with an empty or one-point path, in the fixture build's data range
 //   idle       the settled page keeps animating: more than IDLE_MAX (5) animation frames or short timers (<= 100 ms)
 //              fire in one idle second (a requestAnimationFrame / three.js / interval loop; tool-ui/motion)
 // Each finding carries a `pattern`: the root cause key the inventory is grouped by (criterion, kind, component).
 // Exits 1 when any criterion is above 0 (CI job site-audit, sharded; no pipe after it in the workflow).
 // Usage: BASE=http://localhost:<port> node scripts/site-audit.mjs [path-filter ...]
+//   IDLE_ONLY=1: stop each view after the idle check (console, hydration, empty and idle only): a stability sweep.
 //   RATCHET_MEASURE=1: measure only, always exit 0 unless the run itself breaks (CI's ratchet decides from OUT).
 //   env LOCALES=en,ar  WIDTHS=1440,390  THEMES=light,dark  MIN=12  JOBS=3  SHARD=i/n (pages i, i+n, … of the
 //   sitemap order, i from 1)  OUT=<file.json> (totals, inventory by root cause, every finding)  VERBOSE=1 (one
@@ -34,7 +37,7 @@ import { requireBase } from "../../../scripts/lib/require-base.mjs";
 import { settle } from "../../../scripts/lib/settle.mjs";
 import { sliceShard } from "../../../scripts/lib/shard-pages.mjs";
 import { chromium } from "playwright";
-import { hydrationProblems, watchHydration } from "../../../tests/hydration-guard.mjs";
+import { clockAfterBuild, hydrationProblems, watchHydration } from "../../../tests/hydration-guard.mjs";
 
 // --merge a.json b.json …: one inventory from the shards' OUT files (scripts/site-audit-sharded.sh); a broken
 // link found by several shards counts once.
@@ -53,7 +56,7 @@ const widths = (process.env.WIDTHS ?? "1440,390").split(",").map(Number);
 const themes = (process.env.THEMES ?? "light,dark").split(",");
 const MIN = Number(process.env.MIN ?? 12);
 const IDLE_MAX = 5; // animation frames + short timers allowed in one idle second (a stray deferred callback)
-const VISIT_CLOCK = "2030-01-16T12:00:00Z";
+const VISIT_CLOCK = "2026-10-20T12:00:00Z"; // the fixture build's data clock (tests/fixtures/offline-fetch.mjs)
 const IDLE_WINDOWS = 3; // busy seconds in a row that make a loop
 const jobs = Number(process.env.JOBS ?? 3);
 const AXE = readFileSync(createRequire(import.meta.url).resolve("axe-core/axe.min.js"), "utf8");
@@ -385,6 +388,10 @@ async function view(ctx, path, locale, w) {
       if (out.idle.raf + out.idle.timers <= IDLE_MAX) break;
     }
     lap("idle");
+    if (process.env.IDLE_ONLY) {
+      out.empty = await p.evaluate(emptyCharts);
+      return out;
+    }
     for (const href of await p.evaluate(() => [...document.querySelectorAll("a[href]")].map((a) => a.href))) {
       if (!sameOrigin(href) || !/^https?:/.test(href)) continue;
       const u = new URL(href);
@@ -405,6 +412,7 @@ async function view(ctx, path, locale, w) {
       lap("svg");
       const html = await p.evaluate(measureHtml, MIN);
       lap("html");
+      if (theme === themes[0]) out.empty = await p.evaluate(emptyCharts);
       const a11y = await axeCheck(p, theme !== themes[0]);
       lap("axe");
       out.themes[theme] = { overlaps: chart.overlaps, clipped: [...chart.clipped, ...html.clipped], small: [...chart.small.map((f) => ({ ...f, pattern: `small · svg · ${f.card}` })), ...html.small], a11y, labels: chart.checked, texts: html.checked };
@@ -415,6 +423,36 @@ async function view(ctx, path, locale, w) {
     out.hydration = hydration();
     out.console = consoleErrors.filter((m) => !hydration().some((h) => m.includes(h.slice(0, 60))));
     await p.close();
+  }
+  out.hydration.push(...(await laterVisit(url).catch((e) => (out.console.push(`audit error: ${e.message.split("\n")[0].slice(0, 160)}`), []))));
+  return out;
+}
+
+// The hydration guard's visit: the same page with the browser clock after the server's, so anything rendered from
+// the clock mismatches. Only the load and hydration are measured.
+async function laterVisit(url) {
+  const p = await later.newPage();
+  const hydration = watchHydration(p);
+  try {
+    await p.goto(url, { waitUntil: "load", timeout: 120000 });
+    await settle(p);
+    return hydration();
+  } finally {
+    await p.close();
+  }
+}
+
+// A chart with no data, in the page: a line (stroked, unfilled) whose path has no segment, or an empty path/polyline.
+function emptyCharts() {
+  const out = [];
+  for (const svg of document.querySelectorAll("svg")) {
+    if (svg.getBoundingClientRect().width < 120 || svg.querySelectorAll("text").length < 3) continue;
+    const empty = [...svg.querySelectorAll("path[stroke], polyline")].some((m) => {
+      const d = m.getAttribute("d") ?? m.getAttribute("points") ?? "";
+      const drawn = m.tagName === "path" ? /[LlCcQqAaHhVvSsTt]/.test(d) : d.trim().split(/\s+/).length > 1;
+      return m.getAttribute("fill") === "none" && !drawn;
+    });
+    if (empty) out.push((svg.closest("[data-card]")?.querySelector("h2, h3") ?? svg.closest("[data-bp-panel]")?.querySelector("h2, h3"))?.textContent?.trim().slice(0, 50) ?? "?");
   }
   return out;
 }
@@ -436,7 +474,7 @@ if (process.env.RESUME) {
       if (!line) continue;
       const r = JSON.parse(line);
       // a record without the idle check predates that criterion: the view is measured again
-      if (!wanted.has(viewKey(r)) || !themes.every((t) => r.themes[t]) || !r.idle) continue;
+      if (!wanted.has(viewKey(r)) || !themes.every((t) => r.themes[t]) || !r.idle || !r.empty) continue;
       // a view recorded before axe ran contrast-only after the first theme: the same rule applied to its record
       for (const t of themes.slice(1)) r.themes[t].a11y = r.themes[t].a11y.filter((f) => f.id === "color-contrast");
       recorded.set(viewKey(r), r);
@@ -446,6 +484,7 @@ if (process.env.RESUME) {
 }
 const done = new Set(results.map(viewKey));
 const b = await chromium.launch();
+let later;
 const totalViews = wanted.size;
 // Random numbers (init script): one fixed sequence per page load, so a page that draws random values renders the
 // same thing on every run; fixture data and the browser clock are already fixed.
@@ -496,6 +535,9 @@ for (const w of widths) {
   const ctx = await b.newContext(w < 800 ? { viewport: { width: w, height: 844 }, isMobile: true, hasTouch: true } : { viewport: { width: w, height: 900 } });
   await ctx.clock.setFixedTime(visitClock);
   await ctx.addInitScript(() => localStorage.setItem("theme", "light"));
+  later = await b.newContext({ viewport: { width: w, height: 900 } });
+  await later.clock.setFixedTime(clockAfterBuild(visitClock.getTime()));
+  await later.routeWebSocket(/^wss?:\/\//, () => {});
   await ctx.addInitScript(idleProbe);
   await ctx.addInitScript(seedRandom);
   await ctx.routeWebSocket(/^wss?:\/\//, () => {}); // live price streams stay silent: a real tick changes the page between runs
@@ -519,6 +561,7 @@ for (const w of widths) {
     );
   }
   await ctx.close();
+  await later.close();
 }
 await b.close();
 
@@ -542,6 +585,7 @@ const findings = [];
 for (const r of results) {
   const at = { page: `/${r.locale}${r.path}`, w: r.w, locale: r.locale };
   for (const h of hydrationProblems(at.page, r.hydration)) findings.push({ criterion: "hydration", ...at, theme: "-", detail: h, pattern: `hydration · ${r.path.startsWith("/tools/") ? r.path : "page " + r.path}` });
+  for (const card of r.empty ?? []) findings.push({ criterion: "empty", ...at, theme: "-", detail: { card }, pattern: `empty · ${card} · ${r.path}` });
   if (r.idle && r.idle.raf + r.idle.timers > IDLE_MAX)
     findings.push({ criterion: "idle", ...at, theme: "-", detail: { sites: r.idle.sites.map((s) => s.replace(/\/_next\/static\/chunks\/[\w.-]+/, "chunk")) }, pattern: `idle · ${r.idle.sites[0]?.replace(/\/_next\/static\/chunks\/[\w.-]+/, "chunk") ?? "?"} · ${r.path.startsWith("/tools/") ? r.path : "page " + r.path}` });
   for (const c of r.console) findings.push({ criterion: "console", ...at, theme: "-", detail: c, pattern: `console · ${c.replace(/\/(en|ar)(\/[^\s]*)?/g, "/{locale}…").replace(/\d+/g, "N").slice(0, 120)}` });
@@ -566,7 +610,7 @@ report(findings, { views: results.length * themes.length, pages: paths.length, l
 /** Totals per criterion, the inventory grouped by root cause (OUT file + table), exit code 1 on any finding; with
  *  RATCHET_MEASURE=1 the results only go to OUT and scripts/ratchet.mjs decides, so no ::error is raised here. */
 function report(findings, meta) {
-  const CRITERIA = ["overlap", "clip", "small", "hydration", "console", "a11y", "link", "idle"];
+  const CRITERIA = ["overlap", "clip", "small", "hydration", "console", "a11y", "link", "idle", "empty"];
   const totals = Object.fromEntries(CRITERIA.map((c) => [c, findings.filter((f) => f.criterion === c).length]));
   const groups = new Map();
   for (const f of findings) {

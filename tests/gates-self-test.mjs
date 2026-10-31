@@ -261,7 +261,7 @@ test("ratchet raise: an entry whose to-value differs fails", () => {
 });
 test("ratchet raise: a visual-quality criterion fails even with the label and an entry", () => {
   const prev = { overlap: 1, clip: 0, small: 0, hydration: 0, console: 0, a11y: 0, link: 0, idle: 0 };
-  for (const criterion of ["overlap", "clip", "small", "a11y", "idle", "hydration", "console", "link"]) {
+  for (const criterion of ["overlap", "clip", "small", "a11y", "idle", "hydration", "console", "link", "empty"]) {
     const entry = { ...RAISE, metric: criterion, from: prev[criterion], to: 2 };
     failsWith(baselineRaise(`vis-${criterion}`, "site-audit", prev, { ...prev, [criterion]: 2 }, [entry], LABELLED), new RegExp(`${criterion}: \\d -> 2 \\(${criterion} can never be raised`), `raise of ${criterion}`);
   }
