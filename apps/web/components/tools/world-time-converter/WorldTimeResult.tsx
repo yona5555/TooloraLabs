@@ -143,7 +143,7 @@ export default function WorldTimeResult({ s, d, f }: Props) {
           { k: t("spread"), v: tu("h", { n: f.num(d.spread / 60) }) },
         ].map((x) => (
           <div key={x.k} className="rounded-lg bg-blue-50 px-1 py-1.5 dark:bg-blue-500/10">
-            <p className="truncate text-[10px] leading-3 font-semibold text-zinc-500 dark:text-zinc-400">{x.k}</p>
+            <p className="truncate text-xs leading-4 font-semibold text-zinc-500 dark:text-zinc-400">{x.k}</p>
             <p dir="ltr" className="font-mono text-lg font-bold text-blue-700 dark:text-blue-300">{x.v}</p>
           </div>
         ))}
