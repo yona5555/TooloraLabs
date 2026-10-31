@@ -32,7 +32,7 @@ export default function WxResult({ d, f, status }: Props) {
       rows: [
         { label: t("result.temp"), formula: t("result.f.met"), value: f.temp(cur.tempC, 1), emphasize: true },
         { label: t("result.feels"), formula: feelsFormula, value: f.temp(feels.valueC, 1) },
-        { label: t("result.condition"), formula: cur.symbol ?? "—", value: t(`category.${d.category}`) },
+        { label: t("result.condition"), formula: cur.symbol?.replace(/_/g, " ") ?? "—", value: t(`category.${d.category}`) },
         { label: t("result.humidity"), formula: t("result.f.met"), value: `${f.num(cur.rh)}%` },
         { label: t("result.dew"), formula: t("result.f.magnus", { t: f.deg(cur.tempC), rh: f.num(cur.rh) }), value: `${f.temp(d.dew!, 1)} · ${t(`dewComfort.${dewComfort(d.dew!)}`)}` },
         { label: t("result.cloud"), formula: t("result.f.met"), value: `${f.num(cur.cloud)}%` },
@@ -90,7 +90,7 @@ export default function WxResult({ d, f, status }: Props) {
           { k: t("result.highLow"), v: today ? `${f.deg(today.maxC)}/${f.deg(today.minC)}` : "—" },
         ].map((x) => (
           <div key={x.k} className="rounded-lg bg-blue-50 px-1 py-1.5 dark:bg-blue-500/10">
-            <p className="truncate text-[10px] leading-3 font-semibold text-zinc-500 dark:text-zinc-400">{x.k}</p>
+            <p className="truncate text-xs leading-4 font-semibold text-zinc-500 dark:text-zinc-400">{x.k}</p>
             <p dir="ltr" className="text-xl font-bold text-blue-700 dark:text-blue-300">{x.v}</p>
           </div>
         ))}

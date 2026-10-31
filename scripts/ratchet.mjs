@@ -11,11 +11,17 @@
 //                 so no tolerance); a page with no baseline entry must be fully within that script's BUDGET.
 // The baseline itself can only go down: `node scripts/ratchet.mjs update <kind> <run.json> <baseline.json>`
 // lowers it to the better of (current, committed) per page, and never raises any value - a baseline edit that
-// does (by hand or a bad update) is caught by `check-baseline`, run on the baseline files themselves whenever
-// a PR touches them.
+// does (by hand or a bad update) is caught by `check-baseline`, run on the baseline files of every PR (CI job
+// gates-self-test). One exception, approved case by case: a perf-budget size or count (RAISABLE) may rise when the
+// PR carries the label approve-ratchet-raise AND an entry of .audit/ratchet/raises.json, written for that PR, matches
+// the page, metric, from and to values exactly:
+//   { "page": "/en/x" (or "pages": [...]), "metric": "jsBytes", "from": 100, "to": 120, "reason": "...", "pr": 31 }
+// Site-audit criteria can never be raised, label or not. launch-readiness keeps its absolute budgets: it never reads
+// the baselines or raises.json.
 // Usage:
 //   node scripts/ratchet.mjs check <site-audit|perf-budget> <run.json> [baseline.json]
-//   node scripts/ratchet.mjs check-baseline <site-audit|perf-budget> <new-baseline.json> <old-baseline.json>
+//   node scripts/ratchet.mjs check-baseline <site-audit|perf-budget> <new-baseline.json> <old-baseline.json> [raises.json]
+//     env PR_LABELS (comma-separated) and PR_NUMBER: the PR being checked
 //   node scripts/ratchet.mjs update <site-audit|perf-budget> <run.json> <baseline.json>
 // check needs MEASURED=<file>: the exact pages this shard had to measure (scripts/expand-measured-pages.mjs), one per
 // line. It fails, naming the cause, when the results file is missing or unparsable, or when the pages it measured are
@@ -23,10 +29,12 @@
 // Exit 1 on any regression (check, check-baseline) or nothing to lower (update: exit 0 always, reports what moved).
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 
-const CRITERIA = ["overlap", "clip", "small", "hydration", "console", "a11y", "link", "idle"];
+const CRITERIA = ["overlap", "clip", "small", "hydration", "console", "a11y", "link", "idle", "empty"];
 const METRICS = ["jsBytes", "cssBytes", "blocking", "requests", "lcpInHtml"];
 const rises = (c, b) => c > b;
 const worse = { jsBytes: rises, cssBytes: rises, blocking: rises, requests: rises, lcpInHtml: (c, b) => b && !c };
+const RAISABLE = ["jsBytes", "cssBytes", "blocking", "requests"]; // perf-budget only; never a visual-quality criterion
+const RAISE_LABEL = "approve-ratchet-raise";
 
 const readJson = (f) => JSON.parse(readFileSync(f, "utf8"));
 
@@ -123,17 +131,32 @@ function checkPerfBudget(run, baseline) {
   return problems;
 }
 
-function checkBaseline(kind, next, prev) {
+/** Why this baseline rise is not approved, or null when it is (see the header). */
+function raiseRefused(kind, page, k, from, to, raises) {
+  if (kind !== "perf-budget" || !RAISABLE.includes(k)) return `${k} can never be raised, even with ${RAISE_LABEL}`;
+  if (!(process.env.PR_LABELS ?? "").split(",").includes(RAISE_LABEL)) return `the baseline can only go down without the label ${RAISE_LABEL}`;
+  const pr = Number(process.env.PR_NUMBER);
+  const matches = (e) => (e.pages ?? [e.page]).includes(page) && e.metric === k && e.from === from && e.to === to && e.pr === pr && !!e.reason;
+  return raises.some(matches) ? null : `no entry of raises.json matches this page, metric, from, to and PR #${pr}`;
+}
+
+function checkBaseline(kind, next, prev, raises) {
   const problems = [];
-  const keysOf = (b) => (kind === "site-audit" ? CRITERIA : METRICS);
+  const keys = kind === "site-audit" ? CRITERIA : METRICS;
   for (const page of Object.keys(prev)) {
     if (!(page in next)) { problems.push(`${page}: removed from the baseline (a page must stay tracked, even at 0)`); continue; }
-    for (const k of keysOf()) {
+    for (const k of keys) {
       const a = prev[page][k] ?? 0, b = next[page][k] ?? 0;
       const raised = kind === "site-audit" ? b > a : worse[k](b, a);
-      if (raised) problems.push(`${page}.${k}: ${a} -> ${b} (the baseline can only go down)`);
+      const refused = raised && raiseRefused(kind, page, k, a, b, raises);
+      if (refused) problems.push(`${page}.${k}: ${a} -> ${b} (${refused})`);
     }
   }
+  // A new entry above zero would hide findings the new-page rule of `check` must see; `update` writes new pages at 0.
+  if (kind === "site-audit")
+    for (const page of Object.keys(next))
+      if (!(page in prev))
+        for (const k of keys) if (next[page][k] > 0) problems.push(`${page}.${k}: 0 -> ${next[page][k]} (${raiseRefused(kind, page, k, 0, next[page][k], raises)})`);
   return problems;
 }
 
@@ -177,11 +200,11 @@ if (mode === "check") {
   }
   console.log(`RATCHET PASS (${kind}): no measured page regressed versus ${baselineFile}`);
 } else if (mode === "check-baseline") {
-  const [nextFile, prevFile] = rest;
-  const problems = checkBaseline(kind, readJson(nextFile), readJson(prevFile));
+  const [nextFile, prevFile, raisesFile = ".audit/ratchet/raises.json"] = rest;
+  const problems = checkBaseline(kind, readJson(nextFile), readJson(prevFile), readJson(raisesFile));
   if (problems.length) {
-    console.log(`BASELINE RAISE (${kind}): ${problems.length} value(s) went up\n${problems.map((p) => `  ${p}`).join("\n")}`);
-    console.error(`::error title=ratchet-baseline-${kind}::${problems.length} value(s) raised in ${nextFile} versus ${prevFile} (the baseline can only go down)`);
+    console.log(`BASELINE RAISE (${kind}): ${problems.length} value(s) went up unapproved\n${problems.map((p) => `  ${p}`).join("\n")}`);
+    console.error(`::error title=ratchet-baseline-${kind}::${problems.length} value(s) raised in ${nextFile} versus ${prevFile} (details above)`);
     process.exit(1);
   }
   console.log(`BASELINE OK (${kind}): nothing in ${nextFile} is worse than ${prevFile}`);

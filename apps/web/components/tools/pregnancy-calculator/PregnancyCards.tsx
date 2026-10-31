@@ -73,6 +73,8 @@ export function PregnancyTimelineCard({ side }: { side: Side }) {
   const xd = (day: number) => X0 + (clamp(day, 0, MAX_DAY) / MAX_DAY) * (W - 2 * X0);
   const extra = Math.max(0, (H - HMIN) / 3);
   const LEVEL = 32;
+  // a 12px Arabic line reaches 16px with its descenders, so a station's two lines step by that (§39)
+  const LINE = 16;
   // station labels: each on the first row where it clears the label before it, by the real 12px widths
   // (four rows on desktop as before; close stations on a phone no longer share a row) (§39)
   const stationBox = STATIONS.map((st) => {
@@ -125,10 +127,10 @@ export function PregnancyTimelineCard({ side }: { side: Side }) {
             const { anchor, tx } = stationBox[i];
             return (
               <g key={st.key}>
-                <line x1={x} y1={ly + 16} x2={x} y2={lineY} style={{ stroke: "var(--ph-line)" }} strokeDasharray="2 3" />
+                <line x1={x} y1={ly + LINE + 3} x2={x} y2={lineY} style={{ stroke: "var(--ph-line)" }} strokeDasharray="2 3" />
                 <circle cx={x} cy={lineY} r={on ? 8 : 6} style={{ fill: done ? "var(--ph-accent-strong)" : "var(--ph-surface)", stroke: "var(--ph-ink)" }} strokeWidth={1.5} />
                 <T x={tx} y={ly} text={tc(`stations.${st.key}`)} anchor={anchor} size={12} bold={done || on} style={done || on ? INK : MUTED} />
-                <T x={tx} y={ly + 13} text={`${Math.floor(st.at / 7)}w${st.at % 7 ? ` ${st.at % 7}d` : ""}`} anchor={anchor} size={12} />
+                <T x={tx} y={ly + LINE} text={`${Math.floor(st.at / 7)}w${st.at % 7 ? ` ${st.at % 7}d` : ""}`} anchor={anchor} size={12} />
               </g>
             );
           })}
@@ -313,7 +315,7 @@ function Growth({ side }: { side: Side }) {
           ))}
           {/* the note wraps across the drawing's width instead of running off both edges (§39) */}
           {wrapLabel(t("lengthNote"), W - 2 * X0).map((line, i) => (
-            <T key={i} x={W / 2} y={base + 44 + i * 14} text={line} size={12} />
+            <T key={i} x={W / 2} y={base + 44 + i * 16} text={line} size={12} />
           ))}
           <SvgTrack stopAnchor="middle" W={W} y={trackY} frac={(w - 4) / 36} lo="4w" hi="40w" />
         </Drawing>

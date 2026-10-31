@@ -98,7 +98,7 @@ test("site audit: two runs of a page with random content and a slow theme transi
   };
   const first = await audit(1);
   assert.ok(first.some((f) => f.criterion === "small"), "the random rows must be measured");
-  assert.ok(first.some((f) => f.detail?.text === "2030-01-16T12:00:00.000Z"), `the browser clock must be the fixed one, not one that moves with the build: ${JSON.stringify(first).slice(0, 600)}`);
+  assert.ok(first.some((f) => f.detail?.text === "2026-10-20T12:00:00.000Z"), `the browser clock must be the fixed one, not one that moves with the build: ${JSON.stringify(first).slice(0, 600)}`);
   assert.ok(!first.some((f) => f.criterion === "a11y"), `the theme transition must be over before contrast is read: ${JSON.stringify(first).slice(0, 600)}`);
   assert.deepEqual(await audit(2), first);
 });
@@ -236,6 +236,49 @@ test("ratchet baseline check fails when a committed baseline value is raised", (
   failsWith(ratchet(["check-baseline", "site-audit", raised, prev]), /\/en\/tools\/a\.small: 2 -> 5/, "ratchet baseline check");
   const lowered = writeJson("ra-base-lowered.json", { "/en/tools/a": { overlap: 0, clip: 0, small: 0, hydration: 0, console: 0, a11y: 0, link: 0, idle: 0 } });
   assert.equal(ratchet(["check-baseline", "site-audit", lowered, prev]).status, 0, "lowering the baseline must pass");
+});
+
+// An approved raise: label + matching raises.json entry, perf-budget sizes and counts only.
+const ROW = { jsBytes: 100, cssBytes: 10, blocking: 1, requests: 5, lcpInHtml: true };
+const RAISE = { page: "/en/tools/a", metric: "jsBytes", from: 100, to: 120, reason: "canary", pr: 7 };
+const LABELLED = { PR_LABELS: "other,approve-ratchet-raise", PR_NUMBER: "7" };
+function baselineRaise(name, kind, prevRow, nextRow, entries, env) {
+  const prev = writeJson(`rr-${name}-prev.json`, { "/en/tools/a": prevRow });
+  const next = writeJson(`rr-${name}-next.json`, { "/en/tools/a": nextRow });
+  return ratchet(["check-baseline", kind, next, prev, writeJson(`rr-${name}-raises.json`, entries)], env);
+}
+const raiseJs = (name, entries, env) => baselineRaise(name, "perf-budget", ROW, { ...ROW, jsBytes: 120 }, entries, env);
+test("ratchet raise: without the label fails", () => {
+  failsWith(raiseJs("nolabel", [RAISE], { PR_LABELS: "", PR_NUMBER: "7" }), /\/en\/tools\/a\.jsBytes: 100 -> 120 \(the baseline can only go down without the label/, "raise without label");
+});
+test("ratchet raise: the label with no matching entry fails", () => {
+  failsWith(raiseJs("noentry", [], LABELLED), /\/en\/tools\/a\.jsBytes: 100 -> 120 \(no entry of raises\.json matches/, "raise with no entry");
+  failsWith(raiseJs("otherpr", [{ ...RAISE, pr: 6 }], LABELLED), /no entry of raises\.json matches/, "raise approved for another PR");
+  failsWith(raiseJs("otherfrom", [{ ...RAISE, from: 90 }], LABELLED), /no entry of raises\.json matches/, "raise from another value");
+});
+test("ratchet raise: an entry whose to-value differs fails", () => {
+  failsWith(raiseJs("otherto", [{ ...RAISE, to: 121 }], LABELLED), /no entry of raises\.json matches/, "raise to another value");
+});
+test("ratchet raise: a visual-quality criterion fails even with the label and an entry", () => {
+  const prev = { overlap: 1, clip: 0, small: 0, hydration: 0, console: 0, a11y: 0, link: 0, idle: 0 };
+  for (const criterion of ["overlap", "clip", "small", "a11y", "idle", "hydration", "console", "link", "empty"]) {
+    const entry = { ...RAISE, metric: criterion, from: prev[criterion], to: 2 };
+    failsWith(baselineRaise(`vis-${criterion}`, "site-audit", prev, { ...prev, [criterion]: 2 }, [entry], LABELLED), new RegExp(`${criterion}: \\d -> 2 \\(${criterion} can never be raised`), `raise of ${criterion}`);
+  }
+});
+test("ratchet raise: a new page cannot enter the site-audit baseline above zero", () => {
+  const prev = writeJson("rr-new-prev.json", {});
+  const next = writeJson("rr-new-next.json", { "/en/tools/n": { overlap: 3 } });
+  failsWith(ratchet(["check-baseline", "site-audit", next, prev, writeJson("rr-new-raises.json", [])], LABELLED), /\/en\/tools\/n\.overlap: 0 -> 3/, "new page above zero");
+});
+test("ratchet raise: an LCP element leaving the server HTML can never be raised", () => {
+  const entry = { ...RAISE, metric: "lcpInHtml", from: true, to: false };
+  failsWith(baselineRaise("lcp", "perf-budget", ROW, { ...ROW, lcpInHtml: false }, [entry], LABELLED), /lcpInHtml can never be raised/, "raise of lcpInHtml");
+});
+test("ratchet raise: a fully approved jsBytes raise passes, by page or page list", () => {
+  assert.equal(raiseJs("ok", [RAISE], LABELLED).status, 0, "an approved raise must pass");
+  const { page, ...rest } = RAISE;
+  assert.equal(raiseJs("oklist", [{ ...rest, pages: ["/en/tools/z", page] }], LABELLED).status, 0, "an approved page list must pass");
 });
 
 // A minimal Next.js build: tools a and b load the shared chunk, c does not; a's chunk lazy-loads another chunk; the

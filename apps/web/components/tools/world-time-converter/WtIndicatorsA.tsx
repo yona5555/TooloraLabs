@@ -303,7 +303,7 @@ export function WtMeetingCard({ s, d, f }: CardProps) {
               <rect x={LBL + idx * CW} y={TOP - 4} width={CW} height={d.all.length * RH + RH + 4} fill="none" stroke="currentColor" strokeWidth={2} className="text-zinc-900 dark:text-white" style={{ transition: "x 120ms ease" }} />
               <text style={{ fontSize: svgPx(12) }} x={Math.min(W - 40, LBL + idx * CW + CW / 2)} y={10} textAnchor="middle" fontWeight={800} className={valueText}>{slotLabel(idx)}</text>
             </svg>
-            <div className="mt-1 flex flex-wrap gap-3 text-[11px] text-zinc-600 dark:text-zinc-300">
+            <div className="mt-1 flex flex-wrap gap-3 text-xs text-zinc-600 dark:text-zinc-300">
               {(["work", "shoulder", "night", "weekend"] as const).map((k) => (
                 <span key={k} className="flex items-center gap-1">
                   <span className="inline-block h-2.5 w-2.5 rounded-sm" style={{ background: STATUS_COLORS[k] }} />
