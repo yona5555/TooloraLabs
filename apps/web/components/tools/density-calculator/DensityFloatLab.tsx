@@ -41,8 +41,8 @@ export default function DensityFloatLab() {
   const { setDim } = useDensityLive();
   const { draft, a, f } = useDensityModel();
   const [fluidKey, setFluidKey] = useState("water");
-  const [time, setTime] = useState(0);
-  const [playing, setPlaying] = useState(true);
+  const [time, setTime] = useState(RUN);
+  const [playing, setPlaying] = useState(false);
   const start = useRef<number | null>(null);
 
   useEffect(() => {

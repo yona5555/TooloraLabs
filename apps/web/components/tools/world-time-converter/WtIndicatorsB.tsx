@@ -76,11 +76,12 @@ export function WtDstTimelineCard({ d, f }: CardProps) {
                   {r.tr.length === 0 && <text style={{ fontSize: svgPx(12) }} x={L + 6} y={yy - 4} className={axisText}>{t("dst.none")}</text>}
                   {r.tr.map((tr) => {
                     const fwd = tr.offsetAfter > tr.offsetBefore;
+                    const label = `${f.shortDate(tr.utcMs, r.c.zone)} ${fwd ? "+" : "−"}${f.num(Math.abs(tr.offsetAfter - tr.offsetBefore) / 60)}`;
                     return (
                       <g key={tr.utcMs}>
                         <circle cx={x(tr.utcMs)} cy={yy} r={6} fill={fwd ? "#f59e0b" : "#3b82f6"} stroke="white" strokeWidth={1.5} />
-                        <text style={{ fontSize: svgPx(12) }} x={x(tr.utcMs)} y={yy - 9} textAnchor="middle" fontWeight={700} fill={fwd ? "#b45309" : "#1d4ed8"}>
-                          {f.shortDate(tr.utcMs, r.c.zone)} {fwd ? "+" : "−"}{f.num(Math.abs(tr.offsetAfter - tr.offsetBefore) / 60)}
+                        <text style={{ fontSize: svgPx(12) }} x={Math.min(x(tr.utcMs), W - labelW(label) / 2)} y={yy - 9} textAnchor="middle" fontWeight={700} fill={fwd ? "#b45309" : "#1d4ed8"}>
+                          {label}
                         </text>
                       </g>
                     );
@@ -317,7 +318,7 @@ export function WtWeekCard({ d, f }: CardProps) {
                 </tr>
               </tbody>
             </table>
-            <p className="mt-1 text-[11px] text-zinc-500 dark:text-zinc-400">{t("week.legend")}</p>
+            <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">{t("week.legend")}</p>
           </div>
         }
         rows={[

@@ -218,7 +218,7 @@ export default function WxWorldMap({ d, f }: { d: WxDerived; f: WxFmt }) {
       <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-zinc-600 dark:text-zinc-300">
         <span dir="ltr" className="flex items-center gap-1">
           {TEMP_STOPS.map(([c, col]) => (
-            <span key={c} className="flex flex-col items-center"><span className="h-2 w-6" style={{ background: col }} /><span className="text-[9px]">{f.deg(c)}</span></span>
+            <span key={c} className="flex flex-col items-center"><span className="h-2 w-6" style={{ background: col }} /><span className="text-xs">{f.deg(c)}</span></span>
           ))}
         </span>
         <span className="flex items-center gap-1">

@@ -9,9 +9,13 @@ import { beat, createHeartObject } from "./heartModel";
 
 /**
  * The heavy part (three + fiber + drei): only ever imported through HeartViewer's dynamic().
- * Lit by in-code studio lightformers (no HDR files), drawn at DPR ≤ 2, and the frame loop only
- * runs while `running` (on screen, motion allowed); otherwise it renders on demand.
+ * Lit by in-code studio lightformers (no HDR files), drawn at DPR ≤ 2. Frames are drawn on demand only: the heart
+ * beats for BEAT_SECONDS after a BPM change, never on load, then rests, so nothing renders while the page is idle.
+ * The beat pauses while `running` is false (off screen, page hidden). The shared motion layer of PR #28
+ * (tool-ui/motion) replaces this local episode when it merges; this component then takes that layer's version.
  */
+const BEAT_SECONDS = 8;
+
 export type AnatomicalHeartCanvasProps = { bpm: number; running: boolean; reduced: boolean; dark: boolean };
 
 function Heart({ bpm, running, reduced }: { bpm: number; running: boolean; reduced: boolean }) {
@@ -20,17 +24,29 @@ function Heart({ bpm, running, reduced }: { bpm: number; running: boolean; reduc
   const invalidate = useThree((s) => s.invalidate);
   const period = 60 / Math.min(240, Math.max(30, bpm || 60));
   const phase = useRef(0);
+  const shownPeriod = useRef(period);
+  const beatLeft = useRef(0);
   useEffect(() => {
-    if (reduced) heart.setBeat(0, 0);
+    if (period !== shownPeriod.current) {
+      shownPeriod.current = period;
+      beatLeft.current = BEAT_SECONDS;
+    }
+    if (reduced) {
+      beatLeft.current = 0;
+      heart.setBeat(0, 0);
+    }
     invalidate();
-  }, [reduced, period, heart, invalidate]);
+  }, [reduced, running, period, heart, invalidate]);
 
   useFrame((_, dt) => {
-    if (!running || reduced) return;
+    if (!running || reduced || beatLeft.current <= 0) return;
+    const step = Math.min(dt, 0.1);
+    beatLeft.current -= step;
     // Phase advances with the current period, so a BPM change never jumps mid-beat.
-    phase.current = (phase.current + Math.min(dt, 0.1) / period) % 1;
-    const b = beat(phase.current);
+    phase.current = beatLeft.current > 0 ? (phase.current + step / period) % 1 : 0;
+    const b = beatLeft.current > 0 ? beat(phase.current) : { atr: 0, ven: 0 };
     heart.setBeat(b.atr, b.ven);
+    invalidate();
   });
 
   return (
@@ -46,7 +62,7 @@ export default function AnatomicalHeartCanvas({ bpm, running, reduced, dark }: A
     <Canvas
       dpr={[1, 2]}
       camera={{ position: [0, 0.1, 6.2], fov: 36 }}
-      frameloop={running && !reduced ? "always" : "demand"}
+      frameloop="demand"
       gl={{ antialias: true, alpha: true, toneMapping: THREE.ACESFilmicToneMapping }}
     >
       {/* Soft studio lighting: big key softbox, cool fill, warm rim, plus matching reflections. */}

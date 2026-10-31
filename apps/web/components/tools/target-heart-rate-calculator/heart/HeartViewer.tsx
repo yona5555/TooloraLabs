@@ -33,9 +33,15 @@ function subscribeReduced(cb: () => void) {
   return () => mq?.removeEventListener("change", cb);
 }
 
+function subscribeVisible(cb: () => void) {
+  document.addEventListener("visibilitychange", cb);
+  return () => document.removeEventListener("visibilitychange", cb);
+}
+
 /**
- * Realistic anatomical heart beating at the target BPM. The 3D chunk loads only when the card
- * nears the viewport; the beat pauses off screen and under prefers-reduced-motion. Labels are
+ * Realistic anatomical heart at the target BPM. The 3D chunk loads only when the card nears the
+ * viewport; it beats after a BPM change, and the beat pauses off screen, with the page hidden and
+ * under prefers-reduced-motion. Labels are
  * HTML overlays (page text, so every locale shapes correctly). No WebGL → detailed 2D SVG heart.
  */
 export default function HeartViewer({ bpm, color, labels }: { bpm: number; color: string; labels: HeartLabels }) {
@@ -45,6 +51,7 @@ export default function HeartViewer({ bpm, color, labels }: { bpm: number; color
   const [inView, setInView] = useState(false);
   const gl = useSyncExternalStore<boolean | null>(noop, hasWebGL, () => null);
   const reduced = useSyncExternalStore(subscribeReduced, () => window.matchMedia?.(RM).matches ?? false, () => false);
+  const visible = useSyncExternalStore(subscribeVisible, () => document.visibilityState !== "hidden", () => true);
 
   useEffect(() => {
     const el = ref.current;
@@ -73,9 +80,9 @@ export default function HeartViewer({ bpm, color, labels }: { bpm: number; color
       className="relative h-full min-h-[280px] w-full cursor-grab touch-none overflow-hidden rounded-xl bg-[radial-gradient(ellipse_at_50%_42%,#ffffff_0%,#f1f5f9_55%,#e2e8f0_100%)] active:cursor-grabbing dark:bg-[radial-gradient(ellipse_at_50%_42%,#2a2a31_0%,#1c1c21_55%,#141417_100%)]"
     >
       {gl === false ? (
-        <HeartSvg bpm={bpm} reduced={reduced} paused={!inView} />
+        <HeartSvg bpm={bpm} reduced={reduced} paused={!inView || !visible} />
       ) : near && gl ? (
-        <AnatomicalHeartCanvas bpm={bpm} running={inView} reduced={reduced} dark={p.dark} />
+        <AnatomicalHeartCanvas bpm={bpm} running={inView && visible} reduced={reduced} dark={p.dark} />
       ) : null}
       <span className={`${pill} start-1/2 top-2 -translate-x-1/2 text-xs font-extrabold text-zinc-900 dark:text-zinc-50`} style={{ borderColor: color, backgroundColor: p.dark ? "rgba(24,24,27,0.85)" : "rgba(255,255,255,0.9)", boxShadow: `inset 0 -2px 0 ${color}` }}>
         {labels.bpm}
