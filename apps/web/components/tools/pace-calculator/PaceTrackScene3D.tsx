@@ -64,7 +64,7 @@ export default function PaceTrackScene3D({ secPerKm, title, lap, splits }: PaceT
   const invalidate = useThree((s) => s.invalidate);
   const runner = useRef<THREE.Group>(null);
   const dist = useRef(300 * SCALE);
-  const shownSpeed = useRef(speed);
+  const shownSpeed = useRef<number | null>(null);
   const moveLeft = useRef(0);
   const reduced = useRef<boolean | null>(null);
   const bg = p.dark ? "rgba(24,24,27,0.85)" : "rgba(255,255,255,0.92)";
@@ -87,7 +87,7 @@ export default function PaceTrackScene3D({ secPerKm, title, lap, splits }: PaceT
 
   // The runner moves for MOVE_SECONDS after the pace changes, never on load, so an idle page draws nothing.
   useEffect(() => {
-    if (shownSpeed.current !== speed) moveLeft.current = MOVE_SECONDS;
+    if (shownSpeed.current !== null && shownSpeed.current !== speed) moveLeft.current = MOVE_SECONDS;
     shownSpeed.current = speed;
     invalidate();
   }, [invalidate, speed]);
