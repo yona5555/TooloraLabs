@@ -98,7 +98,7 @@ test("site audit: two runs of a page with random content and a slow theme transi
   };
   const first = await audit(1);
   assert.ok(first.some((f) => f.criterion === "small"), "the random rows must be measured");
-  assert.ok(first.some((f) => f.detail?.text === "2030-01-16T12:00:00.000Z"), `the browser clock must be the fixed one, not one that moves with the build: ${JSON.stringify(first).slice(0, 600)}`);
+  assert.ok(first.some((f) => f.detail?.text === "2026-10-20T12:00:00.000Z"), `the browser clock must be the fixed one, not one that moves with the build: ${JSON.stringify(first).slice(0, 600)}`);
   assert.ok(!first.some((f) => f.criterion === "a11y"), `the theme transition must be over before contrast is read: ${JSON.stringify(first).slice(0, 600)}`);
   assert.deepEqual(await audit(2), first);
 });
