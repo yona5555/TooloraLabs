@@ -330,10 +330,11 @@ export function WxPressureCard({ d, f }: WxCardProps) {
   const R = 12;
   const T = 14;
   const B = 26;
-  const vals = hours.map((h) => h.pressureHpa);
+  // No hourly step left in the forecast: the chart shows the current reading, so no scale divides by an empty series.
+  const vals = hours.length ? hours.map((h) => h.pressureHpa) : [cur.pressureHpa];
   const lo = Math.floor(Math.min(...vals) - 1);
   const hi = Math.ceil(Math.max(...vals) + 1);
-  const n = hours.length;
+  const n = vals.length;
   const X = (i: number) => {
     const frac = i / Math.max(1, n - 1);
     return rtl ? W - L - frac * (W - L - R) : L + frac * (W - L - R);
@@ -341,6 +342,7 @@ export function WxPressureCard({ d, f }: WxCardProps) {
   const Y = (v: number) => T + ((hi - v) / (hi - lo)) * (H - T - B);
   const p0 = hours[0]?.pressureHpa ?? cur.pressureHpa;
   const p3 = hours[3]?.pressureHpa ?? p0;
+  const i3 = Math.min(3, n - 1);
   const color = d.tendency.trend === "rising" ? "#10b981" : d.tendency.trend === "falling" ? "#ef4444" : "#2563eb";
   const minI = vals.indexOf(Math.min(...vals));
   const maxI = vals.indexOf(Math.max(...vals));
@@ -361,10 +363,10 @@ export function WxPressureCard({ d, f }: WxCardProps) {
                 </g>
               );
             })}
-            <rect x={Math.min(X(0), X(3))} y={Y(p0 + 1)} width={Math.abs(X(3) - X(0))} height={Y(p0 - 1) - Y(p0 + 1)} fill={color} fillOpacity={0.15} />
+            <rect x={Math.min(X(0), X(i3))} y={Y(p0 + 1)} width={Math.abs(X(i3) - X(0))} height={Y(p0 - 1) - Y(p0 + 1)} fill={color} fillOpacity={0.15} />
             <path d={vals.map((v, i) => `${i ? "L" : "M"}${X(i).toFixed(1)},${Y(v).toFixed(1)}`).join("")} fill="none" stroke={color} strokeWidth={2.4} />
             <circle cx={X(0)} cy={Y(p0)} r={5} fill={color} />
-            <circle cx={X(3)} cy={Y(p3)} r={4} fill="#fff" stroke={color} strokeWidth={2} />
+            <circle cx={X(i3)} cy={Y(p3)} r={4} fill="#fff" stroke={color} strokeWidth={2} />
             <text style={{ fontSize: svgPx(12) }} x={X(minI)} y={Y(vals[minI]) + 14} textAnchor="middle" fontWeight={700} className={strong}>{f.num(weatherPressure(vals[minI], f.units), f.units === "us" ? 2 : 0)}</text>
             <text style={{ fontSize: svgPx(12) }} x={X(maxI)} y={Y(vals[maxI]) - 6} textAnchor="middle" fontWeight={700} className={strong}>{f.num(weatherPressure(vals[maxI], f.units), f.units === "us" ? 2 : 0)}</text>
             {hours.map((x, k) => (k % 12 === 0 ? <text style={{ fontSize: svgPx(12) }} key={k} x={X(k)} y={H - 6} textAnchor="middle" className={axis}>{f.weekday(x.t, d.place.zone)} {f.hour(x.t, d.place.zone)}</text> : null))}
