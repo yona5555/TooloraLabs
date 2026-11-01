@@ -32,6 +32,7 @@ const CORNERS: P3[] = [
 const SIDES = [2 * Y, 2 * X, 2 * Y, 2 * X];
 const PERIMETER = SIDES.reduce((s, v) => s + v, 0);
 const PARTICLES = 28;
+const MOVE_SECONDS = 8; // the charges flow this long after V or R changes, never on load, so an idle page draws nothing
 
 const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v));
 const log = (v: number) => Math.log10(Math.max(Math.abs(v), 1e-30));
@@ -60,23 +61,31 @@ function Charges({ current, color }: { current: number; color: string }) {
   const invalidate = useThree((s) => s.invalidate);
   const reduced = useRef<boolean | null>(null);
   const offset = useRef(0);
+  const shownSpeed = useRef<number | null>(null);
+  const moveLeft = useRef(0);
   const tmp = useMemo(() => new THREE.Vector3(), []);
   const speed = 0.25 + 2.6 * clamp((log(current) + 3) / 5, 0, 1);
   const dir = current < 0 ? -1 : 1;
 
   useEffect(() => {
+    if (shownSpeed.current !== null && shownSpeed.current !== speed) moveLeft.current = MOVE_SECONDS;
+    shownSpeed.current = speed;
     invalidate();
   }, [invalidate, speed]);
 
   useFrame((state, delta) => {
     if (reduced.current === null) reduced.current = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
-    if (!reduced.current) offset.current += dir * speed * Math.min(delta, 0.1);
+    const moving = !reduced.current && moveLeft.current > 0;
+    if (moving) {
+      moveLeft.current -= Math.min(delta, 0.1);
+      offset.current += dir * speed * Math.min(delta, 0.1);
+    }
     refs.current.forEach((m, i) => {
       if (!m) return;
       along(offset.current + (i * PERIMETER) / PARTICLES, tmp);
       m.position.copy(tmp);
     });
-    if (!reduced.current) state.invalidate();
+    if (moving) state.invalidate();
   });
 
   return (

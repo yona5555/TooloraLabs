@@ -47,7 +47,7 @@ export default function OhmsDimmerLab() {
   const { draft, a, f } = useOhmsModel();
   const [k, setK] = useState(1);
   const [phase, setPhase] = useState(0);
-  const [playing, setPlaying] = useState(true);
+  const [playing, setPlaying] = useState(false);
   const last = useRef<number | null>(null);
 
   const d = a ? dimmerCircuit(a.voltage, a.resistance, k * a.resistance) : null;

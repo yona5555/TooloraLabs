@@ -239,7 +239,7 @@ export function ForgettingCurveCard({ d }: StudyIndicatorProps) {
   const e = exams.find((x) => x.id === pick) ?? exams.find((x) => x.reviewDays.length > 0) ?? exams[0];
   const [fitRef, W] = useFitWidth(400);
   const H = 180;
-  const L = 34;
+  const L = Math.ceil(labelW(f.pct(1))) + 10;
   const B = 150;
   if (!e) return null;
   const learnDay = e.studyDays[0] ?? 0;
@@ -354,7 +354,7 @@ export function PriorityFormulaCard({ d }: StudyIndicatorProps) {
             {exams.map((e, i) => {
               const y = 20 + i * RH;
               const c = d.colorOf(e.id);
-              const bw = (e.priority / max) * (W - 252);
+              const bw = (e.priority / max) * (W - 250 - labelW(f.pct(1), 10));
               return (
                 <g key={e.id}>
                   <circle cx={9} cy={y + 11} r={7} fill={c} />

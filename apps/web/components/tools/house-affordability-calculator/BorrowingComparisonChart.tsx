@@ -3,7 +3,7 @@ import { useLayoutEffect, useRef, useState, type PointerEvent as ReactPointerEve
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import SectionCard from "@/components/tool-ui/SectionCard";
-import { fitStep } from "@/components/tool-ui/chartLabels";
+import { fitStep } from "@/components/tool-ui/chartLayout";
 import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { computeNiceTicks } from "./niceTicks";
 import type { CurrencyCode } from "@/lib/currency";

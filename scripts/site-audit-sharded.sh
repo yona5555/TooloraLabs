@@ -4,6 +4,8 @@
 # measurement: a calibration run (2 tool pages, one worker) gives the memory and the CPU one worker uses (browser,
 # audit and its share of the server), and the shard count is the most that keeps the container under 80% of its
 # memory and its cores busy without oversubscribing them (5 memory-sized shards on 6 cores ran 4x slower per page).
+# Memory is memory.current minus inactive_file, sampled during the calibration: raw usage and memory.peak count the
+# reclaimable page cache and every earlier run in the container, which once sized a run to a single shard.
 #   <outdir>/sizing.txt        the measurement and the chosen shard count
 #   <outdir>/shard-<i>.log     one progress line per page view (+ the shard's own table), shard-<i>.json its OUT
 #   <outdir>/shard-<i>.jsonl   every finished page view's full result (site-audit.mjs RESULTS)
@@ -41,14 +43,23 @@ if (( resume )) && [ -s "$out/sizing.txt" ]; then
   echo "resume: $shards shards, as sized in $out/sizing.txt"
 else
 rm -f "$out"/calibration.*
-# Memory one worker adds: the container's peak during a one-worker run on two heavy tool pages (cgroup v2).
+# Memory one worker adds: the container's peak during a one-worker run on two heavy tool pages (cgroup v2), without
+# the reclaimable page cache.
 cg=/sys/fs/cgroup
-before=$(cat "$cg/memory.current")
+used() { awk -v current="$(cat "$cg/memory.current")" '$1 == "inactive_file" {print current - $2}' "$cg/memory.stat"; }
+before=$(used)
 cpu0=$(awk '/^usage_usec/ {print $2}' "$cg/cpu.stat") t0=$(date +%s%N)
 status=0
-(cd apps/web && JOBS=1 OUT="$out/calibration.json" node scripts/site-audit.mjs /tools/mortgage-calculator /tools/scientific-calculator) > "$out/calibration.log" 2>&1 || status=$?
+(cd apps/web && JOBS=1 OUT="$out/calibration.json" node scripts/site-audit.mjs /tools/mortgage-calculator /tools/scientific-calculator) > "$out/calibration.log" 2>&1 &
+calibration=$!
+peak=$before
+while kill -0 "$calibration" 2>/dev/null; do
+  now=$(used); (( now > peak )) && peak=$now
+  sleep 0.2
+done
+wait "$calibration" || status=$?
 [ -s "$out/calibration.json" ] || { echo "site-audit-sharded: the calibration run crashed (exit $status, $out/calibration.log)" >&2; exit 2; }
-per_worker=$(( $(cat "$cg/memory.peak") - before ))
+per_worker=$(( peak - before ))
 # CPU one worker keeps busy, in milli-cores: CPU time / wall time of the calibration
 cpu_worker=$(( ($(awk '/^usage_usec/ {print $2}' "$cg/cpu.stat") - cpu0) * 1000 / (($(date +%s%N) - t0) / 1000) ))
 limit=$(cat "$cg/memory.max")

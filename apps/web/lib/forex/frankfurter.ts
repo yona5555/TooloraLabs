@@ -1,5 +1,6 @@
 import type { DailyRate, UsdRateTable } from "@tooloralabs/tools";
 import { ECB_CURRENCIES } from "./ecb";
+import { dataNow } from "@/lib/data-clock";
 
 export { hasEcbHistory } from "./ecb";
 
@@ -34,7 +35,7 @@ export async function getPairHistory(base: string, target: string): Promise<Dail
 
 /** The last `days` calendar days of fixings for every ECB currency against USD, on shared dates. */
 export async function getUsdRateTable(days: number): Promise<UsdRateTable> {
-  const start = new Date();
+  const start = new Date(dataNow());
   start.setUTCDate(start.getUTCDate() - days);
   const res = await fetch(`${FRANKFURTER_BASE}/${isoDate(start)}..?base=USD`, { next: { revalidate: REVALIDATE_SECONDS } });
   if (!res.ok) throw new Error(`Frankfurter table request failed: ${res.status}`);

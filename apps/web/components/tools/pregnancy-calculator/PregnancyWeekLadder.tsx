@@ -21,7 +21,7 @@ export default function PregnancyWeekLadder() {
   return (
     <SectionCard title={t("title")} className="lg:flex lg:flex-1 lg:flex-col" bodyClassName="flex flex-col p-4 lg:flex-1 lg:p-6">
       <p className="text-sm text-zinc-600 dark:text-zinc-300">{t("intro")}</p>
-      <div className="mt-3 grid grid-cols-[3rem_1fr_auto] gap-x-3 px-3 text-[11px] font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+      <div className="mt-3 grid grid-cols-[3rem_auto_1fr] gap-x-3 px-3 text-[11px] font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
         <span>{t("colWeek")}</span>
         <span>{t("colDate")}</span>
         <span className="text-end">{t("colSize")}</span>
@@ -36,7 +36,7 @@ export default function PregnancyWeekLadder() {
                 type="button"
                 aria-pressed={on}
                 onClick={() => setGa(w * 7)}
-                className={`grid flex-1 grid-cols-[3rem_1fr_auto] items-center gap-x-3 rounded-lg border px-3 py-1.5 text-start text-sm transition ${
+                className={`grid flex-1 grid-cols-[3rem_auto_1fr] items-center gap-x-3 rounded-lg border px-3 py-1.5 text-start text-sm transition ${
                   on ? "border-blue-500 bg-blue-50 dark:border-blue-500 dark:bg-blue-500/10" : "border-zinc-200 hover:border-blue-300 dark:border-zinc-700"
                 }`}
               >
@@ -44,7 +44,7 @@ export default function PregnancyWeekLadder() {
                   <span className="h-2.5 w-2.5 shrink-0 rounded-full" style={{ background: TRI_COLORS[acogTrimester(w * 7)] }} />
                   {w}w
                 </span>
-                <span className="min-w-0 truncate tabular-nums text-zinc-700 dark:text-zinc-200">{fmtDate(addDaysISO(snap.lmp, w * 7), locale)}</span>
+                <span className="whitespace-nowrap tabular-nums text-zinc-700 dark:text-zinc-200">{fmtDate(addDaysISO(snap.lmp, w * 7), locale)}</span>
                 <span className="text-end text-xs font-semibold text-pink-700 dark:text-pink-300">{m ? tSize(m.sizeComparison) : ""}</span>
               </button>
             </li>
