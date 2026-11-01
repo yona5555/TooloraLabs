@@ -3,7 +3,8 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { ltr } from "@/components/tool-ui/MixedText";
 import { IndicatorCard, KitControls, KitTable, useStepper, type KitRow } from "@/components/tool-ui/indicator-kit/CardKit";
-import { axisTicks, Drawing, INK, LINE, lit, MUTED, px2, SvgLabel, useDrawing } from "@/components/tool-ui/indicator-kit/SvgBits";
+import { axisTicks, INK, LINE, lit, MUTED, px2, SvgLabel } from "@/components/tool-ui/indicator-kit/SvgBits";
+import { Drawing, useDrawing } from "@/components/tool-ui/indicator-kit/Drawing";
 import { fmtSmart, sci, sup } from "@/components/tool-ui/indicator-kit/format";
 
 /**

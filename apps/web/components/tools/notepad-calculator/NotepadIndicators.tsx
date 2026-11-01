@@ -21,6 +21,7 @@ import { KIND_COLORS, OP_COLORS, compact, lineNo, num, pct, raw, signed } from "
 import { svgPx } from "@/components/tool-ui/svgPx";
 import { useFitWidth } from "@/components/tool-ui/useFitWidth";
 
+import FitSvg from "@/components/tool-ui/FitSvg";
 export type IndicatorProps = { a: NotepadAnalysis; text: string };
 type LineProps = IndicatorProps & { line: number; onLine: (i: number) => void };
 type VarProps = IndicatorProps & { variable: string | null; onVariable: (name: string) => void };
@@ -93,7 +94,7 @@ export function LineValuesTrend({ a }: IndicatorProps) {
       }
     >
       <div className="overflow-x-auto" dir="ltr">
-        <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("trend.title")} data-testid="ind-trend" className="mx-auto h-auto max-w-full">
+        <FitSvg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("trend.title")} data-testid="ind-trend" className="mx-auto h-auto max-w-full">
           {[lo, (lo + hi) / 2, hi].map((v) => (
             <g key={v}>
               <line x1={P.l} x2={W - P.r} y1={y(v)} y2={y(v)} className="stroke-zinc-200 dark:stroke-zinc-700" />
@@ -121,7 +122,7 @@ export function LineValuesTrend({ a }: IndicatorProps) {
               </g>
             );
           })}
-        </svg>
+        </FitSvg>
       </div>
     </IndicatorCard>
   );
@@ -659,7 +660,7 @@ export function MagnitudeScale({ a }: IndicatorProps) {
       }
     >
       <div className="overflow-x-auto" dir="ltr">
-        <svg ref={fitRef} width={W} height={76 + 20 * Math.min(pts.length, 6)} viewBox={`0 0 ${W} ${76 + 20 * Math.min(pts.length, 6)}`} role="img" aria-label={t("mag.title")} className="mx-auto h-auto max-w-full" data-testid="ind-mag">
+        <FitSvg ref={fitRef} width={W} height={76 + 20 * Math.min(pts.length, 6)} viewBox={`0 0 ${W} ${76 + 20 * Math.min(pts.length, 6)}`} role="img" aria-label={t("mag.title")} className="mx-auto h-auto max-w-full" data-testid="ind-mag">
           <defs>
             <linearGradient id={`${svgId}np-mag`} x1="0" x2="1">
               <stop offset="0" stopColor="#bfdbfe" />
@@ -688,7 +689,7 @@ export function MagnitudeScale({ a }: IndicatorProps) {
               </g>
             );
           })}
-        </svg>
+        </FitSvg>
       </div>
     </IndicatorCard>
   );

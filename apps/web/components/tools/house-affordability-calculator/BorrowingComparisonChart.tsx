@@ -3,7 +3,7 @@ import { useLayoutEffect, useRef, useState, type PointerEvent as ReactPointerEve
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import SectionCard from "@/components/tool-ui/SectionCard";
-import { useBelowLg } from "@/components/tool-ui/useBelowLg";
+import { fitStep } from "@/components/tool-ui/chartLayout";
 import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { computeNiceTicks } from "./niceTicks";
 import type { CurrencyCode } from "@/lib/currency";
@@ -28,6 +28,7 @@ const MAIN_HEIGHT = 200;
 const XAXIS_HEIGHT = 22;
 const CHART_HEIGHT = MARGIN.top + MAIN_HEIGHT + XAXIS_HEIGHT;
 
+/** Bar step before the container is measured (server render). */
 const MIN_STEP = 100;
 const BAR_WIDTH_RATIO = 0.5;
 const TOOLTIP_WIDTH = 170;
@@ -40,7 +41,6 @@ function ComparisonPlot({ rows, digitStyle, currency }: BorrowingComparisonChart
   const containerRef = useRef<HTMLDivElement>(null);
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
   const [containerWidth, setContainerWidth] = useState(0);
-  const belowLg = useBelowLg();
 
   useLayoutEffect(() => {
     const el = containerRef.current;
@@ -50,7 +50,8 @@ function ComparisonPlot({ rows, digitStyle, currency }: BorrowingComparisonChart
     return () => observer.disconnect();
   }, []);
 
-  const step = Math.max(belowLg && containerWidth > 0 ? 0 : MIN_STEP, (containerWidth - MARGIN.left - MARGIN.right) / rows.length);
+  // shared label layout: the plot fills its container (no scroll box cutting off the last purposes)
+  const step = fitStep(containerWidth, MARGIN.left + MARGIN.right, rows.length, MIN_STEP);
   const barWidth = step * BAR_WIDTH_RATIO;
   const plotWidth = rows.length * step;
   const chartWidth = MARGIN.left + plotWidth + MARGIN.right;

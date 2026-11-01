@@ -1,6 +1,7 @@
 "use client";
 import { useTranslations } from "next-intl";
-import { Mafs, Coordinates, Point, Polygon, useMovablePoint } from "mafs";
+import { Coordinates, Point, Polygon, useMovablePoint } from "mafs";
+import FitMafs from "@/components/tool-ui/FitMafs";
 import "mafs/core.css";
 import "@/components/tool-ui/mafsTheme.css";
 import SectionCard from "@/components/tool-ui/SectionCard";
@@ -58,7 +59,7 @@ export default function SensitivityHeatmap() {
         <div dir="ltr" className="w-full lg:flex-1">
           {isQuadratic ? (
             <div role="group" aria-label={t("ariaLabel")} className="mafs-canvas mx-auto w-full max-w-[340px] overflow-hidden rounded-xl" onMouseUp={handleRelease} onTouchEnd={handleRelease}>
-              <Mafs viewBox={{ x: [-RANGE, RANGE], y: [-RANGE, RANGE] }} height={240} pan={false} zoom={false} preserveAspectRatio={false}>
+              <FitMafs viewBox={{ x: [-RANGE, RANGE], y: [-RANGE, RANGE] }} height={240} pan={false} zoom={false} preserveAspectRatio={false}>
                 <Coordinates.Cartesian xAxis={{ lines: 5 }} yAxis={{ lines: 5 }} />
                 {cells.map((cell, i) => (
                   <Polygon
@@ -76,7 +77,7 @@ export default function SensitivityHeatmap() {
                 ))}
                 <Point x={n.quadB ?? -4} y={n.quadC ?? -6} color="#111827" svgCircleProps={{ r: 4 }} />
                 {point.element}
-              </Mafs>
+              </FitMafs>
             </div>
           ) : (
             <p className="rounded-xl border border-zinc-200 bg-zinc-50 p-4 text-center text-sm text-zinc-500 dark:border-zinc-700 dark:bg-zinc-800/40 dark:text-zinc-400">

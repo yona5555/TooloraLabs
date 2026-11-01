@@ -1,6 +1,7 @@
 "use client";
 import { useTranslations } from "next-intl";
-import { Mafs, Coordinates, Plot, Point, Text } from "mafs";
+import { Coordinates, Plot, Point, Text } from "mafs";
+import FitMafs from "@/components/tool-ui/FitMafs";
 import "mafs/core.css";
 import "@/components/tool-ui/mafsTheme.css";
 import { useIsDarkMode } from "@/lib/use-dark-mode";
@@ -30,14 +31,14 @@ export default function VolumeVsScaleFactorCurve() {
         <div dir="ltr" className="w-full lg:flex-1">
           <PhoneMini slot={1} title={t("title")}>
             <div role="group" aria-label={t("ariaLabel")} className="mafs-canvas w-full overflow-hidden rounded-xl">
-              <Mafs viewBox={{ x: [0.4, 2.1], y: [0, baseVolume * 9.2] }} height={200} pan={false} zoom={false} preserveAspectRatio={false}>
+              <FitMafs viewBox={{ x: [0.4, 2.1], y: [0, baseVolume * 9.2] }} height={200} pan={false} zoom={false} preserveAspectRatio={false}>
                 <Coordinates.Cartesian xAxis={{ lines: 0.25, labels: (x) => `${x}×` }} yAxis={{ lines: Math.max(1, Math.round((baseVolume * 8) / 5)) }} />
                 <Plot.OfX y={(factor) => baseVolume * factor * factor * factor} domain={[0.5, 2]} color={colors.curve} weight={2.5} />
                 <Point x={1} y={baseVolume} color={colors.point} svgCircleProps={{ r: 5 }} />
                 <Text x={1} y={baseVolume} attach="n" attachDistance={12} color={colors.point} size={12}>
                   {`${round(baseVolume)}`}
                 </Text>
-              </Mafs>
+              </FitMafs>
             </div>
           </PhoneMini>
         </div>

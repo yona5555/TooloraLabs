@@ -3,7 +3,9 @@ import { useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { ltr } from "@/components/tool-ui/MixedText";
 import { IndicatorCard, KitControls, KitTable, KitTrack, useMeasuredSize, useStepper, type KitRow } from "@/components/tool-ui/indicator-kit/CardKit";
-import { Drawing, INK, lit, MUTED, px2, SvgLabel as T, useDrawing } from "@/components/tool-ui/indicator-kit/SvgBits";
+import { INK, lit, MUTED, px2, SvgLabel as T } from "@/components/tool-ui/indicator-kit/SvgBits";
+import { Drawing, useDrawing } from "@/components/tool-ui/indicator-kit/Drawing";
+import { LABEL_GAP } from "@/components/tool-ui/chartLabels";
 import { DualRingGauge } from "@/components/tool-ui/indicator-kit/DualRingGauge";
 import { capitalised, clean, EVENTS, EXAMPLE_SEGMENTS, LANG_SAMPLES, LOWER_SENTENCES, run } from "./sttMath";
 import { svgPx } from "@/components/tool-ui/svgPx";
@@ -444,6 +446,10 @@ export function STTLanguagesCard({ side }: { side: Side }) {
   const rtl = cur.code.startsWith("ar");
   const lx0 = rtl ? W - 10 : tx;
   const valueText = t("valueText", { l: cur.code, c: cur.caps, s: cur.starts });
+  // The drawing is as tall as its text column (phone: under the radial), so no line falls below its edge.
+  const afterLines = wrap(cur.out.transcript, per, 2);
+  const lastBase = ty + (narrow ? 76 : 84) + (afterLines.length - 1) * 16;
+  const needH = Math.ceil(lastBase + 2 * LABEL_GAP);
   const rows: KitRow[] = [
     { key: "lang", label: t("rowLang"), value: cur.code },
     { key: "starts", label: t("rowStarts"), value: String(cur.starts) },
@@ -463,7 +469,7 @@ export function STTLanguagesCard({ side }: { side: Side }) {
       controls={<KitControls s={s} valueText={cur.code} testId="stt-c7" />}
       table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
       visual={
-        <Drawing {...d} hMin={HMIN} label={t("handle")} valueText={valueText} handle={{ x: hx, y: hy, dir: "circular" }} s={s} testId="stt-c7">
+        <Drawing {...d} H={Math.max(H, needH)} hMin={Math.max(HMIN, needH)} label={t("handle")} valueText={valueText} handle={{ x: hx, y: hy, dir: "circular" }} s={s} testId="stt-c7">
           <circle cx={cx} cy={cy} r={R} fill="none" style={{ stroke: "var(--ph-grid)" }} />
           <circle cx={cx} cy={cy} r={(R + r0) / 2} fill="none" style={{ stroke: "var(--ph-grid)" }} strokeDasharray="3 4" />
           {data.map((l, i) => {
@@ -488,7 +494,7 @@ export function STTLanguagesCard({ side }: { side: Side }) {
             </text>
           ))}
           <T x={tx} y={ty + (narrow ? 58 : 66)} text={t("after")} anchor="start" size={12} bold />
-          {wrap(cur.out.transcript, per, 2).map((ln, j) => (
+          {afterLines.map((ln, j) => (
             <text key={`a${j}`} x={lx0} y={ty + (narrow ? 76 : 84) + j * 16} fontWeight={700} direction={rtl ? "rtl" : "ltr"} textAnchor="start" style={{ fontSize: svgPx(12), fill: "var(--ph-ink)" }}>
               {ln}
             </text>

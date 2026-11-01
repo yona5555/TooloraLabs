@@ -79,7 +79,8 @@ type SampleText = { name: string; room: string };
  * statistics straight after physics (touching edges), technical writing, and a film elective
  * the student is still considering that overlaps the physics lab. Term = this week's Monday + 15 weeks.
  */
-export function sampleState(text: SampleText[] = []): StudioState {
+/** The sample term starts on the Monday of `today` (from useTodayISO, so the server and the hydrating render agree). */
+export function sampleState(text: SampleText[], today: string): StudioState {
   const n = (i: number, name: string, room: string) => ({ name: text[i]?.name || name, room: text[i]?.room || room });
   const base: Omit<StudioClass, "id" | "color" | "name" | "room">[] = [
     { code: "CS 201", kind: "lecture", days: ["mon", "wed", "fri"], start: "09:00", end: "09:50", instructor: "Dr. Mei Lin", credits: 3 },
@@ -102,7 +103,6 @@ export function sampleState(text: SampleText[] = []): StudioState {
     { name: "Intro to Film (elective)", room: "Arts Center Cinema" },
   ];
   const classes = base.map((c, i) => ({ ...c, ...n(i, fallback[i].name, fallback[i].room), id: `sample-${i + 1}`, color: i }));
-  const today = new Date().toISOString().slice(0, 10);
   const termStart = mondayOf(today);
   return {
     v: 1,

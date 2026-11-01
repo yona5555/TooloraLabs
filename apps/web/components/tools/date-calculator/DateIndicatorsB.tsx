@@ -8,6 +8,7 @@ import { DATE_COLORS } from "./dateModel";
 import { svgPx } from "@/components/tool-ui/svgPx";
 import { useFitWidth } from "@/components/tool-ui/useFitWidth";
 
+import FitSvg from "@/components/tool-ui/FitSvg";
 /* 5 · Start → + years → + months → + days (stepped diagram, month-end clamping shown on the step) */
 export function DateStepLadderCard({ d, f }: IndicatorProps) {
   const t = useIndT();
@@ -179,7 +180,7 @@ export function DateYearZoneCard({ d, f }: IndicatorProps) {
       <IndicatorWithTable
         workedExampleTitle={t("worked")}
         indicator={
-          <svg ref={fitRef} width={W} height={200} viewBox={`0 0 ${W} 200`} style={{ direction: "ltr" }} role="img" aria-label={t("zone.title")} className="max-w-full">
+          <FitSvg ref={fitRef} width={W} height={200} viewBox={`0 0 ${W} 200`} style={{ direction: "ltr" }} role="img" aria-label={t("zone.title")} className="max-w-full">
             <text style={{ fontSize: svgPx(12) }} x={rtl ? W - L : L} y={18} textAnchor={rtl ? "end" : "start"} fontWeight={800} fill={DATE_COLORS.business}>
               {tp("cal.gregorian")} {f.int(y)} · {f.int(gTotal)}
             </text>
@@ -188,7 +189,7 @@ export function DateYearZoneCard({ d, f }: IndicatorProps) {
               {tp("cal.hijri")} {f.int(h.year)} · {f.int(hTotal)}
             </text>
             {strip(128, hLens, hTotal, hTotal / gTotal, colorH, hDayOfYear - 0.5, (i) => f.int(i + 1))}
-          </svg>
+          </FitSvg>
         }
         rows={[
           { label: t("zone.leapTest", { y: f.int(y) }), value: leap ? tp("result.yes") : tp("result.no"), note: `${f.int(y)} ÷ 4 = ${f.num(y / 4)} · ÷ 100 = ${f.num(y / 100)} · ÷ 400 = ${f.num(y / 400)}` },

@@ -8,6 +8,7 @@ import { WhatsAppIcon, XIcon, FacebookIcon, LinkedInIcon } from "@/lib/share-ico
 import ToolInput from "@/components/tool-ui/ToolInput";
 import { formatCalculatorNumber } from "@/lib/home-calculator/formatNumber";
 import type { HistoryEntry } from "./homeCalculatorReducer";
+import TodayDate from "@/components/tool-ui/TodayDate";
 
 type HomeShareExportModalProps = {
   history: HistoryEntry[];
@@ -224,7 +225,7 @@ export default function HomeShareExportModal({ history, currentDisplay }: HomeSh
             <span className="text-2xl font-bold text-blue-600">Labs</span>
           </div>
           <p className="text-sm text-zinc-500">
-            {t("shareExport.generatedOn")}: {new Date().toLocaleDateString(locale)}
+            {t("shareExport.generatedOn")}: <TodayDate locale={locale} />
           </p>
         </div>
 

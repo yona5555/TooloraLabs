@@ -9,6 +9,7 @@ import { svgPx } from "@/components/tool-ui/svgPx";
 import { useSvgUnitsPerPx } from "@/components/tool-ui/useFitWidth";
 import { labelW, placeLabels } from "@/components/tool-ui/labelLayout";
 
+import FitSvg from "@/components/tool-ui/FitSvg";
 type Props = { s: WtState; d: Derived; f: Fmt };
 
 const RING_COLORS = ["#2563eb", "#10b981", "#f59e0b", "#ef4444", "#8b5cf6", "#06b6d4", "#ec4899", "#84cc16", "#f97316", "#14b8a6", "#6366f1"];
@@ -54,7 +55,7 @@ function Dial({ s, d, f }: Props) {
   );
 
   return (
-    <svg ref={dialRef} viewBox={`0 0 ${S} ${S}`} width="100%" height="100%" overflow="visible" style={{ direction: "ltr" }} role="img" aria-label="24h dial">
+    <FitSvg ref={dialRef} viewBox={`0 0 ${S} ${S}`} width="100%" height="100%" overflow="visible" style={{ direction: "ltr" }} role="img" aria-label="24h dial">
       <circle cx={c} cy={c} r={outer + 18} className="fill-zinc-50 dark:fill-zinc-800/60" />
       <path d={arc(22 * 60, 7 * 60, inner - 10, outer + 8)} fill={STATUS_COLORS.night} fillOpacity={0.18} />
       <path d={arc(s.ws, s.we % 1440 === s.ws ? s.ws + 1439 : s.we, inner - 10, outer + 8)} fill={STATUS_COLORS.work} fillOpacity={0.2} />
@@ -95,7 +96,7 @@ function Dial({ s, d, f }: Props) {
         {f.time(d.conv.utcMs, "UTC")}
       </text>
       <text style={{ fontSize: svgPx(12) }} x={c} y={c + 11} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">UTC</text>
-    </svg>
+    </FitSvg>
   );
 }
 

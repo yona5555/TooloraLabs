@@ -4,6 +4,7 @@ import SwIndicatorCard from "./SwIndicatorCard";
 import { useSwLive } from "./SwLiveContext";
 import { svgPx } from "@/components/tool-ui/svgPx";
 
+import FitSvg from "@/components/tool-ui/FitSvg";
 const W = 340;
 const H = 176;
 const PAD_X = 22;
@@ -31,7 +32,7 @@ export default function SwSentenceBreaths() {
 
   const indicator = (
     <div>
-      <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
+      <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
         <line x1={PAD_X} y1={y(BREATH_SECONDS)} x2={W - PAD_X} y2={y(BREATH_SECONDS)} strokeDasharray="2 3" className="stroke-rose-400" />
         <text style={{ fontSize: svgPx(12) }} x={W - PAD_X} y={y(BREATH_SECONDS) - 3} textAnchor="end" className="fill-rose-500 dark:fill-rose-400">{t("breathLine", { s: f(BREATH_SECONDS) })}</text>
         {shown.map((s, i) => {
@@ -68,7 +69,7 @@ export default function SwSentenceBreaths() {
         <text style={{ fontSize: svgPx(12) }} x={PAD_X} y={BASE + 14} className="fill-zinc-500 dark:fill-zinc-400">{f(1)}</text>
         <text style={{ fontSize: svgPx(12) }} x={W - PAD_X} y={BASE + 14} textAnchor="end" className="fill-zinc-500 dark:fill-zinc-400">{f(shown.length)}</text>
         <text style={{ fontSize: svgPx(12) }} x={W / 2} y={BASE + 14} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">{t("axis")}</text>
-      </svg>
+      </FitSvg>
       <p className="mt-1 text-[11px] text-amber-700 dark:text-amber-300">
         {t("hint")}
         {sentences.length > MAX_BARS && ` · ${t("capped", { n: f(MAX_BARS), total: f(sentences.length) })}`}

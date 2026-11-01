@@ -8,6 +8,7 @@ import { generateToolPdf } from "@/lib/pdf/generateToolPdf";
 import { WhatsAppIcon, XIcon, FacebookIcon, LinkedInIcon } from "@/lib/share-icons";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import type { AreaDraft, AreaResult as Result } from "./types";
+import TodayDate from "@/components/tool-ui/TodayDate";
 
 type Props = {
   result: Result;
@@ -245,7 +246,7 @@ export default function AreaShareExportModal({ result, digitStyle, draft }: Prop
             <span className="text-xl font-bold text-blue-600">Labs</span>
           </div>
           <p className="text-xs text-zinc-500">
-            {t("shareExport.generatedOn")}: {new Date().toLocaleDateString(locale)}
+            {t("shareExport.generatedOn")}: <TodayDate locale={locale} />
           </p>
         </div>
 

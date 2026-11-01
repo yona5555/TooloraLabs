@@ -1,7 +1,8 @@
 "use client";
 import type { ReactNode } from "react";
 import type { Stepper } from "./CardKit";
-import { Drawing, INK, px2, SvgLabel as T, useDrawing } from "./SvgBits";
+import { INK, px2, SvgLabel as T } from "./SvgBits";
+import { Drawing, useDrawing } from "./Drawing";
 
 /**
  * The approved double-ring gauge (first drawn for the US vs UK gallon card): two concentric rings

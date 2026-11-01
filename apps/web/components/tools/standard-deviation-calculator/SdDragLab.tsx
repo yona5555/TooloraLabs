@@ -1,7 +1,8 @@
 "use client";
 import { useRef, useState } from "react";
 import { useTranslations } from "next-intl";
-import { Coordinates, Line, Mafs, MovablePoint, Polygon, Text } from "mafs";
+import { Coordinates, Line, MovablePoint, Polygon } from "mafs";
+import FitMafs, { FitText } from "@/components/tool-ui/FitMafs";
 import "mafs/core.css";
 import "@/components/tool-ui/mafsTheme.css";
 import { useIsDarkMode } from "@/lib/use-dark-mode";
@@ -76,7 +77,7 @@ export default function SdDragLab() {
   const plane = (
     <div className="w-full lg:w-[400px]">
       <div role="group" dir="ltr" aria-label={t("aria")} className="mafs-canvas w-full overflow-hidden rounded-xl">
-        <Mafs viewBox={{ x: view.x, y: view.y, padding: 0 }} height={300} pan={false} zoom={false}>
+        <FitMafs viewBox={{ x: view.x, y: view.y, padding: 0 }} height={300} pan={false} zoom={false}>
           <Coordinates.Cartesian xAxis={{ lines: step, labels: (x) => f(x) }} yAxis={false} />
           {sigma > 0 && (
             <Polygon
@@ -126,14 +127,14 @@ export default function SdDragLab() {
             />
           )}
           {sigma > 0 && (
-            <Text x={a.mean + sigma / 2} y={sigma + view.row * 0.6} size={12} color={c.sigma}>
+            <FitText x={a.mean + sigma / 2} y={sigma + view.row * 0.6} size={12} color={c.sigma}>
               {`σ² = ${f(a.populationVariance)}`}
-            </Text>
+            </FitText>
           )}
           <Line.Segment point1={[a.mean, view.y[0]]} point2={[a.mean, yTop]} color={c.mean} weight={2} />
-          <Text x={a.mean} y={yTop - view.row * 0.5} size={12} color={c.mean}>
+          <FitText x={a.mean} y={yTop - view.row * 0.5} size={12} color={c.mean}>
             {`μ ${f(a.mean)}`}
-          </Text>
+          </FitText>
           {values.map((v, i) => (
             <MovablePoint
               key={i}
@@ -143,7 +144,7 @@ export default function SdDragLab() {
               onMove={([x]) => move(i, x)}
             />
           ))}
-        </Mafs>
+        </FitMafs>
       </div>
       <p className="mt-2 text-center text-xs text-zinc-500 dark:text-zinc-400">{t("hint")}</p>
     </div>
