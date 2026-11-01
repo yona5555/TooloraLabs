@@ -229,7 +229,7 @@ export function KitTable({ rows, flash, activeKey, onHover, caption }: { rows: K
   const reduced = usePrefersReducedMotion();
   return (
     <table className="h-full w-full border-collapse text-sm" data-ph-table>
-      <caption className="pb-1.5 text-start text-[11px] font-bold uppercase tracking-wide" style={{ color: "var(--ph-ink-muted)" }}>
+      <caption className="pb-1.5 text-start text-xs font-bold uppercase tracking-wide" style={{ color: "var(--ph-ink-muted)" }}>
         {caption}
       </caption>
       <thead>

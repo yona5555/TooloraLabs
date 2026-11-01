@@ -1,6 +1,7 @@
 "use client";
 import FitSvg from "@/components/tool-ui/FitSvg";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useMotionEpisode, useMotionLoop } from "@/components/tool-ui/motion/motion";
 import { useTranslations } from "next-intl";
 import { Play, Shuffle } from "lucide-react";
 import { sampleRegions, standardError } from "@tooloralabs/tools";
@@ -28,7 +29,6 @@ export default function ProbabilityMonteCarlo() {
   const [seed, setSeed] = useState(1);
   const [shown, setShown] = useState(TRIALS);
   const [run, setRun] = useState(0);
-  const raf = useRef<number | null>(null);
 
   // Running estimate: hits / trials (conditional mode: A∩B hits among the trials where B happened).
   const series = useMemo(() => {
@@ -49,21 +49,23 @@ export default function ProbabilityMonteCarlo() {
     return { out, base, hits };
   }, [b, seed, mode, target]);
 
+  // tool-ui/motion: a new run (Run, new seed or new events) is drawn trial by trial; on load and for reduced
+  // motion the full run is shown, and it pauses off screen or with the page hidden.
+  const motion = useMotionEpisode([series, run]);
+  const clock = useRef(0);
+  const box = useRef<SVGSVGElement>(null);
   useEffect(() => {
-    const reduce = typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
-    // Reduced motion: keep the full run on screen (the initial state), no animation.
-    if (reduce) return;
-    const start = performance.now();
-    const tick = (now: number) => {
-      const k = Math.min(1, (now - start) / DURATION_MS);
-      setShown(Math.max(1, Math.round(TRIALS * k * k)));
-      if (k < 1) raf.current = requestAnimationFrame(tick);
-    };
-    raf.current = requestAnimationFrame(tick);
-    return () => {
-      if (raf.current) cancelAnimationFrame(raf.current);
-    };
+    clock.current = 0;
   }, [series, run]);
+  useMotionLoop(box, (dt) => {
+    clock.current += dt * 1000;
+    const k = Math.min(1, clock.current / DURATION_MS);
+    setShown(Math.max(1, Math.round(TRIALS * k * k)));
+    return k < 1;
+  }, motion.active, () => {
+    motion.stop();
+    setShown(TRIALS);
+  });
 
   const x = (i: number) => L + ((W - L - R) * i) / (TRIALS - 1);
   const y = (v: number) => T + (H - T - B) * (1 - v);
@@ -88,7 +90,7 @@ export default function ProbabilityMonteCarlo() {
 
   const chart = (
     <div className="w-full lg:w-[320px]">
-      <FitSvg style={{ direction: "ltr" }} width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("title")} className="mx-auto max-w-full">
+      <FitSvg ref={box} style={{ direction: "ltr" }} width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("title")} className="mx-auto max-w-full">
         {[0, 0.25, 0.5, 0.75, 1].map((v) => (
           <g key={v}>
             <line x1={L} x2={W - R} y1={y(v)} y2={y(v)} className="stroke-zinc-200 dark:stroke-zinc-700" />

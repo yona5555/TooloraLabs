@@ -1,5 +1,6 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
+import { useMotionEpisode, useMotionLoop } from "@/components/tool-ui/motion/motion";
 import { useTranslations } from "next-intl";
 import { Pause, Play } from "lucide-react";
 import { kinematicsStateAt } from "@tooloralabs/tools";
@@ -35,33 +36,25 @@ export default function KinMotionLab() {
   const { setDim } = useKinLive();
   const { draft, k, solved, f } = useKinModel();
   const [u, setU] = useState(0.45);
-  const [playing, setPlaying] = useState(false);
-  const raf = useRef<number | null>(null);
   const run = k ? Math.min(6, Math.max(2, k.span)) : 3;
+  const motion = useMotionEpisode([run]);
+  const playing = motion.active;
+  const box = useRef<SVGSVGElement>(null);
 
-  useEffect(() => {
-    if (!playing) return;
-    let last = performance.now();
-    let hold = 0;
-    const tick = (now: number) => {
-      const dt = (now - last) / 1000;
-      last = now;
-      setU((prev) => {
-        if (prev >= 1) {
-          hold += dt;
-          if (hold < 0.8) return 1;
-          hold = 0;
-          return 0;
-        }
-        return Math.min(1, prev + dt / run);
-      });
-      raf.current = requestAnimationFrame(tick);
-    };
-    raf.current = requestAnimationFrame(tick);
-    return () => {
-      if (raf.current) cancelAnimationFrame(raf.current);
-    };
-  }, [playing, run]);
+  // tool-ui/motion: plays during a motion episode (Play, or new input values), at most EPISODE_MS, paused off
+  // screen or with the page hidden, never on load and never for reduced motion.
+  const hold = useRef(0);
+  useMotionLoop(box, (dt) => {
+    setU((prev) => {
+      if (prev >= 1) {
+        hold.current += dt;
+        if (hold.current < 0.8) return 1;
+        hold.current = 0;
+        return 0;
+      }
+      return Math.min(1, prev + dt / run);
+    });
+  }, playing, motion.stop);
 
   if (!k || k.span <= 0) return <KinIndicatorUnavailable title={t("title")} />;
 
@@ -96,7 +89,7 @@ export default function KinMotionLab() {
 
   const lab = (
     <div className="w-full max-w-[400px]">
-      <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
+      <svg ref={box} direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
         <text style={{ fontSize: svgPx(13) }} x={W / 2} y={16} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
           {`t = ${f(now.t, 2)} s · v = ${f(now.v, 1)} m/s · x = ${f(now.x, 1)} m`}
         </text>
@@ -154,7 +147,7 @@ export default function KinMotionLab() {
         })}
         <button
           type="button"
-          onClick={() => setPlaying(!playing)}
+          onClick={() => (playing ? motion.stop() : motion.play())}
           className="inline-flex items-center gap-2 rounded-lg border border-zinc-300 px-3 py-1.5 text-xs font-semibold text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
         >
           {playing ? <Pause size={14} /> : <Play size={14} />}

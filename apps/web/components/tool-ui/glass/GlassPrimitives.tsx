@@ -1,7 +1,10 @@
 "use client";
-import { useEffect, useRef, useState, useSyncExternalStore, type CSSProperties, type ReactNode } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import SectionCard, { type PhoneRole } from "@/components/tool-ui/SectionCard";
 import "./glass-tokens.css";
+import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
+
+export { usePrefersReducedMotion };
 
 /**
  * Shared "glass" visual language for the fraction-calculator hero/indicator cards. Every color
@@ -58,19 +61,6 @@ function sideFor(n: number): "visual-left" | "table-left" {
   return n % 2 === 1 ? "visual-left" : "table-left";
 }
 
-const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
-function subscribeReducedMotion(callback: () => void) {
-  const mq = window.matchMedia(REDUCED_MOTION_QUERY);
-  mq.addEventListener("change", callback);
-  return () => mq.removeEventListener("change", callback);
-}
-/** useSyncExternalStore -- not useState+useEffect -- is the hydration-safe, lint-clean way to
- * read a browser media query: the server snapshot is always false, so SSR and first client
- * render always agree (no mismatch), and React itself (not an effect body) handles reconciling
- * the real value right after. */
-export function usePrefersReducedMotion(): boolean {
-  return useSyncExternalStore(subscribeReducedMotion, () => window.matchMedia(REDUCED_MOTION_QUERY).matches, () => false);
-}
 
 /** §42.3: flashes `true` for ~600ms every time `trigger()` is called, then auto-clears -- the
  * hook a card's own control uses to tint its changed table cells once per interaction. Reduced
@@ -88,55 +78,15 @@ export function useValueFlash(durationMs = 600) {
   return { flashing, trigger };
 }
 
-/** Always starts false so server and client render identically (no hydration mismatch); setState
- * is only ever called from inside the IntersectionObserver's own async callback -- never
- * synchronously in the effect body. Reduced motion is handled in CSS (Reveal's
- * motion-reduce:transition-none below), not by special-casing this hook: an in-viewport element's
- * observer callback fires within a frame of mount either way, so reduced-motion users still see it
- * revealed almost immediately, just without the eased animation. */
-function useRevealed<T extends HTMLElement>() {
-  const ref = useRef<T>(null);
-  const [revealed, setRevealed] = useState(false);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setRevealed(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-  return { ref, revealed };
-}
-
-/** Plays once as each card enters the viewport: opacity + a small translate only, never a change
- * to the element's own box size (zero layout shift). Reduced-motion and a missing
- * IntersectionObserver both resolve to "already revealed" so content is never stuck hidden. The
- * print override is a belt-and-suspenders safety net -- browser print already shows a completely
- * separate [data-print-area] subtree (globals.css), these cards aren't in it either way. */
+/**
+ * The card wrapper (the glass font). Cards used to fade in when they entered the viewport: the server sent them
+ * at opacity 0 and only hydrated JavaScript revealed them, so the above-the-fold result card -- the largest
+ * contentful paint -- waited for the whole page's JS plus a 0.5 s fade (LCP 6.4-7.2 s on mobile, ar). Cards are
+ * now visible in the server HTML, with no entrance motion.
+ */
 function Reveal({ children, "data-testid": testId }: { children: ReactNode; "data-testid"?: string }) {
-  const { ref, revealed: observed } = useRevealed<HTMLDivElement>();
-  const reducedMotion = usePrefersReducedMotion();
-  const revealed = observed || reducedMotion;
   return (
-    <div
-      ref={ref}
-      data-revealed={revealed}
-      data-testid={testId}
-      className="print:opacity-100! print:translate-y-0!"
-      style={{
-        opacity: revealed ? 1 : 0,
-        transform: revealed ? "translateY(0)" : "translateY(12px)",
-        transition: reducedMotion ? "none" : "opacity 0.5s ease-out, transform 0.5s ease-out",
-        fontFamily: "var(--glass-font)",
-      }}
-    >
+    <div data-testid={testId} style={{ fontFamily: "var(--glass-font)" }}>
       {children}
     </div>
   );
@@ -216,7 +166,7 @@ export function GlassIndicatorCard({
     <Reveal data-testid={`reveal-${n}`}>
       <SectionCard title={<CardTitle n={n} title={title} />} id={`card-${n}`} bodyClassName="p-4 lg:p-6">
         <div data-indicator-card={n} data-card-weight={weight} data-card-side={side}>
-          <p className="text-[11px] leading-snug sm:text-xs" style={{ color: "var(--glass-subtitle)" }}>
+          <p className="text-xs leading-snug" style={{ color: "var(--glass-subtitle)" }}>
             {subtitle}
           </p>
           <div className={`mt-3 flex flex-col gap-4 lg:items-start ${rowDirection}`}>
@@ -225,7 +175,7 @@ export function GlassIndicatorCard({
             </div>
             <div className={`flex w-full min-w-0 flex-col ${layout.table}`}>
               <div className="h-full rounded-xl p-3" style={{ background: "var(--glass-table-wrap-bg)" }}>
-                <p className="text-[10px] font-bold uppercase tracking-wide" style={{ color: "var(--glass-muted)" }}>
+                <p className="text-xs font-bold uppercase tracking-wide" style={{ color: "var(--glass-muted)" }}>
                   {tableTitle}
                 </p>
                 <div data-indicator-table className="mt-1.5">
@@ -234,7 +184,7 @@ export function GlassIndicatorCard({
               </div>
             </div>
           </div>
-          <div className="mt-3 rounded-lg px-2.5 py-1.5 text-center text-[10px] font-semibold" style={{ background: accentVar(accent, "-soft"), color: accentVar(accent, "-strong") }}>
+          <div className="mt-3 rounded-lg px-2.5 py-1.5 text-center text-xs font-semibold" style={{ background: accentVar(accent, "-soft"), color: accentVar(accent, "-strong") }}>
             LIVE · recomputes while you drag
           </div>
         </div>

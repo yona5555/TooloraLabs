@@ -8,6 +8,7 @@ import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import type { LiveBlock } from "@/lib/crypto/network";
 import { useNetworkData } from "./useCryptoLive";
 import LiveFallback from "@/components/tools/markets/LiveFallback";
+import { subscribeVisibleClock } from "@/components/tool-ui/motion/motion";
 
 const SHOWN = 6;
 const tail = (hash: string) => `…${hash.slice(-6)}`;
@@ -28,10 +29,8 @@ export default function CryptoLatestBlocks() {
     setFresh(prevTip === null ? new Set() : new Set(blocks.filter((b) => b.height > prevTip).map((b) => b.height)));
   }
 
-  useEffect(() => {
-    const id = setInterval(() => setNow(Date.now()), 15_000);
-    return () => clearInterval(id);
-  }, []);
+  // tool-ui/motion: "n minutes ago" every 15 s while the page is visible, nothing while hidden
+  useEffect(() => subscribeVisibleClock(15_000, () => setNow(Date.now())), []);
 
   const num = (v: number, max = 0) => formatLocalizedNumber(v, "western", { maximumFractionDigits: max });
   const rtf = new Intl.RelativeTimeFormat(locale, { numeric: "auto" });
@@ -69,9 +68,9 @@ export default function CryptoLatestBlocks() {
                     >
                       <div className="flex items-baseline justify-between gap-2">
                         <span className="font-mono text-sm font-bold text-blue-700 dark:text-blue-300">#{num(b.height)}</span>
-                        <span className="text-[11px] text-zinc-500 dark:text-zinc-400">{ago(b.timestamp)}</span>
+                        <span className="text-xs text-zinc-500 dark:text-zinc-400">{ago(b.timestamp)}</span>
                       </div>
-                      <div className="mt-1 font-mono text-[11px] leading-4 text-zinc-600 dark:text-zinc-300">
+                      <div className="mt-1 font-mono text-xs leading-4 text-zinc-600 dark:text-zinc-300">
                         <div>
                           {num(b.txCount)} tx · {num(b.size / 1e6, 2)} MB
                         </div>
@@ -80,7 +79,7 @@ export default function CryptoLatestBlocks() {
                       <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-700" title={`${num(fill, 1)}%`}>
                         <div className="h-full rounded-full bg-amber-500" style={{ width: `${fill}%` }} />
                       </div>
-                      <div className="mt-1 truncate font-mono text-[10px] text-zinc-400 dark:text-zinc-500">
+                      <div className="mt-1 truncate font-mono text-xs text-zinc-400 dark:text-zinc-500">
                         {t("prev")} {tail(b.previousHash)}
                       </div>
                     </button>

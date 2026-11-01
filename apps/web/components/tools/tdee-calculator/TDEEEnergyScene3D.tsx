@@ -2,7 +2,9 @@
 
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
-import { useFrame, useThree } from "@react-three/fiber";
+import { useThree } from "@react-three/fiber";
+import { useMotionEpisode } from "@/components/tool-ui/motion/motion";
+import { useSceneFrame } from "@/components/tool-ui/motion/scene-motion";
 import { Line } from "@react-three/drei";
 import Label3D from "@/components/tool-ui/three/Label3D";
 import { usePalette3D } from "@/components/tool-ui/three/theme3d";
@@ -29,15 +31,13 @@ const XO = -0.55;
 const XI = 0.55;
 const HMAX = 2.25;
 const SPARKS = 14;
-const MOVE_SECONDS = 8; // the sparks rise this long after the data changes, never on load, so an idle page draws nothing
 
 export default function TDEEEnergyScene3D({ parts, tdee, intake, intakeColor, multiplier, labels }: TDEEEnergyScene3DProps) {
   const p = usePalette3D();
   const invalidate = useThree((s) => s.invalidate);
   const sparks = useRef<THREE.Group>(null);
-  const reduced = useRef<boolean | null>(null);
-  const shownData = useRef<string | null>(null);
-  const moveLeft = useRef(0);
+  const clock = useRef(0);
+  const { active } = useMotionEpisode([tdee, intake, multiplier]);
   const scale = HMAX / Math.max(1, tdee, intake);
   const hT = tdee * scale;
   const hI = intake * scale;
@@ -47,17 +47,15 @@ export default function TDEEEnergyScene3D({ parts, tdee, intake, intakeColor, mu
   const speed = 0.25 + (multiplier - 1.2) * 0.9;
 
   useEffect(() => {
-    const data = `${tdee}|${intake}|${multiplier}`;
-    if (shownData.current !== null && shownData.current !== data) moveLeft.current = MOVE_SECONDS;
-    shownData.current = data;
     invalidate();
   }, [invalidate, tdee, intake, multiplier]);
 
-  useFrame((state, delta) => {
-    if (reduced.current === null) reduced.current = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
+  // sparks rise during a motion episode after the energy numbers change (tool-ui/motion), else rest in place
+  useSceneFrame((_, dt) => {
     const g = sparks.current;
     if (!g) return;
-    const t = reduced.current ? 0 : state.clock.elapsedTime;
+    clock.current += dt;
+    const t = clock.current;
     g.children.forEach((c, i) => {
       const f = (i / SPARKS + t * speed * 0.35) % 1;
       const a = i * 2.4 + t * 0.6;
@@ -65,10 +63,7 @@ export default function TDEEEnergyScene3D({ parts, tdee, intake, intakeColor, mu
       const m = (c as THREE.Mesh).material as THREE.MeshBasicMaterial;
       m.opacity = 0.85 * (1 - f);
     });
-    if (reduced.current || moveLeft.current <= 0) return;
-    moveLeft.current -= Math.min(delta, 0.1);
-    state.invalidate();
-  });
+  }, active);
 
   const hs = parts.map((part) => Math.max(0, part.kcal * scale));
   const stack = parts.map((part, i) => ({ ...part, y0: hs.slice(0, i).reduce((a, b) => a + b, 0), h: hs[i] }));

@@ -33,10 +33,10 @@ export default function FractionCrossMultiplyCard() {
             </text>
           </svg>
           <div className="flex gap-3">
-            <button type="button" onClick={() => setDim("numeratorA", numeratorA + 1)} className="rounded-full px-2 py-0.5 text-[11px] font-semibold" style={{ background: "var(--glass-accent-1-soft)", color: "var(--glass-accent-1-strong)" }}>
+            <button type="button" onClick={() => setDim("numeratorA", numeratorA + 1)} className="rounded-full px-2 py-0.5 text-xs font-semibold" style={{ background: "var(--glass-accent-1-soft)", color: "var(--glass-accent-1-strong)" }}>
               {t("incrementA")}
             </button>
-            <button type="button" onClick={() => setDim("numeratorB", numeratorB + 1)} className="rounded-full px-2 py-0.5 text-[11px] font-semibold" style={{ background: "var(--glass-accent-2-soft)", color: "var(--glass-accent-2-strong)" }}>
+            <button type="button" onClick={() => setDim("numeratorB", numeratorB + 1)} className="rounded-full px-2 py-0.5 text-xs font-semibold" style={{ background: "var(--glass-accent-2-soft)", color: "var(--glass-accent-2-strong)" }}>
               {t("incrementB")}
             </button>
           </div>

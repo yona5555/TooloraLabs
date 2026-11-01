@@ -2,7 +2,9 @@
 
 import { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
-import { useFrame, useThree } from "@react-three/fiber";
+import { useThree } from "@react-three/fiber";
+import { useMotionEpisode } from "@/components/tool-ui/motion/motion";
+import { useSceneFrame } from "@/components/tool-ui/motion/scene-motion";
 import { Line } from "@react-three/drei";
 import Label3D from "@/components/tool-ui/three/Label3D";
 import { usePalette3D } from "@/components/tool-ui/three/theme3d";
@@ -32,7 +34,6 @@ const CORNERS: P3[] = [
 const SIDES = [2 * Y, 2 * X, 2 * Y, 2 * X];
 const PERIMETER = SIDES.reduce((s, v) => s + v, 0);
 const PARTICLES = 28;
-const MOVE_SECONDS = 8; // the charges flow this long after V or R changes, never on load, so an idle page draws nothing
 
 const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v));
 const log = (v: number) => Math.log10(Math.max(Math.abs(v), 1e-30));
@@ -54,39 +55,30 @@ function along(s: number, out: THREE.Vector3) {
 
 /**
  * Charges flowing round the loop. Their speed follows the current on a log scale (0.001 A crawls,
- * 100 A races), so changing V or R visibly speeds them up or slows them down.
+ * 100 A races), so changing V or R visibly speeds them up or slows them down: they flow during a motion
+ * episode after the current changes (tool-ui/motion), and rest in place otherwise.
  */
 function Charges({ current, color }: { current: number; color: string }) {
   const refs = useRef<(THREE.Mesh | null)[]>([]);
   const invalidate = useThree((s) => s.invalidate);
-  const reduced = useRef<boolean | null>(null);
   const offset = useRef(0);
-  const shownSpeed = useRef<number | null>(null);
-  const moveLeft = useRef(0);
+  const { active } = useMotionEpisode([current]);
   const tmp = useMemo(() => new THREE.Vector3(), []);
   const speed = 0.25 + 2.6 * clamp((log(current) + 3) / 5, 0, 1);
   const dir = current < 0 ? -1 : 1;
 
   useEffect(() => {
-    if (shownSpeed.current !== null && shownSpeed.current !== speed) moveLeft.current = MOVE_SECONDS;
-    shownSpeed.current = speed;
     invalidate();
   }, [invalidate, speed]);
 
-  useFrame((state, delta) => {
-    if (reduced.current === null) reduced.current = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
-    const moving = !reduced.current && moveLeft.current > 0;
-    if (moving) {
-      moveLeft.current -= Math.min(delta, 0.1);
-      offset.current += dir * speed * Math.min(delta, 0.1);
-    }
+  useSceneFrame((_, dt) => {
+    offset.current += dir * speed * dt;
     refs.current.forEach((m, i) => {
       if (!m) return;
       along(offset.current + (i * PERIMETER) / PARTICLES, tmp);
       m.position.copy(tmp);
     });
-    if (moving) state.invalidate();
-  });
+  }, active);
 
   return (
     <group>

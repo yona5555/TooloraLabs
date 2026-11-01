@@ -21,7 +21,7 @@ function Ribbon({ filled, total, color, label }: { filled: number; total: number
       >
         <div className="absolute inset-x-0 bottom-0 rounded-md transition-[height] duration-300 ease-out" style={{ height: `${pct}%`, background: color }} />
       </div>
-      <span className="text-[10px] font-semibold" style={{ color: "var(--glass-muted)" }}>
+      <span className="text-xs font-semibold" style={{ color: "var(--glass-muted)" }}>
         {label}
       </span>
     </div>
@@ -61,7 +61,7 @@ export default function FractionCommonGridCard() {
             <button type="button" onClick={() => nudgeDenominator(-1)} className="h-6 w-6 rounded-full text-xs font-bold" style={{ background: "var(--glass-track)", color: "var(--glass-title)" }}>
               −
             </button>
-            <span className="text-[10px] font-semibold" style={{ color: "var(--glass-muted)" }}>
+            <span className="text-xs font-semibold" style={{ color: "var(--glass-muted)" }}>
               {t("denomAHint", { den: formatMathValue(denominatorA) })}
             </span>
             <button type="button" onClick={() => nudgeDenominator(1)} className="h-6 w-6 rounded-full text-xs font-bold" style={{ background: "var(--glass-track)", color: "var(--glass-title)" }}>

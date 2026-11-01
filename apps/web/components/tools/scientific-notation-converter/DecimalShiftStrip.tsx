@@ -5,7 +5,8 @@ import FitSvg from "@/components/tool-ui/FitSvg";
  * place at a time from its standard position to just after the first nonzero digit, each hop
  * drawn and counted. Long zero runs collapse into one "0…0 ×n" cell so the strip always fits.
  */
-import { useEffect, useState } from "react";
+import { useRef, useState } from "react";
+import { useMotionEpisode, useVisibleInterval } from "@/components/tool-ui/motion/motion";
 import { useTranslations } from "next-intl";
 import { decimalShift } from "@tooloralabs/tools";
 import { sup } from "./sciFormat";
@@ -58,22 +59,24 @@ export default function DecimalShiftStrip({ coefficient, exponent }: { coefficie
   const width = cells.reduce((w, c) => w + (c.wide ? WIDE : CW), 0);
   const pad = s.negative ? 18 : 6;
   const vbW = width + pad + 6;
-  // Animation progress is keyed to the value it belongs to, so a new value starts at hop 0
-  // without a synchronous reset inside the effect.
+  // tool-ui/motion: a new value hops the point place by place (a motion episode, paused off screen or with the
+  // page hidden); on load, at rest and for reduced motion the point sits at its final place. Progress is keyed
+  // to the value it belongs to, so a new value starts at hop 0.
   const key = `${coefficient}e${exponent}`;
   const [anim, setAnim] = useState({ key: "", k: 0 });
-  const k = anim.key === key ? anim.k : 0;
-
-  useEffect(() => {
-    const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
-    let i = 0;
-    const id = setInterval(() => {
-      i = reduce ? s.places : i + 1;
-      setAnim({ key, k: Math.min(i, s.places) });
-      if (i >= s.places) clearInterval(id);
-    }, Math.max(45, Math.min(160, 1100 / Math.max(1, s.places))));
-    return () => clearInterval(id);
-  }, [key, s.places]);
+  const motion = useMotionEpisode([key]);
+  const box = useRef<HTMLDivElement>(null);
+  const k = motion.active ? (anim.key === key ? anim.k : 0) : s.places;
+  useVisibleInterval(
+    box,
+    () => {
+      const next = Math.min((anim.key === key ? anim.k : 0) + 1, s.places);
+      setAnim({ key, k: next });
+      if (next >= s.places) motion.stop();
+    },
+    Math.max(45, Math.min(160, 1100 / Math.max(1, s.places))),
+    { motion: true, active: motion.active },
+  );
 
   const dir = s.direction === "left" ? -1 : 1;
   const pos = s.fromIndex + dir * k;
@@ -82,7 +85,7 @@ export default function DecimalShiftStrip({ coefficient, exponent }: { coefficie
 
   const cellX = cells.reduce<number[]>((xs, c, i) => [...xs, i === 0 ? pad : xs[i - 1] + (cells[i - 1].wide ? WIDE : CW)], []);
   return (
-    <div data-testid="shift-strip">
+    <div ref={box} data-testid="shift-strip">
       <FitSvg viewBox={`0 0 ${vbW} ${H}`} width="100%" className="block max-h-24" role="img" aria-label={t("aria", { places: s.places })} style={{ direction: "ltr" }}>
         {s.negative && (
           <text style={{ fontSize: svgPx(15) }} x={6} y={TOP + CH / 2 + 5} fontWeight="700" fill="currentColor" className="text-zinc-500">−</text>

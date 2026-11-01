@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 import { Canvas, useThree } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { usePalette3D } from "./theme3d";
 import PreviewReady from "./PreviewReady";
 import FitContent from "./FitContent";
+import { SceneMotion, useSceneHost } from "@/components/tool-ui/motion/scene-motion";
 
 export type Scene3DCanvasProps = {
   children: ReactNode;
@@ -38,13 +39,19 @@ export default function Scene3DCanvas({
   orbit,
 }: Scene3DCanvasProps) {
   const p = usePalette3D();
+  // Draws on demand only and stops completely off screen or with the page hidden (tool-ui/motion). No automatic
+  // rotation: OrbitControls' autoRotate renders every frame forever; the scene turns by hand.
+  const host = useRef<HTMLDivElement>(null);
+  const { frameloop, motion } = useSceneHost(host);
   return (
+    <div ref={host} className="h-full w-full">
     <Canvas
       dpr={[1, 2]}
       camera={{ position: camera, fov: 40 }}
-      frameloop="demand"
+      frameloop={frameloop}
       gl={{ antialias: true }}
     >
+      <SceneMotion motion={motion} frameloop={frameloop}>
       <color attach="background" args={[p.bg]} />
       <ambientLight intensity={p.dark ? 0.55 : 0.7} />
       <directionalLight position={[6, 10, 6]} intensity={p.dark ? 0.9 : 1.1} />
@@ -61,6 +68,8 @@ export default function Scene3DCanvas({
         minPolarAngle={orbit?.minPolar ?? 0}
         maxPolarAngle={orbit?.maxPolar ?? Math.PI}
       />
+      </SceneMotion>
     </Canvas>
+    </div>
   );
 }

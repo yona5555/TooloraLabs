@@ -2,7 +2,9 @@
 
 import { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
-import { useFrame, useThree } from "@react-three/fiber";
+import { useThree } from "@react-three/fiber";
+import { useMotionEpisode } from "@/components/tool-ui/motion/motion";
+import { useSceneFrame } from "@/components/tool-ui/motion/scene-motion";
 import { Edges } from "@react-three/drei";
 import Label3D from "@/components/tool-ui/three/Label3D";
 import { usePalette3D } from "@/components/tool-ui/three/theme3d";
@@ -59,18 +61,18 @@ export default function GcfLcmScene3D({ towers, primes, replay }: GcfLcmScene3DP
     invalidate();
   }, [key, replay, invalidate]);
 
-  useFrame((state, delta) => {
-    if (progress.current < 1) {
-      progress.current = Math.min(1, progress.current + delta / DURATION);
-      state.invalidate();
-    }
+  // the blocks drop into place during a motion episode (new numbers or Replay; tool-ui/motion); at rest they sit
+  const { active } = useMotionEpisode([key, replay]);
+  useSceneFrame((_, dt) => {
+    progress.current = dt ? Math.min(1, progress.current + dt / DURATION) : 1;
     flat.forEach((b, i) => {
       const m = meshes.current[i];
       if (!m) return;
       const local = Math.max(0, Math.min(1, (progress.current - b.delay) / (1 - b.delay)));
       m.position.y = b.y + (1 - ease(local)) * 2.4;
     });
-  });
+    return progress.current < 1;
+  }, active);
 
   const colorOf = (prime: number) => p.faces[Math.max(0, primes.indexOf(prime)) % p.faces.length];
   const bg = p.dark ? "rgba(24,24,27,0.88)" : "rgba(255,255,255,0.94)";

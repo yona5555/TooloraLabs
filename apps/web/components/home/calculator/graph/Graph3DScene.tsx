@@ -1,12 +1,13 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useRef } from "react";
 import * as THREE from "three";
 import { Canvas } from "@react-three/fiber";
 import { Line, OrbitControls } from "@react-three/drei";
 import { axisTicks, sampleCurve, sampleSurface, type SurfaceGrid } from "@tooloralabs/tools";
 import Label3D from "@/components/tool-ui/three/Label3D";
 import { fmtTick, heightColor, type PlotFunction } from "./graphShared";
+import { SceneMotion, useSceneHost } from "@/components/tool-ui/motion/scene-motion";
 
 export type Graph3DSceneProps = {
   fns: PlotFunction[];
@@ -14,6 +15,7 @@ export type Graph3DSceneProps = {
   range: number;
   dark: boolean;
   wireframe: boolean;
+  /** The visitor's Auto-rotate button: a bounded episode (GraphCalculator), off screen or hidden it stops. */
   autoRotate: boolean;
 };
 
@@ -161,9 +163,15 @@ export default function Graph3DScene({ fns, range, dark, wireframe, autoRotate }
   const axis = dark ? "#a1a1aa" : "#3f3f46";
   const y0 = Math.min(HEIGHT, Math.max(-HEIGHT, scene.toY(0)));
   const floor = -HEIGHT - 0.02;
+  // tool-ui/motion: on demand only; rotating only while the visitor's episode runs and motion is allowed
+  const host = useRef<HTMLDivElement>(null);
+  const { frameloop, motion } = useSceneHost(host);
+  const rotating = autoRotate && motion;
 
   return (
-    <Canvas dpr={[1, 2]} camera={{ position: [6.4, 4.6, 6.4], fov: 42 }} frameloop={autoRotate ? "always" : "demand"} gl={{ antialias: true, alpha: true }}>
+    <div ref={host} className="h-full w-full">
+    <Canvas dpr={[1, 2]} camera={{ position: [6.4, 4.6, 6.4], fov: 42 }} frameloop={rotating ? "always" : frameloop} gl={{ antialias: true, alpha: true }}>
+      <SceneMotion motion={motion} frameloop={frameloop}>
       <ambientLight intensity={dark ? 0.6 : 0.75} />
       <directionalLight position={[6, 10, 6]} intensity={dark ? 0.9 : 1.05} />
       <directionalLight position={[-6, 4, -4]} intensity={0.4} />
@@ -213,7 +221,9 @@ export default function Graph3DScene({ fns, range, dark, wireframe, autoRotate }
         <Label3D key={`z${v}`} position={[-HALF - 0.3, scene.toY(v), -HALF]} color={muted} fontSize={10} align="right" text={fmtTick(v, scene.zTicks.step)} />
       ))}
 
-      <OrbitControls makeDefault enablePan={false} enableZoom minDistance={3} maxDistance={22} autoRotate={autoRotate} autoRotateSpeed={1.2} />
+      <OrbitControls makeDefault enablePan={false} enableZoom minDistance={3} maxDistance={22} autoRotate={rotating} autoRotateSpeed={1.2} />
+      </SceneMotion>
     </Canvas>
+    </div>
   );
 }

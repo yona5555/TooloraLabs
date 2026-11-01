@@ -2,7 +2,9 @@
 
 import { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
-import { useFrame, useThree } from "@react-three/fiber";
+import { useThree } from "@react-three/fiber";
+import { useMotionEpisode } from "@/components/tool-ui/motion/motion";
+import { useSceneFrame } from "@/components/tool-ui/motion/scene-motion";
 import Label3D from "@/components/tool-ui/three/Label3D";
 import { usePalette3D } from "@/components/tool-ui/three/theme3d";
 
@@ -29,7 +31,6 @@ const S = 84.39 * SCALE;
 const R = 36.8 * SCALE;
 const LANES = 0.3;
 const SPEEDUP = 25;
-const MOVE_SECONDS = 8;
 
 /** Point on the lane-1 line at arc length u (0 = start line, running anticlockwise seen from above). */
 function onTrack(u: number, r = R): { x: number; z: number; heading: number } {
@@ -64,12 +65,10 @@ export default function PaceTrackScene3D({ secPerKm, title, lap, splits }: PaceT
   const invalidate = useThree((s) => s.invalidate);
   const runner = useRef<THREE.Group>(null);
   const dist = useRef(300 * SCALE);
-  const shownSpeed = useRef<number | null>(null);
-  const moveLeft = useRef(0);
-  const reduced = useRef<boolean | null>(null);
   const bg = p.dark ? "rgba(24,24,27,0.85)" : "rgba(255,255,255,0.92)";
   // On-screen speed in scene units per second.
   const speed = secPerKm > 0 ? ((1000 * SCALE) / secPerKm) * SPEEDUP : 0;
+  const { active } = useMotionEpisode([speed]);
 
   const geos = useMemo(() => {
     const ring = stadium(R + LANES);
@@ -85,33 +84,26 @@ export default function PaceTrackScene3D({ secPerKm, title, lap, splits }: PaceT
     geos.infield.dispose();
   }, [geos]);
 
-  // The runner moves for MOVE_SECONDS after the pace changes, never on load, so an idle page draws nothing.
   useEffect(() => {
-    if (shownSpeed.current !== null && shownSpeed.current !== speed) moveLeft.current = MOVE_SECONDS;
-    shownSpeed.current = speed;
     invalidate();
   }, [invalidate, speed]);
 
-  useFrame((state, delta) => {
-    if (reduced.current === null) reduced.current = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
-    const moving = !reduced.current && speed > 0 && moveLeft.current > 0;
-    if (moving) {
-      moveLeft.current -= Math.min(delta, 0.05);
-      dist.current += Math.min(delta, 0.05) * speed;
-    }
+  // the runner laps during a motion episode after the pace changes (tool-ui/motion), else stands at rest
+  useSceneFrame((_, dt) => {
+    if (speed > 0) dist.current += Math.min(dt, 0.05) * speed;
     const pos = onTrack(dist.current, R + LANES / 2 - 0.03);
     if (runner.current) {
       runner.current.position.set(pos.x, 0, pos.z);
       runner.current.rotation.y = pos.heading;
       const swing = Math.sin(dist.current * 9) * 0.5;
       const [, , legA, legB] = runner.current.children;
-      if (legA && legB && !reduced.current) {
+      if (legA && legB && dt) {
         legA.rotation.z = swing;
         legB.rotation.z = -swing;
       }
     }
-    if (moving) state.invalidate();
-  });
+    return speed > 0;
+  }, active);
 
   const terracotta = p.dark ? "#b45309" : "#c2410c";
   const marks = [100, 200, 300, 400].map((m) => ({ m, ...onTrack(m * SCALE, R + LANES + 0.08) }));

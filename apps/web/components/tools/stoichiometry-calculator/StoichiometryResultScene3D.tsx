@@ -1,6 +1,8 @@
 "use client";
 import { useEffect, useMemo, useRef, type RefObject } from "react";
-import { useFrame, useThree } from "@react-three/fiber";
+import { useThree } from "@react-three/fiber";
+import { useMotionEpisode } from "@/components/tool-ui/motion/motion";
+import { useSceneFrame } from "@/components/tool-ui/motion/scene-motion";
 import type { Group } from "three";
 import DemandCanvas3D, { SiteLabel3D as Label3D, Invalidate } from "@/components/tool-ui/three/DemandCanvas3D";
 import { useTokenColors, type TokenColors } from "@/components/tool-ui/indicator-kit/tokenColors";
@@ -29,8 +31,6 @@ export function cluster(count: number, x: number, sw: number, availH: number) {
   return { at, k, top: (rows / 2) * gap };
 }
 
-const SPIN_SECONDS = 8;
-
 function Spinning({ formula, at, k, phase, c }: { formula: string; at: [number, number, number]; k: number; phase: number; c: TokenColors }) {
   const items = useMemo(() => [{ formula, at: [0, 0, 0] as [number, number, number], scale: k }], [formula, k]);
   return (
@@ -40,25 +40,14 @@ function Spinning({ formula, at, k, phase, c }: { formula: string; at: [number, 
   );
 }
 
-/** Slow turn of every molecule for SPIN_SECONDS after the result changes, never on load, so an idle page draws nothing; skipped for reduced motion. */
-function Spin({ root, result }: { root: RefObject<Group | null>; result: string }) {
-  const invalidate = useThree((s) => s.invalidate);
-  const shown = useRef<string | null>(null);
-  const spinLeft = useRef(0);
-  useEffect(() => {
-    if (shown.current !== null && shown.current !== result) spinLeft.current = SPIN_SECONDS;
-    shown.current = result;
-    invalidate();
-  }, [result, invalidate]);
-  const reduce = useMemo(() => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches, []);
-  useFrame((state, dt) => {
-    if (reduce || !root.current || spinLeft.current <= 0) return;
-    spinLeft.current -= Math.min(dt, 0.05);
-    root.current.traverse((o) => {
-      if (o.userData.spin) o.rotation.y += Math.min(dt, 0.05) * 0.45;
+/** Slow turn of every molecule during a motion episode (the reaction's data changed; tool-ui/motion), else still. */
+function Spin({ root, trigger }: { root: RefObject<Group | null>; trigger: string }) {
+  const { active } = useMotionEpisode([trigger]);
+  useSceneFrame((_, dt) => {
+    root.current?.traverse((o) => {
+      if (o.userData.spin) o.rotation.y += dt * 0.45;
     });
-    state.invalidate();
-  });
+  }, active);
   return null;
 }
 
@@ -93,7 +82,7 @@ function Scene({ p, c }: { p: StoSceneProps; c: TokenColors }) {
   const arrowLen = sw * 0.6;
   return (
     <group ref={root}>
-      <Spin root={root} result={JSON.stringify(p.items)} />
+      <Spin root={root} trigger={JSON.stringify(p)} />
       {p.items.map((it, i) => {
         const x = xAt(i < nR ? i : i + 1);
         const n = shownCount(it.coefficient);
