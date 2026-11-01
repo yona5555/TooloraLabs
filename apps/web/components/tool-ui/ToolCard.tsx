@@ -90,7 +90,7 @@ export default async function ToolCard({ tool, titleText, descriptionText, featu
         <Heading className="text-sm font-bold leading-snug text-zinc-900 sm:text-base dark:text-zinc-50">{titleText}</Heading>
 
         {(showFeatured || tags.length > 0) && (
-          <div className="flex h-5 flex-wrap gap-1 overflow-hidden">
+          <div className="flex flex-wrap gap-1">
             {showFeatured && (
               <span className="rounded-full bg-blue-100 px-2 py-0.5 text-[10px] font-semibold leading-4 text-blue-700 dark:bg-blue-500/15 dark:text-blue-300">{featuredLabel}</span>
             )}

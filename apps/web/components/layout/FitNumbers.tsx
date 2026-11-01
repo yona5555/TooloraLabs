@@ -34,7 +34,7 @@ export function isNumericText(text: string): boolean {
   return (t.match(/[\p{L}\p{M}]/gu) || []).length <= MAX_LETTERS;
 }
 
-const SKIP = "svg, script, style, textarea, input, select, pre, [contenteditable=true]";
+const SKIP = "h1, h2, h3, h4, h5, h6, svg, script, style, textarea, input, select, pre, [contenteditable=true]";
 
 function markNumbers(root: Element) {
   const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
@@ -91,8 +91,6 @@ function fit(el: HTMLElement) {
   }
   // A title ([data-fit], words) too long for one line even at the floor wraps at its own size
   // instead: two readable lines beat one tiny one. Numbers never take this path.
-  // A tool page title ([data-fit-oneline]) on phone keeps the floor size and wraps if it still does not fit.
-  if (el.hasAttribute("data-fit-oneline") && window.matchMedia("(max-width: 767px)").matches) return;
   if (spills(el) && !el.hasAttribute("data-num")) {
     el.style.removeProperty("font-size");
     el.setAttribute("data-fit-wrap", "");

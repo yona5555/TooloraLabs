@@ -29,8 +29,8 @@ export default function QuickConversionTable({ title, columns, rows }: QuickConv
   return (
     <div className="mt-5 flex flex-1 flex-col border-t border-zinc-200 pt-4 dark:border-zinc-800">
       <h3 className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">{title}</h3>
-      <div className="relative mt-2 min-h-44 flex-1 overflow-hidden rounded-xl border border-zinc-100 dark:border-zinc-800">
-        <table className="absolute inset-x-0 top-0 w-full text-xs" data-testid="quick-table">
+      <div className="mt-2 min-h-44 flex-1 overflow-hidden rounded-xl border border-zinc-100 dark:border-zinc-800">
+        <table className="w-full table-fixed text-xs [overflow-wrap:anywhere]" data-testid="quick-table">
           <thead className="bg-zinc-50 text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400">
             <tr>
               <th dir="ltr" className="px-2 py-1.5 text-start font-medium uppercase">{columns[0]}</th>

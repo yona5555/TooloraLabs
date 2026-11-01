@@ -28,9 +28,9 @@ export default function LiFitTargets() {
                   {f(chars)} / {f(s.max)}
                 </span>
               </div>
-              <div className="relative mt-1 h-3 overflow-hidden rounded-full bg-zinc-100 dark:bg-zinc-800">
+              <div className="relative mt-1 h-4 overflow-hidden rounded-full bg-zinc-100 dark:bg-zinc-800">
                 <div
-                  className={`absolute inset-y-0 start-0 rounded-full ${over ? "bg-rose-500 dark:bg-rose-400" : "bg-emerald-500 dark:bg-emerald-400"}`}
+                  className={`absolute inset-y-0 start-0 rounded-full ${over ? "bg-rose-600" : "bg-emerald-500 dark:bg-emerald-400"}`}
                   style={{ width: `${Math.min(1, share) * 100}%`, transition: "width 350ms ease" }}
                 />
                 {over && (
