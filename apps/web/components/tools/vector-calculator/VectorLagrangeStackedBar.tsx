@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import VectorIndicatorCard from "./VectorIndicatorCard";
 import { useVectorAnalysis } from "./VectorLiveContext";
@@ -24,7 +25,7 @@ export default function VectorLagrangeStackedBar() {
       intro={t("intro")}
       indicator={
         <div dir="ltr" className="max-w-full">
-          <svg width={W} height={120} viewBox={`0 0 ${W} 120`} role="img" aria-label={t("title")} className="block h-auto max-w-full">
+          <FitSvg width={W} height={120} viewBox={`0 0 ${W} 120`} role="img" aria-label={t("title")} className="block h-auto max-w-full">
             <text style={{ fontSize: svgPx(12) }} x={0} y={14} className="fill-zinc-500 dark:fill-zinc-400">{t("total")} = {n(total)}</text>
             <rect x={0} y={24} width={W} height={BAR_H} rx={8} className="fill-zinc-200 dark:fill-zinc-700" />
             {dotW > 0 && <rect x={0} y={24} width={dotW} height={BAR_H} rx={8} className="fill-blue-500 dark:fill-blue-400" />}
@@ -35,7 +36,7 @@ export default function VectorLagrangeStackedBar() {
             <text style={{ fontSize: svgPx(12) }} x={14} y={93} className="fill-zinc-700 dark:fill-zinc-200">{t("dotPart")} = {n(r.dotSquared)} · {pct(dotShare)}</text>
             <rect x={0} y={102} width={10} height={10} rx={2} className="fill-rose-500 dark:fill-rose-400" />
             <text style={{ fontSize: svgPx(12) }} x={14} y={111} className="fill-zinc-700 dark:fill-zinc-200">{t("crossPart")} = {n(r.crossSquared)} · {pct(crossShare)}</text>
-          </svg>
+          </FitSvg>
         </div>
       }
       rows={[

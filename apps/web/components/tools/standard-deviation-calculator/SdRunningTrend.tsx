@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import SdIndicatorCard, { scaleX } from "./SdIndicatorCard";
 import { useSdModel } from "./SdLiveContext";
@@ -30,11 +31,11 @@ export default function SdRunningTrend() {
 
   const svg = (
     <div className="w-full max-w-[310px]">
-      <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+      <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
         {[0, 0.5, 1].map((q) => (
           <g key={q}>
             <line x1={L} y1={sy(q * maxY)} x2={W - R} y2={sy(q * maxY)} strokeDasharray={q ? "3 3" : undefined} className="stroke-zinc-200 dark:stroke-zinc-700" />
-            <text style={{ fontSize: svgPx(12) }} x={L - 5} y={sy(q * maxY) + 3} textAnchor="end" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+            <text style={{ fontSize: svgPx(12) }} x={L - 5} y={sy(q * maxY) + 3} textAnchor="end" fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
               {f(q * maxY, 2)}
             </text>
           </g>
@@ -62,7 +63,7 @@ export default function SdRunningTrend() {
           <line x1={L + 40} y1={8} x2={L + 56} y2={8} strokeWidth={2} strokeDasharray="5 3" className="stroke-violet-500 dark:stroke-violet-400" />
           <text x={L + 60} y={11} className="fill-zinc-600 dark:fill-zinc-300">s</text>
         </g>
-      </svg>
+      </FitSvg>
     </div>
   );
 

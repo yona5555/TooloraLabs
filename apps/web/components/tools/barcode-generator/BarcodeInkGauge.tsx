@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import BarcodeIndicatorCard, { BarcodeIndicatorUnavailable } from "./BarcodeIndicatorCard";
 import { useBarcodeModel } from "./BarcodeLiveContext";
@@ -39,7 +40,7 @@ export default function BarcodeInkGauge() {
   ];
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {zones.map((z) => (
         <path key={z.from} d={arc(R, z.from + 0.004, z.to - 0.004)} fill="none" strokeWidth={20} className={z.cls} />
       ))}
@@ -57,7 +58,7 @@ export default function BarcodeInkGauge() {
       <text style={{ fontSize: svgPx(22) }} x={CX} y={CY - 34} textAnchor="middle" fontWeight={700} className="fill-blue-700 dark:fill-blue-300">
         {pct(a.darkModules, a.modules)}
       </text>
-    </svg>
+    </FitSvg>
   );
 
   return (

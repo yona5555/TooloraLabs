@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import ZipIndicatorCard, { ZipIndicatorUnavailable } from "./ZipIndicatorCard";
@@ -30,7 +31,7 @@ export default function ZipRatioExplorer() {
 
   const svg = (
     <div className="w-[340px] max-w-full">
-      <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
+      <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
         <line x1={0} y1={BASE} x2={W} y2={BASE} className="stroke-zinc-300 dark:stroke-zinc-600" />
         {shown.map((x, i) => {
           const cx = i * slot + slot / 2;
@@ -39,7 +40,7 @@ export default function ZipRatioExplorer() {
             <g key={x.name} onClick={() => setPick(i)} className="cursor-pointer">
               <rect x={cx - bw - 2} y={y(x.size)} width={bw} height={BASE - y(x.size)} rx={4} className="fill-zinc-300 dark:fill-zinc-600" />
               <rect x={cx + 2} y={y(x.compressed)} width={bw} height={Math.max(2, BASE - y(x.compressed))} rx={4} className={FILE_FILL[i % FILE_FILL.length]} opacity={on ? 1 : 0.55} />
-              <text style={{ fontSize: svgPx(12) }} x={cx} y={BASE + 16} textAnchor="middle" fontWeight={on ? 700 : 500} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
+              <text style={{ fontSize: svgPx(12) }} x={cx} y={BASE + 16} textAnchor="middle" fontWeight={on ? 700 : 500} fontFamily="var(--font-mono)" className="fill-zinc-700 dark:fill-zinc-200">
                 {x.name.length > 10 ? `${x.name.slice(0, 9)}…` : x.name}
               </text>
               <text style={{ fontSize: svgPx(12) }} x={cx} y={BASE + 31} textAnchor="middle" fontWeight={700} className={on ? "fill-blue-700 dark:fill-blue-300" : "fill-zinc-500 dark:fill-zinc-400"}>
@@ -48,7 +49,7 @@ export default function ZipRatioExplorer() {
             </g>
           );
         })}
-      </svg>
+      </FitSvg>
       <input type="range" min={0} max={shown.length - 1} value={k} onChange={(e) => setPick(Number(e.target.value))} aria-label={t("slider")} className="mt-1 w-full accent-blue-600" />
     </div>
   );

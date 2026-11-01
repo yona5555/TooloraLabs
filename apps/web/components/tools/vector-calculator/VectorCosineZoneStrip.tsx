@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import VectorIndicatorCard from "./VectorIndicatorCard";
 import { useVectorAnalysis } from "./VectorLiveContext";
@@ -30,7 +31,7 @@ export default function VectorCosineZoneStrip() {
       intro={t("intro")}
       indicator={
         <div dir="ltr" className="max-w-full">
-          <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("title")} className="block h-auto max-w-full">
+          <FitSvg width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("title")} className="block h-auto max-w-full">
             {mx !== null && (
               <>
                 <text style={{ fontSize: svgPx(12) }} x={Math.min(Math.max(mx, 40), W - 40)} y={14} textAnchor="middle" className="fill-zinc-900 font-bold dark:fill-zinc-50">cos θ = {n(r.cos!, 3)}</text>
@@ -51,7 +52,7 @@ export default function VectorCosineZoneStrip() {
             <text style={{ fontSize: svgPx(12) }} x={x(-1)} y={116} textAnchor="start" className="fill-zinc-400 dark:fill-zinc-500">180°</text>
             <text style={{ fontSize: svgPx(12) }} x={x(0)} y={116} textAnchor="middle" className="fill-zinc-400 dark:fill-zinc-500">90°</text>
             <text style={{ fontSize: svgPx(12) }} x={x(1)} y={116} textAnchor="end" className="fill-zinc-400 dark:fill-zinc-500">0°</text>
-          </svg>
+          </FitSvg>
         </div>
       }
       rows={[

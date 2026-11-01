@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import BarcodeIndicatorCard, { BarcodeIndicatorUnavailable } from "./BarcodeIndicatorCard";
 import { useBarcodeModel } from "./BarcodeLiveContext";
@@ -25,7 +26,7 @@ export default function BarcodeErrorDetection() {
   const H = 40 + groups.length * 62;
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <circle cx={BAR_X + 4} cy={10} r={5} className="fill-emerald-500 dark:fill-emerald-400" />
       <text style={{ fontSize: svgPx(12) }} x={BAR_X + 14} y={14} className="fill-zinc-500 dark:fill-zinc-400">
         {t("caught")}
@@ -45,13 +46,13 @@ export default function BarcodeErrorDetection() {
             </text>
             <rect x={BAR_X} y={y + 4} width={Math.max(2, caught)} height={22} rx={4} className="fill-emerald-500 dark:fill-emerald-400" />
             {BAR_W - caught > 0.5 && <rect x={BAR_X + caught} y={y + 4} width={BAR_W - caught} height={22} rx={4} className="fill-rose-500 dark:fill-rose-400" />}
-            <text style={{ fontSize: svgPx(12) }} x={BAR_X} y={y + 44} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+            <text style={{ fontSize: svgPx(12) }} x={BAR_X} y={y + 44} fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
               {f(g.detected)} / {f(g.total)} · {pct(g.detected, g.total || 1)}
             </text>
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   const missed = a.errors.transpositions.total - a.errors.transpositions.detected;

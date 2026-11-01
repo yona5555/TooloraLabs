@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import { QR_LEVELS, QR_RECOVERY } from "@tooloralabs/tools";
 import QRIndicatorCard, { QRIndicatorUnavailable } from "./QRIndicatorCard";
@@ -25,7 +26,7 @@ export default function QRMinVersionSteps() {
   const y = (v: number) => BASE - (v / maxV) * (BASE - TOP);
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <path d={vs.map((v, i) => `${i ? "L" : "M"} ${i * step} ${y(v)} H ${(i + 1) * step}`).join(" ")} fill="none" strokeWidth={2} className="stroke-blue-600 dark:stroke-blue-400" />
       {QR_LEVELS.map((l, i) => {
         const v = vs[i];
@@ -37,7 +38,7 @@ export default function QRMinVersionSteps() {
               {v > 40 ? "—" : `v${v}`}
             </text>
             {v <= 40 && (
-              <text style={{ fontSize: svgPx(12) }} x={i * step + step / 2} y={BASE - 8} textAnchor="middle" fontFamily="ui-monospace, monospace" className={active ? "fill-white" : "fill-blue-800 dark:fill-blue-200"}>
+              <text style={{ fontSize: svgPx(12) }} x={i * step + step / 2} y={BASE - 8} textAnchor="middle" fontFamily="var(--font-mono)" className={active ? "fill-white" : "fill-blue-800 dark:fill-blue-200"}>
                 {17 + 4 * v}²
               </text>
             )}
@@ -50,7 +51,7 @@ export default function QRMinVersionSteps() {
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   const l = a.minVersion.L ?? 41;

@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useState, useId } from "react";
 import { Minus, Plus } from "lucide-react";
 import { DAY_CODES, termOccurrences, weeklyScheduleStats } from "@tooloralabs/tools";
@@ -33,7 +34,7 @@ export function ScheduleWindowCard({ d }: SchedIndicatorProps) {
       <IndicatorWithTable
         workedExampleTitle={t("ind.worked")}
         indicator={
-          <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.window.title")} className="max-w-full">
+          <FitSvg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.window.title")} className="max-w-full">
             {Array.from({ length: h1 - h0 + 1 }, (_, i) => h0 + i)
               .filter((h) => (h - h0) % 2 === 0)
               .map((h) => (
@@ -77,7 +78,7 @@ export function ScheduleWindowCard({ d }: SchedIndicatorProps) {
                 </g>
               );
             })}
-          </svg>
+          </FitSvg>
         }
         rows={[
           ...d.shownDays
@@ -114,7 +115,7 @@ export function ScheduleCampusCard({ state, onChange, d }: SchedIndicatorProps) 
         workedExampleTitle={t("ind.worked")}
         indicator={
           <div className="w-[400px] max-w-full">
-            <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.campus.title")} className="max-w-full">
+            <FitSvg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.campus.title")} className="max-w-full">
               {days.map((day, i) => {
                 const s = d.stats.days[DAY_CODES.indexOf(day)];
                 const on = s.classCount > 0;
@@ -142,7 +143,7 @@ export function ScheduleCampusCard({ state, onChange, d }: SchedIndicatorProps) 
               <text style={{ fontSize: svgPx(12) }} x={W / 2} y={120} textAnchor="middle" fontWeight={800} className={valueText}>
                 {`${fmt(campusDays.length)}/7 · ${u.h(weekly)}`}
               </text>
-            </svg>
+            </FitSvg>
             <div className="mt-1 flex items-center justify-center gap-2 text-xs font-semibold text-zinc-600 dark:text-zinc-300">
               <span>{t("ind.campus.commute")}</span>
               <button type="button" className={stepBtn} aria-label={t("input.less")} disabled={state.commute <= 0} onClick={() => setCommute(state.commute - 5)}>
@@ -207,7 +208,7 @@ export function ScheduleStreakCard({ d }: SchedIndicatorProps) {
                 </button>
               ))}
             </div>
-            <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.streak.title")} className="max-w-full">
+            <FitSvg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.streak.title")} className="max-w-full">
               <line x1={0} x2={W} y1={B} y2={B} stroke="currentColor" strokeOpacity={0.35} />
               {days.map((day, i) => {
                 const s = stats.days[DAY_CODES.indexOf(day)];
@@ -236,7 +237,7 @@ export function ScheduleStreakCard({ d }: SchedIndicatorProps) {
                   </g>
                 );
               })}
-            </svg>
+            </FitSvg>
           </div>
         }
         rows={[
@@ -290,7 +291,7 @@ export function ScheduleWorkloadCard({ state, d }: SchedIndicatorProps) {
         indicator={
           <div className="w-[260px]">
             <PhoneMini slot={0} title={t("ind.workload.title")}>
-            <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.workload.title")}>
+            <FitSvg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.workload.title")}>
               <defs>
                 <linearGradient id={`${svgId}csb-workload`} x1="0" x2="1" y1="0" y2="0">
                   <stop offset="0%" stopColor="#0ea5e9" />
@@ -319,7 +320,7 @@ export function ScheduleWorkloadCard({ state, d }: SchedIndicatorProps) {
               <text style={{ fontSize: svgPx(12) }} x={CX} y={CY + 22} textAnchor="middle" fontWeight={800} fill={color}>
                 {t(`ind.workload.zone.${zone}`)}
               </text>
-            </svg>
+            </FitSvg>
             </PhoneMini>
             <div className="mt-1 flex items-center justify-center gap-1 text-xs">
               <span className="font-semibold text-zinc-600 dark:text-zinc-300">{t("ind.workload.ratio")}</span>

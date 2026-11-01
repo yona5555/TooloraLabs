@@ -50,7 +50,7 @@ export default function B64SizeBar() {
             <text style={{ fontSize: svgPx(12) }} x={0} y={y + 12} className="fill-zinc-600 dark:fill-zinc-300">
               {t(r.key)}
             </text>
-            <text style={{ fontSize: svgPx(12) }} x={W} y={y + 12} textAnchor="end" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={W} y={y + 12} textAnchor="end" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
               {f(total)}
             </text>
             {r.parts.map((p, k) => {

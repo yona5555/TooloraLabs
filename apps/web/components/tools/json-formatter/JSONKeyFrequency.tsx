@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import JSONIndicatorCard, { JSONIndicatorUnavailable } from "./JSONIndicatorCard";
 import { useJSONModel } from "./JSONLiveContext";
@@ -38,7 +39,7 @@ export default function JSONKeyFrequency() {
   const repeated = a.keyFrequency.filter((k) => k.count > 1).length;
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {rows.map((r, i) => {
         const y = TOP + i * ROW;
         const w = Math.max(3, (r.count / peak) * BAR_W);
@@ -48,19 +49,19 @@ export default function JSONKeyFrequency() {
               x={LABEL}
               y={y + 14}
               textAnchor="end"
-              fontFamily="ui-monospace, monospace"
+              fontFamily="var(--font-mono)"
               className={i === 0 ? "fill-blue-700 font-bold dark:fill-blue-300" : "fill-zinc-600 dark:fill-zinc-300"}
             >
               {clip(r.key, 12)}
             </text>
             <rect x={BAR_X} y={y + 3} width={w} height={ROW - 8} rx={3} className={r.count > 1 ? "fill-blue-500 dark:fill-blue-400" : "fill-zinc-300 dark:fill-zinc-600"} />
-            <text style={{ fontSize: svgPx(12) }} x={BAR_X + w + 5} y={y + 14} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
+            <text style={{ fontSize: svgPx(12) }} x={BAR_X + w + 5} y={y + 14} fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-700 dark:fill-zinc-200">
               ×{f(r.count)}
             </text>
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   return (

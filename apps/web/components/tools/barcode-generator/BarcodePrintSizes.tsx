@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import BarcodeIndicatorCard, { BarcodeIndicatorUnavailable } from "./BarcodeIndicatorCard";
 import { useBarcodeModel } from "./BarcodeLiveContext";
@@ -33,7 +34,7 @@ export default function BarcodePrintSizes() {
 
   const base = H - 34;
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {placements.map(({ s, x, w, h }) => (
         <g key={s.key}>
           <rect x={x} y={base - h - 4} width={w} height={h + 8} rx={3} className="fill-white stroke-zinc-300 dark:fill-zinc-50 dark:stroke-zinc-600" />
@@ -41,12 +42,12 @@ export default function BarcodePrintSizes() {
           <text style={{ fontSize: svgPx(12) }} x={x + w / 2} y={base + 18} textAnchor="middle" fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
             {t(s.key)}
           </text>
-          <text style={{ fontSize: svgPx(12) }} x={x + w / 2} y={base + 32} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+          <text style={{ fontSize: svgPx(12) }} x={x + w / 2} y={base + 32} textAnchor="middle" fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
             {f(s.widthMm, 1)} mm
           </text>
         </g>
       ))}
-    </svg>
+    </FitSvg>
   );
 
   const isCode128 = a.symbology === "code128";

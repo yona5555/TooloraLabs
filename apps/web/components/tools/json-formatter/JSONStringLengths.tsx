@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import JSONIndicatorCard, { JSONIndicatorUnavailable } from "./JSONIndicatorCard";
 import { useJSONModel } from "./JSONLiveContext";
@@ -39,7 +40,7 @@ export default function JSONStringLengths() {
   const meanX = meanBucket * slot + (slot - barW) / 2 + within * barW;
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <line x1={0} y1={BASE} x2={W} y2={BASE} className="stroke-zinc-300 dark:stroke-zinc-600" />
       {s.buckets.map((b, i) => {
         const h = b.count ? Math.max(4, (b.count / peak) * (BASE - TOP - 18)) : 0;
@@ -47,10 +48,10 @@ export default function JSONStringLengths() {
         return (
           <g key={i}>
             {h > 0 && <rect x={x} y={BASE - h} width={barW} height={h} rx={4} className={i === meanBucket ? "fill-emerald-600 dark:fill-emerald-400" : "fill-emerald-300 dark:fill-emerald-800"} />}
-            <text style={{ fontSize: svgPx(12) }} x={x + barW / 2} y={BASE - h - 5} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={x + barW / 2} y={BASE - h - 5} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
               {f(b.count)}
             </text>
-            <text style={{ fontSize: svgPx(12) }} x={x + barW / 2} y={BASE + 16} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+            <text style={{ fontSize: svgPx(12) }} x={x + barW / 2} y={BASE + 16} textAnchor="middle" fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
               {b.to === null ? `${b.from}+` : `${b.from}–${b.to}`}
             </text>
           </g>
@@ -60,7 +61,7 @@ export default function JSONStringLengths() {
       <text style={{ fontSize: svgPx(12) }} x={Math.min(Math.max(meanX, 40), W - 40)} y={TOP - 10} textAnchor="middle" fontWeight={700} className="fill-rose-600 dark:fill-rose-300">
         {t("mean", { n: f(s.meanLength, 1) })}
       </text>
-    </svg>
+    </FitSvg>
   );
 
   return (

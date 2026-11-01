@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import QRIndicatorCard, { QRIndicatorUnavailable } from "./QRIndicatorCard";
@@ -41,7 +42,7 @@ export default function QRDarkGauge() {
   const n4 = Math.floor(Math.abs(share * 100 - 50) / 5) * 10;
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {zones.map((z) => {
         const [x0, y0] = pt(z.from + 0.004, R);
         const [x1, y1] = pt(z.to - 0.004, R);
@@ -60,7 +61,7 @@ export default function QRDarkGauge() {
       <text style={{ fontSize: svgPx(22) }} x={CX} y={CY - 38} textAnchor="middle" fontWeight={700} className="fill-blue-700 dark:fill-blue-300">
         {pct(a.darkModules, total)}
       </text>
-    </svg>
+    </FitSvg>
   );
 
   return (

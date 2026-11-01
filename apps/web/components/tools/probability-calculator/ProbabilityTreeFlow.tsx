@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import ProbabilityIndicatorCard, { REGION_FILL } from "./ProbabilityIndicatorCard";
 import { useProbabilityModel } from "./ProbabilityLiveContext";
@@ -29,7 +30,7 @@ export default function ProbabilityTreeFlow() {
   const LX = 236;
 
   const tree = (
-    <svg style={{ direction: "ltr" }} width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("title")} className="mx-auto max-w-full">
+    <FitSvg style={{ direction: "ltr" }} width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("title")} className="mx-auto max-w-full">
       {mid.map(([x, y], i) => (
         <g key={i}>
           <line x1={root[0]} y1={root[1]} x2={x} y2={y} strokeWidth={2} className={i === 0 ? "stroke-emerald-500" : "stroke-zinc-400"} />
@@ -54,7 +55,7 @@ export default function ProbabilityTreeFlow() {
         );
       })}
       <circle cx={root[0]} cy={root[1]} r={6} className="fill-zinc-700 dark:fill-zinc-200" />
-    </svg>
+    </FitSvg>
   );
 
   return (

@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import SdIndicatorCard from "./SdIndicatorCard";
 import { BAND_FILL, bandOf, useSdModel } from "./SdLiveContext";
@@ -24,7 +25,7 @@ export default function SdZRanked() {
   const sx = (z: number) => LABEL_W + (Math.abs(z) / maxZ) * barW;
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {[1, 2, 3].map((k) => (
         <g key={k}>
           <line x1={sx(k)} y1={0} x2={sx(k)} y2={rows.length * ROW} strokeDasharray="3 3" className="stroke-zinc-300 dark:stroke-zinc-600" />
@@ -37,17 +38,17 @@ export default function SdZRanked() {
         const y = i * ROW;
         return (
           <g key={r.index}>
-            <text style={{ fontSize: svgPx(12) }} x={LABEL_W - 6} y={y + 16} textAnchor="end" fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
+            <text style={{ fontSize: svgPx(12) }} x={LABEL_W - 6} y={y + 16} textAnchor="end" fontFamily="var(--font-mono)" className="fill-zinc-700 dark:fill-zinc-200">
               {`x = ${f(r.value)}`}
             </text>
             <rect x={LABEL_W} y={y + 5} width={Math.max(2, sx(r.z) - LABEL_W)} height={ROW - 9} rx={4} className={BAND_FILL[bandOf(r.z)]} />
-            <text style={{ fontSize: svgPx(12) }} x={W} y={y + 16} textAnchor="end" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={W} y={y + 16} textAnchor="end" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
               {`${r.z >= 0 ? "+" : "−"}${f(Math.abs(r.z), 2)}`}
             </text>
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   const top = rows[0];

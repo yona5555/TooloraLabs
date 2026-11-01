@@ -75,7 +75,7 @@ export default function PaceRings() {
           <circle cx={C} cy={C - RINGS[0] - 6} r={4} className="fill-amber-500 stroke-white dark:fill-amber-400 dark:stroke-zinc-900" strokeWidth={1.5} />
         </g>
         <circle cx={C} cy={C} r={34} className="fill-white dark:fill-zinc-900" />
-        <text style={{ fontSize: svgPx(19) }} x={C} y={C - 4} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-900 dark:fill-zinc-100">
+        <text style={{ fontSize: svgPx(19) }} x={C} y={C - 4} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-900 dark:fill-zinc-100">
           {clock(result.totalSeconds)}
         </text>
         <text style={{ fontSize: svgPx(12) }} x={C} y={C + 14} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">

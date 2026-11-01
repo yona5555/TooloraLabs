@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import SdIndicatorCard from "./SdIndicatorCard";
 import { useSdModel } from "./SdLiveContext";
@@ -31,7 +32,7 @@ export default function SdSquaresStacked() {
   let x = 0;
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <rect x={0} y={BAR_Y} width={W} height={BAR_H} rx={8} className="fill-zinc-100 dark:fill-zinc-800" />
       {a.sumSquares > 0 &&
         parts.map((p, i) => {
@@ -54,7 +55,7 @@ export default function SdSquaresStacked() {
         return (
           <g key={p.index}>
             <rect x={0} y={y} width={12} height={12} rx={3} className={COLORS[i % COLORS.length]} />
-            <text style={{ fontSize: svgPx(12) }} x={18} y={y + 10} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
+            <text style={{ fontSize: svgPx(12) }} x={18} y={y + 10} fontFamily="var(--font-mono)" className="fill-zinc-700 dark:fill-zinc-200">
               {`x = ${f(p.value)}  (${f(p.deviation)})² = ${f(p.squaredDeviation)}`}
             </text>
             <text style={{ fontSize: svgPx(12) }} x={W} y={y + 10} textAnchor="end" fontWeight={700} className="fill-zinc-800 dark:fill-zinc-100">
@@ -63,7 +64,7 @@ export default function SdSquaresStacked() {
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   const top2 = parts.slice(0, 2).reduce((s, p) => s + p.shareOfSS, 0);

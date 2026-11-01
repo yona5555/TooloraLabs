@@ -40,7 +40,7 @@ function ToolQuickPreview({ slug }: { slug: string }) {
     <div className="grid grid-rows-[0fr] overflow-hidden transition-all duration-200 group-hover:grid-rows-[1fr] group-focus-within:grid-rows-[1fr]">
       <div className="min-h-0">
         <div className="mx-1 mb-1.5 rounded-lg border border-zinc-200 bg-zinc-50 p-2.5 dark:border-zinc-700 dark:bg-zinc-800/60">
-          <p className="line-clamp-3 text-xs leading-5 text-zinc-500 dark:text-zinc-400">{tTools(`${slug}.description`)}</p>
+          <p className="text-xs leading-5 text-zinc-500 dark:text-zinc-400">{tTools(`${slug}.description`)}</p>
           <Link
             href={`/docs/${slug}`}
             className="mt-1.5 inline-flex items-center gap-1 text-xs font-medium text-blue-600 hover:underline dark:text-blue-400"
@@ -208,7 +208,7 @@ export default function CategorySidebar({
                     <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg ${iconColorClasses}`}>
                       <Icon size={15} strokeWidth={2} />
                     </span>
-                    <span className="flex-1 truncate text-start">{t(`${category.slug}.title`)}</span>
+                    <span className="flex-1 text-start">{t(`${category.slug}.title`)}</span>
                     <span className="shrink-0 rounded-full bg-zinc-100 px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-zinc-400 dark:bg-zinc-800 dark:text-zinc-500">
                       {tNavbar("comingSoon")}
                     </span>
@@ -227,7 +227,7 @@ export default function CategorySidebar({
                 <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg ${iconColorClasses}`}>
                   <Icon size={15} strokeWidth={2} />
                 </span>
-                <span className="flex-1 truncate text-start">{t(`${category.slug}.title`)}</span>
+                <span className="flex-1 text-start">{t(`${category.slug}.title`)}</span>
                 <span className="shrink-0 rounded-full bg-zinc-100 px-1.5 py-0.5 text-[10px] font-medium text-[#5e5e67] dark:bg-zinc-800 dark:text-zinc-400">
                   {tCategoriesSection("toolCount", { count: categoryTools.length })}
                 </span>
@@ -271,7 +271,7 @@ export default function CategorySidebar({
                   <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg ${iconColorClasses}`}>
                     <Icon size={15} strokeWidth={2} />
                   </span>
-                  <span className="flex-1 truncate text-start">{t(`${category.slug}.title`)}</span>
+                  <span className="flex-1 text-start">{t(`${category.slug}.title`)}</span>
                   <span className="shrink-0 rounded-full bg-zinc-100 px-1.5 py-0.5 text-[10px] font-medium text-[#5e5e67] dark:bg-zinc-800 dark:text-zinc-400">
                     {tCategoriesSection("toolCount", { count: categoryTools.length })}
                   </span>

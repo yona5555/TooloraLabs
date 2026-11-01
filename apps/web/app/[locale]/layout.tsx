@@ -3,9 +3,9 @@ import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { getLocaleDir } from "@/lib/locale-meta";
-import { getLocaleFontClassName } from "@/lib/locale-fonts";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import { localeFontPreload } from "@/lib/fonts";
 import HtmlDocument from "@/components/layout/HtmlDocument";
 import { jsonLdHtml, organizationJsonLd } from "@/lib/seo";
 import { getClientMessages } from "@/lib/client-messages";
@@ -28,10 +28,10 @@ export default async function LocaleLayout({
   setRequestLocale(locale);
 
   return (
-    <HtmlDocument lang={locale} dir={getLocaleDir(locale)}>
+    <HtmlDocument lang={locale} dir={getLocaleDir(locale)} fontPreload={localeFontPreload(locale)}>
       <NextIntlClientProvider locale={locale} messages={await getClientMessages(locale)}>
         <script type="application/ld+json" dangerouslySetInnerHTML={jsonLdHtml(organizationJsonLd)} />
-        <div className={getLocaleFontClassName(locale)}>
+        <div>
           <Navbar />
           {children}
           <Footer />

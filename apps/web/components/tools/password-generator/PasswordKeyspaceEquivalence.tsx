@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import PasswordIndicatorCard, { PasswordIndicatorUnavailable } from "./PasswordIndicatorCard";
 import { usePasswordModel } from "./PasswordLiveContext";
@@ -27,7 +28,7 @@ export default function PasswordKeyspaceEquivalence() {
   const maxDots = 20;
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {rows.map((r, i) => {
         const y = i * ROW + ROW / 2;
         const count = Math.ceil(r.value);
@@ -41,13 +42,13 @@ export default function PasswordKeyspaceEquivalence() {
             {Array.from({ length: shown }, (_, k) => (
               <circle key={k} cx={LABEL + k * gap + gap / 2} cy={y} r={Math.min(6, gap / 2 - 1)} className={r.cls} />
             ))}
-            <text style={{ fontSize: svgPx(12) }} x={W - 2} y={y + 4} textAnchor="end" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={W - 2} y={y + 4} textAnchor="end" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
               {f(r.value, 1)}
             </text>
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   return (

@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useRef } from "react";
 import { useTranslations } from "next-intl";
 import { charEntropy, passphraseEntropy } from "@tooloralabs/tools";
@@ -56,7 +57,7 @@ export default function PasswordLengthCurve() {
   }
 
   const svg = (
-    <svg
+    <FitSvg
       ref={svgRef}
       direction="ltr"
       width={W}
@@ -103,7 +104,7 @@ export default function PasswordLengthCurve() {
       <text style={{ fontSize: svgPx(12) }} x={Math.min(x(n) + 12, W - 80)} y={Math.max(y(entropyAt(n)) - 10, 14)} fontWeight={700} className="fill-amber-700 dark:fill-amber-300">
         {f(entropyAt(n), 1)} {t("bits")}
       </text>
-    </svg>
+    </FitSvg>
   );
 
   const per = words ? s.bitsPerSymbol : Math.log2(s.poolSize);

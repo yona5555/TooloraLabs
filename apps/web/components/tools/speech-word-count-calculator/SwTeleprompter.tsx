@@ -96,7 +96,7 @@ export default function SwTeleprompter() {
   const indicator = (
     <div className="w-full sm:w-[360px]">
       <div className="relative overflow-hidden rounded-xl bg-zinc-900 px-4 py-3 text-zinc-100 shadow-inner dark:bg-black">
-        <div className="mb-2 flex items-center justify-between text-[10px] font-semibold uppercase tracking-wide text-zinc-400">
+        <div className="mb-2 flex items-center justify-between text-[10px] font-semibold uppercase tracking-wide text-zinc-300">
           <span>{t("sentenceOf", { n: f((sent?.index ?? 0) + 1), total: f(sentences.length) })}</span>
           <span dir="ltr" className="font-mono">{clock(at)} / {clock(total)}</span>
         </div>

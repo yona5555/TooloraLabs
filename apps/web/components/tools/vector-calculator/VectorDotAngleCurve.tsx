@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import { dotVsAngleCurve } from "@tooloralabs/tools";
 import VectorIndicatorCard from "./VectorIndicatorCard";
@@ -31,7 +32,7 @@ export default function VectorDotAngleCurve() {
       intro={t("intro")}
       indicator={
         <div dir="ltr" className="max-w-full">
-          <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("title")} className="block h-auto max-w-full">
+          <FitSvg width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("title")} className="block h-auto max-w-full">
             {[span, 0, -span].map((v) => (
               <g key={v}>
                 <line x1={PAD.l} x2={W - PAD.r} y1={y(v)} y2={y(v)} className={v === 0 ? "stroke-zinc-400 dark:stroke-zinc-500" : "stroke-zinc-200 dark:stroke-zinc-700"} strokeDasharray={v === 0 ? undefined : "4 4"} />
@@ -52,7 +53,7 @@ export default function VectorDotAngleCurve() {
                 </text>
               </>
             )}
-          </svg>
+          </FitSvg>
         </div>
       }
       rows={[

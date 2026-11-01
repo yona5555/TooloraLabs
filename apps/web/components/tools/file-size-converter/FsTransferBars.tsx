@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import FsIndicatorCard, { FsIndicatorUnavailable } from "./FsIndicatorCard";
 import { durationParts, useFsModel } from "./FsLiveContext";
@@ -31,7 +32,7 @@ export default function FsTransferBars() {
   };
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <line x1={0} y1={BASE} x2={W} y2={BASE} className="stroke-zinc-300 dark:stroke-zinc-600" />
       {a.transfers.map((x, i) => {
         const cx = i * slot + slot / 2;
@@ -52,13 +53,13 @@ export default function FsTransferBars() {
             <text style={{ fontSize: svgPx(12) }} x={cx} y={BASE + 16} textAnchor="middle" className="fill-zinc-600 dark:fill-zinc-300">
               {tp(x.key).split(" (")[0]}
             </text>
-            <text style={{ fontSize: svgPx(12) }} x={cx} y={BASE + 30} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-400 dark:fill-zinc-500">
+            <text style={{ fontSize: svgPx(12) }} x={cx} y={BASE + 30} textAnchor="middle" fontFamily="var(--font-mono)" className="fill-zinc-400 dark:fill-zinc-500">
               {f(x.mbps, 3)} Mb/s
             </text>
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   const fiber = a.transfers[3];

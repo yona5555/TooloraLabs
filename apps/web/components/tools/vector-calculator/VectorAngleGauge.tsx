@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useId } from "react";
 import { useTranslations } from "next-intl";
 import VectorIndicatorCard from "./VectorIndicatorCard";
@@ -35,7 +36,7 @@ export default function VectorAngleGauge() {
       intro={t("intro")}
       indicator={
         <div dir="ltr">
-          <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("title")} className="block">
+          <FitSvg width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("title")} className="block">
             <defs>
               <linearGradient id={`g${gid}`} x1="0" x2="1" y1="0" y2="0">
                 <stop offset="0%" stopColor="#10b981" />
@@ -64,7 +65,7 @@ export default function VectorAngleGauge() {
             {/* Readout below the pivot, so the needle never crosses it at any angle. */}
             <text style={{ fontSize: svgPx(18) }} x={CX} y={CY + 28} textAnchor="middle" className="fill-zinc-900 font-bold dark:fill-zinc-50">{r.angleDeg === null ? tr("notApplicable") : `θ = ${n(theta, 1)}°`}</text>
             <text style={{ fontSize: svgPx(12) }} x={CX} y={CY + 48} textAnchor="middle" className="fill-blue-700 font-semibold dark:fill-blue-300">{tr(`relation.${r.relation}`)}</text>
-          </svg>
+          </FitSvg>
         </div>
       }
       rows={[

@@ -2,7 +2,7 @@
 import { useEffect } from "react";
 
 /**
- * Chart labels in rendered CSS px (visuals.md): sets `--svg-k` on every SVG of the tool page to its
+ * Chart labels in rendered CSS px (visuals.md): sets `--svg-k` on every SVG of the tool or docs page to its
  * viewBox units per rendered CSS px, so label sizes written with `svgPx(n)` (tool-ui/svgPx) never render
  * below 12px when CSS scales a fixed-viewBox chart down (`svg { max-width: 100% }` below lg, `w-full`
  * charts in a narrow card). 1 when the chart is not scaled down; never below 1, so a chart drawn larger
@@ -21,7 +21,7 @@ function unitsPerPx(svg: SVGSVGElement): number {
 
 export default function SvgLabelScale() {
   useEffect(() => {
-    const main = document.querySelector("main[data-phone-cards]");
+    const main = document.querySelector("main[data-phone-cards], main[data-docs-page]");
     if (!main) return;
     const seen = new WeakSet<Element>();
     const update = (svg: SVGSVGElement) => {

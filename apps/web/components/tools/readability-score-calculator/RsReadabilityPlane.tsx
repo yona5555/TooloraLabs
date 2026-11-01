@@ -67,12 +67,12 @@ export default function RsReadabilityPlane() {
           <polygon key={r.key} points={r.points} fill={r.color} opacity={r.key === band.key ? 0.42 : 0.18} style={{ transition: "opacity 300ms" }} />
         ))}
         {[0, 10, 20, 30, 40].map((v) => (
-          <text style={{ fontSize: svgPx(12) }} key={v} x={px(v)} y={H - B + 13} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+          <text style={{ fontSize: svgPx(12) }} key={v} x={px(v)} y={H - B + 13} textAnchor="middle" fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
             {f(v)}
           </text>
         ))}
         {[1, 1.4, 1.8, 2.2, 2.6].map((v) => (
-          <text style={{ fontSize: svgPx(12) }} key={v} x={L - 4} y={py(v) + 3} textAnchor="end" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+          <text style={{ fontSize: svgPx(12) }} key={v} x={L - 4} y={py(v) + 3} textAnchor="end" fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
             {f(v)}
           </text>
         ))}

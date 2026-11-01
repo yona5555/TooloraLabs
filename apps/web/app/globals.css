@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "../styles/fonts.css";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -25,8 +26,29 @@
   display: none;
 }
 
+/* Self-hosted font stacks (lib/fonts.ts), per locale: the script font first, then Arimo / IBM Plex Mono / Tinos
+ * for Latin, then the math and symbol fonts. No system family anywhere (scripts/system-fonts.mjs). */
+@theme {
+  --font-sans: var(--font-arimo), var(--font-noto-math), var(--font-noto-symbols);
+  --font-mono: var(--font-plex-mono), var(--font-arimo), var(--font-noto-math), var(--font-noto-symbols);
+  --font-serif: var(--font-tinos), var(--font-noto-math), var(--font-noto-symbols);
+}
+html[lang="ar"] {
+  --font-sans: var(--font-plex-arabic), var(--font-arimo), var(--font-noto-math), var(--font-noto-symbols);
+  --font-mono: var(--font-plex-mono), var(--font-plex-arabic), var(--font-noto-math), var(--font-noto-symbols);
+  --font-serif: var(--font-tinos), var(--font-plex-arabic), var(--font-noto-math), var(--font-noto-symbols);
+}
+html[lang="hi"] {
+  --font-sans: var(--font-noto-devanagari), var(--font-arimo), var(--font-noto-math), var(--font-noto-symbols);
+  --font-mono: var(--font-plex-mono), var(--font-noto-devanagari), var(--font-noto-math), var(--font-noto-symbols);
+  --font-serif: var(--font-tinos), var(--font-noto-devanagari), var(--font-noto-math), var(--font-noto-symbols);
+}
+
+/* geometricPrecision: without it Chromium on Linux rounds a web font's glyph advances to whole pixels, up to 8%
+ * wider than the font's own metrics. With it Arimo measures exactly as Arial, on every platform. */
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  text-rendering: geometricPrecision;
 }
 
 /* ===== Blueprint theme: page variants, header nav pills, Browse dropdown, light surfaces =====

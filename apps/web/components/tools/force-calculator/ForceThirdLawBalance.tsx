@@ -54,7 +54,7 @@ export default function ForceThirdLawBalance() {
       <text style={{ fontSize: svgPx(12) }} x={CX} y={BEAM_Y - 34} textAnchor="middle" fontWeight={700} className="fill-emerald-600 dark:fill-emerald-400">
         {t("level")}
       </text>
-      <text style={{ fontSize: svgPx(12) }} x={CX} y={BEAM_Y - 18} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-red-600 dark:fill-red-400">
+      <text style={{ fontSize: svgPx(12) }} x={CX} y={BEAM_Y - 18} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className="fill-red-600 dark:fill-red-400">
         {`F₁₂ = F₂₁ = ${f(gr.force)} N`}
       </text>
       {pans.map((p, i) => (
@@ -72,7 +72,7 @@ export default function ForceThirdLawBalance() {
               y={BEAM_Y + 94 + j * LINE + (j >= massLines[i] ? 3 : 0)}
               textAnchor="middle"
               fontWeight={j >= massLines[i] ? 700 : undefined}
-              fontFamily="ui-monospace, monospace"
+              fontFamily="var(--font-mono)"
               className={j < massLines[i] ? "fill-zinc-600 dark:fill-zinc-300" : i === 0 ? "fill-blue-700 dark:fill-blue-300" : "fill-amber-600 dark:fill-amber-400"}
             >
               {line}

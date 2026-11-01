@@ -101,7 +101,7 @@ export default function InvoiceFlowResult({ invoice, overview, f, onPrint, onCsv
 
       <div className="mt-4 rounded-xl bg-zinc-900 p-4 text-white dark:bg-zinc-800">
         <p className="text-xs font-medium uppercase tracking-wide text-zinc-400">{t("grandTotal", { count: overview.invoiceCount })}</p>
-        <Counter value={overview.grand} f={f} className="block truncate font-mono text-3xl font-bold" testId="grand-total" />
+        <Counter value={overview.grand} f={f} className="block font-mono text-3xl font-bold" testId="grand-total" />
         <dl className="mt-3 grid grid-cols-3 gap-2 text-center">
           {[
             [t("net"), f.money(overview.net)],

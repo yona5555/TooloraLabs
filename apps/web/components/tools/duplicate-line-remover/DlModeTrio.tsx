@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import DlIndicatorCard, { DlIndicatorUnavailable } from "./DlIndicatorCard";
 import { useDlLive, useDlModel } from "./DlLiveContext";
@@ -29,7 +30,7 @@ export default function DlModeTrio() {
   const slot = W / 3;
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <line x1={0} y1={BASE} x2={W} y2={BASE} className="stroke-zinc-300 dark:stroke-zinc-600" />
       {modes.map((m, i) => {
         const h = Math.max(3, (m.v / peak) * (BASE - TOP));
@@ -45,7 +46,7 @@ export default function DlModeTrio() {
             }}
           >
             <rect x={cx - 30} y={BASE - h} width={60} height={h} rx={5} className={active ? "fill-blue-600 dark:fill-blue-400" : "fill-blue-300 hover:fill-blue-400 dark:fill-blue-800"} />
-            <text style={{ fontSize: svgPx(13) }} x={cx} y={BASE - h - 6} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(13) }} x={cx} y={BASE - h - 6} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
               {f(m.v)}
             </text>
             {/* a rule name wider than its column ("Ignore case + spaces") breaks onto a second line (§39);
@@ -58,7 +59,7 @@ export default function DlModeTrio() {
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   return (

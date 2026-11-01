@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import { chunkRanges } from "@tooloralabs/tools";
 import PdfIndicatorCard, { PdfIndicatorUnavailable } from "./PdfIndicatorCard";
@@ -31,24 +32,24 @@ export default function PdfPlanFlow() {
 
   const svg = (
     <div className="w-[340px] max-w-full">
-      <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
+      <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
         {shown.map((it, i) => {
           const y = i * ROW + 4;
           return (
             <g key={i}>
               <rect x={0} y={y} width={120} height={26} rx={13} className="fill-zinc-200 dark:fill-zinc-700" />
-              <text style={{ fontSize: svgPx(12) }} x={60} y={y + 17} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-100">
+              <text style={{ fontSize: svgPx(12) }} x={60} y={y + 17} textAnchor="middle" fontFamily="var(--font-mono)" className="fill-zinc-700 dark:fill-zinc-100">
                 {it.left.length > 15 ? `${it.left.slice(0, 14)}…` : it.left}
               </text>
               <path d={`M 124 ${y + 13} H 176 m -6 -5 l 6 5 l -6 5`} fill="none" strokeWidth={1.5} className="stroke-zinc-400 dark:stroke-zinc-500" />
               <rect x={182} y={y} width={W - 182} height={26} rx={13} className={it.ok ? SOURCE_FILL[i % SOURCE_FILL.length] : "fill-rose-500 dark:fill-rose-400"} />
-              <text style={{ fontSize: svgPx(12) }} x={182 + (W - 182) / 2} y={y + 17} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-white">
+              <text style={{ fontSize: svgPx(12) }} x={182 + (W - 182) / 2} y={y + 17} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className="fill-white">
                 {it.mid}
               </text>
             </g>
           );
         })}
-      </svg>
+      </FitSvg>
       {isSplit && (
         <div className="mt-3 flex flex-wrap gap-1.5">
           {[1, 2, 3].map((n) => (

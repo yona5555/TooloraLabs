@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import DlIndicatorCard, { DlIndicatorUnavailable } from "./DlIndicatorCard";
 import { useDlModel } from "./DlLiveContext";
@@ -30,25 +31,25 @@ export default function DlTopRepeats() {
   const peak = rows[0].count;
   const H = rows.length * ROW + 4;
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {rows.map((r, i) => {
         const y = i * ROW;
         const w = (r.count / peak) * BAR_W;
         const keptW = w / r.count;
         return (
           <g key={r.line}>
-            <text style={{ fontSize: svgPx(12) }} x={LABEL} y={y + 18} textAnchor="end" fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
+            <text style={{ fontSize: svgPx(12) }} x={LABEL} y={y + 18} textAnchor="end" fontFamily="var(--font-mono)" className="fill-zinc-700 dark:fill-zinc-200">
               {r.line.length > 20 ? `${r.line.slice(0, 19)}…` : r.line}
             </text>
             <rect x={BAR_X} y={y + 6} width={keptW} height={ROW - 12} rx={3} className="fill-emerald-500 dark:fill-emerald-400" />
             <rect x={BAR_X + keptW} y={y + 6} width={w - keptW} height={ROW - 12} rx={3} className="fill-rose-400 dark:fill-rose-500" />
-            <text style={{ fontSize: svgPx(12) }} x={BAR_X + w + 5} y={y + 18} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
+            <text style={{ fontSize: svgPx(12) }} x={BAR_X + w + 5} y={y + 18} fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-700 dark:fill-zinc-200">
               ×{r.count}
             </text>
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   const removedTop = rows[0].count - 1;

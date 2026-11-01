@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import { PT_TO_MM } from "@tooloralabs/tools";
 import PdfIndicatorCard, { PdfIndicatorUnavailable } from "./PdfIndicatorCard";
@@ -26,7 +27,7 @@ export default function PdfPaperCompare() {
   const FILL = ["fill-blue-600 dark:fill-blue-400", "fill-emerald-600 dark:fill-emerald-400", "fill-amber-500", "fill-rose-500"];
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {unique.map((p, i) => (
         <rect
           key={i}
@@ -47,12 +48,12 @@ export default function PdfPaperCompare() {
           <text style={{ fontSize: svgPx(12) }} x={W - 120} y={28 + i * 40} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
             {p.paper === "other" ? tp("other") : p.paper}
           </text>
-          <text style={{ fontSize: svgPx(12) }} x={W - 120} y={44 + i * 40} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+          <text style={{ fontSize: svgPx(12) }} x={W - 120} y={44 + i * 40} fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
             {f(p.width * PT_TO_MM, 0)} × {f(p.height * PT_TO_MM, 0)} mm
           </text>
         </g>
       ))}
-    </svg>
+    </FitSvg>
   );
 
   const a = unique[0];

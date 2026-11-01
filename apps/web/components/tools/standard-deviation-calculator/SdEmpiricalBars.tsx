@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import SdIndicatorCard from "./SdIndicatorCard";
 import { useSdModel } from "./SdLiveContext";
@@ -28,7 +29,7 @@ export default function SdEmpiricalBars() {
 
   const svg = (
     <div className="w-full max-w-[300px]">
-      <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+      <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
         <line x1={0} y1={BASE} x2={W} y2={BASE} className="stroke-zinc-300 dark:stroke-zinc-600" />
         {a.bands.map((b, gi) => {
           const shares = [b.actualShare, b.normalShare, b.chebyshevShare];
@@ -55,7 +56,7 @@ export default function SdEmpiricalBars() {
             </g>
           );
         })}
-      </svg>
+      </FitSvg>
       <div className="mt-1 flex flex-wrap justify-center gap-x-3 gap-y-1 text-xs text-zinc-600 dark:text-zinc-300">
         {SERIES.map((s) => (
           <span key={s.key} className="inline-flex items-center gap-1">

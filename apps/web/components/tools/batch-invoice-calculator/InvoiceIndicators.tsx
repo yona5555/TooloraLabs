@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import {
@@ -20,7 +21,6 @@ import { VAT_CHECKED, VAT_TABLE } from "./types";
 import { svgPx } from "@/components/tool-ui/svgPx";
 import { useMeasuredWidth } from "@/components/tool-ui/useMeasuredWidth";
 
-import FitSvg from "@/components/tool-ui/FitSvg";
 export type IndicatorProps = { invoices: BatchInvoice[]; overview: BatchOverview; f: InvoiceFormatters };
 
 /** One colour per invoice, reused by every indicator so an invoice reads the same everywhere. */
@@ -142,7 +142,7 @@ export function CompositionDonut({ overview, f }: IndicatorProps) {
       }
     >
       <div data-preview="visual" data-preview-hero className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center" data-testid="ind-donut">
-        <svg width={S} height={S} viewBox={`0 0 ${S} ${S}`} role="img" aria-label={t("donut.title")} className="shrink-0">
+        <FitSvg width={S} height={S} viewBox={`0 0 ${S} ${S}`} role="img" aria-label={t("donut.title")} className="shrink-0">
           {ring(per.map((r) => r.total), 82, 22, INVOICE_COLORS)}
           {ring([overview.net, overview.tax], 56, 18, [NET, TAX])}
           <text style={{ fontSize: svgPx(12) }} x={c} y={c - 4} textAnchor="middle" className="fill-zinc-400">
@@ -151,7 +151,7 @@ export function CompositionDonut({ overview, f }: IndicatorProps) {
           <text style={{ fontSize: svgPx(12) }} x={c} y={c + 12} textAnchor="middle" direction="ltr" className="fill-zinc-900 font-mono font-bold dark:fill-zinc-100">
             {f.compact(overview.grand)}
           </text>
-        </svg>
+        </FitSvg>
         <ul className="w-full max-w-xs space-y-1.5 text-sm">
           {per.map((r, i) => (
             <li key={r.id} className="flex items-center gap-2">
@@ -275,7 +275,7 @@ export function TotalsTrend({ invoices, overview, f }: IndicatorProps) {
       }
     >
       <div ref={boxRef} className="overflow-x-auto" dir="ltr" data-testid="ind-trend">
-        <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("trend.title")} className="mx-auto block">
+        <FitSvg width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("trend.title")} className="mx-auto block">
           <line x1={pad.l} x2={W - pad.r} y1={y(overview.averageInvoice)} y2={y(overview.averageInvoice)} stroke="#f59e0b" strokeWidth={1.5} strokeDasharray="6 4" />
           <text style={{ fontSize: svgPx(12) }} x={W - pad.r} y={y(overview.averageInvoice) - 5} textAnchor="end" className="fill-amber-600 font-mono font-semibold dark:fill-amber-400">
             {t("trend.avg")} {f.money(overview.averageInvoice)}
@@ -300,7 +300,7 @@ export function TotalsTrend({ invoices, overview, f }: IndicatorProps) {
               </text>
             </g>
           ))}
-        </svg>
+        </FitSvg>
       </div>
     </IndicatorCard>
   );

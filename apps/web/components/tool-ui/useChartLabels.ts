@@ -135,14 +135,19 @@ export function useLabelFit(key: string, floorOf?: (width: number, height: numbe
     // the chart library mounts and re-renders its own SVG (ticks, labels) after our margins reach it
     const mo = new MutationObserver(schedule);
     mo.observe(el, { subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ["x", "y", "viewBox", "transform"] });
-    void document.fonts?.ready.then(() => {
+    // a font's face downloads only when text first uses it, often after this effect: fonts.ready alone can be over by then
+    const remeasure = () => {
       if (!live) return;
       metricsCache.clear();
+      steps = 0;
       setFit((f) => ({ ...f, measure: estimate }));
       schedule();
-    });
+    };
+    void document.fonts?.ready.then(remeasure);
+    document.fonts?.addEventListener("loadingdone", remeasure);
     return () => {
       live = false;
+      document.fonts?.removeEventListener("loadingdone", remeasure);
       if (frame) cancelAnimationFrame(frame);
       ro.disconnect();
       mo.disconnect();

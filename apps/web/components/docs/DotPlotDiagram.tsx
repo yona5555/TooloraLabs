@@ -1,3 +1,5 @@
+import { svgPx } from "@/components/tool-ui/svgPx";
+import FitSvg from "@/components/tool-ui/FitSvg";
 type DotPlotDiagramProps = {
   values: number[];
   markers: { value: number; label: string; colorClass: string }[];
@@ -31,7 +33,7 @@ export default function DotPlotDiagram({ values, markers, caption }: DotPlotDiag
   return (
     <figure className="my-2">
       <div dir="ltr" className="flex justify-center overflow-x-auto">
-        <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={caption} className="h-auto w-72 text-current" style={{ minWidth: 260 }}>
+        <FitSvg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={caption} className="h-auto w-72 text-current" style={{ minWidth: 260 }}>
           <line x1={MARGIN.left} y1={BASELINE_Y} x2={WIDTH - MARGIN.right} y2={BASELINE_Y} stroke="currentColor" strokeWidth={1} opacity={0.3} />
           {stacked.map((p, i) => (
             <circle key={i} cx={p.x} cy={p.y} r={DOT_R} className="fill-zinc-400 dark:fill-zinc-500" />
@@ -39,12 +41,12 @@ export default function DotPlotDiagram({ values, markers, caption }: DotPlotDiag
           {markers.map((m) => (
             <g key={m.label}>
               <line x1={xAt(m.value)} y1={MARGIN.top} x2={xAt(m.value)} y2={BASELINE_Y} strokeWidth={2} className={m.colorClass} />
-              <text x={xAt(m.value)} y={BASELINE_Y + 14} textAnchor="middle" fontSize={9} fontWeight={700} className={m.colorClass}>
+              <text x={xAt(m.value)} y={BASELINE_Y + 14} textAnchor="middle" style={{ fontSize: svgPx(9) }} fontWeight={700} className={m.colorClass}>
                 {m.label}
               </text>
             </g>
           ))}
-        </svg>
+        </FitSvg>
       </div>
       <figcaption className="mt-2 text-center text-sm opacity-70">{caption}</figcaption>
     </figure>

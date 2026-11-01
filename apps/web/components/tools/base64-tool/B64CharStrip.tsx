@@ -31,7 +31,7 @@ export default function B64CharStrip() {
         return (
           <g key={i}>
             <rect x={x + 1} y={y + 1} width={CELL - 2} height={CELL - 2} rx={4} className={pad ? "fill-rose-500 dark:fill-rose-400" : GROUP_FILL[gi % 2]} opacity={pad ? 1 : 0.9} />
-            <text style={{ fontSize: svgPx(14) }} x={x + CELL / 2} y={y + CELL / 2 + 5} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-white">
+            <text style={{ fontSize: svgPx(14) }} x={x + CELL / 2} y={y + CELL / 2 + 5} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className="fill-white">
               {c}
             </text>
           </g>

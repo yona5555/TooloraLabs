@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import DlIndicatorCard, { DlIndicatorUnavailable } from "./DlIndicatorCard";
 import { useDlModel } from "./DlLiveContext";
@@ -27,7 +28,7 @@ export default function DlUniqueCurve() {
   const firstDup = a.lines.findIndex((l) => !l.kept && l.firstPosition < l.position);
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <line x1={x(0)} y1={y(0)} x2={x(n)} y2={y(n)} strokeDasharray="5 4" className="stroke-zinc-300 dark:stroke-zinc-600" />
       {[0, n].map((v) => (
         <text style={{ fontSize: svgPx(12) }} key={v} x={L - 6} y={y(v) + 4} textAnchor="end" className="fill-zinc-500 dark:fill-zinc-400">
@@ -41,7 +42,7 @@ export default function DlUniqueCurve() {
       <text style={{ fontSize: svgPx(12) }} x={(L + W - R) / 2} y={H - 6} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
         {t("axis")}
       </text>
-    </svg>
+    </FitSvg>
   );
 
   const unique = a.uniqueSoFar[n - 1];

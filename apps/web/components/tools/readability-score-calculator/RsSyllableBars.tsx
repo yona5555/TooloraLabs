@@ -45,7 +45,7 @@ export default function RsSyllableBars() {
                 strokeWidth={2}
                 style={{ transition: "y 300ms ease, height 300ms ease" }}
               />
-              <text style={{ fontSize: svgPx(12) }} x={x + barW / 2} y={y(counts[i]) - 4} textAnchor="middle" fontWeight={800} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+              <text style={{ fontSize: svgPx(12) }} x={x + barW / 2} y={y(counts[i]) - 4} textAnchor="middle" fontWeight={800} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
                 {f(counts[i])}
               </text>
               <text style={{ fontSize: svgPx(12) }} x={x + barW / 2} y={BASE + 14} textAnchor="middle" fontWeight={700} className="fill-zinc-600 dark:fill-zinc-300">

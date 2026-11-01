@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import { atLeastOnce, trialsForConfidence } from "@tooloralabs/tools";
 import ProbabilityIndicatorCard from "./ProbabilityIndicatorCard";
@@ -25,7 +26,7 @@ export default function ProbabilityTrialsStepped() {
   const slot = (W - 2 * L) / LEVELS.length;
 
   const steps = (
-    <svg style={{ direction: "ltr" }} width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("title")} className="mx-auto max-w-full">
+    <FitSvg style={{ direction: "ltr" }} width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("title")} className="mx-auto max-w-full">
       <line x1={L} x2={W - L} y1={H - B} y2={H - B} className="stroke-zinc-300 dark:stroke-zinc-600" />
       {needs.map((n, i) => {
         const h = Number.isFinite(n) ? Math.max(6, ((H - T - B) * n) / top) : H - T - B;
@@ -41,7 +42,7 @@ export default function ProbabilityTrialsStepped() {
         );
       })}
       <text style={{ fontSize: svgPx(12) }} x={W / 2} y={H - 3} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">{t("axis")}</text>
-    </svg>
+    </FitSvg>
   );
 
   const n95 = needs[3];

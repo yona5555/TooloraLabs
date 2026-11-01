@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import type { JSONPathStep } from "@tooloralabs/tools";
 import JSONIndicatorCard, { JSONIndicatorUnavailable } from "./JSONIndicatorCard";
@@ -33,7 +34,7 @@ export default function JSONDeepestPath() {
   const H = steps.length * STEP_H + 6;
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {steps.map((s, i) => {
         const x = i * dx;
         const y = i * STEP_H + 3;
@@ -44,7 +45,7 @@ export default function JSONDeepestPath() {
             {s ? (
               <>
                 <rect x={x} y={y} width={PILL_W} height={26} rx={13} className={KIND_FILL[s.kind]} />
-                <text style={{ fontSize: svgPx(12) }} x={x + 12} y={y + 17} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-white">
+                <text style={{ fontSize: svgPx(12) }} x={x + 12} y={y + 17} fontWeight={700} fontFamily="var(--font-mono)" className="fill-white">
                   {clip(s.key, 11)}
                 </text>
                 <text style={{ fontSize: svgPx(12) }} x={x + PILL_W - 10} y={y + 17} textAnchor="end" className="fill-white/90">
@@ -59,7 +60,7 @@ export default function JSONDeepestPath() {
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   const leaf = all[all.length - 1];

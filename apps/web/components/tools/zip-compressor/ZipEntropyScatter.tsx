@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import ZipIndicatorCard, { ZipIndicatorUnavailable } from "./ZipIndicatorCard";
 import { FILE_FILL, useZipModel } from "./ZipLiveContext";
@@ -25,7 +26,7 @@ export default function ZipEntropyScatter() {
   const y = (r: number) => Math.round((H - B - (Math.min(1.05, r) * (H - B - T)) / 1.05) * 100) / 100;
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {[0, 0.5, 1].map((v) => (
         <g key={v}>
           <line x1={L} y1={y(v)} x2={W - R} y2={y(v)} className="stroke-zinc-200 dark:stroke-zinc-700" />
@@ -46,12 +47,12 @@ export default function ZipEntropyScatter() {
       {rows.map((r, i) => (
         <g key={r.name}>
           <circle cx={x(r.entropy)} cy={y(r.ratio)} r={9} strokeWidth={2} className={`${FILE_FILL[i % FILE_FILL.length]} stroke-white dark:stroke-zinc-900`} />
-          <text style={{ fontSize: svgPx(12) }} x={Math.min(x(r.entropy) + 12, W - 70)} y={y(r.ratio) + 4} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
+          <text style={{ fontSize: svgPx(12) }} x={Math.min(x(r.entropy) + 12, W - 70)} y={y(r.ratio) + 4} fontFamily="var(--font-mono)" className="fill-zinc-700 dark:fill-zinc-200">
             {r.name.length > 10 ? `${r.name.slice(0, 9)}…` : r.name}
           </text>
         </g>
       ))}
-    </svg>
+    </FitSvg>
   );
 
   const best = [...rows].sort((a, b) => a.ratio - b.ratio)[0];

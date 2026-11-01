@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import SdIndicatorCard, { scaleX } from "./SdIndicatorCard";
 import { BAND_FILL, bandOf, useSdModel } from "./SdLiveContext";
@@ -35,7 +36,7 @@ export default function SdZoneStrip() {
   const seen = new Map<number, number>();
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {zoneOfSegment.map((z, i) => {
         const x0 = sx(edges[i]);
         const x1 = sx(edges[i + 1]);
@@ -51,7 +52,7 @@ export default function SdZoneStrip() {
                 {k === 0 ? "μ" : `${k > 0 ? "+" : "−"}${Math.abs(k)}σ`}
               </text>
               {Math.abs(k) !== 2 && (
-                <text style={{ fontSize: svgPx(12) }} x={x} y={STRIP_Y + STRIP_H + 27} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-600 dark:fill-zinc-300">
+                <text style={{ fontSize: svgPx(12) }} x={x} y={STRIP_Y + STRIP_H + 27} textAnchor="middle" fontFamily="var(--font-mono)" className="fill-zinc-600 dark:fill-zinc-300">
                   {f(a.mean + k * s, 2)}
                 </text>
               )}
@@ -63,10 +64,10 @@ export default function SdZoneStrip() {
         seen.set(p.value, level + 1);
         return <circle key={p.index} cx={sx(p.value)} cy={STRIP_Y - 8 - Math.min(level, 5) * 11} r={5} className={`${BAND_FILL[bandOf(p.z)]} stroke-white dark:stroke-zinc-900`} strokeWidth={1} />;
       })}
-      <text style={{ fontSize: svgPx(12) }} x={W / 2} y={14} textAnchor="middle" fontFamily="ui-monospace, monospace" fontWeight={600} className="fill-zinc-700 dark:fill-zinc-200">
+      <text style={{ fontSize: svgPx(12) }} x={W / 2} y={14} textAnchor="middle" fontFamily="var(--font-mono)" fontWeight={600} className="fill-zinc-700 dark:fill-zinc-200">
         {`μ = ${f(a.mean)} · σ = ${f(a.populationStdDev)}`}
       </text>
-    </svg>
+    </FitSvg>
   );
 
   return (

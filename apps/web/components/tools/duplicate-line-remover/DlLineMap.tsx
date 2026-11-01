@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import DlIndicatorCard, { DlIndicatorUnavailable } from "./DlIndicatorCard";
@@ -25,7 +26,7 @@ export default function DlLineMap() {
   const H = 170;
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {lines.map((l, i) => {
         if (l.kept || l.firstPosition - 1 >= lines.length) return null;
         const x1 = (l.firstPosition - 1) * cw + cw / 2;
@@ -61,7 +62,7 @@ export default function DlLineMap() {
           )}
         </g>
       ))}
-    </svg>
+    </FitSvg>
   );
 
   return (

@@ -94,7 +94,7 @@ export default function SGResult({ text, result, isExample, sourceLen, words, to
           <div className="grid grid-cols-2 gap-1.5 text-sm">
             {[
               { k: "words", label: t("wordCountLabel"), value: result.wordCount, color: "var(--ph-ink)" },
-              { k: "issues", label: t("issueCountLabel"), value: result.issues.length, color: result.issues.length === 0 ? "var(--ai-c)" : "var(--ai-b)" },
+              { k: "issues", label: t("issueCountLabel"), value: result.issues.length, color: result.issues.length === 0 ? "var(--ai-c)" : "var(--ph-ink)" },
             ].map((r) => (
               <div key={r.k} className="flex items-center justify-between gap-2 rounded-xl px-3 py-2" style={{ background: "var(--glass-table-wrap-bg)" }}>
                 <span style={{ color: "var(--ph-ink-muted)" }}>{r.label}</span>

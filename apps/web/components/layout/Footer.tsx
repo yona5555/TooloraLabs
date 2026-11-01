@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import Wordmark from "./Wordmark";
+import { SiteLogoCopy } from "./SiteLogo";
 
 export default function Footer() {
   const t = useTranslations("footer");
@@ -22,14 +23,7 @@ export default function Footer() {
             padding below). The wordmark is English, so it stays at the left edge on every locale
             (self-end is the left in RTL); the copyright and links follow the page direction. */}
         <div className="flex flex-col items-start gap-3 max-md:gap-6">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo.svg" alt="TooloraLabs" className="h-8 w-auto dark:hidden max-md:hidden" />
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/assets/logo-full-dark.svg"
-            alt="TooloraLabs"
-            className="hidden h-8 w-auto md:dark:block"
-          />
+          <SiteLogoCopy className="h-8 w-auto max-md:hidden" />
           <Wordmark className="text-[15px] leading-5 md:hidden rtl:self-end" />
           <p className="text-start text-sm text-zinc-500 dark:text-zinc-400">
             {t("copyright", { year: new Date().getFullYear() })}

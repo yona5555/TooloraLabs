@@ -7,7 +7,7 @@
  */
 export default function Wordmark({ className = "" }: { className?: string }) {
   return (
-    <span dir="ltr" className={`whitespace-nowrap font-[Arial,Helvetica,sans-serif] leading-none tracking-[0.02em] ${className}`}>
+    <span dir="ltr" className={`whitespace-nowrap font-[family-name:var(--font-arimo)] leading-none tracking-[0.02em] ${className}`}>
       <span className="font-bold text-[#5170ff] dark:text-[#8ea0ff]">TOOLORA</span>
       <span className="font-normal text-zinc-900 dark:text-white">LABS</span>
       <span className="font-light text-zinc-500 dark:text-[#5ce1e6]/80">.COM</span>

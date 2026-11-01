@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useId } from "react";
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber } from "@tooloralabs/core";
@@ -71,7 +72,7 @@ export default function FuelFormulaDiagram() {
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro", { price: money(PRICE) })}</p>
       <GapFreeRow className="mt-4">
         <div dir="ltr" className="shrink-0 overflow-x-auto">
-          <svg width={WIDTH} height={HEIGHT} viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={t("title")} className="mx-auto block min-w-[340px] text-current max-md:h-auto max-md:w-full max-md:min-w-0">
+          <FitSvg width={WIDTH} height={HEIGHT} viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={t("title")} className="mx-auto block min-w-[340px] text-current max-md:h-auto max-md:w-full max-md:min-w-0">
             <defs>
               <linearGradient id={`${svgId}fuelFormulaRibbon`} x1="0" y1="0" x2="1" y2="0">
                 <stop offset="0%" stopColor="currentColor" className="text-blue-400 dark:text-blue-500" stopOpacity={0.85} />
@@ -102,7 +103,7 @@ export default function FuelFormulaDiagram() {
             <text style={{ fontSize: svgPx(12) }} x={STOP_ZONE_W * 2} y={HEIGHT - 8} textAnchor="middle" fontWeight={700} fill="currentColor" opacity={0.55}>
               ×
             </text>
-          </svg>
+          </FitSvg>
         </div>
         <FuelWorkedExampleNote
           title={tw("title")}

@@ -1,3 +1,4 @@
+import { resolveFontFamily } from "@/lib/canvas-font";
 export type GaugeZone = { from: number; to: number; color: string };
 
 export type GaugeSpec = {
@@ -50,6 +51,7 @@ export function drawGaugeCanvas(spec: GaugeSpec, widthCss = 680): HTMLCanvasElem
   canvas.style.width = `${widthCss}px`;
   canvas.style.height = `${heightCss}px`;
 
+  const family = resolveFontFamily("var(--font-sans)");
   const ctx = canvas.getContext("2d");
   if (!ctx) return canvas;
   ctx.scale(dpr, dpr);
@@ -81,7 +83,7 @@ export function drawGaugeCanvas(spec: GaugeSpec, widthCss = 680): HTMLCanvasElem
   const tickR = R + STROKE / 2 + 12 * scale;
   ctx.strokeStyle = "#a1a1aa";
   ctx.fillStyle = "#52525b";
-  ctx.font = `${10 * scale}px Arial, sans-serif`;
+  ctx.font = `${10 * scale}px ${family}`;
   ctx.lineWidth = Math.max(1, 1.5 * scale);
   for (const tick of spec.ticks) {
     const angle = angleFor(tick);
@@ -117,12 +119,12 @@ export function drawGaugeCanvas(spec: GaugeSpec, widthCss = 680): HTMLCanvasElem
 
   ctx.textAlign = "center";
   ctx.fillStyle = "#18181b";
-  ctx.font = `bold ${22 * scale}px Arial, sans-serif`;
+  ctx.font = `bold ${22 * scale}px ${family}`;
   ctx.fillText(spec.valueLabel ?? String(spec.value), CX, CY - 6 * scale);
 
   if (spec.caption) {
     ctx.fillStyle = "#52525b";
-    ctx.font = `600 ${12 * scale}px Arial, sans-serif`;
+    ctx.font = `600 ${12 * scale}px ${family}`;
     ctx.fillText(spec.caption, CX, CY + 26 * scale);
   }
 

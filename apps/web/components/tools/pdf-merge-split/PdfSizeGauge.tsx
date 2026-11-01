@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import PdfIndicatorCard, { PdfIndicatorUnavailable } from "./PdfIndicatorCard";
@@ -39,7 +40,7 @@ export default function PdfSizeGauge() {
   const parts = Math.max(1, draft.outputSizes.length);
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {zones.map((z) => {
         const [x0, y0] = pt(z.from + 0.004, R);
         const [x1, y1] = pt(z.to - 0.004, R);
@@ -60,7 +61,7 @@ export default function PdfSizeGauge() {
         {change >= 0 ? "+" : "−"}
         {f(Math.abs(change), 1)}%
       </text>
-    </svg>
+    </FitSvg>
   );
 
   return (

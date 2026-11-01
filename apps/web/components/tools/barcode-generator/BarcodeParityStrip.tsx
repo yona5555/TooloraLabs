@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import BarcodeIndicatorCard, { BarcodeIndicatorUnavailable } from "./BarcodeIndicatorCard";
 import { PARITY_FILL, ROLE_FILL, useBarcodeModel } from "./BarcodeLiveContext";
@@ -25,7 +26,7 @@ export default function BarcodeParityStrip() {
   const cw = W / cells.length;
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {!isCode128 && a.symbology === "ean-13" && (
         <text style={{ fontSize: svgPx(12) }} x={0} y={16} fontWeight={700} className="fill-violet-700 dark:fill-violet-300">
           {t("hidden", { d: a.fullText[0], p: a.parityPattern ?? "" })}
@@ -38,7 +39,7 @@ export default function BarcodeParityStrip() {
         return (
           <g key={i}>
             <rect x={x + 1} y={Y} width={cw - 2} height={CELL_H} rx={5} className={fill} />
-            <text style={{ fontSize: svgPx(Math.min(15, cw * 0.55)) }} x={x + cw / 2} y={Y + 26} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-white">
+            <text style={{ fontSize: svgPx(Math.min(15, cw * 0.55)) }} x={x + cw / 2} y={Y + 26} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className="fill-white">
               {code}
             </text>
             <text style={{ fontSize: svgPx(Math.min(14, cw * 0.6)) }}
@@ -46,7 +47,7 @@ export default function BarcodeParityStrip() {
               y={Y + CELL_H + 20}
               textAnchor="middle"
               fontWeight={600}
-              fontFamily="ui-monospace, monospace"
+              fontFamily="var(--font-mono)"
               className="fill-zinc-700 dark:fill-zinc-200"
             >
               {s.role === "checksum" ? "✓" : s.label === " " ? "␣" : s.label}
@@ -59,7 +60,7 @@ export default function BarcodeParityStrip() {
           {t("legend")}
         </text>
       )}
-    </svg>
+    </FitSvg>
   );
 
   const rows = isCode128

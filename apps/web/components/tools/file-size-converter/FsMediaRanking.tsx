@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import FsIndicatorCard, { FsIndicatorUnavailable } from "./FsIndicatorCard";
 import { useFsModel } from "./FsLiveContext";
@@ -24,7 +25,7 @@ export default function FsMediaRanking() {
   const H = a.media.length * ROW + 4;
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {a.media.map((m, i) => {
         const y = i * ROW;
         const w = Math.max(4, Math.round(((Math.log10(Math.max(1, m.count)) + 0.15) / (maxLog + 0.15)) * BAR_W * 100) / 100);
@@ -37,13 +38,13 @@ export default function FsMediaRanking() {
               {m.fill < 100 ? t("fill", { p: f(m.fill, 1) }) : ""}
             </text>
             <rect x={BAR_X} y={y + 8} width={w} height={ROW - 16} rx={4} className={m.count === 1 ? "fill-emerald-500 dark:fill-emerald-400" : "fill-blue-600 dark:fill-blue-400"} />
-            <text style={{ fontSize: svgPx(12) }} x={BAR_X + w + 5} y={y + 24} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
+            <text style={{ fontSize: svgPx(12) }} x={BAR_X + w + 5} y={y + 24} fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-700 dark:fill-zinc-200">
               × {f(m.count, 0)}
             </text>
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   const fits = a.media.find((m) => m.count === 1);

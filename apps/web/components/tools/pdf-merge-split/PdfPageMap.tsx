@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { PT_TO_MM } from "@tooloralabs/tools";
@@ -31,7 +32,7 @@ export default function PdfPageMap() {
 
   const svg = (
     <div className="w-[340px] max-w-full">
-      <svg direction="ltr" width={W} height={rows * cellH + 8} viewBox={`0 0 ${W} ${rows * cellH + 8}`} role="img" aria-label={t("aria")} className="block max-w-full">
+      <FitSvg direction="ltr" width={W} height={rows * cellH + 8} viewBox={`0 0 ${W} ${rows * cellH + 8}`} role="img" aria-label={t("aria")} className="block max-w-full">
         {pages.map((p, i) => {
           const maxW = cellW - 10;
           const maxH = cellH - 10;
@@ -50,7 +51,7 @@ export default function PdfPageMap() {
             </g>
           );
         })}
-      </svg>
+      </FitSvg>
       <input type="range" min={0} max={n - 1} value={k} onChange={(e) => setPick(Number(e.target.value))} aria-label={t("slider")} className="mt-2 w-full accent-blue-600" />
     </div>
   );

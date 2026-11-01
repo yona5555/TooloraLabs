@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
@@ -62,7 +63,7 @@ export default function RtSpeedCurve() {
 
   const indicator = (
     <div className="w-full sm:w-[340px]">
-      <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
+      <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
         {[0, 0.5, 1].map((k) => (
           <g key={k}>
             <line x1={L} y1={y(yMax * k)} x2={W - R} y2={y(yMax * k)} strokeDasharray="2 3" className="stroke-zinc-200 dark:stroke-zinc-700" />
@@ -94,7 +95,7 @@ export default function RtSpeedCurve() {
           <circle r={7} className="fill-blue-600 stroke-white dark:fill-blue-400 dark:stroke-zinc-900" strokeWidth={2} />
           <text style={{ fontSize: svgPx(12) }} x={yoursSpot.dx} y={yoursSpot.dy} textAnchor={yoursSpot.anchor} fontWeight={700} className="fill-blue-700 dark:fill-blue-300">{yoursText}</text>
         </g>
-      </svg>
+      </FitSvg>
       <label className="mt-1 flex items-center gap-2 text-[11px] text-zinc-500 dark:text-zinc-400">
         <span className="shrink-0">{t("try", { wpm: f(trial) })}</span>
         <input type="range" min={MIN} max={MAX} step={10} value={trial} onChange={(e) => setTrial(Number(e.target.value))} className="w-full accent-amber-500" aria-label={t("tryLabel")} />

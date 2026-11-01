@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import { binomialCoefficient, surprisalBits } from "@tooloralabs/tools";
 import ProbabilityIndicatorCard from "./ProbabilityIndicatorCard";
@@ -36,7 +37,7 @@ export default function ProbabilityRarityLogScale() {
   const nearest = REFS.reduce((best, ref) => (Math.abs(Math.log10(ref.n) - logN) < Math.abs(Math.log10(best.n) - logN) ? ref : best), REFS[0]);
 
   const scale = (
-    <svg style={{ direction: "ltr" }} width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("title")} className="mx-auto max-w-full">
+    <FitSvg style={{ direction: "ltr" }} width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("title")} className="mx-auto max-w-full">
       <rect x={X - 6} y={T} width={12} height={H - T - B} rx={6} className="fill-zinc-200 dark:fill-zinc-700" />
       <rect x={X - 6} y={y(logN)} width={12} height={H - B - y(logN)} rx={6} className="fill-blue-500 dark:fill-blue-400" />
       {Array.from({ length: MAX_LOG + 1 }, (_, p) => (
@@ -57,7 +58,7 @@ export default function ProbabilityRarityLogScale() {
       ))}
       <polygon points={`${X - 22},${y(logN)} ${X - 34},${y(logN) - 6} ${X - 34},${y(logN) + 6}`} className="fill-violet-600 dark:fill-violet-400" />
       <text style={{ fontSize: svgPx(12) }} x={4} y={y(logN) - 9} className="fill-violet-700 font-mono font-bold dark:fill-violet-300">{Number.isFinite(n) ? `1/${f(n, n < 10 ? 2 : 0)}` : "0"}</text>
-    </svg>
+    </FitSvg>
   );
 
   return (

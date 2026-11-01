@@ -41,7 +41,7 @@ export default function PmFlowArrow() {
         return (
           <g key={i}>
             <rect x={x0} y={y} width={BOX_W} height={BOX_H} rx={9} strokeWidth={1.5} className={s.cls} />
-            <text style={{ fontSize: svgPx(13) }} x={cx} y={y + BOX_H / 2 + 5} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(13) }} x={cx} y={y + BOX_H / 2 + 5} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
               {s.text}
             </text>
             {i < ops.length && (

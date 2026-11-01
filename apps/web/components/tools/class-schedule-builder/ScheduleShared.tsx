@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useId } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import type { DayCode } from "@tooloralabs/tools";
@@ -83,7 +84,7 @@ export function WeekGrid({ state, d, onPick, compact = false }: { state: StudioS
   const colX = (day: DayCode) => AX + days.indexOf(day) * cw;
 
   return (
-    <svg width="100%" height="100%" viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("result.gridAria")} style={{ direction: "ltr" }} className="mx-auto block max-h-[340px]">
+    <FitSvg width="100%" height="100%" viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("result.gridAria")} style={{ direction: "ltr" }} className="mx-auto block max-h-[340px]">
       <defs>
         <pattern id={`${svgId}csb-hatch`} width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
           <rect width="5" height="5" fill="#ef4444" fillOpacity="0.25" />
@@ -161,6 +162,6 @@ export function WeekGrid({ state, d, onPick, compact = false }: { state: StudioS
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 }
