@@ -1,7 +1,7 @@
 /**
  * The phone wordmark: the domain itself in capitals, never translated and
  * always LTR (it is English text, so it reads left to right on every locale).
- * Pinned to the site's Latin stack (Arial) so it is the same width and shape on
+ * Pinned to the site's Latin font (Arimo, lib/fonts.ts) so it is the same width and shape on
  * every locale; otherwise ar/hi pages render it in their own script fonts.
  * Shared by the header and the footer; callers add only size/placement classes.
  */

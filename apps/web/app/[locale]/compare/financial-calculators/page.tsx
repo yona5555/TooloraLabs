@@ -4,6 +4,7 @@ import { Link } from "@/i18n/navigation";
 import { ArrowRight } from "lucide-react";
 import BackButton from "@/components/tool-ui/BackButton";
 import { localeAlternates } from "@/lib/seo";
+import { shareMetadata } from "@/lib/share-image/meta";
 
 type PageProps = {
   params: Promise<{ locale: string }>;
@@ -25,6 +26,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: `${t("title")} | TooloraLabs`,
     description: t("description"),
     alternates: localeAlternates(locale, "/compare/financial-calculators"),
+    ...(await shareMetadata(locale, "/compare/financial-calculators")),
   };
 }
 
