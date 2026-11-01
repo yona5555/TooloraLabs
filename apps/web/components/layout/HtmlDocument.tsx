@@ -1,3 +1,4 @@
+import { preload } from "react-dom";
 import ThemeInitScript from "@/components/layout/ThemeInitScript";
 import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 import FitNumbers from "@/components/layout/FitNumbers";
@@ -19,10 +20,11 @@ export default function HtmlDocument({
   fontPreload?: string;
   children: React.ReactNode;
 }) {
+  // preload(), not a <link>: React writes a <link> element and its own hint for it, so the tag reached <head> twice.
+  if (fontPreload) preload(fontPreload, { as: "font", type: "font/woff2", crossOrigin: "" });
   return (
     <html lang={lang} dir={dir} suppressHydrationWarning>
       <body className="text-zinc-900 antialiased dark:text-zinc-100">
-        {fontPreload && <link rel="preload" href={fontPreload} as="font" type="font/woff2" crossOrigin="" />}
         <ThemeInitScript />
         <GoogleAnalytics />
         <FitNumbers />
