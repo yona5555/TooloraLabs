@@ -195,7 +195,7 @@ export default function FractionHero() {
             unit -- never a grid of separate filled cells. Fills the full height of its own
             panel (§37.3c) instead of floating as a short strip. */}
         <div dir="ltr" className="flex w-full shrink-0 flex-col lg:w-48">
-          <p className="mb-1 text-[10px] font-bold uppercase tracking-wide" style={{ color: "var(--glass-muted)" }}>
+          <p className="mb-1 text-xs font-bold uppercase tracking-wide" style={{ color: "var(--glass-muted)" }}>
             {t("gridLabel")}
           </p>
           <div
@@ -210,7 +210,7 @@ export default function FractionHero() {
               style={{ width: `${(sixthsFilled / sixthsSteps) * 100}%`, background: COLOR_SUM }}
             />
           </div>
-          <p className="mt-1 text-center text-[10px] font-semibold" style={{ color: "var(--glass-muted)" }}>
+          <p className="mt-1 text-center text-xs font-semibold" style={{ color: "var(--glass-muted)" }}>
             {`${formatMathValue(sixthsFilled)}/${formatMathValue(sixthsSteps)}`}
           </p>
         </div>

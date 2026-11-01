@@ -42,7 +42,7 @@ function Ring({ num, den, color, onDrag, label }: { num: number; den: number; co
           {formatMathValue(num)}/{formatMathValue(den)}
         </text>
       </svg>
-      <span className="text-[10px] font-semibold" style={{ color: "var(--glass-muted)" }}>
+      <span className="text-xs font-semibold" style={{ color: "var(--glass-muted)" }}>
         {label}
       </span>
     </div>
