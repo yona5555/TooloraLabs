@@ -114,16 +114,16 @@ export default function DensityFloatLab() {
         ))}
       </div>
       <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
-        <text style={{ fontSize: svgPx(13) }} x={4} y={16} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+        <text style={{ fontSize: svgPx(13) }} x={4} y={16} fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
           {`t = ${time.toFixed(2)} s`}
         </text>
-        <text style={{ fontSize: svgPx(12) }} x={W - 4} y={16} textAnchor="end" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+        <text style={{ fontSize: svgPx(12) }} x={W - 4} y={16} textAnchor="end" fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
           <SvgSubs text={`ρ = ${f(a.density)} · ρ_f = ${f(fluid.fluidDensity)} g/cm³`} />
         </text>
-        <text style={{ fontSize: svgPx(12) }} x={4} y={36} fontFamily="ui-monospace, monospace" className="fill-emerald-700 dark:fill-emerald-400">
+        <text style={{ fontSize: svgPx(12) }} x={4} y={36} fontFamily="var(--font-mono)" className="fill-emerald-700 dark:fill-emerald-400">
           <SvgSubs text={`F_b = ${f(buoyNow, 3)} N`} />
         </text>
-        <text style={{ fontSize: svgPx(12) }} x={W - 4} y={36} textAnchor="end" fontFamily="ui-monospace, monospace" className="fill-red-600 dark:fill-red-400">
+        <text style={{ fontSize: svgPx(12) }} x={W - 4} y={36} textAnchor="end" fontFamily="var(--font-mono)" className="fill-red-600 dark:fill-red-400">
           {`W = ${f(a.weight, 3)} N`}
         </text>
         <text style={{ fontSize: svgPx(12) }} x={rtl ? W - 4 : 4} y={54} direction={rtl ? "rtl" : "ltr"} fontWeight={600} className="fill-violet-700 dark:fill-violet-300">
@@ -155,7 +155,7 @@ export default function DensityFloatLab() {
         <text style={{ fontSize: svgPx(12) }} x={TX} y={H - 3} className="fill-zinc-500 dark:fill-zinc-400">
           0
         </text>
-        <text style={{ fontSize: svgPx(12) }} x={TX + TANK} y={H - 3} textAnchor="end" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+        <text style={{ fontSize: svgPx(12) }} x={TX + TANK} y={H - 3} textAnchor="end" fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
           {`${f(tankCm)} cm · a = ${f(a.cubeEdge, 3)} cm`}
         </text>
         <defs>

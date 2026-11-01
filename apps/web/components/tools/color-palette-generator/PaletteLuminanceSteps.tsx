@@ -36,7 +36,7 @@ export default function PaletteLuminanceSteps() {
       {order.map(({ c, i }, k) => (
         <g key={i}>
           <rect x={k * step + 4} y={y(c.luminance)} width={step - 8} height={BASE - y(c.luminance) + 0.01} rx={4} fill={c.hex} className="stroke-zinc-300 dark:stroke-zinc-600" />
-          <text style={{ fontSize: svgPx(12) }} x={k * step + step / 2} y={y(c.luminance) - 6} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+          <text style={{ fontSize: svgPx(12) }} x={k * step + step / 2} y={y(c.luminance) - 6} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
             {f(c.luminance, 3)}
           </text>
           <text style={{ fontSize: svgPx(12) }} x={k * step + step / 2} y={BASE + 18} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">

@@ -70,7 +70,7 @@ export default function CompositionRing() {
             { value: repeated, stroke: "stroke-emerald-200 dark:stroke-emerald-800" },
           ]}
         />
-        <text style={{ fontSize: svgPx(22) }} x={C} y={C - 4} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-900 dark:fill-zinc-100">
+        <text style={{ fontSize: svgPx(22) }} x={C} y={C - 4} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-900 dark:fill-zinc-100">
           {f(totalChars)}
         </text>
         <text style={{ fontSize: svgPx(12) }} x={C} y={C + 14} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">

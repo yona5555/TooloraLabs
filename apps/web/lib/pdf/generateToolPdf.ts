@@ -194,8 +194,7 @@ export async function generateToolPdf(options: GenerateToolPdfOptions): Promise<
     import("html2canvas-pro"),
   ]);
 
-  const localeRoot = document.querySelector("[lang]") as HTMLElement | null;
-  const fontFamily = localeRoot ? getComputedStyle(localeRoot).fontFamily : "Arial, sans-serif";
+  const fontFamily = getComputedStyle(document.documentElement).fontFamily;
 
   const container = document.createElement("div");
   container.dir = dir;

@@ -41,7 +41,7 @@ export default function CsvFillGrid() {
         )),
       )}
       {a.columns.map((c, k) => (
-        <text style={{ fontSize: svgPx(12) }} key={c.name} x={k * cw + cw / 2} y={H - 6} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+        <text style={{ fontSize: svgPx(12) }} key={c.name} x={k * cw + cw / 2} y={H - 6} textAnchor="middle" fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
           {c.name.length > cw / 7 ? `${c.name.slice(0, Math.max(2, Math.floor(cw / 7) - 1))}…` : c.name}
         </text>
       ))}

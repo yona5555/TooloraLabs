@@ -41,7 +41,7 @@ export default function DensityBuoyancyBalance() {
       <text style={{ fontSize: svgPx(12) }} x={x} y={y + 68} textAnchor="middle" fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
         {label}
       </text>
-      <text style={{ fontSize: svgPx(12) }} x={x} y={y + 83} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-600 dark:fill-zinc-300">
+      <text style={{ fontSize: svgPx(12) }} x={x} y={y + 83} textAnchor="middle" fontFamily="var(--font-mono)" className="fill-zinc-600 dark:fill-zinc-300">
         {value}
       </text>
     </g>

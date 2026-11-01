@@ -39,13 +39,13 @@ export default function ForceBarycenterBar() {
       <rect x={bx} y={Y - BAR_H / 2} width={X1 - bx} height={BAR_H} rx={4} className="fill-amber-500 dark:fill-amber-400" />
       <path d={`M ${bx} ${Y - BAR_H / 2 - 4} L ${bx - 6} ${Y - BAR_H / 2 - 14} L ${bx + 6} ${Y - BAR_H / 2 - 14} z`} className="fill-violet-600 dark:fill-violet-400" />
       <line x1={bx} y1={Y - BAR_H / 2 - 4} x2={bx} y2={Y + BAR_H / 2 + 4} strokeWidth={2} className="stroke-violet-600 dark:stroke-violet-400" />
-      <text style={{ fontSize: svgPx(12) }} x={X0} y={Y + 32} fontFamily="ui-monospace, monospace" className="fill-zinc-600 dark:fill-zinc-300">
+      <text style={{ fontSize: svgPx(12) }} x={X0} y={Y + 32} fontFamily="var(--font-mono)" className="fill-zinc-600 dark:fill-zinc-300">
         {`${f(gr.barycenterFrom1)} m`}
       </text>
-      <text style={{ fontSize: svgPx(12) }} x={X1} y={Y + 32} textAnchor="end" fontFamily="ui-monospace, monospace" className="fill-zinc-600 dark:fill-zinc-300">
+      <text style={{ fontSize: svgPx(12) }} x={X1} y={Y + 32} textAnchor="end" fontFamily="var(--font-mono)" className="fill-zinc-600 dark:fill-zinc-300">
         {`${f(gr.barycenterFrom2)} m`}
       </text>
-      <text style={{ fontSize: svgPx(12) }} x={W / 2} y={Y + 60} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={W / 2} y={Y + 60} textAnchor="middle" fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
         {`r = ${f(gr.distance)} m`}
       </text>
     </svg>

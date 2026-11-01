@@ -50,7 +50,7 @@ export default function CsvJsonBytes() {
             <text style={{ fontSize: svgPx(12) }} x={20} y={y} className="fill-zinc-600 dark:fill-zinc-300">
               {t(p.key)}
             </text>
-            <text style={{ fontSize: svgPx(12) }} x={W} y={y} textAnchor="end" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={W} y={y} textAnchor="end" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
               {f(p.v)} B
             </text>
           </g>

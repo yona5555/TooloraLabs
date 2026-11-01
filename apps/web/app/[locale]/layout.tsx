@@ -5,7 +5,7 @@ import { routing } from "@/i18n/routing";
 import { getLocaleDir } from "@/lib/locale-meta";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import { localeFontPreload } from "@/lib/locale-font-preload";
+import { localeFontPreload } from "@/lib/fonts";
 import HtmlDocument from "@/components/layout/HtmlDocument";
 import { jsonLdHtml, organizationJsonLd } from "@/lib/seo";
 import { getClientMessages } from "@/lib/client-messages";

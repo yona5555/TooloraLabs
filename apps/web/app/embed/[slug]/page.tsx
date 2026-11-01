@@ -5,7 +5,7 @@ import { getTranslations } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { SITE_URL } from "@/lib/site";
 import { getLocaleDir } from "@/lib/locale-meta";
-import { localeFontPreload } from "@/lib/locale-font-preload";
+import { localeFontPreload } from "@/lib/fonts";
 import HtmlDocument from "@/components/layout/HtmlDocument";
 import { getClientMessages } from "@/lib/client-messages";
 import BMICalculatorEmbed from "@/components/tools/bmi-calculator/BMICalculatorEmbed";

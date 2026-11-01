@@ -52,7 +52,7 @@ export default function PasswordCollisionTrio() {
               rx={5}
               className={p > 0.01 ? "fill-rose-500 dark:fill-rose-400" : p > 1e-9 ? "fill-amber-500 dark:fill-amber-400" : "fill-emerald-500 dark:fill-emerald-400"}
             />
-            <text style={{ fontSize: svgPx(12) }} x={cx} y={160 - h - 6} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={cx} y={160 - h - 6} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
               {probText(p, f)}
             </text>
             <text style={{ fontSize: svgPx(12) }} x={cx} y={178} textAnchor="middle" className="fill-zinc-600 dark:fill-zinc-300">

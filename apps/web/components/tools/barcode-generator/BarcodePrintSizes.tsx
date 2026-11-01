@@ -41,7 +41,7 @@ export default function BarcodePrintSizes() {
           <text style={{ fontSize: svgPx(12) }} x={x + w / 2} y={base + 18} textAnchor="middle" fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
             {t(s.key)}
           </text>
-          <text style={{ fontSize: svgPx(12) }} x={x + w / 2} y={base + 32} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+          <text style={{ fontSize: svgPx(12) }} x={x + w / 2} y={base + 32} textAnchor="middle" fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
             {f(s.widthMm, 1)} mm
           </text>
         </g>

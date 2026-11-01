@@ -49,7 +49,7 @@ export default function FsGapTrend() {
             strokeWidth={p.k === k ? 2.5 : 0}
             className={p.k === k ? "fill-blue-600 stroke-white dark:fill-blue-400 dark:stroke-zinc-900" : "fill-amber-500"}
           />
-          <text style={{ fontSize: svgPx(12) }} x={Math.min(x(p.k), W - (labelW(`${f(p.g, 1)}%`) / 2) * 1.15 - 2)} y={y(p.g) - 12} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
+          <text style={{ fontSize: svgPx(12) }} x={Math.min(x(p.k), W - (labelW(`${f(p.g, 1)}%`) / 2) * 1.15 - 2)} y={y(p.g) - 12} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-700 dark:fill-zinc-200">
             {f(p.g, 1)}%
           </text>
           <text style={{ fontSize: svgPx(12) }} x={x(p.k)} y={H - B + 16} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">

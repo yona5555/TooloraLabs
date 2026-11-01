@@ -70,7 +70,7 @@ export default function TimeZoneConceptDiagram({ sameInstantLabel, caption }: Ti
                   <tspan x={cx} dy="1.3em" opacity={0.75}>
                     {example.offsetLabel}
                   </tspan>
-                  <tspan x={cx} dy="1.25em" fontFamily="monospace">
+                  <tspan x={cx} dy="1.25em" fontFamily="var(--font-mono)">
                     {String(example.hour).padStart(2, "0")}:{String(example.minute).padStart(2, "0")}
                   </tspan>
                 </text>

@@ -41,7 +41,7 @@ export default function DensityFormulaDiagram() {
             <text style={{ fontSize: svgPx(16) }} x={b.x + BOX_W / 2} y={TOP + 22} textAnchor="middle" fontWeight={700} className={b.txt}>
               {b.sym}
             </text>
-            <text style={{ fontSize: svgPx(12.5) }} x={b.x + BOX_W / 2} y={TOP + 43} textAnchor="middle" fontWeight={600} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12.5) }} x={b.x + BOX_W / 2} y={TOP + 43} textAnchor="middle" fontWeight={600} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
               {b.value}
             </text>
             <text style={{ fontSize: svgPx(12) }} x={b.x + BOX_W / 2} y={TOP + BOX_H + 14} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
@@ -62,11 +62,11 @@ export default function DensityFormulaDiagram() {
         ÷
       </text>
       <line x1={10} y1={124} x2={W - 10} y2={124} className="stroke-zinc-200 dark:stroke-zinc-700" />
-      <text style={{ fontSize: svgPx(12) }} x={W / 2} y={143} textAnchor="middle" fontWeight={600} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
+      <text style={{ fontSize: svgPx(12) }} x={W / 2} y={143} textAnchor="middle" fontWeight={600} fontFamily="var(--font-mono)" className="fill-zinc-700 dark:fill-zinc-200">
         {`${f(a.density)} g/cm³ = ${f(a.densitySI)} kg/m³`}
       </text>
       {rearr.map((r, i) => (
-        <text style={{ fontSize: svgPx(12) }} key={r.key} x={W / 2} y={165 + i * 18} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+        <text style={{ fontSize: svgPx(12) }} key={r.key} x={W / 2} y={165 + i * 18} textAnchor="middle" fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
           {r.text}
         </text>
       ))}

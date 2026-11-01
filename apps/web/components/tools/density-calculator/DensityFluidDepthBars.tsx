@@ -43,7 +43,7 @@ export default function DensityFluidDepthBars() {
             <text style={{ fontSize: svgPx(12) }} x={LABEL} y={y + 11} textAnchor="end" fontWeight={600} className="fill-zinc-700 dark:fill-zinc-200">
               {tFluids(fl.key)}
             </text>
-            <text style={{ fontSize: svgPx(12) }} x={LABEL} y={y + 23} textAnchor="end" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+            <text style={{ fontSize: svgPx(12) }} x={LABEL} y={y + 23} textAnchor="end" fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
               {`${f(fl.density)} g/cm³`}
             </text>
             {fl.floats ? (
@@ -54,7 +54,7 @@ export default function DensityFluidDepthBars() {
             ) : (
               <rect x={BAR_X} y={y + 4} width={BAR_W} height={ROW - 10} className="fill-red-500/80 dark:fill-red-400/80" />
             )}
-            <text style={{ fontSize: svgPx(12) }} x={BAR_X + BAR_W + 6} y={y + 18} fontWeight={700} fontFamily={fl.floats ? "ui-monospace, monospace" : undefined} className={fl.floats ? "fill-sky-700 dark:fill-sky-300" : "fill-red-600 dark:fill-red-400"}>
+            <text style={{ fontSize: svgPx(12) }} x={BAR_X + BAR_W + 6} y={y + 18} fontWeight={700} fontFamily={fl.floats ? "var(--font-mono)" : undefined} className={fl.floats ? "fill-sky-700 dark:fill-sky-300" : "fill-red-600 dark:fill-red-400"}>
               {fl.floats ? `${f(fl.submergedFraction * 100, 1)} %` : t("sinks")}
             </text>
           </g>

@@ -39,7 +39,7 @@ export default function RsEaseScale() {
         <rect key={b.key} x={x(b.from)} y={STRIP_Y} width={x(b.to) - x(b.from)} height={STRIP_H} fill={b.color} opacity={b === band ? 1 : 0.4} style={{ transition: "opacity 300ms" }} />
       ))}
       {TICKS.map((v) => (
-        <text style={{ fontSize: svgPx(12) }} key={v} x={x(v)} y={STRIP_Y + STRIP_H + 12} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+        <text style={{ fontSize: svgPx(12) }} key={v} x={x(v)} y={STRIP_Y + STRIP_H + 12} textAnchor="middle" fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
           {f(v)}
         </text>
       ))}

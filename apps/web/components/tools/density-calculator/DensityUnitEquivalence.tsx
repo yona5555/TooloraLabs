@@ -38,13 +38,13 @@ export default function DensityUnitEquivalence() {
         return (
           <g key={c.unit}>
             <rect x={x} y={y} width={BOX_W} height={BOX_H} rx={10} strokeWidth={c.strong ? 3 : 1.5} className={`fill-white dark:fill-zinc-900 ${c.cls}`} />
-            <text style={{ fontSize: svgPx(14) }} x={x + BOX_W / 2} y={y + 22} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(14) }} x={x + BOX_W / 2} y={y + 22} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
               {c.value}
             </text>
             <text style={{ fontSize: svgPx(12) }} x={x + BOX_W / 2} y={y + 38} textAnchor="middle" fontWeight={600} className="fill-zinc-600 dark:fill-zinc-300">
               {c.unit}
             </text>
-            <text style={{ fontSize: svgPx(12) }} x={x + BOX_W / 2} y={y + BOX_H + 10} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-400 dark:fill-zinc-500">
+            <text style={{ fontSize: svgPx(12) }} x={x + BOX_W / 2} y={y + BOX_H + 10} textAnchor="middle" fontFamily="var(--font-mono)" className="fill-zinc-400 dark:fill-zinc-500">
               {c.factor}
             </text>
             {i % 2 === 0 && (

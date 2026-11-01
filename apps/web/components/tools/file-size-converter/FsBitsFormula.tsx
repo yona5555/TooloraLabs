@@ -31,7 +31,7 @@ export default function FsBitsFormula() {
         return (
           <g key={i}>
             <circle cx={cx} cy={58} r={36} className={tm.cls} />
-            <text style={{ fontSize: svgPx(tm.top.length > 6 ? 13 : 17) }} x={cx} y={64} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-white">
+            <text style={{ fontSize: svgPx(tm.top.length > 6 ? 13 : 17) }} x={cx} y={64} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className="fill-white">
               {tm.top}
             </text>
             <text style={{ fontSize: svgPx(12) }} x={cx} y={112} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
@@ -45,7 +45,7 @@ export default function FsBitsFormula() {
           </g>
         );
       })}
-      <text style={{ fontSize: svgPx(13) }} x={W / 2} y={150} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+      <text style={{ fontSize: svgPx(13) }} x={W / 2} y={150} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
         = {f(a.bytes, 0)} B = {f(a.bits, 0)} bit
       </text>
       <text style={{ fontSize: svgPx(12) }} x={W / 2} y={182} textAnchor="middle" className="fill-rose-600 dark:fill-rose-300">

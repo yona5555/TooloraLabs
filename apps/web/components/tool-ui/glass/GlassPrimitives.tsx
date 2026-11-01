@@ -2,7 +2,6 @@
 import { useEffect, useRef, useState, useSyncExternalStore, type CSSProperties, type ReactNode } from "react";
 import SectionCard, { type PhoneRole } from "@/components/tool-ui/SectionCard";
 import "./glass-tokens.css";
-import { glassInter } from "./glass-font";
 
 /**
  * Shared "glass" visual language for the fraction-calculator hero/indicator cards. Every color
@@ -143,12 +142,10 @@ function Reveal({ children, "data-testid": testId }: { children: ReactNode; "dat
   );
 }
 
-/** Defines --glass-font-inter once at the top of the page (next/font's generated variable class)
- * so every card below -- however deeply it's nested inside the scattered article content --
- * resolves var(--glass-font) correctly, without needing its own font loader. Imposes no layout
- * of its own (callers nest this around whatever structure, cards and article text alike). */
+/** The wrapper around a glass page. Imposes no layout of its own (callers nest this around whatever
+ * structure, cards and article text alike). */
 export function GlassPage({ children }: { children: ReactNode }) {
-  return <div className={glassInter.variable}>{children}</div>;
+  return <div>{children}</div>;
 }
 
 // Rule A (2026-10-10): card headers carry the title only — no number badge.

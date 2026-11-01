@@ -72,7 +72,7 @@ export default function ForcePushLab() {
   const lab = (
     <div className="w-full max-w-[360px]">
       <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
-        <text style={{ fontSize: svgPx(14) }} x={W / 2} y={18} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+        <text style={{ fontSize: svgPx(14) }} x={W / 2} y={18} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
           {`t = ${time.toFixed(2)} s`}
         </text>
         {lane.map((ln, i) => {
@@ -83,7 +83,7 @@ export default function ForcePushLab() {
               <text style={{ fontSize: svgPx(12) }} x={X0} y={y - 32} fontWeight={600} className="fill-zinc-600 dark:fill-zinc-300">
                 {ln.label}
               </text>
-              <text style={{ fontSize: svgPx(12) }} x={X0 + TRACK} y={y - 32} textAnchor="end" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+              <text style={{ fontSize: svgPx(12) }} x={X0 + TRACK} y={y - 32} textAnchor="end" fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
                 {`v = ${f(ln.now.v, 2)} m/s · x = ${f(ln.now.x, 2)} m`}
               </text>
               <line x1={X0} y1={y} x2={X0 + TRACK} y2={y} strokeWidth={2} className="stroke-zinc-300 dark:stroke-zinc-600" />

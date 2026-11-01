@@ -43,14 +43,14 @@ export default function OhmsFuseSteps() {
         return (
           <g key={r}>
             <rect x={x + 2} y={y} width={stepW - 4} height={B - y} rx={3} className={cls} />
-            <text style={{ fontSize: svgPx(12) }} x={x + stepW / 2} y={y - 5} textAnchor="middle" fontWeight={chosen ? 700 : 500} fontFamily="ui-monospace, monospace" className={chosen ? "fill-emerald-700 dark:fill-emerald-300" : "fill-zinc-500 dark:fill-zinc-400"}>
+            <text style={{ fontSize: svgPx(12) }} x={x + stepW / 2} y={y - 5} textAnchor="middle" fontWeight={chosen ? 700 : 500} fontFamily="var(--font-mono)" className={chosen ? "fill-emerald-700 dark:fill-emerald-300" : "fill-zinc-500 dark:fill-zinc-400"}>
               {`${r}`}
             </text>
           </g>
         );
       })}
       <line x1={L} y1={yI} x2={R} y2={yI} strokeWidth={2} strokeDasharray="5 3" className="stroke-red-600 dark:stroke-red-400" />
-      <text style={{ fontSize: svgPx(12) }} x={R + 4} y={yI + 4} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-red-600 dark:fill-red-400">
+      <text style={{ fontSize: svgPx(12) }} x={R + 4} y={yI + 4} fontWeight={700} fontFamily="var(--font-mono)" className="fill-red-600 dark:fill-red-400">
         {`${f(I, 2)} A`}
       </text>
       <text style={{ fontSize: svgPx(12) }} x={L - 6} y={B + 4} textAnchor="end" className="fill-zinc-500 dark:fill-zinc-400">

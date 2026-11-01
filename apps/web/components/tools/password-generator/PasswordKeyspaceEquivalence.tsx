@@ -41,7 +41,7 @@ export default function PasswordKeyspaceEquivalence() {
             {Array.from({ length: shown }, (_, k) => (
               <circle key={k} cx={LABEL + k * gap + gap / 2} cy={y} r={Math.min(6, gap / 2 - 1)} className={r.cls} />
             ))}
-            <text style={{ fontSize: svgPx(12) }} x={W - 2} y={y + 4} textAnchor="end" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={W - 2} y={y + 4} textAnchor="end" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
               {f(r.value, 1)}
             </text>
           </g>
