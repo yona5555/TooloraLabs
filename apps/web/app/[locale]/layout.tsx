@@ -5,6 +5,7 @@ import { routing } from "@/i18n/routing";
 import { getLocaleDir } from "@/lib/locale-meta";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import { localeFontPreload } from "@/lib/locale-font-preload";
 import HtmlDocument from "@/components/layout/HtmlDocument";
 import { jsonLdHtml, organizationJsonLd } from "@/lib/seo";
 import { getClientMessages } from "@/lib/client-messages";
@@ -27,7 +28,7 @@ export default async function LocaleLayout({
   setRequestLocale(locale);
 
   return (
-    <HtmlDocument lang={locale} dir={getLocaleDir(locale)}>
+    <HtmlDocument lang={locale} dir={getLocaleDir(locale)} fontPreload={localeFontPreload(locale)}>
       <NextIntlClientProvider locale={locale} messages={await getClientMessages(locale)}>
         <script type="application/ld+json" dangerouslySetInnerHTML={jsonLdHtml(organizationJsonLd)} />
         <div>

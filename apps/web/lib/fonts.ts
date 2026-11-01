@@ -9,15 +9,13 @@ import { Arimo, IBM_Plex_Mono, IBM_Plex_Sans_Arabic, Noto_Sans_Devanagari, Noto_
 //   IBM Plex Mono          numbers and chart text (font-mono, every chart's fontFamily="var(--font-mono)")
 //   IBM Plex Sans Arabic   ar      Noto Sans Devanagari   hi      Tinos   serif text (Times-metric)
 //   Noto Sans Math / Symbols 2     last fallback for math operators and symbols (✓) the text fonts lack
-// Arimo is always preloaded: Latin UI text, and the wordmark/logo is Arimo on every locale. ar and hi render
-// their above-the-fold text (the h1, the nav) in plexArabic/notoDevanagari instead, so those two are also
-// preloaded now (2026-10-30: ar/hi previously preloaded zero of the font their own LCP text actually uses).
-// The remaining fonts download when a page's text uses them.
+// next/font preloads nothing: a preload from here would reach all six locales. Each locale preloads its own font
+// instead (lib/locale-font-preload.ts); everything else downloads when a page's text uses it.
 
-const arimo = Arimo({ subsets: ["latin", "latin-ext", "greek"], variable: "--font-arimo", display: "swap" });
+const arimo = Arimo({ subsets: ["latin"], variable: "--font-arimo", display: "swap", preload: false });
 const plexMono = IBM_Plex_Mono({ weight: ["400", "500", "600", "700"], subsets: ["latin", "latin-ext"], variable: "--font-plex-mono", display: "swap", preload: false });
-const plexArabic = IBM_Plex_Sans_Arabic({ weight: ["400", "500", "600", "700"], subsets: ["arabic"], variable: "--font-plex-arabic", display: "swap" });
-const notoDevanagari = Noto_Sans_Devanagari({ weight: ["400", "500", "600", "700"], subsets: ["devanagari"], variable: "--font-noto-devanagari", display: "swap" });
+const plexArabic = IBM_Plex_Sans_Arabic({ weight: ["400", "500", "600", "700"], subsets: ["arabic"], variable: "--font-plex-arabic", display: "swap", preload: false });
+const notoDevanagari = Noto_Sans_Devanagari({ weight: ["400", "500", "600", "700"], subsets: ["devanagari"], variable: "--font-noto-devanagari", display: "swap", preload: false });
 const tinos = Tinos({ weight: ["400", "700"], subsets: ["latin", "latin-ext", "greek"], variable: "--font-tinos", display: "swap", preload: false });
 const notoMath = Noto_Sans_Math({ weight: "400", variable: "--font-noto-math", display: "swap" }); // no subsets: never preloaded
 const notoSymbols = Noto_Sans_Symbols_2({ weight: "400", subsets: ["symbols", "math"], variable: "--font-noto-symbols", display: "swap", preload: false });

@@ -27,6 +27,7 @@ export default function Footer() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/assets/logo-full-dark.svg"
+            loading="lazy"
             alt="TooloraLabs"
             className="hidden h-8 w-auto md:dark:block"
           />

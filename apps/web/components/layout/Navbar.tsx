@@ -23,6 +23,7 @@ export default function Navbar() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/assets/logo-full-dark.svg"
+            loading="lazy"
             alt="TooloraLabs"
             className="hidden h-9 w-auto md:dark:block"
           />
