@@ -106,6 +106,7 @@ import TextToSpeechDocsPage, { getTextToSpeechTocItems } from "@/components/docs
 import SpeechToTextDocsPage, { getSpeechToTextTocItems } from "@/components/docs/speech-to-text/SpeechToTextDocsPage";
 import SpellingGrammarCheckerDocsPage, { getSpellingGrammarCheckerTocItems } from "@/components/docs/spelling-grammar-checker/SpellingGrammarCheckerDocsPage";
 import { ToolMessagesProvider } from "@/lib/client-messages";
+import { shareImageMetadata } from "@/lib/share-image/meta";
 
 type DocsPageProps = {
   params: Promise<{ locale: string; slug: string }>;
@@ -126,12 +127,15 @@ export async function generateMetadata({ params }: DocsPageProps): Promise<Metad
   const pageTitle = `${t(`${slug}.title`)} Docs | TooloraLabs`;
   const description = t(`${slug}.description`);
   const path = `/docs/${slug}`;
+  const { images, twitter } = await shareImageMetadata(locale, path);
 
   return {
     title: pageTitle,
     description,
     alternates: localeAlternates(locale, path),
+    twitter,
     openGraph: {
+      images,
       title: pageTitle,
       description,
       url: `/${locale}${path}`,

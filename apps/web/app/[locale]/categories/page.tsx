@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import HeroCategories from "@/components/hero/HeroCategories";
 import BackButton from "@/components/tool-ui/BackButton";
 import { localeAlternates } from "@/lib/seo";
+import { shareMetadata } from "@/lib/share-image/meta";
 
 type CategoriesPageProps = {
   params: Promise<{ locale: string }>;
@@ -17,6 +18,7 @@ export async function generateMetadata({
     title: `${t("heading")} | TooloraLabs`,
     description: t("subtitle"),
     alternates: localeAlternates(locale, "/categories"),
+    ...(await shareMetadata(locale, "/categories")),
   };
 }
 

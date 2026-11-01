@@ -5,6 +5,7 @@ import { ArrowRight, Clock } from "lucide-react";
 import { comingSoonPhaseIds, comingSoonPhases } from "@/data/comingSoon";
 import BackButton from "@/components/tool-ui/BackButton";
 import { localeAlternates } from "@/lib/seo";
+import { shareMetadata } from "@/lib/share-image/meta";
 
 type ComingSoonPageProps = {
   params: Promise<{ locale: string }>;
@@ -17,6 +18,7 @@ export async function generateMetadata({ params }: ComingSoonPageProps): Promise
     title: `${t("heading")} | TooloraLabs`,
     description: t("subtitle"),
     alternates: localeAlternates(locale, "/coming-soon"),
+    ...(await shareMetadata(locale, "/coming-soon")),
   };
 }
 

@@ -10,6 +10,7 @@ import { DOCUMENTED_TOOL_SLUGS } from "@/lib/docs-tools";
 import DocsLayout from "@/components/docs/DocsLayout";
 import BackButton from "@/components/tool-ui/BackButton";
 import { localeAlternates } from "@/lib/seo";
+import { shareMetadata } from "@/lib/share-image/meta";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -17,6 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title: `${t("overview")} | Docs | TooloraLabs`,
     alternates: localeAlternates(locale, "/docs"),
+    ...(await shareMetadata(locale, "/docs")),
   };
 }
 
@@ -66,7 +68,7 @@ export default async function DocsIndexPage({ params }: { params: Promise<{ loca
                       <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400">
                         <ToolIcon size={16} />
                       </span>
-                      <span className="flex-1 font-medium text-zinc-800 dark:text-zinc-100">{tTools(`${tool.slug}.title`)}</span>
+                      <span className="min-w-0 flex-1 break-words font-medium text-zinc-800 dark:text-zinc-100">{tTools(`${tool.slug}.title`)}</span>
                       <ArrowRight size={15} className="shrink-0 text-zinc-400 rtl:rotate-180" />
                     </Link>
                   );

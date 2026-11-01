@@ -4,6 +4,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import EmbedCodeGenerator from "@/components/embed/EmbedCodeGenerator";
 import BackButton from "@/components/tool-ui/BackButton";
 import { localeAlternates } from "@/lib/seo";
+import { shareMetadata } from "@/lib/share-image/meta";
 
 type PageProps = {
   params: Promise<{ locale: string }>;
@@ -16,6 +17,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: `${t("title")} | TooloraLabs`,
     description: t("description"),
     alternates: localeAlternates(locale, "/embed-tools"),
+    ...(await shareMetadata(locale, "/embed-tools")),
   };
 }
 

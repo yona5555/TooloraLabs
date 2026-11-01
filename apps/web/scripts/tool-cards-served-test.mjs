@@ -5,15 +5,16 @@
 //  - object-fit is contain (never cover) in a 4:3 box on the image's own background;
 //  - the image box lies fully inside its preview box and the card (nothing cropped);
 //  - a card without an image is a tool with no approved image for that variant.
-// Usage (prod server on 3001): npm run test:cards --workspace=apps/web   Env: BASE.
+// Usage (BASE = a prod server you started on a free port, e.g. 3110): npm run test:cards --workspace=apps/web   Env: BASE.
 import { createHash } from "node:crypto";
+import { requireBase } from "../../../scripts/lib/require-base.mjs";
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { chromium } from "playwright";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
-const base = process.env.BASE ?? "http://localhost:3001";
+const base = requireBase(process.env.BASE);
 const approved = JSON.parse(readFileSync(path.join(here, "../public/tool-previews/approved.json"), "utf8"));
 const categories = [...readFileSync(path.join(here, "../data/categories.ts"), "utf8").matchAll(/^\s{4}slug: "([^"]+)"/gm)].map((m) => m[1]);
 const pages = ["/tools", ...categories.map((c) => `/categories/${c}`)];

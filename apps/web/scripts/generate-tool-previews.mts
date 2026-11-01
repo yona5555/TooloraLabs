@@ -22,7 +22,11 @@
 //   npm run previews -- --force <slug>    regenerate an approved tool (drops its approval first)
 //   npm run previews -- --audit [slug..]  check the EXISTING images (DOM gates on the live page + pixel
 //                                         gates on the file) and approve the ones that pass; writes no image
-// Env: BASE (required, e.g. http://localhost:3110), RETRIES (default 3), CONCURRENCY (default 4), VARIANT, VERBOSE.
+// Env: BASE (required, e.g. http://localhost:3110), RETRIES (default 3), CONCURRENCY (default 4), VARIANT, VERBOSE, OUT.
+// Deterministic (same build -> byte-identical files): every page gets the desktop lock's fixed environment —
+// clock 2026-10-20 12:00 UTC, timezone UTC, locale en-US, seeded Math.random and crypto.getRandomValues,
+// animations and transitions off, viewport 1440×1600 at DPR 2, no request or WebSocket beyond BASE (run it
+// against the fixture build: npm run build:desktop-lock, then a server on a free port), fonts loaded.
 import { createHash } from "node:crypto";
 import { requireBase } from "../../../scripts/lib/require-base.mjs";
 import { existsSync, mkdirSync, readFileSync, renameSync, statSync, unlinkSync, writeFileSync } from "node:fs";
@@ -32,7 +36,9 @@ import { chromium, type ElementHandle, type Page } from "playwright";
 import sharp from "sharp";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
-const outRoot = path.join(here, "../public/tool-previews");
+// OUT=<dir> writes the images (and their approvals) under that folder instead: a byte-identity check or a trial
+// run never touches public/tool-previews or its approved.json.
+const outRoot = process.env.OUT ? path.resolve(process.env.OUT) : path.join(here, "../public/tool-previews");
 const base = requireBase(process.env.BASE);
 const retries = Number(process.env.RETRIES ?? 3);
 const args = process.argv.slice(2);
@@ -393,6 +399,28 @@ async function capture(page: Page, slug: string, locale: string, theme: string, 
   return { file, auto: info.auto, bg: geo.bg };
 }
 
+/** Runs in every page before its scripts: seeded randomness (mulberry32) and no CSS motion. */
+function freezePage() {
+  let seed = 0x2f6b9a1d;
+  Math.random = () => {
+    seed = (seed + 0x6d2b79f5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+  crypto.getRandomValues = <T extends ArrayBufferView | null>(arr: T): T => {
+    if (!arr) return arr;
+    const bytes = new Uint8Array(arr.buffer, arr.byteOffset, arr.byteLength);
+    for (let i = 0; i < bytes.length; i++) bytes[i] = Math.floor(Math.random() * 256);
+    return arr;
+  };
+  document.addEventListener("DOMContentLoaded", () => {
+    const st = document.createElement("style");
+    st.textContent = "*,*::before,*::after{transition:none!important;animation:none!important;caret-color:transparent!important}";
+    document.head.appendChild(st);
+  });
+}
+
 const browser = await chromium.launch();
 // VARIANT=en/light limits a run to one variant (quick checks).
 const pickVariants = variants.filter((v) => !process.env.VARIANT || process.env.VARIANT === `${v.locale}/${v.theme}`);
@@ -419,8 +447,12 @@ for (let attempt = 1; attempt <= retries && jobs.length; attempt++) {
   const queue = [...jobs];
   const worker = async () => {
     for (let job = queue.shift(); job; job = queue.shift()) {
-      const context = await browser.newContext({ viewport: { width: 1440, height: 1600 }, deviceScaleFactor: DPR, colorScheme: job.theme, reducedMotion: "reduce" });
+      const context = await browser.newContext({ viewport: { width: 1440, height: 1600 }, deviceScaleFactor: DPR, colorScheme: job.theme, reducedMotion: "reduce", timezoneId: "UTC", locale: "en-US" });
+      await context.addInitScript(freezePage);
       const page = await context.newPage();
+      await page.route((url) => new URL(url.href).origin !== new URL(base).origin, (route) => route.abort());
+      await page.routeWebSocket(/.*/, () => {});
+      await page.clock.setFixedTime(new Date("2026-10-20T12:00:00Z"));
       await page.addInitScript(() => Object.assign(window, { __capturePreview: true })); // PreviewReady's extra frames
       try {
         const r = await capture(page, job.slug, job.locale, job.theme, attempt);
