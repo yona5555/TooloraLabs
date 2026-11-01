@@ -10,7 +10,6 @@ import FitContent from "./FitContent";
 export type Scene3DCanvasProps = {
   children: ReactNode;
   camera?: [number, number, number];
-  autoRotate?: boolean;
   /** Set false when the scene fits its own camera to the canvas (FitWidth would fight it). */
   fitWidth?: boolean;
   /** Optional rotation limits (radians) for scenes whose labels must never line up behind each other. */
@@ -35,7 +34,6 @@ function FitWidth() {
 export default function Scene3DCanvas({
   children,
   camera = [6, 5, 7],
-  autoRotate = false,
   fitWidth = true,
   orbit,
 }: Scene3DCanvasProps) {
@@ -58,8 +56,6 @@ export default function Scene3DCanvas({
       <OrbitControls
         makeDefault
         enablePan={false}
-        autoRotate={autoRotate}
-        autoRotateSpeed={0.8}
         minAzimuthAngle={orbit?.minAzimuth ?? -Infinity}
         maxAzimuthAngle={orbit?.maxAzimuth ?? Infinity}
         minPolarAngle={orbit?.minPolar ?? 0}

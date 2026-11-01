@@ -421,6 +421,7 @@ for (let attempt = 1; attempt <= retries && jobs.length; attempt++) {
     for (let job = queue.shift(); job; job = queue.shift()) {
       const context = await browser.newContext({ viewport: { width: 1440, height: 1600 }, deviceScaleFactor: DPR, colorScheme: job.theme, reducedMotion: "reduce" });
       const page = await context.newPage();
+      await page.addInitScript(() => Object.assign(window, { __capturePreview: true })); // PreviewReady's extra frames
       try {
         const r = await capture(page, job.slug, job.locale, job.theme, attempt);
         if (r.auto) throw new Error('visual not marked with data-preview="visual"');

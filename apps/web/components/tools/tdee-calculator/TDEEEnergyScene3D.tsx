@@ -29,12 +29,15 @@ const XO = -0.55;
 const XI = 0.55;
 const HMAX = 2.25;
 const SPARKS = 14;
+const MOVE_SECONDS = 8; // the sparks rise this long after the data changes, never on load, so an idle page draws nothing
 
 export default function TDEEEnergyScene3D({ parts, tdee, intake, intakeColor, multiplier, labels }: TDEEEnergyScene3DProps) {
   const p = usePalette3D();
   const invalidate = useThree((s) => s.invalidate);
   const sparks = useRef<THREE.Group>(null);
   const reduced = useRef<boolean | null>(null);
+  const shownData = useRef<string | null>(null);
+  const moveLeft = useRef(0);
   const scale = HMAX / Math.max(1, tdee, intake);
   const hT = tdee * scale;
   const hI = intake * scale;
@@ -44,10 +47,13 @@ export default function TDEEEnergyScene3D({ parts, tdee, intake, intakeColor, mu
   const speed = 0.25 + (multiplier - 1.2) * 0.9;
 
   useEffect(() => {
+    const data = `${tdee}|${intake}|${multiplier}`;
+    if (shownData.current !== null && shownData.current !== data) moveLeft.current = MOVE_SECONDS;
+    shownData.current = data;
     invalidate();
   }, [invalidate, tdee, intake, multiplier]);
 
-  useFrame((state) => {
+  useFrame((state, delta) => {
     if (reduced.current === null) reduced.current = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
     const g = sparks.current;
     if (!g) return;
@@ -59,7 +65,9 @@ export default function TDEEEnergyScene3D({ parts, tdee, intake, intakeColor, mu
       const m = (c as THREE.Mesh).material as THREE.MeshBasicMaterial;
       m.opacity = 0.85 * (1 - f);
     });
-    if (!reduced.current) state.invalidate();
+    if (reduced.current || moveLeft.current <= 0) return;
+    moveLeft.current -= Math.min(delta, 0.1);
+    state.invalidate();
   });
 
   const hs = parts.map((part) => Math.max(0, part.kcal * scale));

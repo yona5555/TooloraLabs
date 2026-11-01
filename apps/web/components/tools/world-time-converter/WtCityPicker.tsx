@@ -86,7 +86,7 @@ export default function WtCityPicker({ f, value, onPick, exclude = [], buttonCon
                   <span className="min-w-0 truncate text-zinc-800 dark:text-zinc-200">
                     {f.city(c)} <span className="text-zinc-500 dark:text-zinc-400">— {f.country(c)}</span>
                   </span>
-                  <span dir="ltr" className="shrink-0 font-mono text-[10px] text-zinc-400">{c.zone.split("/").pop()?.replace(/_/g, " ")}</span>
+                  <span dir="ltr" className="shrink-0 font-mono text-xs text-zinc-400">{c.zone.split("/").pop()?.replace(/_/g, " ")}</span>
                 </button>
               </li>
             ))}

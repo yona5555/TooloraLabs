@@ -32,8 +32,8 @@ export default function ForcePushLab() {
   const t = useTranslations("tools.force-calculator.education.lab.push");
   const { setDim } = useForceLive();
   const { draft, sl, f } = useForceModel();
-  const [time, setTime] = useState(0);
-  const [playing, setPlaying] = useState(true);
+  const [time, setTime] = useState(RUN);
+  const [playing, setPlaying] = useState(false);
   const start = useRef<number | null>(null);
 
   useEffect(() => {

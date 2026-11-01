@@ -10,7 +10,7 @@ const files = readdirSync(".").filter((f) => new RegExp(`^${kind}-\\d+\\.json$`)
 
 let line;
 if (kind === "site-audit") {
-  const CRITERIA = ["overlap", "clip", "small", "hydration", "console", "a11y", "link", "idle"];
+  const CRITERIA = ["overlap", "clip", "small", "hydration", "console", "a11y", "link", "idle", "empty"];
   const totals = Object.fromEntries(CRITERIA.map((c) => [c, 0]));
   let pages = 0;
   for (const f of files) {

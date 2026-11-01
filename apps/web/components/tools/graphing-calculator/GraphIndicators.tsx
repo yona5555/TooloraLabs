@@ -10,8 +10,9 @@ import { useGraphLive } from "./GraphLiveContext";
 import { fmtNum } from "./types";
 import { svgPx } from "@/components/tool-ui/svgPx";
 import { useFitWidth } from "@/components/tool-ui/useFitWidth";
-import { LABEL_GAP, labelUnits, stackBands } from "@/components/tool-ui/chartLabels";
-import { useLabelMeasure } from "@/components/tool-ui/useChartLabels";
+import { LABEL_GAP } from "@/components/tool-ui/chartLabels";
+import { labelUnits, stackBands } from "@/components/tool-ui/chartLayout";
+import { useLabelMeasure } from "@/components/tool-ui/useLabelMeasure";
 
 type Row = { label: string; value: string; emphasize?: boolean; note?: string };
 

@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState, useSyncExternalStore, useId } from "react";
+import { useEffect, useRef, useState, useId } from "react";
 import { useTranslations } from "next-intl";
 import { projectileStateAt, sampleTrajectory } from "@tooloralabs/tools";
 import PmIndicatorCard from "./PmIndicatorCard";
@@ -12,16 +12,6 @@ const L = 40;
 const R = 390;
 const T = 16;
 const B = 228;
-
-const MOTION_QUERY = "(prefers-reduced-motion: reduce)";
-function subscribeMotion(cb: () => void) {
-  const mq = window.matchMedia(MOTION_QUERY);
-  mq.addEventListener("change", cb);
-  return () => mq.removeEventListener("change", cb);
-}
-function readMotion() {
-  return window.matchMedia(MOTION_QUERY).matches;
-}
 
 export function niceCeil(v: number): number {
   if (!(v > 0)) return 1;
@@ -44,10 +34,7 @@ export default function PmLaunchLab() {
   const { setDim } = usePmLive();
   const { a, f } = usePmModel();
   const [u, setU] = useState(0.38);
-  const [choice, setChoice] = useState<boolean | null>(null);
-  // Server snapshot "reduce" keeps the SSR frame still; the browser then plays unless the visitor prefers reduced motion.
-  const reduceMotion = useSyncExternalStore(subscribeMotion, readMotion, () => true);
-  const playing = choice ?? !reduceMotion;
+  const [playing, setPlaying] = useState(false);
   const raf = useRef<number | null>(null);
   const flight = a ? Math.min(5, Math.max(1.5, a.timeOfFlight)) : 2;
 
@@ -139,7 +126,7 @@ export default function PmLaunchLab() {
       <div className="mt-2 flex items-center gap-3">
         <button
           type="button"
-          onClick={() => setChoice(!playing)}
+          onClick={() => setPlaying(!playing)}
           className="rounded-lg bg-blue-600 px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-blue-700"
         >
           {playing ? t("pause") : t("play")}

@@ -7,7 +7,6 @@ import { GlassHandle, usePrefersReducedMotion, type HandleDirection } from "@/co
 import { hasWords, subParts } from "@/components/tool-ui/MixedText";
 import { snap } from "./format";
 import PhoneMini from "./PhoneMini";
-import { Drawing } from "./SvgBits";
 
 // Rule 2: the top mini card mirror, fetched only on phone.
 const PhoneMiniMirror = lazy(() => import("./PhoneMiniMirror"));
@@ -313,7 +312,7 @@ export function IndicatorCard({
   const t = useTranslations("toolPage.indicatorKit");
   const wrapRef = useRef<HTMLDivElement>(null);
   // Rule 2: a 2D card drawn with the shared Drawing can be mirrored in a phone top mini card.
-  const miniOk = kind === "2d" && isValidElement(visual) && visual.type === Drawing;
+  const miniOk = kind === "2d" && isValidElement(visual) && (visual.type as { kitDrawing?: boolean }).kitDrawing === true;
   const [phone, setPhone] = useState(false);
   useEffect(() => {
     if (!miniOk) return;

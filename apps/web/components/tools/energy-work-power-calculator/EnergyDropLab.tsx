@@ -32,8 +32,8 @@ export default function EnergyDropLab() {
   const t = useTranslations("tools.energy-work-power-calculator.education.lab.drop");
   const { setDim } = useEnergyLive();
   const { potential: pa, f } = useEnergyModel();
-  const [phase, setPhase] = useState(0);
-  const [playing, setPlaying] = useState(true);
+  const [phase, setPhase] = useState(Math.SQRT1_2);
+  const [playing, setPlaying] = useState(false);
   const start = useRef<number | null>(null);
 
   const tf = pa.fallTime;

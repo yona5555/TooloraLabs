@@ -29,6 +29,8 @@ case "$cmd" in
     pid=$(cat "$pidfile")
     # The recorded PID is the server itself (the subshell exec'd node), so this stops exactly that process.
     kill -TERM "$pid" 2>/dev/null || true
+    # Gone before the next step measures or binds: at most 5s, then the step reports a taken port itself.
+    for _ in $(seq 1 50); do kill -0 "$pid" 2>/dev/null || break; sleep 0.1; done
     rm -f "$pidfile"
     echo "Stopped the test server started on :$port (PID $pid)."
     ;;

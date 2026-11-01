@@ -59,6 +59,9 @@ TooloraLabs-Claude-Instructions.md is a historical archive; the binding rules ar
   can never raise it (`ratchet.mjs check-baseline`, its own gates-self-test canary). Zero across the whole site
   is not required here - that is `launch-readiness` (daily on main, not a required PR check; reports the
   remaining counts that must reach zero before launch).
+- Approved raise (`check-baseline` runs on every PR, in job gates-self-test): only perf-budget `jsBytes`, `cssBytes`, `blocking`,
+  `requests`; xzerone approves, then the PR edits `.audit/ratchet/perf-budget.json`, adds an entry to `.audit/ratchet/raises.json`
+  (`page` or `pages`, `metric`, `from`, `to`, `reason`, `pr`) and carries the label `approve-ratchet-raise`. Audit criteria never rise.
 - Required PR checks finish within 15 minutes: on a PR, site-audit and perf-budget measure only the pages whose
   route fingerprint changed (`scripts/route-manifest.mjs`, CI job `affected`: chunks, prerendered HTML/RSC,
   server bundle, fixtures, gate scripts; a shared chunk marks every page using it).

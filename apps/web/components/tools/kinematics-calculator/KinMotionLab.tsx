@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Pause, Play } from "lucide-react";
 import { kinematicsStateAt } from "@tooloralabs/tools";
@@ -23,14 +23,6 @@ const RANGE: Record<Knob, [number, number, number]> = { v0: [-40, 100, 0.5], v: 
 const UNIT: Record<Knob, string> = { v0: "m/s", v: "m/s", a: "m/s²", t: "s", dx: "m" };
 const SYMBOL: Record<Knob, string> = { v0: "v₀", v: "v", a: "a", t: "t", dx: "Δx" };
 
-const MOTION_QUERY = "(prefers-reduced-motion: reduce)";
-function subscribeMotion(cb: () => void) {
-  const mq = window.matchMedia(MOTION_QUERY);
-  mq.addEventListener("change", cb);
-  return () => mq.removeEventListener("change", cb);
-}
-const readMotion = () => window.matchMedia(MOTION_QUERY).matches;
-
 /**
  * Type #7 (Trend Line with Highlighted Reference Point) and the page's "wow" piece: the live
  * motion runs as an animation. A car drives along the track (1 real second per simulated second,
@@ -43,10 +35,7 @@ export default function KinMotionLab() {
   const { setDim } = useKinLive();
   const { draft, k, solved, f } = useKinModel();
   const [u, setU] = useState(0.45);
-  const [choice, setChoice] = useState<boolean | null>(null);
-  // Server snapshot "reduce" keeps the SSR frame still; the browser then plays unless the visitor prefers reduced motion.
-  const reduceMotion = useSyncExternalStore(subscribeMotion, readMotion, () => true);
-  const playing = choice ?? !reduceMotion;
+  const [playing, setPlaying] = useState(false);
   const raf = useRef<number | null>(null);
   const run = k ? Math.min(6, Math.max(2, k.span)) : 3;
 
@@ -165,7 +154,7 @@ export default function KinMotionLab() {
         })}
         <button
           type="button"
-          onClick={() => setChoice(!playing)}
+          onClick={() => setPlaying(!playing)}
           className="inline-flex items-center gap-2 rounded-lg border border-zinc-300 px-3 py-1.5 text-xs font-semibold text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
         >
           {playing ? <Pause size={14} /> : <Play size={14} />}
