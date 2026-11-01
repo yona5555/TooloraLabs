@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useId } from "react";
 import { svgPx } from "@/components/tool-ui/svgPx";
 import { useSvgUnitsPerPx } from "@/components/tool-ui/useFitWidth";
@@ -109,7 +110,7 @@ export default function LossyLosslessDiagram({
   return (
     <figure className="my-2">
       <div dir="ltr" className="overflow-x-auto">
-        <svg ref={svgRef} viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={caption} className="h-auto w-full min-w-[420px] text-current max-md:min-w-0">
+        <FitSvg ref={svgRef} viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={caption} className="h-auto w-full min-w-[420px] text-current max-md:min-w-0">
           <defs>
             <marker id={`${svgId}arrow`} markerWidth={8} markerHeight={8} refX={6} refY={3} orient="auto">
               <path d="M0,0 L6,3 L0,6 Z" fill="currentColor" opacity={0.6} />
@@ -135,7 +136,7 @@ export default function LossyLosslessDiagram({
             compressedOpacity={0.55}
             resultOpacity={0.35}
           />
-        </svg>
+        </FitSvg>
       </div>
       <figcaption className="mt-2 text-center text-sm opacity-70">{caption}</figcaption>
     </figure>

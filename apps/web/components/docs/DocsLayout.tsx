@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { getTranslations } from "next-intl/server";
 import { Menu } from "lucide-react";
 import DocsSidebarNav from "./DocsSidebarNav";
+import SvgLabelScale from "@/components/tools/layout/SvgLabelScale";
 
 type DocsLayoutProps = {
   children: ReactNode;
@@ -13,6 +14,7 @@ export default async function DocsLayout({ children, toc }: DocsLayoutProps) {
 
   return (
     <main data-docs-page className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:py-10">
+      <SvgLabelScale />
       <details className="group mb-6 rounded-xl border border-zinc-200 bg-white lg:hidden dark:border-zinc-800 dark:bg-zinc-900">
         <summary className="flex cursor-pointer list-none items-center gap-2 px-4 py-3 text-sm font-semibold text-zinc-700 marker:content-none dark:text-zinc-200">
           <Menu size={16} />
