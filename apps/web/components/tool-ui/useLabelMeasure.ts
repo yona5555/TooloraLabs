@@ -22,12 +22,15 @@ export function useLabelMeasure() {
     // `--svg-k` is set on the SVG's style by SvgLabelScale; a font swap changes every measurement
     const mo = new MutationObserver(update);
     mo.observe(el, { attributes: true, attributeFilter: ["style"] });
-    void document.fonts?.ready.then(() => {
+    const remeasure = () => {
       metricsCache.clear();
       if (live) setState((s) => ({ ...s, measure: measureIn(el) }));
-    });
+    };
+    void document.fonts?.ready.then(remeasure);
+    document.fonts?.addEventListener("loadingdone", remeasure);
     return () => {
       live = false;
+      document.fonts?.removeEventListener("loadingdone", remeasure);
       mo.disconnect();
     };
   }, [el]);
