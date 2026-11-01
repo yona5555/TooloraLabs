@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 /**
  * Animated decimal-point shift: the real digits of the standard form, the point hopping one
  * place at a time from its standard position to just after the first nonzero digit, each hop
@@ -82,7 +83,7 @@ export default function DecimalShiftStrip({ coefficient, exponent }: { coefficie
   const cellX = cells.reduce<number[]>((xs, c, i) => [...xs, i === 0 ? pad : xs[i - 1] + (cells[i - 1].wide ? WIDE : CW)], []);
   return (
     <div data-testid="shift-strip">
-      <svg viewBox={`0 0 ${vbW} ${H}`} width="100%" className="block max-h-24" role="img" aria-label={t("aria", { places: s.places })} style={{ direction: "ltr" }}>
+      <FitSvg viewBox={`0 0 ${vbW} ${H}`} width="100%" className="block max-h-24" role="img" aria-label={t("aria", { places: s.places })} style={{ direction: "ltr" }}>
         {s.negative && (
           <text style={{ fontSize: svgPx(15) }} x={6} y={TOP + CH / 2 + 5} fontWeight="700" fill="currentColor" className="text-zinc-500">−</text>
         )}
@@ -120,7 +121,7 @@ export default function DecimalShiftStrip({ coefficient, exponent }: { coefficie
         {/* original point (ghost) and moving point */}
         {s.places > 0 && <circle cx={bx(s.fromIndex)} cy={TOP + CH - 3} r="3" className="fill-zinc-400" />}
         <circle cx={bx(pos)} cy={TOP + CH - 3} r="4.5" className="fill-emerald-500" />
-      </svg>
+      </FitSvg>
       <p className="mt-1 text-center text-sm font-semibold text-zinc-700 dark:text-zinc-200" data-testid="shift-caption">
         {s.direction === "none"
           ? t("none")
