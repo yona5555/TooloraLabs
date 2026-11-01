@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import ZipIndicatorCard, { ZipIndicatorUnavailable } from "./ZipIndicatorCard";
 import { useZipModel } from "./ZipLiveContext";
@@ -23,7 +24,7 @@ export default function ZipByteHeat() {
   const H = shown.length * ROW + 26;
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {shown.map((r, i) => {
         const max = Math.max(...r.histogram, 1);
         const y = i * ROW;
@@ -43,7 +44,7 @@ export default function ZipByteHeat() {
           {k * 16}
         </text>
       ))}
-    </svg>
+    </FitSvg>
   );
 
   const asciiShare = (r: (typeof rows)[number]) => (r.histogram.slice(2, 8).reduce((s, v) => s + v, 0) / Math.max(1, r.size)) * 100;

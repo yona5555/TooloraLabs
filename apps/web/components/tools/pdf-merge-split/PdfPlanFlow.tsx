@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import { chunkRanges } from "@tooloralabs/tools";
 import PdfIndicatorCard, { PdfIndicatorUnavailable } from "./PdfIndicatorCard";
@@ -31,7 +32,7 @@ export default function PdfPlanFlow() {
 
   const svg = (
     <div className="w-[340px] max-w-full">
-      <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
+      <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
         {shown.map((it, i) => {
           const y = i * ROW + 4;
           return (
@@ -48,7 +49,7 @@ export default function PdfPlanFlow() {
             </g>
           );
         })}
-      </svg>
+      </FitSvg>
       {isSplit && (
         <div className="mt-3 flex flex-wrap gap-1.5">
           {[1, 2, 3].map((n) => (

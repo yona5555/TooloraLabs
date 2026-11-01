@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import DlIndicatorCard, { DlIndicatorUnavailable } from "./DlIndicatorCard";
 import { useDlModel } from "./DlLiveContext";
@@ -30,7 +31,7 @@ export default function DlSavingsGauge() {
   ];
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {zones.map((z) => {
         const [x0, y0] = pt(z.from + 0.004, R);
         const [x1, y1] = pt(z.to - 0.004, R);
@@ -49,7 +50,7 @@ export default function DlSavingsGauge() {
       <text style={{ fontSize: svgPx(22) }} x={CX} y={CY - 38} textAnchor="middle" fontWeight={700} className="fill-blue-700 dark:fill-blue-300">
         {f(share * 100, 1)}%
       </text>
-    </svg>
+    </FitSvg>
   );
 
   return (

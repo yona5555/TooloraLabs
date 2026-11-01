@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import CsvIndicatorCard, { CsvIndicatorUnavailable } from "./CsvIndicatorCard";
 import { TYPE_FILL, useCsvModel } from "./CsvLiveContext";
@@ -32,7 +33,7 @@ export default function CsvNumericRanges() {
 
   const H = cols.length * ROW + 4;
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {cols.map((c, i) => {
         const y = i * ROW + 6;
         const { min, max, mean } = c.numeric!;
@@ -56,7 +57,7 @@ export default function CsvNumericRanges() {
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   const widest = [...cols].sort((x, y) => y.numeric!.max - y.numeric!.min - (x.numeric!.max - x.numeric!.min))[0];

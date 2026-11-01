@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import ProbabilityIndicatorCard from "./ProbabilityIndicatorCard";
 import { useProbabilityModel } from "./ProbabilityLiveContext";
@@ -41,7 +42,7 @@ export default function ProbabilityIndependenceBalance() {
   );
 
   const balance = (
-    <svg style={{ direction: "ltr" }} width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("title")} className="mx-auto max-w-full">
+    <FitSvg style={{ direction: "ltr" }} width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("title")} className="mx-auto max-w-full">
       <polygon points={`${CX},${PIVOT} ${CX - 16},${H - 10} ${CX + 16},${H - 10}`} className="fill-zinc-300 dark:fill-zinc-600" />
       <line x1={lx} y1={ly} x2={rx} y2={ry} strokeWidth={5} strokeLinecap="round" className={level ? "stroke-emerald-500" : "stroke-zinc-700 dark:stroke-zinc-200"} />
       <circle cx={CX} cy={PIVOT} r={6} className="fill-zinc-700 dark:fill-zinc-200" />
@@ -50,7 +51,7 @@ export default function ProbabilityIndependenceBalance() {
       <text style={{ fontSize: svgPx(12) }} x={CX} y={22} textAnchor="middle" className={`font-bold ${level ? "fill-emerald-600 dark:fill-emerald-400" : "fill-amber-600 dark:fill-amber-400"}`}>
         {tl(`relations.${b.relation}`)}
       </text>
-    </svg>
+    </FitSvg>
   );
 
   return (

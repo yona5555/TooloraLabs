@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import JSONIndicatorCard, { JSONIndicatorUnavailable } from "./JSONIndicatorCard";
 import { useJSONModel } from "./JSONLiveContext";
@@ -25,7 +26,7 @@ export default function JSONDepthBars() {
   const widest = counts.indexOf(peak);
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <line x1={0} y1={BASE} x2={W} y2={BASE} className="stroke-zinc-300 dark:stroke-zinc-600" />
       {counts.map((c, i) => {
         const h = Math.max(3, (c / peak) * (BASE - TOP - 14));
@@ -49,7 +50,7 @@ export default function JSONDepthBars() {
       <text style={{ fontSize: svgPx(12) }} x={0} y={12} className="fill-zinc-500 dark:fill-zinc-400">
         {t("axis")}
       </text>
-    </svg>
+    </FitSvg>
   );
 
   const leaves = counts[counts.length - 1];

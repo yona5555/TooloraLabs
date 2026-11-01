@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import ZipIndicatorCard, { ZipIndicatorUnavailable } from "./ZipIndicatorCard";
 import { formatBytes, useZipModel } from "./ZipLiveContext";
@@ -31,7 +32,7 @@ export default function ZipLimitTrio() {
   const slot = W / 3;
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <line x1={0} y1={BASE} x2={W} y2={BASE} className="stroke-zinc-300 dark:stroke-zinc-600" />
       {vals.map((x, i) => {
         const h = Math.max(3, (x.v / peak) * (BASE - TOP));
@@ -51,7 +52,7 @@ export default function ZipLimitTrio() {
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   return (

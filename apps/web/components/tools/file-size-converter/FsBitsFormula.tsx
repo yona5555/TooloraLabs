@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import FsIndicatorCard, { FsIndicatorUnavailable } from "./FsIndicatorCard";
 import { useFsModel } from "./FsLiveContext";
@@ -25,7 +26,7 @@ export default function FsBitsFormula() {
   ];
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {terms.map((tm, i) => {
         const cx = 56 + i * 114;
         return (
@@ -51,7 +52,7 @@ export default function FsBitsFormula() {
       <text style={{ fontSize: svgPx(12) }} x={W / 2} y={182} textAnchor="middle" className="fill-rose-600 dark:fill-rose-300">
         {t("trap")}
       </text>
-    </svg>
+    </FitSvg>
   );
 
   return (

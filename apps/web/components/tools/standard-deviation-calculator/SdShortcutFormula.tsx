@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import SdIndicatorCard from "./SdIndicatorCard";
 import { useSdModel } from "./SdLiveContext";
@@ -32,7 +33,7 @@ export default function SdShortcutFormula() {
   );
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {box(4, 6, 126, "Σx²", f(a.sumOfSquaresRaw), "fill-sky-100 stroke-sky-500 dark:fill-sky-500/15 dark:stroke-sky-400")}
       <text style={{ fontSize: svgPx(22) }} x={150} y={40} textAnchor="middle" fontWeight={700} className="fill-zinc-500 dark:fill-zinc-400">
         −
@@ -48,7 +49,7 @@ export default function SdShortcutFormula() {
       <text style={{ fontSize: svgPx(13) }} x={150} y={205} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
         {`Σ(x − μ)² = ${f(a.sumSquares)}`}
       </text>
-    </svg>
+    </FitSvg>
   );
 
   return (

@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import QRIndicatorCard, { QRIndicatorUnavailable } from "./QRIndicatorCard";
 import { useQRModel } from "./QRLiveContext";
@@ -36,7 +37,7 @@ export default function QRPrintTrio() {
   const HT = H + Math.max(...lane) * 32;
 
   const svg = (
-    <svg direction="ltr" width={W} height={HT} viewBox={`0 0 ${W} ${HT}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={HT} viewBox={`0 0 ${W} ${HT}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {MODULES_MM.map((m, k) => {
         const side = px[k];
         const cell = side / span;
@@ -57,7 +58,7 @@ export default function QRPrintTrio() {
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   return (

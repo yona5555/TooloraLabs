@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import { PAPER_SIZES, PT_TO_MM } from "@tooloralabs/tools";
 import PdfIndicatorCard, { PdfIndicatorUnavailable } from "./PdfIndicatorCard";
@@ -33,7 +34,7 @@ export default function PdfPaperRanking() {
   const H = rows.length * ROW + 6;
 
   const svg = (
-    <svg direction="ltr" width={W} height={Math.max(H, 80)} viewBox={`0 0 ${W} ${Math.max(H, 80)}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={Math.max(H, 80)} viewBox={`0 0 ${W} ${Math.max(H, 80)}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {rows.map((r, i) => {
         const y = i * ROW + 3;
         const w = Math.max(4, (r.count / peak) * BAR_W);
@@ -53,7 +54,7 @@ export default function PdfPaperRanking() {
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   const top = rows[0];

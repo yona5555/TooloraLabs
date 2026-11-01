@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import SdIndicatorCard from "./SdIndicatorCard";
 import { useSdModel } from "./SdLiveContext";
@@ -31,7 +32,7 @@ export default function SdSquaresStacked() {
   let x = 0;
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <rect x={0} y={BAR_Y} width={W} height={BAR_H} rx={8} className="fill-zinc-100 dark:fill-zinc-800" />
       {a.sumSquares > 0 &&
         parts.map((p, i) => {
@@ -63,7 +64,7 @@ export default function SdSquaresStacked() {
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   const top2 = parts.slice(0, 2).reduce((s, p) => s + p.shareOfSS, 0);

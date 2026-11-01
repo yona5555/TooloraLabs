@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import ZipIndicatorCard, { ZipIndicatorUnavailable } from "./ZipIndicatorCard";
@@ -30,7 +31,7 @@ export default function ZipRatioExplorer() {
 
   const svg = (
     <div className="w-[340px] max-w-full">
-      <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
+      <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
         <line x1={0} y1={BASE} x2={W} y2={BASE} className="stroke-zinc-300 dark:stroke-zinc-600" />
         {shown.map((x, i) => {
           const cx = i * slot + slot / 2;
@@ -48,7 +49,7 @@ export default function ZipRatioExplorer() {
             </g>
           );
         })}
-      </svg>
+      </FitSvg>
       <input type="range" min={0} max={shown.length - 1} value={k} onChange={(e) => setPick(Number(e.target.value))} aria-label={t("slider")} className="mt-1 w-full accent-blue-600" />
     </div>
   );

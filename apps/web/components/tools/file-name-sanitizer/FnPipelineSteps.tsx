@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import FnIndicatorCard, { FnIndicatorUnavailable } from "./FnIndicatorCard";
 import { useFnModel } from "./FnLiveContext";
@@ -22,7 +23,7 @@ export default function FnPipelineSteps() {
   const H = a.stages.length * ROW + 4;
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {a.stages.map((s, i) => {
         const y = i * ROW;
         const w = Math.max(4, (lens[i] / max) * (W - LABEL - 40));
@@ -42,7 +43,7 @@ export default function FnPipelineSteps() {
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   return (

@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import FsIndicatorCard, { FsIndicatorUnavailable } from "./FsIndicatorCard";
 import { useFsModel } from "./FsLiveContext";
@@ -24,7 +25,7 @@ export default function FsMediaRanking() {
   const H = a.media.length * ROW + 4;
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {a.media.map((m, i) => {
         const y = i * ROW;
         const w = Math.max(4, Math.round(((Math.log10(Math.max(1, m.count)) + 0.15) / (maxLog + 0.15)) * BAR_W * 100) / 100);
@@ -43,7 +44,7 @@ export default function FsMediaRanking() {
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   const fits = a.media.find((m) => m.count === 1);

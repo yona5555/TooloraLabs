@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import DlIndicatorCard, { DlIndicatorUnavailable } from "./DlIndicatorCard";
 import { useDlModel } from "./DlLiveContext";
@@ -19,7 +20,7 @@ export default function DlRepeatHistogram() {
   const peak = Math.max(...a.repeatHistogram, 1);
   const slot = W / 5;
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <line x1={0} y1={BASE} x2={W} y2={BASE} className="stroke-zinc-300 dark:stroke-zinc-600" />
       {a.repeatHistogram.map((c, i) => {
         const h = c ? Math.max(3, (c / peak) * (BASE - TOP)) : 0;
@@ -37,7 +38,7 @@ export default function DlRepeatHistogram() {
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   const repeated = out.uniqueLines - a.repeatHistogram[0];

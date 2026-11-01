@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import FsIndicatorCard, { FsIndicatorUnavailable } from "./FsIndicatorCard";
 import { useFsModel } from "./FsLiveContext";
@@ -28,7 +29,7 @@ export default function FsOsLabels() {
   const H = rows.length * ROW + 4;
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {rows.map((r, i) => {
         const y = i * ROW + ROW / 2 + 2;
         return (
@@ -49,7 +50,7 @@ export default function FsOsLabels() {
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   return (

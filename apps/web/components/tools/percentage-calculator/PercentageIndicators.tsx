@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import {
@@ -168,7 +169,7 @@ export function PercentageEquivalentForms() {
         ))}
       </div>
       <div dir="ltr" className="mt-3">
-        <svg width={420} height={56} viewBox="0 0 420 56" className="mx-auto block h-auto max-w-full" role="img" aria-label={t("forms.heading", { pct: f(p, 4) })}>
+        <FitSvg width={420} height={56} viewBox="0 0 420 56" className="mx-auto block h-auto max-w-full" role="img" aria-label={t("forms.heading", { pct: f(p, 4) })}>
           <line x1={12} x2={408} y1={28} y2={28} className="stroke-zinc-300 dark:stroke-zinc-600" strokeWidth={2} />
           {Array.from({ length: maxX * 4 + 1 }, (_, i) => i / 4).map((v) => (
             <g key={v}>
@@ -179,7 +180,7 @@ export function PercentageEquivalentForms() {
           <line x1={X(bench.percent / 100)} x2={X(bench.percent / 100)} y1={16} y2={40} className="stroke-amber-500" strokeWidth={2} strokeDasharray="3 2" />
           <text style={{ fontSize: svgPx(12) }} x={X(bench.percent / 100)} y={12} textAnchor="middle" className="fill-amber-600 font-mono dark:fill-amber-400">{`${bench.num}/${bench.den}`}</text>
           <circle cx={X(Math.abs(fm.decimal))} cy={28} r={6} className="fill-blue-600 stroke-white dark:fill-blue-400 dark:stroke-zinc-900" strokeWidth={2} />
-        </svg>
+        </FitSvg>
       </div>
     </IndicatorCard>
   );
@@ -213,7 +214,7 @@ export function PercentageRingDonut() {
       }}
     >
       <div className="flex flex-wrap items-center justify-center gap-6">
-        <svg width={168} height={168} viewBox="0 0 168 168" role="img" aria-label={t("rings.heading")}>
+        <FitSvg width={168} height={168} viewBox="0 0 168 168" role="img" aria-label={t("rings.heading")}>
           {rings.map((ring) => {
             const c = 2 * Math.PI * ring.r;
             const frac = clamp(ring.share, 0, 1);
@@ -225,7 +226,7 @@ export function PercentageRingDonut() {
             );
           })}
           <text style={{ fontSize: svgPx(12) }} x={84} y={88} textAnchor="middle" className="fill-zinc-800 font-mono font-bold dark:fill-zinc-100">{`${n(q * 100, 2)}%`}</text>
-        </svg>
+        </FitSvg>
         <ul className="space-y-2 text-xs">
           {rings.map((ring) => (
             <li key={ring.k} className="flex items-center gap-2">
@@ -326,7 +327,7 @@ export function PercentageCompoundTrend() {
       }}
     >
       <div dir="ltr">
-        <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} className="mx-auto block h-auto max-w-full" role="img" aria-label={t("trend.heading", { pct: f(p, 4) })}>
+        <FitSvg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} className="mx-auto block h-auto max-w-full" role="img" aria-label={t("trend.heading", { pct: f(p, 4) })}>
           {[0, 0.5, 1].map((k) => (
             <g key={k}>
               <line x1={L} x2={W - R} y1={Y(lo + k * (hi - lo))} y2={Y(lo + k * (hi - lo))} className="stroke-zinc-200 dark:stroke-zinc-700" />
@@ -341,7 +342,7 @@ export function PercentageCompoundTrend() {
           <line x1={X(2)} x2={X(2)} y1={T} y2={H - Bm} className="stroke-red-500" strokeDasharray="4 3" />
           <circle cx={X(2)} cy={Y(two.compound)} r={5} className="fill-blue-600 stroke-white dark:fill-blue-400 dark:stroke-zinc-900" strokeWidth={1.5} />
           <text style={{ fontSize: svgPx(12) }} x={X(2) + 8} y={Y(two.compound) - 6} className="fill-blue-700 font-mono font-semibold dark:fill-blue-300">{n(two.compound, 2)}</text>
-        </svg>
+        </FitSvg>
       </div>
       <div className="mt-2 flex flex-wrap gap-4 text-xs text-zinc-500 dark:text-zinc-400">
         <span className="flex items-center gap-1.5"><span className="h-0.5 w-4 bg-blue-600 dark:bg-blue-400" />{t("trend.legendCompound")}</span>
@@ -382,7 +383,7 @@ export function PercentageUndoBalance() {
       }}
     >
       <div dir="ltr">
-        <svg width={360} height={190} viewBox="0 0 360 190" className="mx-auto block h-auto max-w-full" role="img" aria-label={t("balance.heading", { pct: sp(p, 3) })}>
+        <FitSvg width={360} height={190} viewBox="0 0 360 190" className="mx-auto block h-auto max-w-full" role="img" aria-label={t("balance.heading", { pct: sp(p, 3) })}>
           <polygon points="180,70 160,170 200,170" className="fill-zinc-300 dark:fill-zinc-600" />
           <rect x={120} y={170} width={120} height={8} rx={3} className="fill-zinc-400 dark:fill-zinc-500" />
           <g transform={`rotate(${tilt} 180 70)`}>
@@ -398,7 +399,7 @@ export function PercentageUndoBalance() {
           </g>
           <circle cx={180} cy={70} r={6} className="fill-zinc-700 dark:fill-zinc-200" />
           <text style={{ fontSize: svgPx(12) }} x={180} y={30} textAnchor="middle" className="fill-zinc-600 font-mono dark:fill-zinc-300">{`${f(B, 2)} → ${f(ud.up, 2)} → ${f(B, 2)}`}</text>
-        </svg>
+        </FitSvg>
       </div>
     </IndicatorCard>
   );
@@ -446,7 +447,7 @@ export function PercentageRangeGauge() {
       }}
     >
       <div dir="ltr">
-        <svg width={300} height={182} viewBox="0 0 300 182" className="mx-auto block h-auto max-w-full" role="img" aria-label={t("gauge.title")}>
+        <FitSvg width={300} height={182} viewBox="0 0 300 182" className="mx-auto block h-auto max-w-full" role="img" aria-label={t("gauge.title")}>
           {zones.map((z) => (
             <path key={z.k} d={arc(z.from, z.to)} fill="none" className={z.cls} strokeWidth={16} />
           ))}
@@ -458,7 +459,7 @@ export function PercentageRangeGauge() {
           <circle cx={cx} cy={cy} r={7} className="fill-zinc-800 dark:fill-zinc-100" />
           {/* Readout below the pivot, so the needle never crosses it at any value. */}
           <text style={{ fontSize: svgPx(18) }} x={cx} y={cy + 34} textAnchor="middle" className="fill-zinc-900 font-mono font-bold dark:fill-zinc-50">{`${f(Math.abs(p), 2)}%`}</text>
-        </svg>
+        </FitSvg>
       </div>
     </IndicatorCard>
   );

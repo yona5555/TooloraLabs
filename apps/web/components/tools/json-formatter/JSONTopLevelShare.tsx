@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import JSONIndicatorCard, { JSONIndicatorUnavailable } from "./JSONIndicatorCard";
 import { formatBytes, KIND_FILL, useJSONModel } from "./JSONLiveContext";
@@ -53,7 +54,7 @@ export default function JSONTopLevelShare() {
   const arcs = turns(segs.map((s) => s.bytes));
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {segs.map((s, i) => (
         <path key={i} d={ringPath(CX, CY, 50, 88, arcs[i][0], arcs[i][1])} className={`${s.fill} stroke-white dark:stroke-zinc-900`} strokeWidth={1.5} />
       ))}
@@ -77,7 +78,7 @@ export default function JSONTopLevelShare() {
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   const big = a.topLevel[0];

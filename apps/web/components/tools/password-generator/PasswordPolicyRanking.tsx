@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import { charEntropy, passphraseEntropy } from "@tooloralabs/tools";
 import PasswordIndicatorCard, { PasswordIndicatorUnavailable } from "./PasswordIndicatorCard";
@@ -35,7 +36,7 @@ export default function PasswordPolicyRanking() {
   const rank = recipes.findIndex((r) => r.key === "yours") + 1;
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {recipes.map((r, i) => {
         const y = i * ROW;
         const w = Math.max(3, Math.round((r.bits / peak) * BAR_W * 100) / 100);
@@ -59,7 +60,7 @@ export default function PasswordPolicyRanking() {
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   const words6 = passphraseEntropy(6);

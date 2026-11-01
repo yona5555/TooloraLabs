@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import JSONIndicatorCard, { JSONIndicatorUnavailable } from "./JSONIndicatorCard";
 import { formatBytes, useJSONModel } from "./JSONLiveContext";
@@ -30,7 +31,7 @@ export default function JSONByteComposition() {
   const H = BAR_Y + BAR_H + 18 + PARTS.length * 22;
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <text style={{ fontSize: svgPx(12) }} x={0} y={16} className="fill-zinc-500 dark:fill-zinc-400">
         {t("axis", { total: formatBytes(b.total) })}
       </text>
@@ -65,7 +66,7 @@ export default function JSONByteComposition() {
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   const payload = b.strings + b.numbers + b.literals;

@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import CsvIndicatorCard, { CsvIndicatorUnavailable } from "./CsvIndicatorCard";
 import { delimiterName, useCsvModel } from "./CsvLiveContext";
@@ -30,7 +31,7 @@ export default function CsvDelimiterBars() {
   const y = (v: number) => BASE - (v / peak) * (BASE - TOP);
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <line x1={0} y1={BASE} x2={W} y2={BASE} className="stroke-zinc-300 dark:stroke-zinc-600" />
       {stats.map((s, i) => {
         const cx = i * slot + slot / 2;
@@ -58,7 +59,7 @@ export default function CsvDelimiterBars() {
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   const used = stats.find((s) => s.d === delimiter)!;

@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import PasswordIndicatorCard, { PasswordIndicatorUnavailable } from "./PasswordIndicatorCard";
@@ -43,7 +44,7 @@ export default function PasswordClassDonut() {
   const shown = KEYS.filter((k) => k !== "other" || classes.other > 0);
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {KEYS.map((k, i) => (outer[i] > 0 ? <path key={k} d={ring(62, 88, o[i][0], o[i][1])} className={`${CLASS_FILL[k]} stroke-white dark:stroke-zinc-900`} strokeWidth={1.5} /> : null))}
       {draft.mode === "characters" &&
         KEYS.map((k, i) =>
@@ -66,7 +67,7 @@ export default function PasswordClassDonut() {
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   const top = KEYS.reduce((m, k) => (classes[k] > classes[m] ? k : m), KEYS[0]);

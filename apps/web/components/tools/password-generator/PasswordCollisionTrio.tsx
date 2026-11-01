@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import { collisionProbability } from "@tooloralabs/tools";
 import PasswordIndicatorCard, { PasswordIndicatorUnavailable } from "./PasswordIndicatorCard";
@@ -36,7 +37,7 @@ export default function PasswordCollisionTrio() {
   const safeN = Math.sqrt(2 * 2 ** s.entropyBits * 0.01);
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <line x1={0} y1={160} x2={W} y2={160} className="stroke-zinc-300 dark:stroke-zinc-600" />
       {SCENARIOS.map((sc, i) => {
         const p = probs[i];
@@ -64,7 +65,7 @@ export default function PasswordCollisionTrio() {
       <text style={{ fontSize: svgPx(12) }} x={W / 2} y={196} textAnchor="middle" className="fill-zinc-400 dark:fill-zinc-500">
         {t("axis")}
       </text>
-    </svg>
+    </FitSvg>
   );
 
   return (

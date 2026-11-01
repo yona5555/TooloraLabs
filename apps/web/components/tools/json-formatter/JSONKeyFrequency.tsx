@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import JSONIndicatorCard, { JSONIndicatorUnavailable } from "./JSONIndicatorCard";
 import { useJSONModel } from "./JSONLiveContext";
@@ -38,7 +39,7 @@ export default function JSONKeyFrequency() {
   const repeated = a.keyFrequency.filter((k) => k.count > 1).length;
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {rows.map((r, i) => {
         const y = TOP + i * ROW;
         const w = Math.max(3, (r.count / peak) * BAR_W);
@@ -60,7 +61,7 @@ export default function JSONKeyFrequency() {
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   return (

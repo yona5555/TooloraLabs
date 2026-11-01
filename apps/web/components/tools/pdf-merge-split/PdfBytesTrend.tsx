@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import PdfIndicatorCard, { PdfIndicatorUnavailable } from "./PdfIndicatorCard";
 import { formatBytes, usePdfModel } from "./PdfLiveContext";
@@ -33,7 +34,7 @@ export default function PdfBytesTrend() {
   const heavy = perPage.indexOf(Math.max(...perPage));
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {[0, total / 2, total].map((v, k) => (
         <g key={k}>
           <line x1={L} y1={y(v)} x2={W - R} y2={y(v)} className="stroke-zinc-200 dark:stroke-zinc-700" />
@@ -54,7 +55,7 @@ export default function PdfBytesTrend() {
       {cum.map((v, i) => (
         <circle key={i} cx={x(i + 1)} cy={y(v)} r={pages[i].source === heavy ? 4.5 : 3} className={pages[i].source === heavy ? "fill-amber-500" : "fill-blue-600 dark:fill-blue-400"} />
       ))}
-    </svg>
+    </FitSvg>
   );
 
   return (

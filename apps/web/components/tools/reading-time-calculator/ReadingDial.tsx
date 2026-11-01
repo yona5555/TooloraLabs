@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import { dialMinutes, SEGMENT_DOTS, SEGMENT_STROKES } from "./rtMath";
 import { useRtLive } from "./RtLiveContext";
@@ -28,7 +29,7 @@ export default function ReadingDial() {
 
   return (
     <div data-preview="visual" className="flex w-full flex-wrap items-center justify-center gap-5 lg:flex-nowrap lg:justify-start">
-      <svg direction="ltr" width={SIZE} height={SIZE} viewBox={`0 0 ${SIZE} ${SIZE}`} role="img" aria-label={t("aria")} className="shrink-0">
+      <FitSvg direction="ltr" width={SIZE} height={SIZE} viewBox={`0 0 ${SIZE} ${SIZE}`} role="img" aria-label={t("aria")} className="shrink-0">
         <circle cx={C} cy={C} r={R + 14} className="fill-zinc-50 stroke-zinc-200 dark:fill-zinc-800/60 dark:stroke-zinc-700" />
         {Array.from({ length: ticks }, (_, i) => {
           const a = (i / ticks) * 2 * Math.PI - Math.PI / 2;
@@ -77,7 +78,7 @@ export default function ReadingDial() {
         <text style={{ fontSize: svgPx(12) }} x={C} y={C + 18} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
           {t("scale", { n: f(span) })}
         </text>
-      </svg>
+      </FitSvg>
       <ul className="flex min-w-[10rem] flex-1 flex-col justify-between gap-1 self-stretch py-2 text-xs lg:min-w-0">
         {paragraphs.slice(0, LEGEND_ROWS).map((p, i) => (
           <li key={p.index} className="flex items-center justify-between gap-2">

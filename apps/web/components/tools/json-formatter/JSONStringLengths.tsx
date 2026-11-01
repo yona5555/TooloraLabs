@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import JSONIndicatorCard, { JSONIndicatorUnavailable } from "./JSONIndicatorCard";
 import { useJSONModel } from "./JSONLiveContext";
@@ -39,7 +40,7 @@ export default function JSONStringLengths() {
   const meanX = meanBucket * slot + (slot - barW) / 2 + within * barW;
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <line x1={0} y1={BASE} x2={W} y2={BASE} className="stroke-zinc-300 dark:stroke-zinc-600" />
       {s.buckets.map((b, i) => {
         const h = b.count ? Math.max(4, (b.count / peak) * (BASE - TOP - 18)) : 0;
@@ -60,7 +61,7 @@ export default function JSONStringLengths() {
       <text style={{ fontSize: svgPx(12) }} x={Math.min(Math.max(meanX, 40), W - 40)} y={TOP - 10} textAnchor="middle" fontWeight={700} className="fill-rose-600 dark:fill-rose-300">
         {t("mean", { n: f(s.meanLength, 1) })}
       </text>
-    </svg>
+    </FitSvg>
   );
 
   return (

@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import ZipIndicatorCard, { ZipIndicatorUnavailable } from "./ZipIndicatorCard";
 import { useZipModel } from "./ZipLiveContext";
@@ -31,7 +32,7 @@ export default function ZipRecordFlow() {
   const x0 = (W - PILL_W) / 2;
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {steps.map((s, i) => {
         const y = i * STEP + 4;
         return (
@@ -47,7 +48,7 @@ export default function ZipRecordFlow() {
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   return (

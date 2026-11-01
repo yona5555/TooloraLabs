@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import DlIndicatorCard, { DlIndicatorUnavailable } from "./DlIndicatorCard";
 import { useDlModel } from "./DlLiveContext";
@@ -29,7 +30,7 @@ export default function DlVariants() {
   const groups = a.variantGroups.slice(0, 5);
   const H = groups.length * ROW + 4;
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {groups.map((g, i) => {
         const y = i * ROW;
         return (
@@ -50,7 +51,7 @@ export default function DlVariants() {
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   return (

@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import FnIndicatorCard, { FnIndicatorUnavailable } from "./FnIndicatorCard";
 import { useFnModel } from "./FnLiveContext";
@@ -35,7 +36,7 @@ export default function FnChangeBars() {
   const slot = W / bars.length;
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <line x1={0} y1={BASE} x2={W} y2={BASE} className="stroke-zinc-300 dark:stroke-zinc-600" />
       {bars.map((b, i) => {
         const h = Math.max(2, (b.v / peak) * (BASE - TOP));
@@ -53,7 +54,7 @@ export default function FnChangeBars() {
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   return (

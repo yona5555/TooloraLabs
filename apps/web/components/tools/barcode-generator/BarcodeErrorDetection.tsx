@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import BarcodeIndicatorCard, { BarcodeIndicatorUnavailable } from "./BarcodeIndicatorCard";
 import { useBarcodeModel } from "./BarcodeLiveContext";
@@ -25,7 +26,7 @@ export default function BarcodeErrorDetection() {
   const H = 40 + groups.length * 62;
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <circle cx={BAR_X + 4} cy={10} r={5} className="fill-emerald-500 dark:fill-emerald-400" />
       <text style={{ fontSize: svgPx(12) }} x={BAR_X + 14} y={14} className="fill-zinc-500 dark:fill-zinc-400">
         {t("caught")}
@@ -51,7 +52,7 @@ export default function BarcodeErrorDetection() {
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   const missed = a.errors.transpositions.total - a.errors.transpositions.detected;

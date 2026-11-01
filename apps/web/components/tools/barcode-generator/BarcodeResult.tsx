@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useRef } from "react";
 import ResultActionButton from "@/components/tool-ui/ResultActionButton";
 import { useTranslations } from "next-intl";
@@ -80,7 +81,7 @@ export default function BarcodeResult() {
       </div>
 
       <div dir="ltr" className="mt-2 px-4">
-        <svg viewBox={`0 0 ${totalW} ${stripH}`} role="img" aria-label={tr("stripAria")} className="h-auto w-full" style={{ minWidth: 260 }}>
+        <FitSvg viewBox={`0 0 ${totalW} ${stripH}`} role="img" aria-label={tr("stripAria")} className="h-auto w-full" style={{ minWidth: 260 }}>
           <rect x={0} y={4} width={q * MODULE_W - 2} height={10} rx={3} className="fill-zinc-200 dark:fill-zinc-700" />
           <rect x={(q + a.modules) * MODULE_W + 2} y={4} width={q * MODULE_W - 2} height={10} rx={3} className="fill-zinc-200 dark:fill-zinc-700" />
           {a.symbols.map((s, i) => {
@@ -98,7 +99,7 @@ export default function BarcodeResult() {
               </g>
             );
           })}
-        </svg>
+        </FitSvg>
         <div className="mt-1 flex flex-wrap justify-center gap-x-4 gap-y-1 text-xs text-zinc-500 dark:text-zinc-400">
           {(isCode128 ? (["start", "data", "checksum"] as const) : (["guard", "left", "right", "check"] as const)).map((role) => (
             <span key={role} className="inline-flex items-center gap-1.5">

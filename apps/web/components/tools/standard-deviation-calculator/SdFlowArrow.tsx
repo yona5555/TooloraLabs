@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useId } from "react";
 import { useTranslations } from "next-intl";
 import SdIndicatorCard from "./SdIndicatorCard";
@@ -31,7 +32,7 @@ export default function SdFlowArrow() {
   const cx = x0 + BOX_W / 2;
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <defs>
         <marker id={`${svgId}sd-flow-head`} viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto">
           <path d="M0,0 L10,5 L0,10 z" className="fill-zinc-500 dark:fill-zinc-400" />
@@ -56,7 +57,7 @@ export default function SdFlowArrow() {
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   return (

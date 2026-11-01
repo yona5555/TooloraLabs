@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import BarcodeIndicatorCard, { BarcodeIndicatorUnavailable } from "./BarcodeIndicatorCard";
 import { useBarcodeModel } from "./BarcodeLiveContext";
@@ -30,7 +31,7 @@ export default function BarcodeModuleBudget() {
   const order = [parts[0], parts[1], parts[2], parts[3]];
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <text style={{ fontSize: svgPx(12) }} x={0} y={14} className="fill-zinc-500 dark:fill-zinc-400">
         {t("axis", { n: f(total) })}
       </text>
@@ -62,7 +63,7 @@ export default function BarcodeModuleBudget() {
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   return (

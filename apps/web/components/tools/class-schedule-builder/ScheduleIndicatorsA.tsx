@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useId } from "react";
 import { DAY_CODES, findClassConflicts } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
@@ -10,7 +11,6 @@ import { svgPx } from "@/components/tool-ui/svgPx";
 import { useFitWidth } from "@/components/tool-ui/useFitWidth";
 import { flowRows, labelW } from "@/components/tool-ui/labelLayout";
 
-import FitSvg from "@/components/tool-ui/FitSvg";
 export type SchedIndicatorProps = { state: StudioState; onChange: (s: StudioState) => void; d: Derived };
 
 const BUFFER_STEPS = [0, 5, 10, 15, 20, 30];
@@ -41,7 +41,7 @@ export function ScheduleConflictCard({ state, onChange, d }: SchedIndicatorProps
         workedExampleTitle={t("ind.worked")}
         indicator={
           <div className="w-[420px] max-w-full">
-            <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.conflict.title")} className="max-w-full">
+            <FitSvg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.conflict.title")} className="max-w-full">
               <defs>
                 <pattern id={`${svgId}csb-hatch-a`} width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
                   <rect width="5" height="5" fill="#ef4444" fillOpacity="0.25" />
@@ -93,7 +93,7 @@ export function ScheduleConflictCard({ state, onChange, d }: SchedIndicatorProps
                   </g>
                 );
               })}
-            </svg>
+            </FitSvg>
             <label className="mt-2 block text-xs font-semibold text-zinc-600 dark:text-zinc-300">
               {t("ind.conflict.buffer")}: <span dir="ltr" className="font-mono text-blue-700 dark:text-blue-300">{t("units.minutes", { n: fmt(state.buffer) })}</span>
               <input type="range" min={0} max={30} step={5} value={state.buffer} onChange={(e) => onChange({ ...state, buffer: Number(e.target.value) })} className="mt-1 w-full accent-blue-600" />
@@ -204,7 +204,7 @@ export function ScheduleGapsCard({ d }: SchedIndicatorProps) {
       <IndicatorWithTable
         workedExampleTitle={t("ind.worked")}
         indicator={
-          <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.gaps.title")} className="max-w-full">
+          <FitSvg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.gaps.title")} className="max-w-full">
             {campus.map((s, ri) => {
               const y0 = ri * RH + 4;
               const first = s.firstStart ?? 0;
@@ -247,7 +247,7 @@ export function ScheduleGapsCard({ d }: SchedIndicatorProps) {
                 </text>
               </g>
             ))}
-          </svg>
+          </FitSvg>
         }
         rows={[
           ...campus.map((s) => ({
@@ -289,7 +289,7 @@ export function ScheduleCreditsCard({ state }: SchedIndicatorProps) {
       <IndicatorWithTable
         workedExampleTitle={t("ind.worked")}
         indicator={
-          <svg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.credits.title")} className="max-w-full">
+          <FitSvg ref={fitRef} width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.credits.title")} className="max-w-full">
             {rows.map((r, i) => {
               const y0 = i * RH + 2;
               return (
@@ -317,7 +317,7 @@ export function ScheduleCreditsCard({ state }: SchedIndicatorProps) {
                 </text>
               </g>
             ))}
-          </svg>
+          </FitSvg>
         }
         rows={[
           ...rows.map((r) => ({

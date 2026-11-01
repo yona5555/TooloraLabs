@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import VectorIndicatorCard from "./VectorIndicatorCard";
 import { useVectorAnalysis } from "./VectorLiveContext";
@@ -43,7 +44,7 @@ export default function VectorTriangleBalance() {
       intro={t("intro")}
       indicator={
         <div dir="ltr" className="max-w-full">
-          <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("title")} className="block h-auto max-w-full">
+          <FitSvg width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("title")} className="block h-auto max-w-full">
             <path d={`M ${CX} ${PIVOT_Y} L ${CX - 22} ${H - 10} L ${CX + 22} ${H - 10} Z`} className="fill-zinc-300 dark:fill-zinc-600" />
             <line x1={lx} y1={ly} x2={rx} y2={ry} strokeWidth={5} strokeLinecap="round" className="stroke-zinc-700 dark:stroke-zinc-200" />
             <circle cx={CX} cy={PIVOT_Y} r={6} className="fill-zinc-700 dark:fill-zinc-200" />
@@ -52,7 +53,7 @@ export default function VectorTriangleBalance() {
             <text style={{ fontSize: svgPx(12) }} x={CX} y={16} textAnchor="middle" className={`font-bold ${balanced ? "fill-emerald-600 dark:fill-emerald-400" : "fill-zinc-700 dark:fill-zinc-200"}`}>
               {balanced ? t("balanced") : `${n(direct, 2)} < ${n(path, 2)}`}
             </text>
-          </svg>
+          </FitSvg>
         </div>
       }
       rows={[

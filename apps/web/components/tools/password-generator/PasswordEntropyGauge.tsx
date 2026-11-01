@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import PasswordIndicatorCard, { PasswordIndicatorUnavailable } from "./PasswordIndicatorCard";
@@ -36,7 +37,7 @@ export default function PasswordEntropyGauge() {
   const next = BOUNDS.slice(1, -1).find((b) => b > s.entropyBits);
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {BOUNDS.slice(0, -1).map((b, i) => (
         <path key={b} d={`M ${pt(b / MAX + 0.003, R)} A ${R} ${R} 0 0 1 ${pt(BOUNDS[i + 1] / MAX - 0.003, R)}`} fill="none" strokeWidth={20} className={ZONE[i]} />
       ))}
@@ -56,7 +57,7 @@ export default function PasswordEntropyGauge() {
       <text style={{ fontSize: svgPx(12) }} x={CX} y={CY - 24} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
         {tt(tier)}
       </text>
-    </svg>
+    </FitSvg>
   );
 
   return (

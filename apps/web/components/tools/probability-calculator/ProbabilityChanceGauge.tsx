@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useId } from "react";
 import { useTranslations } from "next-intl";
 import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
@@ -37,7 +38,7 @@ export default function ProbabilityChanceGauge() {
   const [bx, by] = polar(1);
 
   const gauge = (
-    <svg style={{ direction: "ltr" }} width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("title")} className="mx-auto max-w-full">
+    <FitSvg style={{ direction: "ltr" }} width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("title")} className="mx-auto max-w-full">
       <defs>
         <linearGradient id={gid} x1="0" x2="1" y1="0" y2="0">
           <stop offset="0%" stopColor="#ef4444" />
@@ -59,7 +60,7 @@ export default function ProbabilityChanceGauge() {
       {/* Readout below the pivot, so the needle never crosses it. */}
       <text style={{ fontSize: svgPx(17) }} x={CX} y={CY + 32} textAnchor="middle" className="fill-zinc-800 font-mono font-bold dark:fill-zinc-100">{`${symbol} = ${pct(r)}`}</text>
       <text style={{ fontSize: svgPx(12) }} x={CX} y={CY + 52} textAnchor="middle" className="fill-zinc-500 font-semibold dark:fill-zinc-400">{t(`zones.${zone}`)}</text>
-    </svg>
+    </FitSvg>
   );
 
   return (

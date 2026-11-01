@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import { COLUMN_TYPES } from "@tooloralabs/tools";
 import CsvIndicatorCard, { CsvIndicatorUnavailable } from "./CsvIndicatorCard";
@@ -34,7 +35,7 @@ export default function CsvTypeDonut() {
   const cum = counts.map((_, i) => [counts.slice(0, i).reduce((s, v) => s + v, 0) / total, counts.slice(0, i + 1).reduce((s, v) => s + v, 0) / total]);
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {COLUMN_TYPES.map((ty, i) =>
         counts[i] > 0 ? <path key={ty} d={ring(52, 88, cum[i][0], cum[i][1])} className={`${TYPE_FILL[ty]} stroke-white dark:stroke-zinc-900`} strokeWidth={1.5} /> : null,
       )}
@@ -58,7 +59,7 @@ export default function CsvTypeDonut() {
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   const numeric = counts[0] + counts[1];

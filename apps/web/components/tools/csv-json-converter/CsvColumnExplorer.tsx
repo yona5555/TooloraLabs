@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import CsvIndicatorCard, { CsvIndicatorUnavailable } from "./CsvIndicatorCard";
@@ -32,7 +33,7 @@ export default function CsvColumnExplorer() {
     const y = (v: number) => base - ((v - lo) / (hi - lo)) * (base - 16);
     const slot = W / nums.length;
     chart = (
-      <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
+      <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
         <line x1={0} y1={y(0)} x2={W} y2={y(0)} className="stroke-zinc-300 dark:stroke-zinc-600" />
         {nums.map((v, i) =>
           v === null ? (
@@ -50,12 +51,12 @@ export default function CsvColumnExplorer() {
         <text style={{ fontSize: svgPx(12) }} x={0} y={H - 6} className="fill-zinc-500 dark:fill-zinc-400">
           {t("rowsAxis", { n: nums.length })}
         </text>
-      </svg>
+      </FitSvg>
     );
   } else {
     const peak = Math.max(...col.top.map((x) => x.count), 1);
     chart = (
-      <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
+      <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
         {col.top.map((x, i) => {
           const y = 8 + i * 32;
           const w = Math.max(4, (x.count / peak) * 150);
@@ -71,7 +72,7 @@ export default function CsvColumnExplorer() {
             </g>
           );
         })}
-      </svg>
+      </FitSvg>
     );
   }
 

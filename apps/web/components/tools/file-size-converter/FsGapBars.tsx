@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import FsIndicatorCard, { FsIndicatorUnavailable } from "./FsIndicatorCard";
 import { useFsModel } from "./FsLiveContext";
@@ -31,7 +32,7 @@ export default function FsGapBars() {
   const y = (v: number) => Math.round((BASE - (Math.log10(1 + v) / Math.log10(1 + peak)) * (BASE - TOP)) * 100) / 100;
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <line x1={0} y1={BASE} x2={W} y2={BASE} className="stroke-zinc-300 dark:stroke-zinc-600" />
       {levels.map((k, i) => {
         const cx = i * slot + slot / 2;
@@ -63,7 +64,7 @@ export default function FsGapBars() {
       <text style={{ fontSize: svgPx(12) }} x={0} y={12} className="fill-zinc-500 dark:fill-zinc-400">
         {t("axis")}
       </text>
-    </svg>
+    </FitSvg>
   );
 
   const k = a.decimalLevel || 1;

@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import BarcodeIndicatorCard, { BarcodeIndicatorUnavailable } from "./BarcodeIndicatorCard";
@@ -31,7 +32,7 @@ export default function BarcodeSymbolExplorer() {
 
   const svg = (
     <div className="w-[340px] max-w-full">
-      <svg direction="ltr" width={W} height={ZOOM_Y + ZOOM_H + 24} viewBox={`0 0 ${W} ${ZOOM_Y + ZOOM_H + 24}`} role="img" aria-label={t("aria")} className="block max-w-full">
+      <FitSvg direction="ltr" width={W} height={ZOOM_Y + ZOOM_H + 24} viewBox={`0 0 ${W} ${ZOOM_Y + ZOOM_H + 24}`} role="img" aria-label={t("aria")} className="block max-w-full">
         {[...bits].map((b, i) => (b === "1" ? <rect key={i} x={i * scale} y={STRIP_Y} width={scale + 0.2} height={STRIP_H} className="fill-zinc-900 dark:fill-zinc-100" /> : null))}
         {a.symbols.map((x, i) => (
           <rect
@@ -63,7 +64,7 @@ export default function BarcodeSymbolExplorer() {
             </text>
           );
         })}
-      </svg>
+      </FitSvg>
       <input type="range" min={0} max={a.symbols.length - 1} value={idx} onChange={(e) => setPick(Number(e.target.value))} aria-label={t("slider")} className="mt-2 w-full accent-blue-600" />
     </div>
   );

@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import SdIndicatorCard, { scaleX } from "./SdIndicatorCard";
 import { BAND_FILL, bandOf, useSdModel } from "./SdLiveContext";
@@ -35,7 +36,7 @@ export default function SdZoneStrip() {
   const seen = new Map<number, number>();
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {zoneOfSegment.map((z, i) => {
         const x0 = sx(edges[i]);
         const x1 = sx(edges[i + 1]);
@@ -66,7 +67,7 @@ export default function SdZoneStrip() {
       <text style={{ fontSize: svgPx(12) }} x={W / 2} y={14} textAnchor="middle" fontFamily="var(--font-mono)" fontWeight={600} className="fill-zinc-700 dark:fill-zinc-200">
         {`μ = ${f(a.mean)} · σ = ${f(a.populationStdDev)}`}
       </text>
-    </svg>
+    </FitSvg>
   );
 
   return (

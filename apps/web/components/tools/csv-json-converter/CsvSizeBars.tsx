@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import CsvIndicatorCard, { CsvIndicatorUnavailable } from "./CsvIndicatorCard";
 import { useCsvModel } from "./CsvLiveContext";
@@ -28,7 +29,7 @@ export default function CsvSizeBars() {
   const H = rows.length * ROW + 4;
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {rows.map((r, i) => {
         const y = i * ROW;
         const w = Math.max(3, (r.v / peak) * BAR_W);
@@ -44,7 +45,7 @@ export default function CsvSizeBars() {
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   return (

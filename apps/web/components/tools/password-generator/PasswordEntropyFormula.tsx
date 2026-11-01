@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import PasswordIndicatorCard, { PasswordIndicatorUnavailable } from "./PasswordIndicatorCard";
 import { pow10Text, usePasswordModel } from "./PasswordLiveContext";
@@ -25,7 +26,7 @@ export default function PasswordEntropyFormula() {
   const cw = W / terms.length;
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <text style={{ fontSize: svgPx(22) }} x={W / 2} y={30} textAnchor="middle" fontWeight={700} fontFamily="var(--font-serif)" className="fill-zinc-800 dark:fill-zinc-100">
         H = n · log₂ N{s.extraBits ? " + log₂ 100" : ""}
       </text>
@@ -51,7 +52,7 @@ export default function PasswordEntropyFormula() {
       <text style={{ fontSize: svgPx(13) }} x={W / 2} y={186} textAnchor="middle" fontWeight={700} className="fill-blue-700 dark:fill-blue-300">
         {t("keyspace", { k: pow10Text(s.log10Keyspace) })}
       </text>
-    </svg>
+    </FitSvg>
   );
 
   return (

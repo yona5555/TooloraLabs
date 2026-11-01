@@ -1,3 +1,4 @@
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { svgPx } from "@/components/tool-ui/svgPx";
 export type BarcodeSegment = { width: number; filled: boolean; tall?: boolean };
 
@@ -35,7 +36,7 @@ export default function BarcodeSVG({
   }, []);
 
   return (
-    <svg
+    <FitSvg
       viewBox={`0 0 ${totalWidth} ${height}`}
       role="img"
       aria-label={displayText}
@@ -69,6 +70,6 @@ export default function BarcodeSVG({
           <image href={logoDataUrl} x={barsWidth + 16} y={(BAR_HEIGHT + TALL_EXTRA - logoWidth) / 2} width={logoWidth} height={logoWidth} preserveAspectRatio="xMidYMid meet" />
         </>
       )}
-    </svg>
+    </FitSvg>
   );
 }

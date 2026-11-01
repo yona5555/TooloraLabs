@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import PdfIndicatorCard, { PdfIndicatorUnavailable } from "./PdfIndicatorCard";
 import { formatBytes, SOURCE_FILL, usePdfModel } from "./PdfLiveContext";
@@ -33,7 +34,7 @@ export default function PdfSizeBars() {
   const slot = W / shown.length;
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <line x1={0} y1={BASE} x2={W} y2={BASE} className="stroke-zinc-300 dark:stroke-zinc-600" />
       {shown.map((b, i) => {
         const h = Math.max(3, (b.v / peak) * (BASE - TOP));
@@ -51,7 +52,7 @@ export default function PdfSizeBars() {
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   const diff = outputBytes - inputBytes;

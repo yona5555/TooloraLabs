@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import FnIndicatorCard, { FnIndicatorUnavailable } from "./FnIndicatorCard";
 import { useFnModel } from "./FnLiveContext";
@@ -26,7 +27,7 @@ export default function FnLengthCompare() {
   const H = KEYS.length * ROW + 24;
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <circle cx={BAR_X + 4} cy={8} r={5} className="fill-zinc-400 dark:fill-zinc-500" />
       <text style={{ fontSize: svgPx(12) }} x={BAR_X + 14} y={12} className="fill-zinc-500 dark:fill-zinc-400">
         {t("original")}
@@ -55,7 +56,7 @@ export default function FnLengthCompare() {
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   return (

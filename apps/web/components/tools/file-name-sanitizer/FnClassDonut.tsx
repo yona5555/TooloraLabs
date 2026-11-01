@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import { NAME_CHAR_CLASSES } from "@tooloralabs/tools";
 import FnIndicatorCard, { FnIndicatorUnavailable } from "./FnIndicatorCard";
@@ -31,7 +32,7 @@ export default function FnClassDonut() {
   const cum = counts.map((_, i) => [counts.slice(0, i).reduce((s, v) => s + v, 0) / total, counts.slice(0, i + 1).reduce((s, v) => s + v, 0) / total]);
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {NAME_CHAR_CLASSES.map((c, i) => (counts[i] > 0 ? <path key={c} d={ring(52, 88, cum[i][0], cum[i][1])} className={`${CLASS_FILL[c]} stroke-white dark:stroke-zinc-900`} strokeWidth={1.5} /> : null))}
       <text style={{ fontSize: svgPx(20) }} x={CX} y={CY + 6} textAnchor="middle" fontWeight={700} className="fill-zinc-800 dark:fill-zinc-100">
         {f(a.chars.length, 0)}
@@ -50,7 +51,7 @@ export default function FnClassDonut() {
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   const safe = a.classCounts.ascii + a.classCounts.digit + a.classCounts.dot;

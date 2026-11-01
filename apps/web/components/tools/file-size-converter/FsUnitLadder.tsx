@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import FsIndicatorCard, { FsIndicatorUnavailable } from "./FsIndicatorCard";
 import { useFsModel } from "./FsLiveContext";
@@ -26,7 +27,7 @@ export default function FsUnitLadder() {
   const step = W / 6;
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <rect x={0} y={y(3)} width={W} height={y(0) - y(3)} className="fill-emerald-100 dark:fill-emerald-500/10" />
       <text style={{ fontSize: svgPx(12) }} x={W - 2} y={y(3) + 12} textAnchor="end" className="fill-emerald-700 dark:fill-emerald-300">
         {t("band")}
@@ -43,7 +44,7 @@ export default function FsUnitLadder() {
           </text>
         </g>
       ))}
-    </svg>
+    </FitSvg>
   );
 
   const best = out.decimal[a.decimalLevel];

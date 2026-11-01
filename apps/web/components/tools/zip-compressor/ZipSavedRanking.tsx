@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import ZipIndicatorCard, { ZipIndicatorUnavailable } from "./ZipIndicatorCard";
 import { formatBytes, useZipModel } from "./ZipLiveContext";
@@ -22,7 +23,7 @@ export default function ZipSavedRanking() {
   const totalSaved = rows.reduce((s, r) => s + r.saved, 0);
 
   const svg = (
-    <svg direction="ltr" width={W} height={Math.max(H, 60)} viewBox={`0 0 ${W} ${Math.max(H, 60)}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={Math.max(H, 60)} viewBox={`0 0 ${W} ${Math.max(H, 60)}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {ranked.map((r, i) => {
         const y = i * ROW;
         const w = Math.max(3, (Math.abs(r.saved) / peak) * BAR_W);
@@ -52,7 +53,7 @@ export default function ZipSavedRanking() {
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   const top = ranked[0];

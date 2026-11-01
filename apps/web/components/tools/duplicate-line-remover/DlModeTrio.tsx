@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import DlIndicatorCard, { DlIndicatorUnavailable } from "./DlIndicatorCard";
 import { useDlLive, useDlModel } from "./DlLiveContext";
@@ -29,7 +30,7 @@ export default function DlModeTrio() {
   const slot = W / 3;
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <line x1={0} y1={BASE} x2={W} y2={BASE} className="stroke-zinc-300 dark:stroke-zinc-600" />
       {modes.map((m, i) => {
         const h = Math.max(3, (m.v / peak) * (BASE - TOP));
@@ -58,7 +59,7 @@ export default function DlModeTrio() {
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   return (

@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import DlIndicatorCard, { DlIndicatorUnavailable } from "./DlIndicatorCard";
 import { useDlModel } from "./DlLiveContext";
@@ -30,7 +31,7 @@ export default function DlTopRepeats() {
   const peak = rows[0].count;
   const H = rows.length * ROW + 4;
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {rows.map((r, i) => {
         const y = i * ROW;
         const w = (r.count / peak) * BAR_W;
@@ -48,7 +49,7 @@ export default function DlTopRepeats() {
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   const removedTop = rows[0].count - 1;

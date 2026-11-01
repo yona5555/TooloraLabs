@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import PdfIndicatorCard, { PdfIndicatorUnavailable } from "./PdfIndicatorCard";
@@ -31,7 +32,7 @@ export default function PdfSourceDonut() {
   const shown = sources.slice(0, 6);
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {counts.map((c, i) =>
         c > 0 ? <path key={i} d={ring(52, 88, cum[i][0], cum[i][1])} className={`${SOURCE_FILL[i % SOURCE_FILL.length]} stroke-white dark:stroke-zinc-900`} strokeWidth={1.5} /> : null,
       )}
@@ -55,7 +56,7 @@ export default function PdfSourceDonut() {
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   const big = counts.indexOf(Math.max(...counts));

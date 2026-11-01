@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import { CHAR_CLASSES } from "@tooloralabs/tools";
 import PasswordIndicatorCard, { PasswordIndicatorUnavailable } from "./PasswordIndicatorCard";
@@ -27,7 +28,7 @@ export default function PasswordPoolBar() {
   const H = BAR_Y + BAR_H + 22 + 4 * 22;
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <text style={{ fontSize: svgPx(12) }} x={0} y={14} className="fill-zinc-500 dark:fill-zinc-400">
         {words ? t("axisWords", { n: f(s.wordListSize) }) : t("axis", { n: s.poolSize, full: FULL })}
       </text>
@@ -52,7 +53,7 @@ export default function PasswordPoolBar() {
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   return (

@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Pause, Play, RotateCcw } from "lucide-react";
@@ -97,7 +98,7 @@ export default function RtReaderPlayback() {
 
   const indicator = (
     <div className="w-full sm:w-[340px]">
-      <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
+      <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
         <text style={{ fontSize: svgPx(12) }} x={PAD} y={BAR_Y - 8} fontWeight={600} className="fill-zinc-500 dark:fill-zinc-400">{t("paragraphsRow")}</text>
         {paragraphs.map((p, i) => (
           <rect
@@ -138,7 +139,7 @@ export default function RtReaderPlayback() {
           <line x1={0} y1={BAR_Y - 4} x2={0} y2={AXIS_Y} strokeWidth={2} className="stroke-amber-500 dark:stroke-amber-400" />
           <circle cx={0} cy={BAR_Y - 6} r={5} className="fill-amber-500 dark:fill-amber-400" />
         </g>
-      </svg>
+      </FitSvg>
 
       <div className="mt-2 flex items-center gap-2">
         <button

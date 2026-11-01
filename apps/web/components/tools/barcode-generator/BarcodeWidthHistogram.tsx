@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import BarcodeIndicatorCard, { BarcodeIndicatorUnavailable } from "./BarcodeIndicatorCard";
 import { useBarcodeModel } from "./BarcodeLiveContext";
@@ -25,7 +26,7 @@ export default function BarcodeWidthHistogram() {
   const avgSpace = (a.modules - a.darkModules) / a.spaces;
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <circle cx={8} cy={10} r={6} className="fill-zinc-800 dark:fill-zinc-200" />
       <text style={{ fontSize: svgPx(12) }} x={20} y={14} className="fill-zinc-600 dark:fill-zinc-300">
         {t("bars")}
@@ -55,7 +56,7 @@ export default function BarcodeWidthHistogram() {
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   const narrow = a.barWidths[0] + a.spaceWidths[0];
