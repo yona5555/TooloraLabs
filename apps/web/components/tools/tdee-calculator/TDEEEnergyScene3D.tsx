@@ -31,7 +31,6 @@ const XO = -0.55;
 const XI = 0.55;
 const HMAX = 2.25;
 const SPARKS = 14;
-const MOVE_SECONDS = 8; // the sparks rise this long after the data changes, never on load, so an idle page draws nothing
 
 export default function TDEEEnergyScene3D({ parts, tdee, intake, intakeColor, multiplier, labels }: TDEEEnergyScene3DProps) {
   const p = usePalette3D();
