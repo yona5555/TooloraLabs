@@ -85,7 +85,7 @@ function ClockFace({ cx, cy, h, m, color, dayShift }: { cx: number; cy: number; 
       <line x1={cx} y1={cy} x2={px2(cx + 24 * Math.cos(rad(ha)))} y2={px2(cy + 24 * Math.sin(rad(ha)))} stroke={night ? "#f8fafc" : "#0f172a"} strokeWidth={3.5} strokeLinecap="round" style={{ transition: "all 600ms ease" }} />
       <line x1={cx} y1={cy} x2={px2(cx + 36 * Math.cos(rad(ma)))} y2={px2(cy + 36 * Math.sin(rad(ma)))} stroke={color} strokeWidth={2.2} strokeLinecap="round" style={{ transition: "all 600ms ease" }} />
       <circle cx={cx} cy={cy} r={3} fill={color} />
-      <text x={cx} y={cy + r + 18} textAnchor="middle" fontWeight={800} className={valueText} style={{ fontSize: svgPx(15), fontFamily: "ui-monospace, monospace" }}>
+      <text x={cx} y={cy + r + 18} textAnchor="middle" fontWeight={800} className={valueText} style={{ fontSize: svgPx(15), fontFamily: "var(--font-mono)" }}>
         {`${two(h)}:${two(m)}`}
         {dayShift !== 0 && (
           <tspan style={{ fontSize: svgPx(12) }} fill={AMBER}>{` ${dayShift > 0 ? "+" : "−"}${Math.abs(dayShift)}d`}</tspan>

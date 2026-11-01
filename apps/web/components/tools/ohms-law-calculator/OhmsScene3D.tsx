@@ -34,6 +34,7 @@ const CORNERS: P3[] = [
 const SIDES = [2 * Y, 2 * X, 2 * Y, 2 * X];
 const PERIMETER = SIDES.reduce((s, v) => s + v, 0);
 const PARTICLES = 28;
+const MOVE_SECONDS = 8; // the charges flow this long after V or R changes, never on load, so an idle page draws nothing
 
 const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v));
 const log = (v: number) => Math.log10(Math.max(Math.abs(v), 1e-30));

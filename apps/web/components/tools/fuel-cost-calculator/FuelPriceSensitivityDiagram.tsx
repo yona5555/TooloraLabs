@@ -1,3 +1,4 @@
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import type { CurrencyCode } from "@/lib/currency";
 import AutoFitText from "@/components/tool-ui/AutoFitText";
@@ -56,7 +57,7 @@ export default function FuelPriceSensitivityDiagram({ lowPoint, currentPoint, hi
   return (
     <figure data-preview="visual" className="my-2">
       <div dir="ltr" className="flex justify-center overflow-x-auto">
-        <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={caption} className="h-auto w-full max-w-[380px] text-current" style={{ minWidth: 300 }}>
+        <FitSvg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={caption} className="h-auto w-full max-w-[380px] text-current" style={{ minWidth: 300 }}>
           <line x1={16} y1={BASELINE_Y} x2={WIDTH - 16} y2={BASELINE_Y} stroke="currentColor" strokeWidth={1} opacity={0.25} />
 
           {scenarios.map((s, i) => {
@@ -88,7 +89,7 @@ export default function FuelPriceSensitivityDiagram({ lowPoint, currentPoint, hi
               </g>
             );
           })}
-        </svg>
+        </FitSvg>
       </div>
       <figcaption className="mt-2 text-center text-sm opacity-70">{caption}</figcaption>
     </figure>

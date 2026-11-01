@@ -26,7 +26,7 @@ export default function TlRecovery() {
           >
             <span className="truncate text-zinc-900 dark:text-zinc-50">{s.styled}</span>
             <span className="font-mono text-[10px] text-zinc-400">NFKC →</span>
-            <span className="truncate text-zinc-600 dark:text-zinc-300">{s.recovered}</span>
+            <span className="min-w-0 break-words text-zinc-600 dark:text-zinc-300">{s.recovered}</span>
             {ok ? <Check size={14} className="text-emerald-600 dark:text-emerald-400" /> : <X size={14} className="text-rose-600 dark:text-rose-400" />}
           </li>
         );

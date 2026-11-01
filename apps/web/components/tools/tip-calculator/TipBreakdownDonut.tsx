@@ -1,3 +1,4 @@
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { svgPx } from "@/components/tool-ui/svgPx";
 type Segment = {
   key: string;
@@ -36,7 +37,7 @@ export default function TipBreakdownDonut({ segments, centerValue, centerLabel }
 
   return (
     <div className="flex w-full items-center gap-5">
-      <svg viewBox={`0 0 ${SIZE} ${SIZE}`} role="img" aria-label={`${centerLabel}: ${centerValue}`} className="w-44 shrink-0">
+      <FitSvg viewBox={`0 0 ${SIZE} ${SIZE}`} role="img" aria-label={`${centerLabel}: ${centerValue}`} className="w-44 shrink-0">
         <circle
           cx={center}
           cy={center}
@@ -65,7 +66,7 @@ export default function TipBreakdownDonut({ segments, centerValue, centerLabel }
         <text style={{ fontSize: svgPx(12) }} x={center} y={center + 16} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
           {centerLabel}
         </text>
-      </svg>
+      </FitSvg>
 
       <div className="flex min-w-0 flex-1 flex-col justify-between gap-2 self-stretch py-4 text-sm">
         {segments

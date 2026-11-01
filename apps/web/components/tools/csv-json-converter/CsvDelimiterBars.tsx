@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import CsvIndicatorCard, { CsvIndicatorUnavailable } from "./CsvIndicatorCard";
 import { delimiterName, useCsvModel } from "./CsvLiveContext";
@@ -30,7 +31,7 @@ export default function CsvDelimiterBars() {
   const y = (v: number) => BASE - (v / peak) * (BASE - TOP);
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <line x1={0} y1={BASE} x2={W} y2={BASE} className="stroke-zinc-300 dark:stroke-zinc-600" />
       {stats.map((s, i) => {
         const cx = i * slot + slot / 2;
@@ -39,7 +40,7 @@ export default function CsvDelimiterBars() {
           <g key={s.d}>
             <rect x={cx - 22} y={y(s.mean)} width={44} height={Math.max(2, BASE - y(s.mean))} rx={4} className={on ? "fill-blue-600 dark:fill-blue-400" : "fill-zinc-300 dark:fill-zinc-600"} />
             {s.max > s.min && <line x1={cx} y1={y(s.max)} x2={cx} y2={y(s.min)} strokeWidth={2} className="stroke-rose-500" />}
-            <text style={{ fontSize: svgPx(12) }} x={cx} y={y(Math.max(s.mean, s.max)) - 6} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={cx} y={y(Math.max(s.mean, s.max)) - 6} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
               {f(s.mean, 1)}
             </text>
             <text style={{ fontSize: svgPx(14) }}
@@ -47,7 +48,7 @@ export default function CsvDelimiterBars() {
               y={BASE + 18}
               textAnchor="middle"
               fontWeight={700}
-              fontFamily="ui-monospace, monospace"
+              fontFamily="var(--font-mono)"
               className={on ? "fill-blue-700 dark:fill-blue-300" : "fill-zinc-600 dark:fill-zinc-300"}
             >
               {delimiterName(s.d)}
@@ -58,7 +59,7 @@ export default function CsvDelimiterBars() {
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   const used = stats.find((s) => s.d === delimiter)!;

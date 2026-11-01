@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import { QR_LEVELS, QR_RECOVERY } from "@tooloralabs/tools";
 import QRIndicatorCard, { QRIndicatorUnavailable } from "./QRIndicatorCard";
@@ -25,7 +26,7 @@ export default function QRLevelBars() {
   const y = (v: number) => BASE - (v / peak) * (BASE - TOP);
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <line x1={0} y1={BASE} x2={W} y2={BASE} className="stroke-zinc-300 dark:stroke-zinc-600" />
       {QR_LEVELS.map((l, i) => {
         const cap = a.capacityAtVersion[l];
@@ -43,7 +44,7 @@ export default function QRLevelBars() {
               rx={5}
               className={active ? "fill-blue-600 dark:fill-blue-400" : fits ? "fill-blue-300 hover:fill-blue-400 dark:fill-blue-800" : "fill-zinc-300 dark:fill-zinc-700"}
             />
-            <text style={{ fontSize: svgPx(12) }} x={x + w / 2} y={y(cap) - 6} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={x + w / 2} y={y(cap) - 6} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
               {f(cap)}
             </text>
             <text style={{ fontSize: svgPx(13) }} x={x + w / 2} y={BASE + 16} textAnchor="middle" fontWeight={700} className={active ? "fill-blue-700 dark:fill-blue-300" : "fill-zinc-600 dark:fill-zinc-300"}>
@@ -59,7 +60,7 @@ export default function QRLevelBars() {
       <text style={{ fontSize: svgPx(12) }} x={W} y={y(a.payloadBytes) - 5} textAnchor="end" fontWeight={600} className="fill-rose-600 dark:fill-rose-300">
         {t("payload", { n: a.payloadBytes })}
       </text>
-    </svg>
+    </FitSvg>
   );
 
   const lv = draft.errorCorrectionLevel;

@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import FnIndicatorCard, { FnIndicatorUnavailable } from "./FnIndicatorCard";
 import { useFnModel } from "./FnLiveContext";
@@ -22,7 +23,7 @@ export default function FnPipelineSteps() {
   const H = a.stages.length * ROW + 4;
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {a.stages.map((s, i) => {
         const y = i * ROW;
         const w = Math.max(4, (lens[i] / max) * (W - LABEL - 40));
@@ -33,16 +34,16 @@ export default function FnPipelineSteps() {
               {t(s.key)}
             </text>
             <rect x={LABEL} y={y + 4} width={w} height={16} rx={4} className={last ? "fill-emerald-500 dark:fill-emerald-400" : "fill-blue-500 dark:fill-blue-400"} />
-            <text style={{ fontSize: svgPx(12) }} x={LABEL + w + 5} y={y + 16} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-700 dark:fill-zinc-200">
+            <text style={{ fontSize: svgPx(12) }} x={LABEL + w + 5} y={y + 16} fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-700 dark:fill-zinc-200">
               {f(lens[i], 0)}
             </text>
-            <text style={{ fontSize: svgPx(12) }} x={LABEL} y={y + 35} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+            <text style={{ fontSize: svgPx(12) }} x={LABEL} y={y + 35} fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
               {s.value.length > 40 ? `${s.value.slice(0, 39)}…` : s.value || "∅"}
             </text>
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   return (

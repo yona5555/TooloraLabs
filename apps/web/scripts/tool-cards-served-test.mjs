@@ -30,9 +30,12 @@ for (const locale of ["ar", "en"])
   for (const theme of ["light", "dark"]) {
     const set = locale === "ar" ? "ar" : "en";
     const variant = `${set}/${theme}`;
-    const context = await browser.newContext({ viewport: { width: 1440, height: 1000 }, colorScheme: theme });
+    const context = await browser.newContext({ viewport: { width: 1440, height: 1000 }, colorScheme: theme, reducedMotion: "reduce" });
     await context.addInitScript((t) => localStorage.setItem("theme", t), theme);
     const page = await context.newPage();
+    // Only BASE is reached, like the locks: no live price feed or WebSocket frame moves a card while it is checked.
+    await page.route((url) => new URL(url.href).origin !== new URL(base).origin, (route) => route.abort());
+    await page.routeWebSocket(/.*/, () => {});
     for (const p of pages) {
       const url = `${base}/${locale}${p}`;
       const res = await page.goto(url, { waitUntil: "load", timeout: 90_000 });

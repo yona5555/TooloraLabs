@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import { collisionProbability } from "@tooloralabs/tools";
 import PasswordIndicatorCard, { PasswordIndicatorUnavailable } from "./PasswordIndicatorCard";
@@ -36,7 +37,7 @@ export default function PasswordCollisionTrio() {
   const safeN = Math.sqrt(2 * 2 ** s.entropyBits * 0.01);
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <line x1={0} y1={160} x2={W} y2={160} className="stroke-zinc-300 dark:stroke-zinc-600" />
       {SCENARIOS.map((sc, i) => {
         const p = probs[i];
@@ -52,7 +53,7 @@ export default function PasswordCollisionTrio() {
               rx={5}
               className={p > 0.01 ? "fill-rose-500 dark:fill-rose-400" : p > 1e-9 ? "fill-amber-500 dark:fill-amber-400" : "fill-emerald-500 dark:fill-emerald-400"}
             />
-            <text style={{ fontSize: svgPx(12) }} x={cx} y={160 - h - 6} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={cx} y={160 - h - 6} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
               {probText(p, f)}
             </text>
             <text style={{ fontSize: svgPx(12) }} x={cx} y={178} textAnchor="middle" className="fill-zinc-600 dark:fill-zinc-300">
@@ -64,7 +65,7 @@ export default function PasswordCollisionTrio() {
       <text style={{ fontSize: svgPx(12) }} x={W / 2} y={196} textAnchor="middle" className="fill-zinc-400 dark:fill-zinc-500">
         {t("axis")}
       </text>
-    </svg>
+    </FitSvg>
   );
 
   return (

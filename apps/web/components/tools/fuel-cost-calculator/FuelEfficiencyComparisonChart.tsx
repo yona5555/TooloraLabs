@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber } from "@tooloralabs/core";
 import { convertAmount } from "@/lib/currency";
@@ -62,7 +63,7 @@ export default function FuelEfficiencyComparisonChart() {
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("caption", { distance: ANNUAL_DISTANCE.toLocaleString("en-US"), price: money(PRICE, 2) })}</p>
       <GapFreeRow className="mt-4">
         <div dir="ltr" className="shrink-0 overflow-x-auto">
-          <svg width={WIDTH} height={HEIGHT} viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={t("title")} className="mx-auto block min-w-[300px] text-current">
+          <FitSvg width={WIDTH} height={HEIGHT} viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={t("title")} className="mx-auto block min-w-[300px] text-current">
             <line x1={10} y1={HEIGHT - PAD_BOTTOM} x2={WIDTH - 10} y2={HEIGHT - PAD_BOTTOM} className="stroke-current opacity-20" strokeWidth={1} />
             {points.map((p, i) => {
               const colHeight = (p.value / maxValue) * plotHeight;
@@ -83,7 +84,7 @@ export default function FuelEfficiencyComparisonChart() {
                 </g>
               );
             })}
-          </svg>
+          </FitSvg>
         </div>
         <FuelWorkedExampleNote
           title={tw("title")}

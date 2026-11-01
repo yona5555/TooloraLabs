@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useMotionEpisode, useMotionLoop } from "@/components/tool-ui/motion/motion";
 import { useTranslations } from "next-intl";
@@ -89,7 +90,7 @@ export default function ProbabilityMonteCarlo() {
 
   const chart = (
     <div className="w-full lg:w-[320px]">
-      <svg ref={box} style={{ direction: "ltr" }} width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("title")} className="mx-auto max-w-full">
+      <FitSvg ref={box} style={{ direction: "ltr" }} width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("title")} className="mx-auto max-w-full">
         {[0, 0.25, 0.5, 0.75, 1].map((v) => (
           <g key={v}>
             <line x1={L} x2={W - R} y1={y(v)} y2={y(v)} className="stroke-zinc-200 dark:stroke-zinc-700" />
@@ -106,7 +107,7 @@ export default function ProbabilityMonteCarlo() {
         <text style={{ fontSize: svgPx(12) }} x={W - R - 2} y={Math.max(T + 10, y(r) - 6)} textAnchor="end" className="fill-violet-700 font-mono font-bold dark:fill-violet-300">{`${symbol} = ${pct(r)}`}</text>
         {/* a full line under the tick numbers (§39) */}
         <text style={{ fontSize: svgPx(12) }} x={L + 4} y={H - 2} className="fill-zinc-500 dark:fill-zinc-400">{t("axis")}</text>
-      </svg>
+      </FitSvg>
       <div className="mt-2 flex justify-center gap-2">
         <button
           type="button"

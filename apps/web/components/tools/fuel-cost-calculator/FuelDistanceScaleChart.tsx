@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber } from "@tooloralabs/core";
 import { convertAmount } from "@/lib/currency";
@@ -86,7 +87,7 @@ export default function FuelDistanceScaleChart() {
       {/* Stacked as approved (chart above its table): its 12px lanes would otherwise measure side-by-side. */}
       <GapFreeRow className="mt-4" layout="stacked">
         <div dir="ltr" className="shrink-0 overflow-x-auto">
-          <svg ref={svgRef} width={WIDTH} height={HEIGHT} viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={t("title")} className="block min-w-[320px] text-current">
+          <FitSvg ref={svgRef} width={WIDTH} height={HEIGHT} viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={t("title")} className="block min-w-[320px] text-current">
             <line x1={PAD_LEFT} y1={AXIS_Y} x2={WIDTH - PAD_RIGHT} y2={AXIS_Y} className="stroke-teal-400 dark:stroke-teal-500" strokeWidth={3} strokeLinecap="round" />
             {marks.map((m, i) => {
               const { x, cx, anchor, above } = boxes[i];
@@ -108,7 +109,7 @@ export default function FuelDistanceScaleChart() {
                 </g>
               );
             })}
-          </svg>
+          </FitSvg>
         </div>
         <FuelWorkedExampleNote
           title={tw("title")}

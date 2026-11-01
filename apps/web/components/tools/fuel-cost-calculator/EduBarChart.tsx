@@ -1,3 +1,4 @@
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { svgPx } from "@/components/tool-ui/svgPx";
 /**
  * Lightweight, non-interactive SVG horizontal bar chart shared by this tool's
@@ -34,7 +35,7 @@ export default function EduBarChart({ bars, ariaLabel, barColorClass = "fill-blu
 
   return (
     <div dir="ltr" className="overflow-x-auto">
-      <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} role="img" aria-label={ariaLabel} className="block min-w-[320px] text-current">
+      <FitSvg width={width} height={height} viewBox={`0 0 ${width} ${height}`} role="img" aria-label={ariaLabel} className="block min-w-[320px] text-current">
         {bars.map((bar, i) => {
           const y = MARGIN.top + i * (ROW_HEIGHT + ROW_GAP);
           const barW = Math.max((bar.value / maxValue) * plotWidth, 2);
@@ -51,7 +52,7 @@ export default function EduBarChart({ bars, ariaLabel, barColorClass = "fill-blu
             </g>
           );
         })}
-      </svg>
+      </FitSvg>
     </div>
   );
 }

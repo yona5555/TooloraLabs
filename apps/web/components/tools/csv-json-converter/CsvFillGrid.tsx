@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import CsvIndicatorCard, { CsvIndicatorUnavailable } from "./CsvIndicatorCard";
 import { TYPE_FILL, useCsvModel } from "./CsvLiveContext";
@@ -25,7 +26,7 @@ export default function CsvFillGrid() {
   const sparse = [...a.columns].sort((x, y) => y.empty - x.empty)[0];
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {rows.map((r, i) =>
         r.map((v, k) => (
           <rect
@@ -41,11 +42,11 @@ export default function CsvFillGrid() {
         )),
       )}
       {a.columns.map((c, k) => (
-        <text style={{ fontSize: svgPx(12) }} key={c.name} x={k * cw + cw / 2} y={H - 6} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+        <text style={{ fontSize: svgPx(12) }} key={c.name} x={k * cw + cw / 2} y={H - 6} textAnchor="middle" fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
           {c.name.length > cw / 7 ? `${c.name.slice(0, Math.max(2, Math.floor(cw / 7) - 1))}…` : c.name}
         </text>
       ))}
-    </svg>
+    </FitSvg>
   );
 
   return (

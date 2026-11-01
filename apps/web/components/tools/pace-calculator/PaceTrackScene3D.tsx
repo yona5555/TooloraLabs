@@ -31,6 +31,7 @@ const S = 84.39 * SCALE;
 const R = 36.8 * SCALE;
 const LANES = 0.3;
 const SPEEDUP = 25;
+const MOVE_SECONDS = 8;
 
 /** Point on the lane-1 line at arc length u (0 = start line, running anticlockwise seen from above). */
 function onTrack(u: number, r = R): { x: number; z: number; heading: number } {

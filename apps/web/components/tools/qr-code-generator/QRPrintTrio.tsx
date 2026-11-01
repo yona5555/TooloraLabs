@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import QRIndicatorCard, { QRIndicatorUnavailable } from "./QRIndicatorCard";
 import { useQRModel } from "./QRLiveContext";
@@ -36,7 +37,7 @@ export default function QRPrintTrio() {
   const HT = H + Math.max(...lane) * 32;
 
   const svg = (
-    <svg direction="ltr" width={W} height={HT} viewBox={`0 0 ${W} ${HT}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={HT} viewBox={`0 0 ${W} ${HT}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {MODULES_MM.map((m, k) => {
         const side = px[k];
         const cell = side / span;
@@ -51,13 +52,13 @@ export default function QRPrintTrio() {
             <text style={{ fontSize: svgPx(12) }} x={caps[k].x} y={base + 16 + lane[k] * 32} textAnchor="middle" fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
               {t("module", { m })}
             </text>
-            <text style={{ fontSize: svgPx(12) }} x={caps[k].x} y={base + 32 + lane[k] * 32} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+            <text style={{ fontSize: svgPx(12) }} x={caps[k].x} y={base + 32 + lane[k] * 32} textAnchor="middle" fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
               {f(widths[k], 1)} mm
             </text>
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   return (

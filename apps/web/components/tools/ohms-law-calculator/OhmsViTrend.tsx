@@ -47,12 +47,12 @@ export default function OhmsViTrend() {
       <line x1={L} y1={B} x2={R} y2={B} className="stroke-zinc-300 dark:stroke-zinc-600" />
       <line x1={L} y1={T} x2={L} y2={B} className="stroke-zinc-300 dark:stroke-zinc-600" />
       {[0, 1, 2].map((q) => (
-        <text style={{ fontSize: svgPx(12) }} key={`x${q}`} x={sx(q * I)} y={B + 14} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+        <text style={{ fontSize: svgPx(12) }} key={`x${q}`} x={sx(q * I)} y={B + 14} textAnchor="middle" fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
           {f(q * I, 3)}
         </text>
       ))}
       {[1, 2].map((q) => (
-        <text style={{ fontSize: svgPx(12) }} key={`y${q}`} x={L - 5} y={sy(q * V) + 3} textAnchor="end" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+        <text style={{ fontSize: svgPx(12) }} key={`y${q}`} x={L - 5} y={sy(q * V) + 3} textAnchor="end" fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
           {f(q * V, 3)}
         </text>
       ))}
@@ -68,7 +68,7 @@ export default function OhmsViTrend() {
         return (
           <g key={ln.k}>
             <line x1={sx(pts[0].current)} y1={sy(pts[0].voltage)} x2={e.x} y2={e.y} strokeWidth={ln.w} className={ln.cls} />
-            <text style={{ fontSize: svgPx(ln.k === 1 ? 12 : 12) }} x={e.x - 4} y={e.y - 6} textAnchor="end" fontWeight={700} fontFamily="ui-monospace, monospace" className={ln.txt}>
+            <text style={{ fontSize: svgPx(ln.k === 1 ? 12 : 12) }} x={e.x - 4} y={e.y - 6} textAnchor="end" fontWeight={700} fontFamily="var(--font-mono)" className={ln.txt}>
               {ln.label}
             </text>
           </g>
@@ -77,7 +77,7 @@ export default function OhmsViTrend() {
       <line x1={sx(I)} y1={sy(V)} x2={sx(I)} y2={B} strokeDasharray="3 3" className="stroke-zinc-400 dark:stroke-zinc-500" />
       <line x1={L} y1={sy(V)} x2={sx(I)} y2={sy(V)} strokeDasharray="3 3" className="stroke-zinc-400 dark:stroke-zinc-500" />
       <circle cx={sx(I)} cy={sy(V)} r={7} className="fill-red-600 dark:fill-red-400" />
-      <text style={{ fontSize: svgPx(12) }} x={sx(I) + 10} y={sy(V) + 16} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-red-600 dark:fill-red-400">
+      <text style={{ fontSize: svgPx(12) }} x={sx(I) + 10} y={sy(V) + 16} fontWeight={700} fontFamily="var(--font-mono)" className="fill-red-600 dark:fill-red-400">
         {`(${f(I, 3)} A, ${f(V, 3)} V)`}
       </text>
     </svg>

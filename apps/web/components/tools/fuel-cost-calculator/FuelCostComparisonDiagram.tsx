@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber } from "@tooloralabs/core";
 import { convertAmount } from "@/lib/currency";
@@ -59,7 +60,7 @@ export default function FuelCostComparisonDiagram() {
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{d("intro")}</p>
       <GapFreeRow className="mt-4">
         <div dir="ltr" className="shrink-0 overflow-x-auto">
-          <svg width={WIDTH} height={HEIGHT} viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={d("title")} className="mx-auto block min-w-[300px] text-current">
+          <FitSvg width={WIDTH} height={HEIGHT} viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={d("title")} className="mx-auto block min-w-[300px] text-current">
             <line x1={16} y1={HEIGHT - PAD_BOTTOM} x2={WIDTH - 16} y2={HEIGHT - PAD_BOTTOM} className="stroke-current opacity-20" strokeWidth={1} />
             {VEHICLES.map((v, i) => {
               const cost = costs[i];
@@ -78,7 +79,7 @@ export default function FuelCostComparisonDiagram() {
                 </g>
               );
             })}
-          </svg>
+          </FitSvg>
         </div>
         <FuelWorkedExampleNote
           title={tw("title")}

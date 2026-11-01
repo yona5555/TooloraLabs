@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import SdIndicatorCard from "./SdIndicatorCard";
 import { useSdModel } from "./SdLiveContext";
@@ -25,14 +26,14 @@ export default function SdShortcutFormula() {
       <text style={{ fontSize: svgPx(12) }} x={x + w / 2} y={y + 20} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">
         {top}
       </text>
-      <text style={{ fontSize: svgPx(14) }} x={x + w / 2} y={y + 40} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+      <text style={{ fontSize: svgPx(14) }} x={x + w / 2} y={y + 40} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
         {value}
       </text>
     </g>
   );
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {box(4, 6, 126, "Σx²", f(a.sumOfSquaresRaw), "fill-sky-100 stroke-sky-500 dark:fill-sky-500/15 dark:stroke-sky-400")}
       <text style={{ fontSize: svgPx(22) }} x={150} y={40} textAnchor="middle" fontWeight={700} className="fill-zinc-500 dark:fill-zinc-400">
         −
@@ -45,10 +46,10 @@ export default function SdShortcutFormula() {
         {match ? "=" : "≈"}
       </text>
       <rect x={60} y={184} width={180} height={32} rx={10} strokeWidth={1.5} className="fill-emerald-50 stroke-emerald-600 dark:fill-emerald-500/10 dark:stroke-emerald-400" />
-      <text style={{ fontSize: svgPx(13) }} x={150} y={205} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+      <text style={{ fontSize: svgPx(13) }} x={150} y={205} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
         {`Σ(x − μ)² = ${f(a.sumSquares)}`}
       </text>
-    </svg>
+    </FitSvg>
   );
 
   return (

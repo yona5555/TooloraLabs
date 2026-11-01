@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useId } from "react";
 import { useTranslations } from "next-intl";
 import { parseLocalizedNumber } from "@tooloralabs/core";
@@ -59,7 +60,7 @@ export default function ProbabilityVennLab() {
 
   const diagram = (
     <div className="w-full lg:w-[320px]">
-      <svg style={{ direction: "ltr" }} width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("title")} className="mx-auto max-w-full">
+      <FitSvg style={{ direction: "ltr" }} width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("title")} className="mx-auto max-w-full">
         <defs>
           <clipPath id={clip}>
             <circle cx={cxA} cy={cy} r={rA} />
@@ -81,7 +82,7 @@ export default function ProbabilityVennLab() {
         <text style={{ fontSize: svgPx(12) }} x={W - PAD - 4} y={22} textAnchor="end" className="fill-emerald-700 font-bold dark:fill-emerald-300">{`B ${pct(b.pB, 1)}`}</text>
         <text style={{ fontSize: svgPx(12) }} x={W - PAD - 4} y={H - 14} textAnchor="end" className="fill-zinc-600 font-mono font-semibold dark:fill-zinc-300">{`A′∩B′ ${pct(b.neither, 1)}`}</text>
         <text style={{ fontSize: svgPx(12) }} x={PAD + 4} y={H - 14} className="fill-zinc-900 font-mono font-bold dark:fill-white">{`${symbol} = ${pct(r)}`}</text>
-      </svg>
+      </FitSvg>
       <div className="mt-3 space-y-2">
         {MODE_FIELDS[mode].map((k) => (
           <label key={k} className="block">

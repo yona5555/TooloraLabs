@@ -6,6 +6,8 @@ import ForexConverterEntry from "@/components/tools/entries/forex-converter";
 import CommoditiesTrackerEntry from "@/components/tools/entries/commodities-tracker";
 import WeatherForecastEntry from "@/components/tools/entries/weather-forecast";
 import { ToolPageView, toolPageMetadata } from "@/lib/tool-page";
+import { RenderClockProvider } from "@/components/tools/markets/RenderClock";
+import { renderTime } from "@/lib/render-time";
 
 type ToolPageProps = {
   params: Promise<{
@@ -46,5 +48,9 @@ const liveDataEntries: Record<string, ComponentType<ToolEntryProps>> = {
 
 export default async function ToolPage({ params }: ToolPageProps) {
   const { locale, slug } = await params;
-  return <ToolPageView locale={locale} slug={slug} Entry={liveDataEntries[slug]} />;
+  return (
+    <RenderClockProvider renderedAt={renderTime()}>
+      <ToolPageView locale={locale} slug={slug} Entry={liveDataEntries[slug]} />
+    </RenderClockProvider>
+  );
 }

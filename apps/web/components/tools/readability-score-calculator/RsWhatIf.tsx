@@ -71,7 +71,7 @@ export default function RsWhatIf() {
         {[-30, 0, 30, 60, 100].map((v) => {
           const [x, y] = pt(v, R + 17);
           return (
-            <text style={{ fontSize: svgPx(12) }} key={v} x={x} y={y + 3} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+            <text style={{ fontSize: svgPx(12) }} key={v} x={x} y={y + 3} textAnchor="middle" fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
               {f(v)}
             </text>
           );
@@ -84,7 +84,7 @@ export default function RsWhatIf() {
           <line x1={CX} y1={CY} x2={CX - R + 12} y2={CY} strokeWidth={4} strokeLinecap="round" className="stroke-zinc-800 dark:stroke-zinc-100" />
         </g>
         <circle cx={CX} cy={CY} r={7} className="fill-zinc-800 dark:fill-zinc-100" />
-        <text style={{ fontSize: svgPx(26) }} x={CX} y={CY - 36} textAnchor="middle" fontWeight={800} fontFamily="ui-monospace, monospace" className="fill-zinc-900 dark:fill-zinc-50">
+        <text style={{ fontSize: svgPx(26) }} x={CX} y={CY - 36} textAnchor="middle" fontWeight={800} fontFamily="var(--font-mono)" className="fill-zinc-900 dark:fill-zinc-50">
           {f(ease)}
         </text>
         <text style={{ fontSize: svgPx(12) }} x={CX} y={CY + 24} textAnchor="middle" fontWeight={700} fill={band.color}>

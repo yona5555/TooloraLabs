@@ -31,6 +31,8 @@ export function cluster(count: number, x: number, sw: number, availH: number) {
   return { at, k, top: (rows / 2) * gap };
 }
 
+const SPIN_SECONDS = 8;
+
 function Spinning({ formula, at, k, phase, c }: { formula: string; at: [number, number, number]; k: number; phase: number; c: TokenColors }) {
   const items = useMemo(() => [{ formula, at: [0, 0, 0] as [number, number, number], scale: k }], [formula, k]);
   return (

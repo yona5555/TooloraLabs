@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import PdfIndicatorCard, { PdfIndicatorUnavailable } from "./PdfIndicatorCard";
@@ -31,7 +32,7 @@ export default function PdfSourceDonut() {
   const shown = sources.slice(0, 6);
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {counts.map((c, i) =>
         c > 0 ? <path key={i} d={ring(52, 88, cum[i][0], cum[i][1])} className={`${SOURCE_FILL[i % SOURCE_FILL.length]} stroke-white dark:stroke-zinc-900`} strokeWidth={1.5} /> : null,
       )}
@@ -46,16 +47,16 @@ export default function PdfSourceDonut() {
         return (
           <g key={i}>
             <circle cx={208} cy={y} r={6} className={SOURCE_FILL[i % SOURCE_FILL.length]} />
-            <text style={{ fontSize: svgPx(12) }} x={220} y={y + 4} fontFamily="ui-monospace, monospace" className="fill-zinc-600 dark:fill-zinc-300">
+            <text style={{ fontSize: svgPx(12) }} x={220} y={y + 4} fontFamily="var(--font-mono)" className="fill-zinc-600 dark:fill-zinc-300">
               {s.length > 12 ? `${s.slice(0, 11)}…` : s}
             </text>
-            <text style={{ fontSize: svgPx(12) }} x={W - 4} y={y + 4} textAnchor="end" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={W - 4} y={y + 4} textAnchor="end" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
               {f(counts[i])}
             </text>
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   const big = counts.indexOf(Math.max(...counts));

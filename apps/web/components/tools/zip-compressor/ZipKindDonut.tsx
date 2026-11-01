@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import ZipIndicatorCard, { ZipIndicatorUnavailable } from "./ZipIndicatorCard";
 import { formatBytes, useZipModel } from "./ZipLiveContext";
@@ -52,7 +53,7 @@ export default function ZipKindDonut() {
   const cc = cum(comp);
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {KINDS.map((k, i) => (orig[i] > 0 ? <path key={k.key} d={ring(62, 88, co[i][0], co[i][1])} className={`${k.fill} stroke-white dark:stroke-zinc-900`} strokeWidth={1.5} /> : null))}
       {KINDS.map((k, i) => (comp[i] > 0 ? <path key={k.key} d={ring(36, 58, cc[i][0], cc[i][1])} className={`${k.fill} stroke-white opacity-60 dark:stroke-zinc-900`} strokeWidth={1.5} /> : null))}
       {KINDS.map((k, i) => {
@@ -66,13 +67,13 @@ export default function ZipKindDonut() {
             <text style={{ fontSize: svgPx(12) }} x={220} y={y + 4} className="fill-zinc-600 dark:fill-zinc-300">
               {t(k.key)}
             </text>
-            <text style={{ fontSize: svgPx(12) }} x={under ? 220 : W - 4} y={under ? y + 18 : y + 4} textAnchor={under ? "start" : "end"} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={under ? 220 : W - 4} y={under ? y + 18 : y + 4} textAnchor={under ? "start" : "end"} fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
               {value}
             </text>
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   const top = orig.indexOf(Math.max(...orig));

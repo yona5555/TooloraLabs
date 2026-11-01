@@ -66,7 +66,7 @@ export default async function DocsIndexPage({ params }: { params: Promise<{ loca
                       <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400">
                         <ToolIcon size={16} />
                       </span>
-                      <span className="flex-1 truncate font-medium text-zinc-800 dark:text-zinc-100">{tTools(`${tool.slug}.title`)}</span>
+                      <span className="flex-1 font-medium text-zinc-800 dark:text-zinc-100">{tTools(`${tool.slug}.title`)}</span>
                       <ArrowRight size={15} className="shrink-0 text-zinc-400 rtl:rotate-180" />
                     </Link>
                   );

@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import DlIndicatorCard, { DlIndicatorUnavailable } from "./DlIndicatorCard";
 import { useDlModel } from "./DlLiveContext";
@@ -19,7 +20,7 @@ export default function DlRepeatHistogram() {
   const peak = Math.max(...a.repeatHistogram, 1);
   const slot = W / 5;
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <line x1={0} y1={BASE} x2={W} y2={BASE} className="stroke-zinc-300 dark:stroke-zinc-600" />
       {a.repeatHistogram.map((c, i) => {
         const h = c ? Math.max(3, (c / peak) * (BASE - TOP)) : 0;
@@ -28,7 +29,7 @@ export default function DlRepeatHistogram() {
         return (
           <g key={i}>
             {h > 0 && <rect x={x} y={BASE - h} width={w} height={h} rx={4} className={i === 0 ? "fill-emerald-500 dark:fill-emerald-400" : "fill-rose-500 dark:fill-rose-400"} />}
-            <text style={{ fontSize: svgPx(12) }} x={x + w / 2} y={BASE - h - 6} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={x + w / 2} y={BASE - h - 6} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
               {f(c)}
             </text>
             <text style={{ fontSize: svgPx(12) }} x={x + w / 2} y={BASE + 18} textAnchor="middle" fontWeight={600} className="fill-zinc-600 dark:fill-zinc-300">
@@ -37,7 +38,7 @@ export default function DlRepeatHistogram() {
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   const repeated = out.uniqueLines - a.repeatHistogram[0];

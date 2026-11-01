@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import QRIndicatorCard, { QRIndicatorUnavailable } from "./QRIndicatorCard";
@@ -41,7 +42,7 @@ export default function QRPayloadDonut() {
   const prefix = payload.match(/^(WIFI:|BEGIN:VCARD|mailto:|SMSTO:|https?:\/\/)/)?.[0];
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {KINDS.map((k, i) => (vals[i] > 0 ? <path key={k.key} d={ring(52, 88, cum[i][0], cum[i][1])} className={`${k.fill} stroke-white dark:stroke-zinc-900`} strokeWidth={1.5} /> : null))}
       <text style={{ fontSize: svgPx(20) }} x={CX} y={CY - 2} textAnchor="middle" fontWeight={700} className="fill-zinc-800 dark:fill-zinc-100">
         {f(total)}
@@ -57,13 +58,13 @@ export default function QRPayloadDonut() {
             <text style={{ fontSize: svgPx(12) }} x={220} y={y + 4} className="fill-zinc-600 dark:fill-zinc-300">
               {t(k.key)}
             </text>
-            <text style={{ fontSize: svgPx(12) }} x={W - 4} y={y + 4} textAnchor="end" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={W - 4} y={y + 4} textAnchor="end" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
               {f(vals[i])}
             </text>
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   return (

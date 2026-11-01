@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "../styles/fonts.css";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -43,8 +44,11 @@ html[lang="hi"] {
   --font-serif: var(--font-tinos), var(--font-noto-devanagari), var(--font-noto-math), var(--font-noto-symbols);
 }
 
+/* geometricPrecision: without it Chromium on Linux rounds a web font's glyph advances to whole pixels, up to 8%
+ * wider than the font's own metrics. With it Arimo measures exactly as Arial, on every platform. */
 body {
   font-family: var(--font-sans);
+  text-rendering: geometricPrecision;
 }
 
 /* ===== Blueprint theme: page variants, header nav pills, Browse dropdown, light surfaces =====

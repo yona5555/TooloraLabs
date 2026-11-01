@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import JSONIndicatorCard, { JSONIndicatorUnavailable } from "./JSONIndicatorCard";
 import { formatBytes, useJSONModel } from "./JSONLiveContext";
@@ -30,7 +31,7 @@ export default function JSONByteComposition() {
   const H = BAR_Y + BAR_H + 18 + PARTS.length * 22;
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <text style={{ fontSize: svgPx(12) }} x={0} y={16} className="fill-zinc-500 dark:fill-zinc-400">
         {t("axis", { total: formatBytes(b.total) })}
       </text>
@@ -56,16 +57,16 @@ export default function JSONByteComposition() {
             <text style={{ fontSize: svgPx(12) }} x={20} y={y} className="fill-zinc-600 dark:fill-zinc-300">
               {t(p.key)}
             </text>
-            <text style={{ fontSize: svgPx(12) }} x={W - 70} y={y} textAnchor="end" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+            <text style={{ fontSize: svgPx(12) }} x={W - 70} y={y} textAnchor="end" fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
               {pct(b[p.key], b.total)}
             </text>
-            <text style={{ fontSize: svgPx(12) }} x={W} y={y} textAnchor="end" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={W} y={y} textAnchor="end" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
               {f(b[p.key])} B
             </text>
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   const payload = b.strings + b.numbers + b.literals;

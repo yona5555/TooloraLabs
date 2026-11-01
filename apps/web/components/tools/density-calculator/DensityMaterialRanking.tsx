@@ -48,7 +48,7 @@ export default function DensityMaterialRanking() {
               {r.yours ? t("yours") : tm(r.key)}
             </text>
             <rect x={BAR_X} y={y + 3} width={l} height={ROW - 6} rx={3} className={r.yours ? "fill-blue-600 dark:fill-blue-400" : r.density < 1 ? "fill-sky-300 dark:fill-sky-700" : "fill-zinc-300 dark:fill-zinc-600"} />
-            <text style={{ fontSize: svgPx(12) }} x={BAR_X + l + 4} y={y + 12} fontWeight={r.yours ? 700 : 400} fontFamily="ui-monospace, monospace" className={r.yours ? "fill-blue-700 dark:fill-blue-300" : "fill-zinc-500 dark:fill-zinc-400"}>
+            <text style={{ fontSize: svgPx(12) }} x={BAR_X + l + 4} y={y + 12} fontWeight={r.yours ? 700 : 400} fontFamily="var(--font-mono)" className={r.yours ? "fill-blue-700 dark:fill-blue-300" : "fill-zinc-500 dark:fill-zinc-400"}>
               {f(r.density)}
             </text>
           </g>

@@ -145,7 +145,7 @@ export default function SignificantFiguresInputPanel({
                   onClick={() => onPreset(preset)}
                   className={`flex h-full w-full items-center justify-between gap-2 rounded-lg border px-3 py-2 text-start text-sm transition ${active ? "border-blue-500 bg-blue-50 dark:bg-blue-500/10" : "border-zinc-200 hover:border-blue-300 hover:bg-blue-50/60 dark:border-zinc-700 dark:hover:bg-blue-500/5"}`}
                 >
-                  <span className="truncate font-medium text-zinc-800 dark:text-zinc-200">{t(`operation.${preset.operation}`)}</span>
+                  <span className="min-w-0 font-medium text-zinc-800 dark:text-zinc-200">{t(`operation.${preset.operation}`)}</span>
                   <span dir="ltr" className="shrink-0 font-mono text-xs font-semibold text-blue-700 dark:text-blue-300">{presetExpression(preset)}</span>
                 </button>
               </li>

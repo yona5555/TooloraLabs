@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import FsIndicatorCard, { FsIndicatorUnavailable } from "./FsIndicatorCard";
 import { useFsModel } from "./FsLiveContext";
@@ -28,7 +29,7 @@ export default function FsOsLabels() {
   const H = rows.length * ROW + 4;
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {rows.map((r, i) => {
         const y = i * ROW + ROW / 2 + 2;
         return (
@@ -40,16 +41,16 @@ export default function FsOsLabels() {
             <text style={{ fontSize: svgPx(12) }} x={38} y={y - 3} fontWeight={600} className="fill-zinc-700 dark:fill-zinc-200">
               {t(r.key)}
             </text>
-            <text style={{ fontSize: svgPx(12) }} x={38} y={y + 13} fontFamily="ui-monospace, monospace" className="fill-zinc-400 dark:fill-zinc-500">
+            <text style={{ fontSize: svgPx(12) }} x={38} y={y + 13} fontFamily="var(--font-mono)" className="fill-zinc-400 dark:fill-zinc-500">
               {r.base}
             </text>
-            <text style={{ fontSize: svgPx(15) }} x={W - 2} y={y + 5} textAnchor="end" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(15) }} x={W - 2} y={y + 5} textAnchor="end" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
               {r.label}
             </text>
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   return (

@@ -21,7 +21,7 @@ export default function TriangleUnitConversionEquivalence() {
           <p className="mt-1 text-2xl font-bold text-zinc-900 dark:text-zinc-50">{round(exampleSideCFeet)} ft</p>
         </div>
       </div>
-      <p className="mt-4 text-center text-xs opacity-60 max-md:text-zinc-500 max-md:dark:text-zinc-400 max-md:opacity-100">{t("note")}</p>
+      <p className="mt-4 text-center text-xs opacity-70 max-md:text-zinc-500 max-md:dark:text-zinc-400 max-md:opacity-100">{t("note")}</p>
     </SectionCard>
   );
 }

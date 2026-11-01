@@ -54,7 +54,7 @@ export default function RsFormulaWaterfall() {
       {[0, 50, 100, 150, 200].map((v) => (
         <g key={v}>
           <line x1={LEFT} y1={y(v)} x2={W - RIGHT} y2={y(v)} className={v === 0 ? "stroke-zinc-400 dark:stroke-zinc-500" : "stroke-zinc-200 dark:stroke-zinc-700/70"} />
-          <text style={{ fontSize: svgPx(12) }} x={LEFT - 4} y={y(v) + 3} textAnchor="end" fontFamily="ui-monospace, monospace" className="fill-zinc-400 dark:fill-zinc-500">
+          <text style={{ fontSize: svgPx(12) }} x={LEFT - 4} y={y(v) + 3} textAnchor="end" fontFamily="var(--font-mono)" className="fill-zinc-400 dark:fill-zinc-500">
             {f(v)}
           </text>
         </g>
@@ -69,7 +69,7 @@ export default function RsFormulaWaterfall() {
             {i < cols.length - 1 && (
               <line x1={bx + barW} y1={y(i === 0 ? BASE : c.from)} x2={bx + slot} y2={y(i === 0 ? BASE : c.from)} strokeDasharray="3 2" className="stroke-zinc-400 dark:stroke-zinc-500" />
             )}
-            <text style={{ fontSize: svgPx(12) }} x={bx + barW / 2} y={top - 4} textAnchor="middle" fontWeight={800} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={bx + barW / 2} y={top - 4} textAnchor="middle" fontWeight={800} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
               {c.label}
             </text>
             {captions[i].map((cap, j) => (
@@ -80,7 +80,7 @@ export default function RsFormulaWaterfall() {
                 y={BOTTOM + 4 + (j + 0.85) * line}
                 textAnchor="middle"
                 fontWeight={cap.formula ? undefined : 600}
-                fontFamily={cap.formula ? "ui-monospace, monospace" : undefined}
+                fontFamily={cap.formula ? "var(--font-mono)" : undefined}
                 className={cap.formula ? "fill-zinc-400 dark:fill-zinc-500" : "fill-zinc-600 dark:fill-zinc-300"}
               >
                 {cap.text}

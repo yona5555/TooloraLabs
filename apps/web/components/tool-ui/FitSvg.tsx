@@ -107,7 +107,9 @@ function useCollisionFree(svg: SVGSVGElement | null, key: string) {
     const ro = new ResizeObserver(schedule);
     ro.observe(svg);
     void document.fonts?.ready.then(schedule);
+    document.fonts?.addEventListener("loadingdone", schedule);
     return () => {
+      document.fonts?.removeEventListener("loadingdone", schedule);
       if (frame) cancelAnimationFrame(frame);
       mo.disconnect();
       ro.disconnect();

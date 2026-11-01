@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import { JSON_VALUE_KINDS } from "@tooloralabs/tools";
 import JSONIndicatorCard, { JSONIndicatorUnavailable } from "./JSONIndicatorCard";
@@ -28,7 +29,7 @@ export default function JSONKindDonut() {
   const inner = turns([containers, scalars]);
 
   const svg = (
-    <svg data-preview="visual" data-preview-hero direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg data-preview="visual" data-preview-hero direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {JSON_VALUE_KINDS.map((k, i) =>
         counts[i] > 0 ? <path key={k} d={ringPath(CX, CY, 62, 88, outer[i][0], outer[i][1])} className={`${KIND_FILL[k]} stroke-white dark:stroke-zinc-900`} strokeWidth={1.5} /> : null,
       )}
@@ -48,13 +49,13 @@ export default function JSONKindDonut() {
             <text style={{ fontSize: svgPx(12) }} x={220} y={y + 4} className="fill-zinc-600 dark:fill-zinc-300">
               {tk(k)}
             </text>
-            <text style={{ fontSize: svgPx(12) }} x={W - 4} y={y + 4} textAnchor="end" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={W - 4} y={y + 4} textAnchor="end" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
               {f(counts[i])}
             </text>
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   const top = JSON_VALUE_KINDS.reduce((best, k) => (a.kinds[k] > a.kinds[best] ? k : best), JSON_VALUE_KINDS[0]);

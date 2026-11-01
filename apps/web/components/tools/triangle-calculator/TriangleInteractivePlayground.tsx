@@ -100,7 +100,7 @@ export default function TriangleInteractivePlayground() {
       {!degenerate && (
         <TriangleSinCosLiveCurve angles={[{ label: "A", deg: angleA }, { label: "B", deg: angleB }, { label: "C", deg: angleC }]} />
       )}
-      <p className="mt-3 text-xs opacity-60 max-md:text-zinc-500 max-md:dark:text-zinc-400 max-md:opacity-100">{t("hint")}</p>
+      <p className="mt-3 text-xs opacity-70 max-md:text-zinc-500 max-md:dark:text-zinc-400 max-md:opacity-100">{t("hint")}</p>
     </SectionCard>
   );
 }

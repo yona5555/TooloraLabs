@@ -30,13 +30,13 @@ export default function ForceMassTrio() {
         return (
           <g key={it.factor}>
             <rect x={cx - BAR / 2} y={BASE - h} width={BAR} height={Math.max(1, h)} rx={6} className={CLS[i]} />
-            <text style={{ fontSize: svgPx(12) }} x={cx} y={BASE - h - 8} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={cx} y={BASE - h - 8} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
               {f(it.acceleration, 3)}
             </text>
             <text style={{ fontSize: svgPx(12) }} x={cx} y={BASE + 16} textAnchor="middle" fontWeight={600} className="fill-zinc-600 dark:fill-zinc-300">
               {names[i]}
             </text>
-            <text style={{ fontSize: svgPx(12) }} x={cx} y={BASE + 31} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+            <text style={{ fontSize: svgPx(12) }} x={cx} y={BASE + 31} textAnchor="middle" fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
               {`${f(it.mass)} kg`}
             </text>
           </g>

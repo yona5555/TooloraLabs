@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber } from "@tooloralabs/core";
 import { convertAmount } from "@/lib/currency";
@@ -61,7 +62,7 @@ export default function FuelAnnualProjectionChart() {
       </p>
       <GapFreeRow className="mt-4">
         <div dir="ltr" className="shrink-0 overflow-x-auto">
-          <svg width={WIDTH} height={HEIGHT} viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={t("title")} className="mx-auto block min-w-[300px] text-current">
+          <FitSvg width={WIDTH} height={HEIGHT} viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={t("title")} className="mx-auto block min-w-[300px] text-current">
             <line x1={10} y1={BASELINE_Y} x2={WIDTH - 10} y2={BASELINE_Y} className="stroke-current opacity-20" strokeWidth={1} />
             {points.map((p, i) => {
               const stepH = Math.max((p.value / maxValue) * MAX_STEP_H, 10);
@@ -82,7 +83,7 @@ export default function FuelAnnualProjectionChart() {
                 </g>
               );
             })}
-          </svg>
+          </FitSvg>
         </div>
         <FuelWorkedExampleNote
           title={tw("title")}

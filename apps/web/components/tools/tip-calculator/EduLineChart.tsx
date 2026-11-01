@@ -1,3 +1,4 @@
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { svgPx } from "@/components/tool-ui/svgPx";
 /**
  * Lightweight, non-interactive SVG line chart shared by this tool's education-page
@@ -39,7 +40,7 @@ export default function EduLineChart({ points, ariaLabel, lineColorClass = "stro
 
   return (
     <div dir="ltr" className="overflow-x-auto">
-      <svg width={WIDTH} height={HEIGHT} viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={ariaLabel} className="block min-w-[300px] text-current">
+      <FitSvg width={WIDTH} height={HEIGHT} viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={ariaLabel} className="block min-w-[300px] text-current">
         <line x1={PAD_LEFT} y1={HEIGHT - PAD_BOTTOM} x2={WIDTH - PAD_RIGHT} y2={HEIGHT - PAD_BOTTOM} className="stroke-current opacity-20" strokeWidth={1} />
         <line x1={PAD_LEFT} y1={PAD_TOP} x2={PAD_LEFT} y2={HEIGHT - PAD_BOTTOM} className="stroke-current opacity-20" strokeWidth={1} />
         <path d={areaD} className={`${dotColorClass} opacity-[0.08]`} stroke="none" />
@@ -58,7 +59,7 @@ export default function EduLineChart({ points, ariaLabel, lineColorClass = "stro
             </g>
           );
         })}
-      </svg>
+      </FitSvg>
     </div>
   );
 }

@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import { COLUMN_TYPES } from "@tooloralabs/tools";
 import CsvIndicatorCard, { CsvIndicatorUnavailable } from "./CsvIndicatorCard";
@@ -34,7 +35,7 @@ export default function CsvTypeDonut() {
   const cum = counts.map((_, i) => [counts.slice(0, i).reduce((s, v) => s + v, 0) / total, counts.slice(0, i + 1).reduce((s, v) => s + v, 0) / total]);
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {COLUMN_TYPES.map((ty, i) =>
         counts[i] > 0 ? <path key={ty} d={ring(52, 88, cum[i][0], cum[i][1])} className={`${TYPE_FILL[ty]} stroke-white dark:stroke-zinc-900`} strokeWidth={1.5} /> : null,
       )}
@@ -52,13 +53,13 @@ export default function CsvTypeDonut() {
             <text style={{ fontSize: svgPx(12) }} x={220} y={y + 4} className="fill-zinc-600 dark:fill-zinc-300">
               {tt(ty)}
             </text>
-            <text style={{ fontSize: svgPx(12) }} x={W - 4} y={y + 4} textAnchor="end" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={W - 4} y={y + 4} textAnchor="end" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
               {f(counts[i])}
             </text>
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   const numeric = counts[0] + counts[1];

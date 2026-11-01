@@ -73,7 +73,7 @@ export default function TriangleAngleReferenceDrag() {
           </span>
         ))}
       </div>
-      <p className="mt-3 text-xs opacity-60 max-md:text-zinc-500 max-md:dark:text-zinc-400 max-md:opacity-100">{t("hint")}</p>
+      <p className="mt-3 text-xs opacity-70 max-md:text-zinc-500 max-md:dark:text-zinc-400 max-md:opacity-100">{t("hint")}</p>
     </SectionCard>
   );
 }

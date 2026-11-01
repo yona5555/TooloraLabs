@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 /**
  * §31 type 10 -- interactive log-scale magnitude ladder, 10^-15 … 10^15. One real reference
  * length at each main power (LADDER_REFERENCES, sourced in packages/tools). Dragging the thumb
@@ -59,7 +60,7 @@ export default function MagnitudeLadder({ sci, onSetExponent }: { sci: Normalize
 
   return (
     <div data-testid="ladder">
-      <svg
+      <FitSvg
         ref={svgRef}
         data-preview="visual"
         viewBox={`0 0 ${W} ${H}`}
@@ -121,7 +122,7 @@ export default function MagnitudeLadder({ sci, onSetExponent }: { sci: Normalize
             }}
           />
         </g>
-      </svg>
+      </FitSvg>
 
       <div className="mt-2 flex flex-wrap items-center justify-center gap-2">
         <button type="button" onClick={() => onSetExponent(Math.max(LADDER_MIN, Math.min(LADDER_MAX, sci.exponent) - 1))} className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-100 text-base font-bold text-zinc-700 dark:bg-zinc-800 dark:text-zinc-200" aria-label={t("down")}>−</button>

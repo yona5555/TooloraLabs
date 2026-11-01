@@ -21,6 +21,8 @@ function Heart({ bpm, beating }: { bpm: number; beating: boolean }) {
   const invalidate = useThree((s) => s.invalidate);
   const period = 60 / Math.min(240, Math.max(30, bpm || 60));
   const phase = useRef(0);
+  const shownPeriod = useRef(period);
+  const beatLeft = useRef(0);
   useEffect(() => {
     invalidate();
   }, [period, heart, invalidate]);

@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useId } from "react";
 import { useTranslations } from "next-intl";
 import SdIndicatorCard from "./SdIndicatorCard";
@@ -38,7 +39,7 @@ export default function SdCvGauge() {
   const ticks = [0, 10, 20, 30, 40, 50, 60];
 
   const gauge = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <defs>
         <linearGradient id={`${svgId}sd-cv-grad`} x1="0" x2="1" y1="0" y2="0">
           <stop offset="0%" stopColor="#10b981" />
@@ -65,7 +66,7 @@ export default function SdCvGauge() {
       <text style={{ fontSize: svgPx(13) }} x={CX} y={CY + 26} textAnchor="middle" fontWeight={700} className="fill-zinc-800 dark:fill-zinc-100">
         {cv === null ? tl("cvUndefined") : `${f(cv, 1)}% · ${t(`zones.${cvZone(cv)}`)}`}
       </text>
-    </svg>
+    </FitSvg>
   );
 
   return (

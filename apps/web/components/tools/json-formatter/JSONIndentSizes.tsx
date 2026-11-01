@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import JSONIndicatorCard, { JSONIndicatorUnavailable } from "./JSONIndicatorCard";
 import { formatBytes, useJSONModel } from "./JSONLiveContext";
@@ -44,7 +45,7 @@ export default function JSONIndentSizes() {
   const H = TOP + styles.length * ROW;
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <circle cx={BAR_X + 4} cy={10} r={5} className="fill-blue-500 dark:fill-blue-400" />
       <text style={{ fontSize: svgPx(12) }} x={BAR_X + 14} y={14} className="fill-zinc-500 dark:fill-zinc-400">
         {t("payloadKey")}
@@ -69,7 +70,7 @@ export default function JSONIndentSizes() {
               x={BAR_X + total + 6}
               y={y + 18}
               fontWeight={weight}
-              fontFamily="ui-monospace, monospace"
+              fontFamily="var(--font-mono)"
               className={st.active ? "fill-blue-700 dark:fill-blue-300" : "fill-zinc-500 dark:fill-zinc-400"}
             >
               {formatBytes(st.bytes)}
@@ -77,7 +78,7 @@ export default function JSONIndentSizes() {
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   return (

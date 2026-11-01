@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useMeasuredWidth } from "@/components/tool-ui/useMeasuredWidth";
 import { svgPx } from "@/components/tool-ui/svgPx";
 
@@ -37,7 +38,7 @@ export default function TipSensitivityLineDiagram({ points, currentTipPercent, c
   return (
     <figure className="my-2">
       <div ref={wrap} dir="ltr" className="w-full overflow-x-auto">
-        <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} width={WIDTH} height={HEIGHT} role="img" aria-label={caption} className="block h-auto w-full text-current" style={{ minWidth: 260 }}>
+        <FitSvg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} width={WIDTH} height={HEIGHT} role="img" aria-label={caption} className="block h-auto w-full text-current" style={{ minWidth: 260 }}>
           <line x1={MARGIN.left} y1={MARGIN.top + PLOT_HEIGHT} x2={WIDTH - MARGIN.right} y2={MARGIN.top + PLOT_HEIGHT} stroke="currentColor" strokeWidth={1} opacity={0.3} />
           <path d={pathD} fill="none" strokeWidth={2.5} className="stroke-blue-600 dark:stroke-blue-400" />
           <line x1={currentX} y1={MARGIN.top} x2={currentX} y2={MARGIN.top + PLOT_HEIGHT} strokeWidth={1} strokeDasharray="3 3" stroke="currentColor" opacity={0.4} />
@@ -51,7 +52,7 @@ export default function TipSensitivityLineDiagram({ points, currentTipPercent, c
           <text style={{ fontSize: svgPx(12) }} x={WIDTH / 2} y={HEIGHT - 6} textAnchor="middle" fill="currentColor" opacity={0.6}>
             {xLabel}
           </text>
-        </svg>
+        </FitSvg>
       </div>
       <figcaption className="mt-2 text-center text-sm opacity-70">{caption}</figcaption>
     </figure>

@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useMeasuredWidth } from "@/components/tool-ui/useMeasuredWidth";
 import { svgPx } from "@/components/tool-ui/svgPx";
 
@@ -25,7 +26,7 @@ export default function TipPerPersonSplitDiagram({ people, amountPerPerson, form
   return (
     <figure className="my-2">
       <div ref={wrap} dir="ltr" className="w-full overflow-x-auto">
-        <svg viewBox={`0 0 ${WIDTH} ${height}`} width={WIDTH} height={height} role="img" aria-label={caption} className="block h-auto w-full text-current" style={{ minWidth: 260 }}>
+        <FitSvg viewBox={`0 0 ${WIDTH} ${height}`} width={WIDTH} height={height} role="img" aria-label={caption} className="block h-auto w-full text-current" style={{ minWidth: 260 }}>
           {Array.from({ length: rows }, (_, i) => {
             const y = MARGIN_TOP + i * (ROW_HEIGHT + ROW_GAP);
             return (
@@ -41,7 +42,7 @@ export default function TipPerPersonSplitDiagram({ people, amountPerPerson, form
               </g>
             );
           })}
-        </svg>
+        </FitSvg>
       </div>
       <figcaption className="mt-2 text-center text-sm opacity-70">
         {caption}

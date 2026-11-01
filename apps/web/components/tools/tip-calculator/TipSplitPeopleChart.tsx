@@ -1,3 +1,4 @@
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { getTranslations } from "next-intl/server";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import TipWorkedExampleNote from "./TipWorkedExampleNote";
@@ -30,7 +31,7 @@ export default async function TipSplitPeopleChart() {
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("caption", { total: TOTAL.toFixed(2) })}</p>
       <GapFreeRow className="mt-4">
         <div className="min-w-0 flex-1 overflow-x-auto" dir="ltr">
-          <svg width={WIDTH} height={HEIGHT} viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={t("title")} className="block min-w-[300px] text-current">
+          <FitSvg width={WIDTH} height={HEIGHT} viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={t("title")} className="block min-w-[300px] text-current">
             <line x1={PAD_LEFT} y1={AXIS_Y} x2={WIDTH - PAD_RIGHT} y2={AXIS_Y} className="stroke-teal-400 dark:stroke-teal-500" strokeWidth={3} strokeLinecap="round" />
             {marks.map((m, i) => {
               const x = xFor(i);
@@ -49,7 +50,7 @@ export default async function TipSplitPeopleChart() {
                 </g>
               );
             })}
-          </svg>
+          </FitSvg>
         </div>
         <TipWorkedExampleNote title={tRoot("workedExampleTitle")} rows={marks.map((m) => ({ label: m.label, value: m.formatted }))} />
       </GapFreeRow>

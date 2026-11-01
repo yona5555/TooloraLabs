@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import PdfIndicatorCard, { PdfIndicatorUnavailable } from "./PdfIndicatorCard";
 import { SOURCE_FILL, usePdfModel } from "./PdfLiveContext";
@@ -24,7 +25,7 @@ export default function PdfCoverageStrip() {
   const firstPart = (p: number) => (plan ? plan.parts.findIndex((part) => p >= part.start && p <= part.end) : -1);
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <text style={{ fontSize: svgPx(12) }} x={0} y={14} className="fill-zinc-500 dark:fill-zinc-400">
         {isSplit ? t("axisSplit", { n }) : t("axisMerge", { n })}
       </text>
@@ -49,7 +50,7 @@ export default function PdfCoverageStrip() {
       <text style={{ fontSize: svgPx(12) }} x={0} y={H - 10} className="fill-zinc-500 dark:fill-zinc-400">
         {isSplit ? t("legendSplit") : t("legendMerge")}
       </text>
-    </svg>
+    </FitSvg>
   );
 
   const rows = isSplit

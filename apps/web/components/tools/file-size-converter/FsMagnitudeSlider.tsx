@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useRef, useId } from "react";
 import { useTranslations } from "next-intl";
 import { STORAGE_MEDIA } from "@tooloralabs/tools";
@@ -46,7 +47,7 @@ export default function FsMagnitudeSlider() {
   }
 
   const svg = (
-    <svg
+    <FitSvg
       ref={svgRef}
       direction="ltr"
       width={W}
@@ -95,7 +96,7 @@ export default function FsMagnitudeSlider() {
       <text style={{ fontSize: svgPx(13) }} x={Math.min(Math.max(x(cur), 40), W - 40)} y={AXIS_Y + 50} textAnchor="middle" fontWeight={700} className="fill-amber-700 dark:fill-amber-300">
         {t("you")}
       </text>
-    </svg>
+    </FitSvg>
   );
 
   const nearest = STORAGE_MEDIA.reduce((b, m) => (Math.abs(Math.log10(m.bytes) - cur) < Math.abs(Math.log10(b.bytes) - cur) ? m : b), STORAGE_MEDIA[0]);

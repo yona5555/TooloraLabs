@@ -121,7 +121,7 @@ export default function WxInput({ place, onPlace, units, onUnits, favourites, on
         {geo === "busy" ? t("input.locating") : t("input.useLocation")}
       </button>
       {(geo === "denied" || geo === "unsupported") && <p className="text-xs text-amber-700 dark:text-amber-300">{t(`input.geo.${geo}`)}</p>}
-      <p className="text-[11px] leading-4 text-zinc-500 dark:text-zinc-400">{t("input.geoNote")}</p>
+      <p className="text-xs leading-4 text-zinc-500 dark:text-zinc-400">{t("input.geoNote")}</p>
 
       {favCities.length > 0 && (
         <div>

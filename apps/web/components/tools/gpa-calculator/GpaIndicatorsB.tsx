@@ -310,7 +310,7 @@ export function GpaWhatIfCard({ state, d, f }: IndicatorProps) {
               const v = over[c.id] ?? actual;
               return (
                 <label key={c.id} className="grid grid-cols-[minmax(0,7rem)_minmax(0,1fr)_3.5rem] items-center gap-2 text-xs">
-                  <span className="truncate font-semibold text-zinc-700 dark:text-zinc-200">{c.name || tp("input.courseN", { n: ci + 1 })}</span>
+                  <span className="min-w-0 break-words font-semibold text-zinc-700 dark:text-zinc-200">{c.name || tp("input.courseN", { n: ci + 1 })}</span>
                   <input
                     type="range"
                     min={0}

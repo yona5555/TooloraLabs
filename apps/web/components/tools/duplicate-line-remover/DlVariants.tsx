@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import DlIndicatorCard, { DlIndicatorUnavailable } from "./DlIndicatorCard";
 import { useDlModel } from "./DlLiveContext";
@@ -29,7 +30,7 @@ export default function DlVariants() {
   const groups = a.variantGroups.slice(0, 5);
   const H = groups.length * ROW + 4;
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {groups.map((g, i) => {
         const y = i * ROW;
         return (
@@ -38,10 +39,10 @@ export default function DlVariants() {
             <text style={{ fontSize: svgPx(12) }} x={12} y={y + 26} textAnchor="middle" fontWeight={700} className="fill-white">
               {g.variants.length}
             </text>
-            <text style={{ fontSize: svgPx(12) }} x={30} y={y + 18} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={30} y={y + 18} fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
               {g.canonical.length > 34 ? `${g.canonical.slice(0, 33)}…` : g.canonical}
             </text>
-            <text style={{ fontSize: svgPx(12) }} x={30} y={y + 35} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+            <text style={{ fontSize: svgPx(12) }} x={30} y={y + 35} fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
               {g.variants
                 .map((v) => `"${v.replace(/ /g, "·")}"`)
                 .join("  ")
@@ -50,7 +51,7 @@ export default function DlVariants() {
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   return (

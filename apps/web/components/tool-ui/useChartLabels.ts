@@ -13,7 +13,7 @@ import { NO_MARGINS, marginDelta, nextMargins, type Box, type Margins } from "./
 export const NUDGE = "data-label-nudge";
 
 let canvas: CanvasRenderingContext2D | null = null;
-const metricsCache = new Map<string, TextMetrics>();
+export const metricsCache = new Map<string, TextMetrics>();
 
 function metrics(text: string, font: string): TextMetrics {
   const key = `${font}\n${text}`;
@@ -49,7 +49,7 @@ export function inkBox(t: SVGTextElement): Box {
 /** Width, ascent and descent (ink, px) of `text` set at `px` in the font of `el`. */
 export type Measure = (text: string, px: number, weight?: number) => { width: number; ascent: number; descent: number };
 
-function measureIn(el: Element): Measure {
+export function measureIn(el: Element): Measure {
   const cs = getComputedStyle(el);
   return (text, px, weight) => {
     const m = metrics(text, cssFont(cs, `${px}px`, weight === undefined ? cs.fontWeight : String(weight)));
@@ -61,10 +61,10 @@ function measureIn(el: Element): Measure {
  * Fallback before the first client measurement (server render, first paint): Arial-like proportions, so the
  * server HTML is already close and the measured layout replaces it in the same frame (layout effect).
  */
-const estimate: Measure = (text, px) => ({ width: text.length * px * 0.62, ascent: px * 0.72, descent: px * 0.21 });
+export const estimate: Measure = (text, px) => ({ width: text.length * px * 0.62, ascent: px * 0.72, descent: px * 0.21 });
 
 /** Root element given by a callback ref; the phone mini-card copy (an 88px thumbnail of the same drawing) is ignored. */
-function useChartRoot<T extends Element>() {
+export function useChartRoot<T extends Element>() {
   const [el, setEl] = useState<T | null>(null);
   const [ref] = useState(() => (node: T | null) => {
     if (node && !node.closest("[data-phone-mini-slot]")) setEl(node);
@@ -73,38 +73,6 @@ function useChartRoot<T extends Element>() {
 }
 
 const svgOf = (root: Element | null) => (root instanceof SVGSVGElement ? root : root?.querySelector("svg") ?? null);
-
-/**
- * Measured text for a hand-drawn SVG chart: `measure` in the chart's font (refreshed when web fonts finish
- * loading) and `k`, the chart's viewBox units per rendered px (`--svg-k`, what `svgPx` labels grow by), so
- * a layout in viewBox units uses the size the labels are really drawn at.
- */
-export function useLabelMeasure() {
-  const [el, ref] = useChartRoot<SVGSVGElement>();
-  const [state, setState] = useState<{ measure: Measure; k: number }>({ measure: estimate, k: 1 });
-  useLayoutEffect(() => {
-    if (!el) return;
-    let live = true;
-    const update = () => {
-      if (!live) return;
-      const k = Math.max(1, parseFloat(getComputedStyle(el).getPropertyValue("--svg-k")) || 1);
-      setState((s) => (s.measure !== estimate && s.k === k ? s : { measure: measureIn(el), k }));
-    };
-    update();
-    // `--svg-k` is set on the SVG's style by SvgLabelScale; a font swap changes every measurement
-    const mo = new MutationObserver(update);
-    mo.observe(el, { attributes: true, attributeFilter: ["style"] });
-    void document.fonts?.ready.then(() => {
-      metricsCache.clear();
-      if (live) setState((s) => ({ ...s, measure: measureIn(el) }));
-    });
-    return () => {
-      live = false;
-      mo.disconnect();
-    };
-  }, [el]);
-  return [ref, state.measure, state.k] as const;
-}
 
 /** Fit steps per layout before the margins are frozen (the layout cannot oscillate). */
 const MAX_FIT_STEPS = 8;
@@ -167,14 +135,19 @@ export function useLabelFit(key: string, floorOf?: (width: number, height: numbe
     // the chart library mounts and re-renders its own SVG (ticks, labels) after our margins reach it
     const mo = new MutationObserver(schedule);
     mo.observe(el, { subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ["x", "y", "viewBox", "transform"] });
-    void document.fonts?.ready.then(() => {
+    // a font's face downloads only when text first uses it, often after this effect: fonts.ready alone can be over by then
+    const remeasure = () => {
       if (!live) return;
       metricsCache.clear();
+      steps = 0;
       setFit((f) => ({ ...f, measure: estimate }));
       schedule();
-    });
+    };
+    void document.fonts?.ready.then(remeasure);
+    document.fonts?.addEventListener("loadingdone", remeasure);
     return () => {
       live = false;
+      document.fonts?.removeEventListener("loadingdone", remeasure);
       if (frame) cancelAnimationFrame(frame);
       ro.disconnect();
       mo.disconnect();

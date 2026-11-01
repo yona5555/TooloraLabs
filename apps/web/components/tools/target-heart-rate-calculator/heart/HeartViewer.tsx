@@ -34,6 +34,11 @@ function subscribeReduced(cb: () => void) {
   return () => mq?.removeEventListener("change", cb);
 }
 
+function subscribeVisible(cb: () => void) {
+  document.addEventListener("visibilitychange", cb);
+  return () => document.removeEventListener("visibilitychange", cb);
+}
+
 /**
  * Realistic anatomical heart at the target BPM. The 3D chunk loads only when the card nears the viewport. It
  * beats only during a motion episode (tool-ui/motion): when the target BPM changes, never on load, never off

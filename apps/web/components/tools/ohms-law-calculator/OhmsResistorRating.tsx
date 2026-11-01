@@ -56,10 +56,10 @@ export default function OhmsResistorRating() {
           </text>
         </g>
       ))}
-      <text style={{ fontSize: svgPx(12) }} x={X0} y={STRIP + 38} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={X0} y={STRIP + 38} fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
         {`${pow10(LO)} W`}
       </text>
-      <text style={{ fontSize: svgPx(12) }} x={X1} y={STRIP + 38} textAnchor="end" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+      <text style={{ fontSize: svgPx(12) }} x={X1} y={STRIP + 38} textAnchor="end" fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
         {`${pow10(HI)} W`}
       </text>
       <text style={{ fontSize: svgPx(12) }} x={X1} y={STRIP + 70} textAnchor="end" fontWeight={600} className="fill-red-600 dark:fill-red-400">
@@ -71,7 +71,7 @@ export default function OhmsResistorRating() {
           <g key={m.key}>
             <line x1={m.x} y1={STRIP} x2={lx} y2={m.y + 4} strokeWidth={1.5} className={m.stroke} />
             <path d={`M ${m.x - 5} ${STRIP - 6} L ${m.x + 5} ${STRIP - 6} L ${m.x} ${STRIP + 1} z`} className={m.cls} />
-            <text style={{ fontSize: svgPx(12) }} x={lx} y={m.y} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className={m.cls}>
+            <text style={{ fontSize: svgPx(12) }} x={lx} y={m.y} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className={m.cls}>
               {m.label}
             </text>
           </g>

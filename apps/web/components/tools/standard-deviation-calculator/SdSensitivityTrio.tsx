@@ -1,4 +1,5 @@
 "use client";
+import FitSvg from "@/components/tool-ui/FitSvg";
 import { useTranslations } from "next-intl";
 import SdIndicatorCard from "./SdIndicatorCard";
 import { useSdModel } from "./SdLiveContext";
@@ -28,7 +29,7 @@ export default function SdSensitivityTrio() {
   const change = (v: number) => (cur > 0 ? ((v - cur) / cur) * 100 : 0);
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <FitSvg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <line x1={0} y1={BASE} x2={W} y2={BASE} className="stroke-zinc-300 dark:stroke-zinc-600" />
       {items.map((it, i) => {
         const cx = (W / 3) * i + W / 6;
@@ -37,7 +38,7 @@ export default function SdSensitivityTrio() {
         return (
           <g key={it.key}>
             <rect x={cx - BAR / 2} y={BASE - h} width={BAR} height={Math.max(1, h)} rx={6} className={it.cls} />
-            <text style={{ fontSize: svgPx(12) }} x={cx} y={BASE - h - 16} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
+            <text style={{ fontSize: svgPx(12) }} x={cx} y={BASE - h - 16} textAnchor="middle" fontWeight={700} fontFamily="var(--font-mono)" className="fill-zinc-800 dark:fill-zinc-100">
               {f(it.v)}
             </text>
             {it.key !== "current" && (
@@ -48,13 +49,13 @@ export default function SdSensitivityTrio() {
             <text style={{ fontSize: svgPx(12) }} x={Math.max(labelW(t(it.key)) / 2 + 2, Math.min(W - labelW(t(it.key)) / 2 - 2, cx))} y={BASE + 16} textAnchor="middle" fontWeight={600} className="fill-zinc-700 dark:fill-zinc-200">
               {t(it.key)}
             </text>
-            <text style={{ fontSize: svgPx(12) }} x={cx} y={BASE + 30} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+            <text style={{ fontSize: svgPx(12) }} x={cx} y={BASE + 30} textAnchor="middle" fontFamily="var(--font-mono)" className="fill-zinc-500 dark:fill-zinc-400">
               {it.sub}
             </text>
           </g>
         );
       })}
-    </svg>
+    </FitSvg>
   );
 
   return (

@@ -89,7 +89,7 @@ function HijriDateInput({ s, set, f }: { s: WtState; set: Props["set"]; f: Fmt }
           className={`${field} text-center`}
         />
       </div>
-      <p className={`mt-1 text-[11px] ${invalid ? "text-red-600 dark:text-red-400" : "text-zinc-500 dark:text-zinc-400"}`}>
+      <p className={`mt-1 text-xs ${invalid ? "text-red-600 dark:text-red-400" : "text-zinc-500 dark:text-zinc-400"}`}>
         {invalid ? t("hijriInvalid") : t("hijriEquals", { date: f.date(civilToUtcMs(g) + 12 * 3_600_000, "UTC") })}
       </p>
     </div>
@@ -167,7 +167,7 @@ export default function WorldTimeInput({ s, set, d, f, now, onCopy, onShare, onR
               </label>
             </div>
             {s.cal === "hijri" && <HijriDateInput key={s.date.slice(0, 7)} s={s} set={set} f={f} />}
-            <p className="text-[11px] leading-4 text-zinc-500 dark:text-zinc-400">{t("customHint", { city: f.city(d.from) })}</p>
+            <p className="text-xs leading-4 text-zinc-500 dark:text-zinc-400">{t("customHint", { city: f.city(d.from) })}</p>
           </div>
         )}
         {status !== "ok" && (
@@ -262,7 +262,7 @@ export default function WorldTimeInput({ s, set, d, f, now, onCopy, onShare, onR
           <RotateCcw size={15} />
         </button>
       </div>
-      <p className="text-[11px] leading-4 text-zinc-500 dark:text-zinc-400">{t("savedNote")}</p>
+      <p className="text-xs leading-4 text-zinc-500 dark:text-zinc-400">{t("savedNote")}</p>
     </SectionCard>
   );
 }
