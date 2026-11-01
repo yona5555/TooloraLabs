@@ -1,7 +1,8 @@
 // The shared chart label geometry: margins from measured overflow, data ranges from margins, side choice,
-// clamping, thinning, RTL sides and label bands.
+// clamping, thinning and label bands.
 import { describe, expect, it } from "vitest";
-import { LABEL_GAP, NO_MARGINS, clampInto, fitStep, placeBeside, placeClear, labelUnits, marginDelta, nextMargins, padRange, physicalSide, pickSide, stackBands, thinEvery } from "./chartLabels";
+import { LABEL_GAP, NO_MARGINS, clampInto, placeClear, marginDelta, nextMargins } from "./chartLabels";
+import { fitStep, placeBeside, labelUnits, padRange, pickSide, stackBands, thinEvery } from "./chartLayout";
 
 const frame = { left: 0, right: 300, top: 0, bottom: 200 };
 
@@ -78,15 +79,10 @@ describe("pickSide / clampInto", () => {
   });
 });
 
-describe("thinEvery / physicalSide / labelUnits / stackBands", () => {
+describe("thinEvery / labelUnits / stackBands", () => {
   it("thins tick labels by measured width, never below every label", () => {
     expect(thinEvery(53, 22)).toBe(1);
     expect(thinEvery(20, 30)).toBe(2);
-  });
-  it("resolves logical sides for the page direction", () => {
-    expect(physicalSide("start", false)).toBe("left");
-    expect(physicalSide("start", true)).toBe("right");
-    expect(physicalSide("end", true)).toBe("left");
   });
   it("mirrors svgPx: never below 12 rendered px", () => {
     expect(labelUnits(12, 1)).toBe(12);

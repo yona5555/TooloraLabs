@@ -4,7 +4,8 @@ import { useTranslations } from "next-intl";
 import type { PhoneRole } from "@/components/tool-ui/SectionCard";
 import { ltr } from "@/components/tool-ui/MixedText";
 import { IndicatorCard, KitControls, KitTable, useStepper, type KitRow, type Stepper } from "@/components/tool-ui/indicator-kit/CardKit";
-import { Drawing, flowRows, INK, labelW, LINE, lit, MUTED, px2, SvgLabel as T, useDrawing } from "@/components/tool-ui/indicator-kit/SvgBits";
+import { flowRows, INK, labelW, LINE, lit, MUTED, px2, SvgLabel as T } from "@/components/tool-ui/indicator-kit/SvgBits";
+import { Drawing, useDrawing } from "@/components/tool-ui/indicator-kit/Drawing";
 import { clamp, f1, f2 } from "@/components/tool-ui/indicator-kit/format";
 import { useMacroLive } from "./MacroLiveContext";
 import {

@@ -1,7 +1,8 @@
 "use client";
 import { useTranslations } from "next-intl";
 import type { Stepper } from "@/components/tool-ui/indicator-kit/CardKit";
-import { Drawing, INK, LINE, MUTED, px2, SvgLabel as T, axisTicks, useDrawing } from "@/components/tool-ui/indicator-kit/SvgBits";
+import { INK, LINE, MUTED, px2, SvgLabel as T, axisTicks } from "@/components/tool-ui/indicator-kit/SvgBits";
+import { Drawing, useDrawing } from "@/components/tool-ui/indicator-kit/Drawing";
 import { formatBytes } from "./formatBytes";
 
 export type SweepPoint = { q: number; size: number };

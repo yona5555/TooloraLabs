@@ -8,7 +8,7 @@ import { riemannSum, type RiemannMethod } from "@tooloralabs/tools";
 import { useIsDarkMode } from "@/lib/use-dark-mode";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import IndicatorWithTable from "@/components/tool-ui/IndicatorWithTable";
-import { padRange } from "@/components/tool-ui/chartLabels";
+import { padRange } from "@/components/tool-ui/chartLayout";
 import { useLabelFit } from "@/components/tool-ui/useChartLabels";
 import { useGraphLive } from "./GraphLiveContext";
 import { MafsCurve, MAFS_COLORS, niceStep } from "./graphMafs";

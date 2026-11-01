@@ -9,8 +9,8 @@ import { computeNiceTicks } from "./niceTicks";
 import type { CurrencyCode } from "@/lib/currency";
 import { svgPx } from "@/components/tool-ui/svgPx";
 import { wrapLabel } from "@/components/tool-ui/labelLayout";
-import { fitStep, thinEvery } from "@/components/tool-ui/chartLabels";
-import { useLabelMeasure } from "@/components/tool-ui/useChartLabels";
+import { fitStep, thinEvery } from "@/components/tool-ui/chartLayout";
+import { useLabelMeasure } from "@/components/tool-ui/useLabelMeasure";
 
 type LoanAmortizationChartProps = {
   schedule: LoanPaymentRow[];
